@@ -6,8 +6,7 @@ dapperstrano he add --yes --guess --host-name=www.phrankinsense.tld
 
 ## About:
 
-Build and Monitoring in PHP. Provision your boxes manually or with an Operating System agnostic method of
-ensuring environment stability.
+Build and Monitoring in PHP. Integrate Builds for your application.
 
 This is part of the Pharaoh Tools suite, which covers Configuration Management, Test Automation Management, Automated
 Deployment, Build and Release Management and more, all implemented in code, and all in PHP.
@@ -21,13 +20,13 @@ Currently, all of the Modules work on Ubuntu 12-14, most on Centos and Windows.
 First you'll need to install Git and PHP5. If you don't have either, google them - they're easy to install. To install
 phrankinsense cli on your On your Mac, Linux or  Unix Machine silently do the following:
 
-git clone https://github.com/PharaohTools/cleopatra.git && sudo php cleopatra/install-silent
+git clone https://github.com/PharaohTools/phrankinsense.git && sudo php phrankinsense/install-silent
 
 or on Windows, open a terminal with the "Run as Administrator" option...
 
-git clone https://github.com/PharaohTools/cleopatra.git && php cleopatra\install-silent
+git clone https://github.com/PharaohTools/phrankinsense.git && php phrankinsense\install-silent
 
-... that's it, now the cleopatra command should be available at the command line for you.
+... that's it, now the phrankinsense command should be available at the command line for you.
 
 
 ## Usage:
@@ -36,13 +35,13 @@ So, there are a few simple commands...
 
 First, you can just use
 
-cleopatra
+phrankinsense
 
 ...This will give you a list of the available modules...
 
 Then you can use
 
-cleopatra *ModuleName* help
+phrankinsense *ModuleName* help
 
 ...This will display the help for that module, and tell you a list of available alias for the module command, and the
 available actions too.
