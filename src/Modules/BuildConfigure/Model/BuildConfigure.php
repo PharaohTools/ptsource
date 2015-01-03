@@ -2,6 +2,6 @@
 
 Namespace Model;
 
-class BuildList extends BaseModelFactory {
+class BuildConfigure extends BaseModelFactory {
 
 }

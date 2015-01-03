@@ -15,6 +15,10 @@
 -------------------------------------------------------------
 </p>
 
+<h5>
+    <a href="/index.php?control=BuildConfigure&action=show&item=some_build_1">Configure some_build 1-</a>
+</h5>
+
 <p>
     Build Status Currently:
     <br/>

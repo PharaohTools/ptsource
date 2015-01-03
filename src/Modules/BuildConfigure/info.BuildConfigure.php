@@ -17,7 +17,7 @@ class BuildConfigureInfo extends CleopatraBase {
     }
 
     public function routeAliases() {
-      return array("buildList"=>"BuildConfigure");
+      return array("buildConfigure"=>"BuildConfigure");
     }
 
     public function helpDefinition() {
