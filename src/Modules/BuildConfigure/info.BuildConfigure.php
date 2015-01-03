@@ -2,22 +2,22 @@
 
 Namespace Info;
 
-class BuildListInfo extends CleopatraBase {
+class BuildConfigureInfo extends CleopatraBase {
 
     public $hidden = true;
 
-    public $name = "BuildList/Home Page";
+    public $name = "BuildConfigure/Home Page";
 
     public function _construct() {
       parent::__construct();
     }
 
     public function routesAvailable() {
-      return array( "BuildList" => array("show") );
+      return array( "BuildConfigure" => array("show") );
     }
 
     public function routeAliases() {
-      return array("buildList"=>"BuildList");
+      return array("buildList"=>"BuildConfigure");
     }
 
     public function helpDefinition() {

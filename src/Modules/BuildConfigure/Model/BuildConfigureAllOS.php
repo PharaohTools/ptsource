@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class BuildListAllOS extends Base {
+class BuildConfigureAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
