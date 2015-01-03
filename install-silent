@@ -1,0 +1,273 @@
+#!/usr/bin/php
+<?php
+
+$installer = new Installer();
+$installer->installProgram();
+
+class Installer {
+
+    private $startDirectory;
+    private $titleData;
+    private $completionData;
+    private $bootStrapData;
+    private $programDataFolder;
+    private $programExecutorFolder;
+    private $programNameMachine = "cleopatra";
+    private $programNameFriendly = " Cleopatra! "; // 12 chars
+
+    public function __construct() {
+        require ("src".DIRECTORY_SEPARATOR."Constants.php") ;
+        $this->populateStartDirectory() ;
+        $this->populateTitle() ;
+        $this->populateCompletion() ;
+        $this->populateExecutorFile() ;
+    }
+
+    public function installProgram() {
+        $this->showTitle();
+        $this->turnOffUACOnWindows();
+        $this->addPHPToPath();
+        $this->askForProgramDataFolder();
+        $this->askForProgramExecutorFolder();
+        $this->winCreateProgramExecutorFolder();
+        $this->winAddProgramExecutorFolderToPath();
+        $this->installElevateOnWindows();
+        $this->deleteProgramDataFolderAsRootIfExists();
+        $this->makeProgramDataFolder();
+        $this->copyFilesToProgramDataFolder();
+        $this->deleteExecutorIfExists();
+        $this->saveExecutorFile();
+        $this->deleteInstallationFiles();
+        $this->changePermissions();
+        $this->showCompletion();
+        $this->winCloseAndCompleteInNewWindow();
+    }
+
+    private function showTitle() {
+        print $this->titleData ;
+    }
+
+    private function showCompletion() {
+        print $this->completionData ;
+        exit();
+    }
+
+    private function turnOffUACOnWindows() {
+        if (in_array(PHP_OS, array("Windows", "WINNT"))) {
+            echo "Using Windows, so turning off UAC prompts...\n" ;
+            $sr = getenv('SystemRoot') ;
+            $comm = $sr.'\System32\reg.exe ADD HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v EnableLUA /t REG_DWORD /d 0 /f' ;
+            echo $comm."\n";
+            self::executeAndOutput($comm) ;  }
+    }
+
+    private function addPHPToPath() {
+        // @todo use logic for the correct path
+        if (in_array(PHP_OS, array("Windows", "WINNT"))) {
+            echo "Using Windows, so adding PHP to path...\n" ;
+            $path = getenv('PATH') ;
+            $php5path = 'C:\php5' ;
+            if (strpos($path, $php5path) != false) {
+                echo "PHP is already in the path\n" ;
+                return ; }
+            $path .= ';'.$php5path ;
+            $comm = 'setx PATH "'.$path.'" /M' ;
+            self::executeAndOutput($comm) ;
+            echo $comm."\n" ; }
+    }
+
+    private function installElevateOnWindows() {
+        if (in_array(PHP_OS, array("Windows", "WINNT"))) {
+            echo "Using Windows, so installing the elevate command is required - installing now...\n" ;
+            $comm  = 'copy '.dirname(__FILE__).'\src\Modules\WinElevate\Packages\x8664\elevate.exe '.$this->programExecutorFolder ;
+            echo $comm."\n";
+            self::executeAndOutput($comm) ;  }
+    }
+
+    private function askForProgramDataFolder() {
+        if (in_array(PHP_OS, array("Windows", "WINNT"))) {
+            $this->programDataFolder = 'C:'.
+                DS.'PharaohTools'.DS.$this->programNameMachine.DS.$this->programNameMachine ; }
+        else if (in_array(PHP_OS, array("Linux", "Solaris", "FreeBSD", "OpenBSD", "Darwin"))) {
+            $this->programDataFolder = DS."opt".DS.$this->programNameMachine.DS.$this->programNameMachine ; }
+    }
+
+    private function askForProgramExecutorFolder(){
+        if (in_array(PHP_OS, array("Windows", "WINNT"))) {
+            $sd = getenv('SystemDrive') ;
+            $this->programExecutorFolder = $sd.DS.'PharaohTools' ;
+            return $this->programExecutorFolder ; }
+        else if (in_array(PHP_OS, array("Linux", "Solaris", "FreeBSD", "OpenBSD", "Darwin"))) {
+            $this->programExecutorFolder = DS.'usr'.DS.'bin' ;
+            return $this->programExecutorFolder ; }
+    }
+
+    private function winCreateProgramExecutorFolder(){
+        if (in_array(PHP_OS, array("Windows", "WINNT"))) {
+            if (is_dir($this->programExecutorFolder)) {
+                echo "Executor Folder {$this->programExecutorFolder} already exists, not creating\n" ;
+                return ; }
+            echo "Creating {$this->programExecutorFolder}\n" ;
+            $comm = 'mkdir "'.$this->programExecutorFolder.'"' ;
+            self::executeAndOutput($comm) ;
+            echo $comm."\n" ; }
+    }
+
+    private function winAddProgramExecutorFolderToPath() {
+        if (in_array(PHP_OS, array("Windows", "WINNT"))) {
+            echo "Using Windows, so adding Executor Directory to path...\n" ;
+            $path = getenv('PATH') ;
+            if (strpos($path, $this->programExecutorFolder) != false) {
+                echo "Program Executor directory is already in the path\n" ;
+                return ; }
+            $path .= ';'.$this->programExecutorFolder ;
+            $comm = 'setx PATH "'.$path.'" /M' ;
+            self::executeAndOutput($comm) ;
+            echo $comm."\n" ; }
+    }
+
+    private function deleteProgramDataFolderAsRootIfExists(){
+        if (in_array(PHP_OS, array("Windows", "WINNT"))) {
+            $command = "rmdir /S /Q " ; }
+        else if (in_array(PHP_OS, array("Linux", "Solaris", "FreeBSD", "OpenBSD", "Darwin"))) {
+            $command = "rm -rf " ; }
+        if ( file_exists($this->programDataFolder)) {
+            $fullCommand = $command.$this->programDataFolder;
+            self::executeAndOutput($fullCommand, "Program Data Folder $this->programDataFolder Deleted"); }
+        return true;
+    }
+
+    private function makeProgramDataFolder(){
+        echo "Creating {$this->programDataFolder}\n" ;
+        if (in_array(PHP_OS, array("Windows", "WINNT"))) {
+            $comm = 'mkdir "'.$this->programDataFolder.'"' ;
+            self::executeAndOutput($comm) ; }
+        else if (in_array(PHP_OS, array("Linux", "Solaris", "FreeBSD", "OpenBSD", "Darwin"))) {
+            $comm = "mkdir -p ".$this->programDataFolder ;
+            self::executeAndOutput($comm) ; }
+        echo $comm."\n" ;
+    }
+
+    private function copyFilesToProgramDataFolder(){
+        if (in_array(PHP_OS, array("Windows", "WINNT"))) {
+            $command = 'xcopy /q /s /e /y "'.dirname(__FILE__).'" "'.$this->programDataFolder.DS.'"' ;
+            echo $command . "\n" ;
+            self::executeAndOutput($command, "Program Data folder populated with program files\n");
+            if (is_dir(dirname(__FILE__).DS.'git')) {
+                $command2 = 'copy '.dirname(__FILE__).DS.'git '.$this->programDataFolder.DS.$this->programNameMachine ;
+                echo $command2 . "\n" ;
+                self::executeAndOutput($command2, "Program Data folder populated with hidden files\n"); } }
+        else {
+            $command = "sudo cp -r " ;
+            $command3 = $command.dirname(__FILE__).DS.'* '.$this->programDataFolder ;
+            echo $command3 . "\n" ;
+            self::executeAndOutput($command3, "Program Data folder populated with program files\n");
+            if (is_dir(dirname(__FILE__).DS.'.git')) {
+                $command2 = $command.dirname(__FILE__).DS.'.git '.$this->programDataFolder ;
+                echo $command2 . "\n" ;
+                self::executeAndOutput($command2, "Program Data folder populated with hidden files\n"); } }
+        return true;
+    }
+
+    private function deleteExecutorIfExists(){
+        if (in_array(PHP_OS, array("Windows", "WINNT"))) { $extension = ".bat" ; }
+        else { $extension = "" ; }
+        if (file_exists($this->programExecutorFolder.DS.$this->programNameMachine.$extension)) {
+            if (in_array(PHP_OS, array("Windows", "WINNT"))) {
+                $command = 'del ' ; }
+            else if (in_array(PHP_OS, array("Linux", "Solaris", "FreeBSD", "OpenBSD", "Darwin"))) {
+                $command = "rm -rf " ; }
+            echo "Deleting old executor ".$this->programExecutorFolder.DS.$this->programNameMachine.$extension."...\n" ;
+            $fullCommand = $command.$this->programExecutorFolder.DS.$this->programNameMachine.$extension;
+            self::executeAndOutput($fullCommand, "Old Program Executor Deleted\n"); }
+        return true;
+    }
+
+    private function deleteInstallationFiles(){
+        echo "Changing shell to parent directory...\n" ;
+        $cdup = 'cd '.dirname(__FILE__);
+        self::executeAndOutput($cdup);
+        echo "Deleting install files...\n" ;
+        if (in_array(PHP_OS, array("Windows", "WINNT"))) {
+            $command = "rmdir /S /Q " ; }
+        else {
+            $command = "sudo rm -rf " ; }
+        $fullCommand = $command.$this->startDirectory.DS.$this->programNameMachine;
+        echo $fullCommand."\n" ;
+        self::executeAndOutput($fullCommand);
+    }
+
+    private function saveExecutorFile(){
+        $this->populateExecutorFile();
+        if (in_array(PHP_OS, array("Windows", "WINNT"))) {
+            echo "Saving executor file {$this->programNameMachine}.cmd to {$this->programExecutorFolder} ...\n" ;
+            echo (is_int(file_put_contents($this->programExecutorFolder.DS.$this->programNameMachine.".cmd", $this->bootStrapData)))
+                ? "Executor written\n" : "Executor failed writing" ; }
+        else {
+            echo "Saving executor file {$this->programNameMachine} to {$this->programExecutorFolder} ...\n" ;
+            $fname = $this->programExecutorFolder.DS.$this->programNameMachine ;
+            return file_put_contents($fname, $this->bootStrapData); }
+    }
+
+    private function changePermissions() {
+        // @todo does windows need something like this?
+        if (in_array(PHP_OS, array("Linux", "Solaris", "FreeBSD", "OpenBSD", "Darwin"))) {
+            echo "Changing *NIX based permissions...\n" ;
+            $command = "chmod -R 775 $this->programDataFolder";
+            self::executeAndOutput($command);
+            $command = "chmod 775 $this->programExecutorFolder".DS.$this->programNameMachine;
+            self::executeAndOutput($command); }
+    }
+
+    private function populateTitle() {
+        $this->titleData = <<<TITLE
+*******************************
+*        Pharaoh Tools        *
+*         $this->programNameFriendly        *
+*******************************
+
+TITLE;
+    }
+
+    private function populateCompletion() {
+        $this->completionData = <<<COMPLETION
+... All done!
+*******************************
+Thanks for installing , visit www.pharaohtools.com for more
+
+COMPLETION;
+    }
+
+    private function populateExecutorFile() {
+        if (in_array(PHP_OS, array("Windows", "WINNT"))) {
+            $this->bootStrapData =
+                "@echo off\r\n\r\nphp \"".$this->programDataFolder.DS."src".DS."Bootstrap.php".'" %*' ; }
+        else if (in_array(PHP_OS, array("Linux", "Solaris", "FreeBSD", "OpenBSD", "Darwin"))) {
+            $this->bootStrapData =  "#!".DS."usr".DS."bin".DS."php\n" ;
+            $this->bootStrapData .=
+                "<?php\n\nrequire('".$this->programDataFolder.DS."src".DS."Bootstrap.php"."');\n\n?>"; }
+    }
+
+    private function populateStartDirectory() {
+        $this->startDirectory = str_replace(DS."$this->programNameMachine", "", dirname(__FILE__));
+    }
+
+    private function winCloseAndCompleteInNewWindow() {
+        echo "Opening cleopatra in new window...\n" ;
+        $command = "start cmd.exe";
+        self::executeAndOutput($command);
+    }
+
+    private function executeAndOutput($command, $message=null) {
+        $outputArray = array();
+        exec($command, $outputArray);
+        $outputText = "";
+        foreach ($outputArray as $outputValue) {
+            $outputText .= "$outputValue\n"; }
+        if ($message !== null) {
+            $outputText .= "$message\n"; }
+        print $outputText;
+        return true;
+    }
+
+}
