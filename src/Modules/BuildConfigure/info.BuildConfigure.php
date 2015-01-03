@@ -4,7 +4,7 @@ Namespace Info;
 
 class BuildConfigureInfo extends CleopatraBase {
 
-    public $hidden = true;
+    public $hidden = false;
 
     public $name = "BuildConfigure/Home Page";
 
