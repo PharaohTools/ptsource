@@ -22,6 +22,16 @@
 <p>
 ---------------------------------------
 </p>
+
+<h5>
+    <a href="/index.php?control=BuildHome&action=show&item=some_build_1">-Build Home for some_build 1-</a>
+</h5>
+<h5>
+    <a href="/index.php?control=BuildHome&action=show&item=some_build_2">-Build Home for some_build 2-</a>
+</h5>
+<h5>
+    <a href="/index.php?control=BuildHome&action=show&item=some_build_3">-Build Home for some_build 3-</a>
+</h5>
 <?php
 
 foreach ($pageVars["build"] as $build) {
