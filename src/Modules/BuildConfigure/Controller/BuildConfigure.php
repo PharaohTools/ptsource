@@ -2,7 +2,7 @@
 
 Namespace Controller ;
 
-class BuildList extends Base {
+class BuildConfigure extends Base {
 
     public function execute($pageVars) {
       $thisModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars) ;
@@ -10,7 +10,7 @@ class BuildList extends Base {
       $this->content = $pageVars ;
       if (is_array($thisModel)) { return $this->failDependencies($pageVars, $this->content, $thisModel) ; }
       $this->content["modulesInfo"] = $thisModel->findModuleNames($pageVars["route"]["extraParams"]);
-      return array ("type"=>"view", "view"=>"buildList", "pageVars"=>$this->content);
+      return array ("type"=>"view", "view"=>"buildConfigure", "pageVars"=>$this->content);
     }
 
 }
