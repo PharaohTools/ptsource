@@ -4,7 +4,7 @@
  * Pharaoh Tools Constants
  */
 
-define('PHARAOH_APP', "cleopatra") ;
+define('PHARAOH_APP', "phrankinsense") ;
 
 if (in_array(PHP_OS, array("Windows", "WINNT"))) {
     $sd = getenv('SystemDrive') ;
