@@ -1,5 +1,70 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+cleopatraenterprise phrankinsense install --yes --guess
+cd /opt/phrankinsense/phrankinsense/src/Modules/PostInput
 dapperstrano vhe add --yes --guess --vhe-url=www.phrankinsense.tld --vhe-default-template-name=docroot-no-suffix
 dapperstrano he add --yes --guess --host-name=www.phrankinsense.tld
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # Phrankinsense, Pharaoh Tools
