@@ -9,7 +9,7 @@ class BuildHome extends Base {
       // if we don't have an object, its an array of errors
       $this->content = $pageVars ;
       if (is_array($thisModel)) { return $this->failDependencies($pageVars, $this->content, $thisModel) ; }
-      $this->content["modulesInfo"] = $thisModel->findModuleNames($pageVars["route"]["extraParams"]);
+      $this->content["data"] = $thisModel->getData($pageVars["route"]["extraParams"]);
       return array ("type"=>"view", "view"=>"buildHome", "pageVars"=>$this->content);
     }
 
