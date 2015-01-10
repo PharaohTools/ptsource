@@ -15,40 +15,8 @@ class PipelineAllOS extends Base {
     public $modelGroup = array("Default") ;
 
     public function getPipelines() {
-        $ret = array(
-            "pipeline_1" => array(
-                "project_slug" => array("label" => "Project Slug:", "value" => "pipeline_1"),
-                "project_title" => array("label" => "Project Title:", "value" => "My Project Title"),
-                "project_description" => array("label" => "Project Description:", "value" => "My Project Description. What's the point of this one."),
-                "steps" =>
-                    array(
-                        array(
-                            "title" => "Build Step 1",
-                            "type" => "BashShell",
-                            // "title" => "Build Step 1",
-                            "value" => "Lets do a git clone or something" ),
-                        array(
-                            "title" => "Build Step 2",
-                            "type" => "Xvfb",
-                            // "title" => "Build Step 1",
-                            "value" => "The second build step. Lets start Xvfb, for instance" ), ), ),
-            "other_project" => array(
-                "project_slug" => array("label" => "Project Slug:", "value" => "other_project"),
-                "project_title" => array("label" => "Project Title:", "value" => "Other Project"),
-                "project_description" => array("label" => "Project Description:", "value" => "Some Other Project Description. What's the point of this one next."),
-                "steps" =>
-                    array(
-                        array(
-                            "title" => "Build Step 1",
-                            "type" => "BashShell",
-                            // "title" => "Build Step 1",
-                            "value" => "Lets do a git clone or something" ),
-                        array(
-                            "title" => "Build Step 2",
-                            "type" => "Xvfb",
-                            // "title" => "Build Step 1",
-                            "value" => "The second build step. Lets start Xvfb, for instance" ), ), ),
-        ) ;
+        include("demopipelines.php") ;
+        $ret = $demoPipelines ;
         return $ret ;
     }
 
