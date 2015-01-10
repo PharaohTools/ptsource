@@ -14,16 +14,15 @@ class BuildHomeAllOS extends Base {
     // Model Group
     public $modelGroup = array("Default") ;
 
+    public function getData() {
+        $ret["pipeline"] = $this->getPipeline();
+        return $ret ;
+    }
 
-
-
-
-    public function getData($params) {
-        if (isset($this->params["compatible-only"]) && $this->params["compatible-only"]=="true") {
-            return $this->findOnlyCompatibleModuleNames($params); }
-        if (isset($this->params["only-compatible"]) && $this->params["only-compatible"]=="true") {
-            return $this->findOnlyCompatibleModuleNames($params); }
-        return $this->findAllModuleNames() ;
+    public function getPipeline() {
+        $pipelineFactory = new \Model\Pipeline() ;
+        $pipeline = $pipelineFactory->getModel($this->params);
+        return $pipeline->getPipeline($this->params["item"]);
     }
 
 }
