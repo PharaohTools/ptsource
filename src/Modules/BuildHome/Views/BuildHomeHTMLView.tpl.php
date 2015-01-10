@@ -42,8 +42,8 @@
             </div>
             <hr>
             <div class="row clearfix no-margin">
-                <h3><a class="lg-anchor text-light" href="/index.php?control=BuildConfigure&action=show&item=some_build_1">Configure Pipeline: <?php echo $pageVars["data"]["pipeline"]["project_title"]["value"] ; ?>- <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
-
+                <h3><a class="lg-anchor text-light" href="/index.php?control=BuildConfigure&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project_slug"]["value"] ; ?>">
+                        Configure Pipeline: <?php echo $pageVars["data"]["pipeline"]["project_title"]["value"] ; ?>- <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
                 <p>Build Status Currently:</p>
                 <div class="pipe-now-status-block pipe-block"></div>
                 <p>Build Monitors:</p>
