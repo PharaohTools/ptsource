@@ -35,13 +35,39 @@
         </div>
 
         <div class="col-sm-8 col-md-9 clearfix main-container">
-            <h2 class="text-uppercase text-light"><a href="/">                 Phrankinsense - Pharaoh Tools          </a></h2>
+            <h2 class="text-uppercase text-light"><a href="/">Phrankinsense - Pharaoh Tools</a></h2>
             <div class="row clearfix no-margin">
-                <h3><a class="lg-anchor text-light" href="#">Build Configure <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
-                <h5 class="text-uppercase text-light" style="margin-top: 15px;">
-                    <a href="/index.php?control=BuildHome&action=show&item=some_build_1">Build Home for some_build 1-</a>
-                </h5>
+                <h3><a class="lg-anchor text-light" href="#"> Configuration <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
                 <form class="form-horizontal custom-form">
+                    <h5 class="text-uppercase text-light" style="margin-top: 15px;">
+                        <a href="/index.php?control=BuildHome&action=show&item=some_build_1">Configure Default Modules</a>
+                    </h5>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-2 control-label text-left">Project Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputEmail3" placeholder="Project Name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label text-left">Git URL</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputPassword3" placeholder="Git URL">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label text-left">Configuration</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-info">Configure</button>
+                        </div>
+                    </div>
+                    <h5 class="text-uppercase text-light" style="margin-top: 15px;">
+                        <a href="/index.php?control=BuildHome&action=show&item=some_build_1">Configure Extensions</a>
+                    </h5>
                     <div class="form-group">
                         <label for="inputEmail3" class="col-sm-2 control-label text-left">Project Name</label>
                         <div class="col-sm-10">
