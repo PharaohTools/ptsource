@@ -35,11 +35,12 @@
         </div>
 
         <div class="col-sm-8 col-md-9 clearfix main-container">
-            <h2 class="text-uppercase text-light"><a href="/">                 Phrankinsense - Pharaoh Tools          </a></h2>
+            <h2 class="text-uppercase text-light"><a href="/"> Phrankinsense - Pharaoh Tools </a></h2>
             <div class="row clearfix no-margin">
                 <h3><a class="lg-anchor text-light" href="#">Build Configure <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
                 <h5 class="text-uppercase text-light" style="margin-top: 15px;">
-                    <a href="/index.php?control=BuildHome&action=show&item=some_build_1">Build Home for some_build 1-</a>
+                    <a href="/index.php?control=BuildHome&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project_title"]["value"] ; ?>">
+                        Build Home for <?php echo $pageVars["data"]["pipeline"]["project_title"]["value"] ; ?>-</a>
                 </h5>
                 <form class="form-horizontal custom-form">
                     <div class="form-group">
