@@ -7,12 +7,9 @@
                 <span class="icon-bar"></span>
             </div>
             <div class="list-group sidebar-list">
-                        <span href="#" class="list-group-item active">
-                            Menu
-                            <span class="pull-right" id="slide-submenu">
-                                <i class="fa fa-times"></i>
-                            </span>
-                        </span>
+                <span href="#" class="list-group-item active"> Menu <span class="pull-right" id="slide-submenu">
+                    <i class="fa fa-times"></i>
+                </span> </span>
                 <a href="/index.php?control=Index&action=show" class="list-group-item">
                     <i class="fa fa-comment-o"></i> Dashboard
                 </a>
@@ -58,9 +55,9 @@
 
                 <?php
 
-                foreach ($pageVars["build_history"] as $build_history) {
+                foreach ($pageVars["data"]["pipeline"]["build_history"] as $build_history) {
                     if ($moduleInfo["hidden"] != true) {
-                        echo '<p>'.$moduleInfo["command"].' - '.$moduleInfo["name"]."</p>";
+                        echo '<p><a href="/index.php?control=BuildConfigure&action=show&item=">'.$build_history["count"].' - '.$build_history["status"].' - '.$build_history["message"]."</p>";
                     }
                 }
 
