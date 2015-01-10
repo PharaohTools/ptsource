@@ -39,7 +39,7 @@
             <div class="row clearfix no-margin">
                 <h3><a class="lg-anchor text-light" href="#">Build Configure <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
                 <h5 class="text-uppercase text-light" style="margin-top: 15px;">
-                    <a href="/index.php?control=BuildHome&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project_title"]["value"] ; ?>">
+                    <a href="/index.php?control=BuildHome&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project_slug"]["value"] ; ?>">
                         Build Home for <?php echo $pageVars["data"]["pipeline"]["project_title"]["value"] ; ?>-</a>
                 </h5>
                 <form class="form-horizontal custom-form">
