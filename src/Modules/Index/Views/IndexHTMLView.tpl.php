@@ -13,14 +13,14 @@
                                 <i class="fa fa-times"></i>
                             </span>
                         </span>
-                <a href="/index.php?control=BulidConfigure&action=new" class="list-group-item">
-                    <i class="fa fa-comment-o"></i> New Pipeline
+                <a href="/index.php?control=Index&action=show" class="list-group-item">
+                    <i class="fa fa-comment-o"></i> Dashboard
                 </a>
                 <a href="/index.php?control=ApplicationConfigure&action=show" class="list-group-item">
                     <i class="fa fa-search"></i> Configure Phrankinsense
                 </a>
                 <a href="/index.php?control=BuildList&action=show" class="list-group-item">
-                    <i class="fa fa-search"></i>All Pipelines
+                    <i class="fa fa-search"></i> All Pipelines
                 </a>
                 <a href="#" class="list-group-item">
                     <i class="fa fa-folder-open-o"></i> Lorem ipsum <span class="badge">14</span>
