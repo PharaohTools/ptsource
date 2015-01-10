@@ -40,19 +40,19 @@
                 <h3><a class="lg-anchor text-light" href="#">Build Configure <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
                 <h5 class="text-uppercase text-light" style="margin-top: 15px;">
                     <a href="/index.php?control=BuildHome&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project_slug"]["value"] ; ?>">
-                        Build Home for <?php echo $pageVars["data"]["pipeline"]["project_title"]["value"] ; ?>-</a>
+                        Pipeline Summary for <?php echo $pageVars["data"]["pipeline"]["project_title"]["value"] ; ?>-</a>
                 </h5>
                 <form class="form-horizontal custom-form">
                     <div class="form-group">
                         <label for="inputEmail3" class="col-sm-2 control-label text-left">Project Name</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputEmail3" placeholder="Project Name">
+                            <input type="text" class="form-control" id="inputEmail3" placeholder="Project Name" value="<?php echo $pageVars["data"]["pipeline"]["project_title"]["value"] ; ?>" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputPassword3" class="col-sm-2 control-label text-left">Git URL</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputPassword3" placeholder="Git URL">
+                            <input type="text" class="form-control" id="inputPassword3" placeholder="Git URL" value="<?php echo $pageVars["data"]["pipeline"]["git_url"]["value"] ; ?>" />
                         </div>
                     </div>
                     <div class="form-group">
