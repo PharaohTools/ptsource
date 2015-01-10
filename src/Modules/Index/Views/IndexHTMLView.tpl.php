@@ -13,14 +13,14 @@
                                 <i class="fa fa-times"></i>
                             </span>
                         </span>
-                <a href="#" class="list-group-item">
+                <a href="/index.php?control=BulidConfigure&action=new" class="list-group-item">
                     <i class="fa fa-comment-o"></i> New Pipeline
                 </a>
-                <a href="#" class="list-group-item">
+                <a href="/index.php?control=ApplicationConfigure&action=show" class="list-group-item">
                     <i class="fa fa-search"></i> Configure Phrankinsense
                 </a>
-                <a href="#" class="list-group-item">
-                    <i class="fa fa-user"></i> List Pipelines
+                <a href="/index.php?control=BuildList&action=show" class="list-group-item">
+                    <i class="fa fa-search"></i>All Pipelines
                 </a>
                 <a href="#" class="list-group-item">
                     <i class="fa fa-folder-open-o"></i> Lorem ipsum <span class="badge">14</span>
@@ -39,9 +39,9 @@
             <div class="row clearfix no-margin">
                 <h3>
                     <a class="lg-anchor text-light" href="">
-                        Phrankinsense Pharaoh Tools <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
+                        Phrankinsense - The Builder <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
                 <p>
-                    Build and Monitoring Server  in PHP.
+                    Build and Monitoring Server in PHP.
                     <br/>
                     Can be used to set up monitoring of any application feature in minutes.
                     <br/>
