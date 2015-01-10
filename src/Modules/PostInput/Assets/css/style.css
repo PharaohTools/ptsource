@@ -95,3 +95,26 @@ body{
 #slide-submenu{
     display: none;
 }
+
+.pipe-block {
+    min-height: 50px;
+    width: 100%;
+    display: block;
+}
+
+.pipe-now-status-block {
+    background-color: green;
+}
+
+.pipe-monitor-block {
+    background-color: red;
+}
+
+.pipe-features-block {
+    background-color: blue;
+}
+
+.pipe-history-block {
+    background-color: lightgray;
+}
+
