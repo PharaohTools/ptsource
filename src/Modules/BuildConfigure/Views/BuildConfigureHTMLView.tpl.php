@@ -17,10 +17,10 @@
                     <i class="fa fa-comment-o"></i> Dashboard
                 </a>
                 <a href="/index.php?control=BuildList&action=show" class="list-group-item">
-                    <i class="fa fa-search"></i>All Pipelines
+                    <i class="fa fa-search"></i> All Pipelines
                 </a>
-                <a href="#" class="list-group-item">
-                    <i class="fa fa-user">List Pipelines</i>
+                <a href="/index.php?control=BuildList&action=show" class="list-group-item">
+                    <i class="fa fa-user"></i> All Pipelines
                 </a>
                 <a href="#" class="list-group-item">
                     <i class="fa fa-folder-open-o"></i> Lorem ipsum <span class="badge">14</span>
@@ -62,23 +62,32 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label text-left">Build Steps</label>
+                        <div class="col-sm-10">
+                            <?php
+
+                                foreach ($pageVars["build_steps"] as $build_step) {
+                                    echo '<div>' ;
+                                    echo '  <p>'.$build_step["title"]."</p>";
+                                    echo '  <p>'.$build_step["type"]."</p>";
+                                    echo '  <p>'.$build_step["value"]."</p>";
+                                    echo '</div>';
+                                }
+
+                            ?>
+                            <textarea class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="submit" class="btn btn-info">Configure</button>
                         </div>
                     </div>
+                    <h5 class="text-uppercase text-light">
+                        <a href="/index.php?control=BuildConfigure&action=save&item=<?php echo $pageVars["data"]["pipeline"]["project_title"]["value"] ; ?>">
+                            Save configuration of <?php echo $pageVars["data"]["pipeline"]["project_title"]["value"] ; ?>-</a>
+                    </h5>
                 </form>
-                <?php
-
-                foreach ($pageVars["build_steps"] as $build_step) {
-                    if ($build_step["hidden"] != true) {
-                        echo '<p>'.$moduleInfo["command"].' - '.$moduleInfo["name"]."</p>";
-                    }
-                }
-
-                ?>
-                <h5 class="text-uppercase text-light">
-                    <a href="/index.php?control=BuildConfigure&action=save&item=some_build_1">Save configuration of some_build 1-</a>
-                </h5>
             </div>
             <p>
                 ---------------------------------------<br/>
