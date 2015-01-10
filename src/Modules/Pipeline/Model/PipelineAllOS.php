@@ -15,8 +15,9 @@ class PipelineAllOS extends Base {
     public $modelGroup = array("Default") ;
 
     public function getPipelines() {
-        include(dirname(dirname(__FILE__)).DS."Data".DS."demopipelines.php") ;
-        $ret = $demoPipelines ;
+        $path = dirname(dirname(__FILE__)).DS."Data".DS."demopipelines.php" ;
+        include($path) ;
+        $ret = $demopipelines ;
         return $ret ;
     }
 
