@@ -2,27 +2,27 @@
 
 Namespace Info;
 
-class BuildConfigureInfo extends CleopatraBase {
+class PipelineInfo extends CleopatraBase {
 
-    public $hidden = false;
+    public $hidden = true;
 
-    public $name = "BuildConfigure/Home Page";
+    public $name = "Pipeline Functionality";
 
     public function _construct() {
       parent::__construct();
     }
 
     public function routesAvailable() {
-      return array( "BuildConfigure" => array("show") );
+      return array();
     }
 
     public function routeAliases() {
-      return array("buildConfigure"=>"BuildConfigure");
+      return array();
     }
 
     public function helpDefinition() {
       $help = <<<"HELPDATA"
-  This command is part of Core - its the default route and only used for help and as an Intro really...
+  This module provides functionality for Pipelines. It provides no actions at the command line.
 HELPDATA;
       return $help ;
     }
