@@ -14,36 +14,53 @@ class PipelineAllOS extends Base {
     // Model Group
     public $modelGroup = array("Default") ;
 
-    public function findModuleNames($params) {
-        if (isset($this->params["compatible-only"]) && $this->params["compatible-only"]=="true") {
-            return $this->findOnlyCompatibleModuleNames($params); }
-        if (isset($this->params["only-compatible"]) && $this->params["only-compatible"]=="true") {
-            return $this->findOnlyCompatibleModuleNames($params); }
-        return $this->findAllModuleNames() ;
+    public function getPipelines() {
+        $ret = array(
+            "pipeline_1" => array(
+                "project_title" => array("label" => "Project Title:", "value" => "My Project Title"),
+                "project_description" => array("label" => "Project Description:", "value" => "My Project Description. What's the point of this one."),
+                "steps" =>
+                    array(
+                        array(
+                            "title" => "Build Step 1",
+                            "type" => "BashShell",
+                            // "title" => "Build Step 1",
+                            "value" => "Lets do a git clone or something" ),
+                        array(
+                            "title" => "Build Step 2",
+                            "type" => "Xvfb",
+                            // "title" => "Build Step 1",
+                            "value" => "The second build step. Lets start Xvfb, for instance" ), ), ),
+            "other_project" => array(
+                "project_title" => array("label" => "Project Title:", "value" => "Other Project"),
+                "project_description" => array("label" => "Project Description:", "value" => "Some Other Project Description. What's the point of this one next."),
+                "steps" =>
+                array(
+                    array(
+                        "title" => "Build Step 1",
+                        "type" => "BashShell",
+                        // "title" => "Build Step 1",
+                        "value" => "Lets do a git clone or something" ),
+                    array(
+                        "title" => "Build Step 2",
+                        "type" => "Xvfb",
+                        // "title" => "Build Step 1",
+                        "value" => "The second build step. Lets start Xvfb, for instance" ), ), ),
+        ) ;
+        return $ret ;
     }
 
-    private function findAllModuleNames() {
-        $allInfoObjects = \Core\AutoLoader::getInfoObjects() ;
-        $moduleNames = array() ;
-        foreach ($allInfoObjects as $infoObject) {
-            $array_keys = array_keys($infoObject->routesAvailable()) ;
-            $miniRay = array() ;
-            $miniRay["command"] = $array_keys[0] ;
-            $miniRay["name"] = $infoObject->name ;
-            $miniRay["hidden"] = $infoObject->hidden ;
-            $moduleNames[] = $miniRay ; }
-        return $moduleNames;
+    public function getPipeline($line) {
+        $pipelines = $this->getPipelines() ;
+        $ret = $pipelines[$line] ;
+        $r = (isset($ret) && is_array($ret)) ? $ret : false ;
+        return $r ;
     }
 
-    private function findOnlyCompatibleModuleNames($params) {
-        $allModules = $this->findAllModuleNames() ;
-        $controllerBase = new \Controller\Base();
-        $errors = $controllerBase->checkForRegisteredModels($params, $allModules) ;
-        $compatibleModules = array();
-        foreach($allModules as $oneModule) {
-            if (!in_array($oneModule["command"], $errors)) {
-                $compatibleModules[] = $oneModule ; } }
-        return $compatibleModules;
+    public function getPipelineNames() {
+        $pipelines = $this->getPipelines() ;
+        $names = array_keys($pipelines) ;
+        return (isset($names) && is_array($names)) ? $names : false ;
     }
 
 }
