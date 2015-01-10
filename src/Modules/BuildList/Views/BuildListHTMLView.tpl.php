@@ -13,8 +13,8 @@
                                 <i class="fa fa-times"></i>
                             </span>
                         </span>
-                <a href="#" class="list-group-item">
-                    <i class="fa fa-comment-o"></i> New Pipeline
+                <a href="/index.php?control=Index&action=show" class="list-group-item">
+                    <i class="fa fa-comment-o"></i> Dashboard
                 </a>
                 <a href="#" class="list-group-item">
                     <i class="fa fa-search">Configure Phrankinsense</i>
@@ -45,43 +45,33 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Bulid Name</th>
-                            <th>Table heading</th>
-                            <th>Table heading</th>
+                            <th>Pipeline Name</th>
+                            <th>Status</th>
+                            <th>Parent</th>
+                            <th>Child</th>
                         </tr>
                         </thead>
                         <tbody class="table-hover">
-                        <tr>
-                            <th scope="row">1</th>
-                            <td><a href="/index.php?control=BuildHome&action=show&item=some_build_1">Build Home for some_build 1</a></td>
-                            <td>Table cell</td>
-                            <td>Table cell</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td><a href="/index.php?control=BuildHome&action=show&item=some_build_2">Build Home for some_build 2</a></td>
-                            <td>Table cell</td>
-                            <td>Table cell</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td><a href="/index.php?control=BuildHome&action=show&item=some_build_3">Build Home for some_build 3</a></td>
-                            <td>Table cell</td>
-                            <td>Table cell</td>
-                        </tr>
+
+                        <?php
+                            $i = 1;
+                            foreach ($pageVars["data"]["pipelines"] as $pipelineSlug => $pipelineDetails) { ?>
+                            <tr>
+                                <th scope="row"><?php echo $i ; ?></th>
+                                <td><a href="/index.php?control=BuildHome&action=show&item=<?php echo $pipelineSlug; ?>">Pipeline <?php echo $pipelineDetails["project_title"]["value"] ; ?></a></td>
+                                <td>Table cell</td>
+                                <td>Table cell</td>
+                                <td>Table cell</td>
+                            </tr>
+                        <?php
+                            $i++;
+                            } ?>
+
                         </tbody>
                     </table>
                 </div>
             </div>
-            <?php
 
-            foreach ($pageVars["build"] as $build) {
-                if ($moduleInfo["hidden"] != true) {
-                    echo '<p>'.$moduleInfo["command"].' - '.$moduleInfo["name"]."</p>";
-                }
-            }
-
-            ?>
             <p>
                 ---------------------------------------<br/>
                 Visit www.pharaohtools.com for more
