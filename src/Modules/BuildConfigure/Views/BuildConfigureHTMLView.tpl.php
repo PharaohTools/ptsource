@@ -61,12 +61,13 @@
                             <textarea class="form-control"></textarea>
                         </div>
                     </div>
+                    <div class="form-group"> <h3>Build Steps</h3> </div>
                     <?php
                         foreach ($pageVars["data"]["pipeline"]["steps"] as $one_build_step) {
                             echo '<div class="form-group">' ;
-                            echo '  <label for="inputPassword3" class="col-sm-2 control-label text-left">Build Steps</label>' ;
+                            echo '  <label for="inputPassword3" class="col-sm-2 control-label text-left">'.$one_build_step["title"].'</label>' ;
                             echo '  <div class="col-sm-10">' ;
-                            echo '      <p>'.$one_build_step["title"]."</p>";
+                            echo '      <p>'.$one_build_step["title"].'</p>';
                             echo '      <p>Step Type: '.$one_build_step["type"]."</p>";
                             echo '      <textarea class="form-control">'.$one_build_step["value"].'</textarea>';
                             echo '  </div>';
