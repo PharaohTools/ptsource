@@ -9,7 +9,7 @@ class BuildList extends Base {
       // if we don't have an object, its an array of errors
       $this->content = $pageVars ;
       if (is_array($thisModel)) { return $this->failDependencies($pageVars, $this->content, $thisModel) ; }
-      $this->content["modulesInfo"] = $thisModel->findModuleNames($pageVars["route"]["extraParams"]);
+      $this->content["data"] = $thisModel->getData();
       return array ("type"=>"view", "view"=>"buildList", "pageVars"=>$this->content);
     }
 
