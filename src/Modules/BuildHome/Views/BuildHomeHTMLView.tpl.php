@@ -13,14 +13,14 @@
                                 <i class="fa fa-times"></i>
                             </span>
                         </span>
-                <a href="#" class="list-group-item">
-                    <i class="fa fa-comment-o"></i> New Pipeline
+                <a href="/index.php?control=Index&action=show" class="list-group-item">
+                    <i class="fa fa-comment-o"></i> Dashboard
                 </a>
-                <a href="#" class="list-group-item">
-                    <i class="fa fa-search">Configure Phrankinsense</i>
+                <a href="/index.php?control=BuildList&action=show" class="list-group-item">
+                    <i class="fa fa-search"></i>All Pipelines
                 </a>
-                <a href="#" class="list-group-item">
-                    <i class="fa fa-user">List Pipelines</i>
+                <a href="/index.php?control=BuildConfigure&action=show" class="list-group-item">
+                    <i class="fa fa-user"></i>Configure This Pipeline
                 </a>
                 <a href="#" class="list-group-item">
                     <i class="fa fa-folder-open-o"></i> Lorem ipsum <span class="badge">14</span>
@@ -35,34 +35,27 @@
         </div>
 
         <div class="col-sm-8 col-md-9 clearfix main-container">
-            <h4 class="text-uppercase text-light">GC cleopetra</h4>
+            <h4 class="text-uppercase text-light">Pipeline</h4>
             <div class="row clearfix no-margin">
                 <h3><a class="lg-anchor text-light" href="">Phrankinsense - Pharaoh Tools <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
-                <p>
-                    The Build and Monitoring Server built for the Web, in its favourite language.
-                    <br/>
-                    The home page for a single build
-                </p>
+                <p><?php echo $pageVars["data"]["pipeline"]["project_title"]["label"] ; ?>:
+                    <?php echo $pageVars["data"]["pipeline"]["project_title"]["value"] ; ?></p>
+                <p><?php echo $pageVars["data"]["pipeline"]["project_description"]["label"] ; ?>:
+                    <?php echo $pageVars["data"]["pipeline"]["project_description"]["value"] ; ?></p>
             </div>
             <hr>
             <div class="row clearfix no-margin">
-                <h3><a class="lg-anchor text-light" href="/index.php?control=BuildConfigure&action=show&item=some_build_1">Configure some_build 1- <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
+                <h3><a class="lg-anchor text-light" href="/index.php?control=BuildConfigure&action=show&item=some_build_1">Configure Pipeline: <?php echo $pageVars["data"]["pipeline"]["project_title"]["value"] ; ?>- <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
 
-                <p>
-                    Build Status Currently:
-                    <br/>
-                    ---------------------------------------
-                </p>
-                <p>
-                    Build Plugins/features/monitors:
-                    <br/>
-                    ---------------------------------------
-                </p>
-                <p>
-                    Build Status:
-                    <br/>
-                    ---------------------------------------
-                </p>
+                <p>Build Status Currently:</p>
+                <div class="pipe-now-status-block pipe-block"></div>
+                <p>Build Monitors:</p>
+                <div class="pipe-monitor-block pipe-block"></div>
+                <p>Build Plugins/Features:</p>
+                <div class="pipe-features-block pipe-block"></div>
+                <p>Build History:</p>
+                <div class="pipe-history-block pipe-block">
+
                 <?php
 
                 foreach ($pageVars["build_history"] as $build_history) {
@@ -72,6 +65,7 @@
                 }
 
                 ?>
+                </div>
 
                 <p>
                     ---------------------------------------<br/>
