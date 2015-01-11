@@ -118,6 +118,11 @@ body{
     background-color: lightgray;
 }
 
+.loadingImage {
+    max-width:20%;
+    max-height:20%;
+}
+
 .listImage {
     max-width:40%;
     max-height:40%;
