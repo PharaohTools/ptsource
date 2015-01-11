@@ -7,12 +7,12 @@
                 <span class="icon-bar"></span>
             </div>
             <div class="list-group sidebar-list">
-                        <span href="#" class="list-group-item active">
-                            Menu
-                            <span class="pull-right" id="slide-submenu">
-                                <i class="fa fa-times"></i>
-                            </span>
-                        </span>
+                <span href="#" class="list-group-item active">
+                    Menu
+                    <span class="pull-right" id="slide-submenu">
+                        <i class="fa fa-times"></i>
+                    </span>
+                </span>
                 <a href="/index.php?control=Index&action=show" class="list-group-item">
                     <i class="fa fa-comment-o"></i> Dashboard
                 </a>
@@ -37,9 +37,9 @@
                 <p>
                     Build and Monitoring Server in PHP.
                     <br/>
-                    Can be used to set up monitoring of any application feature in minutes.
-                    <br/>
                     Create simple or complex build pipelines fully integrated with pharaoh tools
+                    <br/>
+                    Create monitoring application features in minutes.
                     <br/>
                     Using Convention over Configuration, a lot of common build tasks can be completed with little or
                     no extra implementation work.
