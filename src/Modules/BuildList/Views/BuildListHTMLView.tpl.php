@@ -45,7 +45,7 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Pipeline Name</th>
+                            <th>Pipeline</th>
                             <th>Status</th>
                             <th>Success</th>
                             <th>Failure</th>
@@ -62,7 +62,7 @@
                             foreach ($pageVars["data"]["pipelines"] as $pipelineSlug => $pipelineDetails) { ?>
                             <tr>
                                 <th scope="row"><?php echo $i ; ?></th>
-                                <td><a href="/index.php?control=BuildHome&action=show&item=<?php echo $pipelineSlug; ?>">Pipeline <?php echo $pipelineDetails["project_title"]["value"] ; ?></a></td>
+                                <td><a href="/index.php?control=BuildHome&action=show&item=<?php echo $pipelineSlug; ?>"><?php echo $pipelineDetails["project_title"]["value"] ; ?></a></td>
                                 <td>
                                     <?php
                                         if ($pipelineDetails["last_status"] === true) {
