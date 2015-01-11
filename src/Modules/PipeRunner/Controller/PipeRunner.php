@@ -9,10 +9,12 @@ class PipeRunner extends Base {
         // if we don't have an object, its an array of errors
         $this->content = $pageVars ;
         if (is_array($thisModel)) { return $this->failDependencies($pageVars, $this->content, $thisModel) ; }
-        if ($pageVars["route"]["action"] == "service") {
+        if (in_array($pageVars["route"]["action"], array("pipestatus","service"))) {
             $this->content["data"] = $thisModel->getServiceData();
-            $this->content["route"]["extraParams"]["output-format"] = "service";
+            $this->content["route"]["extraParams"]["output-format"] = $pageVars["route"]["action"];
             return array ("type"=>"view", "view"=>"pipeRunner", "pageVars"=>$this->content); }
+        if (in_array($pageVars["route"]["action"], array("start"))) {
+            $this->content["pipex"] = $thisModel->runPipe(); }
         $this->content["data"] = $thisModel->getData();
         return array ("type"=>"view", "view"=>"pipeRunner", "pageVars"=>$this->content);
     }
