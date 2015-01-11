@@ -113,7 +113,8 @@
                                 </td>
                                 <td>
                                     <?php
-                                        echo '<a href="PipeRunner"><img class="listImage" src="/Assets/BuildList/images/run.png" /></a>' ;
+                                        echo '<a href="/index.php?control=PipeRunner&action=start&item='.$pipelineSlug.'">';
+                                        echo '<img class="listImage" src="/Assets/BuildList/images/run.png" /></a>' ;
                                     ?>
                                 </td>
                             </tr>
