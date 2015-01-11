@@ -17,19 +17,22 @@
                     <i class="fa fa-comment-o"></i> Dashboard
                 </a>
                 <a href="/index.php?control=BuildList&action=show" class="list-group-item">
-                    <i class="fa fa-search"></i> All Pipelines
+                    <i class="fa fa-search"></i> Pipeline Home
                 </a>
                 <a href="/index.php?control=BuildList&action=show" class="list-group-item">
                     <i class="fa fa-user"></i> All Pipelines
                 </a>
                 <a href="#" class="list-group-item">
-                    <i class="fa fa-folder-open-o"></i> Lorem ipsum <span class="badge">14</span>
+                    <i class="fa fa-folder-open-o"></i> Workspace
                 </a>
                 <a href="#" class="list-group-item">
-                    <i class="fa fa-bar-chart-o"></i> Lorem ipsumr <span class="badge">14</span>
+                    <i class="fa fa-bar-chart-o"></i> Monitors <span class="badge">6</span>
                 </a>
                 <a href="#" class="list-group-item">
-                    <i class="fa fa-envelope"></i> Lorem ipsum
+                    <i class="fa fa-bar-chart-o"></i> History <span class="badge">3</span>
+                </a>
+                <a href="#" class="list-group-item">
+                    <i class="fa fa-envelope"></i> Run Now
                 </a>
             </div>
         </div>
@@ -61,7 +64,11 @@
                             <textarea class="form-control"></textarea>
                         </div>
                     </div>
-                    <div class="form-group"> <h3>Build Steps</h3> </div>
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                            <h3>Build Steps</h3>
+                        </div>
+                    </div>
                     <?php
                         foreach ($pageVars["data"]["pipeline"]["steps"] as $one_build_step) {
                             echo '<div class="form-group">' ;
