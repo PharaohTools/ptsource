@@ -119,10 +119,10 @@ body{
 }
 
 .listImage {
-    max-width:80%;
-    max-height:80%;
+    max-width:40%;
+    max-height:40%;
 }
 
 .listImageWide {
-    max-width:87%;
+    max-width:50%;
 }
