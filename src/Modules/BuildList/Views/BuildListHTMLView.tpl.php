@@ -59,9 +59,30 @@
                             <tr>
                                 <th scope="row"><?php echo $i ; ?></th>
                                 <td><a href="/index.php?control=BuildHome&action=show&item=<?php echo $pipelineSlug; ?>">Pipeline <?php echo $pipelineDetails["project_title"]["value"] ; ?></a></td>
-                                <td>Table cell</td>
-                                <td>Table cell</td>
-                                <td>Table cell</td>
+                                <td>
+                                    <?php
+                                        if ($pipelineDetails["last_status"] === true) {
+                                            echo '<img class="listImageWide" src="/Assets/BuildList/images/green-ball.png" />' ; }
+                                        else {
+                                            echo '<img class="listImageWide" src="/Assets/BuildList/images/red-ball.png" />' ; }
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php
+                                        if ($pipelineDetails["has_parents"] === true) {
+                                            echo '<img class="listImage" src="/Assets/BuildList/images/tick.png" />' ; }
+                                        else {
+                                            echo '<img class="listImage" src="/Assets/BuildList/images/cross.png" />' ; }
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php
+                                        if ($pipelineDetails["has_children"] === true) {
+                                            echo '<img class="listImage" src="/Assets/BuildList/images/tick.png" />' ; }
+                                        else {
+                                            echo '<img class="listImage" src="/Assets/BuildList/images/cross.png" />' ; }
+                                    ?>
+                                </td>
                             </tr>
                         <?php
                             $i++;
