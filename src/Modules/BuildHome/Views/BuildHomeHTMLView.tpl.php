@@ -16,17 +16,17 @@
                 <a href="/index.php?control=BuildList&action=show" class="list-group-item">
                     <i class="fa fa-search"></i>All Pipelines
                 </a>
-                <a href="/index.php?control=BuildConfigure&action=show" class="list-group-item">
+                <a href="/index.php?control=BuildConfigure&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project_slug"]["value"] ; ?>" class="list-group-item">
                     <i class="fa fa-user"></i>Configure This Pipeline
                 </a>
                 <a href="#" class="list-group-item">
-                    <i class="fa fa-folder-open-o"></i> Lorem ipsum <span class="badge">14</span>
+                    <i class="fa fa-folder-open-o"></i> Workspace
                 </a>
                 <a href="#" class="list-group-item">
-                    <i class="fa fa-bar-chart-o"></i> Lorem ipsumr <span class="badge">14</span>
+                    <i class="fa fa-bar-chart-o"></i> Changes <span class="badge">3</span>
                 </a>
                 <a href="#" class="list-group-item">
-                    <i class="fa fa-envelope"></i> Lorem ipsum
+                    <i class="fa fa-envelope"></i> Delete
                 </a>
             </div>
         </div>
