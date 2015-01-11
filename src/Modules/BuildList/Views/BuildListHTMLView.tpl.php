@@ -62,9 +62,9 @@
                                 <td>
                                     <?php
                                         if ($pipelineDetails["last_status"] === true) {
-                                            echo '<img class="listImageWide" src="/Assets/BuildList/images/green-ball.png" />' ; }
+                                            echo '<img class="listImage listImageWide" src="/Assets/BuildList/images/green-ball.png" />' ; }
                                         else {
-                                            echo '<img class="listImageWide" src="/Assets/BuildList/images/red-ball.png" />' ; }
+                                            echo '<img class="listImage listImageWide" src="/Assets/BuildList/images/red-ball.png" />' ; }
                                     ?>
                                 </td>
                                 <td>
