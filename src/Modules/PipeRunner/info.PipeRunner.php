@@ -13,7 +13,7 @@ class PipeRunnerInfo extends CleopatraBase {
     }
 
     public function routesAvailable() {
-      return array( "PipeRunner" => array("show") );
+      return array( "PipeRunner" => array("start", "service", "show") );
     }
 
     public function routeAliases() {
