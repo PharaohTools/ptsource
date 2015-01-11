@@ -28,6 +28,9 @@
                 <a href="#" class="list-group-item">
                     <i class="fa fa-envelope"></i> Delete
                 </a>
+                <a href="/index.php?control=PipeRunner&action=start&item=<?php echo $pageVars["data"]["pipeline"]["project_slug"]["value"] ; ?>" class="list-group-item">
+                    <i class="fa fa-envelope"></i> Run Now
+                </a>
             </div>
         </div>
 
