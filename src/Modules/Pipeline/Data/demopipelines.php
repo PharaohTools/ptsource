@@ -2,6 +2,9 @@
 
 $demopipelines = array(
     "pipeline_1" => array(
+        "last_status" => true,
+        "has_parents" => true,
+        "has_children" => true,
         "project_slug" => array("label" => "Project Slug:", "value" => "pipeline_1"),
         "project_title" => array("label" => "Project Title:", "value" => "My Project Title"),
         "git_url" => array("label" => "Git URL:", "value" => "http://github.com/PharaohTools/website.git"),
@@ -19,6 +22,9 @@ $demopipelines = array(
                 // "title" => "Build Step 1",
                 "value" => "The second build step. Lets start Xvfb, for instance" ), ), ),
     "other_project" => array(
+        "last_status" => true,
+        "has_parents" => false,
+        "has_children" => false,
         "project_slug" => array("label" => "Project Slug:", "value" => "other_project"),
         "project_title" => array("label" => "Project Title:", "value" => "Other Project"),
         "git_url" => array("label" => "Git URL:", "value" => "http://github.com/PharaohTools/otherproject.git"),
@@ -36,6 +42,9 @@ $demopipelines = array(
                 // "title" => "Build Step 1",
                 "value" => "The second build step. Lets start Xvfb, for instance" ), ), ),
     "cleopatra" => array(
+        "last_status" => true,
+        "has_parents" => false,
+        "has_children" => false,
         "project_slug" => array("label" => "Project Slug:", "value" => "cleopatra"),
         "project_title" => array("label" => "Project Title:", "value" => "The Cleopatra Pharaoh Application"),
         "git_url" => array("label" => "Git URL:", "value" => "http://github.com/PharaohTools/cleopatra.git"),
@@ -53,6 +62,9 @@ $demopipelines = array(
                 // "title" => "Build Step 1",
                 "value" => "The second build step. Lets start up 4 operating systems to test on 4, for instance" ), ), ),
     "phlagrant" => array(
+        "last_status" => true,
+        "has_parents" => false,
+        "has_children" => false,
         "project_slug" => array("label" => "Project Slug:", "value" => "phlagrant"),
         "project_title" => array("label" => "Project Title:", "value" => "The Phlagrant Pharaoh Application"),
         "git_url" => array("label" => "Git URL:", "value" => "http://github.com/PharaohTools/phlagrant.git"),
