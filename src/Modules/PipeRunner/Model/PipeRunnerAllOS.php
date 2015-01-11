@@ -16,8 +16,10 @@ class PipeRunnerAllOS extends Base {
 
     public function getData() {
         $ret["pipeline"] = $this->getPipeline();
+        $ret["item"] = $this->params["item"];
         return $ret ;
     }
+
     public function getServiceData() {
         $ret["output"] = $this->getExecutionOutput();
         $ret["status"] = $this->getExecutionStatus();
@@ -31,26 +33,41 @@ class PipeRunnerAllOS extends Base {
     }
 
     public function runPipe() {
-        $cwd='/tmp';
-        $descriptorspec = array(
-            0 => array("pipe", "r"),
-            1 => array("pipe", "w"),
-            2 => array("file", "/tmp/error-output.txt", "a") );
-        proc_open("php /tmp/pipey.php > /tmp/error-output.txt &", $descriptorspec, $pipes, $cwd);
-        $o = stream_get_contents($pipes[1]);
-        fclose($pipes[1]);
-        return $o ;
+        $cmd = "php /tmp/pipey.php > /tmp/error-output.txt &" ;
+
+        $descr = array(
+            0 => array(
+                'pipe',
+                'r'
+            ) ,
+            1 => array(
+                'pipe',
+                'w'
+            ) ,
+            2 => array(
+                'pipe',
+                'w'
+            )
+        );
+        $pipes = array();
+        $process = proc_open($cmd, $descr, $pipes);
+            $stat = proc_get_status ( $process ) ;
+            proc_close($process);
+        return $stat["pid"] ;
     }
 
-    public function getExecutionOutput() {
+    private function getExecutionOutput() {
         $ofile = "/tmp/error-output.txt" ;
         $o = file_get_contents($ofile) ;
         return $o ;
     }
 
-    public function getExecutionStatus() {
-        $o = false ;
-        return $o ;
+    private function getExecutionStatus() {
+        $ofile = "/tmp/error-output.txt" ;
+        $o = file_get_contents($ofile) ;
+        if (strpos($o, "DONE") !== false) {
+            return true ; }
+        return false ;
     }
 
 }
