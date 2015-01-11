@@ -47,8 +47,12 @@
                             <th>#</th>
                             <th>Pipeline Name</th>
                             <th>Status</th>
+                            <th>Success</th>
+                            <th>Failure</th>
+                            <th>Duration</th>
                             <th>Parent</th>
                             <th>Child</th>
+                            <th>Run Now</th>
                         </tr>
                         </thead>
                         <tbody class="table-hover">
@@ -69,18 +73,47 @@
                                 </td>
                                 <td>
                                     <?php
-                                        if ($pipelineDetails["has_parents"] === true) {
-                                            echo '<img class="listImage" src="/Assets/BuildList/images/tick.png" />' ; }
-                                        else {
-                                            echo '<img class="listImage" src="/Assets/BuildList/images/cross.png" />' ; }
+                                    if ($pipelineDetails["last_success"] != false) {
+                                        echo '20:13:55 01/02/2015' ; }
+                                    else {
+                                        echo 'N/A' ; }
                                     ?>
                                 </td>
                                 <td>
                                     <?php
-                                        if ($pipelineDetails["has_children"] === true) {
-                                            echo '<img class="listImage" src="/Assets/BuildList/images/tick.png" />' ; }
-                                        else {
-                                            echo '<img class="listImage" src="/Assets/BuildList/images/cross.png" />' ; }
+                                    if ($pipelineDetails["last_fail"] != false) {
+                                        echo '14:13:55 21/01/2015' ; }
+                                    else {
+                                        echo 'N/A' ; }
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php
+                                    if ($pipelineDetails["duration"] != false) {
+                                        echo '134 seconds' ; }
+                                    else {
+                                        echo 'N/A' ; }
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php
+                                    if ($pipelineDetails["has_parents"] === true) {
+                                        echo '<img class="listImage" src="/Assets/BuildList/images/tick.png" />' ; }
+                                    else {
+                                        echo '<img class="listImage" src="/Assets/BuildList/images/cross.png" />' ; }
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php
+                                    if ($pipelineDetails["has_children"] === true) {
+                                        echo '<img class="listImage" src="/Assets/BuildList/images/tick.png" />' ; }
+                                    else {
+                                        echo '<img class="listImage" src="/Assets/BuildList/images/cross.png" />' ; }
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php
+                                        echo '<a href="PipeRunner"><img class="listImage" src="/Assets/BuildList/images/run.png" /></a>' ;
                                     ?>
                                 </td>
                             </tr>
