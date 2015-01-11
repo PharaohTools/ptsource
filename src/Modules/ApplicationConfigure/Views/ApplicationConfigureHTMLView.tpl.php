@@ -16,20 +16,11 @@
                 <a href="/index.php?control=Index&action=show" class="list-group-item">
                     <i class="fa fa-comment-o"></i> Dashboard
                 </a>
-                <a href="/index.php?control=BuildList&action=show" class="list-group-item">
-                    <i class="fa fa-search"></i> All Pipelines
+                <a href="/index.php?control=Licensing&action=show" class="list-group-item">
+                    <i class="fa fa-bar-chart-o"></i> Licensing <span class="badge">OK</span>
                 </a>
-                <a href="#" class="list-group-item">
-                    <i class="fa fa-user"></i> List Pipelines
-                </a>
-                <a href="#" class="list-group-item">
-                    <i class="fa fa-folder-open-o"></i> Lorem ipsum <span class="badge">14</span>
-                </a>
-                <a href="#" class="list-group-item">
-                    <i class="fa fa-bar-chart-o"></i> Lorem ipsumr <span class="badge">14</span>
-                </a>
-                <a href="#" class="list-group-item">
-                    <i class="fa fa-envelope"></i> Lorem ipsum
+                <a href="/index.php?control=UserManager&action=show" class="list-group-item">
+                    <i class="fa fa-user"></i> User Manager
                 </a>
             </div>
         </div>
@@ -37,73 +28,120 @@
         <div class="col-sm-8 col-md-9 clearfix main-container">
             <h2 class="text-uppercase text-light"><a href="/">Phrankinsense - Pharaoh Tools</a></h2>
             <div class="row clearfix no-margin">
-                <h3><a class="lg-anchor text-light" href="#"> Configuration <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
                 <form class="form-horizontal custom-form">
-                    <h5 class="text-uppercase text-light" style="margin-top: 15px;">
-                        <a href="/index.php?control=BuildHome&action=show&item=some_build_1">Configure Default Modules</a>
-                    </h5>
-                    <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-2 control-label text-left">Project Name</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputEmail3" placeholder="Project Name">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-2 control-label text-left">Git URL</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputPassword3" placeholder="Git URL">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-2 control-label text-left">Configuration</label>
-                        <div class="col-sm-10">
-                            <textarea class="form-control"></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-info">Configure</button>
-                        </div>
-                    </div>
-                    <h5 class="text-uppercase text-light" style="margin-top: 15px;">
-                        <a href="/index.php?control=BuildHome&action=show&item=some_build_1">Configure Extensions</a>
-                    </h5>
-                    <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-2 control-label text-left">Project Name</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputEmail3" placeholder="Project Name">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-2 control-label text-left">Git URL</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputPassword3" placeholder="Git URL">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-2 control-label text-left">Configuration</label>
-                        <div class="col-sm-10">
-                            <textarea class="form-control"></textarea>
-                        </div>
-                    </div>
+
+                    <h3 class="text-uppercase text-light" style="margin-top: 15px;">
+                        Application Configuration <i style="font-size: 18px;" class="fa fa-chevron-right"></i>
+                    </h3>
+
+                    <?php
+
+                        if (is_array($pageVars["data"]["app_configs"]) && count($pageVars["data"]["app_configs"]>0)) {
+                            foreach ($pageVars["data"]["app_configs"] as $one_config_slug => $one_conf_tails) {
+                                echo '<div class="form-group">' ;
+                                echo '  <label for="config_'.$one_config_slug.'" class="col-sm-2 control-label text-left">'.$one_conf_tails["label"].':</label>' ;
+                                echo '  <div class="col-sm-10">' ;
+                                echo '      <p>' ;
+                                switch ($one_conf_tails["type"]) {
+                                    case "boolean" :
+                                        if (isset($pageVars["data"]["current_configs"]["app"][$one_config_slug])) {
+                                            if ($pageVars["data"]["current_configs"]["app"][$one_config_slug] == true) {
+                                                $onoff = "on";  }
+                                            else {
+                                                $onoff = "off" ; } }
+                                        $onoff = (is_null($onoff))
+                                            ? $one_conf_tails["default"]
+                                            : null ;
+                                        echo '<input name="config_'.$one_config_slug.'" id="config_'.$one_config_slug.'" type="checkbox" value="'.$onoff.'" />' ;
+                                        break ;
+                                    case "text" :
+                                        if (isset($pageVars["data"]["current_configs"]["app"][$one_config_slug])) {
+                                                $val = $pageVars["data"]["current_configs"]["app"][$one_config_slug];  }
+                                        if (!isset($val) && is_null($onoff)) {
+                                            $val = $one_conf_tails["default"] ; }
+                                        echo '<input name="config_'.$one_config_slug.'" id="config_'.$one_config_slug.'" type="text" class="form-control" value="'.$one_conf_tails["value"].'" placeholder="'.$one_conf_tails["label"].'" />' ;
+                                        break ; }
+                                echo '</p>';
+                                echo '  </div>';
+                                echo '  <div class="col-sm-offset-2 col-sm-10">';
+                                echo '  </div>';
+                                echo '</div>'; } }
+                        else {
+                            echo '<div class="form-group">' ;
+                            echo '    <p>No Default are providing editables configurations</p>';
+                            echo '</div>'; }
+                    ?>
+
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-info">Configure</button>
+                            <button type="submit" class="btn btn-success">Save App Config</button>
+                            <button type="submit" class="btn btn-primary">Clear</button>
+                            <button type="submit" class="btn btn-warning">Use Defaults</button>
                         </div>
                     </div>
+
+                    <br />
+
+                    <h3 class="text-uppercase text-light" style="margin-top: 15px;">
+                        Module Configuration <i style="font-size: 18px;" class="fa fa-chevron-right"></i>
+                    </h3>
+
+                    <?php
+
+                        if (is_array($pageVars["data"]["mod_configs"]) && count($pageVars["data"]["mod_configs"]>0)) {
+                            foreach ($pageVars["data"]["mod_configs"] as $module_name => $one_mod_confs) {
+                                echo '  <div class="col-sm-10">' ;
+                                echo '      <h4>Module: '.$module_name.'</h4>';
+                                echo '  </div>';
+                                foreach ($one_mod_confs as $one_config_slug => $one_conf_tails) {
+                                    echo '<div class="form-group">' ;
+                                    echo '  <label for="config_'.$one_config_slug.'" class="col-sm-6 control-label text-left">'.$one_conf_tails["label"].'</label>' ;
+                                    echo '  <div class="col-sm-4">' ;
+                                    echo '      <p>' ;
+                                    switch ($one_conf_tails["type"]) {
+                                        case "boolean" :
+                                            if (isset($pageVars["data"]["current_configs"]["app"][$one_config_slug])) {
+                                                if ($pageVars["data"]["current_configs"]["app"][$one_config_slug] == true) {
+                                                    $onoff = "on";  }
+                                                else {
+                                                    $onoff = "off" ; } }
+                                            $onoff = (is_null($onoff))
+                                                ? $one_conf_tails["default"]
+                                                : null ;
+                                            echo '<input name="config_'.$one_config_slug.'" id="config_'.$one_config_slug.'" type="checkbox" value="'.$onoff.'" />' ;
+                                            break ;
+                                        case "text" :
+                                            if (isset($pageVars["data"]["current_configs"]["app"][$one_config_slug])) {
+                                                $val = $pageVars["data"]["current_configs"]["app"][$one_config_slug];  }
+                                            if (!isset($val) && is_null($onoff)) {
+                                                $val = $one_conf_tails["default"] ; }
+                                            echo '<input name="config_'.$one_config_slug.'" id="config_'.$one_config_slug.'" type="text" class="form-control" value="'.$one_conf_tails["value"].'" placeholder="'.$one_conf_tails["label"].'" />' ;
+                                            break ; }
+                                    echo '</p>';                                    echo '  </div>';
+                                    echo '</div>'; } } }
+                        else {
+                            echo '<div class="form-group">' ;
+                            echo '    <p>No Modules are providing editables configurations</p>';
+                            echo '</div>'; }
+
+                    ?>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-success">Save App Config</button>
+                            <button type="submit" class="btn btn-primary">Clear</button>
+                            <button type="submit" class="btn btn-warning">Use Defaults</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-success">Save All Configurations</button>
+                        </div>
+                    </div>
+
                 </form>
-                <?php
 
-                foreach ($pageVars["build_steps"] as $build_step) {
-                    if ($build_step["hidden"] != true) {
-                        echo '<p>'.$moduleInfo["command"].' - '.$moduleInfo["name"]."</p>";
-                    }
-                }
-
-                ?>
-                <h5 class="text-uppercase text-light">
-                    <a href="/index.php?control=ApplicationConfigure&action=save&item=some_build_1">Save configuration of some_build 1-</a>
-                </h5>
             </div>
             <p>
                 ---------------------------------------<br/>
