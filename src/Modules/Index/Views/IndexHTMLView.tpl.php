@@ -20,16 +20,10 @@
                     <i class="fa fa-search"></i> Configure Phrankinsense
                 </a>
                 <a href="/index.php?control=BuildList&action=show" class="list-group-item">
-                    <i class="fa fa-search"></i> All Pipelines
+                    <i class="fa fa-user"></i> All Pipelines
                 </a>
-                <a href="#" class="list-group-item">
-                    <i class="fa fa-folder-open-o"></i> Lorem ipsum <span class="badge">14</span>
-                </a>
-                <a href="#" class="list-group-item">
-                    <i class="fa fa-bar-chart-o"></i> Lorem ipsumr <span class="badge">14</span>
-                </a>
-                <a href="#" class="list-group-item">
-                    <i class="fa fa-envelope"></i> Lorem ipsum
+                <a href="/index.php?control=Monitors&action=DefaultHistory" class="list-group-item">
+                    <i class="fa fa-bar-chart-o"></i> History
                 </a>
             </div>
         </div>
