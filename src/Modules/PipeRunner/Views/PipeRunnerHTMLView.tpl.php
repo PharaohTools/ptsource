@@ -40,35 +40,42 @@
         <div class="col-sm-8 col-md-9 clearfix main-container">
             <h2 class="text-uppercase text-light"><a href="/"> Phrankinsense - Pharaoh Tools </a></h2>
             <div class="row clearfix no-margin">
-                <h3><a class="lg-anchor text-light" href="#">Build Configure <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
+                <h3><a class="lg-anchor text-light" href="#">Executing Pipeline <?php echo $pageVars["data"]["pipeline"]["project_title"]["value"] ; ?> <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
                 <h5 class="text-uppercase text-light" style="margin-top: 15px;">
-                    <a href="/index.php?control=BuildHome&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project_slug"]["value"] ; ?>">
-                        Pipeline Summary for <?php echo $pageVars["data"]["pipeline"]["project_title"]["value"] ; ?>-</a>
+                    <a href="/index.php?control=BuildHome&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project_slug"]["value"] ; ?>"></a>
                 </h5>
                 <form class="form-horizontal custom-form">
-                    <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-2 control-label text-left">Project Name</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputEmail3" placeholder="Project Name" value="<?php echo $pageVars["data"]["pipeline"]["project_title"]["value"] ; ?>" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-2 control-label text-left">Git URL</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputPassword3" placeholder="Git URL" value="<?php echo $pageVars["data"]["pipeline"]["git_url"]["value"] ; ?>" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-2 control-label text-left">Configuration</label>
-                        <div class="col-sm-10">
-                            <textarea class="form-control"></textarea>
-                        </div>
-                    </div>
+
                     <div class="form-group">
                         <div class="col-sm-10">
-                            <h3>Build Steps</h3>
+                            <div id="updatable">
+                                Starting Pipeline Execution...
+                            </div>
                         </div>
                     </div>
+
+                    <script type="text/javascript">
+                        console.log("one") ;
+                        done = false ;
+                        max = 0 ;
+                        while (done == false && max < 30) {
+                            window.setTimeout(updatePage, 3000) //wait 3 seconds before continuing
+                            max = max + 1 ; }
+
+                        function updatePage()
+                        {
+                            item = $("#item").val();
+                            url = "/index.php?control=PipeRunner&action=service&item=" + item ;
+                            $.ajax({
+                                url: url,
+                                success: function(data) {
+                                    $('#updatable').html(data); },
+                                complete: function() {
+                                    // Schedule the next request when the current one's complete
+                                    setTimeout(updatePage, 5000); }
+                            });}
+                    </script>
+
                     <?php
                         foreach ($pageVars["data"]["pipeline"]["steps"] as $one_build_step) {
                             echo '<div class="form-group">' ;
@@ -81,14 +88,17 @@
                             echo '</div>'; }
                     ?>
                     <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-info">Configure</button>
+                        <div class="col-sm-offset-2 col-sm-8">
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-danger" id="end-now">End Now</button>
+                            </div>
+                        </div>
+                        <div class="col-sm-offset-2 col-sm-8">
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary" id="close-complete">Close Execution Screen</button>
+                            </div>
                         </div>
                     </div>
-                    <h5 class="text-uppercase text-light">
-                        <a href="/index.php?control=PipeRunner&action=save&item=<?php echo $pageVars["data"]["pipeline"]["project_title"]["value"] ; ?>">
-                            Save configuration of <?php echo $pageVars["data"]["pipeline"]["project_title"]["value"] ; ?>-</a>
-                    </h5>
                 </form>
             </div>
             <p>

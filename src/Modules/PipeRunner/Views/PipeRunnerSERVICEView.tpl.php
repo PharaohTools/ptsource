@@ -1,1 +1,3 @@
-I updated you baby
+<pre>
+<?php echo $pageVars["data"]["output"] ; ?>
+</pre>
