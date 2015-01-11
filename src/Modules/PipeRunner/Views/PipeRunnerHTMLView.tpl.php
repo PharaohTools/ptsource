@@ -31,8 +31,8 @@
                 <a href="#" class="list-group-item">
                     <i class="fa fa-bar-chart-o"></i> History <span class="badge">3</span>
                 </a>
-                <a href="#" class="list-group-item">
-                    <i class="fa fa-envelope"></i> Run Now
+                <a href="/index.php?control=PipeRunner&action=start&item=<?php echo $pageVars["data"]["pipeline"]["project_slug"]["value"] ; ?>" class="list-group-item">
+                    <i class="fa fa-envelope"></i> Run Again
                 </a>
             </div>
         </div>
@@ -44,7 +44,7 @@
                 <h5 class="text-uppercase text-light" style="margin-top: 15px;">
                     <a href="/index.php?control=BuildHome&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project_slug"]["value"] ; ?>"></a>
                 </h5>
-                <form class="form-horizontal custom-form">
+                <form class="form-horizontal custom-form" action="/index.php?control=PipeRunner&action=show" method="POST">
 
                     <?php
                     if (isset($pageVars["pipex"])) {
@@ -68,13 +68,11 @@
                         </div>
                     </div>
 
-                    <script src="/Assets/js/jquery.min.js" type="text/javascript" />
-
                     <script type="text/javascript">
                         done = false ;
                         max = 0 ;
                         while (done == false && max < 30) {
-                            window.setTimeout(updatePage, 1000) //wait 3 seconds before continuing
+                            window.setTimeout(updatePage, 3000) //wait 3 seconds before continuing
                             max = max + 1 ; }
 
                         // updatePage() ;
