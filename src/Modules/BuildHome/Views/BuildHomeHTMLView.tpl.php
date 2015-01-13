@@ -14,10 +14,10 @@
                     <i class="fa fa-comment-o"></i> Dashboard
                 </a>
                 <a href="/index.php?control=BuildList&action=show" class="list-group-item">
-                    <i class="fa fa-search"></i>All Pipelines
+                    <i class="fa fa-search"></i> All Pipelines
                 </a>
                 <a href="/index.php?control=BuildConfigure&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project_slug"]["value"] ; ?>" class="list-group-item">
-                    <i class="fa fa-user"></i>Configure This Pipeline
+                    <i class="fa fa-user"></i> Configure
                 </a>
                 <a href="#" class="list-group-item">
                     <i class="fa fa-folder-open-o"></i> Workspace
@@ -37,7 +37,9 @@
         <div class="col-sm-8 col-md-9 clearfix main-container">
             <h4 class="text-uppercase text-light">Pipeline</h4>
             <div class="row clearfix no-margin">
+                <!--
                 <h3><a class="lg-anchor text-light" href="">Phrankinsense - Pharaoh Tools <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
+                -->
                 <p><?php echo $pageVars["data"]["pipeline"]["project_title"]["label"] ; ?>:
                     <?php echo $pageVars["data"]["pipeline"]["project_title"]["value"] ; ?></p>
                 <p><?php echo $pageVars["data"]["pipeline"]["project_description"]["label"] ; ?>:
