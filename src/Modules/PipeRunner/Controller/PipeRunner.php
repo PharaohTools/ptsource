@@ -13,11 +13,11 @@ class PipeRunner extends Base {
             $this->content["data"] = $thisModel->getServiceData();
             $this->content["route"]["extraParams"]["output-format"] = $pageVars["route"]["action"];
             return array ("type"=>"view", "view"=>"pipeRunner", "pageVars"=>$this->content); }
-        if (in_array($pageVars["route"]["action"], array("saverun"))) {
-            $this->content["savestate"] = $thisModel->saveState();
-            $this->content["data"] = $thisModel->getData();
-            $this->content["route"]["extraParams"]["output-format"] = $pageVars["route"]["action"];
-            return array ("type"=>"view", "view"=>"pipeRunnerSummary", "pageVars"=>$this->content); }
+        if (in_array($pageVars["route"]["action"], array("child"))) {
+            $this->content["pid"] = $thisModel->runChild();
+            $this->content["data"] = $thisModel->getChildData();
+            $this->content["route"]["extraParams"]["output-format"] = "CLI";
+            return array ("type"=>"view", "view"=>"pipeRunnerChild", "pageVars"=>$this->content); }
         if (in_array($pageVars["route"]["action"], array("start"))) {
             $this->content["pipex"] = $thisModel->runPipe(); }
         $this->content["data"] = $thisModel->getData();
