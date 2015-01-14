@@ -13,7 +13,7 @@ class BuildHomeInfo extends CleopatraBase {
     }
 
     public function routesAvailable() {
-      return array( "BuildHome" => array("show") );
+      return array( "BuildHome" => array("show","new","delete") );
     }
 
     public function routeAliases() {

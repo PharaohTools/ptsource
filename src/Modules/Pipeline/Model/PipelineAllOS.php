@@ -33,5 +33,11 @@ class PipelineAllOS extends Base {
         $names = array_keys($pipelines) ;
         return (isset($names) && is_array($names)) ? $names : false ;
     }
+    public function deletePipeline($name) {
+        $pipelines = $this->getPipelines() ;
+        $ret = $pipelines[$name] ;
+        $r = (isset($ret) && is_array($ret)) ? $ret : false ;
+        return $r ;
+    }
 
 }
