@@ -28,7 +28,7 @@
                 <a href="#" class="list-group-item">
                     <i class="fa fa-bar-chart-o"></i> Monitors <span class="badge">6</span>
                 </a>
-                <a href="/index.php?control=PipeRunner&action=history&item=<?php echo $pageVars["data"]["pipeline"]["project_slug"]["value"] ; ?>" class="list-group-item">
+                <a href="#" class="list-group-item">
                     <i class="fa fa-bar-chart-o"></i> History <span class="badge">3</span>
                 </a>
                 <a href="/index.php?control=PipeRunner&action=start&item=<?php echo $pageVars["data"]["pipeline"]["project_slug"]["value"] ; ?>" class="list-group-item">
