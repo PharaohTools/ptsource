@@ -15,8 +15,12 @@ class PipeRunnerAllOS extends Base {
     public $modelGroup = array("Default") ;
 
     public function getData() {
+        $this->setPipeDir();
+        $ret["historic_builds"] = $this->getOldBuilds();
+        $ret["historic_build"] = $this->getOneBuild($this->params["run-id"]);
         $ret["pipeline"] = $this->getPipeline();
         $ret["item"] = $this->params["item"];
+        $ret["history_count"] = $this->getNextBuildNumber();
         return $ret ;
     }
 
@@ -43,9 +47,10 @@ class PipeRunnerAllOS extends Base {
         $this->setPipeDir();
         // ensure build dir exists
         // run pipe fork command
-        $this->runPipeForkCommand();
+        $run = $this->saveRunPlaceHolder();
         // save run
-        return $this->saveRun();
+        $this->runPipeForkCommand();
+        return $run ;
     }
 
     private function setPipeDir() {
@@ -61,8 +66,6 @@ class PipeRunnerAllOS extends Base {
         $cmd  = PHRCOMM.' piperunner child --pipe-dir="'.$this->params["pipe-dir"].'" ' ;
         $cmd .= '--item="'.$this->params["item"].'" > '.PIPEDIR.DS.$this->params["item"].DS ;
         $cmd .= 'tmpfile &' ;
-        error_log($cmd);
-
         $descr = array(
             0 => array(
                 'pipe',
@@ -81,19 +84,19 @@ class PipeRunnerAllOS extends Base {
         $process = proc_open($cmd, $descr, $pipes);
         $stat = proc_get_status ( $process ) ;
         proc_close($process);
-        return $stat["pid"] ;
+        return $stat["pid"]  ;
     }
 
     public function runChild() {
-        file_put_contents(PIPEDIR.DS.$this->params["item"].DS.'tmpfile',"") ; //empty file
+        $f = PIPEDIR.DS.$this->params["item"].DS.$this->params["run-id"] ;
+        self::executeAndOutput("rm -f $f", "Removing temp log file");
         echo PIPEDIR.DS.$this->params["item"].DS.'tmpfile'."\n" ;
-        for ($i = 0; $i < 30; $i++ ) {
+        for ($i = 0; $i < 15; $i++ ) {
             sleep(1);
-            echo "writing line $i to temp log\n";
-            file_put_contents(PIPEDIR.DS.$this->params["item"].DS.'tmpfile', "\nThis many lines: $i \n", FILE_APPEND) ; }
-        echo "done\n";
-        file_put_contents(PIPEDIR.DS.$this->params["item"].DS.'tmpfile', "DONE\n", FILE_APPEND) ;
-        return array("flozz");
+            echo "write $i This many lines: $i , Time: ".time()."\n" ;
+        }
+        echo "DONE\n";
+        return $this->saveRunLog();
     }
 
     private function getExecutionOutput() {
@@ -111,18 +114,50 @@ class PipeRunnerAllOS extends Base {
     private function getNextBuildNumber() {
         # mkdir($this->params["pipe-dir"].DS.$this->params["item"], true) ;
         $builds = scandir($this->params["pipe-dir"].DS.$this->params["item"]) ;
-        var_dump($builds) ;
+        for ($i=0; $i<count($builds); $i++) {
+            if (in_array($builds, array(".", "..", "tmpfile"))){
+                unset($builds[$i]) ; } }
         $buildCount = count($builds) + 1 ;
         return $buildCount ;
     }
 
-    public function saveRun() {
-        $file = $this->params["pipe-dir"].DS.$this->params["item"].DS.$this->getNextBuildNumber() ;
+    private function getOldBuilds() {
+        $builds = scandir($this->params["pipe-dir"].DS.$this->params["item"]) ;
+        $buildsRay = array();
+        for ($i=0; $i<count($builds); $i++) {
+            if (!in_array($builds[$i], array(".", "..", "tmpfile"))){
+                $buildsRay[] = $builds[$i] ; } }
+        rsort($buildsRay) ;
+        return $buildsRay ;
+    }
+
+    private function getOneBuild($buildNum) {
+        $file = $this->params["pipe-dir"].DS.$this->params["item"].DS.$buildNum ;
+        $o = file_get_contents($file) ;
+        return array("run-id" => $buildNum, "out" => $o) ;
+    }
+
+    public function saveRunPlaceHolder() {
+        $run = $this->getNextBuildNumber() ;
+        $file = $this->params["pipe-dir"].DS.$this->params["item"].DS.$run ;
         $buildOut = $this->getExecutionOutput() ;
-        $top = "THIS IS A PLACEHOLDER TO SHOW A FINISHED OUTPUT FILE\n\n" ;
+        error_log("bo: ".$buildOut) ;
+        $top = "THIS IS A PLACEHOLDER TO SHOW A STARTED OUTPUT FILE\n\n" ;
         file_put_contents($file, $top.$buildOut) ;
         if (file_exists($file)){
-            return true ; }
+            return $run ; }
+        return false ;
+    }
+
+    public function saveRunLog() {
+        $file = PIPEDIR.DS.$this->params["item"].DS.$this->params["run-id"] ;
+        $buildOut = $this->getExecutionOutput() ;
+        error_log("box: ".$buildOut) ;
+        file_put_contents($file, $buildOut) ;
+        if (file_exists($file)){
+            $f = PIPEDIR.DS.$this->params["item"].DS.$this->params["run-id"] ;
+            self::executeAndOutput("rm -f $f", "Removing temp log file");
+            return $this->params["run-id"] ; }
         return false ;
     }
 
