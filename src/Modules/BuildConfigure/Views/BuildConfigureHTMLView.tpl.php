@@ -31,7 +31,10 @@
                 <a href="#" class="list-group-item">
                     <i class="fa fa-bar-chart-o"></i> History <span class="badge">3</span>
                 </a>
-                <a href="#" class="list-group-item">
+                <a href="/index.php?control=BuildHome&action=delete&item=<?php echo $pageVars["data"]["pipeline"]["project_slug"]["value"] ; ?>" class="list-group-item">
+                    <i class="fa fa-envelope"></i> Delete
+                </a>
+                <a href="/index.php?control=PipeRunner&action=start&item=<?php echo $pageVars["data"]["pipeline"]["project_slug"]["value"] ; ?>" class="list-group-item">
                     <i class="fa fa-envelope"></i> Run Now
                 </a>
             </div>
@@ -53,17 +56,18 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label text-left">Description</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="inputPassword3" class="col-sm-2 control-label text-left">Git URL</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="inputPassword3" placeholder="Git URL" value="<?php echo $pageVars["data"]["pipeline"]["git_url"]["value"] ; ?>" />
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-2 control-label text-left">Configuration</label>
-                        <div class="col-sm-10">
-                            <textarea class="form-control"></textarea>
-                        </div>
-                    </div>
+
                     <div class="form-group">
                         <div class="col-sm-10">
                             <h3>Build Steps</h3>
