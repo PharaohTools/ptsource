@@ -19,6 +19,9 @@
                 <a href="#" class="list-group-item">
                     <i class="fa fa-search">Configure Phrankinsense</i>
                 </a>
+                <a href="/index.php?control=BuildHome&action=new" class="list-group-item">
+                    <i class="fa fa-user"></i> New Pipelines
+                </a>
                 <a href="#" class="list-group-item">
                     <i class="fa fa-user">List Pipelines</i>
                 </a>
