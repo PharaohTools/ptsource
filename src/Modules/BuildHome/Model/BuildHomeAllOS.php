@@ -18,11 +18,20 @@ class BuildHomeAllOS extends Base {
         $ret["pipeline"] = $this->getPipeline();
         return $ret ;
     }
-
+    public function DeleteData() {
+        $ret["pipeline"] = $this->deletePipeline();
+        return $ret ;
+    }
     public function getPipeline() {
         $pipelineFactory = new \Model\Pipeline() ;
         $pipeline = $pipelineFactory->getModel($this->params);
         return $pipeline->getPipeline($this->params["item"]);
+    }
+
+    public function deletePipeline() {
+        $pipelineFactory = new \Model\Pipeline() ;
+        $pipeline = $pipelineFactory->getModel($this->params);
+        return $pipeline->deletePipeline($this->params["item"]);
     }
 
 }
