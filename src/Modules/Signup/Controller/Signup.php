@@ -10,7 +10,12 @@ class Signup extends Base {
       $this->content = $pageVars ;
       if (is_array($thisModel)) { return $this->failDependencies($pageVars, $this->content, $thisModel) ; }
       if($pageVars["route"]["action"] == "login"){
-            $this->content["data"] = $thisModel->getloginV();
+            $this->content["data"] = $thisModel->getlogin();
+      }
+      if($pageVars["route"]["action"] == "logout"){
+          $thisModel->allLogininfodestroy();
+          header("Location: /index.php?control=Signup&action=login");
+          die();
       }
       return array ("type"=>"view", "view"=>"signup", "pageVars"=>$this->content);
     }
