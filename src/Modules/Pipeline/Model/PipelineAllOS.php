@@ -35,9 +35,20 @@ class PipelineAllOS extends Base {
     }
     public function deletePipeline($name) {
         $pipelines = $this->getPipelines() ;
+        $path = dirname(dirname(__FILE__)).DS."Data".DS."demopipelines.php" ;
+        include($path) ;
+        unset($demopipelines[$name]);
+
+//        $pipelines = $this->getPipelines() ;
+//        $path = dirname(dirname(__FILE__)).DS."Data".DS."demopipelines.php" ;
+//
+//        $file = fopen($path,"w");
+//        fwrite($file,$pipelines);
+//        fclose($file);
         $ret = $pipelines[$name] ;
         $r = (isset($ret) && is_array($ret)) ? $ret : false ;
         return $r ;
+        return ;
     }
 
 }
