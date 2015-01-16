@@ -108,27 +108,47 @@
                                 <h3>Build Steps</h3>
                             </div>
                         </div>
-                        <?php
-                        foreach ($pageVars["data"]["pipeline"]["steps"] as $one_build_step) {
-                            echo '<div class="form-group">' ;
-                            echo '  <label for="inputPassword3" class="col-sm-2 control-label text-left">'.$one_build_step["title"].'</label>' ;
-                            echo '  <div class="col-sm-10">' ;
-                            echo '      <p>'.$one_build_step["title"].'</p>';
-                            echo '      <p>Step Type: '.$one_build_step["type"]."</p>";
-                            echo '      <textarea class="form-control">'.$one_build_step["value"].'</textarea>';
-                            echo '  </div>';
-                            echo '</div>'; }
-                        ?>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label text-left" for="inputPassword3">Build Step 1</label>
+                            <div class="col-sm-10">
+                                <p>Build Step 1</p>
+                                <p>Step Type: BashShell</p>
+                                <textarea class="form-control">Lets do a git clone or something</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label text-left" for="inputPassword3">Build Step 1</label>
+                            <div class="col-sm-10">
+                                <p>Build Step 1</p>
+                                <p>Step Type: BashShell</p>
+                                <textarea class="form-control">Lets do a git clone or something</textarea>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
                                 <button type="submit" class="btn btn-info">Configure</button>
                             </div>
                         </div>
-                        <h5 class="text-uppercase text-light">
-                            <a href="/index.php?control=BuildConfigure&action=save&item=<?php echo $pageVars["data"]["pipeline"]["project_title"]["value"] ; ?>">
-                                Save configuration of <?php echo $pageVars["data"]["pipeline"]["project_title"]["value"] ; ?>-</a>
-                        </h5>
+
                     </form>
+                </div>
+                <p>
+                    ---------------------------------------<br/>
+                    Visit www.pharaohtools.com for more
+                </p>
+
+            </div>
+        <?php } if($pageVars["route"]["action"] == "delete"){ ?>
+            <div class="col-sm-8 col-md-9 clearfix main-container">
+                <h2 class="text-uppercase text-light"><a href="/"> Phrankinsense - Pharaoh Tools </a></h2>
+                <div class="row clearfix no-margin">
+                    <br><br><br>
+                    <h2 class="text-uppercase text-light" style="margin-top: 15px;">
+                        Successfully deleted!!  Pipeline: <?php echo $pageVars["data"]["pipeline"]["project_slug"]["value"] ; ?>
+                    </h2>
+                    <br><br><br>
+
                 </div>
                 <p>
                     ---------------------------------------<br/>
