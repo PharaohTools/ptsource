@@ -13,7 +13,7 @@ class SignupInfo extends CleopatraBase {
     }
 
     public function routesAvailable() {
-      return array( "Signup" => array("login","submit") );
+      return array( "Signup" => array("login","logout","submit") );
     }
 
     public function routeAliases() {

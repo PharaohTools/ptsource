@@ -14,8 +14,12 @@ class SignupAllOS extends Base {
     // Model Group
     public $modelGroup = array("Default") ;
 
-    public function getloginV() {
+    public function getlogin() {
         $ret="get Login";
+        return $ret ;
+    }
+    public function allLogininfodestroy() {
+        $ret="get Logout";
         return $ret ;
     }
 
