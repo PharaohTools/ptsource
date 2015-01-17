@@ -63,11 +63,12 @@
                         <tbody class="table-hover">
 
                         <?php
+
                             $i = 1;
                             foreach ($pageVars["data"]["pipelines"] as $pipelineSlug => $pipelineDetails) { ?>
                             <tr>
                                 <th scope="row"><?php echo $i ; ?></th>
-                                <td><a href="/index.php?control=BuildHome&action=show&item=<?php echo $pipelineSlug; ?>"><?php echo $pipelineDetails["project_title"]["value"] ; ?></a></td>
+                                <td><a href="/index.php?control=BuildHome&action=show&item=<?php echo $pipelineSlug ; ?>"><?php echo $pipelineDetails["project-name"] ; ?></a></td>
                                 <td>
                                     <?php
                                         if ($pipelineDetails["last_status"] === true) {
@@ -118,7 +119,7 @@
                                 </td>
                                 <td>
                                     <?php
-                                        echo '<a href="/index.php?control=PipeRunner&action=start&item='.$pipelineSlug.'">';
+                                        echo '<a href="/index.php?control=PipeRunner&action=start&item='.$pipelineDetails["project-slug"].'">';
                                         echo '<img class="listImage" src="/Assets/BuildList/images/run.png" /></a>' ;
                                     ?>
                                 </td>
