@@ -15,29 +15,22 @@ class PipelineRepositoryAllOS extends Base {
     public $modelGroup = array("PipelineRepository") ;
 
     public function getAllPipelines() {
-
         $pipelines = array();
         $names = $this->getPipelineNames() ;
         $pipelineFactory = new \Model\Pipeline() ;
         $pipeline = $pipelineFactory->getModel($this->params);
-        return $pipeline->getPipeline($this->params["item"]);
-
-        $ret = $this->getPipelines() ;
-        $r = (isset($ret) && is_array($ret)) ? $ret : false ;
-        return $r ;
+        foreach ($names as $name) { $pipelines[$name] = $pipeline->getPipeline($name); }
+        return $pipelines ;
     }
 
     public function getPipelineNames() {
-
-            # mkdir($this->params["pipe-dir"].DS.$this->params["item"], true) ;
-        $pipelines = scandir($this->params["pipe-dir"]) ;
-            for ($i=0; $i<count($pipelines); $i++) {
-                if (in_array($pipelines, array(".", "..", "tmpfile"))){
-                    // @todo if this isnt defrinitely a build dir ignore maybe
-                    // unset($pipelines[$i]) ;
-                } }
-        $names = array_keys($pipelines) ;
-        return (isset($names) && is_array($names)) ? $names : false ;
+        $pipelines = scandir(PIPEDIR) ;
+        for ($i=0; $i<count($pipelines); $i++) {
+            if (!in_array($pipelines[$i], array(".", "..", "tmpfile"))){
+                if(is_dir(PIPEDIR.DS.$pipelines[$i])) {
+                    // @todo if this isnt definitely a build dir ignore maybe
+                    $names[] = $pipelines[$i] ; } } }
+        return (isset($names) && is_array($names)) ? $names : array() ;
     }
 
 }
