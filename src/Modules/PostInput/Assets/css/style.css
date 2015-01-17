@@ -131,3 +131,9 @@ body{
 .listImageWide {
     max-width:50%;
 }
+
+.navbar-img {
+    float: left;
+    max-height: 50px;
+    padding: 2%;
+}

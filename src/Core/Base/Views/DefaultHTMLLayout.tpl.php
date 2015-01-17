@@ -40,7 +40,8 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/index.php?control=Index&action=show">Phrankisense</a>
+            <a href="/index.php?control=Index&action=show"><img src="/Assets/images/5.png" class="navbar-img" /></a>
+            <a class="navbar-brand" href="/index.php?control=Index&action=show">Phrankinsense</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
