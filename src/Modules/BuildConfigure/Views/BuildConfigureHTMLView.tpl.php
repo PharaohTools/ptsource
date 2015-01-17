@@ -73,9 +73,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="default-scm-url" class="col-sm-2 control-label text-left">Git URL</label>
+                        <label for="default-scm-url" class="col-sm-2 control-label text-left">Default SCM URL</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="default-scm-url" name="default-scm-url" placeholder="Git URL" value="<?php echo $pageVars["data"]["pipeline"]["git-url"] ; ?>" />
+                            <input type="text" class="form-control" id="default-scm-url" name="default-scm-url" placeholder="Git URL" value="<?php echo $pageVars["data"]["pipeline"]["default-scm-url"] ; ?>" />
                         </div>
                     </div>
 
@@ -87,11 +87,11 @@
                     <?php
                         foreach ($pageVars["data"]["pipeline"]["steps"] as $one_build_step) {
                             echo '<div class="form-group">' ;
-                            echo '  <label for="inputPassword3" class="col-sm-2 control-label text-left">'.$one_build_step["title"].'</label>' ;
+                            echo '  <label for="'.$one_build_step["hash"].'" class="col-sm-2 control-label text-left">'.$one_build_step["title"].'</label>' ;
                             echo '  <div class="col-sm-10">' ;
                             echo '      <p>'.$one_build_step["title"].'</p>';
                             echo '      <p>Step Type: '.$one_build_step["type"]."</p>";
-                            echo '      <textarea class="form-control">'.$one_build_step["value"].'</textarea>';
+                            echo '      <textarea id="'.$one_build_step["hash"].'" name="'.$one_build_step["hash"].'" class="form-control">'.$one_build_step["value"].'</textarea>';
                             echo '  </div>';
                             echo '</div>'; }
                     ?>
