@@ -14,15 +14,10 @@ class PipelineCollaterAllOS extends Base {
     // Model Group
     public $modelGroup = array("PipelineCollater") ;
 
-    public function getPipeline() {
+    public function getPipeline($pipe = null) {
+        if ($pipe != null) { $this->params["item"] = $pipe ; }
         $r = $this->collate();
         return $r ;
-    }
-
-    public function getPipelineNames() {
-        $pipelines = $this->getPipelines() ;
-        $names = array_keys($pipelines) ;
-        return (isset($names) && is_array($names)) ? $names : false ;
     }
 
     private function collate() {
