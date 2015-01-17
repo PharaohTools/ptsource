@@ -22,7 +22,7 @@ class BuildListAllOS extends Base {
     public function getPipelines() {
         $pipelineFactory = new \Model\Pipeline() ;
         $pipeline = $pipelineFactory->getModel($this->params);
-        return $pipeline->getPipelines();
+        return $pipeline->getAllPipelines();
     }
 
 }
