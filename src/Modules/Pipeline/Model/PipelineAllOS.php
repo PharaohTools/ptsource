@@ -15,18 +15,35 @@ class PipelineAllOS extends Base {
     public $modelGroup = array("Default") ;
 
     public function getPipelines() {
-        $path = dirname(dirname(__FILE__)).DS."Data".DS."demopipelines.php" ;
-        include($path) ;
-        $ret = $demopipelines ;
+        $pipelineFactory = new Pipeline();
+        $pipelineRepository = $pipelineFactory->getModel($this->params, "PipelineRepository") ;
+        $pipelines = $pipelineRepository->getAllPipelines();
+        $ret = $pipelines ;
         return $ret ;
     }
 
     public function getPipeline($line) {
-        $pipelines = $this->getPipelines() ;
-        $ret = $pipelines[$line] ;
-        $r = (isset($ret) && is_array($ret)) ? $ret : false ;
-        return $r ;
+        $pipelineFactory = new Pipeline();
+        $pipelineCollater = $pipelineFactory->getModel($this->params, "PipelineCollater") ;
+        $pipeline = $pipelineCollater->getPipeline($line);
+        $ret = $pipeline ;
+        return $ret ;
     }
+
+    public function savePipeline($line) {
+        $pipelineFactory = new Pipeline();
+        $pipelineSaver = $pipelineFactory->getModel($this->params, "PipelineSaver") ;
+        $pipeline = $pipelineSaver->getPipeline($line);
+        $ret = $pipeline ;
+        return $ret ;
+    }
+
+//    public function getPipeline($line) {
+//        $pipelines = $this->getPipelines() ;
+//        $ret = $pipelines[$line] ;
+//        $r = (isset($ret) && is_array($ret)) ? $ret : false ;
+//        return $r ;
+//    }
 
     public function getPipelineNames() {
         $pipelines = $this->getPipelines() ;
