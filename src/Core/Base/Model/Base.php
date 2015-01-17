@@ -37,6 +37,7 @@ class Base {
             $this->tempDir =  '/tmp'; }
         $this->autopilotDefiner = $this->getModuleName() ;
         $this->setCmdLineParams($params);
+        $this->setRequestParams();
     }
 
     protected function populateTitle() {
@@ -129,6 +130,10 @@ COMPLETION;
                 $paramValue = true ; }
             $cmdParams = array_merge($cmdParams, array($paramKey => $paramValue)); }
         $this->params = (is_array($this->params)) ? array_merge($this->params, $cmdParams) : $cmdParams;
+    }
+
+    protected function setRequestParams() {
+        $this->params = (is_array($this->params)) ? array_merge($this->params, $_REQUEST) : $_REQUEST;
     }
 
     protected function askYesOrNo($question) {
