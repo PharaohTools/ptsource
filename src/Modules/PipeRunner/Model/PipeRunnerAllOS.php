@@ -88,8 +88,8 @@ class PipeRunnerAllOS extends Base {
     }
 
     public function runChild() {
-        $f = PIPEDIR.DS.$this->params["item"].DS.$this->params["run-id"] ;
-        self::executeAndOutput("rm -f $f", "Removing temp log file");
+        //$f = PIPEDIR.DS.$this->params["item"].DS."tmpfile" ;
+        //if (file_exists($f)) { self::executeAndOuput("rm -f $f", "Temp log file exists here, removing"); }
         echo PIPEDIR.DS.$this->params["item"].DS.'tmpfile'."\n" ;
         for ($i = 0; $i < 15; $i++ ) {
             sleep(1);
