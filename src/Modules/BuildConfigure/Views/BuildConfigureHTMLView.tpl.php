@@ -40,31 +40,42 @@
             </div>
         </div>
 
+
+        <?php
+            $act = '/index.php?control=BuildConfigure&item='.$pageVars["data"]["pipeline"]["project_slug"]["value"].'&action=save' ;
+        ?>
+
         <div class="col-sm-8 col-md-9 clearfix main-container">
             <h2 class="text-uppercase text-light"><a href="/"> Phrankinsense - Pharaoh Tools </a></h2>
             <div class="row clearfix no-margin">
                 <h3><a class="lg-anchor text-light" href="#">Build Configure <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
                 <h5 class="text-uppercase text-light" style="margin-top: 15px;">
                     <a href="/index.php?control=BuildHome&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project_slug"]["value"] ; ?>">
-                        Pipeline Summary for <?php echo $pageVars["data"]["pipeline"]["project_title"]["value"] ; ?>-</a>
+                        Pipeline Summary for <?php echo $pageVars["data"]["pipeline"]["project-name"] ; ?>-</a>
                 </h5>
-                <form class="form-horizontal custom-form">
+                <form class="form-horizontal custom-form" action="<?= $act ; ?>" method="POST">
                     <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-2 control-label text-left">Project Name</label>
+                        <label for="project-name" class="col-sm-2 control-label text-left">Project Name</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputEmail3" placeholder="Project Name" value="<?php echo $pageVars["data"]["pipeline"]["project_title"]["value"] ; ?>" />
+                            <input type="text" class="form-control" name="project-name" id="project-name" placeholder="Project Name" value="<?php echo $pageVars["data"]["pipeline"]["project-name"] ; ?>" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-2 control-label text-left">Description</label>
+                        <label for="project-slug" class="col-sm-2 control-label text-left">Project Slug</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control"></textarea>
+                            <input type="text" class="form-control" name="project-slug" id="project-slug" placeholder="Project Slug" value="<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-2 control-label text-left">Git URL</label>
+                        <label for="project-description" class="col-sm-2 control-label text-left">Description</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputPassword3" placeholder="Git URL" value="<?php echo $pageVars["data"]["pipeline"]["git_url"]["value"] ; ?>" />
+                            <textarea id="project-description" name="project-description" class="form-control"><?php echo $pageVars["data"]["pipeline"]["project-description"] ; ?></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="default-scm-url" class="col-sm-2 control-label text-left">Git URL</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="default-scm-url" name="default-scm-url" placeholder="Git URL" value="<?php echo $pageVars["data"]["pipeline"]["git-url"] ; ?>" />
                         </div>
                     </div>
 
@@ -90,8 +101,8 @@
                         </div>
                     </div>
                     <h5 class="text-uppercase text-light">
-                        <a href="/index.php?control=BuildConfigure&action=save&item=<?php echo $pageVars["data"]["pipeline"]["project_title"]["value"] ; ?>">
-                            Save configuration of <?php echo $pageVars["data"]["pipeline"]["project_title"]["value"] ; ?>-</a>
+                        <a href="/index.php?control=BuildConfigure&action=save&item=<?php echo $pageVars["data"]["pipeline"]["project-name"] ; ?>">
+                            Save configuration of <?php echo $pageVars["data"]["pipeline"]["project-name"] ; ?>-</a>
                     </h5>
                 </form>
             </div>
