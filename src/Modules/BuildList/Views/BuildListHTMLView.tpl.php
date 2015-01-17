@@ -17,22 +17,24 @@
                     <i class="fa fa-comment-o"></i> Dashboard
                 </a>
                 <a href="#" class="list-group-item">
-                    <i class="fa fa-search">Configure Phrankinsense</i>
+                    <i class="fa fa-search"></i> Configure Phrankinsense
                 </a>
                 <a href="/index.php?control=BuildHome&action=new" class="list-group-item">
                     <i class="fa fa-user"></i> New Pipelines
                 </a>
                 <a href="#" class="list-group-item">
-                    <i class="fa fa-user">List Pipelines</i>
+                    <i class="fa fa-user"></i> List Pipelines
                 </a>
+                <!--
                 <a href="#" class="list-group-item">
                     <i class="fa fa-folder-open-o"></i> Lorem ipsum <span class="badge">14</span>
                 </a>
                 <a href="#" class="list-group-item">
                     <i class="fa fa-bar-chart-o"></i> Lorem ipsumr <span class="badge">14</span>
                 </a>
+                -->
                 <a href="#" class="list-group-item">
-                    <i class="fa fa-envelope"></i> Lorem ipsum
+                    <i class="fa fa-envelope"></i> History
                 </a>
             </div>
         </div>
