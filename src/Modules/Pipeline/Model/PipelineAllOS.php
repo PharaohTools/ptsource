@@ -45,10 +45,15 @@ class PipelineAllOS extends Base {
     }
 
     public function deletePipeline($name) {
-        $pipelines = $this->getPipelines() ;
-        $ret = $pipelines[$name] ;
-        $r = (isset($ret) && is_array($ret)) ? $ret : false ;
-        return $r ;
+        $loggingFactory = new \Model\Logging();
+        $logging = $loggingFactory->getModel($this->params);
+        if (file_exists(PIPEDIR.DS.$name)) {
+            $logging->log("Directory exists at ".PIPEDIR.DS."{$name}. Attempting removal.", $this->getModuleName()) ;
+            $rc = self::executeAndGetReturnCode('mkdir -p '.PIPEDIR.DS.$name);
+            return false ; }
+        else  {
+            $logging->log("No directory exists at ".PIPEDIR.DS."$name ", $this->getModuleName()) ;
+            return $rc ; }
     }
 
     public function createPipeline($name) {
