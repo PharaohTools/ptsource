@@ -13,7 +13,7 @@ class BuildConfigureInfo extends CleopatraBase {
     }
 
     public function routesAvailable() {
-      return array( "BuildConfigure" => array("show", "save") );
+      return array( "BuildConfigure" => array("show", "save", "new") );
     }
 
     public function routeAliases() {
