@@ -16,7 +16,7 @@
                 <a href="/index.php?control=BuildList&action=show" class="list-group-item">
                     <i class="fa fa-search"></i> All Pipelines
                 </a>
-                <a href="/index.php?control=BuildConfigure&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project_slug"]["value"] ; ?>" class="list-group-item">
+                <a href="/index.php?control=BuildConfigure&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
                     <i class="fa fa-user"></i> Configure
                 </a>
                 <a href="#" class="list-group-item">
@@ -25,10 +25,13 @@
                 <a href="#" class="list-group-item">
                     <i class="fa fa-bar-chart-o"></i> Changes <span class="badge">3</span>
                 </a>
-                <a href="#" class="list-group-item">
+                <a href="/index.php?control=BuildHome&action=delete&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
+                    <i class="fa fa-bar-chart-o"></i> History <span class="badge">3</span>
+                </a>
+                <a href="/index.php?control=BuildHome&action=delete&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
                     <i class="fa fa-envelope"></i> Delete
                 </a>
-                <a href="/index.php?control=PipeRunner&action=start&item=<?php echo $pageVars["data"]["pipeline"]["project_slug"]["value"] ; ?>" class="list-group-item">
+                <a href="/index.php?control=PipeRunner&action=start&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
                     <i class="fa fa-envelope"></i> Run Now
                 </a>
             </div>
@@ -40,15 +43,14 @@
                     <!--
                     <h3><a class="lg-anchor text-light" href="">Phrankinsense - Pharaoh Tools <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
                     -->
-                    <p><?php echo $pageVars["data"]["pipeline"]["project_title"]["label"] ; ?>:
-                        <?php echo $pageVars["data"]["pipeline"]["project_title"]["value"] ; ?></p>
-                    <p><?php echo $pageVars["data"]["pipeline"]["project_description"]["label"] ; ?>:
-                        <?php echo $pageVars["data"]["pipeline"]["project_description"]["value"] ; ?></p>
+                    <p> Project Name: <?php echo $pageVars["data"]["pipeline"]["project-name"] ; ?></p>
+                    <p> Project Slug: <?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?></p>
+                    <p> Project Description: <?php echo $pageVars["data"]["pipeline"]["project-description"] ; ?></p>
                 </div>
                 <hr>
                 <div class="row clearfix no-margin">
-                    <h3><a class="lg-anchor text-light" href="/index.php?control=BuildConfigure&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project_slug"]["value"] ; ?>">
-                            Configure Pipeline: <?php echo $pageVars["data"]["pipeline"]["project_title"]["value"] ; ?>- <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
+                    <h3><a class="lg-anchor text-light" href="/index.php?control=BuildConfigure&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
+                            Configure Pipeline: <?php echo $pageVars["data"]["pipeline"]["project-name"] ; ?>- <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
                     <p>Build Status Currently:</p>
                     <div class="pipe-now-status-block pipe-block"></div>
                     <p>Build Monitors:</p>
@@ -87,7 +89,7 @@
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label text-left">Project Title</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="inputEmail3" placeholder="Project Name" value="<?php echo $pageVars["data"]["pipeline"]["project_title"]["value"] ; ?>" />
+                                <input type="text" class="form-control" id="inputEmail3" placeholder="Project Name" value="<?php echo $pageVars["data"]["pipeline"]["project-name"] ; ?>" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -145,7 +147,7 @@
                 <div class="row clearfix no-margin">
                     <br><br><br>
                     <h2 class="text-uppercase text-light" style="margin-top: 15px;">
-                        Successfully deleted!!  Pipeline: <?php echo $pageVars["data"]["pipeline"]["project_slug"]["value"] ; ?>
+                        Successfully deleted!!  Pipeline: <?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>
                     </h2>
                     <br><br><br>
 
