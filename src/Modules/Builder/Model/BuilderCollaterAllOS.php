@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class PipelineCollaterAllOS extends Base {
+class BuilderCollaterAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -12,9 +12,9 @@ class PipelineCollaterAllOS extends Base {
     public $architectures = array("any") ;
 
     // Model Group
-    public $modelGroup = array("PipelineCollater") ;
+    public $modelGroup = array("BuilderCollater") ;
 
-    public function getPipeline($pipe = null) {
+    public function getBuilder($pipe = null) {
         if ($pipe != null) { $this->params["item"] = $pipe ; }
         $r = $this->collate();
         return $r ;
@@ -22,9 +22,9 @@ class PipelineCollaterAllOS extends Base {
 
     private function collate() {
         $collated = array() ;
-        $collated = array_merge($collated, $this->getStatuses()) ;
-        $collated = array_merge($collated, $this->getDefaults()) ;
-        $collated = array_merge($collated, $this->getSteps()) ;
+        // $collated = array_merge($collated, $this->getStatuses()) ;
+        $collated = array_merge($collated, $this->getBuildSteps()) ;
+        // $collated = array_merge($collated, $this->getSteps()) ;
         return $collated ;
     }
 
@@ -33,7 +33,7 @@ class PipelineCollaterAllOS extends Base {
         return $statuses ;
     }
 
-    private function getDefaults() {
+    private function getBuildSteps() {
         $defaults = array();
         $defaultsFile = PIPEDIR.DS.$this->params["item"].DS.'defaults' ;
         if (file_exists($defaultsFile)) {

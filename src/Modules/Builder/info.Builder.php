@@ -2,11 +2,11 @@
 
 Namespace Info;
 
-class PipelineInfo extends CleopatraBase {
+class BuilderInfo extends CleopatraBase {
 
     public $hidden = true;
 
-    public $name = "Pipeline Functionality";
+    public $name = "Builder Functionality";
 
     public function _construct() {
       parent::__construct();
@@ -22,7 +22,7 @@ class PipelineInfo extends CleopatraBase {
 
     public function helpDefinition() {
       $help = <<<"HELPDATA"
-  This module provides functionality for Pipelines. It provides no actions at the command line.
+  This module provides functionality for Builders. It provides no actions at the command line.
 HELPDATA;
       return $help ;
     }

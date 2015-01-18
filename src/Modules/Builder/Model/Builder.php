@@ -2,6 +2,6 @@
 
 Namespace Model;
 
-class Pipeline extends BaseModelFactory {
+class Builder extends BaseModelFactory {
 
 }

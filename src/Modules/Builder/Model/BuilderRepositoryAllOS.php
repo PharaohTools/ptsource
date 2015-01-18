@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class PipelineRepositoryAllOS extends Base {
+class BuilderRepositoryAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -12,24 +12,24 @@ class PipelineRepositoryAllOS extends Base {
     public $architectures = array("any") ;
 
     // Model Group
-    public $modelGroup = array("PipelineRepository") ;
+    public $modelGroup = array("BuilderRepository") ;
 
-    public function getAllPipelines() {
-        $pipelines = array();
-        $names = $this->getPipelineNames() ;
-        $pipelineFactory = new \Model\Pipeline() ;
-        $pipeline = $pipelineFactory->getModel($this->params);
-        foreach ($names as $name) { $pipelines[$name] = $pipeline->getPipeline($name); }
-        return $pipelines ;
+    public function getAllBuilders() {
+        $builders = array();
+        $names = $this->getBuilderNames() ;
+        $builderFactory = new \Model\Builder() ;
+        $builder = $builderFactory->getModel($this->params);
+        foreach ($names as $name) { $builders[$name] = $builder->getBuilder($name); }
+        return $builders ;
     }
 
-    public function getPipelineNames() {
-        $pipelines = scandir(PIPEDIR) ;
-        for ($i=0; $i<count($pipelines); $i++) {
-            if (!in_array($pipelines[$i], array(".", "..", "tmpfile"))){
-                if(is_dir(PIPEDIR.DS.$pipelines[$i])) {
+    public function getBuilderNames() {
+        $builders = scandir(PIPEDIR) ;
+        for ($i=0; $i<count($builders); $i++) {
+            if (!in_array($builders[$i], array(".", "..", "tmpfile"))){
+                if(is_dir(PIPEDIR.DS.$builders[$i])) {
                     // @todo if this isnt definitely a build dir ignore maybe
-                    $names[] = $pipelines[$i] ; } } }
+                    $names[] = $builders[$i] ; } } }
         return (isset($names) && is_array($names)) ? $names : array() ;
     }
 

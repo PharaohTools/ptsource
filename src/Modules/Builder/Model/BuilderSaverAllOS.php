@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class PipelineSaverAllOS extends Base {
+class BuilderSaverAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -12,16 +12,16 @@ class PipelineSaverAllOS extends Base {
     public $architectures = array("any") ;
 
     // Model Group
-    public $modelGroup = array("PipelineSaver") ;
+    public $modelGroup = array("BuilderSaver") ;
 
-    public function savePipeline($save) {
+    public function saveBuilder($save) {
         $r = $this->saveStates($save);
         return $r ;
     }
 
-    public function getPipelineNames() {
-        $pipelines = $this->getPipelines() ;
-        $names = array_keys($pipelines) ;
+    public function getBuilderNames() {
+        $builders = $this->getBuilders() ;
+        $names = array_keys($builders) ;
         return (isset($names) && is_array($names)) ? $names : false ;
     }
 

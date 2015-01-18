@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class PipelineAllOS extends Base {
+class BuilderAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -14,55 +14,55 @@ class PipelineAllOS extends Base {
     // Model Group
     public $modelGroup = array("Default") ;
 
-    public function getPipelines() {
-        $pipelineFactory = new Pipeline();
-        $pipelineRepository = $pipelineFactory->getModel($this->params, "PipelineRepository") ;
-        $pipelines = $pipelineRepository->getAllPipelines();
-        $ret = $pipelines ;
+    public function getBuilders() {
+        $builderFactory = new Builder();
+        $builderRepository = $builderFactory->getModel($this->params, "BuilderRepository") ;
+        $builders = $builderRepository->getAllBuilders();
+        $ret = $builders ;
         return $ret ;
     }
 
-    public function getPipeline($line) {
-        $pipelineFactory = new Pipeline();
-        $pipelineCollater = $pipelineFactory->getModel($this->params, "PipelineCollater") ;
-        $pipeline = $pipelineCollater->getPipeline($line);
-        $ret = $pipeline ;
+    public function getBuilder($line) {
+        $builderFactory = new Builder();
+        $builderCollater = $builderFactory->getModel($this->params, "BuilderCollater") ;
+        $builder = $builderCollater->getBuilder($line);
+        $ret = $builder ;
         return $ret ;
     }
 
-    public function savePipeline($line) {
-        $pipelineFactory = new Pipeline();
-        $pipelineSaver = $pipelineFactory->getModel($this->params, "PipelineSaver") ;
-        $pipeline = $pipelineSaver->getPipeline($line);
-        $ret = $pipeline ;
+    public function saveBuilder($line) {
+        $builderFactory = new Builder();
+        $builderSaver = $builderFactory->getModel($this->params, "BuilderSaver") ;
+        $builder = $builderSaver->getBuilder($line);
+        $ret = $builder ;
         return $ret ;
     }
 
-//    public function getPipeline($line) {
-//        $pipelines = $this->getPipelines() ;
-//        $ret = $pipelines[$line] ;
+//    public function getBuilder($line) {
+//        $builders = $this->getBuilders() ;
+//        $ret = $builders[$line] ;
 //        $r = (isset($ret) && is_array($ret)) ? $ret : false ;
 //        return $r ;
 //    }
 
-    public function getPipelineNames() {
-        $pipelines = $this->getPipelines() ;
-        $names = array_keys($pipelines) ;
+    public function getBuilderNames() {
+        $builders = $this->getBuilders() ;
+        $names = array_keys($builders) ;
         return (isset($names) && is_array($names)) ? $names : false ;
     }
-    public function deletePipeline($name) {
-        $pipelines = $this->getPipelines() ;
-        $path = dirname(dirname(__FILE__)).DS."Data".DS."demopipelines.php" ;
+    public function deleteBuilder($name) {
+        $builders = $this->getBuilders() ;
+        $path = dirname(dirname(__FILE__)).DS."Data".DS."demobuilders.php" ;
         include($path) ;
-        unset($demopipelines[$name]);
+        unset($demobuilders[$name]);
 
-//        $pipelines = $this->getPipelines() ;
-//        $path = dirname(dirname(__FILE__)).DS."Data".DS."demopipelines.php" ;
+//        $builders = $this->getBuilders() ;
+//        $path = dirname(dirname(__FILE__)).DS."Data".DS."demobuilders.php" ;
 //
 //        $file = fopen($path,"w");
-//        fwrite($file,$pipelines);
+//        fwrite($file,$builders);
 //        fclose($file);
-        $ret = $pipelines[$name] ;
+        $ret = $builders[$name] ;
         $r = (isset($ret) && is_array($ret)) ? $ret : false ;
         return $r ;
         return ;
