@@ -27,9 +27,9 @@ class PipelineSaverAllOS extends Base {
 
     private function saveStates($save) {
         $saveRes = array() ;
-        $saveRes[] = $this->saveStatuses($save) ;
-        $saveRes[] = $this->saveDefaults($save) ;
-        $saveRes[] = $this->saveSteps($save) ;
+        $saveRes["statuses"] = $this->saveStatuses($save) ;
+        $saveRes["defaults"] = $this->saveDefaults($save) ;
+        $saveRes["steps"] = $this->saveSteps($save) ;
         return $saveRes ;
     }
 
@@ -41,11 +41,11 @@ class PipelineSaverAllOS extends Base {
     private function saveDefaults($save) {
         $loggingFactory = new \Model\Logging();
         $logging = $loggingFactory->getModel($this->params);
-        if (isset($save["type"]) && $save["type"] =="Defaults") {
+        if (isset($save["type"]) && $save["type"] == "Defaults") {
             $defaultsFile = PIPEDIR.DS.$this->params["item"].DS.'defaults' ;
-                $logging->log("Storing defaults file in pipe", $this->getModuleName()) ;
-                $defaults = json_encode($save["data"]) ;
-                return file_put_contents($defaultsFile, $defaults) ; }
+            $logging->log("Storing defaults file in pipe at $defaultsFile", $this->getModuleName()) ;
+            $defaults = json_encode($save["data"]) ;
+            return file_put_contents($defaultsFile, $defaults) ; }
         return false ;
     }
 
