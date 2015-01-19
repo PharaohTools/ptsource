@@ -17,7 +17,7 @@ class BuildSearchInfo extends CleopatraBase {
     }
 
     public function routeAliases() {
-      return array("buildsearch"=>"BuildSearch");
+      return array("buildSearch"=>"BuildSearch");
     }
 
     public function helpDefinition() {
