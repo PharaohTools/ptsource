@@ -16,6 +16,7 @@ class BuildConfigureAllOS extends Base {
 
     public function getData() {
         $ret["pipeline"] = $this->getPipeline();
+        $ret["builders"] = $this->getBuilders();
         return $ret ;
     }
 
@@ -29,13 +30,19 @@ class BuildConfigureAllOS extends Base {
         return $pipeline->getPipeline($this->params["item"]);
     }
 
+    public function getBuilders() {
+        $builderFactory = new \Model\Builder() ;
+        $builder = $builderFactory->getModel($this->params);
+        return $builder->getBuilders();
+    }
+
     public function savePipeline() {
         $pipelineFactory = new \Model\Pipeline() ;
         $pipeline = $pipelineFactory->getModel($this->params, "PipelineSaver");
         return $pipeline->savePipeline(array("type" => "Defaults", "data" => array(
-            "project-name" => $_REQUEST["project-name"],
-            "project-description" => $_REQUEST["project-description"],
-            "default-scm-url" => $_REQUEST["default-scm-url"],
+            "project-name" => $this->params["project-name"],
+            "project-description" => $this->params["project-description"],
+            "default-scm-url" => $this->params["default-scm-url"],
         )));
     }
 
