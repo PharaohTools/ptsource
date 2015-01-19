@@ -119,6 +119,14 @@
                         </div>
                     </div>
 
+                    <?php
+
+                    if ($pageVars["route"]["action"] == "new") {
+                        echo '<input type="hidden" name="creation" id="creation" value="yes" />' ;
+                    }
+
+                    ?>
+
                     <input type="hidden" name="item" id="item" value="<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" />
 
                     <h5 class="text-uppercase text-light">
