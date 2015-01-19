@@ -40,14 +40,23 @@ class PipelineCollaterAllOS extends Base {
             $defaultsFileData =  file_get_contents($defaultsFile) ;
             $defaults = json_decode($defaultsFileData, true) ; }
         else {
-            $loggingFactory = new \Model\Logging();
-            $logging = $loggingFactory->getModel($this->params);
+            $loggingFactory = new \Model\Logging() ;
+            $logging = $loggingFactory->getModel($this->params) ;
             $logging->log("No defaults file available in build", $this->getModuleName()) ; }
+        $defaults = $this->setDefaultSlugIfNeeded($defaults) ;
+        return $defaults ;
+    }
+
+    private function setDefaultSlugIfNeeded($defaults) {
+        if (!isset($defaults["project-slug"])) {
+            $defaults["project-slug"] = $this->params["item"] ; }
+        if (isset($defaults["project-slug"]) && $defaults["project-slug"] == "") {
+            $defaults["project-slug"] = $this->params["item"] ; }
         return $defaults ;
     }
 
     private function getSteps() {
-        $statuses = array() ;
+        $statuses = array("steps" => array()) ;
         return $statuses ;
     }
 
