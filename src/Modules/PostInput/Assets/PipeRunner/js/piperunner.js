@@ -9,7 +9,7 @@ while (done == false && max < 30) {
 function updatePage() {
     console.log("running update page js method");
     item = $("#item").val();
-    url = "/index.php?control=PipeRunner&action=service&item=" + item ;
+    url = "/index.php?control=PipeRunner&action=service&item=" + item + "&output-format=SERVICE";
     $.ajax({
         url: url,
         success: function(data) {
@@ -28,7 +28,7 @@ function updatePage() {
 function setStatus() {
     item = $("#item").val();
     pid = $("#pid").val();
-    url = "/index.php?control=PipeRunner&action=pipestatus&item=" + item + "&pid=" + pid ;
+    url = "/index.php?control=PipeRunner&action=pipestatus&item=" + item + "&pid=" + pid + "&output-format=SERVICE";
     console.log(url);
     $.ajax({
         url: url,
@@ -60,7 +60,7 @@ function changeSubButton() {
 function saveRun() {
     item = $("#item").val();
     pid = $("#pid").val();
-    url = "/index.php?control=PipeRunner&action=saverun&item=" + item + "&pid=" + pid ;
+    url = "/index.php?control=PipeRunner&action=saverun&item=" + item + "&pid=" + pid + "&output-format=SERVICE" ;
     console.log(url);
     $.ajax({
         url: url,
