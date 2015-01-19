@@ -66,6 +66,7 @@ class PipeRunnerAllOS extends Base {
         $cmd  = PHRCOMM.' piperunner child --pipe-dir="'.$this->params["pipe-dir"].'" ' ;
         $cmd .= '--item="'.$this->params["item"].'" > '.PIPEDIR.DS.$this->params["item"].DS ;
         $cmd .= 'tmpfile &' ;
+        error_log($cmd);
         $descr = array(
             0 => array(
                 'pipe',
