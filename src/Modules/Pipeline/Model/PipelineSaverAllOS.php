@@ -50,6 +50,13 @@ class PipelineSaverAllOS extends Base {
     }
 
     private function saveSteps($save) {
+        $loggingFactory = new \Model\Logging();
+        $logging = $loggingFactory->getModel($this->params);
+        if (isset($save["type"]) && $save["type"] == "Steps") {
+            $stepsFile = PIPEDIR.DS.$this->params["item"].DS.'steps' ;
+            $logging->log("Storing steps file in pipe at $stepsFile", $this->getModuleName()) ;
+            $steps = json_encode($save["data"]) ;
+            return file_put_contents($stepsFile, $steps) ; }
         $statuses = array() ;
         return $statuses ;
     }
