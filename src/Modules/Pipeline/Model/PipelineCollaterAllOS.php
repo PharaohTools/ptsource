@@ -56,8 +56,17 @@ class PipelineCollaterAllOS extends Base {
     }
 
     private function getSteps() {
-        $statuses = array("steps" => array()) ;
-        return $statuses ;
+        $steps = array();
+        $stepsFile = PIPEDIR.DS.$this->params["item"].DS.'steps' ;
+        if (file_exists($stepsFile)) {
+            $stepsFileData =  file_get_contents($stepsFile) ;
+            $steps = json_decode($stepsFileData, true) ; }
+        else {
+            $loggingFactory = new \Model\Logging() ;
+            $logging = $loggingFactory->getModel($this->params) ;
+            $logging->log("No steps file available in build", $this->getModuleName()) ; }
+        $steps = $this->setDefaultSlugIfNeeded($steps) ;
+        return $steps ;
     }
 
 }
