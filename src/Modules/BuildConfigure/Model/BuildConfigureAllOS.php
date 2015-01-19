@@ -37,13 +37,33 @@ class BuildConfigureAllOS extends Base {
     }
 
     public function savePipeline() {
+        $this->params["project-slug"] = $this->getFormattedSlug() ;
+        $this->params["item"] = $this->params["project-slug"] ;
         $pipelineFactory = new \Model\Pipeline() ;
-        $pipeline = $pipelineFactory->getModel($this->params, "PipelineSaver");
-        return $pipeline->savePipeline(array("type" => "Defaults", "data" => array(
+        $data = array(
             "project-name" => $this->params["project-name"],
+            "project-slug" => $this->params["project-slug"],
             "project-description" => $this->params["project-description"],
-            "default-scm-url" => $this->params["default-scm-url"],
-        )));
+            "default-scm-url" => $this->params["default-scm-url"] ) ;
+        if ($this->params["creation"] == "yes") {
+            $pipelineDefault = $pipelineFactory->getModel($this->params);
+            $pipelineDefault->createPipeline($this->params["project-slug"]) ; }
+        $pipelineSaver = $pipelineFactory->getModel($this->params, "PipelineSaver");
+        // @todo  dunno y i have to force thi sparam
+        $pipelineSaver->params["item"] = $this->params["item"];
+        $pipelineSaver->savePipeline(array("type" => "Defaults", "data" => $data ));
+        return true ;
+    }
+
+    private function getFormattedSlug() {
+
+        if ($this->params["project-slug"] == "") {
+            $this->params["project-slug"] = str_replace(" ", "_", $this->params["project-name"]);
+            $this->params["project-slug"] = str_replace("'", "", $this->params["project-slug"]);
+            $this->params["project-slug"] = str_replace('"', "", $this->params["project-slug"]);
+            $this->params["project-slug"] = str_replace("/", "", $this->params["project-slug"]);
+            $this->params["project-slug"] = strtolower($this->params["project-slug"]); }
+        return $this->params["project-slug"] ;
     }
 
 }
