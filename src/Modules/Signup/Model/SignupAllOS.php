@@ -14,13 +14,19 @@ class SignupAllOS extends Base {
     // Model Group
     public $modelGroup = array("Default") ;
 
+
     public function getlogin() {
         $ret="get Login";
         return $ret ;
     }
+    // @todo need to check login credential from datastore or PAM/LDAP
+    public function Checklogin($username, $password) {
+        return "aasd" ;
+    }
+    // @todo need to destroy all login credential or anything related to login
     public function allLogininfodestroy() {
-        $ret="get Logout";
-        return $ret ;
+        session_destroy();
+        return;
     }
 
 }

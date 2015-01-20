@@ -14,11 +14,12 @@ class BuildSearchAllOS extends Base {
     // Model Group
     public $modelGroup = array("Default") ;
 
+
     public function getSearchData() {
         $search["search_pipelines"] = $this->getSearchPipelines();
         return $search ;
     }
-
+    // @todo need search data from datastore or PAM/LDAP
     public function getSearchPipelines() {
         $pipelineFactory = new \Model\Pipeline() ;
         $pipeline = $pipelineFactory->getSeachPipelines($this->params);
