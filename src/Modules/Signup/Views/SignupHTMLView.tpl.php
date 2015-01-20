@@ -47,6 +47,7 @@
 </div><!-- /.container -->
 <script>
     function submit_login() {
+        $('#login_error_msg').html('');
         $('#login_username_alert').html('');
         $('#login_password_alert').html('');
 
@@ -73,7 +74,6 @@
             {
              if(result.status == true){
                     window.location.assign($('#base_url').val() + '/index.php?control=Index&action=show');
-
                 }
              else{
                     $('#login_error_msg').html('&nbsp;&nbsp;'+result.msg);

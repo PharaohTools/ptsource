@@ -20,7 +20,9 @@ class Signup extends Base {
               echo json_encode(array("status" => FALSE, "msg" => 'Sorry!! Wrong User name Or Password'));
               return;
           } else {
-
+              // Start the session
+              session_start();
+              $_SESSION["username"] = $username;
               echo json_encode(array("status" => TRUE));
               return;
           }
