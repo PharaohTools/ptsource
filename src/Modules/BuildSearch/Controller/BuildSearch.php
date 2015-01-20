@@ -10,6 +10,7 @@ class BuildSearch extends Base {
       $this->content = $pageVars ;
       if (is_array($thisModel)) { return $this->failDependencies($pageVars, $this->content, $thisModel) ; }
       $this->content["data"] = $thisModel->getSearchData();
+        // @todo searched data to should be properly shown in view
       return array ("type"=>"view", "view"=>"buildSearch", "pageVars"=>$this->content);
     }
 
