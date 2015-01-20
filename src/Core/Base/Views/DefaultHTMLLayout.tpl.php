@@ -29,7 +29,7 @@
 </head>
 
 <body>
-
+<input type="hidden" name="base_url" value="http://www.phrankinsense.tld">
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
