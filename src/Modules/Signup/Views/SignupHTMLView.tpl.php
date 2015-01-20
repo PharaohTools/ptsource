@@ -7,7 +7,8 @@
                     <h5 class="text-uppercase text-light" style="margin-top: 15px;">
                         Login
                     </h5>
-                    <form class="form-horizontal custom-form" action="/index.php?control=Signup&action=submit" method="post">
+                    <p style="color: #ff6312; margin-left: 137px;" id="login_error_msg"></p>
+                    <form class="form-horizontal custom-form">
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label text-left">User Name</label>
                             <div class="col-sm-10">
@@ -49,20 +50,20 @@
         $('#login_username_alert').html('');
         $('#login_password_alert').html('');
 
-        if ($('#login_username_alert').val() == '') {
+        if ($('#login_username').val() == '') {
             $('#login_username_alert').html('&nbsp;&nbsp;Please enter your User Name');
             $('#login_username').focus();
             return;
         }
 
         if ($('#login_password').val() == '') {
-            $('#login_password_alert').html('&nbsp;&nbsp;Please enter your Email');
+            $('#login_password_alert').html('&nbsp;&nbsp;Please enter your Password');
             $('#login_password').focus();
             return;
         }
         $.ajax({
             type: 'POST',
-            url: $('#base_url').val() + '/index.php?control=Signup&action=submit',
+            url: $('#base_url').val() + '/index.php?control=Signup&action=login_submit',
             data: {
                 username:$('#login_username').val(),
                 password:$('#login_password').val()
@@ -70,14 +71,13 @@
             dataType: "json",
             success: function(result)
             {
-
-                if(result.status == true){
+             if(result.status == true){
                     window.location.assign($('#base_url').val() + '/index.php?control=Index&action=show');
 
                 }
-                else{
+             else{
                     $('#login_error_msg').html('&nbsp;&nbsp;'+result.msg);
-                    $('#login_email').focus();
+                    $('#login_username').focus();
                     return;
                 }
 
