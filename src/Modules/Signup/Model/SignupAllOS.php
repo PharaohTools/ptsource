@@ -81,7 +81,7 @@ class SignupAllOS extends Base {
             $this->checkLoginSession();
 
     }
-    
+    //@todo we can do autoload.php file before load a controller
     public function checkLoginSession() {
         if(isset($_SESSION["login-status"]) && $_SESSION["login-status"] == TRUE){
             echo json_encode(array("status" => TRUE));

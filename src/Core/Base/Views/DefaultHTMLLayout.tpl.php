@@ -129,7 +129,6 @@
                 if(result.status == false){
                     window.location.assign($('#base_url').val() + '/index.php?control=Signup&action=login');
                 }
-                
             }
         });
     })
