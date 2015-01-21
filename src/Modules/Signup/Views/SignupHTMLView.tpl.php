@@ -1,7 +1,7 @@
 <div class="container">
 
         <?php if($pageVars["route"]["action"] == "login"){ ?>
-            <div class="col-sm-8 col-md-9 clearfix main-container">
+            <div class="col-sm-8 col-md-9 clearfix main-container signup-position">
                 <h2 class="text-uppercase text-light"><a href="/"> Phrankinsense - Pharaoh Tools </a></h2>
                 <div class="row clearfix no-margin">
                     <h5 class="text-uppercase text-light" style="margin-top: 15px;">

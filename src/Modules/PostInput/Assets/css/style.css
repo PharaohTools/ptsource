@@ -137,3 +137,8 @@ body{
     max-height: 50px;
     padding: 2%;
 }
+.signup-position{
+    float: none;
+    margin: 0 auto;
+    top: 30px;
+}
