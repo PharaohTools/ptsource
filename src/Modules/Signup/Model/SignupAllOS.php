@@ -41,6 +41,7 @@ class SignupAllOS extends Base {
         $passwords = array(1 => 'e10adc3949ba59abbe56e057f20f883e', 2 => 'e10adc3949ba59abbe56e057f20f883e', 3 => 'e10adc3949ba59abbe56e057f20f883e', 4 => 'e10adc3949ba59abbe56e057f20f883e');
         if (in_array($usr, $users) && in_array(md5($pass), $passwords))
         {
+
             $_SESSION["login-status"]=TRUE;
             $_SESSION["username"] = $users;
             echo json_encode(array("status" => TRUE));

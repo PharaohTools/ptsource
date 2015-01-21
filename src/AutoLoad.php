@@ -9,8 +9,6 @@ class AutoLoader{
     }
 
     public static function autoLoad($className) {
-        // Start the session
-        session_start();
         $classNameForLoad = str_replace('\\' , DIRECTORY_SEPARATOR, $className);
         $filename = dirname(__FILE__) . DIRECTORY_SEPARATOR . $classNameForLoad.'.php';
         if (is_readable($filename)) {

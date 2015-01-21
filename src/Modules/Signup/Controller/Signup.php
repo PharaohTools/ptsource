@@ -9,6 +9,8 @@ class Signup extends Base {
       // if we don't have an object, its an array of errors
       $this->content = $pageVars ;
       if (is_array($thisModel)) { return $this->failDependencies($pageVars, $this->content, $thisModel) ; }
+        // Start the session
+        session_start();
       if($pageVars["route"]["action"] == "login"){
             $this->content["data"] = $thisModel->getlogin();
       }
