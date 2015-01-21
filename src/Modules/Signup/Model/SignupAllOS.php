@@ -52,7 +52,47 @@ class SignupAllOS extends Base {
         }
 
     }
+
+    public function checkLoginStatusInfo($url) {
+        // login status check
+        $url_split = explode("?", $url);
+        if(isset($url_split[1])){
+            $url_spl = explode("&", $url_split[1]);
+            if(isset($url_spl[0])){
+                $url_sp = explode("=", $url_spl[0]);
+                if(isset($url_sp[1]) && $url_sp[1] =="Signup"){
+                    $url_s = explode("=", $url_spl[1]);
+                    if(isset($url_s[1]) && ($url_s[1] =="login" || $url_s[1] =="logout" || $url_s[1] =="login-submit")){
+                        echo json_encode(array("status" => TRUE));
+                        return;
+                    }
+                    else
+                        $this->checkLoginSession();
+
+                }
+                else
+                    $this->checkLoginSession();
+            }
+            else
+                $this->checkLoginSession();
+
+        }
+        else
+            $this->checkLoginSession();
+
+    }
     
+    public function checkLoginSession() {
+        if(isset($_SESSION["login-status"]) && $_SESSION["login-status"] == TRUE){
+            echo json_encode(array("status" => TRUE));
+            return;
+        }
+        else{
+            echo json_encode(array("status" => FALSE));
+            return;
+        }
+    }
+
 
     public function allLoginInfoDestroy() {
         session_destroy();

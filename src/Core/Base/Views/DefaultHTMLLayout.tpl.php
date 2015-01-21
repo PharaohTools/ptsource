@@ -116,22 +116,22 @@
             $(this).next('.list-group').toggle('slide');
             $('.mini-submenu').hide();
         });
-//
-//        $.ajax({
-//            type: 'POST',
-//            url: $('#base_url').val() + '/index.php?control=Signup&action=login-status',
-//            data: {
-//                url:document.URL
-//            },
-//            dataType: "json",
-//            success: function(result)
-//            {
-//                if(result.status == false){
-//                    window.location.assign($('#base_url').val() + '/index.php?control=Signup&action=login');
-//                }
-//
-//            }
-//        });
+
+        $.ajax({
+            type: 'POST',
+            url: $('#base_url').val() + '/index.php?control=Signup&action=login-status',
+            data: {
+                url:document.URL
+            },
+            dataType: "json",
+            success: function(result)
+            {
+                if(result.status == false){
+                    window.location.assign($('#base_url').val() + '/index.php?control=Signup&action=login');
+                }
+                
+            }
+        });
     })
 
 
