@@ -12,6 +12,9 @@ class Signup extends Base {
       if($pageVars["route"]["action"] == "login"){
             $this->content["data"] = $thisModel->getlogin();
       }
+      if($pageVars["route"]["action"] == "login-status"){
+            return $thisModel->checkLoginStatus();
+      }
       if($pageVars["route"]["action"] == "login-submit"){
           return $thisModel->checkLogin();
       }
