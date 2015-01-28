@@ -37,11 +37,10 @@ class SignupAllOS extends Base {
     // @todo need to check login credential from datastore or PAM/LDAP
     public function checkLoginInfo($usr, $pass) {
         // List of users and their password.
-        $users = array(1 => 'test1', 2 => 'test2', 3 => 'test3', 4 => 'test4');
-        $passwords = array(1 => 'e10adc3949ba59abbe56e057f20f883e', 2 => 'e10adc3949ba59abbe56e057f20f883e', 3 => 'e10adc3949ba59abbe56e057f20f883e', 4 => 'e10adc3949ba59abbe56e057f20f883e');
+        $users = array(1 => 'test1', 2 => 'test2', 3 => 'test3', 4 => 'test4', 5 => "bigboss");
+        $passwords = array(1 => 'e10adc3949ba59abbe56e057f20f883e', 2 => 'e10adc3949ba59abbe56e057f20f883e', 3 => 'e10adc3949ba59abbe56e057f20f883e', 4 => 'e10adc3949ba59abbe56e057f20f883e', 5 => '81dc9bdb52d04dc20036dbd8313ed055');
         if (in_array($usr, $users) && in_array(md5($pass), $passwords))
         {
-
             $_SESSION["login-status"]=TRUE;
             $_SESSION["username"] = $users;
             echo json_encode(array("status" => TRUE));
