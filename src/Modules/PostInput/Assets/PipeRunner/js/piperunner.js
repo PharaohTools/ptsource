@@ -1,7 +1,7 @@
 done = false ;
 max = 0 ;
 while (done == false && max < 30) {
-    window.setTimeout(updatePage, 3000) //wait 3 seconds before continuing
+    window.setTimeout(updatePage, 3000) ; //wait 3 seconds before continuing
     max = max + 1 ; }
 
 // updatePage() ;
@@ -9,7 +9,7 @@ while (done == false && max < 30) {
 function updatePage() {
     console.log("running update page js method");
     item = $("#item").val();
-    url = "/index.php?control=PipeRunner&action=service&item=" + item + "&output-format=SERVICE";
+    url = "/index.php?control=PipeRunner&action=service&item=" + item;
     $.ajax({
         url: url,
         success: function(data) {
@@ -19,8 +19,8 @@ function updatePage() {
             setStatus();
             console.log(window.reqStatus);
             if (window.reqStatus == "OK") {
-                doCompletion();
-            } else {
+                doCompletion(); }
+            else {
                 setTimeout(updatePage, 3000); } }
     });
 }
@@ -28,13 +28,14 @@ function updatePage() {
 function setStatus() {
     item = $("#item").val();
     pid = $("#pid").val();
-    url = "/index.php?control=PipeRunner&action=pipestatus&item=" + item + "&pid=" + pid + "&output-format=SERVICE";
+    url = "/index.php?control=PipeRunner&action=pipestatus&item=" + item + "&pid=" + pid ;
     console.log(url);
     $.ajax({
         url: url,
         success: function(data) {
-            console.log(data);
-            window.reqStatus = data }
+            window.reqStatus = data
+            console.log("rstat: " + data) ;
+        }
     });
 }
 
