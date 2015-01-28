@@ -46,19 +46,12 @@
                     <br/>
                     Using Convention over Configuration, a lot of common build tasks can be completed with little or
                     no extra implementation work.
-                 </p>
+                </p>
             </div>
             <hr>
             <div class="row clearfix no-margin">
-                <h3><a class="lg-anchor text-light" href="/index.php?control=BuildList&action=show">Build List <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
-
-                <p>
-                    Available Commands:
-                </p>
-
-                <p>
-                    ---------------------------------------
-                </p>
+                <h3> Available Modules: <i style="font-size: 18px;" class="fa fa-chevron-right"></i></h3>
+                <p> --------------------------------------- </p>
                 <?php
 
                 foreach ($pageVars["modulesInfo"] as $moduleInfo) {
