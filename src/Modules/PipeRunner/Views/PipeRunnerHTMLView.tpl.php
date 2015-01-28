@@ -28,10 +28,10 @@
                 <a href="#" class="list-group-item">
                     <i class="fa fa-bar-chart-o"></i> Monitors <span class="badge">6</span>
                 </a>
-                <a href="/index.php?control=PipeRunner&action=history&item=<?php echo $pageVars["data"]["pipeline"]["project_slug"]["value"] ; ?>" class="list-group-item">
+                <a href="/index.php?control=PipeRunner&action=history&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
                     <i class="fa fa-bar-chart-o"></i> History <span class="badge"><?php echo $pageVars["data"]["history_count"] ; ?></span>
                 </a>
-                <a href="/index.php?control=PipeRunner&action=start&item=<?php echo $pageVars["data"]["pipeline"]["project_slug"]["value"] ; ?>" class="list-group-item">
+                <a href="/index.php?control=PipeRunner&action=start&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
                     <i class="fa fa-envelope"></i> Run Again
                 </a>
             </div>
@@ -52,7 +52,7 @@
                             $stat = "Execution Summary of " ;
                             break ; }
                 ?>
-                <h3><?= $stat; ?> Pipeline <?php echo $pageVars["data"]["pipeline"]["project_title"]["value"] ; ?>
+                <h3><?= $stat; ?> Pipeline <?php echo $pageVars["data"]["pipeline"]["project-name"] ; ?>
 
                     <?php
                     if ($pageVars["route"]["action"] == "summary") {
@@ -61,13 +61,13 @@
 
                     <i style="font-size: 18px;" class="fa fa-chevron-right"></i></h3>
                 <h5 class="text-uppercase text-light" style="margin-top: 15px;">
-                    <a href="/index.php?control=BuildHome&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project_slug"]["value"] ; ?>"></a>
+                    <a href="/index.php?control=BuildHome&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>"></a>
                 </h5>
                 <?php
                     if ($pageVars["route"]["action"] != "summary") {
-                        $act = '/index.php?control=PipeRunner&item='.$pageVars["data"]["pipeline"]["project_slug"]["value"].'&action=summary' ; }
+                        $act = '/index.php?control=PipeRunner&item='.$pageVars["data"]["pipeline"]["project-slug"].'&action=summary' ; }
                     else {
-                        $act = '/index.php?control=PipeRunner&item='.$pageVars["data"]["pipeline"]["project_slug"]["value"].'&action=summary&run-id='.$pageVars["data"]["historic_build"]["run-id"]  ; }
+                        $act = '/index.php?control=PipeRunner&item='.$pageVars["data"]["pipeline"]["project-slug"].'&action=summary&run-id='.$pageVars["data"]["historic_build"]["run-id"]  ; }
                 ?>
 
                 <form class="form-horizontal custom-form" action="<?= $act ; ?>" method="POST">
@@ -94,7 +94,7 @@
                                 if ($pageVars["route"]["action"]=="history") {
                                     echo '<p>Historic builds</p>';
                                     foreach ($pageVars["data"]["historic_builds"] as $hb) {
-                                        echo '<a href="/index.php?control=PipeRunner&action=summary&item='.$pageVars["data"]["pipeline"]["project_slug"]["value"].'&run-id='.$hb.'">'.$hb.'</a><br />' ; } }
+                                        echo '<a href="/index.php?control=PipeRunner&action=summary&item='.$pageVars["data"]["pipeline"]["project-slug"].'&run-id='.$hb.'">'.$hb.'</a><br />' ; } }
                                 else if ($pageVars["route"]["action"]=="summary") {
                                     echo '<pre>'.$pageVars["data"]["historic_build"]["out"].'</pre>'; }
                                 ?>
@@ -120,7 +120,7 @@
                             </div>
                         </div>
                     </div>
-                    <input type="hidden" id="item" value="<?= $pageVars["data"]["pipeline"]["project_slug"]["value"] ;?>" />
+                    <input type="hidden" id="item" value="<?= $pageVars["data"]["pipeline"]["project-slug"] ;?>" />
                     <input type="hidden" id="pid" value="<?= $pageVars["pipex"] ;?>" />
                     <?php
                     if ($pageVars["route"]["action"] == "summary") {
