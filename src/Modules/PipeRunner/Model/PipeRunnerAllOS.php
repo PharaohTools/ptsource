@@ -20,7 +20,7 @@ class PipeRunnerAllOS extends Base {
         $ret["historic_build"] = $this->getOneBuild($this->params["run-id"]);
         $ret["pipeline"] = $this->getPipeline();
         $ret["item"] = $this->params["item"];
-        $ret["history_count"] = $this->getNextBuildNumber();
+        $ret["history_count"] = $this->getBuildNumber("last");
         return $ret ;
     }
 
@@ -49,7 +49,7 @@ class PipeRunnerAllOS extends Base {
         // run pipe fork command
         $run = $this->saveRunPlaceHolder();
         // save run
-        $this->runPipeForkCommand();
+        $this->runPipeForkCommand($run);
         return $run ;
     }
 
@@ -61,10 +61,10 @@ class PipeRunnerAllOS extends Base {
             $this->params["pipe-dir"] = PIPEDIR ; }
     }
 
-    private function runPipeForkCommand() {
+    private function runPipeForkCommand($run) {
         // this should be a phrank piperunner@cli and it should save the log to a named history
         $cmd  = PHRCOMM.' piperunner child --pipe-dir="'.$this->params["pipe-dir"].'" ' ;
-        $cmd .= '--item="'.$this->params["item"].'" > '.PIPEDIR.DS.$this->params["item"].DS ;
+        $cmd .= '--item="'.$this->params["item"].'" --run-id="'.$run.'" > '.PIPEDIR.DS.$this->params["item"].DS ;
         $cmd .= 'tmpfile &' ;
         error_log($cmd);
         $descr = array(
@@ -96,7 +96,8 @@ class PipeRunnerAllOS extends Base {
             sleep(1);
             echo "write $i This many lines: $i , Time: ".time()."\n" ;
         }
-        echo "DONE\n";
+        echo "DONE\n"; // SUCCESSFUL EXECUTION
+        echo "SUCCESSFUL EXECUTION\n";
         return $this->saveRunLog();
     }
 
@@ -112,18 +113,18 @@ class PipeRunnerAllOS extends Base {
         return false ;
     }
 
-    private function getNextBuildNumber() {
+    private function getBuildNumber($nextorlast = "next") {
         # mkdir($this->params["pipe-dir"].DS.$this->params["item"], true) ;
-        $builds = scandir($this->params["pipe-dir"].DS.$this->params["item"]) ;
+        $builds = scandir($this->params["pipe-dir"].DS.$this->params["item"].DS.'history') ;
         for ($i=0; $i<count($builds); $i++) {
             if (in_array($builds, array(".", "..", "tmpfile"))){
                 unset($builds[$i]) ; } }
-        $buildCount = count($builds) + 1 ;
-        return $buildCount ;
+        $buildCount = count($builds) ;
+        return ($nextorlast == "next") ? $buildCount + 2 : $buildCount + 1 ;
     }
 
     private function getOldBuilds() {
-        $builds = scandir($this->params["pipe-dir"].DS.$this->params["item"]) ;
+        $builds = scandir($this->params["pipe-dir"].DS.$this->params["item"].DS.'history') ;
         $buildsRay = array();
         for ($i=0; $i<count($builds); $i++) {
             if (!in_array($builds[$i], array(".", "..", "tmpfile"))){
@@ -133,16 +134,16 @@ class PipeRunnerAllOS extends Base {
     }
 
     private function getOneBuild($buildNum) {
-        $file = $this->params["pipe-dir"].DS.$this->params["item"].DS.$buildNum ;
+        $file = $this->params["pipe-dir"].DS.$this->params["item"].DS.'history'.DS.$buildNum ;
         $o = file_get_contents($file) ;
         return array("run-id" => $buildNum, "out" => $o) ;
     }
 
     public function saveRunPlaceHolder() {
-        $run = $this->getNextBuildNumber() ;
-        $file = $this->params["pipe-dir"].DS.$this->params["item"].DS.$run ;
+        $run = $this->getBuildNumber("next") ;
+        $file = $this->params["pipe-dir"].DS.$this->params["item"].DS.'history'.DS.$run ;
+        error_log("file: ".$file) ;
         $buildOut = $this->getExecutionOutput() ;
-        error_log("bo: ".$buildOut) ;
         $top = "THIS IS A PLACEHOLDER TO SHOW A STARTED OUTPUT FILE\n\n" ;
         file_put_contents($file, $top.$buildOut) ;
         if (file_exists($file)){
@@ -151,7 +152,7 @@ class PipeRunnerAllOS extends Base {
     }
 
     public function saveRunLog() {
-        $file = PIPEDIR.DS.$this->params["item"].DS.$this->params["run-id"] ;
+        $file = PIPEDIR.DS.$this->params["item"].DS.'history'.DS.$this->params["run-id"] ;
         $buildOut = $this->getExecutionOutput() ;
         error_log("box: ".$buildOut) ;
         file_put_contents($file, $buildOut) ;
