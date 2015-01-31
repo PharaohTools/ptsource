@@ -94,9 +94,7 @@ class PipeRunnerAllOS extends Base {
         echo PIPEDIR.DS.$this->params["item"].DS.'tmpfile'."\n" ;
         for ($i = 0; $i < 15; $i++ ) {
             sleep(1);
-            echo "write $i This many lines: $i , Time: ".time()."\n" ;
-        }
-        echo "DONE\n"; // SUCCESSFUL EXECUTION
+            echo "write $i This many lines: $i , Time: ".time()."\n" ; }
         echo "SUCCESSFUL EXECUTION\n";
         return $this->saveRunLog();
     }
@@ -109,18 +107,19 @@ class PipeRunnerAllOS extends Base {
 
     private function getExecutionStatus() {
         $o = $this->getExecutionOutput() ;
-        if (strpos($o, "DONE") !== false) { return true ; }
+        if (strpos($o, "SUCCESSFUL EXECUTION") !== false) { return true ; }
         return false ;
     }
 
     private function getBuildNumber($nextorlast = "next") {
-        # mkdir($this->params["pipe-dir"].DS.$this->params["item"], true) ;
-        $builds = scandir($this->params["pipe-dir"].DS.$this->params["item"].DS.'history') ;
-        for ($i=0; $i<count($builds); $i++) {
-            if (in_array($builds, array(".", "..", "tmpfile"))){
-                unset($builds[$i]) ; } }
-        $buildCount = count($builds) ;
-        return ($nextorlast == "next") ? $buildCount + 2 : $buildCount + 1 ;
+        $builds = $this->getOldBuilds() ;
+        $highest = 1 ;
+        foreach ($builds as $build) {
+            $build = (int) $build ;
+            if ($build > $highest) {
+                $highest = $build ; } }
+        $ret = ($nextorlast == "next") ? $highest + 2 : $highest + 1 ;
+        return $ret ;
     }
 
     private function getOldBuilds() {
