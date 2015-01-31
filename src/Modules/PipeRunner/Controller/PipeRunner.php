@@ -10,7 +10,9 @@ class PipeRunner extends Base {
         $this->content = $pageVars ;
         if (is_array($thisModel)) { return $this->failDependencies($pageVars, $this->content, $thisModel) ; }
         if (in_array($pageVars["route"]["action"], array("pipestatus", "service"))) {
+            // @todo output format change not being implemented
             $this->content["params"]["output-format"] = strtoupper($pageVars["route"]["action"]);
+            $this->content["route"]["extraParams"]["output-format"] = strtoupper($pageVars["route"]["action"]);
             $this->content["data"] = $thisModel->getServiceData();
             return array ("type"=>"view", "view"=>"pipeRunner", "pageVars"=>$this->content); }
         if (in_array($pageVars["route"]["action"], array("child"))) {
