@@ -1,15 +1,12 @@
 done = false ;
 max = 0 ;
-while (done == false && max < 30) {
-    window.setTimeout(updatePage, 3000) ; //wait 3 seconds before continuing
-    max = max + 1 ; }
-
-// updatePage() ;
+window.outUpdater = setInterval(function () { updatePage() }, 5000);
 
 function updatePage() {
     console.log("running update page js method");
-    item = $("#item").val();
-    url = "/index.php?control=PipeRunner&action=service&item=" + item;
+    // item = $("#item").val();
+    item = window.pipeitem ;
+    url = "/index.php?control=PipeRunner&action=service&item=" + item + "&output-format=SERVICE";
     $.ajax({
         url: url,
         success: function(data) {
@@ -17,32 +14,33 @@ function updatePage() {
         complete: function() {
             // Schedule the next request when the current one's complete
             setStatus();
-            console.log(window.reqStatus);
+            console.log("Req Status: " + window.reqStatus);
             if (window.reqStatus == "OK") {
-                doCompletion(); }
-            else {
-                setTimeout(updatePage, 3000); } }
+                doCompletion(); } }
     });
 }
 
 function setStatus() {
-    item = $("#item").val();
-    pid = $("#pid").val();
-    url = "/index.php?control=PipeRunner&action=pipestatus&item=" + item + "&pid=" + pid ;
+    // item = $("#item").val();
+    // pid = $("#pid").val();
+    item = window.pipeitem ;
+    pid = window.runid ;
+    url = "/index.php?control=PipeRunner&action=pipestatus&item=" + item + "&pid=" + pid + "&output-format=PIPESTATUS";
     console.log(url);
     $.ajax({
         url: url,
         success: function(data) {
-            window.reqStatus = data
-            console.log("rstat: " + data) ;
+            window.reqStatus = data ;
+            console.log("pipestat: " + data) ;
         }
     });
 }
 
 function doCompletion() {
-    saveRun();
+    // saveRun();
     removeWaitImage();
     changeSubButton();
+    clearInterval(window.outUpdater);
 }
 
 function removeWaitImage() {
@@ -58,16 +56,17 @@ function changeSubButton() {
     $("#submit-holder").html(subhtml) ;
 }
 
-function saveRun() {
-    item = $("#item").val();
-    pid = $("#pid").val();
-    url = "/index.php?control=PipeRunner&action=saverun&item=" + item + "&pid=" + pid + "&output-format=SERVICE" ;
-    console.log(url);
-    $.ajax({
-        url: url,
-        success: function(data) {
-            console.log(data);
-            window.reqStatus = data }
-    });
-
-}
+//function saveRun() {
+//    item = $("#item").val();
+//    pid = $("#pid").val();
+//    item = window.pipeitem ;
+//    pid = window.runid ;
+//    url = "/index.php?control=PipeRunner&action=saverun&item=" + item + "&pid=" + pid + "&output-format=SERVICE" ;
+//    console.log(url);
+//    $.ajax({
+//        url: url,
+//        success: function(data) {
+//            console.log(data) ;
+//            window.reqStatus = data ; }
+//    });
+//}
