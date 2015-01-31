@@ -4,7 +4,6 @@ window.outUpdater = setInterval(function () { updatePage() }, 5000);
 
 function updatePage() {
     console.log("running update page js method");
-    // item = $("#item").val();
     item = window.pipeitem ;
     url = "/index.php?control=PipeRunner&action=service&item=" + item + "&output-format=SERVICE";
     $.ajax({
@@ -21,8 +20,6 @@ function updatePage() {
 }
 
 function setStatus() {
-    // item = $("#item").val();
-    // pid = $("#pid").val();
     item = window.pipeitem ;
     pid = window.runid ;
     url = "/index.php?control=PipeRunner&action=pipestatus&item=" + item + "&pid=" + pid + "&output-format=PIPESTATUS";
@@ -37,7 +34,6 @@ function setStatus() {
 }
 
 function doCompletion() {
-    // saveRun();
     removeWaitImage();
     changeSubButton();
     clearInterval(window.outUpdater);
@@ -55,18 +51,3 @@ function changeSubButton() {
     subhtml += '</div>' ;
     $("#submit-holder").html(subhtml) ;
 }
-
-//function saveRun() {
-//    item = $("#item").val();
-//    pid = $("#pid").val();
-//    item = window.pipeitem ;
-//    pid = window.runid ;
-//    url = "/index.php?control=PipeRunner&action=saverun&item=" + item + "&pid=" + pid + "&output-format=SERVICE" ;
-//    console.log(url);
-//    $.ajax({
-//        url: url,
-//        success: function(data) {
-//            console.log(data) ;
-//            window.reqStatus = data ; }
-//    });
-//}
