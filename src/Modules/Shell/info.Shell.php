@@ -20,13 +20,13 @@ class ShellInfo extends CleopatraBase {
         return array("shell"=>"Shell");
     }
 
-    public function provisonerName() {
-        return "shell";
+    public function buildSteps() {
+        return array("shellscript", "shellfile");
     }
 
     public function helpDefinition() {
        $help = <<<"HELPDATA"
-    This extension provides integration with Shell as a Phlagrant Provisioner. It provides code
+    This extension provides integration with Shell as a Build Step. It provides code
     functionality, but no extra commands.
 
     Shell
