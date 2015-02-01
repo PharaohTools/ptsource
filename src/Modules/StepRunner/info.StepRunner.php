@@ -13,7 +13,7 @@ class StepRunnerInfo extends CleopatraBase {
   }
 
   public function routesAvailable() {
-    return array( "StepRunner" =>  array_merge( array("now", "hard", "pause", "help") ) );
+    return array( "StepRunner" =>  array_merge( array("help") ) );
   }
 
   public function routeAliases() {
