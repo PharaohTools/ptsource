@@ -19,27 +19,28 @@ class StepRunnerAllOS extends BaseLinuxApp {
         $this->initialize();
     }
 
-    public function stepRunnerNow($hook = "") {
-        $this->stepRunner->stepRunner($hook);
-    }
-
-    public function stepRunnerHook($hook, $type) {
-        $this->stepRunner->stepRunnerHook($hook, $type);
-    }
-
-    protected function loadStepRunner() {
+    public function stepRunner($step) {
         $loggingFactory = new \Model\Logging();
         $logging = $loggingFactory->getModel($this->params) ;
-        $provFile = dirname(dirname(__FILE__)).DS."StepRunners".DS.$this->phlagrantfile->config["vm"]["ostype"].".php" ;
-        if (file_exists($provFile)) {
-            require_once ($provFile) ;
-            $logging->log("Step Runner found for {$this->phlagrantfile->config["vm"]["ostype"]}") ;
-            $osp = new \Model\StepRunner($this->params) ;
-            $osp->phlagrantfile = $this->phlagrantfile;
-            $osp->papyrus = $this->papyrus;
-            return $osp ; }
-        $logging->log("No suitable Step Runner found");
-        return null ;
+        // get build step module from step
+        $stepModule = $step["module"] ;
+        $modx = \Core\AutoLoader::moduleExists($stepModule) ;
+        if ($modx == false) {
+            $logging->log ("No Module {$stepModule} is installed", $this->getModuleName() ) ;
+            return false ;  }
+        // fire up the model for it
+        $stepFactoryClass = '\Model\\'.$stepModule();
+        $stepFactory = new $stepFactoryClass() ;
+        $stepModel = $stepFactory->getModel($this->params);
+        $modStepTypes = $stepModel->getStepTypes() ;
+        // if type not supported return false
+        if (!in_array($step["type"], $modStepTypes)) {
+            $logging->log ("Module {$stepModule} does not support step type", $this->getModuleName() ) ;
+            return false ; } ;
+        // send step data to method in question
+        $stepResult = $stepModel->executeStep($step) ;
+        // return the result of the step run (true or false, output should already be done)
+        return $stepResult ;
     }
 
 }
