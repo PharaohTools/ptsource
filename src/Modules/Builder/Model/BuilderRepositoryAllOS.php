@@ -19,7 +19,8 @@ class BuilderRepositoryAllOS extends Base {
         $names = $this->getBuilderNames() ;
         $builderFactory = new \Model\Builder() ;
         $builder = $builderFactory->getModel($this->params);
-        foreach ($names as $name) { $builders[$name] = $builder->getBuilder($name); }
+        foreach ($names as $name => $types) {
+            $builders[$name] = $builder->getBuilder($name); }
         return $builders ;
     }
 
@@ -28,7 +29,9 @@ class BuilderRepositoryAllOS extends Base {
         $infos = \Core\AutoLoader::getInfoObjects() ;
         foreach ($infos as $info) {
             if (method_exists($info, "buildSteps")) {
-                $buildSteps = array_merge($buildSteps, $info->buildSteps()); } }
+                $name = get_class($info);
+                $name = substr($name, strlen($name)-4, 4) ;
+                $buildSteps[$name] = $info->buildSteps(); } }
         return $buildSteps ;
     }
 
