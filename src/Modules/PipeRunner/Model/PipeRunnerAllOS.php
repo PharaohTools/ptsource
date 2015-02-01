@@ -89,8 +89,21 @@ class PipeRunnerAllOS extends Base {
     }
 
     public function runChild() {
-        //$f = PIPEDIR.DS.$this->params["item"].DS."tmpfile" ;
-        //if (file_exists($f)) { self::executeAndOuput("rm -f $f", "Temp log file exists here, removing"); }
+        // @todo lets call our mofo builder
+        $buildSteps = array() ; // get build steps
+        $stepRunnerFactory = new \Model\StepRunner() ;
+        $stepRunner = $stepRunnerFactory->getModel($this->params) ;
+
+
+
+        foreach ($buildSteps as $step) {
+
+            $stepRunner->stepRunner($step);
+            $step ;
+        }
+        $buildSteps = array() ; // get build steps
+
+
         echo PIPEDIR.DS.$this->params["item"].DS.'tmpfile'."\n" ;
         for ($i = 0; $i < 15; $i++ ) {
             sleep(1);
