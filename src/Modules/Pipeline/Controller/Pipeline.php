@@ -5,6 +5,9 @@ Namespace Controller ;
 class Pipeline extends Base {
 
     public function execute($pageVars) {
+
+        // @ todo i dont think we should be accepting any of these actions
+
         $thisModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars) ;
         $isDefaultAction = parent::checkDefaultActions($pageVars, array(
             "install","uninstall", "x", "exec", "execute", "status", "init", "inititalize", "version", "run-at-reboots"
