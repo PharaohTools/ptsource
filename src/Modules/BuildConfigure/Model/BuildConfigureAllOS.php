@@ -56,7 +56,6 @@ class BuildConfigureAllOS extends Base {
     }
 
     private function getFormattedSlug() {
-
         if ($this->params["project-slug"] == "") {
             $this->params["project-slug"] = str_replace(" ", "_", $this->params["project-name"]);
             $this->params["project-slug"] = str_replace("'", "", $this->params["project-slug"]);
