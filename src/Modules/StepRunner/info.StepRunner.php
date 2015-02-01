@@ -13,7 +13,7 @@ class StepRunnerInfo extends CleopatraBase {
   }
 
   public function routesAvailable() {
-    return array( "StepRunner" =>  array_merge( array("now", "hard", "pause") ) );
+    return array( "StepRunner" =>  array_merge( array("now", "hard", "pause", "help") ) );
   }
 
   public function routeAliases() {
@@ -21,16 +21,13 @@ class StepRunnerInfo extends CleopatraBase {
   }
 
   public function helpDefinition() {
-    $help = <<<"HELPDATA"
-  This command allows you to stepRunner a phlagrant box
+    $help = 'This command allows you to Run a step in a Build
 
   StepRunner, stepRunner
 
         - now
-        StepRunner a box now
-        example: phlagrant stepRunner now
-
-HELPDATA;
+        Wrapper functionality for running steps
+        example: '.PHARAOH_APP.' stepRunner now ' ;
     return $help ;
   }
 
