@@ -24,13 +24,12 @@ class BuilderRepositoryAllOS extends Base {
     }
 
     public function getBuilderNames() {
-        $builders = scandir(PIPEDIR) ;
-        for ($i=0; $i<count($builders); $i++) {
-            if (!in_array($builders[$i], array(".", "..", "tmpfile"))){
-                if(is_dir(PIPEDIR.DS.$builders[$i])) {
-                    // @todo if this isnt definitely a build dir ignore maybe
-                    $names[] = $builders[$i] ; } } }
-        return (isset($names) && is_array($names)) ? $names : array() ;
+        $buildSteps = array() ;
+        $infos = \Core\AutoLoader::getInfoObjects() ;
+        foreach ($infos as $info) {
+            if (method_exists($info, "buildSteps")) {
+                $buildSteps = array_merge($buildSteps, $info->buildSteps()); } }
+        return $buildSteps ;
     }
 
 }
