@@ -106,8 +106,12 @@
                             <select name="new_step" id="new_step">
                                 <option value="">-- Select Step --</option>
                             <?php
-                                foreach ($pageVars["data"]["builder"]["available_steps"] as $one_build_step) {
-                                    echo '  <option value="'.$one_build_step["slug"].'">'.$one_build_step["name"].'</option>'; }
+
+                            var_dump($pageVars["data"]["builders"] ) ;
+
+                            foreach ($pageVars["data"]["builders"] as $builderName => $bulider) {
+                                foreach ($pageVars["data"]["available_steps"] as $one_build_step) {
+                                        echo '  <option value="'.$one_build_step["slug"].'">'.$one_build_step["name"].'</option>'; } }
                             ?>
                             </select>
                         </div>
