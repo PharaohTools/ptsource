@@ -18,6 +18,14 @@ class ShellLinuxUnix extends Base {
         return array("shelldata", "shellscript", "shellfile");
     }
 
+    public function getFormFields() {
+        return array(
+            "type" => "textarea",
+            "name" => "Shell Script",
+            "slug" => "shell_script"
+        );
+    }
+
     public function executeStep($step) {
         $loggingFactory = new \Model\Logging();
         $logging = $loggingFactory->getModel($this->params);

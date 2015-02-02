@@ -43,11 +43,11 @@ function removeWaitImage() {
     $("#loading-holder").hide() ;
 }
 
-function changeSubButton() {
-    subhtml  = '<div class="col-sm-offset-2 col-sm-8">';
-    subhtml += '  <div class="text-center">';
-    subhtml += '    <button type="submit" class="btn btn-primary" id="close-complete">Close Execution Screen</button>';
-    subhtml += '  </div>';
-    subhtml += '</div>' ;
-    $("#submit-holder").html(subhtml) ;
+function changeModule(element) {
+    alert("dave") ;
+    alert(element) ;
+    subhtml  = '<select name="step-selector" id="step-selector">';
+    subhtml += '  <option value="value">A Value</option>';
+    subhtml += '</select>' ;
+    $("#new_step_type_selector").html(subhtml) ;
 }

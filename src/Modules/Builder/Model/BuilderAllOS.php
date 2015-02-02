@@ -22,10 +22,10 @@ class BuilderAllOS extends Base {
         return $ret ;
     }
 
-    public function getBuilder($line) {
+    public function getBuilder($module) {
         $builderFactory = new Builder();
         $builderCollater = $builderFactory->getModel($this->params, "BuilderCollater") ;
-        $builder = $builderCollater->getBuilder($line);
+        $builder = $builderCollater->getBuilder($module);
         $ret = $builder ;
         return $ret ;
     }

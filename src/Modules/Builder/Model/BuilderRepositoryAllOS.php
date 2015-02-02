@@ -30,7 +30,8 @@ class BuilderRepositoryAllOS extends Base {
         foreach ($infos as $info) {
             if (method_exists($info, "buildSteps")) {
                 $name = get_class($info);
-                $name = substr($name, strlen($name)-4, 4) ;
+                $name = str_replace("Info\\", "", $name) ;
+                $name = substr($name, 0, strlen($name)-4) ;
                 $buildSteps[$name] = $info->buildSteps(); } }
         return $buildSteps ;
     }

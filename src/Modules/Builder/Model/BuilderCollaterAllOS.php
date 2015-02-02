@@ -14,50 +14,33 @@ class BuilderCollaterAllOS extends Base {
     // Model Group
     public $modelGroup = array("BuilderCollater") ;
 
-    public function getBuilder($pipe = null) {
-        if ($pipe != null) { $this->params["item"] = $pipe ; }
-        $r = $this->collate();
+    public function getBuilder($module) {
+        $r = $this->collate($module);
         return $r ;
     }
 
-    private function collate() {
+    private function collate($module) {
         $collated = array() ;
-        // $collated = array_merge($collated, $this->getStatuses()) ;
-        $collated = array_merge($collated, $this->getBuildSteps()) ;
+        $collated["fields"] =  $this->getFormFields($module) ;
+        $collated["step-types"] = $this->getStepTypes($module) ;
         // $collated = array_merge($collated, $this->getSteps()) ;
         return $collated ;
     }
 
-    private function getStatuses() {
-        $statuses = array( "last_status" => true, "has_parents" => true, "has_children" => true ) ;
-        return $statuses ;
+    private function getFormFields($module) {
+        $stepFactoryClass = '\Model\\'.$module;
+        $stepFactory = new $stepFactoryClass() ;
+        $stepModel = $stepFactory->getModel($this->params);
+        $modFormFields = $stepModel->getFormFields() ;
+        return $modFormFields ;
     }
 
-    private function getBuildSteps() {
-        $defaults = array();
-        $defaultsFile = PIPEDIR.DS.$this->params["item"].DS.'defaults' ;
-        if (file_exists($defaultsFile)) {
-            $defaultsFileData =  file_get_contents($defaultsFile) ;
-            $defaults = json_decode($defaultsFileData, true) ; }
-        else {
-            $loggingFactory = new \Model\Logging() ;
-            $logging = $loggingFactory->getModel($this->params) ;
-            $logging->log("No defaults file available in build", $this->getModuleName()) ; }
-        $defaults = $this->setDefaultSlugIfNeeded($defaults) ;
-        return $defaults ;
-    }
-
-    private function setDefaultSlugIfNeeded($defaults) {
-        if (!isset($defaults["project-slug"])) {
-            $defaults["project-slug"] = $this->params["item"] ; }
-        if (isset($defaults["project-slug"]) && $defaults["project-slug"] == "") {
-            $defaults["project-slug"] = $this->params["item"] ; }
-        return $defaults ;
-    }
-
-    private function getSteps() {
-        $statuses = array("steps" => array()) ;
-        return $statuses ;
+    private function getStepTypes($module) {
+        $stepFactoryClass = '\Model\\'.$module;
+        $stepFactory = new $stepFactoryClass() ;
+        $stepModel = $stepFactory->getModel($this->params);
+        $modStepTypes = $stepModel->getStepTypes() ;
+        return $modStepTypes ;
     }
 
 }

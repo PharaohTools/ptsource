@@ -103,17 +103,22 @@
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <h5>Add New Step</h5>
-                            <select name="new_step" id="new_step">
-                                <option value="">-- Select Step --</option>
-                            <?php
+                            <div class="seletorWrap" id="new_step_module_selector_wrap">
+                                <select name="new_step_module_selector" id="new_step_module_selector" onchange="changeModule(this)">
+                                    <option value="">-- Select Step --</option>
+                                    <?php
 
-                            var_dump($pageVars["data"]["builders"] ) ;
+                                    foreach ($pageVars["data"]["builders"] as $builderName => $builderBits) {
+                                        foreach ($builderBits["step-types"] as $step_type) {
+                                            echo '  <option value="'.$builderName.'_'.$step_type.'">'.$builderName.', '.$step_type.'</option>'; } }
 
-                            foreach ($pageVars["data"]["builders"] as $builderName => $bulider) {
-                                foreach ($pageVars["data"]["available_steps"] as $one_build_step) {
-                                        echo '  <option value="'.$one_build_step["slug"].'">'.$one_build_step["name"].'</option>'; } }
-                            ?>
-                            </select>
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="seletorWrap" id="new_step_type_selector_wrap">
+                                <select name="new_step_type_selector" id="new_step_type_selector" onchange="changeStepType(this)">
+                                </select>
+                            </div>
                         </div>
                     </div>
 
@@ -122,6 +127,8 @@
                             <button type="submit" class="btn btn-success">Save Configuration</button>
                         </div>
                     </div>
+
+                    <script type="text/javascript" src="/Assets/BuildConfigure/js/buildconfigure.js"></script>
 
                     <?php
 
