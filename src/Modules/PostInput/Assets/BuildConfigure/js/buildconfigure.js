@@ -1,34 +1,45 @@
 done = false ;
 max = 0 ;
 
-function updatePage() {
-    item = window.pipeitem ;
-    url = "/index.php?control=PipeRunner&action=service&item=" + item + "&output-format=SERVICE";
-    $.ajax({
-        url: url,
-        success: function(data) {
-            $('#updatable').html(data); },
-        complete: function() {
-            // Schedule the next request when the current one's complete
-            setStatus();
-            console.log("Req Status: " + window.reqStatus);
-            if (window.reqStatus == "OK") {
-                doCompletion(); } }
-    });
-}
-
-function doCompletion() {
-    removeWaitImage();
-    changeSubButton();
-}
-
-function removeWaitImage() {
-    $("#loading-holder").hide() ;
-}
-
 function changeModule(element) {
-    module = $("#new_module_selector").find(":selected").text() ;
-    alert(module) ;
+    module = $("#new_step_module_selector").find(":selected").text() ;
+    console.log("one") ;
     selectoptions = window.steps[module] ;
+    console.log("two") ;
+    window.htmlzy  = '<select onchange="changeStepTypeSelector()" id="new_step_type_selector" name="new_step_type_selector">' ;
+    window.htmlzy += '  <option value="">-- Select Step Type --</option>' ;
+    console.log("three") ;
     console.log(selectoptions) ;
+    for (var key in selectoptions) {
+        window.htmlzy += '  <option value="'+key+'">'+key+'</option>';    }
+    console.log("four") ;
+    window.htmlzy += '</select>' ;
+    console.log("five") ;
+    console.log(window.htmlzy) ;
+    $('#new_step_type_selector_wrap').html(window.htmlzy);
+}
+
+function changeStepTypeSelector(element) {
+    html  = '<a class="btn btn-info" onclick="displayStepField()">Add Step</a>' ;
+    $('#new_step_button_wrap').html(html);
+}
+
+function displayStepField() {
+    steptype = $("#new_step_type_selector").find(":selected").text() ;
+    module = $("#new_step_module_selector").find(":selected").text() ;
+    field = window.steps[module][steptype] ;
+    console.log("field is");
+    console.log(field);
+    hash = "1234567890" ;
+
+    if (field.type == "textarea") {
+        html  = '<h4>'+field.name+'</h4>' ;
+        html += '<textarea id="'+field.slug+"_"+hash+'" name="'+field.slug+"_"+hash+'">' ;
+        html += '</textarea>' ; }
+
+    else if (field.type == "text") {
+        html  = '<h4>'+field.name+'</h4>' ;
+        html += '<input type="text" id="'+field.slug+"_"+hash+'" name="'+field.slug+"_"+hash+'" />' ; }
+
+    $('#new_step_wrap').html(html);
 }
