@@ -105,17 +105,18 @@
                             <h5>Add New Step</h5>
                             <div class="seletorWrap" id="new_step_module_selector_wrap">
                                 <select name="new_step_module_selector" id="new_step_module_selector" onchange="changeModule(this)">
-                                    <option value="">-- Select Step --</option>
+                                    <option value="">-- Select Module --</option>
                                     <?php
                                         foreach ($pageVars["data"]["fields"] as $builderName => $builderBits) {
-                                            foreach ($builderBits as $stepName => $stepDetails) {
-                                                echo '  <option value="'.$builderName.'_'.$stepDetails["slug"].'">'.$builderName.', '.$stepName.'</option>'; } }
+                                            echo '  <option value="'.strtolower($builderName).'">'.$builderName.'</option>'; }
                                     ?>
                                 </select>
                             </div>
                             <div class="selectorWrap" id="new_step_type_selector_wrap">
-                                <select name="new_step_type_selector" id="new_step_type_selector">
-                                </select>
+                            </div>
+                            <div class="buttonWrap" id="new_step_button_wrap">
+                            </div>
+                            <div class="selectorWrap" id="new_step_wrap">
                             </div>
                         </div>
                     </div>
@@ -126,12 +127,8 @@
                         </div>
                     </div>
 
-                    <pre>
-                        <?php var_dump($pageVars["data"]["fields"]) ; ?>
-                    </pre>
-
                     <script type="text/javascript">
-                        steps = <?php echo json_encode($pageVars["data"]["fields"]) ; ?>
+                        steps = <?php echo json_encode($pageVars["data"]["fields"]) ; ?> ;
                     </script>
                     <script type="text/javascript" src="/Assets/BuildConfigure/js/buildconfigure.js"></script>
 
