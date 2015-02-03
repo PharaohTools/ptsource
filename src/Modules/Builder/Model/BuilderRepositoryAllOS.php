@@ -24,6 +24,19 @@ class BuilderRepositoryAllOS extends Base {
         return $builders ;
     }
 
+    public function getAllBuildersFormFields() {
+        $formFields = array();
+        $names = $this->getBuilderNames() ;
+        // var_dump($names) ;
+        $builderFactory = new \Model\Builder() ;
+        $builder = $builderFactory->getModel($this->params);
+        foreach ($names as $name => $types) {
+            $bo = $builder->getBuilder($name);
+            $formFields[$name] = $bo["fields"] ;
+            var_dump($formFields) ; }
+        return $formFields ;
+    }
+
     public function getBuilderNames() {
         $buildSteps = array() ;
         $infos = \Core\AutoLoader::getInfoObjects() ;
