@@ -106,11 +106,11 @@
                         echo '
                           <script type="text/javascript">
                               window.pipeitem = "'.$pageVars["data"]["pipeline"]["project-slug"].'" ;
-                             window.runid = "'.$pageVars["pipex"].'" ;
+                              window.runid = "'.$pageVars["pipex"].'" ;
                           </script>
-                             <script type="text/javascript" src="/Assets/PipeRunner/js/piperunner.js"></script>
-                             <div class="form-group" id="loading-holder">
-                                 <div class="col-sm-offset-2 col-sm-8">
+                              <script type="text/javascript" src="/Assets/PipeRunner/js/piperunner.js"></script>
+                              <div class="form-group" id="loading-holder">
+                                  <div class="col-sm-offset-2 col-sm-8">
                                       <div class="text-center">
                                           <img class="loadingImage" src="/Assets/PipeRunner/images/loading.gif" />
                                       </div>
