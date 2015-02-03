@@ -107,16 +107,14 @@
                                 <select name="new_step_module_selector" id="new_step_module_selector" onchange="changeModule(this)">
                                     <option value="">-- Select Step --</option>
                                     <?php
-
-                                    foreach ($pageVars["data"]["builders"] as $builderName => $builderBits) {
-                                        foreach ($builderBits["step-types"] as $step_type) {
-                                            echo '  <option value="'.$builderName.'_'.$step_type.'">'.$builderName.', '.$step_type.'</option>'; } }
-
+                                        foreach ($pageVars["data"]["fields"] as $builderName => $builderBits) {
+                                            foreach ($builderBits as $stepName => $stepDetails) {
+                                                echo '  <option value="'.$builderName.'_'.$stepDetails["slug"].'">'.$builderName.', '.$stepName.'</option>'; } }
                                     ?>
                                 </select>
                             </div>
-                            <div class="seletorWrap" id="new_step_type_selector_wrap">
-                                <select name="new_step_type_selector" id="new_step_type_selector" onchange="changeStepType(this)">
+                            <div class="selectorWrap" id="new_step_type_selector_wrap">
+                                <select name="new_step_type_selector" id="new_step_type_selector">
                                 </select>
                             </div>
                         </div>
@@ -128,13 +126,19 @@
                         </div>
                     </div>
 
+                    <pre>
+                        <?php var_dump($pageVars["data"]["fields"]) ; ?>
+                    </pre>
+
+                    <script type="text/javascript">
+                        steps = <?php echo json_encode($pageVars["data"]["fields"]) ; ?>
+                    </script>
                     <script type="text/javascript" src="/Assets/BuildConfigure/js/buildconfigure.js"></script>
 
                     <?php
 
                     if ($pageVars["route"]["action"] == "new") {
-                        echo '<input type="hidden" name="creation" id="creation" value="yes" />' ;
-                    }
+                        echo '<input type="hidden" name="creation" id="creation" value="yes" />' ; }
 
                     ?>
 
