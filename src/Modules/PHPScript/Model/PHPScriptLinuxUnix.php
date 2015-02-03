@@ -20,14 +20,14 @@ class PHPScriptLinuxUnix extends Base {
 
     public function getFormFields() {
         $ff = array(
-            "shelldata" => array(
+            "phpscriptdata" => array(
                 "type" => "textarea",
                 "name" => "PHPScript Data",
-                "slug" => "shell_data" ),
-            "shellscript" => array(
+                "slug" => "phpscript_data" ),
+            "phpscriptscript" => array(
                 "type" => "text",
                 "name" => "PHPScript Script",
-                "slug" => "shell_script" ),
+                "slug" => "phpscript_script" ),
         );
 
         return $ff ;
@@ -37,16 +37,16 @@ class PHPScriptLinuxUnix extends Base {
         $loggingFactory = new \Model\Logging();
         $logging = $loggingFactory->getModel($this->params);
 
-        $shellDataSpellings = array("shelldata");
-        $shellScriptSpellings = array("shellscript", "shellfile");
+        $phpscriptDataSpellings = array("phpscriptdata");
+        $phpscriptScriptSpellings = array("phpscriptfile");
 
-        if (in_array($step["type"], $shellDataSpellings)) {
+        if (in_array($step["type"], $phpscriptDataSpellings)) {
             $logging->log("Running PHPScript from Data...") ;
             $this->executeAsPHPScript($step["data"]) ;
             $xc = $this->executeAndLoad("$?");
             if ($xc !== 0) { return false ; }
             return true ; }
-        else if (in_array($step["type"], $shellScriptSpellings)) {
+        else if (in_array($step["type"], $phpscriptScriptSpellings)) {
             $logging->log("Running PHPScript from Script...") ;
             $this->executeAsPHPScript($step["data"]) ;
             $xc = $this->executeAndLoad("$?");
