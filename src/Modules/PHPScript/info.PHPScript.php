@@ -17,11 +17,11 @@ class PHPScriptInfo extends CleopatraBase {
     }
 
     public function routeAliases() {
-        return array("shell"=>"PHPScript");
+        return array("phpscript"=>"PHPScript");
     }
 
     public function buildSteps() {
-        return array("shellscript", "shellfile");
+        return array("phpscriptfile");
     }
 
     public function helpDefinition() {
