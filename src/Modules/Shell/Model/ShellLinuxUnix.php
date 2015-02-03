@@ -15,15 +15,22 @@ class ShellLinuxUnix extends Base {
     public $modelGroup = array("Default") ;
 
     public function getStepTypes() {
-        return array("shelldata", "shellscript", "shellfile");
+        return array_keys($this->getFormFields());
     }
 
     public function getFormFields() {
-        return array(
-            "type" => "textarea",
-            "name" => "Shell Script",
-            "slug" => "shell_script"
+        $ff = array(
+            "shelldata" => array(
+                "type" => "textarea",
+                "name" => "Shell Data",
+                "slug" => "shell_data" ),
+            "shellscript" => array(
+                "type" => "text",
+                "name" => "Shell Script",
+                "slug" => "shell_script" ),
         );
+
+        return $ff ;
     }
 
     public function executeStep($step) {
