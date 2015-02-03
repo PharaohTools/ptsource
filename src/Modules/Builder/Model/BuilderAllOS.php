@@ -38,13 +38,6 @@ class BuilderAllOS extends Base {
         return $ret ;
     }
 
-//    public function getBuilder($line) {
-//        $builders = $this->getBuilders() ;
-//        $ret = $builders[$line] ;
-//        $r = (isset($ret) && is_array($ret)) ? $ret : false ;
-//        return $r ;
-//    }
-
     public function getBuilderNames() {
         $builders = $this->getBuilders() ;
         $names = array_keys($builders) ;

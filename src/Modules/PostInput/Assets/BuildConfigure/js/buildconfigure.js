@@ -1,9 +1,7 @@
 done = false ;
 max = 0 ;
-window.outUpdater = setInterval(function () { updatePage() }, 5000);
 
 function updatePage() {
-    console.log("running update page js method");
     item = window.pipeitem ;
     url = "/index.php?control=PipeRunner&action=service&item=" + item + "&output-format=SERVICE";
     $.ajax({
@@ -19,24 +17,9 @@ function updatePage() {
     });
 }
 
-function setStatus() {
-    item = window.pipeitem ;
-    pid = window.runid ;
-    url = "/index.php?control=PipeRunner&action=pipestatus&item=" + item + "&pid=" + pid + "&output-format=PIPESTATUS";
-    console.log(url);
-    $.ajax({
-        url: url,
-        success: function(data) {
-            window.reqStatus = data ;
-            console.log("pipestat: " + data) ;
-        }
-    });
-}
-
 function doCompletion() {
     removeWaitImage();
     changeSubButton();
-    clearInterval(window.outUpdater);
 }
 
 function removeWaitImage() {
@@ -44,10 +27,8 @@ function removeWaitImage() {
 }
 
 function changeModule(element) {
-    alert("dave") ;
-    alert(element) ;
-    subhtml  = '<select name="step-selector" id="step-selector">';
-    subhtml += '  <option value="value">A Value</option>';
-    subhtml += '</select>' ;
-    $("#new_step_type_selector").html(subhtml) ;
+    module = $("#new_module_selector").find(":selected").text() ;
+    alert(module) ;
+    selectoptions = window.steps[module] ;
+    console.log(selectoptions) ;
 }
