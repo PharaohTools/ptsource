@@ -42,7 +42,7 @@ class PHPScriptLinuxUnix extends Base {
 
         if (in_array($step["type"], $phpscriptDataSpellings)) {
             $logging->log("Running PHPScript from Data...") ;
-            $this->executeAsPHPScript($step["data"]) ;
+            $this->executeAsPHPData($step["data"]) ;
             $xc = $this->executeAndLoad("$?");
             if ($xc !== 0) { return false ; }
             return true ; }
@@ -55,6 +55,21 @@ class PHPScriptLinuxUnix extends Base {
         else {
             $logging->log("Unrecognised Build Step Type {$step["type"]} specified in PHPScript Module") ;
             return null ; }
+    }
+
+    private function executeAsPHPData($data) {
+        eval($data) ;
+    }
+
+    private function executeAsPHPScript($data) {
+        $loggingFactory = new \Model\Logging();
+        $logging = $loggingFactory->getModel($this->params);
+        if (file_exists($data)) {
+            $logging->log("File found, executing...") ;
+            self::executeAndOutput("php $data") ; }
+        else {
+            $logging->log("File not found, ignoring...") ;
+            \Core\BootStrap::setExitCode(1);}
     }
 
 }
