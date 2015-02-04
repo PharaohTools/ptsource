@@ -49,7 +49,7 @@ class ShellLinuxUnix extends Base {
             return true ; }
         else {
             $logging->log("Unrecognised Build Step Type {$step["type"]} specified in Shell Module") ;
-            return null ; }
+            return false ; }
     }
 
 }
