@@ -99,7 +99,7 @@
                             echo '      <p><strong>Step Type: </strong>'.$one_build_step["steptype"].'</p>';
                             echo '      <input type="hidden" id="steps['.$hash.'][module]" name="steps['.$hash.'][module]" value="'.$one_build_step["module"].'" />';
                             echo '      <input type="hidden" id="steps['.$hash.'][steptype]" name="steps['.$hash.'][steptype]" value="'.$one_build_step["steptype"].'" />';
-                            echo '      <textarea id="steps['.$hash.'][data]" name="steps['.$hash.'][data]" value="'.$one_build_step["data"].'"  class="form-control">'.$one_build_step["data"].'</textarea>';
+                            echo '      <textarea id="steps['.$hash.'][data]" name="steps['.$hash.'][data]" value="'.$one_build_step["data"].'" class="form-control">'.$one_build_step["data"].'</textarea>';
                             echo '  </div>';
                             echo '</div>'; } ?>
 
