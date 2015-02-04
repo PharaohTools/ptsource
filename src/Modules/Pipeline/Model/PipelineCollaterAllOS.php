@@ -85,8 +85,7 @@ class PipelineCollaterAllOS extends Base {
             $loggingFactory = new \Model\Logging() ;
             $logging = $loggingFactory->getModel($this->params) ;
             $logging->log("No steps file available in build", $this->getModuleName()) ; }
-        $steps = $this->setDefaultSlugIfNeeded($steps) ;
-        return $steps ;
+        return array("steps" => $steps) ;
     }
 
 }
