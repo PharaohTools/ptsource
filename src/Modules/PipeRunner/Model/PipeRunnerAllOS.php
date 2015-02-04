@@ -89,17 +89,12 @@ class PipeRunnerAllOS extends Base {
     }
 
     public function runChild() {
-        // @todo lets call our mofo builder
-        $buildSteps = array() ; // get build steps
         $stepRunnerFactory = new \Model\StepRunner() ;
         $stepRunner = $stepRunnerFactory->getModel($this->params) ;
-
-        foreach ($buildSteps as $step) {
-            var_dump($step) ;
-            $stepRunner->stepRunner($step);
-            $step ;
-        }
-
+        $pipeline = $this->getPipeline();
+        foreach ($pipeline["steps"] as $hash => $stepDetails) {
+            echo "Executing step id $hash\n" ;
+            $stepRunner->stepRunner($stepDetails); }
         echo PIPEDIR.DS.$this->params["item"].DS.'tmpfile'."\n" ;
         for ($i = 0; $i < 15; $i++ ) {
             sleep(1);
