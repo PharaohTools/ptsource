@@ -50,7 +50,7 @@ class PHPScriptLinuxUnix extends Base {
             return true ; }
         else {
             $logging->log("Unrecognised Build Step Type {$step["type"]} specified in PHPScript Module") ;
-            return null ; }
+            return false ; }
     }
 
     private function executeAsPHPData($data) {
