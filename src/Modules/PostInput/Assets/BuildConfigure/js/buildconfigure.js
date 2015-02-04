@@ -31,6 +31,9 @@ function displayStepField() {
     console.log("field is");
     console.log(field);
     hash = "1234567890" ;
+    hash = Math.random() ;
+    hash = hash * 10000000000 ;
+    alert(hash);
 
     if (field.type == "textarea") {
         html  = '<h4>'+field.name+'</h4>' ;
@@ -39,13 +42,21 @@ function displayStepField() {
         html += '<textarea id="steps['+hash+']['+field.slug+']"' ;
         html += ' name="steps['+hash+']['+field.slug+']" >' ;
         html += '</textarea>' ;
+        html += '<a class="btn btn-warning" onclick="deleteStepField(hash)">Delete Step</a>' ;
     }
 
     else if (field.type == "text") {
         html  = '<h4>'+field.name+'</h4>' ;
         html += '<input type="hidden" id="steps['+hash+'][module]" name="steps['+hash+'][module]" value="'+module+'" />' ;
         html += '<input type="hidden" id="steps['+hash+'][steptype]" name="steps['+hash+'][steptype]" value="'+steptype+'" />' ;
-        html += "<input type='text' id='steps[" +'"'+hash+'"'+ ']["'+field.slug+'"]'+"' name='steps[" +'"'+hash+'"'+ '"]["'+field.slug+'"]'+' />' ; }
+        html += "<input type='text' id='steps[" +'"'+hash+'"'+ ']["'+field.slug+'"]'+"' name='steps[" +'"'+hash+'"'+ '"]["'+field.slug+'"]'+' />' ;
+        html += '<a class="btn btn-warning" onclick="deleteStepField(hash)">Delete Step</a>' ; }
 
+    $('#new_step_wrap').html(html);
+}
+
+function deleteStepField(hash) {
+    html  = '<h4>'+field.name+'</h4>' ;
+    html += '<a class="btn btn-alert" onclick="deleteStepField(hash)">Delete Step</a>' ;
     $('#new_step_wrap').html(html);
 }
