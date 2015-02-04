@@ -23,13 +23,12 @@ class ShellLinuxUnix extends Base {
             "shelldata" => array(
                 "type" => "textarea",
                 "name" => "Shell Data",
-                "slug" => "shell_data" ),
+                "slug" => "data" ),
             "shellscript" => array(
                 "type" => "text",
                 "name" => "Shell Script",
-                "slug" => "shell_script" ),
+                "slug" => "script" ),
         );
-
         return $ff ;
     }
 
