@@ -92,13 +92,11 @@ class PipeRunnerAllOS extends Base {
         $stepRunnerFactory = new \Model\StepRunner() ;
         $stepRunner = $stepRunnerFactory->getModel($this->params) ;
         $pipeline = $this->getPipeline();
+        echo PIPEDIR.DS.$this->params["item"].DS.'tmpfile'."\n" ;
         foreach ($pipeline["steps"] as $hash => $stepDetails) {
             echo "Executing step id $hash\n" ;
-            $stepRunner->stepRunner($stepDetails); }
-        echo PIPEDIR.DS.$this->params["item"].DS.'tmpfile'."\n" ;
-        for ($i = 0; $i < 15; $i++ ) {
-            sleep(1);
-            echo "write $i This many lines: $i , Time: ".time()."\n" ; }
+            $stepRunner->stepRunner($stepDetails) ;
+            echo "\n\n" ; }
         echo "SUCCESSFUL EXECUTION\n";
         return $this->saveRunLog();
     }
@@ -145,7 +143,6 @@ class PipeRunnerAllOS extends Base {
     public function saveRunPlaceHolder() {
         $run = $this->getBuildNumber("next") ;
         $file = $this->params["pipe-dir"].DS.$this->params["item"].DS.'history'.DS.$run ;
-        error_log("file: ".$file) ;
         $buildOut = $this->getExecutionOutput() ;
         $top = "THIS IS A PLACEHOLDER TO SHOW A STARTED OUTPUT FILE\n\n" ;
         file_put_contents($file, $top.$buildOut) ;
@@ -157,7 +154,6 @@ class PipeRunnerAllOS extends Base {
     public function saveRunLog() {
         $file = PIPEDIR.DS.$this->params["item"].DS.'history'.DS.$this->params["run-id"] ;
         $buildOut = $this->getExecutionOutput() ;
-        error_log("box: ".$buildOut) ;
         file_put_contents($file, $buildOut) ;
         if (file_exists($file)){
             $f = PIPEDIR.DS.$this->params["item"].DS.$this->params["run-id"] ;
