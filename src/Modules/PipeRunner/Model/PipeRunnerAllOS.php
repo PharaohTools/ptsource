@@ -94,15 +94,11 @@ class PipeRunnerAllOS extends Base {
         $stepRunnerFactory = new \Model\StepRunner() ;
         $stepRunner = $stepRunnerFactory->getModel($this->params) ;
 
-
-
         foreach ($buildSteps as $step) {
-
+            var_dump($step) ;
             $stepRunner->stepRunner($step);
             $step ;
         }
-        $buildSteps = array() ; // get build steps
-
 
         echo PIPEDIR.DS.$this->params["item"].DS.'tmpfile'."\n" ;
         for ($i = 0; $i < 15; $i++ ) {
