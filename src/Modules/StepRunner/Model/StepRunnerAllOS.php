@@ -29,12 +29,12 @@ class StepRunnerAllOS extends BaseLinuxApp {
             $logging->log ("No Module {$stepModule} is installed", $this->getModuleName() ) ;
             return false ;  }
         // fire up the model for it
-        $stepFactoryClass = '\Model\\'.$stepModule();
+        $stepFactoryClass = '\Model\\'.$stepModule;
         $stepFactory = new $stepFactoryClass() ;
         $stepModel = $stepFactory->getModel($this->params);
         $modStepTypes = $stepModel->getStepTypes() ;
         // if type not supported return false
-        if (!in_array($step["type"], $modStepTypes)) {
+        if (!in_array($step["steptype"], $modStepTypes)) {
             $logging->log ("Module {$stepModule} does not support step type", $this->getModuleName() ) ;
             return false ; } ;
         // send step data to method in question
