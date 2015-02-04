@@ -60,6 +60,7 @@ class BuildConfigureAllOS extends Base {
         // @todo  dunno y i have to force thi sparam
         $pipelineSaver->params["item"] = $this->params["item"];
         $pipelineSaver->savePipeline(array("type" => "Defaults", "data" => $data ));
+        $pipelineSaver->savePipeline(array("type" => "Steps", "data" => $this->params["steps"] ));
         return true ;
     }
 
