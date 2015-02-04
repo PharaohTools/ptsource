@@ -23,11 +23,11 @@ class PHPScriptLinuxUnix extends Base {
             "phpscriptdata" => array(
                 "type" => "textarea",
                 "name" => "PHPScript Data",
-                "slug" => "phpscript_data" ),
+                "slug" => "data" ),
             "phpscriptscript" => array(
                 "type" => "text",
                 "name" => "PHPScript Script",
-                "slug" => "phpscript_script" ),
+                "slug" => "script" ),
         );
 
         return $ff ;
