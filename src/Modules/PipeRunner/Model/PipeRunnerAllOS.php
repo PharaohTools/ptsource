@@ -92,7 +92,7 @@ class PipeRunnerAllOS extends Base {
         $stepRunnerFactory = new \Model\StepRunner() ;
         $stepRunner = $stepRunnerFactory->getModel($this->params) ;
         $pipeline = $this->getPipeline();
-        echo PIPEDIR.DS.$this->params["item"].DS.'tmpfile'."\n" ;
+        echo PIPEDIR.DS.$this->params["item"].DS.'tmpfile'."\n\n" ;
         foreach ($pipeline["steps"] as $hash => $stepDetails) {
             echo "Executing step id $hash\n" ;
             $stepRunner->stepRunner($stepDetails) ;
