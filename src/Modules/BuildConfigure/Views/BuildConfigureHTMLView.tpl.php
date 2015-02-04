@@ -90,13 +90,14 @@
                     </div>
 
                     <?php
-                        foreach ($pageVars["data"]["pipeline"]["steps"] as $one_build_step) {
+                        foreach ($pageVars["data"]["pipeline"]["steps"] as $hash => $one_build_step) {
                             echo '<div class="form-group">' ;
-                            echo '  <label for="'.$one_build_step["hash"].'" class="col-sm-2 control-label text-left">'.$one_build_step["title"].'</label>' ;
+                            echo '  <label for="steps['.$hash.']["shell_data"]" class="col-sm-2 control-label text-left">'.$one_build_step["title"].'</label>' ;
                             echo '  <div class="col-sm-10">' ;
-                            echo '      <p>'.$one_build_step["title"].'</p>';
-                            echo '      <p>Step Type: '.$one_build_step["type"]."</p>";
-                            echo '      <textarea id="'.$one_build_step["hash"].'" name="'.$one_build_step["hash"].'" class="form-control">'.$one_build_step["value"].'</textarea>';
+                            echo '      <p><strong>Hash: </strong>'.$hash.'</p>';
+                            echo '      <p><strong>Module: </strong>'.$one_build_step["module"].'</p>';
+                            echo '      <p><strong>Step Type: </strong>'.$one_build_step["steptype"].'</p>';
+                            echo '      <textarea id="steps['.$hash.']" name="steps['.$hash.']" value="'.$one_build_step["shell_data"].'" class="form-control"></textarea>';
                             echo '  </div>';
                             echo '</div>'; } ?>
 
