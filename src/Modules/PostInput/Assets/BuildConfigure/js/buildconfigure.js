@@ -20,7 +20,7 @@ function changeModule(element) {
 }
 
 function changeStepTypeSelector(element) {
-    html  = '<a class="btn btn-info" onclick="displayStepField()">Add Step</a>' ;
+    html = '<a class="btn btn-info" onclick="displayStepField()">Add Step</a>' ;
     $('#new_step_button_wrap').html(html);
 }
 
@@ -34,12 +34,18 @@ function displayStepField() {
 
     if (field.type == "textarea") {
         html  = '<h4>'+field.name+'</h4>' ;
-        html += '<textarea id="'+field.slug+"_"+hash+'" name="'+field.slug+"_"+hash+'">' ;
-        html += '</textarea>' ; }
+        html += '<input type="hidden" id="steps['+hash+'][module]" name="steps['+hash+'][module]" value="'+module+'" />' ;
+        html += '<input type="hidden" id="steps['+hash+'][steptype]" name="steps['+hash+'][steptype]" value="'+steptype+'" />' ;
+        html += '<textarea id="steps['+hash+']['+field.slug+']"' ;
+        html += ' name="steps['+hash+']['+field.slug+']" >' ;
+        html += '</textarea>' ;
+    }
 
     else if (field.type == "text") {
         html  = '<h4>'+field.name+'</h4>' ;
-        html += '<input type="text" id="'+field.slug+"_"+hash+'" name="'+field.slug+"_"+hash+'" />' ; }
+        html += '<input type="hidden" id="steps['+hash+'][module]" name="steps['+hash+'][module]" value="'+module+'" />' ;
+        html += '<input type="hidden" id="steps['+hash+'][steptype]" name="steps['+hash+'][steptype]" value="'+steptype+'" />' ;
+        html += "<input type='text' id='steps[" +'"'+hash+'"'+ ']["'+field.slug+'"]'+"' name='steps[" +'"'+hash+'"'+ '"]["'+field.slug+'"]'+' />' ; }
 
     $('#new_step_wrap').html(html);
 }
