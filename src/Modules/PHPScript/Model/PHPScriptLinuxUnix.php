@@ -36,17 +36,13 @@ class PHPScriptLinuxUnix extends Base {
     public function executeStep($step) {
         $loggingFactory = new \Model\Logging();
         $logging = $loggingFactory->getModel($this->params);
-
-        $phpscriptDataSpellings = array("phpscriptdata");
-        $phpscriptScriptSpellings = array("phpscriptfile");
-
-        if (in_array($step["type"], $phpscriptDataSpellings)) {
+        if ( $step["steptype"] == "phpscriptdata") {
             $logging->log("Running PHPScript from Data...") ;
             $this->executeAsPHPData($step["data"]) ;
             $xc = $this->executeAndLoad("$?");
             if ($xc !== 0) { return false ; }
             return true ; }
-        else if (in_array($step["type"], $phpscriptScriptSpellings)) {
+        else if ($step["steptype"] == "phpscriptfile") {
             $logging->log("Running PHPScript from Script...") ;
             $this->executeAsPHPScript($step["data"]) ;
             $xc = $this->executeAndLoad("$?");
