@@ -33,24 +33,27 @@ function displayStepField() {
     hash = "1234567890" ;
     hash = Math.random() ;
     hash = hash * 10000000000 ;
-    alert(hash);
 
     if (field.type == "textarea") {
-        html  = '<h4>'+field.name+'</h4>' ;
-        html += '<input type="hidden" id="steps['+hash+'][module]" name="steps['+hash+'][module]" value="'+module+'" />' ;
-        html += '<input type="hidden" id="steps['+hash+'][steptype]" name="steps['+hash+'][steptype]" value="'+steptype+'" />' ;
-        html += '<textarea id="steps['+hash+']['+field.slug+']"' ;
+        html  = '<div class="col-sm-10">' ;
+        html += '  <h4>'+field.name+'</h4>' ;
+        html += '  <input type="hidden" id="steps['+hash+'][module]" name="steps['+hash+'][module]" value="'+module+'" />' ;
+        html += '  <input type="hidden" id="steps['+hash+'][steptype]" name="steps['+hash+'][steptype]" value="'+steptype+'" />' ;
+        html += '  <textarea id="steps['+hash+']['+field.slug+']"' ;
         html += ' name="steps['+hash+']['+field.slug+']" >' ;
-        html += '</textarea>' ;
-        html += '<a class="btn btn-warning" onclick="deleteStepField(hash)">Delete Step</a>' ;
+        html += '  </textarea>' ;
+        html += '  <a class="btn btn-warning" onclick="deleteStepField(hash)">Delete Step</a>' ;
+        html += '</div>' ;
     }
 
     else if (field.type == "text") {
-        html  = '<h4>'+field.name+'</h4>' ;
-        html += '<input type="hidden" id="steps['+hash+'][module]" name="steps['+hash+'][module]" value="'+module+'" />' ;
-        html += '<input type="hidden" id="steps['+hash+'][steptype]" name="steps['+hash+'][steptype]" value="'+steptype+'" />' ;
-        html += "<input type='text' id='steps[" +'"'+hash+'"'+ ']["'+field.slug+'"]'+"' name='steps[" +'"'+hash+'"'+ '"]["'+field.slug+'"]'+' />' ;
-        html += '<a class="btn btn-warning" onclick="deleteStepField(hash)">Delete Step</a>' ; }
+        html  = '<div class="col-sm-10">' ;
+        html += '  <h4>'+field.name+'</h4>' ;
+        html += '  <input type="hidden" id="steps['+hash+'][module]" name="steps['+hash+'][module]" value="'+module+'" />' ;
+        html += '  <input type="hidden" id="steps['+hash+'][steptype]" name="steps['+hash+'][steptype]" value="'+steptype+'" />' ;
+        html += "  <input type='text' id='steps[" +'"'+hash+'"'+ ']["'+field.slug+'"]'+"' name='steps[" +'"'+hash+'"'+ '"]["'+field.slug+'"]'+' />' ;
+        html += '  <a class="btn btn-warning" onclick="deleteStepField(hash)">Delete Step</a>' ;
+        html += '</div>' ; }
 
     $('#new_step_wrap').html(html);
 }
