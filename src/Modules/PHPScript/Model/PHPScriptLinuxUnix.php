@@ -39,14 +39,10 @@ class PHPScriptLinuxUnix extends Base {
         if ( $step["steptype"] == "phpscriptdata") {
             $logging->log("Running PHPScript from Data...") ;
             $this->executeAsPHPData($step["data"]) ;
-            $xc = $this->executeAndLoad("$?");
-            if ($xc !== 0) { return false ; }
             return true ; }
         else if ($step["steptype"] == "phpscriptfile") {
             $logging->log("Running PHPScript from Script...") ;
             $this->executeAsPHPScript($step["data"]) ;
-            $xc = $this->executeAndLoad("$?");
-            if ($xc !== 0) { return false ; }
             return true ; }
         else {
             $logging->log("Unrecognised Build Step Type {$step["type"]} specified in PHPScript Module") ;
