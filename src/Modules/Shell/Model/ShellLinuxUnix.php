@@ -37,15 +37,12 @@ class ShellLinuxUnix extends Base {
         $logging = $loggingFactory->getModel($this->params);
         if ( $step["steptype"] == "shelldata") {
             $logging->log("Running Shell from Data...") ;
-            $this->executeAsShell($step["data"]) ;
-            $xc = $this->executeAndLoad("$?");
-            if ($xc !== 0) { return false ; }
-            return true ; }
+            $this->executeAndOutput($step["data"]) ;
+            $rc = $this->executeAndGetReturnCode('$?') ;
+            return $rc ; }
         else if ( $step["steptype"] == "shellscript") {
             $logging->log("Running Shell from Script...") ;
             $this->executeAsShell($step["data"]) ;
-            $xc = $this->executeAndLoad("$?");
-            if ($xc !== 0) { return false ; }
             return true ; }
         else {
             $logging->log("Unrecognised Build Step Type {$step["type"]} specified in Shell Module") ;
