@@ -93,11 +93,18 @@ class PipeRunnerAllOS extends Base {
         $stepRunner = $stepRunnerFactory->getModel($this->params) ;
         $pipeline = $this->getPipeline();
         echo PIPEDIR.DS.$this->params["item"].DS.'tmpfile'."\n\n" ;
+        $ressys = array() ;
         foreach ($pipeline["steps"] as $hash => $stepDetails) {
             echo "Executing step id $hash\n" ;
-            $stepRunner->stepRunner($stepDetails) ;
-            echo "\n\n" ; }
-        echo "SUCCESSFUL EXECUTION\n";
+            $res = $stepRunner->stepRunner($stepDetails) ;
+            $evar  = "Step execution " ;
+            $evar .= ($res) ? "Success" : "Failed" ;
+            $evar .= ", ID $hash" ;
+            echo $evar."\n\n" ;
+            $ressys[] = $res ;
+            if ($res==false) break ; }
+        $ret = (in_array(false, $ressys)) ? "FAILED EXECUTION\n" : "SUCCESSFUL EXECUTION\n" ;
+        echo $ret;
         return $this->saveRunLog();
     }
 
