@@ -13,6 +13,8 @@ class Base {
     protected $installUserName;
     protected $installUserHomeDir;
 
+    protected $salt;
+
     protected $programNameMachine ;
     protected $programDataFolder;
     protected $startDirectory;
@@ -38,6 +40,7 @@ class Base {
         $this->autopilotDefiner = $this->getModuleName() ;
         $this->setCmdLineParams($params);
         $this->setRequestParams();
+        $this->salt='QlkjfpoiZfsdluyvposdfMszZi';
     }
 
     protected function populateTitle() {
