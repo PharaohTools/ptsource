@@ -99,14 +99,10 @@ function submit_registration() {
         dataType: "json",
         success: function(result)
         {
-            if(result.status == true){
-                window.location.assign($('#base_url').val() + '/index.php?control=Index&action=show');
-            }
-            else{
-                $('#login_error_msg').html('&nbsp;&nbsp;'+result.msg);
-                $('#login_username').focus();
-                return;
-            }
+
+                $('#'+result.id).html('&nbsp;&nbsp;'+result.msg);
+                $('#'+result.id).focus();
+
 
         }
     });
