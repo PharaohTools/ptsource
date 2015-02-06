@@ -1,0 +1,1 @@
+[{"username":"test1","email":"test@gmail.com","password":"8f2a915e4291db6e7a20917902c84928"},{"username":"test2","email":"test2@gmail.com","password":"8f2a915e4291db6e7a20917902c84928"},{"username":"test3","email":"test3@gmail.com","password":"8f2a915e4291db6e7a20917902c84928"},{"username":"test4","email":"test4@gmail.com","password":"8f2a915e4291db6e7a20917902c84928"}]
