@@ -94,6 +94,48 @@ class SignupAllOS extends Base {
     }
 
 
+
+    public function registrationSubmit(){
+
+        $registrationData=array('username'=>$_POST['username'],'email'=>$_POST['email'],'password'=>md5($this->salt.$_POST['password']));
+        $myfile = fopen(__DIR__."/../Data/users.txt", "r") or die("Unable to open file!");
+        $oldData='';
+        while(!feof($myfile))
+            $oldData.=fgets($myfile);
+        fclose($myfile);
+        $oldData=json_decode($oldData);
+
+        foreach($oldData as $data)
+        {
+            if($data->username==$_POST['username'])
+            {
+                echo json_encode(array("status" => FALSE,"id"=>"login_username_alert", "msg" => "User Name Already Exist!!!"));
+                return;
+            }
+
+            if($data->email==$_POST['email'])
+            {
+                echo json_encode(array("status" => FALSE,"id"=>"login_email_alert", "msg" => "Email Already Exist!!!"));
+                return;
+            }
+
+        }
+
+        $myfile = fopen(__DIR__."/../Data/users.txt", "w") or die("Unable to open file!");
+        if($oldData==null) {
+            fwrite($myfile, json_encode(array($registrationData)));
+        }
+        else{
+            fwrite($myfile, json_encode(array_merge($oldData, array($registrationData))));
+        }
+       // print_r(array_merge($oldData, array($registrationData)));
+        fclose($myfile);
+        echo json_encode(array("status" => TRUE, "id"=>"registration_error_msg", "msg" => "Registration Successful!!"));
+        return;
+    }
+
+
+
     public function allLoginInfoDestroy() {
         session_destroy();
         // return array ("type"=>"control", "control"=>"Signup");
