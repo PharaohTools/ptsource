@@ -45,7 +45,7 @@
                     <h5 class="text-uppercase text-light" style="margin-top: 15px;">
                         Registration
                     </h5>
-                    <p style="color: #ff6312; margin-left: 137px;" id="login_error_msg"></p>
+                    <p style="color: #ff6312; margin-left: 137px;" id="registration_error_msg"></p>
                     <form class="form-horizontal custom-form">
                         <div class="form-group">
                             <label for="login_username" class="col-sm-2 control-label text-left">User Name</label>
