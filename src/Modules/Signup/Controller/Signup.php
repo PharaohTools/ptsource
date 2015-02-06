@@ -24,12 +24,18 @@ class Signup extends Base
         if ($pageVars["route"]["action"] == "registration") {
             $this->content["data"] = "registration";
         }
+
+        if ($pageVars["route"]["action"] == "registration-submit") {
+            return $thisModel->registrationSubmit();
+        }
+
         if ($pageVars["route"]["action"] == "login-status") {
             return $thisModel->checkLoginStatus();
         }
         if ($pageVars["route"]["action"] == "login-submit") {
             return $thisModel->checkLogin();
         }
+
         if ($pageVars["route"]["action"] == "logout") {
             $thisModel->allLoginInfoDestroy();
         }
