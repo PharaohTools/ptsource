@@ -127,7 +127,7 @@ class PipeRunnerAllOS extends Base {
             $build = (int) $build ;
             if ($build > $highest) {
                 $highest = $build ; } }
-        $ret = ($nextorlast == "next") ? $highest + 2 : $highest + 1 ;
+        $ret = ($nextorlast == "next") ? $highest + 1 : $highest ;
         return $ret ;
     }
 
@@ -149,10 +149,14 @@ class PipeRunnerAllOS extends Base {
 
     public function saveRunPlaceHolder() {
         $run = $this->getBuildNumber("next") ;
+        $folder = $this->params["pipe-dir"].DS.$this->params["item"].DS.'history';
+		if(!file_exists($folder))
+			mkdir($folder, 0777);
         $file = $this->params["pipe-dir"].DS.$this->params["item"].DS.'history'.DS.$run ;
         $buildOut = $this->getExecutionOutput() ;
         $top = "THIS IS A PLACEHOLDER TO SHOW A STARTED OUTPUT FILE\n\n" ;
-        file_put_contents($file, $top.$buildOut) ;
+		file_put_contents($file, "$top.$buildOut");
+		//{ echo "done"; }
         if (file_exists($file)){
             return $run ; }
         return false ;

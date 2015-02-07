@@ -129,7 +129,7 @@
                     <input type="hidden" id="pid" value="<?= $pageVars["pipex"] ;?>" />
                     <?php
                     if ($pageVars["route"]["action"] == "summary") {
-                        echo '<input type="hidden" id="run-id" value="'.$pageVars["data"]["historic_build"]["run-id"].' />' ; }
+                        echo '<input type="hidden" id="run-id" value="'.$pageVars["data"]["historic_build"]["run-id"].'" />' ; }
                     ?>
 
                 </form>
