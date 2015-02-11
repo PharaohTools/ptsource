@@ -22,7 +22,7 @@
                 <a href="/index.php?control=BuildConfigure&action=new" class="list-group-item">
                     <i class="fa fa-user"></i> New Pipeline
                 </a>
-                <a href="#" class="list-group-item">
+                <a href="/index.php?control=BuildList&action=show" class="list-group-item">
                     <i class="fa fa-user"></i> List Pipelines
                 </a>
                 <!--
@@ -93,7 +93,8 @@
                                             <td>
                                                 <?php
                                                 if ($pipelineDetails["last_success"] != false) {
-                                                    echo '20:13:55 01/02/2015' ; }
+                                                    echo date('Y-m-d \<\b\r\> h:i:s', $pipelineDetails["last_success"]) ; 
+													echo ' #('.$pipelineDetails["last_success_build"].')'; }
                                                 else {
                                                     echo 'N/A' ; }
                                                 ?>
@@ -101,7 +102,8 @@
                                             <td>
                                                 <?php
                                                 if ($pipelineDetails["last_fail"] != false) {
-                                                    echo '14:13:55 21/01/2015' ; }
+                                                    echo date('Y-m-d \<\b\r\> h:i:s', $pipelineDetails["last_fail"]) ; 
+													echo ' #('.$pipelineDetails["last_fail_build"].')'; }
                                                 else {
                                                     echo 'N/A' ; }
                                                 ?>
@@ -109,7 +111,7 @@
                                             <td>
                                                 <?php
                                                 if ($pipelineDetails["duration"] != false) {
-                                                    echo '134 seconds' ; }
+                                                    echo $pipelineDetails["duration"].' seconds' ; }
                                                 else {
                                                     echo 'N/A' ; }
                                                 ?>

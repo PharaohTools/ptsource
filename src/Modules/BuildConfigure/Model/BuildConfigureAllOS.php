@@ -52,7 +52,8 @@ class BuildConfigureAllOS extends Base {
             "project-name" => $this->params["project-name"],
             "project-slug" => $this->params["project-slug"],
             "project-description" => $this->params["project-description"],
-            "default-scm-url" => $this->params["default-scm-url"] ) ;
+            "default-scm-url" => $this->params["default-scm-url"],
+			"email-id" => $this->params["email-id"] ) ;
         if ($this->params["creation"] == "yes") {
             $pipelineDefault = $pipelineFactory->getModel($this->params);
             $pipelineDefault->createPipeline($this->params["project-slug"]) ; }

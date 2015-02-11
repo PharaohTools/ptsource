@@ -37,9 +37,11 @@ class ShellLinuxUnix extends Base {
         $logging = $loggingFactory->getModel($this->params);
         if ( $step["steptype"] == "shelldata") {
             $logging->log("Running Shell from Data...") ;
-            $this->executeAndOutput($step["data"]) ;
-            $rc = $this->executeAndGetReturnCode('$?') ;
-            return $rc ; }
+			$output = array();
+			$rc = -1;
+			exec($step["data"], $output, $rc);
+			foreach ($output as $val) { echo $val.'<br />'; }
+            return (intval($rc) === 0) ? true : false ; }
         else if ( $step["steptype"] == "shellscript") {
             $logging->log("Running Shell from Script...") ;
             $this->executeAsShell($step["data"]) ;

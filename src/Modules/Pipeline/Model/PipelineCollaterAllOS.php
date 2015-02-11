@@ -29,8 +29,15 @@ class PipelineCollaterAllOS extends Base {
     }
 
     private function getStatuses() {
-        $statuses = array(
+		$successStatus = $this->getLastSuccess();
+		$failStatus = $this->getLastFail();
+		$statuses = array(
             "last_status" => $this->getLastStatus(),
+			"last_success" => $successStatus['time'],
+			"last_fail" => $failStatus['time'],
+			"duration" =>  $this->getDuration(),
+            "last_success_build" =>  $successStatus['build'],
+            "last_fail_build" =>  $failStatus['build'],
             "has_parents" => true,
             "has_children" => true ) ;
         return $statuses ;
@@ -38,19 +45,61 @@ class PipelineCollaterAllOS extends Base {
 
     private function getLastStatus() {
         $allRuns = scandir(PIPEDIR.DS.$this->params["item"].DS.'history') ;
-        foreach($allRuns as &$run) {
-            if (!is_int($run)) { unset($run) ; } }
-        $runId = max($allRuns) ;
-        $out = $this->getRunOutput($runId) ;
-        $lastStatus = strpos($out, "SUCCESSFUL EXECUTION") ;
-        return (is_int($lastStatus)) ? true : false ;
+        foreach($allRuns as $i=>$run) {
+            if (is_numeric($allRuns[$i])) { intval($allRuns[$i]) ; } else { unset($allRuns[$i]) ; } }
+     	$runId = max($allRuns) ;
+        return $this->getRunOutput($runId) ;
+    }
+
+    private function getLastSuccess() {
+        $file = PIPEDIR.DS.$this->params["item"].DS.'historyIndex';
+        if ($historyIndex = file_get_contents($file)) {
+			$historyIndex = json_decode($historyIndex, true);
+			krsort($historyIndex);
+			foreach ($historyIndex as $run=>$val) {
+				if ($historyIndex[$run]['status'] == "SUCCESS") {
+					return array('time' => $historyIndex[$run]['end'], 'build' => $run) ; } } }
+        return array('time' => false, 'build' => 0) ;
+    }
+
+    private function getLastFail() {
+        $file = PIPEDIR.DS.$this->params["item"].DS.'historyIndex';
+        if ($historyIndex = file_get_contents($file)) {
+			$historyIndex = json_decode($historyIndex, true);
+			krsort($historyIndex);
+			foreach ($historyIndex as $run=>$val) {
+				if ($historyIndex[$run]['status'] == "FAIL") {
+					return array('time' => $historyIndex[$run]['end'], 'build' => $run) ; } } }
+        return array('time' => false, 'build' => 0) ;
+    }
+
+    private function getDuration() {
+        $file = PIPEDIR.DS.$this->params["item"].DS.'historyIndex';
+        if ($historyIndex = file_get_contents($file)) {
+			$historyIndex = json_decode($historyIndex, true);
+			krsort($historyIndex);
+			foreach ($historyIndex as $run=>$val) {
+				if (isset($historyIndex[$run]['status'])) {
+					return $historyIndex[$run]['end']-$historyIndex[$run]['start']; } } }
+        return false ;
+    }
+
+    private function getBuild() {
+        $file = PIPEDIR.DS.$this->params["item"].DS.'historyIndex';
+        if ($historyIndex = file_get_contents($file)) {
+			$historyIndex = json_decode($historyIndex, true);
+			krsort($historyIndex);
+			foreach ($historyIndex as $run=>$val) {
+				if (isset($historyIndex[$run]['status'])) {
+					return $run; } } }
+        return false ;
     }
 
     private function getRunOutput($runId) {
         $outFile = PIPEDIR.DS.$this->params["item"].DS.'history'.DS.$runId ;
         $out = file_get_contents($outFile) ;
         $lastStatus = strpos($out, "SUCCESSFUL EXECUTION") ;
-        return (is_int($lastStatus)) ? true : false ;
+        return ($lastStatus) ? true : false ;
     }
 
     private function getDefaults() {

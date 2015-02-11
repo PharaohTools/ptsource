@@ -83,6 +83,13 @@
                         </div>
                     </div>
 
+					<div class="form-group">
+                        <label for="email-id" class="col-sm-2 control-label text-left">E-mail <small>For Notification</small></label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="email-id" name="email-id" placeholder="E-mail" value="<?php echo $pageVars["data"]["pipeline"]["email-id"] ; ?>" />
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <div class="col-sm-10">
                             <h3>Build Steps</h3>

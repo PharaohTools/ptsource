@@ -36,7 +36,7 @@ class StepRunnerAllOS extends BaseLinuxApp {
         // if type not supported return false
         if (!in_array($step["steptype"], $modStepTypes)) {
             $logging->log ("Module {$stepModule} does not support step type", $this->getModuleName() ) ;
-            return false ; } ;
+            return false ; }
         echo "Module {$step["module"]}, step type {$step["steptype"]}\n" ;
         // send step data to method in question
         $stepResult = $stepModel->executeStep($step) ;

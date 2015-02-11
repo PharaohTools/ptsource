@@ -48,9 +48,43 @@ class PipeRunnerAllOS extends Base {
         // ensure build dir exists
         // run pipe fork command
         $run = $this->saveRunPlaceHolder();
+        $this->setRunStartTime($run);
         // save run
-        $this->runPipeForkCommand($run);
+		$this->runPipeForkCommand($run);
         return $run ;
+    }
+
+    public function apiRunPipe() {
+		$stepRunnerFactory = new \Model\StepRunner() ;
+        $stepRunner = $stepRunnerFactory->getModel($this->params) ;
+        $pipeline = $this->getPipeline();
+        $ressys = array() ;
+        foreach ($pipeline["steps"] as $hash => $stepDetails) { $hash = $hash; }
+		if (md5($hash) == $this->params["accesscode"])
+        	return $this->runPipe();
+		else
+			echo "Access Failed";
+		die();
+    }
+
+    private function setRunStartTime($run) {
+		$file = PIPEDIR.DS.$this->params["item"].DS.'historyIndex';
+        if($historyIndex = file_get_contents($file))
+			$historyIndex = json_decode($historyIndex, true);
+		$historyIndex[intval($run)]['start'] = time();
+        $historyIndex = json_encode($historyIndex);
+		file_put_contents($file, $historyIndex) ;
+    }
+
+    private function setRunEndTime($status) { 
+		$run = $this->params["run-id"];
+		$file = PIPEDIR.DS.$this->params["item"].DS.'historyIndex';
+        if($historyIndex = file_get_contents($file))
+			$historyIndex = json_decode($historyIndex, true);
+		$historyIndex[intval($run)]['end'] = time();
+		$historyIndex[intval($run)]['status'] = $status;
+        $historyIndex = json_encode($historyIndex);
+		file_put_contents($file, $historyIndex) ;
     }
 
     private function setPipeDir() {
@@ -104,8 +138,23 @@ class PipeRunnerAllOS extends Base {
             $ressys[] = $res ;
             if ($res==false) break ; }
         $ret = (in_array(false, $ressys)) ? "FAILED EXECUTION\n" : "SUCCESSFUL EXECUTION\n" ;
+        $status = (in_array(false, $ressys)) ? "FAIL" : "SUCCESS" ;
         echo $ret;
+		$this->setRunEndTime($status);
+        $this->sendEmail($status);
         return $this->saveRunLog();
+    }
+
+    private function sendEmail($status) {
+		$run = $this->params["run-id"];
+        $file = PIPEDIR.DS.$this->params["item"].DS.'defaults';
+        $defaults = file_get_contents($file) ;
+		$defaults = json_decode($defaults);
+		$subject = $defaults["project-name"]." "."build-".$run;
+		$message = $status;
+		$to = $defaults["email-id"];
+		mail($to, $subject, $message);
+        return;
     }
 
     private function getExecutionOutput() {
@@ -116,18 +165,18 @@ class PipeRunnerAllOS extends Base {
 
     private function getExecutionStatus() {
         $o = $this->getExecutionOutput() ;
-        if (strpos($o, "SUCCESSFUL EXECUTION") !== false) { return true ; }
+        if (strpos($o, "SUCCESSFUL EXECUTION") !== false || (strpos($o, "FAILED EXECUTION") !== false)) { return true ; }
         return false ;
     }
 
     private function getBuildNumber($nextorlast = "next") {
         $builds = $this->getOldBuilds() ;
-        $highest = 1 ;
+        $highest = 0 ;
         foreach ($builds as $build) {
             $build = (int) $build ;
             if ($build > $highest) {
                 $highest = $build ; } }
-        $ret = ($nextorlast == "next") ? $highest + 2 : $highest + 1 ;
+		$ret = ($nextorlast == "next") ? $highest + 1 : $highest ;
         return $ret ;
     }
 
@@ -152,8 +201,8 @@ class PipeRunnerAllOS extends Base {
         $file = $this->params["pipe-dir"].DS.$this->params["item"].DS.'history'.DS.$run ;
         $buildOut = $this->getExecutionOutput() ;
         $top = "THIS IS A PLACEHOLDER TO SHOW A STARTED OUTPUT FILE\n\n" ;
-        file_put_contents($file, $top.$buildOut) ;
-        if (file_exists($file)){
+		file_put_contents($file, "$top.$buildOut");
+		if (file_exists($file)){
             return $run ; }
         return false ;
     }
@@ -165,8 +214,7 @@ class PipeRunnerAllOS extends Base {
         if (file_exists($file)){
             $f = PIPEDIR.DS.$this->params["item"].DS.$this->params["run-id"] ;
             self::executeAndOutput("rm -f $f", "Removing temp log file");
-            return $this->params["run-id"] ; }
+			return $this->params["run-id"] ; }
         return false ;
     }
-
 }
