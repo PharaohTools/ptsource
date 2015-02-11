@@ -22,7 +22,7 @@
                 <a href="/index.php?control=BuildConfigure&action=new" class="list-group-item">
                     <i class="fa fa-user"></i> New Pipeline
                 </a>
-                <a href="#" class="list-group-item">
+                <a href="/index.php?control=BuildList&action=show" class="list-group-item">
                     <i class="fa fa-user"></i> List Pipelines
                 </a>
                 <!--

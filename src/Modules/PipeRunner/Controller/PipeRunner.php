@@ -22,6 +22,8 @@ class PipeRunner extends Base {
             return array ("type"=>"view", "view"=>"pipeRunnerChild", "pageVars"=>$this->content); }
         if (in_array($pageVars["route"]["action"], array("start"))) {
             $this->content["pipex"] = $thisModel->runPipe(); }
+        if (in_array($pageVars["route"]["action"], array("apistart"))) {
+            $this->content["pipex"] = $thisModel->apiRunPipe(); }
         $this->content["data"] = $thisModel->getData();
         return array ("type"=>"view", "view"=>"pipeRunner", "pageVars"=>$this->content);
     }
