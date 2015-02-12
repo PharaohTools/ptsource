@@ -22,6 +22,17 @@ class BuilderAllOS extends Base {
         return $ret ;
     }
 
+    public function getBuilderSettings() {
+        $builders = $this->getBuilders();
+        // var_dump(1, $builders) ;
+        $ret = array() ;
+        foreach ($builders as $name => $builder) {
+            if (isset($builder["settings"]) && count($builder["settings"])>0) {
+                $ret[$name] = $builder ; } }
+        // var_dump(2, $ret) ;
+        return $ret ;
+    }
+
     public function getBuilder($module) {
         $builderFactory = new Builder();
         $builderCollater = $builderFactory->getModel($this->params, "BuilderCollater") ;
