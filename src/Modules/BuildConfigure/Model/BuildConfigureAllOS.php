@@ -17,6 +17,7 @@ class BuildConfigureAllOS extends Base {
     public function getData() {
         $ret["pipeline"] = $this->getPipeline();
         $ret["builders"] = $this->getBuilders();
+        $ret["settings"] = $this->getBuilderSettings();
         $ret["fields"] = $this->getBuilderFormFields();
         return $ret ;
     }
@@ -35,6 +36,12 @@ class BuildConfigureAllOS extends Base {
         $builderFactory = new \Model\Builder() ;
         $builder = $builderFactory->getModel($this->params);
         return $builder->getBuilders();
+    }
+
+    public function getBuilderSettings() {
+        $builderFactory = new \Model\Builder() ;
+        $builder = $builderFactory->getModel($this->params);
+        return $builder->getBuilderSettings();
     }
 
     public function getBuilderFormFields() {
