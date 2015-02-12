@@ -2,6 +2,6 @@
 
 Namespace Model;
 
-class Shell extends BaseModelFactory {
+class TriggerRemote extends BaseModelFactory {
 
 }

@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class ShellLinuxUnix extends Base {
+class TriggerRemoteLinuxUnix extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -14,20 +14,24 @@ class ShellLinuxUnix extends Base {
     // Model Group
     public $modelGroup = array("Default") ;
 
-    public function getStepTypes() {
-        return array_keys($this->getFormFields());
+    public function getSettingTypes() {
+        return array_keys($this->getSettingFormFields());
     }
 
-    public function getFormFields() {
+    public function getSettingFormFields() {
         $ff = array(
-            "shelldata" => array(
-                "type" => "textarea",
-                "name" => "Shell Data",
-                "slug" => "data" ),
-            "shellscript" => array(
-                "type" => "text",
-                "name" => "Shell Script",
-                "slug" => "script" ),
+            "trigger-remote-http" => array(
+                "type" => "boolean",
+                "name" => "Allow Trigger By Remote HTTP?",
+                "optional" => true ),
+            "trigger-remote-cli" => array(
+                "type" => "boolean",
+                "name" => "Allow Trigger By CLI?",
+                "optional" => true ),
+            "trigger-web" => array(
+                "type" => "boolean",
+                "name" => "Allow Trigger By Web Interface?",
+                "optional" => true ),
         );
         return $ff ;
     }
@@ -35,19 +39,19 @@ class ShellLinuxUnix extends Base {
     public function executeStep($step) {
         $loggingFactory = new \Model\Logging();
         $logging = $loggingFactory->getModel($this->params);
-        if ( $step["steptype"] == "shelldata") {
-            $logging->log("Running Shell from Data...") ;
+        if ( $step["steptype"] == "trigger-remote-data") {
+            $logging->log("Running TriggerRemote from Data...") ;
 			$output = array();
 			$rc = -1;
 			exec($step["data"], $output, $rc);
 			foreach ($output as $val) { echo $val.'<br />'; }
             return (intval($rc) === 0) ? true : false ; }
-        else if ( $step["steptype"] == "shellscript") {
-            $logging->log("Running Shell from Script...") ;
-            $this->executeAsShell($step["data"]) ;
+        else if ( $step["steptype"] == "trigger-remote-script") {
+            $logging->log("Running TriggerRemote from Script...") ;
+            $this->executeAsTriggerRemote($step["data"]) ;
             return true ; }
         else {
-            $logging->log("Unrecognised Build Step Type {$step["type"]} specified in Shell Module") ;
+            $logging->log("Unrecognised Build Step Type {$step["type"]} specified in TriggerRemote Module") ;
             return false ; }
     }
 

@@ -2,34 +2,38 @@
 
 Namespace Info;
 
-class ShellInfo extends CleopatraBase {
+class TriggerRemoteInfo extends CleopatraBase {
 
     public $hidden = false;
 
-    public $name = "Shell Provisioner Integration";
+    public $name = "TriggerRemote Provisioner Integration";
 
     public function _construct() {
         parent::__construct();
     }
 
     public function routesAvailable() {
-        return array( "Shell" => array_merge(parent::routesAvailable(), array("help") ) );
+        return array( "TriggerRemote" => array_merge(parent::routesAvailable(), array("help") ) );
     }
 
     public function routeAliases() {
-        return array("shell"=>"Shell");
+        return array("trigger-remote"=>"TriggerRemote");
     }
 
     public function buildSteps() {
-        return array("shellscript", "shellfile");
+        return array("trigger-remote-script", "trigger-remote-file");
+    }
+
+    public function buildSettings() {
+        return array("trigger-remote-script", "trigger-remote-file");
     }
 
     public function helpDefinition() {
        $help = <<<"HELPDATA"
-    This extension provides integration with Shell as a Build Step. It provides code
+    This extension provides integration with TriggerRemote as a Build Step. It provides code
     functionality, but no extra commands.
 
-    Shell
+    TriggerRemote
 
 HELPDATA;
       return $help ;
