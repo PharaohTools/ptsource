@@ -2,7 +2,7 @@
 
 Namespace Info;
 
-class PipelineInfo extends CleopatraBase {
+class PipelineInfo extends PTConfigureBase {
 
     public $hidden = true;
 

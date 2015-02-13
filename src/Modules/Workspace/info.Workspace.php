@@ -2,7 +2,7 @@
 
 Namespace Info;
 
-class WorkspaceInfo extends CleopatraBase {
+class WorkspaceInfo extends PTConfigureBase {
 
     public $hidden = false;
 
@@ -13,11 +13,11 @@ class WorkspaceInfo extends CleopatraBase {
     }
 
     public function routesAvailable() {
-      return array( "Workspace" => array("start", "service", "pipestatus", "show", "child", "history", "summary") );
+      return array( "Workspace" => array("show") );
     }
 
     public function routeAliases() {
-      return array("piperunner"=>"Workspace", "workspace"=>"Workspace");
+      return array("workspace"=>"Workspace");
     }
 
     public function configuration() {

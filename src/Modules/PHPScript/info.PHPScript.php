@@ -2,7 +2,7 @@
 
 Namespace Info;
 
-class PHPScriptInfo extends CleopatraBase {
+class PHPScriptInfo extends PTConfigureBase {
 
     public $hidden = false;
 

@@ -6,13 +6,13 @@ class StepRunner extends StepRunnerDefaultLinux {
 
     public $ostype = "Ubuntu 64 or 32 Bit from 10.04 onwards" ;
 
-    public function getCleopatraInitSSHData($stepRunnerFile) {
+    public function getPTConfigureInitSSHData($stepRunnerFile) {
 		$sshData = "" ;
         $sshData .= "echo ".$this->phlagrantfile->config["ssh"]["password"]." | sudo -S apt-get update -y\n" ;
         $sshData .= "echo ".$this->phlagrantfile->config["ssh"]["password"]." | sudo -S apt-get install -y php5 git\n" ;
-        $sshData .= "echo ".$this->phlagrantfile->config["ssh"]["password"]." | sudo -S rm -rf cleopatra\n" ;
-        $sshData .= "echo ".$this->phlagrantfile->config["ssh"]["password"]." | sudo -S git clone https://github.com/PharaohTools/cleopatra.git\n" ;
-        $sshData .= "echo ".$this->phlagrantfile->config["ssh"]["password"]." | sudo -S php cleopatra/install-silent\n" ;
+        $sshData .= "echo ".$this->phlagrantfile->config["ssh"]["password"]." | sudo -S rm -rf ptconfigure\n" ;
+        $sshData .= "echo ".$this->phlagrantfile->config["ssh"]["password"]." | sudo -S git clone https://github.com/PharaohTools/ptconfigure.git\n" ;
+        $sshData .= "echo ".$this->phlagrantfile->config["ssh"]["password"]." | sudo -S php ptconfigure/install-silent\n" ;
         return $sshData ;
     }
 
@@ -30,20 +30,20 @@ class StepRunner extends StepRunnerDefaultLinux {
         return $sshData ;
     }
 
-    public function getStandardCleopatraSSHData($stepRunnerFile, $params = array() ) {
+    public function getStandardPTConfigureSSHData($stepRunnerFile, $params = array() ) {
         $paramString = "" ;
         foreach ($params as $paramKey => $paramValue) { $paramString .= " --$paramKey=$paramValue" ;}
         $sshData = <<<"SSHDATA"
-echo {$this->phlagrantfile->config["ssh"]["password"]} | sudo -S cleopatra auto x --af={$stepRunnerFile}{$paramString}
+echo {$this->phlagrantfile->config["ssh"]["password"]} | sudo -S ptconfigure auto x --af={$stepRunnerFile}{$paramString}
 SSHDATA;
         return $sshData ;
     }
 
-    public function getStandardDapperstranoSSHData($stepRunnerFile, $params = array() ) {
+    public function getStandardPTDeploySSHData($stepRunnerFile, $params = array() ) {
         $paramString = "" ;
         foreach ($params as $paramKey => $paramValue) { $paramString .= " --$paramKey=$paramValue" ;}
         $sshData = <<<"SSHDATA"
-echo {$this->phlagrantfile->config["ssh"]["password"]} | sudo -S dapperstrano auto x --af={$stepRunnerFile}{$paramString}
+echo {$this->phlagrantfile->config["ssh"]["password"]} | sudo -S ptdeploy auto x --af={$stepRunnerFile}{$paramString}
 SSHDATA;
         return $sshData ;
     }

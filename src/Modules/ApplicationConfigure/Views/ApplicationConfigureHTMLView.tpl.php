@@ -26,7 +26,7 @@
         </div>
 
         <div class="col-sm-8 col-md-9 clearfix main-container">
-            <h2 class="text-uppercase text-light"><a href="/">Phrankinsense - Pharaoh Tools</a></h2>
+            <h2 class="text-uppercase text-light"><a href="/">PTBuild - Pharaoh Tools</a></h2>
             <div class="row clearfix no-margin">
                 <form class="form-horizontal custom-form">
 

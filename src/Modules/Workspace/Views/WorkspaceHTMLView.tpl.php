@@ -22,7 +22,7 @@
                 <a href="/index.php?control=BuildList&action=show" class="list-group-item">
                     <i class="fa fa-user"></i> All Pipelines
                 </a>
-                <a href="#" class="list-group-item">
+                <a href="/index.php?control=Workspace&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
                     <i class="fa fa-folder-open-o"></i> Workspace
                 </a>
                 <a href="#" class="list-group-item">
@@ -38,99 +38,47 @@
         </div>
 
         <div class="col-sm-8 col-md-9 clearfix main-container">
-            <h2 class="text-uppercase text-light"><a href="/"> Phrankinsense - Pharaoh Tools </a></h2>
+            <h2 class="text-uppercase text-light"><a href="/"> Build - Pharaoh Tools </a></h2>
             <div class="row clearfix no-margin">
                 <?php
                     switch ($pageVars["route"]["action"]) {
-                        case "start" :
-                            $stat = "Now Executing " ;
-                            break ;
-                        case "history" :
-                            $stat = "Historic Builds of " ;
-                            break ;
-                        case "summary" :
-                            $stat = "Execution Summary of " ;
+                        case "show" :
+                            $stat = "Workspace From " ;
                             break ; }
                 ?>
-                <h3><?= $stat; ?> Pipeline <?php echo $pageVars["data"]["pipeline"]["project-name"] ; ?>
-
-                    <?php
-                    if ($pageVars["route"]["action"] == "summary") {
-                        echo ', Run '.$pageVars["data"]["historic_build"]["run-id"] ; }
-                    ?>
-
-                    <i style="font-size: 18px;" class="fa fa-chevron-right"></i></h3>
-                <h5 class="text-uppercase text-light" style="margin-top: 15px;">
-                    <a href="/index.php?control=BuildHome&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>"></a>
-                </h5>
+                <h3><?= $stat; ?> Pipeline <?php echo $pageVars["data"]["pipeline"]["project-name"] ; ?></h3>
                 <?php
-                    if ($pageVars["route"]["action"] != "summary") {
-                        $act = '/index.php?control=Workspace&item='.$pageVars["data"]["pipeline"]["project-slug"].'&action=summary' ; }
-                    else {
-                        $act = '/index.php?control=Workspace&item='.$pageVars["data"]["pipeline"]["project-slug"].'&action=summary&run-id='.$pageVars["data"]["historic_build"]["run-id"]  ; }
+                    $rootPath = str_replace($pageVars["data"]["relpath"], "", $pageVars["data"]["wsdir"]) ;
+                    echo '<h3><a href=" href="/index.php?control=Workspace&action=show&item='.
+                         $pageVars["data"]["pipeline"]["project-slug"].'">'.$rootPath.'</a></h3>' ;
+                    $act = '/index.php?control=Workspace&item='.$pageVars["data"]["pipeline"]["project-slug"].'&action=show' ;
                 ?>
 
                 <form class="form-horizontal custom-form" action="<?= $act ; ?>" method="POST">
 
-                    <?php
-                    if (isset($pageVars["pipex"])) {
-                        ?>
-
-                        <div class="form-group">
-                            <div class="col-sm-10">
-                                Pipeline Execution started - Run # <?= $pageVars["pipex"] ;?>
-                            </div>
-                        </div>
-
-                    <?php
-                    }
-                    ?>
-
                     <div class="form-group">
                         <div class="col-sm-10">
                             <div id="updatable">
-                                Checking Pipeline Execution Output...
-                                <?php
-                                if ($pageVars["route"]["action"]=="history") {
-                                    echo '<p>Historic builds</p>';
-                                    foreach ($pageVars["data"]["historic_builds"] as $hb) {
-                                        echo '<a href="/index.php?control=Workspace&action=summary&item='.$pageVars["data"]["pipeline"]["project-slug"].'&run-id='.$hb.'">'.$hb.'</a><br />' ; } }
-                                else if ($pageVars["route"]["action"]=="summary") {
-                                    echo '<pre>'.$pageVars["data"]["historic_build"]["out"].'</pre>'; }
+                                 <?php
+                                if ($pageVars["route"]["action"]=="show") {
+                                    foreach ($pageVars["data"]["directory"] as $name => $isDir) {
+
+                                        $dirString = ($isDir) ? " - (D)" : "" ;
+                                        $trail = ($isDir) ? "/" : "" ;
+                                        echo '<a href="/index.php?control=Workspace&action=show&item='.$pageVars["data"]["pipeline"]["project-slug"].'&relpath='.$pageVars["data"]["relpath"].'">'.$pageVars["data"]["relpath"].'</a>' ;
+
+                                        $relativeString = str_replace($pageVars["data"]["wsdir"], "", $name) ;
+                                        $nameparts = explode(DS, $relativeString) ;
+
+                                        foreach ($nameparts as $namepart => $isSubDir) {
+                                            echo '<a href="/index.php?control=Workspace&action=show&item='.$pageVars["data"]["pipeline"]["project-slug"].'&relpath='.$pageVars["data"]["relpath"].$name.
+                                                $trail.'">'.$name.'</a>' ; }
+
+                                        echo $trail.$dirString.'<br />' ; } }
                                 ?>
                             </div>
                         </div>
                     </div>
-                    <?php
-                    if ($pageVars["route"]["action"] =="start") {
-                        echo '
-                          <script type="text/javascript">
-                              window.pipeitem = "'.$pageVars["data"]["pipeline"]["project-slug"].'" ;
-                              window.runid = "'.$pageVars["pipex"].'" ;
-                          </script>
-                              <script type="text/javascript" src="/Assets/Workspace/js/piperunner.js"></script>
-                              <div class="form-group" id="loading-holder">
-                                  <div class="col-sm-offset-2 col-sm-8">
-                                      <div class="text-center">
-                                          <img class="loadingImage" src="/Assets/Workspace/images/loading.gif" />
-                                      </div>
-                                 </div>
-                             </div>'; }
-                    ?>
-
-                    <div class="form-group" id="submit-holder">
-                        <div class="col-sm-offset-2 col-sm-8">
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-danger" id="end-now">End Now</button>
-                            </div>
-                        </div>
-                    </div>
-                    <input type="hidden" id="item" value="<?= $pageVars["data"]["pipeline"]["project-slug"] ;?>" />
-                    <input type="hidden" id="pid" value="<?= $pageVars["pipex"] ;?>" />
-                    <?php
-                    if ($pageVars["route"]["action"] == "summary") {
-                        echo '<input type="hidden" id="run-id" value="'.$pageVars["data"]["historic_build"]["run-id"].' />' ; }
-                    ?>
 
                 </form>
             </div>

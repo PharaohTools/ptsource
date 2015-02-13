@@ -17,10 +17,10 @@
 
 
 
-cleopatraenterprise phrankinsense install --yes --guess
-cd /opt/phrankinsense/phrankinsense/src/Modules/PostInput
-dapperstrano vhe add --yes --guess --vhe-url=www.phrankinsense.tld --vhe-default-template-name=docroot-no-suffix
-dapperstrano he add --yes --guess --host-name=www.phrankinsense.tld
+ptconfigureenterprise ptbuild install --yes --guess
+cd /opt/ptbuild/ptbuild/src/Modules/PostInput
+ptdeploy vhe add --yes --guess --vhe-url=www.ptbuild.tld --vhe-default-template-name=docroot-no-suffix
+ptdeploy he add --yes --guess --host-name=www.ptbuild.tld
 
 
 
@@ -67,7 +67,7 @@ dapperstrano he add --yes --guess --host-name=www.phrankinsense.tld
 
 
 
-# Phrankinsense, Pharaoh Tools
+# PTBuild, Pharaoh Tools
 
 ## About:
 
@@ -83,15 +83,15 @@ Currently, all of the Modules work on Ubuntu 12-14, most on Centos and Windows.
 ## Installation
 
 First you'll need to install Git and PHP5. If you don't have either, google them - they're easy to install. To install
-phrankinsense cli on your On your Mac, Linux or  Unix Machine silently do the following:
+ptbuild cli on your On your Mac, Linux or  Unix Machine silently do the following:
 
-git clone https://github.com/PharaohTools/phrankinsense.git && sudo php phrankinsense/install-silent
+git clone https://github.com/PharaohTools/ptbuild.git && sudo php ptbuild/install-silent
 
 or on Windows, open a terminal with the "Run as Administrator" option...
 
-git clone https://github.com/PharaohTools/phrankinsense.git && php phrankinsense\install-silent
+git clone https://github.com/PharaohTools/ptbuild.git && php ptbuild\install-silent
 
-... that's it, now the phrankinsense command should be available at the command line for you.
+... that's it, now the ptbuild command should be available at the command line for you.
 
 
 ## Usage:
@@ -100,13 +100,13 @@ So, there are a few simple commands...
 
 First, you can just use
 
-phrankinsense
+ptbuild
 
 ...This will give you a list of the available modules...
 
 Then you can use
 
-phrankinsense *ModuleName* help
+ptbuild *ModuleName* help
 
 ...This will display the help for that module, and tell you a list of available alias for the module command, and the
 available actions too.

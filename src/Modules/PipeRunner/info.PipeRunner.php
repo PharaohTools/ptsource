@@ -2,11 +2,11 @@
 
 Namespace Info;
 
-class PipeRunnerInfo extends CleopatraBase {
+class PipeRunnerInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "PipeRunner/Home Page";
+    public $name = "Pipe Running Functionality and Pages";
 
     public function _construct() {
       parent::__construct();

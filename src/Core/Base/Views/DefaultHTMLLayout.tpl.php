@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Phrankinsense - Pharaoh Tools</title>
+    <title>PTBuild - Pharaoh Tools</title>
 
     <!-- Bootstrap core CSS -->
     <link href="Assets/css/bootstrap.min.css" rel="stylesheet">
@@ -33,7 +33,7 @@
 </head>
 
 <body>
-<input type="hidden" id="base_url" value="http://www.phrankinsense.tld">
+<input type="hidden" id="base_url" value="http://www.ptbuild.tld">
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -45,7 +45,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a href="/index.php?control=Index&action=show"><img src="/Assets/images/5.png" class="navbar-img" /></a>
-            <a class="navbar-brand" href="/index.php?control=Index&action=show">Phrankinsense</a>
+            <a class="navbar-brand" href="/index.php?control=Index&action=show">PTBuild</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->

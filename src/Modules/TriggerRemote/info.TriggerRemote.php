@@ -2,7 +2,7 @@
 
 Namespace Info;
 
-class TriggerRemoteInfo extends CleopatraBase {
+class TriggerRemoteInfo extends PTConfigureBase {
 
     public $hidden = false;
 
