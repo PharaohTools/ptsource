@@ -126,26 +126,40 @@
                         </div>
                     </div>
 
+                    <ul class="form-group ui-sortable" id="sortableSteps">
+
                     <?php
                         foreach ($pageVars["data"]["pipeline"]["steps"] as $hash => $one_build_step) {
-                            echo '<div class="form-group">' ;
-                            echo '  <label for="steps['.$hash.']["shell_data"]" class="col-sm-2 control-label text-left">'.$one_build_step["title"].'</label>' ;
+                            echo '<li class="form-group ui-state-default ui-sortable-handle">' ;
+                            echo '  <div class="col-sm-2">' ;
+                            echo ' <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' ;
+                            echo '  </div>';
                             echo '  <div class="col-sm-10">' ;
+                            echo '   <div class="col-sm-12">' ;
+                            echo '    <label for="steps['.$hash.'][data]" class="control-label text-left">'.$one_build_step["title"].'</label>' ;
                             echo '      <p><strong>Hash: </strong>'.$hash.'</p>';
                             echo '      <p><strong>Module: </strong>'.$one_build_step["module"].'</p>';
                             echo '      <p><strong>Step Type: </strong>'.$one_build_step["steptype"].'</p>';
                             echo '      <input type="hidden" id="steps['.$hash.'][module]" name="steps['.$hash.'][module]" value="'.$one_build_step["module"].'" />';
                             echo '      <input type="hidden" id="steps['.$hash.'][steptype]" name="steps['.$hash.'][steptype]" value="'.$one_build_step["steptype"].'" />';
                             echo '      <textarea id="steps['.$hash.'][data]" name="steps['.$hash.'][data]" value="'.$one_build_step["data"].'" class="form-control">'.$one_build_step["data"].'</textarea>';
+
                             echo '  </div>';
-                            echo '</div>'; } ?>
+                            echo '   <div class="col-sm-12">'  ;
+                            echo '  <a class="btn btn-warning" onclick="deleteStepField(hash)">Delete Step</a>' ;
+
+                            echo '  </div>';
+                            echo '  </div>';
+                            echo '</li>'; } ?>
+
+                    </ul> <!-- sortable end -->
 
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <h5>Add New Step</h5>
-                            <div class="seletorWrap" id="new_step_module_selector_wrap">
+                            <div class="selectorWrap" id="new_step_module_selector_wrap">
                                 <select name="new_step_module_selector" id="new_step_module_selector" onchange="changeModule(this)">
-                                    <option value="">-- Select Module --</option>
+                                    <option value="nomoduleselected" selected="selected">-- Select Module --</option>
                                     <?php
                                         foreach ($pageVars["data"]["fields"] as $builderName => $builderBits) {
                                             echo '  <option value="'.strtolower($builderName).'">'.$builderName.'</option>'; }
@@ -166,11 +180,6 @@
                             <button type="submit" class="btn btn-success">Save Configuration</button>
                         </div>
                     </div>
-
-                    <script type="text/javascript">
-                        steps = <?php echo json_encode($pageVars["data"]["fields"]) ; ?> ;
-                    </script>
-                    <script type="text/javascript" src="/Assets/BuildConfigure/js/buildconfigure.js"></script>
 
                     <?php
 
@@ -197,3 +206,19 @@
 
     </div>
 </div><!-- /.container -->
+
+
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="/Assets/BuildConfigure/css/buildconfigure.css">
+<script type="text/javascript">
+    steps = <?php echo json_encode($pageVars["data"]["fields"]) ; ?> ;
+</script>
+<script type="text/javascript" src="/Assets/BuildConfigure/js/buildconfigure.js"></script>
+<script type="text/javascript">
+
+    $(function() {
+        $( "#sortableSteps" ).sortable();
+        $( "#sortableSteps" ).disableSelection();
+    });
+</script>
