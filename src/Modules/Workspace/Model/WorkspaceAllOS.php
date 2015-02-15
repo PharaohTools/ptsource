@@ -31,7 +31,7 @@ class WorkspaceAllOS extends Base {
     }
 
     public function getRelPath() {
-        $relPath = $this->params["relpath"] ;
+        $relPath = isset($this->params["relpath"]) ? $this->params["relpath"] : "" ;
         return $relPath ;
     }
 
