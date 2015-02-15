@@ -94,7 +94,7 @@
                                                 <?php
                                                 if ($pipelineDetails["last_success"] != false) {
                                                     echo date('Y-m-d \<\b\r\> h:i:s', $pipelineDetails["last_success"]) ; 
-													echo ' #('.$pipelineDetails["last_success_build"].')'; }
+													echo ' <span class="badge">#('.$pipelineDetails["last_success_build"].')</span>'; }
                                                 else {
                                                     echo 'N/A' ; }
                                                 ?>
@@ -103,7 +103,7 @@
                                                 <?php
                                                 if ($pipelineDetails["last_fail"] != false) {
                                                     echo date('Y-m-d \<\b\r\> h:i:s', $pipelineDetails["last_fail"]) ; 
-													echo ' #('.$pipelineDetails["last_fail_build"].')'; }
+													echo ' <span class="badge">#('.$pipelineDetails["last_fail_build"].')</span>'; }
                                                 else {
                                                     echo 'N/A' ; }
                                                 ?>
@@ -167,7 +167,7 @@
                                     <?php
 
                                     $i = 1;
-                                    foreach ($pageVars["data"]["pipelines"] as $pipelineSlug => $pipelineDetails) { ?>
+                                    foreach ($pageVars["data"]["pipelines"] as $pipelineSlug => $pipelineDetails) { if ($pipelineDetails["last_status"] === true) { ?>
                                         <tr>
                                             <th scope="row"><?php echo $i ; ?></th>
                                             <td><a href="/index.php?control=BuildHome&action=show&item=<?php echo $pipelineSlug ; ?>"><?php echo $pipelineDetails["project-name"] ; ?></a></td>
@@ -182,7 +182,8 @@
                                             <td>
                                                 <?php
                                                 if ($pipelineDetails["last_success"] != false) {
-                                                    echo '20:13:55 01/02/2015' ; }
+                                                    echo date('Y-m-d \<\b\r\> h:i:s', $pipelineDetails["last_success"]) ; 
+													echo ' <span class="badge">#('.$pipelineDetails["last_success_build"].')</span>'; }
                                                 else {
                                                     echo 'N/A' ; }
                                                 ?>
@@ -190,7 +191,8 @@
                                             <td>
                                                 <?php
                                                 if ($pipelineDetails["last_fail"] != false) {
-                                                    echo '14:13:55 21/01/2015' ; }
+                                                    echo date('Y-m-d \<\b\r\> h:i:s', $pipelineDetails["last_fail"]) ; 
+													echo ' <span class="badge">#('.$pipelineDetails["last_fail_build"].')</span>'; }
                                                 else {
                                                     echo 'N/A' ; }
                                                 ?>
@@ -198,7 +200,7 @@
                                             <td>
                                                 <?php
                                                 if ($pipelineDetails["duration"] != false) {
-                                                    echo '134 seconds' ; }
+                                                    echo $pipelineDetails["duration"].' seconds' ; }
                                                 else {
                                                     echo 'N/A' ; }
                                                 ?>
@@ -228,7 +230,7 @@
                                         </tr>
                                         <?php
                                         $i++;
-                                    } ?>
+                                    } } ?>
 
                                     </tbody>
                                 </table>
@@ -253,7 +255,7 @@
                                     <?php
 
                                     $i = 1;
-                                    foreach ($pageVars["data"]["pipelines"] as $pipelineSlug => $pipelineDetails) { ?>
+                                    foreach ($pageVars["data"]["pipelines"] as $pipelineSlug => $pipelineDetails) { if ($pipelineDetails["last_status"] === false) { ?>
                                         <tr>
                                             <th scope="row"><?php echo $i ; ?></th>
                                             <td><a href="/index.php?control=BuildHome&action=show&item=<?php echo $pipelineSlug ; ?>"><?php echo $pipelineDetails["project-name"] ; ?></a></td>
@@ -268,7 +270,8 @@
                                             <td>
                                                 <?php
                                                 if ($pipelineDetails["last_success"] != false) {
-                                                    echo '20:13:55 01/02/2015' ; }
+                                                    echo date('Y-m-d \<\b\r\> h:i:s', $pipelineDetails["last_success"]) ; 
+													echo ' <span class="badge">#('.$pipelineDetails["last_success_build"].')</span>'; }
                                                 else {
                                                     echo 'N/A' ; }
                                                 ?>
@@ -276,7 +279,8 @@
                                             <td>
                                                 <?php
                                                 if ($pipelineDetails["last_fail"] != false) {
-                                                    echo '14:13:55 21/01/2015' ; }
+                                                    echo date('Y-m-d \<\b\r\> h:i:s', $pipelineDetails["last_fail"]) ; 
+													echo ' <span class="badge">#('.$pipelineDetails["last_fail_build"].')</span>'; }
                                                 else {
                                                     echo 'N/A' ; }
                                                 ?>
@@ -284,7 +288,7 @@
                                             <td>
                                                 <?php
                                                 if ($pipelineDetails["duration"] != false) {
-                                                    echo '134 seconds' ; }
+                                                    echo $pipelineDetails["duration"].' seconds' ; }
                                                 else {
                                                     echo 'N/A' ; }
                                                 ?>
@@ -314,7 +318,7 @@
                                         </tr>
                                         <?php
                                         $i++;
-                                    } ?>
+                                    } } ?>
 
                                     </tbody>
                                 </table>
@@ -339,7 +343,7 @@
                                     <?php
 
                                     $i = 1;
-                                    foreach ($pageVars["data"]["pipelines"] as $pipelineSlug => $pipelineDetails) { ?>
+                                    foreach ($pageVars["data"]["pipelines"] as $pipelineSlug => $pipelineDetails) { if ( 1== 2) { ?>
                                         <tr>
                                             <th scope="row"><?php echo $i ; ?></th>
                                             <td><a href="/index.php?control=BuildHome&action=show&item=<?php echo $pipelineSlug ; ?>"><?php echo $pipelineDetails["project-name"] ; ?></a></td>
@@ -400,7 +404,7 @@
                                         </tr>
                                         <?php
                                         $i++;
-                                    } ?>
+                                    } } ?>
 
                                     </tbody>
                                 </table>

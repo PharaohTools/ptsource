@@ -32,6 +32,7 @@ class StepRunnerAllOS extends BaseLinuxApp {
         $stepFactoryClass = '\Model\\'.$stepModule;
         $stepFactory = new $stepFactoryClass() ;
         $stepModel = $stepFactory->getModel($this->params);
+        
         $modStepTypes = $stepModel->getStepTypes() ;
         // if type not supported return false
         if (!in_array($step["steptype"], $modStepTypes)) {

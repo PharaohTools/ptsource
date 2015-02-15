@@ -83,7 +83,7 @@
                         </div>
                     </div>
 
-					<div class="form-group">
+                    <div class="form-group">
                         <label for="email-id" class="col-sm-2 control-label text-left">E-mail <small>For Notification</small></label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="email-id" name="email-id" placeholder="E-mail" value="<?php echo $pageVars["data"]["pipeline"]["email-id"] ; ?>" />
@@ -96,7 +96,7 @@
                         </div>
                     </div>
 
-                    <?php
+                    <?php $plugins = $pageVars["data"]["plugin"]; $buildconf = $plugins['data'][$plugin]['buildconf'];
                         foreach ($pageVars["data"]["pipeline"]["steps"] as $hash => $one_build_step) {
                             echo '<div class="form-group">' ;
                             echo '  <label for="steps['.$hash.']["shell_data"]" class="col-sm-2 control-label text-left">'.$one_build_step["title"].'</label>' ;
@@ -106,7 +106,20 @@
                             echo '      <p><strong>Step Type: </strong>'.$one_build_step["steptype"].'</p>';
                             echo '      <input type="hidden" id="steps['.$hash.'][module]" name="steps['.$hash.'][module]" value="'.$one_build_step["module"].'" />';
                             echo '      <input type="hidden" id="steps['.$hash.'][steptype]" name="steps['.$hash.'][steptype]" value="'.$one_build_step["steptype"].'" />';
-                            echo '      <textarea id="steps['.$hash.'][data]" name="steps['.$hash.'][data]" value="'.$one_build_step["data"].'" class="form-control">'.$one_build_step["data"].'</textarea>';
+                            if ($one_build_step["module"] == "Plugin") { 
+                                $buildconf = $plugins['data'][$one_build_step["steptype"]]['buildconf'];
+                                foreach ($buildconf as $data ) {
+                                    if ($data['type'] == 'text') {
+                                        echo '      <input id="steps['.$hash.']['.$data['name'].']" name="steps['.$hash.']['.$data['name'].']" value="'.$one_build_step[$data['name']].'" class="form-control" />'; 
+                                    }
+                                    if ($data['type'] == 'textarea') {
+                                        echo '      <textarea id="steps['.$hash.']['.$data['name'].']" name="steps['.$hash.']['.$data['name'].']" class="form-control" />'.$one_build_step[$data['name']].'</textarea>'; 
+                                    }
+                                }
+                            }
+                            else {
+                                echo '      <textarea id="steps['.$hash.'][data]" name="steps['.$hash.'][data]" value="'.$one_build_step["data"].'" class="form-control">'.$one_build_step["data"].'</textarea>';
+                            }
                             echo '  </div>';
                             echo '</div>'; } ?>
 
@@ -114,11 +127,15 @@
                         <div class="col-sm-offset-2 col-sm-10">
                             <h5>Add New Step</h5>
                             <div class="seletorWrap" id="new_step_module_selector_wrap">
+                                <?php //print_r($pageVars["data"]["fields"]); ?>
                                 <select name="new_step_module_selector" id="new_step_module_selector" onchange="changeModule(this)">
                                     <option value="">-- Select Module --</option>
                                     <?php
-                                        foreach ($pageVars["data"]["fields"] as $builderName => $builderBits) {
-                                            echo '  <option value="'.strtolower($builderName).'">'.$builderName.'</option>'; }
+                                        $dataplugin['Plugin'] = $pageVars["data"]["plugin"]["data"];
+                                        $dataplugin = array_merge($pageVars["data"]["fields"],$dataplugin );
+                                        foreach ($dataplugin as $builderName => $builderBits) {
+                                            echo '  <option value="'.strtolower($builderName).'">'.$builderName.'</option>'; 
+                                        }
                                     ?>
                                 </select>
                             </div>
@@ -130,15 +147,10 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-success">Save Configuration</button>
-                        </div>
-                    </div>
-
+            
                     <script type="text/javascript">
-                        steps = <?php echo json_encode($pageVars["data"]["fields"]) ; ?> ;
+                        steps = <?php echo json_encode(array_merge ($pageVars["data"]["fields"],$dataplugin) ) ; ?> ;
+                    
                     </script>
                     <script type="text/javascript" src="/Assets/BuildConfigure/js/buildconfigure.js"></script>
 
@@ -148,13 +160,30 @@
                         echo '<input type="hidden" name="creation" id="creation" value="yes" />' ; }
 
                     ?>
+					
+
+
+		<div class="form-group">
+                        <div class="col-sm-10">
+                            <h3>Post Build</h3>
+                        </div>
+                    </div>
+
 
                     <input type="hidden" name="item" id="item" value="<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" />
 
                     <h5 class="text-uppercase text-light">
-                        <a href="/index.php?control=BuildConfigure&action=save">
+                        <a href="#/index.php?control=BuildConfigure&action=save">
                             Save configuration of <?php echo $pageVars["data"]["pipeline"]["project-name"] ; ?>-</a>
                     </h5>
+
+					<div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-success">Save Configuration</button>
+                        </div>
+                    </div>
+
+                    
 
                 </form>
             </div>

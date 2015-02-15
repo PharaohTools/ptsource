@@ -18,6 +18,8 @@ class BuildConfigureAllOS extends Base {
         $ret["pipeline"] = $this->getPipeline();
         $ret["builders"] = $this->getBuilders();
         $ret["fields"] = $this->getBuilderFormFields();
+        $ret["plugin"] = $this->getInstalledPlugins();
+        $ret["pluginsenabled"] = $this->getEnabledPlugins();
         return $ret ;
     }
 
@@ -31,6 +33,58 @@ class BuildConfigureAllOS extends Base {
         return $pipeline->getPipeline($this->params["item"]);
     }
 
+    public function getInstalledPlugins()
+    {
+    $plugin = scandir(str_replace('pipes','plugins/installed',PIPEDIR)) ;
+        for ($i=0; $i<count($plugin); $i++) {
+            if (!in_array($plugin[$i], array(".", "..", "tmpfile"))){
+                if(is_dir(str_replace('pipes','plugins/installed',PIPEDIR).DS.$plugin[$i])) {
+                    // @todo if this isnt definitely a build dir ignore maybe
+                    $detail['details'][$plugin[$i]] = $this->getInstalledPlugin($plugin[$i]);
+                    $detail['data'][$plugin[$i]] = $this->getInstalledPluginData($plugin[$i]); } } }
+        return (isset($detail) && is_array($detail)) ? $detail : array() ;
+    }
+
+    public function getInstalledPlugin($plugin) {
+	$defaultsFile = str_replace('pipes','plugins/installed',PIPEDIR).DS.$plugin.DS.'details' ;
+        if (file_exists($defaultsFile)) {
+            $defaultsFileData =  file_get_contents($defaultsFile) ;
+            $defaults = json_decode($defaultsFileData, true) ; }
+        return  (isset($defaults) && is_array($defaults)) ? $defaults : array() ;
+    }
+
+    public function getInstalledPluginData($plugin) {
+        $file = PIPEDIR . DS . $this->params["item"] . DS . 'pluginData';
+        if ($pluginData = file_get_contents($file)) {
+            $pluginData = json_decode($pluginData, true);
+        }
+        $defaultsFile = str_replace('pipes','plugins/installed',PIPEDIR).DS.$plugin.DS.'data' ;
+        if (file_exists($defaultsFile)) {
+            $defaultsFileData =  file_get_contents($defaultsFile) ;
+            $defaults = json_decode($defaultsFileData, true) ; 
+        }
+        foreach ($defaults['buildconf'] as $key=>$val) {
+            if (isset ($pluginData[$plugin][$val['name']]) ) {
+                $value = $pluginData[$plugin][$val['name']];
+                $defaults['buildconf'][$key]['value'] = $value;
+            }
+        }
+        return  (isset($defaults) && is_array($defaults)) ? $defaults : array() ;
+    }
+    
+    public function getEnabledPlugins() {
+        $file = PIPEDIR . DS . $this->params["item"] . DS . 'pluginData';
+        $pluginData = array();
+        if ($pluginData = file_get_contents($file)) {
+            $pluginData = json_decode($pluginData, true);
+        }
+        $enabledplugins = array();
+        foreach ($pluginData as $key=>$val) {
+           array_push($enabledplugins, $key);
+        }
+        return $enabledplugins;
+    }
+
     public function getBuilders() {
         $builderFactory = new \Model\Builder() ;
         $builder = $builderFactory->getModel($this->params);
@@ -42,7 +96,7 @@ class BuildConfigureAllOS extends Base {
         $builder = $builderFactory->getModel($this->params, "BuilderRepository");
         return $builder->getAllBuildersFormFields();
     }
-    #
+    
 
     public function savePipeline() {
         $this->params["project-slug"] = $this->getFormattedSlug() ;
@@ -63,6 +117,25 @@ class BuildConfigureAllOS extends Base {
         $pipelineSaver->savePipeline(array("type" => "Defaults", "data" => $data ));
         $pipelineSaver->savePipeline(array("type" => "Steps", "data" => $this->params["steps"] ));
         return true ;
+    }
+
+    public function savePluginData() {
+        $plugins = $this->getInstalledPlugins();
+        foreach ($plugins['details'] as $plugin=>$detail) {
+            if ($this->params[$detail['name']][enable]  === 'true') {
+                $pluginData = $this->params['plugin'];
+                $this->saveBuildPluginData($pluginData);
+            }
+        }
+    }
+    
+    private function saveBuildPluginData($data)
+    {
+        $file = PIPEDIR . DS . $this->params["item"] . DS . 'pluginData';
+        $pluginData = array();
+        $pluginData = $data;
+        $pluginData = json_encode($pluginData);
+        file_put_contents($file, $pluginData);
     }
 
     private function getFormattedSlug() {

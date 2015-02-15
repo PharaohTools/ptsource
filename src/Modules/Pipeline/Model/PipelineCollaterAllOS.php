@@ -44,11 +44,17 @@ class PipelineCollaterAllOS extends Base {
     }
 
     private function getLastStatus() {
-        $allRuns = scandir(PIPEDIR.DS.$this->params["item"].DS.'history') ;
-        foreach($allRuns as $i=>$run) {
-            if (is_numeric($allRuns[$i])) { intval($allRuns[$i]) ; } else { unset($allRuns[$i]) ; } }
-     	$runId = max($allRuns) ;
-        return $this->getRunOutput($runId) ;
+        $file = PIPEDIR.DS.$this->params["item"].DS.'historyIndex' ;
+        $status = 'FAIL';
+        if ($historyIndex = file_get_contents($file)) {
+                $historyIndex = json_decode($historyIndex, true);
+                ksort($historyIndex);
+                foreach ($historyIndex as $run=>$val) {
+                        $status = $historyIndex[$run]['status'];
+                }
+        }
+        return ($status == 'SUCCESS')? true : false;
+        
     }
 
     private function getLastSuccess() {
