@@ -130,7 +130,7 @@ class PipeRunnerAllOS extends Base {
         $ressys = array() ;
         foreach ($pipeline["steps"] as $hash => $stepDetails) {
             echo "Executing step id $hash\n" ;
-            $res = $stepRunner->stepRunner($stepDetails) ;
+            $res = $stepRunner->stepRunner($stepDetails, $this->params["item"]) ;
             $evar  = "Step execution " ;
             $evar .= ($res) ? "Success" : "Failed" ;
             $evar .= ", ID $hash" ;
