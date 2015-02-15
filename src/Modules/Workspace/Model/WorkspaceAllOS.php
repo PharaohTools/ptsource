@@ -40,7 +40,7 @@ class WorkspaceAllOS extends Base {
         return $this->params["pipe-dir"].DS.$this->params["item"].DS.'workspace'.DS.$relPath;
     }
 
-    private function setPipeDir() {
+    public function setPipeDir() {
         if (isset($this->params["guess"]) && $this->params["guess"]==true) {
             $this->params["pipe-dir"] = PIPEDIR ; }
         else {
