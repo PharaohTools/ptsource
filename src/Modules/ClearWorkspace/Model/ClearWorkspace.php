@@ -2,6 +2,6 @@
 
 Namespace Model;
 
-class PHPScript extends BaseModelFactory {
+class ClearWorkspace extends BaseModelFactory {
 
 }

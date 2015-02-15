@@ -2,34 +2,34 @@
 
 Namespace Info;
 
-class PHPScriptInfo extends PTConfigureBase {
+class ClearWorkspaceInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "PHPScript Provisioner Integration";
+    public $name = "ClearWorkspace Provisioner Integration";
 
     public function _construct() {
         parent::__construct();
     }
 
     public function routesAvailable() {
-        return array( "PHPScript" => array_merge(parent::routesAvailable(), array("help") ) );
+        return array( "ClearWorkspace" => array_merge(parent::routesAvailable(), array("help") ) );
     }
 
     public function routeAliases() {
-        return array("phpscript"=>"PHPScript");
+        return array("clearworkspace"=>"ClearWorkspace");
     }
 
     public function buildSteps() {
-        return array("phpscriptfile");
+        return array("clearworkspace");
     }
 
     public function helpDefinition() {
        $help = <<<"HELPDATA"
-    This extension provides integration with PHPScript as a Build Step. It provides code
+    This extension provides integration with ClearWorkspace as a Build Step. It provides code
     functionality, but no extra commands.
 
-    PHPScript
+    ClearWorkspace
 
 HELPDATA;
       return $help ;

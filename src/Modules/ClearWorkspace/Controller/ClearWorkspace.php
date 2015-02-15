@@ -2,7 +2,7 @@
 
 Namespace Controller ;
 
-class PHPScript extends Base {
+class ClearWorkspace extends Base {
 
     public function execute($pageVars) {
 
@@ -16,7 +16,7 @@ class PHPScript extends Base {
             $this->content["helpData"] = $helpModel->getHelpData($pageVars["route"]["control"]);
             return array ("type"=>"view", "view"=>"help", "pageVars"=>$this->content); }
 
-        $this->content["messages"][] = "Help is the only valid PHPScript Action";
+        $this->content["messages"][] = "Help is the only valid ClearWorkspace Action";
         return array ("type"=>"control", "control"=>"index", "pageVars"=>$this->content);
 
     }

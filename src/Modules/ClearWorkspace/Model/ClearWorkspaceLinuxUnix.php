@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class PHPScriptLinuxUnix extends Base {
+class ClearWorkspaceLinuxUnix extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -20,48 +20,56 @@ class PHPScriptLinuxUnix extends Base {
 
     public function getFormFields() {
         $ff = array(
-            "phpscriptdata" => array(
-                "type" => "textarea",
-                "name" => "PHPScript Data",
-                "slug" => "data" ),
-            "phpscriptscript" => array(
-                "type" => "text",
-                "name" => "PHPScript Script",
-                "slug" => "script" ),
+            "clearworkspace" => array(
+                "type" => "boolean",
+                "name" => "Clear Workspace",
+                "slug" => "boolean" ),
         );
 
         return $ff ;
     }
 
-    public function executeStep($step) {
+    public function executeStep($step, $item) {
         $loggingFactory = new \Model\Logging();
         $logging = $loggingFactory->getModel($this->params);
-        if ( $step["steptype"] == "phpscriptdata") {
-            $logging->log("Running PHPScript from Data...") ;
-            $this->executeAsPHPData($step["data"]) ;
-            return true ; }
-        else if ($step["steptype"] == "phpscriptfile") {
-            $logging->log("Running PHPScript from Script...") ;
-            $this->executeAsPHPScript($step["data"]) ;
-            return true ; }
+        if ($step["steptype"] == "clearworkspace") {
+            $logging->log("Running Workspace Clear...") ;
+            $xcw = $this->executeClearWorkspace($step, $item) ;
+            return $xcw ; }
         else {
-            $logging->log("Unrecognised Build Step Type {$step["type"]} specified in PHPScript Module") ;
+            $logging->log("Unrecognised Build Step Type {$step["type"]} specified in ClearWorkspace Module") ;
             return false ; }
     }
 
-    private function executeAsPHPData($data) {
-        eval($data) ;
-    }
-
-    private function executeAsPHPScript($data) {
+    private function executeClearWorkspace($step, $item) {
         $loggingFactory = new \Model\Logging();
         $logging = $loggingFactory->getModel($this->params);
-        if (file_exists($data)) {
-            $logging->log("File found, executing...") ;
-            self::executeAndOutput("php $data") ; }
+        if ($step["data"]=="on") {
+            echo "Clear Workspace Build step exists, execution flag is set to on, executing...\n" ;
+            $workspace = $this->getWorkspace($item) ;
+            $dir = $workspace->getWorkspaceDir()  ;
+            $comm = "rm -rf $dir*" ;
+            echo "Executing $comm...\n" ;
+            echo self::executeAndLoad($comm) ;
+            $rc1 = self::executeAndLoad("echo $?") ;
+            $comm = "ls -lah $dir" ;
+            echo "Executing $comm...\n" ;
+            echo self::executeAndLoad($comm) ;
+            $rc2 = self::executeAndLoad("echo $?") ;
+            return ($rc1==true && $rc2==true) ? true : false  ; }
         else {
-            $logging->log("File not found, ignoring...") ;
-            \Core\BootStrap::setExitCode(1);}
+            echo "Clear Workspace Build step exists, though execution flag is set to off, so not executing\n" ;
+            return true ; }
+    }
+
+    public function getWorkspace($item) {
+        $workspaceFactory = new \Model\Workspace() ;
+        $wsparams = $this->params ;
+        unset($wsparams["guess"]) ;
+        $wsparams["item"] = $item ;
+        $workspace = $workspaceFactory->getModel($wsparams);
+        $workspace->setPipeDir();
+        return $workspace ;
     }
 
 }
