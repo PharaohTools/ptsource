@@ -97,9 +97,9 @@ class PipeRunnerAllOS extends Base {
 
     private function runPipeForkCommand($run) {
         // this should be a phrank piperunner@cli and it should save the log to a named history
-        $cmd  = PHRCOMM.' piperunner child --pipe-dir="'.$this->params["pipe-dir"].'" ' ;
+        $cmd  = "sudo su golden -c'".PHRCOMM.' piperunner child --pipe-dir="'.$this->params["pipe-dir"].'" ' ;
         $cmd .= '--item="'.$this->params["item"].'" --run-id="'.$run.'" > '.PIPEDIR.DS.$this->params["item"].DS ;
-        $cmd .= 'tmpfile &' ;
+        $cmd .= 'tmpfile &'."'" ;
         error_log($cmd);
         $descr = array(
             0 => array(
@@ -126,8 +126,18 @@ class PipeRunnerAllOS extends Base {
         $stepRunnerFactory = new \Model\StepRunner() ;
         $stepRunner = $stepRunnerFactory->getModel($this->params) ;
         $pipeline = $this->getPipeline();
-        echo PIPEDIR.DS.$this->params["item"].DS.'tmpfile'."\n\n" ;
+        //  @todo this should become an event called beforeSettings
+        $eventRunnerFactory = new \Model\EventRunner() ;
+        $eventRunner = $eventRunnerFactory->getModel($this->params) ;
+        $eventRunner->eventRunner("beforeSettings") ;
+        echo "Writing to temp file ". PIPEDIR.DS.$this->params["item"].DS.'tmpfile'."\n" ;
+        echo "Executing as ".self::executeAndLoad("whoami")."\n" ;
+        $workspace = $this->getWorkspace() ;
+        $dir = $workspace->getWorkspaceDir()  ;
+        echo "Changing to workspace directory $dir\n" ;
+        chdir($dir);
         $ressys = array() ;
+        $eventRunner->eventRunner("beforeBuild") ;
         foreach ($pipeline["steps"] as $hash => $stepDetails) {
             echo "Executing step id $hash\n" ;
             $res = $stepRunner->stepRunner($stepDetails, $this->params["item"]) ;
@@ -137,24 +147,20 @@ class PipeRunnerAllOS extends Base {
             echo $evar."\n\n" ;
             $ressys[] = $res ;
             if ($res==false) break ; }
+
+        //  @todo this should become an event called buildComplete
+        $eventRunner->eventRunner("beforeBuildComplete") ;
+
         $ret = (in_array(false, $ressys)) ? "FAILED EXECUTION\n" : "SUCCESSFUL EXECUTION\n" ;
         $status = (in_array(false, $ressys)) ? "FAIL" : "SUCCESS" ;
         echo $ret;
-		$this->setRunEndTime($status);
-        $this->sendEmail($status);
-        return $this->saveRunLog();
-    }
 
-    private function sendEmail($status) {
-		$run = $this->params["run-id"];
-        $file = PIPEDIR.DS.$this->params["item"].DS.'defaults';
-        $defaults = file_get_contents($file) ;
-		$defaults = json_decode($defaults);
-		$subject = $defaults["project-name"]." "."build-".$run;
-		$message = $status;
-		$to = $defaults["email-id"];
-		mail($to, $subject, $message);
-        return;
+        //  @todo this should become an event called buildComplete
+        $eventRunner->eventRunner("afterBuildComplete") ;
+
+		$this->setRunEndTime($status);
+        // $this->sendEmail($status);
+        return $this->saveRunLog();
     }
 
     private function getExecutionOutput() {
@@ -217,4 +223,14 @@ class PipeRunnerAllOS extends Base {
 			return $this->params["run-id"] ; }
         return false ;
     }
+
+    public function getWorkspace() {
+        $workspaceFactory = new \Model\Workspace() ;
+        $wsparams = $this->params ;
+        unset($wsparams["guess"]) ;
+        $workspace = $workspaceFactory->getModel($wsparams);
+        $workspace->setPipeDir();
+        return $workspace ;
+    }
+
 }

@@ -22,7 +22,7 @@
                 <a href="/index.php?control=BuildList&action=show" class="list-group-item">
                     <i class="fa fa-user"></i> All Pipelines
                 </a>
-                <a href="#" class="list-group-item">
+                <a href="/index.php?control=Workspace&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
                     <i class="fa fa-folder-open-o"></i> Workspace
                 </a>
                 <a href="#" class="list-group-item">
@@ -87,7 +87,7 @@
                     ?>
 
                     <div class="form-group">
-                        <div class="col-sm-10">
+                        <div class="col-sm-12">
                             <div id="updatable">
                                 Checking Pipeline Execution Output...
                                 <?php
