@@ -146,7 +146,7 @@
 
                             echo '  </div>';
                             echo '   <div class="col-sm-12">'  ;
-                            echo '  <a class="btn btn-warning" onclick="deleteStepField(\''.$hash.'\')">Delete Step</a>' ;
+                            echo '  <a class="btn btn-warning" onclick="deleteStepField(hash)">Delete Step</a>' ;
 
                             echo '  </div>';
                             echo '  </div>';
@@ -205,7 +205,7 @@
         </div>
 
     </div>
-</div><!-- /.container -->
+</div><!-- container -->
 
 
 
