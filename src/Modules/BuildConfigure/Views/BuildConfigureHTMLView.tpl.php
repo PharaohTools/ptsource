@@ -130,7 +130,7 @@
 
                     <?php
                         foreach ($pageVars["data"]["pipeline"]["steps"] as $hash => $one_build_step) {
-                            echo '<li class="form-group ui-state-default ui-sortable-handle">' ;
+                            echo '<li class="form-group ui-state-default ui-sortable-handle" id="step'.$hash.'">' ;
                             echo '  <div class="col-sm-2">' ;
                             echo ' <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' ;
                             echo '  </div>';
@@ -146,7 +146,7 @@
 
                             echo '  </div>';
                             echo '   <div class="col-sm-12">'  ;
-                            echo '  <a class="btn btn-warning" onclick="deleteStepField(hash)">Delete Step</a>' ;
+                            echo '  <a class="btn btn-warning" onclick="deleteStepField(\''.$hash.'\')">Delete Step</a>' ;
 
                             echo '  </div>';
                             echo '  </div>';
