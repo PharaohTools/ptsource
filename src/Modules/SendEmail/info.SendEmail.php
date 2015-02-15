@@ -17,11 +17,11 @@ class SendEmailInfo extends PTConfigureBase {
     }
 
     public function routeAliases() {
-        return array("clearworkspace"=>"SendEmail");
+        return array("sendemail"=>"SendEmail");
     }
 
-    public function buildSteps() {
-        return array("clearworkspacefile");
+    public function events() {
+        return array("beforeSettings", "beforeBuild", "afterBuildComplete");
     }
 
     public function helpDefinition() {

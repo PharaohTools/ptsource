@@ -14,62 +14,41 @@ class SendEmailLinuxUnix extends Base {
     // Model Group
     public $modelGroup = array("Default") ;
 
-    public function getStepTypes() {
-        return array_keys($this->getFormFields());
+    public function getEventNames() {
+        return array_keys($this->getEvents());
     }
 
-    public function getFormFields() {
+    public function getEvents() {
         $ff = array(
-            "clearworkspace" => array(
-                "type" => "boolean",
-                "name" => "Clear Workspace",
-                "slug" => "boolean" ),
+            "beforeSettings" => array(
+                "doAnEcho",
+            ),
+            "beforeBuild" => array(
+                "doAnEcho",
+            ),
+            "afterBuildComplete" => array(
+                "sendAlertMail",
+            ),
         );
 
         return $ff ;
     }
 
-    public function executeStep($step, $item) {
-        $loggingFactory = new \Model\Logging();
-        $logging = $loggingFactory->getModel($this->params);
-        if ($step["steptype"] == "clearworkspace") {
-            $logging->log("Running Workspace Clear...") ;
-            $xcw = $this->executeSendEmail($step, $item) ;
-            return $xcw ; }
-        else {
-            $logging->log("Unrecognised Build Step Type {$step["type"]} specified in SendEmail Module") ;
-            return false ; }
+    public function sendAlertMail() {
+        $run = $this->params["run-id"];
+        $file = PIPEDIR.DS.$this->params["item"].DS.'defaults';
+        $defaults = file_get_contents($file) ;
+        $defaults = new \ArrayObject(json_decode($defaults));
+        // error_log(serialize($defaults)) ;
+        $subject = $defaults["project-name"]." "."build-".$run;
+        $message = $this->params["run-status"];
+        $to = $defaults["email-id"];
+        mail($to, $subject, $message);
+        return;
     }
 
-    private function executeSendEmail($step, $item) {
-        $loggingFactory = new \Model\Logging();
-        $logging = $loggingFactory->getModel($this->params);
-        if ($step["data"]=="on") {
-            echo "Clear Workspace Build step exists, execution flag is set to on, executing...\n" ;
-            $workspace = $this->getWorkspace($item) ;
-            $dir = $workspace->getWorkspaceDir()  ;
-            $comm = "rm -rf $dir*" ;
-            echo "Executing $comm...\n" ;
-            echo self::executeAndLoad($comm) ;
-            $rc1 = self::executeAndLoad("echo $?") ;
-            $comm = "ls -lah $dir" ;
-            echo "Executing $comm...\n" ;
-            echo self::executeAndLoad($comm) ;
-            $rc2 = self::executeAndLoad("echo $?") ;
-            return ($rc1==true && $rc2==true) ? true : false  ; }
-        else {
-            echo "Clear Workspace Build step exists, though execution flag is set to off, so not executing\n" ;
-            return true ; }
-    }
-
-    public function getWorkspace($item) {
-        $workspaceFactory = new \Model\Workspace() ;
-        $wsparams = $this->params ;
-        unset($wsparams["guess"]) ;
-        $wsparams["item"] = $item ;
-        $workspace = $workspaceFactory->getModel($wsparams);
-        $workspace->setPipeDir();
-        return $workspace ;
+    public function doAnEcho($step, $item) {
+        echo "done an echo \n\n" ;
     }
 
 }
