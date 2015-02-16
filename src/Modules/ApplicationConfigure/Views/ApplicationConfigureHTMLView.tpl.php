@@ -28,7 +28,12 @@
         <div class="col-sm-8 col-md-9 clearfix main-container">
             <h2 class="text-uppercase text-light"><a href="/">PTBuild - Pharaoh Tools</a></h2>
             <div class="row clearfix no-margin">
-                <form class="form-horizontal custom-form">
+
+                <?php
+                $act = '/index.php?control=ApplicationConfigure&action=save' ;
+                ?>
+
+                <form class="form-horizontal custom-form" action="<?= $act ; ?>" method="POST">
 
                     <h3 class="text-uppercase text-light" style="margin-top: 15px;">
                         Application Configuration <i style="font-size: 18px;" class="fa fa-chevron-right"></i>
@@ -42,25 +47,27 @@
                                 echo '  <label for="config_'.$one_config_slug.'" class="col-sm-2 control-label text-left">'.$one_conf_tails["label"].':</label>' ;
                                 echo '  <div class="col-sm-10">' ;
                                 echo '      <p>' ;
+
                                 switch ($one_conf_tails["type"]) {
                                     case "boolean" :
-                                        if (isset($pageVars["data"]["current_configs"]["app"][$one_config_slug])) {
-                                            if ($pageVars["data"]["current_configs"]["app"][$one_config_slug] == true) {
-                                                $onoff = "on";  }
+
+                                        if (isset($pageVars["data"]["current_configs"]["app_config"]["config_".$one_config_slug])) {
+                                            if ($pageVars["data"]["current_configs"]["app_config"]["config_".$one_config_slug]=="on") {
+                                                $onoff = "checked";  }
                                             else {
-                                                $onoff = "off" ; } }
+                                                $onoff = "" ; } }
                                         $onoff = (is_null($onoff))
-                                            ? $one_conf_tails["default"]
-                                            : null ;
-                                        echo '<input name="config_'.$one_config_slug.'" id="config_'.$one_config_slug.'" type="checkbox" value="'.$onoff.'" />' ;
+                                            ? ""
+                                            : $onoff ;
+                                        $onoff = ($onoff === true) ? "checked" : $onoff ;
+                                        echo '<input name="app_config[config_'.$one_config_slug.']" id="app_config[config_'.$one_config_slug.']" type="checkbox" checked="'.$onoff.'" autocomplete="off" />' ;
                                         break ;
                                     case "text" :
-                                        if (isset($pageVars["data"]["current_configs"]["app"][$one_config_slug])) {
-                                                $val = $pageVars["data"]["current_configs"]["app"][$one_config_slug];  }
+                                        if (isset($pageVars["data"]["current_configs"]["app_config"]["config_".$one_config_slug])) {
+                                                $val = $pageVars["data"]["current_configs"]["app_config"]["config_".$one_config_slug]; }
                                         if (!isset($val) && is_null($onoff)) {
                                             $val = $one_conf_tails["default"] ; }
-                                        echo '<input name="config_'.$one_config_slug.'" id="config_'.$one_config_slug.'" type="text" class="form-control" value="'.$one_conf_tails["value"].'" placeholder="'.$one_conf_tails["label"].'" />' ;
-                                        break ; }
+                                        echo '<input name="app_config[config_'.$one_config_slug.']" id="app_config[config_'.$one_config_slug.']" type="text" class="form-control" value="'.$val.'" placeholder="'.$one_conf_tails["label"].'" />' ;                                        break ; }
                                 echo '</p>';
                                 echo '  </div>';
                                 echo '  <div class="col-sm-offset-2 col-sm-10">';
@@ -68,7 +75,7 @@
                                 echo '</div>'; } }
                         else {
                             echo '<div class="form-group">' ;
-                            echo '    <p>No Default are providing editables configurations</p>';
+                            echo '    <p>No Default are providing editable configurations</p>';
                             echo '</div>'; }
                     ?>
 
@@ -100,28 +107,29 @@
                                     echo '      <p>' ;
                                     switch ($one_conf_tails["type"]) {
                                         case "boolean" :
-                                            if (isset($pageVars["data"]["current_configs"]["app"][$one_config_slug])) {
-                                                if ($pageVars["data"]["current_configs"]["app"][$one_config_slug] == true) {
+                                            if (isset($pageVars["data"]["current_configs"]["mod_config"][$module_name]["config_".$one_config_slug])) {
+                                                if ($pageVars["data"]["current_configs"]["mod_config"][$module_name]["config_".$one_config_slug] == true) {
                                                     $onoff = "on";  }
                                                 else {
                                                     $onoff = "off" ; } }
                                             $onoff = (is_null($onoff))
                                                 ? $one_conf_tails["default"]
                                                 : null ;
-                                            echo '<input name="config_'.$one_config_slug.'" id="config_'.$one_config_slug.'" type="checkbox" value="'.$onoff.'" />' ;
+                                            echo '<input name="mod_config['.$module_name.'][config_'.$one_config_slug.']" id="mod_config['.$module_name.'][config_'.$one_config_slug.']" type="checkbox" value="'.$onoff.'" />' ;
                                             break ;
                                         case "text" :
-                                            if (isset($pageVars["data"]["current_configs"]["app"][$one_config_slug])) {
-                                                $val = $pageVars["data"]["current_configs"]["app"][$one_config_slug];  }
+                                            if (isset($pageVars["data"]["current_configs"]["mod_config"][$module_name]["config_".$one_config_slug])) {
+                                                $val = $pageVars["data"]["current_configs"]["mod_config"][$module_name]["config_".$one_config_slug];  }
                                             if (!isset($val) && is_null($onoff)) {
                                                 $val = $one_conf_tails["default"] ; }
-                                            echo '<input name="config_'.$one_config_slug.'" id="config_'.$one_config_slug.'" type="text" class="form-control" value="'.$one_conf_tails["value"].'" placeholder="'.$one_conf_tails["label"].'" />' ;
+                                            echo '<input name="mod_config['.$module_name.'][config_'.$one_config_slug.']" id="mod_config['.$module_name.'][config_'.$one_config_slug.']" type="text" class="form-control" value="'.$val.'" placeholder="'.$one_conf_tails["label"].'" />' ;
                                             break ; }
-                                    echo '</p>';                                    echo '  </div>';
+                                    echo '</p>';
+                                    echo '  </div>';
                                     echo '</div>'; } } }
                         else {
                             echo '<div class="form-group">' ;
-                            echo '    <p>No Modules are providing editables configurations</p>';
+                            echo '    <p>No Modules are providing editable configurations</p>';
                             echo '</div>'; }
 
                     ?>
