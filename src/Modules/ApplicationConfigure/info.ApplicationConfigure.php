@@ -13,7 +13,7 @@ class ApplicationConfigureInfo extends PTConfigureBase {
     }
 
     public function routesAvailable() {
-      return array( "ApplicationConfigure" => array("show") );
+      return array( "ApplicationConfigure" => array("show", "save") );
     }
 
     public function routeAliases() {
@@ -22,7 +22,7 @@ class ApplicationConfigureInfo extends PTConfigureBase {
 
     public function helpDefinition() {
       $help = <<<"HELPDATA"
-This module provides configuration for this instance of PTBuild ...
+This module provides application level configuration settings for this instance of Pharaoh Build ...
 HELPDATA;
       return $help ;
     }
