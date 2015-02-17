@@ -38,13 +38,15 @@ class LoggingAll extends BaseLinuxApp {
             $this->logMessage = self::askForInput("Enter Log Message", true) ; }
     }
 
-    public function log($message = null, $source = null) {
+    public function log($message = null, $source = null, $options=array() ) {
         if (isset($this->logMessage)) { $message = $this->logMessage ; }
         $stx = (strlen($source)>0) ? "[$source] " : "" ;
         $fullMessage = "[Pharaoh Logging] " . $stx . $message . "\n" ;
         file_put_contents("php://stderr", $fullMessage );
-        if (isset($this->params["php-log"])) {
+        if ($options["php-log"] == true || (isset($this->params["php-log"]) && $this->params["php-log"] == true) ) {
             error_log($fullMessage) ; }
+        if ($options["echo-log"] == true || (isset($this->params["echo-log"]) && $this->params["echo-log"] == true) ) {
+            echo $fullMessage ; }
     }
 
 }
