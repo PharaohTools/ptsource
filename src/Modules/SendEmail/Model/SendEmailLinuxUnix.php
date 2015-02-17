@@ -34,7 +34,7 @@ class SendEmailLinuxUnix extends Base {
         $defaults = file_get_contents($file) ;
         $defaults = new \ArrayObject(json_decode($defaults));
         // error_log(serialize($defaults)) ;
-        $subject = "Pharaoh Build Result - ". $defaults["project-name"]." "."build-".$run;
+        $subject = "Pharaoh Build Result - ". $defaults["project-name"]." ".", Run ID -".$run;
         $message = $this->params["run-status"];
         $to = $defaults["email-id"] ;
 
