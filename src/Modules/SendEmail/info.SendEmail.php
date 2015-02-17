@@ -27,7 +27,7 @@ class SendEmailInfo extends PTConfigureBase {
     public function configuration() {
         return array(
             "smtp_server"=> array( "type" => "text", "default" => "SMTP Server", "label" => "SMTP Server Address", ),
-            "from"=> array( "type" => "text", "default" => "example@mail.com", "label" => "From Email", ),
+            "from_email"=> array( "type" => "text", "default" => "example@mail.com", "label" => "Email Address", ),
             "username"=> array( "type" => "text", "default" => "example", "label" => "Email Username", ),
             "password"=> array( "type" => "text", "default" => "none", "label" => "Email Password", ),
             "port"=> array( "type" => "text", "default" => "25", "label" => "Email Server Port", ),
@@ -37,7 +37,7 @@ class SendEmailInfo extends PTConfigureBase {
     public function helpDefinition() {
        $help = <<<"HELPDATA"
     This extension provides integration with SendEmail as a Build Step. It provides code
-    functionality, but no extra commands.
+    functionality, but no extra CLI commands.
 
     SendEmail
 
