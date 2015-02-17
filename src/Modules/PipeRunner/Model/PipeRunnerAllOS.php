@@ -59,7 +59,6 @@ class PipeRunnerAllOS extends Base {
         $stepRunner = $stepRunnerFactory->getModel($this->params) ;
         $pipeline = $this->getPipeline();
         $ressys = array() ;
-        foreach ($pipeline["steps"] as $hash => $stepDetails) { $hash = $hash; }
 		if (md5($hash) == $this->params["accesscode"])
         	return $this->runPipe();
 		else
@@ -123,44 +122,45 @@ class PipeRunnerAllOS extends Base {
     }
 
     public function runChild() {
+        // @todo this is 30 lines long
+        $this->params["build-settings"]["app_config"] = \Model\AppConfig::getAppVariable("app_config");
+        $this->params["build-settings"]["mod_config"] = \Model\AppConfig::getAppVariable("mod_config");
+        $eventRunnerFactory = new \Model\EventRunner() ;
+        $eventRunner = $eventRunnerFactory->getModel($this->params) ;
+        $eventRunner->eventRunner("afterSettings") ;
+        $loggingFactory = new \Model\Logging();
+        $this->params["echo-log"] = true ;
+        $logging = $loggingFactory->getModel($this->params);
         $stepRunnerFactory = new \Model\StepRunner() ;
         $stepRunner = $stepRunnerFactory->getModel($this->params) ;
         $pipeline = $this->getPipeline();
-        //  @todo this should become an event called beforeSettings
-        $eventRunnerFactory = new \Model\EventRunner() ;
-        $eventRunner = $eventRunnerFactory->getModel($this->params) ;
-        $eventRunner->eventRunner("beforeSettings") ;
-        echo "Writing to temp file ". PIPEDIR.DS.$this->params["item"].DS.'tmpfile'."\n" ;
-        echo "Executing as ".self::executeAndLoad("whoami")."\n" ;
+        $logging->log("Writing to temp file ". PIPEDIR.DS.$this->params["item"].DS.'tmpfile', $this->getModuleName()) ;
+        $logging->log("Executing as ".self::executeAndLoad("whoami"), $this->getModuleName()) ;
         $workspace = $this->getWorkspace() ;
         $dir = $workspace->getWorkspaceDir()  ;
-        echo "Changing to workspace directory $dir\n" ;
+        $logging->log("Changing to workspace directory $dir", $this->getModuleName()) ;
         chdir($dir);
         $ressys = array() ;
         $eventRunner->eventRunner("beforeBuild") ;
         foreach ($pipeline["steps"] as $hash => $stepDetails) {
-            echo "Executing step id $hash\n" ;
+            $logging->log("Executing step id $hash", $this->getModuleName()) ;
             $res = $stepRunner->stepRunner($stepDetails, $this->params["item"]) ;
             $evar  = "Step execution " ;
             $evar .= ($res) ? "Success" : "Failed" ;
             $evar .= ", ID $hash" ;
-            echo $evar."\n\n" ;
+            $logging->log($evar, $this->getModuleName()) ;
+            echo "\n" ;
             $ressys[] = $res ;
             if ($res==false) break ; }
-
-        //  @todo this should become an event called buildComplete
         $eventRunner->eventRunner("beforeBuildComplete") ;
-
         $ret = (in_array(false, $ressys)) ? "FAILED EXECUTION\n" : "SUCCESSFUL EXECUTION\n" ;
-        $status = (in_array(false, $ressys)) ? "FAIL" : "SUCCESS" ;
-        echo $ret;
-
-        //  @todo this should become an event called buildComplete
+        $logging->log($ret, $this->getModuleName()) ;
+        $this->params["run-status"] = (in_array(false, $ressys)) ? "FAIL" : "SUCCESS" ;
+        $eventRunner->params = $this->params ;
         $eventRunner->eventRunner("afterBuildComplete") ;
-
-		$this->setRunEndTime($status);
+		$this->setRunEndTime($this->params["run-status"]) ;
         // $this->sendEmail($status);
-        return $this->saveRunLog();
+        return $this->saveRunLog() ;
     }
 
     private function getExecutionOutput() {
@@ -169,8 +169,8 @@ class PipeRunnerAllOS extends Base {
         return $o ;
     }
 
-    private function getExecutionStatus() {
-        $o = $this->getExecutionOutput() ;
+    private function getExecutionStatus($o = null) {
+        $o = ($o==null) ? $this->getExecutionOutput() : $o ;
         if (strpos($o, "SUCCESSFUL EXECUTION") !== false || (strpos($o, "FAILED EXECUTION") !== false)) { return true ; }
         return false ;
     }
@@ -214,12 +214,16 @@ class PipeRunnerAllOS extends Base {
     }
 
     public function saveRunLog() {
+        $loggingFactory = new \Model\Logging();
+        $this->params["echo-log"] = true ;
+        $logging = $loggingFactory->getModel($this->params);
         $file = PIPEDIR.DS.$this->params["item"].DS.'history'.DS.$this->params["run-id"] ;
         $buildOut = $this->getExecutionOutput() ;
         file_put_contents($file, $buildOut) ;
         if (file_exists($file)){
             $f = PIPEDIR.DS.$this->params["item"].DS.$this->params["run-id"] ;
-            self::executeAndOutput("rm -f $f", "Removing temp log file");
+            $logging->log("Removing temp log file", $this->getModuleName()) ;
+            self::executeAndOutput("rm -f $f");
 			return $this->params["run-id"] ; }
         return false ;
     }
