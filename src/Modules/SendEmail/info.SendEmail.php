@@ -26,26 +26,11 @@ class SendEmailInfo extends PTConfigureBase {
 
     public function configuration() {
         return array(
-            "smtp_server"=> array(
-                "type" => "text",
-                "default" => "SMTP Server",
-                "label" => "Enter SMTP Server Address?",
-            ),
-            "username"=> array(
-                "type" => "text",
-                "default" => "example@mail.com",
-                "label" => "Email Username",
-            ),
-            "password"=> array(
-                "type" => "text",
-                "default" => "none",
-                "label" => "Email Password",
-            ),
-            "port"=> array(
-                "type" => "text",
-                "default" => "25",
-                "label" => "Email Server Port",
-            ),
+            "smtp_server"=> array( "type" => "text", "default" => "SMTP Server", "label" => "SMTP Server Address", ),
+            "from"=> array( "type" => "text", "default" => "example@mail.com", "label" => "From Email", ),
+            "username"=> array( "type" => "text", "default" => "example", "label" => "Email Username", ),
+            "password"=> array( "type" => "text", "default" => "none", "label" => "Email Password", ),
+            "port"=> array( "type" => "text", "default" => "25", "label" => "Email Server Port", ),
         );
     }
 
