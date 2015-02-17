@@ -59,6 +59,7 @@ class PipeRunnerAllOS extends Base {
         $stepRunner = $stepRunnerFactory->getModel($this->params) ;
         $pipeline = $this->getPipeline();
         $ressys = array() ;
+        foreach ($pipeline["steps"] as $hash => $stepDetails) { $hash = $hash; }
 		if (md5($hash) == $this->params["accesscode"])
         	return $this->runPipe();
 		else
