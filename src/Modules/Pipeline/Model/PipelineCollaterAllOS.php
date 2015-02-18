@@ -25,6 +25,7 @@ class PipelineCollaterAllOS extends Base {
         $collated = array_merge($collated, $this->getStatuses()) ;
         $collated = array_merge($collated, $this->getDefaults()) ;
         $collated = array_merge($collated, $this->getSteps()) ;
+        $collated = array_merge($collated, $this->getSettings()) ;
         return $collated ;
     }
 
@@ -135,6 +136,19 @@ class PipelineCollaterAllOS extends Base {
             $logging = $loggingFactory->getModel($this->params) ;
             $logging->log("No steps file available in build", $this->getModuleName()) ; }
         return array("steps" => $steps) ;
+    }
+
+    private function getSettings() {
+        $settings = array();
+        $settingsFile = PIPEDIR.DS.$this->params["item"].DS.'settings' ;
+        if (file_exists($settingsFile)) {
+            $settingsFileData =  file_get_contents($settingsFile) ;
+            $settings = json_decode($settingsFileData, true) ; }
+        else {
+            $loggingFactory = new \Model\Logging() ;
+            $logging = $loggingFactory->getModel($this->params) ;
+            $logging->log("No settings file available in build", $this->getModuleName()) ; }
+        return array("settings" => $settings) ;
     }
 
 }
