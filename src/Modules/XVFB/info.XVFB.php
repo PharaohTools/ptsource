@@ -6,7 +6,7 @@ class XVFBInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "XVFB Provisioner Integration";
+    public $name = "XVFB Virtual Desktop Integration";
 
     public function _construct() {
         parent::__construct();
@@ -25,9 +25,12 @@ class XVFBInfo extends PTConfigureBase {
     }
 
     public function buildSettings() {
+        return array("xvfb_during_build");
+    }
+
+    public function configuration() {
         return array(
-            "xvfb_during_build"
-            // "xvfb_during_build"=> array("type" => "boolean", "default" => false, "label" => "Start Xvfb before the build, and shut it down after.", ),
+            "xvfb_command"=> array("type" => "text", "default" => "", "label" => "XVFB Command Location?", ),
         );
     }
 

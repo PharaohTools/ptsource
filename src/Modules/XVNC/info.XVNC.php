@@ -6,7 +6,7 @@ class XVNCInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "XVNC Provisioner Integration";
+    public $name = "XVNC Virtual Desktop Integration";
 
     public function _construct() {
         parent::__construct();
@@ -25,9 +25,12 @@ class XVNCInfo extends PTConfigureBase {
     }
 
     public function buildSettings() {
+        return array("xvnc_during_build");
+    }
+
+    public function configuration() {
         return array(
-            "xvnc_during_build"
-            // "xvnc_during_build"=> array("type" => "boolean", "default" => false, "label" => "Start Xvfb before the build, and shut it down after.", ),
+            "xvfb_command"=> array("type" => "text", "default" => "", "label" => "XVFB Command Location?", ),
         );
     }
 
