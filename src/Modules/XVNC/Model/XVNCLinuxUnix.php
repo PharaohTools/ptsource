@@ -43,48 +43,60 @@ class XVNCLinuxUnix extends Base {
 
     public function startXvnc() {
         $run = $this->params["run-id"];
-        $file = PIPEDIR.DS.$this->params["item"].DS.'defaults';
-        $defaults = file_get_contents($file) ;
-        $defaults = new \ArrayObject(json_decode($defaults));
-        // error_log(serialize($defaults)) ;
-
-        $subject = "Pharaoh Build Result - ". $defaults["project-name"]." ".", Run ID -".$run;
-        $message = $this->params["run-status"];
-        $to = $defaults["email-id"] ;
 
         $loggingFactory = new \Model\Logging();
         $this->params["echo-log"] = true ;
         $logging = $loggingFactory->getModel($this->params);
 
-        $xvncCommand = "" ;
+        $file = PIPEDIR.DS.$this->params["item"].DS.'defaults';
+        $defaults = file_get_contents($file) ;
+        $defaults = json_decode($defaults, true);
 
-        $result = self::executeAndOutput($xvncCommand) ;
-        if ($result == true) { $logging->log ("Email sent successfully", $this->getModuleName() ) ; }
-        else { $logging->log ("Email sending error", $this->getModuleName() ) ; }
-        return $result;
+        $file = PIPEDIR.DS.$this->params["item"].DS.'settings';
+        $settings = file_get_contents($file) ;
+        $settings = json_decode($settings, true);
+
+        $mn = $this->getModuleName() ;
+        if ($settings[$mn]["xvnc_during_build"] == "on") {
+            $logging->log ("XVNC Enabled for build, starting...", $this->getModuleName() ) ;
+            $xvncCommand = "echo 'pretend to start xvnc'" ;
+            $result = self::executeAndOutput($xvncCommand) ;
+            if ($result == true) { $logging->log ("XVNC started successfully", $this->getModuleName() ) ; }
+            else { $logging->log ("XVNC start error", $this->getModuleName() ) ; }
+            return $result;
+        }  else {
+            $logging->log ("XVNC Not enabled for build, ignoring...", $this->getModuleName() ) ;
+            return true ;
+        }
     }
 
     public function stopXvnc() {
         $run = $this->params["run-id"];
-        $file = PIPEDIR.DS.$this->params["item"].DS.'defaults';
-        $defaults = file_get_contents($file) ;
-        $defaults = new \ArrayObject(json_decode($defaults));
-        // error_log(serialize($defaults)) ;
-
-        $subject = "Pharaoh Build Result - ". $defaults["project-name"]." ".", Run ID -".$run;
-        $message = $this->params["run-status"];
-        $to = $defaults["email-id"] ;
 
         $loggingFactory = new \Model\Logging();
         $this->params["echo-log"] = true ;
         $logging = $loggingFactory->getModel($this->params);
 
-        $xvncCommand = "" ;
+        $file = PIPEDIR.DS.$this->params["item"].DS.'defaults';
+        $defaults = file_get_contents($file) ;
+        $defaults = json_decode($defaults, true);
 
-        $result = self::executeAndOutput($xvncCommand) ;
-        if ($result == true) { $logging->log ("Email sent successfully", $this->getModuleName() ) ; }
-        else { $logging->log ("Email sending error", $this->getModuleName() ) ; }
-        return $result;
+        $file = PIPEDIR.DS.$this->params["item"].DS.'settings';
+        $settings = file_get_contents($file) ;
+        $settings = json_decode($settings, true);
+
+        $mn = $this->getModuleName() ;
+        if ($settings[$mn]["xvnc_during_build"] == "on") {
+            $logging->log ("XVNC Enabled for build, stopping...", $this->getModuleName() ) ;
+            $xvncCommand = "echo 'pretend to stop xvnc'" ;
+            $result = self::executeAndOutput($xvncCommand) ;
+            if ($result == true) { $logging->log ("XVNC stopped successfully", $this->getModuleName() ) ; }
+            else { $logging->log ("XVNC stop error", $this->getModuleName() ) ; }
+            return $result;
+        }  else {
+            $logging->log ("XVNC Not enabled for build, ignoring...", $this->getModuleName() ) ;
+            return true ;
+        }
     }
 
 }
