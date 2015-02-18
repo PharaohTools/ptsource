@@ -20,7 +20,7 @@ class XVFBLinuxUnix extends Base {
 
     public function getSettingFormFields() {
         $ff = array(
-            "xvnc_during_build" =>
+            "xvfb_during_build" =>
                 array(
                     "type" => "boolean",
                     "optional" => true,
@@ -57,17 +57,16 @@ class XVFBLinuxUnix extends Base {
         $settings = json_decode($settings, true);
 
         $mn = $this->getModuleName() ;
-        if ($settings[$mn]["xvnc_during_build"] == "on") {
+        if ($settings[$mn]["xvfb_during_build"] == "on") {
             $logging->log ("XVFB Enabled for build, starting...", $this->getModuleName() ) ;
-            $xvncCommand = "echo 'pretend to start xvnc'" ;
-            $result = self::executeAndOutput($xvncCommand) ;
+            $xvfbCommand = "echo 'pretend to start xvfb'" ;
+            $result = self::executeAndOutput($xvfbCommand) ;
             if ($result == true) { $logging->log ("XVFB started successfully", $this->getModuleName() ) ; }
             else { $logging->log ("XVFB start error", $this->getModuleName() ) ; }
-            return $result;
-        }  else {
+            return $result; }
+        else {
             $logging->log ("XVFB Not enabled for build, ignoring...", $this->getModuleName() ) ;
-            return true ;
-        }
+            return true ; }
     }
 
     public function stopXvnc() {
@@ -86,17 +85,16 @@ class XVFBLinuxUnix extends Base {
         $settings = json_decode($settings, true);
 
         $mn = $this->getModuleName() ;
-        if ($settings[$mn]["xvnc_during_build"] == "on") {
+        if ($settings[$mn]["xvfb_during_build"] == "on") {
             $logging->log ("XVFB Enabled for build, stopping...", $this->getModuleName() ) ;
-            $xvncCommand = "echo 'pretend to stop xvnc'" ;
-            $result = self::executeAndOutput($xvncCommand) ;
+            $xvfbCommand = "echo 'pretend to stop xvfb'" ;
+            $result = self::executeAndOutput($xvfbCommand) ;
             if ($result == true) { $logging->log ("XVFB stopped successfully", $this->getModuleName() ) ; }
             else { $logging->log ("XVFB stop error", $this->getModuleName() ) ; }
-            return $result;
-        }  else {
+            return $result; }
+        else {
             $logging->log ("XVFB Not enabled for build, ignoring...", $this->getModuleName() ) ;
-            return true ;
-        }
+            return true ; }
     }
 
 }

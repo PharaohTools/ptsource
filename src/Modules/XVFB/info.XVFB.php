@@ -17,7 +17,7 @@ class XVFBInfo extends PTConfigureBase {
     }
 
     public function routeAliases() {
-        return array("xvnc"=>"XVFB");
+        return array("xvfb"=>"XVFB");
     }
 
     public function events() {
@@ -26,8 +26,8 @@ class XVFBInfo extends PTConfigureBase {
 
     public function buildSettings() {
         return array(
-            "xvnc_during_build"
-            // "xvnc_during_build"=> array("type" => "boolean", "default" => false, "label" => "Start Xvfb before the build, and shut it down after.", ),
+            "xvfb_during_build"
+            // "xvfb_during_build"=> array("type" => "boolean", "default" => false, "label" => "Start Xvfb before the build, and shut it down after.", ),
         );
     }
 
