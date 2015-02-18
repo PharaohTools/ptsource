@@ -17,6 +17,7 @@ class ApplicationConfigureAllOS extends Base {
     public function getData() {
         $ret["app_configs"] = $this->getAppConfigs();
         $ret["mod_configs"] = $this->getModuleConfigs();
+        $ret["current_configs"] = $this->getCurrentConfigs();
         return $ret ;
     }
 
@@ -33,7 +34,7 @@ class ApplicationConfigureAllOS extends Base {
                         "desc" => "Enter the title you'd like to apply to this instance (for clustering)",
                         "default" => "My Development Instance" ),
                     "organisation" => array(
-                        "label" => "Instance Title",
+                        "label" => "Organisation",
                         "type" => "text",
                         "desc" => "Enter the name of your Organisation",
                         "default" => "An Organisation" ),
@@ -55,6 +56,13 @@ class ApplicationConfigureAllOS extends Base {
                 $modName = str_replace("Info", "", $fullName) ;
                 $modName = str_replace("\\", "", $modName) ;
                 $configs[$modName] = $info->configuration() ; } }
+        return $configs ;
+    }
+
+    private function getCurrentConfigs() {
+        $configs = array();
+        $configs["app_config"] = \Model\AppConfig::getAppVariable("app_config") ;
+        $configs["mod_config"] = \Model\AppConfig::getAppVariable("mod_config") ;
         return $configs ;
     }
 

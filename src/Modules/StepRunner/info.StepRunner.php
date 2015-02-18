@@ -2,7 +2,7 @@
 
 Namespace Info;
 
-class StepRunnerInfo extends CleopatraBase {
+class StepRunnerInfo extends PTConfigureBase {
 
   public $hidden = false;
 

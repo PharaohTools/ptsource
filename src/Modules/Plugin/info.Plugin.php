@@ -2,11 +2,11 @@
 
 Namespace Info;
 
-class PluginInfo extends CleopatraBase {
+class PluginInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "Shell Provisioner Integration";
+    public $name = "Plugin Integration";
 
     public function _construct() {
         parent::__construct();
@@ -26,8 +26,7 @@ class PluginInfo extends CleopatraBase {
 
     public function helpDefinition() {
        $help = <<<"HELPDATA"
-    This extension provides integration with Shell as a Build Step. It provides code
-    functionality, but no extra commands.
+    This extension provides integration to run Plugins. It call plugin Triger.php in plugins folder.
 
     Shell
 

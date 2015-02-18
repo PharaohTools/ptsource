@@ -2,7 +2,7 @@
 
 Namespace Info;
 
-class BuildListInfo extends CleopatraBase {
+class BuildListInfo extends PTConfigureBase {
 
     public $hidden = false;
 

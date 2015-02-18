@@ -19,13 +19,13 @@
                 <a href="/index.php?control=BuildConfigure&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
                     <i class="fa fa-user"></i> Configure
                 </a>
-                <a href="/index.php?control=BuildHome&action=workspace&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
+                <a href="/index.php?control=Workspace&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
                     <i class="fa fa-folder-open-o"></i> Workspace
                 </a>
                 <a href="/index.php?control=BuildHome&action=changes&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
                     <i class="fa fa-bar-chart-o"></i> Changes <span class="badge">3</span>
                 </a>
-                <a href="/index.php?control=PipeRunner&action=history&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
+                <a href="/index.php?control=BuildHome&action=history&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
                     <i class="fa fa-bar-chart-o"></i> History <span class="badge">3</span>
                 </a>
                 <a href="/index.php?control=BuildHome&action=delete&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
@@ -40,7 +40,7 @@
             <h4 class="text-uppercase text-light">Pipeline</h4>
             <div class="row clearfix no-margin">
                 <!--
-                <h3><a class="lg-anchor text-light" href="">Phrankinsense - Pharaoh Tools <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
+                <h3><a class="lg-anchor text-light" href="">PTBuild - Pharaoh Tools <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
                 -->
                 <p> Project Name: <?php echo $pageVars["data"]["pipeline"]["project-name"] ; ?></p>
                 <p> Project Slug: <?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?></p>

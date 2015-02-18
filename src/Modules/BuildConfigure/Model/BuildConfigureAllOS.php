@@ -17,6 +17,7 @@ class BuildConfigureAllOS extends Base {
     public function getData() {
         $ret["pipeline"] = $this->getPipeline();
         $ret["builders"] = $this->getBuilders();
+        $ret["settings"] = $this->getBuilderSettings();
         $ret["fields"] = $this->getBuilderFormFields();
         $ret["plugin"] = $this->getInstalledPlugins();
         $ret["pluginsenabled"] = $this->getEnabledPlugins();
@@ -33,6 +34,56 @@ class BuildConfigureAllOS extends Base {
         return $pipeline->getPipeline($this->params["item"]);
     }
 
+    public function getBuilders() {
+        $builderFactory = new \Model\Builder() ;
+        $builder = $builderFactory->getModel($this->params);
+        return $builder->getBuilders();
+    }
+
+    public function getBuilderSettings() {
+        $builderFactory = new \Model\Builder() ;
+        $builder = $builderFactory->getModel($this->params);
+        return $builder->getBuilderSettings();
+    }
+
+    public function getBuilderFormFields() {
+        $builderFactory = new \Model\Builder() ;
+        $builder = $builderFactory->getModel($this->params, "BuilderRepository");
+        return $builder->getAllBuildersFormFields();
+    }
+    
+
+    public function savePipeline() {
+        $this->params["project-slug"] = $this->getFormattedSlug() ;
+        $this->params["item"] = $this->params["project-slug"] ;
+        $pipelineFactory = new \Model\Pipeline() ;
+        $data = array(
+            "project-name" => $this->params["project-name"],
+            "project-slug" => $this->params["project-slug"],
+            "project-description" => $this->params["project-description"],
+            "default-scm-url" => $this->params["default-scm-url"],
+			"email-id" => $this->params["email-id"] ) ;
+        if ($this->params["creation"] == "yes") {
+            $pipelineDefault = $pipelineFactory->getModel($this->params);
+            $pipelineDefault->createPipeline($this->params["project-slug"]) ; }
+        $pipelineSaver = $pipelineFactory->getModel($this->params, "PipelineSaver");
+        // @todo  dunno y i have to force thi sparam
+        $pipelineSaver->params["item"] = $this->params["item"];
+        $pipelineSaver->savePipeline(array("type" => "Defaults", "data" => $data ));
+        $pipelineSaver->savePipeline(array("type" => "Steps", "data" => $this->params["steps"] ));
+        return true ;
+    }
+
+    private function getFormattedSlug() {
+        if ($this->params["project-slug"] == "") {
+            $this->params["project-slug"] = str_replace(" ", "_", $this->params["project-name"]);
+            $this->params["project-slug"] = str_replace("'", "", $this->params["project-slug"]);
+            $this->params["project-slug"] = str_replace('"', "", $this->params["project-slug"]);
+            $this->params["project-slug"] = str_replace("/", "", $this->params["project-slug"]);
+            $this->params["project-slug"] = strtolower($this->params["project-slug"]); }
+        return $this->params["project-slug"] ;
+    }
+    
     public function getInstalledPlugins()
     {
     $plugin = scandir(str_replace('pipes','plugins/installed',PIPEDIR)) ;
@@ -85,67 +136,6 @@ class BuildConfigureAllOS extends Base {
         return $enabledplugins;
     }
 
-    public function getBuilders() {
-        $builderFactory = new \Model\Builder() ;
-        $builder = $builderFactory->getModel($this->params);
-        return $builder->getBuilders();
-    }
-
-    public function getBuilderFormFields() {
-        $builderFactory = new \Model\Builder() ;
-        $builder = $builderFactory->getModel($this->params, "BuilderRepository");
-        return $builder->getAllBuildersFormFields();
-    }
     
-
-    public function savePipeline() {
-        $this->params["project-slug"] = $this->getFormattedSlug() ;
-        $this->params["item"] = $this->params["project-slug"] ;
-        $pipelineFactory = new \Model\Pipeline() ;
-        $data = array(
-            "project-name" => $this->params["project-name"],
-            "project-slug" => $this->params["project-slug"],
-            "project-description" => $this->params["project-description"],
-            "default-scm-url" => $this->params["default-scm-url"],
-			"email-id" => $this->params["email-id"] ) ;
-        if ($this->params["creation"] == "yes") {
-            $pipelineDefault = $pipelineFactory->getModel($this->params);
-            $pipelineDefault->createPipeline($this->params["project-slug"]) ; }
-        $pipelineSaver = $pipelineFactory->getModel($this->params, "PipelineSaver");
-        // @todo  dunno y i have to force thi sparam
-        $pipelineSaver->params["item"] = $this->params["item"];
-        $pipelineSaver->savePipeline(array("type" => "Defaults", "data" => $data ));
-        $pipelineSaver->savePipeline(array("type" => "Steps", "data" => $this->params["steps"] ));
-        return true ;
-    }
-
-    public function savePluginData() {
-        $plugins = $this->getInstalledPlugins();
-        foreach ($plugins['details'] as $plugin=>$detail) {
-            if ($this->params[$detail['name']][enable]  === 'true') {
-                $pluginData = $this->params['plugin'];
-                $this->saveBuildPluginData($pluginData);
-            }
-        }
-    }
-    
-    private function saveBuildPluginData($data)
-    {
-        $file = PIPEDIR . DS . $this->params["item"] . DS . 'pluginData';
-        $pluginData = array();
-        $pluginData = $data;
-        $pluginData = json_encode($pluginData);
-        file_put_contents($file, $pluginData);
-    }
-
-    private function getFormattedSlug() {
-        if ($this->params["project-slug"] == "") {
-            $this->params["project-slug"] = str_replace(" ", "_", $this->params["project-name"]);
-            $this->params["project-slug"] = str_replace("'", "", $this->params["project-slug"]);
-            $this->params["project-slug"] = str_replace('"', "", $this->params["project-slug"]);
-            $this->params["project-slug"] = str_replace("/", "", $this->params["project-slug"]);
-            $this->params["project-slug"] = strtolower($this->params["project-slug"]); }
-        return $this->params["project-slug"] ;
-    }
 
 }

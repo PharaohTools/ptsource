@@ -23,7 +23,7 @@ class BuilderCollaterAllOS extends Base {
         $collated = array() ;
         $collated["fields"] =  $this->getFormFields($module) ;
         $collated["step-types"] = $this->getStepTypes($module) ;
-        // $collated = array_merge($collated, $this->getSteps()) ;
+        $collated["settings"] = $this->getSettings($module) ;
         return $collated ;
     }
 
@@ -31,7 +31,10 @@ class BuilderCollaterAllOS extends Base {
         $stepFactoryClass = '\Model\\'.$module;
         $stepFactory = new $stepFactoryClass() ;
         $stepModel = $stepFactory->getModel($this->params);
-        $modFormFields = $stepModel->getFormFields() ;
+        if (method_exists($stepModel, "getFormFields")) {
+            $modFormFields = $stepModel->getFormFields() ; }
+        else {
+            $modFormFields = array() ; }
         return $modFormFields ;
     }
 
@@ -39,7 +42,21 @@ class BuilderCollaterAllOS extends Base {
         $stepFactoryClass = '\Model\\'.$module;
         $stepFactory = new $stepFactoryClass() ;
         $stepModel = $stepFactory->getModel($this->params);
-        $modStepTypes = $stepModel->getStepTypes() ;
+        if (method_exists($stepModel, "getFormFields")) {
+            $modStepTypes = $stepModel->getStepTypes() ; }
+        else {
+            $modStepTypes = array() ; }
+        return $modStepTypes ;
+    }
+
+    private function getSettings($module) {
+        $stepFactoryClass = '\Model\\'.$module;
+        $stepFactory = new $stepFactoryClass() ;
+        $stepModel = $stepFactory->getModel($this->params);
+        if (method_exists($stepModel, "getSettingFormFields")) {
+            $modStepTypes = $stepModel->getSettingFormFields() ; }
+        else {
+            $modStepTypes = array() ; }
         return $modStepTypes ;
     }
 

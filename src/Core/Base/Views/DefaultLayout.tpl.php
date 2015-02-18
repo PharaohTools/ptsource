@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Phrankinsense - Pharaoh Tools</title>
+    <title>PTBuild - Pharaoh Tools</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../../../Modules/PostInput/Assets/css/bootstrap.min.css" rel="stylesheet">

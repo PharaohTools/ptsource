@@ -2,7 +2,7 @@
 
 Namespace Info;
 
-class SignupInfo extends CleopatraBase {
+class SignupInfo extends PTConfigureBase {
 
     public $hidden = false;
 

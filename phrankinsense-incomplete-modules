@@ -1,4 +1,4 @@
-Cleopatra Modules to be created
+PTConfigure Modules to be created
 
 BUG
 
@@ -23,9 +23,9 @@ All of Pharaoh
 -------------------
 Add lots of route aliases
 for instance
-cleopatra digital-ocean box-destroy
-cleopatra digital-ocean destroy-box
-cleopatra digital-ocean destroy-boxes
+ptconfigure digital-ocean box-destroy
+ptconfigure digital-ocean destroy-box
+ptconfigure digital-ocean destroy-boxes
 should all just work the same. Makes using the app at the command line way easier.
 
 
@@ -85,7 +85,7 @@ ignore those directories
 
 for autopilot execute create shortcuts for a) action execute to just x b) --af --auto for file path c) --dfd, --default-dir
 for default dir so
-cleopatra auto x --af="thisone.php" --dfd
+ptconfigure auto x --af="thisone.php" --dfd
 is much shorter
 
 ask zend to show me how to do autofill by tab at command line and also coloured command line output (that might be stack
@@ -170,8 +170,8 @@ WAIT - PHPUnit - PHP Unit - The PHP Implementation of the XUnit Unit Testing sta
 WAIT - RubyBDD - Ruby BDD Suite - Install Common Gems for Cucumber, Calabash, Capybara and Saucelabs
 
 DONE - ApacheServer - Apache Server - Install or remove the Apache Server
-DONE - Cleopatra - Cleopatra - Upgrade or Re-install Cleopatra - PHPGITAPP GET TAG
-DONE - Dapperstrano - Dapperstrano - The PHP Automated Website Deployment tool - PHPGITAPP GET TAG
+DONE - PTConfigure - PTConfigure - Upgrade or Re-install PTConfigure - PHPGITAPP GET TAG
+DONE - PTDeploy - PTDeploy - The PHP Automated Website Deployment tool - PHPGITAPP GET TAG
 DONE - Firefox - Firefox - Install or remove Firefox
 DONE - IntelliJ - IntelliJ - A great IDE from JetBrains
 DONE - GitBucket - Git Bucket - The Git SCM Management Web Application
@@ -184,11 +184,11 @@ DONE - NagiosServer - Nagios Server - Install or remove the Nagios Server
 DONE - NginxServer - Nginx Server - Install or remove the Nginx Server
 DONE - NodeJS - Node JS - The Server Side Javascript Engine
 DONE - Parallax - Parallax - The parallel execution tool from Golden Contact - PHPGITAPP GET TAG
-DONE - Phlagrant - Phlagrant - The Virtual Machine management solution for PHP - PHPGITAPP GET TAG
+DONE - PTVirtualize - PTVirtualize - The Virtual Machine management solution for PHP - PHPGITAPP GET TAG
 DONE - PostgresServer - Postgres Server - The Postgres RDBMS Server
 DONE - RubySystem - Ruby RVM System wide - The Ruby version manager system wide version
 DONE - Python - Python - The programming language
-DONE - Testingkamen - Testingkamen - Upgrade or Re-install Testingkamen PHP - PHPGITAPP GET TAG
+DONE - PTTest - PTTest - Upgrade or Re-install PTTest PHP - PHPGITAPP GET TAG
 DONE - SeleniumServer - The Selenium Web Browser controlling server
 DONE - SVN - SVN - The Source Control Manager
 
@@ -592,7 +592,7 @@ Gem (RubyGems), extend a PackageManager module that apt-get and yum can also use
 
 
 
-Cleopatra
+PTConfigure
 ----------------
 Cleofy should be Updated to use the Templating module  DONE
 
@@ -606,12 +606,12 @@ DONE - ApacheConf - Apache Conf - Install a Apache Configuration
 DONE - ApacheModules - Apache Modules - Commonly used modules for Apache
 DONE - ApacheServer - Apache Server - Install or remove the Apache Server
 DONE - Apt - Add, Remove or Modify Apts
-DONE - Autopilot - Cleopatra Autopilot - User Defined Installations
+DONE - Autopilot - PTConfigure Autopilot - User Defined Installations
 DONE - Behat - Behat - The PHP BDD Testing Suite
-DONE - Cleofy - Cleopatra Cleofyer - Creates default autopilots for your project
-DONE - Cleopatra - Cleopatra - Upgrade or Re-install Cleopatra
+DONE - Cleofy - PTConfigure Cleofyer - Creates default autopilots for your project
+DONE - PTConfigure - PTConfigure - Upgrade or Re-install PTConfigure
 DONE - Console
-DONE - Dapperstrano - Dapperstrano - The PHP Automated Website Deployment tool
+DONE - PTDeploy - PTDeploy - The PHP Automated Website Deployment tool
 DONE - DeveloperTools - Developer Tools - IDE's and other tools for Developers
 DONE - EnvironmentConfig - Environment Configuration - Configure Environments for a project
 DONE - File - Add, Remove or Modify Files
@@ -619,12 +619,12 @@ DONE - Firefox14 - Firefox 14 - A version of Firefox highly tested with Selenium
 DONE - Firefox17 - Firefox 17 - A version of Firefox highly tested with Selenium Server
 DONE - Firewall - Add, Remove or Modify Firewalls
 DONE - Gem - Ruby Gems Package Manager
-DONE - Generator - Dapperstrano Autopilot Generator - Generate Autopilot files interactively
+DONE - Generator - PTDeploy Autopilot Generator - Generate Autopilot files interactively
 DONE - GitBucket - Git Bucket - The Git SCM Management Web Application
 DONE - GitLab - Git Lab - The Git SCM Management Web Application
 DONE - GitTools - Git Tools - Tools for working with Git SCM
 DONE - Hostname - View or Modify Hostname
-DONE - InstallPackage - Cleopatra Predefined Installers
+DONE - InstallPackage - PTConfigure Predefined Installers
 DONE - IntelliJ - IntelliJ - A great IDE from JetBrains
 DONE - Invoke - SSH Invocation Functions
 DONE - JRush - JRush - The Joomla command line utility from Golden Contact
@@ -650,7 +650,7 @@ DONE - PackageManager - Native Package Manager Wrapper - Install OS neutral pack
 DONE - PapyrusEditor - Papyrus Editor Web Interface
 DONE - Parallax - Parallax - The parallel execution tool from Golden Contact
 DONE - Pear - Pear Package Manager
-DONE - Phlagrant - Phlagrant - The Virtual Machine management solution for PHP
+DONE - PTVirtualize - PTVirtualize - The Virtual Machine management solution for PHP
 DONE - Port - Test a Port to see if its responding
 DONE - PostInput - HTTP Post/Get Input Interface
 DONE - Python - Python - The programming language
@@ -665,7 +665,7 @@ DONE - StandardTools - Standard Tools for any Installation
 DONE - SudoNoPass - Configure Passwordless Sudo for any User
 DONE - SystemDetection - System Detection - Detect the Running Operating System
 DONE - Templating - Templating
-DONE - Testingkamen - Testingkamen - Upgrade or Re-install Testingkamen
+DONE - PTTest - PTTest - Upgrade or Re-install PTTest
 DONE - UbuntuCompiler - Ubuntu Compiler - For Compiling Linux Programs
 DONE - User - Add, Remove or Modify Users
 
@@ -680,13 +680,13 @@ OK - ApacheConf - Apache Conf - Install a Apache Configuration
 OK - ApacheModules - Apache Modules - Commonly used modules for Apache
 OK - ApacheServer - Apache Server - Install or remove the Apache Server
 OK - Apt - Add, Remove or Modify Apts
-OK - Autopilot - Cleopatra Autopilot - User Defined Installations
+OK - Autopilot - PTConfigure Autopilot - User Defined Installations
 OK - Behat - Behat - The PHP BDD Testing Suite
 OK - BoxManager - Native Box Manager Wrapper - Install OS neutral environments
-OK - Cleofy - Cleopatra Cleofyer - Creates default autopilots for your project
-OK - Cleopatra - Cleopatra - Upgrade or Re-install Cleopatra
+OK - Cleofy - PTConfigure Cleofyer - Creates default autopilots for your project
+OK - PTConfigure - PTConfigure - Upgrade or Re-install PTConfigure
 OK - Console - Console - Output errors to the console
-OK - Dapperstrano - Dapperstrano - The PHP Automated Website Deployment tool
+OK - PTDeploy - PTDeploy - The PHP Automated Website Deployment tool
 OK - DeveloperTools - Developer Tools - IDE's and other tools for Developers
 OK - DigitalOcean - Digital Ocean Server Management Functions
 OK - Encryption - Encryption or Decryption of files
@@ -696,12 +696,12 @@ OK - Firefox14 - Firefox 14 - A version of Firefox highly tested with Selenium S
 OK - Firefox17 - Firefox 17 - A version of Firefox highly tested with Selenium Server
 OK - Firewall - Add, Remove or Modify Firewalls
 OK - Gem - Ruby Gems Package Manager
-OK - Generator - Dapperstrano Autopilot Generator - Generate Autopilot files interactively
+OK - Generator - PTDeploy Autopilot Generator - Generate Autopilot files interactively
 OK - GitBucket - Git Bucket - The Git SCM Management Web Application
 OK - GitLab - Git Lab - The Git SCM Management Web Application
 OK - GitTools - Git Tools - Tools for working with Git SCM
 OK - Hostname - View or Modify Hostname
-OK - InstallPackage - Cleopatra Predefined Installers
+OK - InstallPackage - PTConfigure Predefined Installers
 OK - IntelliJ - IntelliJ - A great IDE from JetBrains
 OK - Invoke - SSH Invocation Functions
 OK - JRush - JRush - The Joomla command line utility from Golden Contact
@@ -727,7 +727,7 @@ OK - PackageManager - Native Package Manager Wrapper - Install OS neutral packag
 OK - PapyrusEditor - Papyrus Editor Web Interface
 OK - Parallax - Parallax - The parallel execution tool from Golden Contact
 OK - Pear - Pear Package Manager
-OK - Phlagrant - Phlagrant - The Virtual Machine management solution for PHP
+OK - PTVirtualize - PTVirtualize - The Virtual Machine management solution for PHP
 OK - Port - Test a Port to see if its responding
 OK - PostInput - HTTP Post/Get Input Interface
 OK - PostgresServer - Postgres Server - The Postgres RDBMS Server
@@ -745,7 +745,7 @@ OK - StandardTools - Standard Tools for any Installation
 OK - SudoNoPass - Configure Passwordless Sudo for any User
 OK - SystemDetection - System Detection - Detect the Running Operating System
 OK - Templating - Templating
-OK - Testingkamen - Testingkamen - Upgrade or Re-install Testingkamen
+OK - PTTest - PTTest - Upgrade or Re-install PTTest
 OK - UbuntuCompiler - Ubuntu Compiler - For Compiling Linux Programs
 OK - User - Add, Remove or Modify Users
 OK - Yum - Add, Remove or Modify Yum Packages

@@ -21,6 +21,8 @@ class PipeRunnerAllOS extends Base {
         $ret["pipeline"] = $this->getPipeline();
         $ret["item"] = $this->params["item"];
         $ret["history_count"] = $this->getBuildNumber("last");
+        $ret["plugin"] = $this->getInstalledPlugins();
+        $ret["pluginsenabled"] = $this->getEnabledPlugins();
         return $ret ;
     }
 
@@ -55,16 +57,16 @@ class PipeRunnerAllOS extends Base {
     }
 
     public function apiRunPipe() {
-		$stepRunnerFactory = new \Model\StepRunner() ;
+        /*$stepRunnerFactory = new \Model\StepRunner() ;
         $stepRunner = $stepRunnerFactory->getModel($this->params) ;
         $pipeline = $this->getPipeline();
         $ressys = array() ;
         foreach ($pipeline["steps"] as $hash => $stepDetails) { $hash = $hash; }
-		if (md5($hash) == $this->params["accesscode"])
-        	return $this->runPipe();
-		else
-			echo "Access Failed";
-		die();
+        if (md5($hash) == $this->params["accesscode"])
+        return $this->runPipe();
+        else
+                echo "Access Failed";
+        die();*/
     }
 
     private function setRunStartTime($run) {
@@ -97,9 +99,9 @@ class PipeRunnerAllOS extends Base {
 
     private function runPipeForkCommand($run) {
         // this should be a phrank piperunner@cli and it should save the log to a named history
-        $cmd  = PHRCOMM.' piperunner child --pipe-dir="'.$this->params["pipe-dir"].'" ' ;
+        $cmd  = "sudo su golden -c'".PHRCOMM.' piperunner child --pipe-dir="'.$this->params["pipe-dir"].'" ' ;
         $cmd .= '--item="'.$this->params["item"].'" --run-id="'.$run.'" > '.PIPEDIR.DS.$this->params["item"].DS ;
-        $cmd .= 'tmpfile &' ;
+        $cmd .= 'tmpfile &'."'" ;
         error_log($cmd);
         $descr = array(
             0 => array(
@@ -126,35 +128,42 @@ class PipeRunnerAllOS extends Base {
         $stepRunnerFactory = new \Model\StepRunner() ;
         $stepRunner = $stepRunnerFactory->getModel($this->params) ;
         $pipeline = $this->getPipeline();
-        //echo PIPEDIR.DS.$this->params["item"].DS.'tmpfile'."\n\n" ;
+        //  @todo this should become an event called beforeSettings
+        $eventRunnerFactory = new \Model\EventRunner() ;
+        $eventRunner = $eventRunnerFactory->getModel($this->params) ;
+        $eventRunner->eventRunner("beforeSettings") ;
+        echo "Writing to temp file ". PIPEDIR.DS.$this->params["item"].DS.'tmpfile'."\n" ;
+        echo "Executing as ".self::executeAndLoad("whoami")."\n" ;
+        $workspace = $this->getWorkspace() ;
+        $dir = $workspace->getWorkspaceDir()  ;
+        echo "Changing to workspace directory $dir\n" ;
+        chdir($dir);
         $ressys = array() ;
+        $eventRunner->eventRunner("beforeBuild") ;
         foreach ($pipeline["steps"] as $hash => $stepDetails) {
             echo "Executing step id $hash\n" ;
-            $res = $stepRunner->stepRunner($stepDetails) ;
+            $res = $stepRunner->stepRunner($stepDetails, $this->params["item"]) ;
             $evar  = "Step execution " ;
             $evar .= ($res) ? "Success" : "Failed" ;
             $evar .= ", ID $hash" ;
             echo $evar."\n\n" ;
             $ressys[] = $res ;
             if ($res==false) break ; }
+
+        //  @todo this should become an event called buildComplete
+        $eventRunner->eventRunner("beforeBuildComplete") ;
+
         $ret = (in_array(false, $ressys)) ? "FAILED EXECUTION\n" : "SUCCESSFUL EXECUTION\n" ;
         $status = (in_array(false, $ressys)) ? "FAIL" : "SUCCESS" ;
+        $this->params["run-status"] = (in_array(false, $ressys)) ? "FAIL" : "SUCCESS" ;
         echo $ret;
-	$this->setRunEndTime($status);
-        $this->sendEmail($status);
-        return $this->saveRunLog();
-    }
 
-    private function sendEmail($status) {
-		$run = $this->params["run-id"];
-        $file = PIPEDIR.DS.$this->params["item"].DS.'defaults';
-        $defaults = file_get_contents($file) ;
-		$defaults = json_decode($defaults);
-		$subject = $defaults["project-name"]." "."build-".$run;
-		$message = $status;
-		$to = $defaults["email-id"];
-		mail($to, $subject, $message);
-        return;
+        //  @todo this should become an event called buildComplete
+        $eventRunner->eventRunner("afterBuildComplete") ;
+
+        $this->setRunEndTime($status);
+        // $this->sendEmail($status);
+        return $this->saveRunLog();
     }
 
     private function getExecutionOutput() {
@@ -217,4 +226,66 @@ class PipeRunnerAllOS extends Base {
 			return $this->params["run-id"] ; }
         return false ;
     }
+
+    public function getWorkspace() {
+        $workspaceFactory = new \Model\Workspace() ;
+        $wsparams = $this->params ;
+        unset($wsparams["guess"]) ;
+        $workspace = $workspaceFactory->getModel($wsparams);
+        $workspace->setPipeDir();
+        return $workspace ;
+    }
+    
+    public function getInstalledPlugins()
+    {
+    $plugin = scandir(str_replace('pipes','plugins/installed',PIPEDIR)) ;
+        for ($i=0; $i<count($plugin); $i++) {
+            if (!in_array($plugin[$i], array(".", "..", "tmpfile"))){
+                if(is_dir(str_replace('pipes','plugins/installed',PIPEDIR).DS.$plugin[$i])) {
+                    // @todo if this isnt definitely a build dir ignore maybe
+                    $detail['details'][$plugin[$i]] = $this->getInstalledPlugin($plugin[$i]);
+                    $detail['data'][$plugin[$i]] = $this->getInstalledPluginData($plugin[$i]); } } }
+        return (isset($detail) && is_array($detail)) ? $detail : array() ;
+    }
+
+    public function getInstalledPlugin($plugin) {
+	$defaultsFile = str_replace('pipes','plugins/installed',PIPEDIR).DS.$plugin.DS.'details' ;
+        if (file_exists($defaultsFile)) {
+            $defaultsFileData =  file_get_contents($defaultsFile) ;
+            $defaults = json_decode($defaultsFileData, true) ; }
+        return  (isset($defaults) && is_array($defaults)) ? $defaults : array() ;
+    }
+
+    public function getInstalledPluginData($plugin) {
+        $file = PIPEDIR . DS . $this->params["item"] . DS . 'pluginData';
+        if ($pluginData = file_get_contents($file)) {
+            $pluginData = json_decode($pluginData, true);
+        }
+        $defaultsFile = str_replace('pipes','plugins/installed',PIPEDIR).DS.$plugin.DS.'data' ;
+        if (file_exists($defaultsFile)) {
+            $defaultsFileData =  file_get_contents($defaultsFile) ;
+            $defaults = json_decode($defaultsFileData, true) ; 
+        }
+        foreach ($defaults['buildconf'] as $key=>$val) {
+            if (isset ($pluginData[$plugin][$val['name']]) ) {
+                $value = $pluginData[$plugin][$val['name']];
+                $defaults['buildconf'][$key]['value'] = $value;
+            }
+        }
+        return  (isset($defaults) && is_array($defaults)) ? $defaults : array() ;
+    }
+    
+    public function getEnabledPlugins() {
+        $file = PIPEDIR . DS . $this->params["item"] . DS . 'pluginData';
+        $pluginData = array();
+        if ($pluginData = file_get_contents($file)) {
+            $pluginData = json_decode($pluginData, true);
+        }
+        $enabledplugins = array();
+        foreach ($pluginData as $key=>$val) {
+           array_push($enabledplugins, $key);
+        }
+        return $enabledplugins;
+    }
+
 }

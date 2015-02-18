@@ -2,11 +2,11 @@
 
 Namespace Info;
 
-class PipeRunnerInfo extends CleopatraBase {
+class PipeRunnerInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "PipeRunner/Home Page";
+    public $name = "Pipe Running Functionality and Pages";
 
     public function _construct() {
       parent::__construct();
@@ -18,6 +18,21 @@ class PipeRunnerInfo extends CleopatraBase {
 
     public function routeAliases() {
       return array("piperunner"=>"PipeRunner", "pipeRunner"=>"PipeRunner");
+    }
+
+    public function configuration() {
+        return array(
+            "concurrent_runs"=> array(
+                "type" => "boolean",
+                "default" => false,
+                "label" => "Execute concurrent runs if necessary?",
+            ),
+            "enable_pipe"=> array(
+                "type" => "boolean",
+                "default" => true,
+                "label" => "Enable the execution of this pipeline",
+            ),
+        );
     }
 
     public function helpDefinition() {

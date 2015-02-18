@@ -17,7 +17,7 @@
                     <i class="fa fa-comment-o"></i> Dashboard
                 </a>
                 <a href="/index.php?control=ApplicationConfigure&action=show" class="list-group-item">
-                    <i class="fa fa-search"></i> Configure Phrankinsense
+                    <i class="fa fa-search"></i> Configure PTBuild
                 </a>
                 <a href="/index.php?control=BuildConfigure&action=new" class="list-group-item">
                     <i class="fa fa-user"></i> New Pipeline
@@ -36,7 +36,7 @@
             <div class="row clearfix no-margin">
                 <h3>
                     <a class="lg-anchor text-light" href="">
-                        Phrankinsense - The Builder <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
+                        PTBuild - The Builder <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
                 <p>
                     Build and Monitoring Server in PHP.
                     <br/>

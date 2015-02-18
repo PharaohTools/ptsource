@@ -2,7 +2,7 @@
 
 Namespace Info;
 
-class ApplicationConfigureInfo extends CleopatraBase {
+class ApplicationConfigureInfo extends PTConfigureBase {
 
     public $hidden = false;
 
@@ -13,7 +13,7 @@ class ApplicationConfigureInfo extends CleopatraBase {
     }
 
     public function routesAvailable() {
-      return array( "ApplicationConfigure" => array("show") );
+      return array( "ApplicationConfigure" => array("show", "save") );
     }
 
     public function routeAliases() {
@@ -22,7 +22,7 @@ class ApplicationConfigureInfo extends CleopatraBase {
 
     public function helpDefinition() {
       $help = <<<"HELPDATA"
-This module provides configuration for this instance of Phrankinsense ...
+This module provides application level configuration settings for this instance of Pharaoh Build ...
 HELPDATA;
       return $help ;
     }

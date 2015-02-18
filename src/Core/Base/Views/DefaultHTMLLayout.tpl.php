@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Phrankinsense - Pharaoh Tools</title>
+    <title>PTBuild - Pharaoh Tools</title>
 
     <!-- Bootstrap core CSS -->
     <link href="Assets/css/bootstrap.min.css" rel="stylesheet">
@@ -21,10 +21,12 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 
-    <!--  sign up add -->
-    <script src="/Assets/Signup/js/signup.js"></script>
 
     <![endif]-->
+    <!--  sign up add -->
+    <script src="/Assets/Signup/js/signup.js"></script>
+    <script src="/Assets/js/jquery.min.js"></script>
+    <script src="/Assets/js/jquery-ui.min.js"></script>
     <style>
         body{
             padding-top: 72px;
@@ -33,7 +35,7 @@
 </head>
 
 <body>
-<input type="hidden" id="base_url" value="http://www.phrankinsense.tld">
+<input type="hidden" id="base_url" value="http://www.ptbuild.tld">
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -45,7 +47,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a href="/index.php?control=Index&action=show"><img src="/Assets/images/5.png" class="navbar-img" /></a>
-            <a class="navbar-brand" href="/index.php?control=Index&action=show">Phrankinsense</a>
+            <a class="navbar-brand" href="/index.php?control=Index&action=show">PTBuild</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -102,7 +104,6 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="/Assets/js/jquery.min.js"></script>
 <script src="/Assets/js/bootstrap.min.js"></script>
 <script>
     $(function() {

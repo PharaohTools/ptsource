@@ -22,7 +22,7 @@
                 <a href="/index.php?control=BuildList&action=show" class="list-group-item">
                     <i class="fa fa-user"></i> All Pipelines
                 </a>
-                <a href="#" class="list-group-item">
+                <a href="/index.php?control=Workspace&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
                     <i class="fa fa-folder-open-o"></i> Workspace
                 </a>
                 <a href="#" class="list-group-item">
@@ -38,7 +38,7 @@
         </div>
 
         <div class="col-sm-8 col-md-9 clearfix main-container">
-            <h2 class="text-uppercase text-light"><a href="/"> Phrankinsense - Pharaoh Tools </a></h2>
+            <h2 class="text-uppercase text-light"><a href="/"> PTBuild - Pharaoh Tools </a></h2>
             <div class="row clearfix no-margin">
                 <?php
                     switch ($pageVars["route"]["action"]) {
@@ -87,7 +87,7 @@
                     ?>
 
                     <div class="form-group">
-                        <div class="col-sm-10">
+                        <div class="col-sm-12">
                             <div id="updatable">
                                 Checking Pipeline Execution Output...
                                 <?php

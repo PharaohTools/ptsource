@@ -20,7 +20,7 @@
                 <a href="/index.php?control=BuildList&action=show" class="list-group-item">
                     <i class="fa fa-user"></i> All Pipelines
                 </a>
-                <a href="#" class="list-group-item">
+                <a href="/index.php?control=Workspace&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
                     <i class="fa fa-folder-open-o"></i> Workspace
                 </a>
                 <a href="#" class="list-group-item">
@@ -43,7 +43,7 @@
         ?>
 
         <div class="col-sm-8 col-md-9 clearfix main-container">
-            <h2 class="text-uppercase text-light"><a href="/"> Phrankinsense - Pharaoh Tools </a></h2>
+            <h2 class="text-uppercase text-light"><a href="/"> Build - Pharaoh Tools </a></h2>
             <div class="row clearfix no-margin">
 
                 <h3><a class="lg-anchor text-light" href="#">Build Configure <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
@@ -83,12 +83,42 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+					<div class="form-group">
                         <label for="email-id" class="col-sm-2 control-label text-left">E-mail <small>For Notification</small></label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="email-id" name="email-id" placeholder="E-mail" value="<?php echo $pageVars["data"]["pipeline"]["email-id"] ; ?>" />
                         </div>
                     </div>
+
+                    <?php
+                    foreach ($pageVars["data"]["settings"] as $one_config_slug => $one_conf_tails) {
+                        echo '<div class="form-group">' ;
+                        echo '  <label for="config_'.$one_config_slug.'" class="col-sm-2 control-label text-left">'.$one_config_slug.':</label>' ;
+                        foreach ( $one_conf_tails["settings"] as $fieldSlug => $fieldInfo) {
+                            echo '  <div class="col-sm-12">' ;
+                            switch ($fieldInfo["type"]) {
+                                case "boolean" :
+                                    $onoff = (is_null($onoff))
+                                        ? $fieldInfo["default"]
+                                        : $onoff ;
+                                    echo '  <div class="col-sm-12">' ;
+                                    echo '    <div class="col-sm-2">' ;
+                                    echo '      <input name="config_'.$one_config_slug.'" id="config_'.$one_config_slug.'" type="checkbox" value="'.$onoff.'" />' ;
+                                    echo '    </div>' ;
+                                    echo '    <div class="col-sm-10">' ;
+                                    echo '      <label for="config_'.$one_config_slug.'" class="control-label text-left">'.$fieldInfo["name"].':</label>' ;
+                                    echo '    </div>' ;
+                                    echo '  </div>' ;
+                                    break ;
+                                case "text" :
+                                    if (isset($pageVars["data"]["current_configs"]["app"][$one_config_slug])) {
+                                        $val = $pageVars["data"]["current_configs"]["app"][$one_config_slug];  }
+                                    if (!isset($val) && is_null($onoff)) {
+                                        $val = $one_conf_tails["default"] ; }
+                                    echo '<input name="config_'.$one_config_slug.'" id="config_'.$one_config_slug.'" type="text" class="form-control" value="'.$one_conf_tails["value"].'" placeholder="'.$one_conf_tails["label"].'" />' ;
+                                    break ; }
+                            echo '  </div>';}
+                        echo '</div>'; } ?>
 
                     <div class="form-group">
                         <div class="col-sm-10">
@@ -96,11 +126,17 @@
                         </div>
                     </div>
 
+                    <ul class="form-group ui-sortable" id="sortableSteps">
+
                     <?php $plugins = $pageVars["data"]["plugin"]; $buildconf = $plugins['data'][$plugin]['buildconf'];
                         foreach ($pageVars["data"]["pipeline"]["steps"] as $hash => $one_build_step) {
-                            echo '<div class="form-group">' ;
-                            echo '  <label for="steps['.$hash.']["shell_data"]" class="col-sm-2 control-label text-left">'.$one_build_step["title"].'</label>' ;
+                            echo '<li class="form-group ui-state-default ui-sortable-handle" id="step'.$hash.'">' ;
+                            echo '  <div class="col-sm-2">' ;
+                            echo ' <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' ;
+                            echo '  </div>';
                             echo '  <div class="col-sm-10">' ;
+                            echo '   <div class="col-sm-12">' ;
+                            echo '    <label for="steps['.$hash.'][data]" class="control-label text-left">'.$one_build_step["title"].'</label>' ;
                             echo '      <p><strong>Hash: </strong>'.$hash.'</p>';
                             echo '      <p><strong>Module: </strong>'.$one_build_step["module"].'</p>';
                             echo '      <p><strong>Step Type: </strong>'.$one_build_step["steptype"].'</p>';
@@ -109,6 +145,7 @@
                             if ($one_build_step["module"] == "Plugin") { 
                                 $buildconf = $plugins['data'][$one_build_step["steptype"]]['buildconf'];
                                 foreach ($buildconf as $data ) {
+                                    echo '      <label for="'.$data['name'].'">'.$data['name'].'</label>'; 
                                     if ($data['type'] == 'text') {
                                         echo '      <input id="steps['.$hash.']['.$data['name'].']" name="steps['.$hash.']['.$data['name'].']" value="'.$one_build_step[$data['name']].'" class="form-control" />'; 
                                     }
@@ -120,16 +157,24 @@
                             else {
                                 echo '      <textarea id="steps['.$hash.'][data]" name="steps['.$hash.'][data]" value="'.$one_build_step["data"].'" class="form-control">'.$one_build_step["data"].'</textarea>';
                             }
+                            
+
                             echo '  </div>';
-                            echo '</div>'; } ?>
+                            echo '   <div class="col-sm-12">'  ;
+                            echo '  <a class="btn btn-warning" onclick="deleteStepField(hash)">Delete Step</a>' ;
+
+                            echo '  </div>';
+                            echo '  </div>';
+                            echo '</li>'; } ?>
+
+                    </ul> <!-- sortable end -->
 
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <h5>Add New Step</h5>
-                            <div class="seletorWrap" id="new_step_module_selector_wrap">
-                                <?php //print_r($pageVars["data"]["fields"]); ?>
+                            <div class="selectorWrap" id="new_step_module_selector_wrap">
                                 <select name="new_step_module_selector" id="new_step_module_selector" onchange="changeModule(this)">
-                                    <option value="">-- Select Module --</option>
+                                    <option value="nomoduleselected" selected="selected">-- Select Module --</option>
                                     <?php
                                         $dataplugin['Plugin'] = $pageVars["data"]["plugin"]["data"];
                                         $dataplugin = array_merge($pageVars["data"]["fields"],$dataplugin );
@@ -147,12 +192,12 @@
                             </div>
                         </div>
                     </div>
-            
-                    <script type="text/javascript">
-                        steps = <?php echo json_encode(array_merge ($pageVars["data"]["fields"],$dataplugin) ) ; ?> ;
-                    
-                    </script>
-                    <script type="text/javascript" src="/Assets/BuildConfigure/js/buildconfigure.js"></script>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-success">Save Configuration</button>
+                        </div>
+                    </div>
 
                     <?php
 
@@ -160,30 +205,13 @@
                         echo '<input type="hidden" name="creation" id="creation" value="yes" />' ; }
 
                     ?>
-					
-
-
-		<div class="form-group">
-                        <div class="col-sm-10">
-                            <h3>Post Build</h3>
-                        </div>
-                    </div>
-
 
                     <input type="hidden" name="item" id="item" value="<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" />
 
                     <h5 class="text-uppercase text-light">
-                        <a href="#/index.php?control=BuildConfigure&action=save">
+                        <a href="/index.php?control=BuildConfigure&action=save">
                             Save configuration of <?php echo $pageVars["data"]["pipeline"]["project-name"] ; ?>-</a>
                     </h5>
-
-					<div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-success">Save Configuration</button>
-                        </div>
-                    </div>
-
-                    
 
                 </form>
             </div>
@@ -195,4 +223,18 @@
         </div>
 
     </div>
-</div><!-- /.container -->
+</div><!-- container -->
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="/Assets/BuildConfigure/css/buildconfigure.css">
+<script type="text/javascript">
+    steps = <?php echo json_encode(array_merge($pageVars["data"]["fields"], $dataplugin) ) ; ?> ;
+</script>
+<script type="text/javascript" src="/Assets/BuildConfigure/js/buildconfigure.js"></script>
+<script type="text/javascript">
+
+    $(function() {
+        $( "#sortableSteps" ).sortable();
+        $( "#sortableSteps" ).disableSelection();
+    });
+</script>

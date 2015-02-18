@@ -10,9 +10,7 @@ class BuildConfigure extends Base {
         $this->content = $pageVars ;
         if (is_array($thisModel)) { return $this->failDependencies($pageVars, $this->content, $thisModel) ; }
         if (in_array($pageVars["route"]["action"], array("save"))) {
-            $this->content["data"]["saveState"] = $thisModel->savePipeline();
-            $thisModel->savePluginData();
-        }
+            $this->content["data"]["saveState"] = $thisModel->savePipeline();  }
         $this->content["data"] = $thisModel->getData();
         return array ("type"=>"view", "view"=>"buildConfigure", "pageVars"=>$this->content);
     }
