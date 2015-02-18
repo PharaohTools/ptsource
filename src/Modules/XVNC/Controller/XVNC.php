@@ -2,7 +2,7 @@
 
 Namespace Controller ;
 
-class SendEmail extends Base {
+class XVNC extends Base {
 
     public function execute($pageVars) {
 
@@ -16,7 +16,7 @@ class SendEmail extends Base {
             $this->content["helpData"] = $helpModel->getHelpData($pageVars["route"]["control"]);
             return array ("type"=>"view", "view"=>"help", "pageVars"=>$this->content); }
 
-        $this->content["messages"][] = "Help is the only valid SendEmail Action";
+        $this->content["messages"][] = "Help is the only valid XVNC Action";
         return array ("type"=>"control", "control"=>"index", "pageVars"=>$this->content);
 
     }

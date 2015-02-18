@@ -2,44 +2,41 @@
 
 Namespace Info;
 
-class SendEmailInfo extends PTConfigureBase {
+class XVNCInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "SendEmail Provisioner Integration";
+    public $name = "XVNC Provisioner Integration";
 
     public function _construct() {
         parent::__construct();
     }
 
     public function routesAvailable() {
-        return array( "SendEmail" => array_merge(parent::routesAvailable(), array("help") ) );
+        return array( "XVNC" => array_merge(parent::routesAvailable(), array("help") ) );
     }
 
     public function routeAliases() {
-        return array("sendemail"=>"SendEmail");
+        return array("xvnc"=>"XVNC");
     }
 
     public function events() {
-        return array("afterBuildComplete");
+        return array("afterSettings", "afterBuildComplete");
     }
 
-    public function configuration() {
+    public function buildSettings() {
         return array(
-            "smtp_server"=> array( "type" => "text", "default" => "SMTP Server", "label" => "SMTP Server Address", ),
-            "from_email"=> array( "type" => "text", "default" => "example@mail.com", "label" => "Email Address", ),
-            "username"=> array( "type" => "text", "default" => "example", "label" => "Email Username", ),
-            "password"=> array( "type" => "text", "default" => "none", "label" => "Email Password", ),
-            "port"=> array( "type" => "text", "default" => "25", "label" => "Email Server Port", ),
+            "xvnc_during_build"
+            // "xvnc_during_build"=> array("type" => "boolean", "default" => false, "label" => "Start Xvfb before the build, and shut it down after.", ),
         );
     }
 
     public function helpDefinition() {
        $help = <<<"HELPDATA"
-    This extension provides integration with SendEmail as a Build Step. It provides code
+    This extension provides integration with XVNC as a Build Step. It provides code
     functionality, but no extra CLI commands.
 
-    SendEmail
+    XVNC
 
 HELPDATA;
       return $help ;
