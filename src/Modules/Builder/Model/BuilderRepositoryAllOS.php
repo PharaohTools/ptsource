@@ -19,7 +19,7 @@ class BuilderRepositoryAllOS extends Base {
         $names = $this->getBuilderNames() ;
         $builderFactory = new \Model\Builder() ;
         $builder = $builderFactory->getModel($this->params);
-        foreach ($names as $name => $types) {
+        foreach ($names as $name) {
             $builders[$name] = $builder->getBuilder($name); }
         return $builders ;
     }
@@ -29,22 +29,22 @@ class BuilderRepositoryAllOS extends Base {
         $names = $this->getBuilderNames() ;
         $builderFactory = new \Model\Builder() ;
         $builder = $builderFactory->getModel($this->params);
-        foreach ($names as $name => $types) {
+        foreach ($names as $name) {
             $bo = $builder->getBuilder($name);
             $formFields[$name] = $bo["fields"] ; }
         return $formFields ;
     }
 
     public function getBuilderNames() {
-        $buildSteps = array() ;
+        $builderNames = array() ;
         $infos = \Core\AutoLoader::getInfoObjects() ;
         foreach ($infos as $info) {
-            if (method_exists($info, "buildSteps")) {
+            if (method_exists($info, "buildSteps") || method_exists($info, "buildSettings") || method_exists($info, "events")) {
                 $name = get_class($info);
                 $name = str_replace("Info\\", "", $name) ;
                 $name = substr($name, 0, strlen($name)-4) ;
-                $buildSteps[$name] = $info->buildSteps(); } }
-        return $buildSteps ;
+                $builderNames[] = $name; } }
+        return $builderNames ;
     }
 
 }
