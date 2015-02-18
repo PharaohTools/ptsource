@@ -20,21 +20,6 @@ class PipeRunnerInfo extends PTConfigureBase {
       return array("piperunner"=>"PipeRunner", "pipeRunner"=>"PipeRunner");
     }
 
-    public function configuration() {
-        return array(
-            "concurrent_runs"=> array(
-                "type" => "boolean",
-                "default" => false,
-                "label" => "Execute concurrent runs if necessary?",
-            ),
-            "enable_pipe"=> array(
-                "type" => "boolean",
-                "default" => true,
-                "label" => "Enable the execution of this pipeline",
-            ),
-        );
-    }
-
     public function helpDefinition() {
       $help = <<<"HELPDATA"
   This command is part of Core - its the default route and only used for help and as an Intro really...
