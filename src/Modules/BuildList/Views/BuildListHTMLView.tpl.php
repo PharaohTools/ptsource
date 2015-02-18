@@ -68,8 +68,10 @@
                                         <th>Success</th>
                                         <th>Failure</th>
                                         <th>Duration</th>
+                                        <!--
                                         <th>Parent</th>
                                         <th>Child</th>
+                                        -->
                                         <th>Run Now</th>
                                     </tr>
                                     </thead>
@@ -116,6 +118,7 @@
                                                     echo 'N/A' ; }
                                                 ?>
                                             </td>
+                                            <!--
                                             <td>
                                                 <?php
                                                 if ($pipelineDetails["has_parents"] === true) {
@@ -132,6 +135,7 @@
                                                     echo '<img class="listImage" src="/Assets/BuildList/images/cross.png" />' ; }
                                                 ?>
                                             </td>
+                                            -->
                                             <td>
                                                 <?php
                                                 echo '<a href="/index.php?control=PipeRunner&action=start&item='.$pipelineDetails["project-slug"].'">';
