@@ -56,7 +56,7 @@ class SendEmailLinuxUnix extends Base {
             // Give the message a subject
             ->setSubject($subject)
             // Set the From address with an associative array
-            ->setFrom(array($to))
+            ->setFrom(array($this->params["build-settings"]["mod_config"]["SendEmail"]["config_from_email"] => "Pharaoh Build Server"))
             // Set the To addresses with an associative array
             ->setTo(array($to))
             // Give it a body
