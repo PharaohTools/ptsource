@@ -31,6 +31,8 @@ class XVFBInfo extends PTConfigureBase {
     public function configuration() {
         return array(
             "xvfb_command"=> array("type" => "text", "default" => "", "label" => "XVFB Command Location?", ),
+            "xvfb_min_id"=> array("type" => "text", "default" => "0", "label" => "XVFB Minimum Desktop ID?", ),
+            "xvfb_max_id"=> array("type" => "text", "default" => "99", "label" => "XVFB Maximum Desktop ID?", ),
         );
     }
 

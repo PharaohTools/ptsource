@@ -30,7 +30,9 @@ class XVNCInfo extends PTConfigureBase {
 
     public function configuration() {
         return array(
-            "xvfb_command"=> array("type" => "text", "default" => "", "label" => "XVFB Command Location?", ),
+            "xvnc_command"=> array("type" => "text", "default" => "", "label" => "XVNC Command Location?", ),
+            "xvnc_min_id"=> array("type" => "text", "default" => "0", "label" => "XVNC Minimum Desktop ID?", ),
+            "xvnc_max_id"=> array("type" => "text", "default" => "99", "label" => "XVNC Maximum Desktop ID?", ),
         );
     }
 
