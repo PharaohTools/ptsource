@@ -91,6 +91,7 @@
                     </div>
 
                     <?php
+
                     foreach ($pageVars["data"]["settings"] as $one_config_slug => $one_conf_tails) {
                         echo '<div class="form-group">' ;
                         echo '  <label for="config_'.$one_config_slug.'" class="col-sm-2 control-label text-left">'.$one_config_slug.':</label>' ;
@@ -98,15 +99,27 @@
                             echo '  <div class="col-sm-12">' ;
                             switch ($fieldInfo["type"]) {
                                 case "boolean" :
-                                    $onoff = (is_null($onoff))
-                                        ? $fieldInfo["default"]
-                                        : $onoff ;
+
+                                    if ( (isset($pageVars["data"]["pipeline"]["settings"][$one_config_slug][$fieldSlug])) &&
+                                        $pageVars["data"]["pipeline"]["settings"][$one_config_slug][$fieldSlug] == "on" ) {
+                                        $onoff = "on" ; }
+                                    else if ( (isset($pageVars["data"]["pipeline"]["settings"][$one_config_slug][$fieldSlug])) &&
+                                        $pageVars["data"]["pipeline"]["settings"][$one_config_slug][$fieldSlug] != "on" ) {
+                                        $onoff = "off" ; }
+                                    else {
+                                        $onoff = (is_null($onoff))
+                                            ? $fieldInfo["default"]
+                                            : $onoff ; }
+
+
+                                    if ($onoff === "on") { $onoff = 'checked="checked"' ;}
+                                    else {$onoff = "" ;}
                                     echo '  <div class="col-sm-12">' ;
                                     echo '    <div class="col-sm-2">' ;
-                                    echo '      <input name="config_'.$one_config_slug.'" id="config_'.$one_config_slug.'" type="checkbox" value="'.$onoff.'" />' ;
+                                    echo '      <input name="settings['.$one_config_slug.']['.$fieldSlug.']" id="settings['.$one_config_slug.']['.$fieldSlug.']" type="checkbox" '.$onoff.' />' ;
                                     echo '    </div>' ;
                                     echo '    <div class="col-sm-10">' ;
-                                    echo '      <label for="config_'.$one_config_slug.'" class="control-label text-left">'.$fieldInfo["name"].':</label>' ;
+                                    echo '      <label for="settings['.$one_config_slug.']['.$fieldSlug.']" class="control-label text-left">'.$fieldInfo["name"].':</label>' ;
                                     echo '    </div>' ;
                                     echo '  </div>' ;
                                     break ;
@@ -115,7 +128,7 @@
                                         $val = $pageVars["data"]["current_configs"]["app"][$one_config_slug];  }
                                     if (!isset($val) && is_null($onoff)) {
                                         $val = $one_conf_tails["default"] ; }
-                                    echo '<input name="config_'.$one_config_slug.'" id="config_'.$one_config_slug.'" type="text" class="form-control" value="'.$one_conf_tails["value"].'" placeholder="'.$one_conf_tails["label"].'" />' ;
+                                    echo '<input name="settings['.$one_config_slug.']['.$fieldSlug.']" id="settings['.$one_config_slug.']['.$fieldSlug.']" type="text" class="form-control" value="'.$one_conf_tails["value"].'" placeholder="'.$one_conf_tails["label"].'" />' ;
                                     break ; }
                             echo '  </div>';}
                         echo '</div>'; } ?>
@@ -157,8 +170,6 @@
                             else {
                                 echo '      <textarea id="steps['.$hash.'][data]" name="steps['.$hash.'][data]" value="'.$one_build_step["data"].'" class="form-control">'.$one_build_step["data"].'</textarea>';
                             }
-                            
-
                             echo '  </div>';
                             echo '   <div class="col-sm-12">'  ;
                             echo '  <a class="btn btn-warning" onclick="deleteStepField(hash)">Delete Step</a>' ;
@@ -224,6 +235,8 @@
 
     </div>
 </div><!-- container -->
+
+
 
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
 <link rel="stylesheet" href="/Assets/BuildConfigure/css/buildconfigure.css">

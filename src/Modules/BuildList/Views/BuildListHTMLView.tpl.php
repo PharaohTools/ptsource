@@ -68,8 +68,10 @@
                                         <th>Success</th>
                                         <th>Failure</th>
                                         <th>Duration</th>
+                                        <!--
                                         <th>Parent</th>
                                         <th>Child</th>
+                                        -->
                                         <th>Run Now</th>
                                     </tr>
                                     </thead>
@@ -94,7 +96,7 @@
                                                 <?php
                                                 if ($pipelineDetails["last_success"] != false) {
                                                     echo date('Y-m-d \<\b\r\> h:i:s', $pipelineDetails["last_success"]) ; 
-													echo ' #('.$pipelineDetails["last_success_build"].')'; }
+                                                    echo '<span class="badge">#('.$pipelineDetails["last_success_build"].')</span>'; }
                                                 else {
                                                     echo 'N/A' ; }
                                                 ?>
@@ -103,7 +105,7 @@
                                                 <?php
                                                 if ($pipelineDetails["last_fail"] != false) {
                                                     echo date('Y-m-d \<\b\r\> h:i:s', $pipelineDetails["last_fail"]) ; 
-													echo ' #('.$pipelineDetails["last_fail_build"].')'; }
+                                                    echo ' #('.$pipelineDetails["last_fail_build"].')'; }
                                                 else {
                                                     echo 'N/A' ; }
                                                 ?>
@@ -116,6 +118,7 @@
                                                     echo 'N/A' ; }
                                                 ?>
                                             </td>
+                                            <!--
                                             <td>
                                                 <?php
                                                 if ($pipelineDetails["has_parents"] === true) {
@@ -132,6 +135,7 @@
                                                     echo '<img class="listImage" src="/Assets/BuildList/images/cross.png" />' ; }
                                                 ?>
                                             </td>
+                                            -->
                                             <td>
                                                 <?php
                                                 echo '<a href="/index.php?control=PipeRunner&action=start&item='.$pipelineDetails["project-slug"].'">';
@@ -157,8 +161,8 @@
                                         <th>Success</th>
                                         <th>Failure</th>
                                         <th>Duration</th>
-                                        <th>Parent</th>
-                                        <th>Child</th>
+                                        <!--<th>Parent</th>
+                                        <th>Child</th>-->
                                         <th>Run Now</th>
                                     </tr>
                                     </thead>
@@ -167,7 +171,7 @@
                                     <?php
 
                                     $i = 1;
-                                    foreach ($pageVars["data"]["pipelines"] as $pipelineSlug => $pipelineDetails) { ?>
+                                    foreach ($pageVars["data"]["pipelines"] as $pipelineSlug => $pipelineDetails) { if ($pipelineDetails["last_status"] === true) { ?>
                                         <tr>
                                             <th scope="row"><?php echo $i ; ?></th>
                                             <td><a href="/index.php?control=BuildHome&action=show&item=<?php echo $pipelineSlug ; ?>"><?php echo $pipelineDetails["project-name"] ; ?></a></td>
@@ -182,7 +186,8 @@
                                             <td>
                                                 <?php
                                                 if ($pipelineDetails["last_success"] != false) {
-                                                    echo '20:13:55 01/02/2015' ; }
+                                                    echo date('Y-m-d \<\b\r\> h:i:s', $pipelineDetails["last_success"]) ; 
+                                                    echo ' <span class="badge">#('.$pipelineDetails["last_success_build"].')</span>'; }
                                                 else {
                                                     echo 'N/A' ; }
                                                 ?>
@@ -190,7 +195,8 @@
                                             <td>
                                                 <?php
                                                 if ($pipelineDetails["last_fail"] != false) {
-                                                    echo '14:13:55 21/01/2015' ; }
+                                                    echo date('Y-m-d \<\b\r\> h:i:s', $pipelineDetails["last_fail"]) ; 
+                                                    echo ' <span class="badge">#('.$pipelineDetails["last_fail_build"].')</span>'; }
                                                 else {
                                                     echo 'N/A' ; }
                                                 ?>
@@ -198,12 +204,12 @@
                                             <td>
                                                 <?php
                                                 if ($pipelineDetails["duration"] != false) {
-                                                    echo '134 seconds' ; }
+                                                    echo $pipelineDetails["duration"].' seconds' ; }
                                                 else {
                                                     echo 'N/A' ; }
                                                 ?>
                                             </td>
-                                            <td>
+                                            <!--<td>
                                                 <?php
                                                 if ($pipelineDetails["has_parents"] === true) {
                                                     echo '<img class="listImage" src="/Assets/BuildList/images/tick.png" />' ; }
@@ -218,7 +224,7 @@
                                                 else {
                                                     echo '<img class="listImage" src="/Assets/BuildList/images/cross.png" />' ; }
                                                 ?>
-                                            </td>
+                                            </td>-->
                                             <td>
                                                 <?php
                                                 echo '<a href="/index.php?control=PipeRunner&action=start&item='.$pipelineDetails["project-slug"].'">';
@@ -228,7 +234,7 @@
                                         </tr>
                                         <?php
                                         $i++;
-                                    } ?>
+                                    } } ?>
 
                                     </tbody>
                                 </table>
@@ -243,8 +249,8 @@
                                         <th>Success</th>
                                         <th>Failure</th>
                                         <th>Duration</th>
-                                        <th>Parent</th>
-                                        <th>Child</th>
+                                        <!--<th>Parent</th>
+                                        <th>Child</th>-->
                                         <th>Run Now</th>
                                     </tr>
                                     </thead>
@@ -253,7 +259,7 @@
                                     <?php
 
                                     $i = 1;
-                                    foreach ($pageVars["data"]["pipelines"] as $pipelineSlug => $pipelineDetails) { ?>
+                                    foreach ($pageVars["data"]["pipelines"] as $pipelineSlug => $pipelineDetails) { if ($pipelineDetails["last_status"] === false) { ?>
                                         <tr>
                                             <th scope="row"><?php echo $i ; ?></th>
                                             <td><a href="/index.php?control=BuildHome&action=show&item=<?php echo $pipelineSlug ; ?>"><?php echo $pipelineDetails["project-name"] ; ?></a></td>
@@ -268,7 +274,8 @@
                                             <td>
                                                 <?php
                                                 if ($pipelineDetails["last_success"] != false) {
-                                                    echo '20:13:55 01/02/2015' ; }
+                                                    echo date('Y-m-d \<\b\r\> h:i:s', $pipelineDetails["last_success"]) ; 
+                                                    echo ' <span class="badge">#('.$pipelineDetails["last_success_build"].')</span>'; }
                                                 else {
                                                     echo 'N/A' ; }
                                                 ?>
@@ -276,7 +283,8 @@
                                             <td>
                                                 <?php
                                                 if ($pipelineDetails["last_fail"] != false) {
-                                                    echo '14:13:55 21/01/2015' ; }
+                                                    echo date('Y-m-d \<\b\r\> h:i:s', $pipelineDetails["last_fail"]) ; 
+                                                    echo ' <span class="badge">#('.$pipelineDetails["last_fail_build"].')</span>'; }
                                                 else {
                                                     echo 'N/A' ; }
                                                 ?>
@@ -284,12 +292,12 @@
                                             <td>
                                                 <?php
                                                 if ($pipelineDetails["duration"] != false) {
-                                                    echo '134 seconds' ; }
+                                                    echo $pipelineDetails["duration"].' seconds' ; }
                                                 else {
                                                     echo 'N/A' ; }
                                                 ?>
                                             </td>
-                                            <td>
+                                            <!--<td>
                                                 <?php
                                                 if ($pipelineDetails["has_parents"] === true) {
                                                     echo '<img class="listImage" src="/Assets/BuildList/images/tick.png" />' ; }
@@ -304,7 +312,7 @@
                                                 else {
                                                     echo '<img class="listImage" src="/Assets/BuildList/images/cross.png" />' ; }
                                                 ?>
-                                            </td>
+                                            </td>-->
                                             <td>
                                                 <?php
                                                 echo '<a href="/index.php?control=PipeRunner&action=start&item='.$pipelineDetails["project-slug"].'">';
@@ -314,7 +322,7 @@
                                         </tr>
                                         <?php
                                         $i++;
-                                    } ?>
+                                    } } ?>
 
                                     </tbody>
                                 </table>
@@ -329,8 +337,8 @@
                                         <th>Success</th>
                                         <th>Failure</th>
                                         <th>Duration</th>
-                                        <th>Parent</th>
-                                        <th>Child</th>
+                                        <!--<th>Parent</th>
+                                        <th>Child</th>-->
                                         <th>Run Now</th>
                                     </tr>
                                     </thead>
@@ -339,7 +347,7 @@
                                     <?php
 
                                     $i = 1;
-                                    foreach ($pageVars["data"]["pipelines"] as $pipelineSlug => $pipelineDetails) { ?>
+                                    foreach ($pageVars["data"]["pipelines"] as $pipelineSlug => $pipelineDetails) { if ( 1== 2) { ?>
                                         <tr>
                                             <th scope="row"><?php echo $i ; ?></th>
                                             <td><a href="/index.php?control=BuildHome&action=show&item=<?php echo $pipelineSlug ; ?>"><?php echo $pipelineDetails["project-name"] ; ?></a></td>
@@ -375,7 +383,7 @@
                                                     echo 'N/A' ; }
                                                 ?>
                                             </td>
-                                            <td>
+                                            <!--<td>
                                                 <?php
                                                 if ($pipelineDetails["has_parents"] === true) {
                                                     echo '<img class="listImage" src="/Assets/BuildList/images/tick.png" />' ; }
@@ -390,7 +398,7 @@
                                                 else {
                                                     echo '<img class="listImage" src="/Assets/BuildList/images/cross.png" />' ; }
                                                 ?>
-                                            </td>
+                                            </td>-->
                                             <td>
                                                 <?php
                                                 echo '<a href="/index.php?control=PipeRunner&action=start&item='.$pipelineDetails["project-slug"].'">';
@@ -400,7 +408,7 @@
                                         </tr>
                                         <?php
                                         $i++;
-                                    } ?>
+                                    } } ?>
 
                                     </tbody>
                                 </table>
@@ -421,5 +429,4 @@
     </div>
 
 </div><!-- /.container -->
-
 

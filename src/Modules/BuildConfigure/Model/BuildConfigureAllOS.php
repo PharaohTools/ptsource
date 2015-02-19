@@ -20,7 +20,6 @@ class BuildConfigureAllOS extends Base {
         $ret["settings"] = $this->getBuilderSettings();
         $ret["fields"] = $this->getBuilderFormFields();
         $ret["plugin"] = $this->getInstalledPlugins();
-        $ret["pluginsenabled"] = $this->getEnabledPlugins();
         return $ret ;
     }
 
@@ -51,7 +50,7 @@ class BuildConfigureAllOS extends Base {
         $builder = $builderFactory->getModel($this->params, "BuilderRepository");
         return $builder->getAllBuildersFormFields();
     }
-    
+    #
 
     public function savePipeline() {
         $this->params["project-slug"] = $this->getFormattedSlug() ;
@@ -71,6 +70,7 @@ class BuildConfigureAllOS extends Base {
         $pipelineSaver->params["item"] = $this->params["item"];
         $pipelineSaver->savePipeline(array("type" => "Defaults", "data" => $data ));
         $pipelineSaver->savePipeline(array("type" => "Steps", "data" => $this->params["steps"] ));
+        $pipelineSaver->savePipeline(array("type" => "Settings", "data" => $this->params["settings"] ));
         return true ;
     }
 
@@ -122,20 +122,4 @@ class BuildConfigureAllOS extends Base {
         }
         return  (isset($defaults) && is_array($defaults)) ? $defaults : array() ;
     }
-    
-    public function getEnabledPlugins() {
-        $file = PIPEDIR . DS . $this->params["item"] . DS . 'pluginData';
-        $pluginData = array();
-        if ($pluginData = file_get_contents($file)) {
-            $pluginData = json_decode($pluginData, true);
-        }
-        $enabledplugins = array();
-        foreach ($pluginData as $key=>$val) {
-           array_push($enabledplugins, $key);
-        }
-        return $enabledplugins;
-    }
-
-    
-
 }

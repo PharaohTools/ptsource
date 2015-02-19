@@ -34,7 +34,7 @@ class SendEmailLinuxUnix extends Base {
         $defaults = file_get_contents($file) ;
         $defaults = new \ArrayObject(json_decode($defaults));
         // error_log(serialize($defaults)) ;
-        $subject = "Pharaoh Build Result - ". $defaults["project-name"]." "."build-".$run;
+        $subject = "Pharaoh Build Result - ". $defaults["project-name"]." ".", Run ID -".$run;
         $message = $this->params["run-status"];
         $to = $defaults["email-id"] ;
 
@@ -45,7 +45,7 @@ class SendEmailLinuxUnix extends Base {
         // Create the Transport
         $transport = \Swift_SmtpTransport::newInstance(
                 $this->params["build-settings"]["mod_config"]["SendEmail"]["config_smtp_server"],
-            (int) $this->params["build-settings"]["mod_config"]["SendEmail"]["config_port"])
+            (int) $this->params["build-settings"]["mod_config"]["SendEmail"]["config_port"], 'ssl')
             ->setUsername($this->params["build-settings"]["mod_config"]["SendEmail"]["config_username"])
             ->setPassword($this->params["build-settings"]["mod_config"]["SendEmail"]["config_password"])
         ;
@@ -56,7 +56,7 @@ class SendEmailLinuxUnix extends Base {
             // Give the message a subject
             ->setSubject($subject)
             // Set the From address with an associative array
-            ->setFrom(array($to))
+            ->setFrom(array($this->params["build-settings"]["mod_config"]["SendEmail"]["config_from_email"] => "Pharaoh Build Server"))
             // Set the To addresses with an associative array
             ->setTo(array($to))
             // Give it a body

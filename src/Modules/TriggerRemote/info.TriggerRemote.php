@@ -21,11 +21,11 @@ class TriggerRemoteInfo extends PTConfigureBase {
     }
 
     public function buildSteps() {
-        return array("trigger-remote-script", "trigger-remote-file");
+        return array("trigger-remote-script", "trigger-remote-file") ;
     }
 
     public function buildSettings() {
-        return array("trigger-remote-script", "trigger-remote-file");
+        return array("trigger-remote-script", "trigger-remote-file") ;
     }
 
     public function helpDefinition() {

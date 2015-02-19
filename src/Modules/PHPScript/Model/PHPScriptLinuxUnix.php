@@ -37,15 +37,15 @@ class PHPScriptLinuxUnix extends Base {
         $loggingFactory = new \Model\Logging();
         $logging = $loggingFactory->getModel($this->params);
         if ( $step["steptype"] == "phpscriptdata") {
-            $logging->log("Running PHPScript from Data...") ;
+            $logging->log("Running PHPScript from Data...", $this->getModuleName()) ;
             $this->executeAsPHPData($step["data"]) ;
             return true ; }
         else if ($step["steptype"] == "phpscriptfile") {
-            $logging->log("Running PHPScript from Script...") ;
+            $logging->log("Running PHPScript from Script...", $this->getModuleName()) ;
             $this->executeAsPHPScript($step["data"]) ;
             return true ; }
         else {
-            $logging->log("Unrecognised Build Step Type {$step["type"]} specified in PHPScript Module") ;
+            $logging->log("Unrecognised Build Step Type {$step["type"]} specified in PHPScript Module", $this->getModuleName()) ;
             return false ; }
     }
 
@@ -57,10 +57,10 @@ class PHPScriptLinuxUnix extends Base {
         $loggingFactory = new \Model\Logging();
         $logging = $loggingFactory->getModel($this->params);
         if (file_exists($data)) {
-            $logging->log("File found, executing...") ;
+            $logging->log("File found, executing...", $this->getModuleName()) ;
             self::executeAndOutput("php $data") ; }
         else {
-            $logging->log("File not found, ignoring...") ;
+            $logging->log("File not found, ignoring...", $this->getModuleName()) ;
             \Core\BootStrap::setExitCode(1);}
     }
 

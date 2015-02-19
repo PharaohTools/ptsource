@@ -27,11 +27,6 @@ class IndexInfo extends PTConfigureBase {
                 "default" => true,
                 "label" => "Allow your home page to be overridden by other modules?",
             ),
-            "text_param"=> array(
-                "type" => "text",
-                "default" => "Example Answer",
-                "label" => "Example Text Conf Param",
-            ),
         );
     }
 

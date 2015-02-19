@@ -21,6 +21,7 @@ class StepRunnerAllOS extends BaseLinuxApp {
 
     public function stepRunner($step, $item = null) {
         $loggingFactory = new \Model\Logging();
+        $this->params["echo-log"] = true ;
         $logging = $loggingFactory->getModel($this->params) ;
         // get build step module from step
         $stepModule = $step["module"] ;
@@ -37,7 +38,7 @@ class StepRunnerAllOS extends BaseLinuxApp {
         if (!in_array($step["steptype"], $modStepTypes)) {
             $logging->log ("Module {$stepModule} does not support step type", $this->getModuleName() ) ;
             return false ; }
-        echo "Module {$step["module"]}, step type {$step["steptype"]}\n" ;
+        $logging->log ("Module {$step["module"]}, step type {$step["steptype"]}", $this->getModuleName() ) ;
         // send step data to method in question
         $stepResult = $stepModel->executeStep($step, $item) ;
         // return the result of the step run (true or false, output should already be done)

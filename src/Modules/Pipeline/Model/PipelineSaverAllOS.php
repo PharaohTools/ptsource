@@ -29,6 +29,7 @@ class PipelineSaverAllOS extends Base {
         $saveRes = array() ;
         $saveRes["statuses"] = $this->saveStatuses($save) ;
         $saveRes["defaults"] = $this->saveDefaults($save) ;
+        $saveRes["settings"] = $this->saveSettings($save) ;
         $saveRes["steps"] = $this->saveSteps($save) ;
         return $saveRes ;
     }
@@ -55,6 +56,18 @@ class PipelineSaverAllOS extends Base {
         if (isset($save["type"]) && $save["type"] == "Steps") {
             $stepsFile = PIPEDIR.DS.$this->params["item"].DS.'steps' ;
             $logging->log("Storing steps file in pipe at $stepsFile", $this->getModuleName()) ;
+            $steps = json_encode($save["data"]) ;
+            return file_put_contents($stepsFile, $steps) ; }
+        $statuses = array() ;
+        return $statuses ;
+    }
+
+    private function saveSettings($save) {
+        $loggingFactory = new \Model\Logging();
+        $logging = $loggingFactory->getModel($this->params);
+        if (isset($save["type"]) && $save["type"] == "Settings") {
+            $stepsFile = PIPEDIR.DS.$this->params["item"].DS.'settings' ;
+            $logging->log("Storing settings file in pipe at $stepsFile", $this->getModuleName()) ;
             $steps = json_encode($save["data"]) ;
             return file_put_contents($stepsFile, $steps) ; }
         $statuses = array() ;
