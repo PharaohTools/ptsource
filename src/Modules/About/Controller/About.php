@@ -2,7 +2,7 @@
 
 Namespace Controller ;
 
-class BuildHome extends Base {
+class About extends Base {
 
     public function execute($pageVars) {
       $thisModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars) ;
@@ -10,8 +10,7 @@ class BuildHome extends Base {
       $this->content = $pageVars ;
       if (is_array($thisModel)) { return $this->failDependencies($pageVars, $this->content, $thisModel) ; }
       if($pageVars["route"]["action"] == "show"){ $this->content["data"] = $thisModel->getData(); }
-      if($pageVars["route"]["action"] == "delete"){ $this->content["data"] = $thisModel->deleteData(); }
-      return array ("type"=>"view", "view"=>"buildHome", "pageVars"=>$this->content);
+      return array ("type"=>"view", "view"=>"about", "pageVars"=>$this->content);
     }
 
 }

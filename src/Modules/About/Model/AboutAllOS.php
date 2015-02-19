@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class BuildHomeAllOS extends Base {
+class AboutAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -29,12 +29,6 @@ class BuildHomeAllOS extends Base {
         $pipeline = $pipelineFactory->getModel($this->params);
         $r = $pipeline->getPipeline($this->params["item"]);
         return $r ;
-    }
-
-    public function deletePipeline() {
-        $pipelineFactory = new \Model\Pipeline() ;
-        $pipeline = $pipelineFactory->getModel($this->params);
-        return $pipeline->deletePipeline($this->params["item"]);
     }
 
 }

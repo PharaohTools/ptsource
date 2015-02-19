@@ -2,6 +2,6 @@
 
 Namespace Model;
 
-class BuildHome extends BaseModelFactory {
+class About extends BaseModelFactory {
 
 }

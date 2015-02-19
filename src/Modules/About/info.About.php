@@ -2,22 +2,22 @@
 
 Namespace Info;
 
-class BuildHomeInfo extends PTConfigureBase {
+class AboutInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "BuildHome/Home Page";
+    public $name = "About/Home Page";
 
     public function _construct() {
       parent::__construct();
     }
 
     public function routesAvailable() {
-      return array( "BuildHome" => array("show", "delete") );
+      return array( "About" => array("show") );
     }
 
     public function routeAliases() {
-      return array("buildHome"=>"BuildHome");
+      return array("about"=>"About");
     }
 
     public function helpDefinition() {
