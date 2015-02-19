@@ -124,11 +124,16 @@ class PipeRunnerAllOS extends Base {
 
     public function runChild() {
         // @todo this is 30 lines long
+        $eventRunnerFactory = new \Model\EventRunner() ;
+        $eventRunner = $eventRunnerFactory->getModel($this->params) ;
+        $ev = $eventRunner->eventRunner("beforeSettings") ;
+        if ($ev == false) { return $this->failBuild() ; }
         $this->params["build-settings"]["app_config"] = \Model\AppConfig::getAppVariable("app_config");
         $this->params["build-settings"]["mod_config"] = \Model\AppConfig::getAppVariable("mod_config");
         $eventRunnerFactory = new \Model\EventRunner() ;
         $eventRunner = $eventRunnerFactory->getModel($this->params) ;
-        $eventRunner->eventRunner("afterSettings") ;
+        $ev = $eventRunner->eventRunner("afterSettings") ;
+        if ($ev == false) { return $this->failBuild() ; }
         $loggingFactory = new \Model\Logging();
         $this->params["echo-log"] = true ;
         $logging = $loggingFactory->getModel($this->params);
@@ -142,7 +147,8 @@ class PipeRunnerAllOS extends Base {
         $logging->log("Changing to workspace directory $dir", $this->getModuleName()) ;
         chdir($dir);
         $ressys = array() ;
-        $eventRunner->eventRunner("beforeBuild") ;
+        $ev = $eventRunner->eventRunner("beforeBuild") ;
+        if ($ev == false) { return $this->failBuild() ; }
         foreach ($pipeline["steps"] as $hash => $stepDetails) {
             $logging->log("Executing step id $hash", $this->getModuleName()) ;
             $res = $stepRunner->stepRunner($stepDetails, $this->params["item"]) ;
@@ -153,15 +159,24 @@ class PipeRunnerAllOS extends Base {
             echo "\n" ;
             $ressys[] = $res ;
             if ($res==false) break ; }
-        $eventRunner->eventRunner("beforeBuildComplete") ;
+        $ev = $eventRunner->eventRunner("beforeBuildComplete") ;
+        if ($ev == false) { return $this->failBuild() ; }
         $ret = (in_array(false, $ressys)) ? "FAILED EXECUTION\n" : "SUCCESSFUL EXECUTION\n" ;
         $logging->log($ret, $this->getModuleName()) ;
         $this->params["run-status"] = (in_array(false, $ressys)) ? "FAIL" : "SUCCESS" ;
         $eventRunner->params = $this->params ;
         $eventRunner->eventRunner("afterBuildComplete") ;
 		$this->setRunEndTime($this->params["run-status"]) ;
-        // $this->sendEmail($status);
         return $this->saveRunLog() ;
+    }
+
+    private function failBuild() {
+        $loggingFactory = new \Model\Logging();
+        $this->params["echo-log"] = true ;
+        $logging = $loggingFactory->getModel($this->params);
+        $ret = "FAILED EXECUTION" ;
+        $logging->log($ret, $this->getModuleName()) ;
+        return false ;
     }
 
     private function getExecutionOutput() {
@@ -172,7 +187,9 @@ class PipeRunnerAllOS extends Base {
 
     private function getExecutionStatus($o = null) {
         $o = ($o==null) ? $this->getExecutionOutput() : $o ;
-        if (strpos($o, "SUCCESSFUL EXECUTION") !== false || (strpos($o, "FAILED EXECUTION") !== false)) { return true ; }
+        if (strpos($o, "SUCCESSFUL EXECUTION") !== false ||
+           (strpos($o, "FAILED EXECUTION") !== false || strpos($o, "ABORTED EXECUTION" )))
+        { return true ; }
         return false ;
     }
 
