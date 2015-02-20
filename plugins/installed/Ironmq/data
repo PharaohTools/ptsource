@@ -1,0 +1,1 @@
+{"preconf":[{"name":"port","type":"text","value":"80"},{"name":"detail","type":"textarea","value":""}],"buildconf":[{"name":"token","type":"textarea","value":"Enter token"},{"name":"projectid","type":"textarea","value":"Enter project id"},{"name":"queuename","type":"textarea","value":"Enter queue name"}]}

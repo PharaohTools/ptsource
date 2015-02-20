@@ -127,6 +127,14 @@ class PipelineCollaterAllOS extends Base {
 
     private function getSteps() {
         $steps = array();
+        $stepsForRunFile = PIPEDIR.DS.$this->params["item"].DS.'stepsForRun' ;
+        if (file_exists($stepsForRunFile)) {
+            $stepsForRunFileData =  file_get_contents($stepsForRunFile) ;
+            $stepsForRun = json_decode($stepsForRunFileData, true) ; }
+        else {
+            $loggingFactory = new \Model\Logging() ;
+            $logging = $loggingFactory->getModel($this->params) ;
+            $logging->log("No steps For Run file available in build", $this->getModuleName()) ; }
         $stepsFile = PIPEDIR.DS.$this->params["item"].DS.'steps' ;
         if (file_exists($stepsFile)) {
             $stepsFileData =  file_get_contents($stepsFile) ;
@@ -135,7 +143,7 @@ class PipelineCollaterAllOS extends Base {
             $loggingFactory = new \Model\Logging() ;
             $logging = $loggingFactory->getModel($this->params) ;
             $logging->log("No steps file available in build", $this->getModuleName()) ; }
-        return array("steps" => $steps) ;
+        return array("steps" => $steps, "steps-for-run" => $stepsForRun ) ;
     }
 
     private function getSettings() {

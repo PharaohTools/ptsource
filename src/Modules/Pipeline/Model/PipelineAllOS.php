@@ -66,6 +66,8 @@ class PipelineAllOS extends Base {
             $logging->log("Attempting to create directory ".PIPEDIR.DS."$name ", $this->getModuleName()) ;
             $rc = self::executeAndGetReturnCode('mkdir -p '.PIPEDIR.DS.$name);
             self::executeAndGetReturnCode('mkdir -p '.PIPEDIR.DS.$name.DS.'history');
+            self::executeAndGetReturnCode('mkdir -p '.PIPEDIR.DS.$name.DS.'workspace');
+            self::executeAndGetReturnCode('mkdir -p '.PIPEDIR.DS.$name.DS.'stepsHistory');
             return $rc ; }
     }
 

@@ -23,6 +23,7 @@ if (in_array(PHP_OS, array("Windows", "WINNT"))) {
     define('RACOMM',  PFILESDIR."ra.cmd") ;
     define('BOXDIR', $sd.'\\PharaohTools\boxes') ;
     define('PIPEDIR', $sd.'\\PharaohTools\pipes'.'\\') ;
+	define('PLUGININS', $sd.'\\PharaohTools\plugins/installed'.'\\') ;
     define("DS", "\\");
     define("BASE_TEMP_DIR", getenv("SystemDrive").'\Temp\\'); }
 else if (in_array(PHP_OS, array("Linux", "Solaris", "FreeBSD", "OpenBSD", "Darwin"))) {
@@ -37,4 +38,5 @@ else if (in_array(PHP_OS, array("Linux", "Solaris", "FreeBSD", "OpenBSD", "Darwi
     define('RACOMM', "ra") ;
     define("BASE_TEMP_DIR", '/tmp/');
     define('BOXDIR', '/opt/phlagrant/boxes') ;
-    define('PIPEDIR', '/opt/ptbuild/pipes') ; }
+    define('PIPEDIR', '/opt/ptbuild/pipes') ;
+    define('PLUGININS', '/opt/ptbuild/plugins/installed') ; }

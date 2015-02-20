@@ -48,7 +48,7 @@ class PluginLinuxUnix extends Base {
             if (!file_exists($pluginWorkDir))
                 mkdir($pluginWorkDir, 0777);
             $logging->log("Running Plugin by Data...") ;
-            $pipeInstalledDir = str_replace('pipes','plugins/installed',PIPEDIR);
+            $pipeInstalledDir = PLUGININS;
             $input["pluginWorkDir"] = $pluginWorkDir;
             $input["tmpfile"] = PIPEDIR.DS.$this->params["item"].DS.'tmpfile';
             if(!include_once($pipeInstalledDir.DS.$step["steptype"].DS.'Triger.php') ) {
@@ -57,7 +57,7 @@ class PluginLinuxUnix extends Base {
                 return false;
             }
             else {
-                return true;
+                return \Triger::startTriger($input);
             }
         }
         else {
@@ -69,7 +69,7 @@ class PluginLinuxUnix extends Base {
     public function getInstalledPlugins()
     {
         $detail = array();
-        $plugin = scandir(str_replace('pipes','plugins/installed',PIPEDIR)) ;
+        $plugin = scandir(PLUGININS) ;
         for ($i=0; $i<count($plugin); $i++) {
             if (!in_array($plugin[$i], array(".", "..", "tmpfile"))){
                 $detail[] = $plugin[$i];

@@ -89,6 +89,43 @@
                             <input type="text" class="form-control" id="email-id" name="email-id" placeholder="E-mail" value="<?php echo $pageVars["data"]["pipeline"]["email-id"] ; ?>" />
                         </div>
                     </div>
+                    
+                    
+                    
+                    
+                    <div class="form-group"> 
+						<input class="col-sm-2 control-label text-left" name="parameter-status" <?php echo ($pageVars["data"]["pipeline"]["parameter-status"])? "checked": "" ; ?> id="parameter-status" type="checkbox" value="on" /><p>This Build is Parameterised</p>
+						<div class="col-sm-10"> 
+						<h4>String Parameter</h4>
+						</div>
+					</div>
+							
+                    <div class="form-group">
+                        <label for="project-name" class="col-sm-2 control-label text-left">Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="parameter-name" id="parameter-name" placeholder="Name" value="<?php echo $pageVars["data"]["pipeline"]["parameter-name"] ; ?>" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="project-slug" class="col-sm-2 control-label text-left">Default Value</label>
+                        <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="parameter-dvalue" id="parameter-dvalue" placeholder="" value="<?php echo $pageVars["data"]["pipeline"]["parameter-value"] ; ?>" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="project-description" class="col-sm-2 control-label text-left">Description</label>
+                        <div class="col-sm-10">
+                            <textarea id="parameter-description" name="parameter-description" class="form-control"><?php echo $pageVars["data"]["pipeline"]["parameter-description"] ; ?></textarea>
+                        </div>
+                    </div>
+
+                    
+                    
+                         
+                    
+                    
 
                     <?php
 
