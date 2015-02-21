@@ -58,13 +58,6 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="project-slug" class="col-sm-2 control-label text-left">Project Slug</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="project-slug" id="project-slug" placeholder="<?php echo $pageVars["data"]["new-module"]["project-slug"] ; ?>" value="<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" />
-                        </div>
-                    </div>
-
-                    <div class="form-group">
 
                         <div class="col-sm-12">
 
