@@ -6,7 +6,7 @@ class ApplicationInstanceInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "ApplicationInstance Virtual Desktop Integration";
+    public $name = "Application Instance Configurations";
 
     public function _construct() {
         parent::__construct();
@@ -20,25 +20,18 @@ class ApplicationInstanceInfo extends PTConfigureBase {
         return array("xvnc"=>"ApplicationInstance");
     }
 
-    public function events() {
-        return array("afterSettings", "afterBuildComplete");
-    }
-
-    public function buildSettings() {
-        return array("xvnc_during_build");
-    }
-
     public function configuration() {
         return array(
-            "xvnc_command"=> array("type" => "text", "default" => "", "label" => "ApplicationInstance Command Location?", ),
-            "xvnc_min_id"=> array("type" => "text", "default" => "0", "label" => "ApplicationInstance Minimum Desktop ID?", ),
-            "xvnc_max_id"=> array("type" => "text", "default" => "99", "label" => "ApplicationInstance Maximum Desktop ID?", ),
+            "instance_id"=> array("type" => "text", "default" => "Instance ID", "label" => "Application Instance ID?", ),
+            "instance_title"=> array("type" => "text", "default" => "Example Title", "label" => "Application Instance Title?", ),
+            "organisation"=> array("type" => "text", "default" => "Example Organisation", "label" => "Organisation Name?", ),
+            "force_ssl"=> array("type" => "boolean", "default" => "on", "label" => "Force SSL?", ),
         );
     }
 
     public function helpDefinition() {
        $help = <<<"HELPDATA"
-    This extension provides integration with ApplicationInstance as a Build Step. It provides code
+    This extension provides Application Instance Configuration It provides code
     functionality, but no extra CLI commands.
 
     ApplicationInstance
