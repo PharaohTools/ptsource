@@ -15,18 +15,8 @@ class ApplicationConfigureSaverAllOS extends Base {
     public $modelGroup = array("ApplicationConfigureSaver") ;
 
     public function saveAllConfigs() {
-        $r1 = $this->saveAppConfigs();
-        $r2 = $this->saveModConfigs();
-        return ($r1 == true && $r2 == true) ? true : false ;
-    }
-
-    public function saveAppConfigs() {
-        // @todo escape this data from injection etc
-        $appConfigVar = $_REQUEST["app_config"] ;
-        $appConfig = new \Model\AppConfig();
-        $appConfig->setAppVariable("app_config", $appConfigVar);
-        // @todo actually use logic here
-        return true ;
+        $r1 = $this->saveModConfigs();
+        return ($r1 == true) ? true : false ;
     }
 
     public function saveModConfigs() {
