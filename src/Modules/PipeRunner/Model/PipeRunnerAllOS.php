@@ -83,17 +83,18 @@ class PipeRunnerAllOS extends Base {
 			$historyIndex = json_decode($historyIndex, true);
 		$historyIndex[intval($run)]['end'] = time();
 		$historyIndex[intval($run)]['status'] = $status;
-        $historyIndex = json_encode($historyIndex);
-		file_put_contents($file, $historyIndex) ;
-    }
+		$historyIndex = json_encode($historyIndex);
+		file_put_contents($file, $historyIndex);
+	}
 
-    private function setPipeDir() {
-        if (isset($this->params["guess"]) && $this->params["guess"]==true) {
-            $this->params["pipe-dir"] = PIPEDIR ; }
-        else {
-            // @todo should probably ask a question here
-            $this->params["pipe-dir"] = PIPEDIR ; }
-    }
+	private function setPipeDir() {
+		if (isset($this -> params["guess"]) && $this -> params["guess"] == true) {
+			$this -> params["pipe-dir"] = PIPEDIR;
+		} else {
+			// @todo should probably ask a question here
+			$this -> params["pipe-dir"] = PIPEDIR;
+		}
+	}
 
     private function runPipeForkCommand($run) {
         // this should be a phrank piperunner@cli and it should save the log to a named history

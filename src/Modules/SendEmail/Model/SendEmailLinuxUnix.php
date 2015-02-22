@@ -20,7 +20,7 @@ class SendEmailLinuxUnix extends Base {
 
     public function getEvents() {
         $ff = array(
-            "afterBuildComplete" => array(
+            "beforeBuildComplete" => array(
                 "sendAlertMail",
             ),
         );
@@ -45,7 +45,7 @@ class SendEmailLinuxUnix extends Base {
         // Create the Transport
         $transport = \Swift_SmtpTransport::newInstance(
                 $this->params["build-settings"]["mod_config"]["SendEmail"]["config_smtp_server"],
-            (int) $this->params["build-settings"]["mod_config"]["SendEmail"]["config_port"])
+            (int) $this->params["build-settings"]["mod_config"]["SendEmail"]["config_port"], 'ssl')
             ->setUsername($this->params["build-settings"]["mod_config"]["SendEmail"]["config_username"])
             ->setPassword($this->params["build-settings"]["mod_config"]["SendEmail"]["config_password"])
         ;

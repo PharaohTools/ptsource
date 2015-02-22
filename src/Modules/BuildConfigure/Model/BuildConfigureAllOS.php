@@ -55,12 +55,20 @@ class BuildConfigureAllOS extends Base {
         $this->params["project-slug"] = $this->getFormattedSlug() ;
         $this->params["item"] = $this->params["project-slug"] ;
         $pipelineFactory = new \Model\Pipeline() ;
+        // @todo we need to put all of this into modules, as build settings.
         $data = array(
             "project-name" => $this->params["project-name"],
             "project-slug" => $this->params["project-slug"],
             "project-description" => $this->params["project-description"],
             "default-scm-url" => $this->params["default-scm-url"],
-			"email-id" => $this->params["email-id"] ) ;
+			"email-id" => $this->params["email-id"],
+			"parameter-status" => $this->params["parameter-status"],
+			"parameter-name" => $this->params["parameter-name"],
+			"parameter-dvalue" => $this->params["parameter-dvalue"],
+			"parameter-input" => "",
+			"parameter-description" => $this->params["parameter-description"]) ;
+			
+		
         if ($this->params["creation"] == "yes") {
             $pipelineDefault = $pipelineFactory->getModel($this->params);
             $pipelineDefault->createPipeline($this->params["project-slug"]) ; }
@@ -81,6 +89,45 @@ class BuildConfigureAllOS extends Base {
             $this->params["project-slug"] = str_replace("/", "", $this->params["project-slug"]);
             $this->params["project-slug"] = strtolower($this->params["project-slug"]); }
         return $this->params["project-slug"] ;
+    }
+    
+    public function getInstalledPlugins()
+    {
+    $plugin = scandir(PLUGININS) ;
+        for ($i=0; $i<count($plugin); $i++) {
+            if (!in_array($plugin[$i], array(".", "..", "tmpfile"))){
+                if(is_dir(PLUGININS.DS.$plugin[$i])) {
+                    // @todo if this isnt definitely a build dir ignore maybe
+                    $detail['details'][$plugin[$i]] = $this->getInstalledPlugin($plugin[$i]);
+                    $detail['data'][$plugin[$i]] = $this->getInstalledPluginData($plugin[$i]); } } }
+        return (isset($detail) && is_array($detail)) ? $detail : array() ;
+    }
+
+    public function getInstalledPlugin($plugin) {
+	$defaultsFile = PLUGININS.DS.$plugin.DS.'details' ;
+        if (file_exists($defaultsFile)) {
+            $defaultsFileData =  file_get_contents($defaultsFile) ;
+            $defaults = json_decode($defaultsFileData, true) ; }
+        return  (isset($defaults) && is_array($defaults)) ? $defaults : array() ;
+    }
+
+    public function getInstalledPluginData($plugin) {
+        $file = PIPEDIR . DS . $this->params["item"] . DS . 'pluginData';
+        if ($pluginData = file_get_contents($file)) {
+            $pluginData = json_decode($pluginData, true);
+        }
+        $defaultsFile = PLUGININS.DS.$plugin.DS.'data' ;
+        if (file_exists($defaultsFile)) {
+            $defaultsFileData =  file_get_contents($defaultsFile) ;
+            $defaults = json_decode($defaultsFileData, true) ; 
+        }
+        foreach ($defaults['buildconf'] as $key=>$val) {
+            if (isset ($pluginData[$plugin][$val['name']]) ) {
+                $value = $pluginData[$plugin][$val['name']];
+                $defaults['buildconf'][$key]['value'] = $value;
+            }
+        }
+        return  (isset($defaults) && is_array($defaults)) ? $defaults : array() ;
     }
 
 }
