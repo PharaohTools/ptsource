@@ -259,6 +259,16 @@ require('".$this->programDataFolder.DIRECTORY_SEPARATOR.$this->programExecutorTa
         return $data;
     }
 
+    protected function getSwitchingUser() {
+        $app_config = \Model\AppConfig::getAppVariable("app_config");
+
+        $su = (isset($app_config["UserSwitching"]["switching_user"])) ? $app_config["UserSwitching"]["switching_user"] : "www-data" ;
+
+        $question .= ' Found "/opt/'.$this->programNameMachine.'" - use this? (Enter nothing for yes, no end slash)';
+        $input = (isset($this->params["yes"]) && $this->params["yes"]==true) ? "/opt/$this->programNameMachine" : self::askForInput($question);
+        return ($input=="") ? "/opt/$this->programNameMachine" : $input ;
+    }
+
 
     public function versionInstalledCommandTrimmer($text) {
         $lastNewLine = strrpos($text, "\n") ;
