@@ -20,13 +20,14 @@ class ModuleManagerWebActionAnyOS extends BasePHPApp {
     }
 
     private function installModules() {
-        $modFactory = new \Model\ModuleManager() ;
-        $mmpr = $this->params ;
-        $mmpr["module-source"] = $_REQUEST[] ;
-        $mm = $modFactory->getModel();
-
-
-        return $mm ;
+        var_dump($_REQUEST["module-source"]);
+        if (isset($_REQUEST["module-source"]) && strlen($_REQUEST["module-source"]) > 0) {
+            $modFactory = new \Model\ModuleManager() ;
+            $mmpr = $this->params ;
+            $mmpr["module-source"] = $_REQUEST["module-source"] ;
+            $mm = $modFactory->getModel($mmpr);
+            $mm->install(); }
+        return true ;
     }
 
 }

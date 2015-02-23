@@ -14,27 +14,6 @@
                 <a href="/index.php?control=Index&action=show" class="list-group-item">
                     <i class="fa fa-comment-o"></i> Dashboard
                 </a>
-                <a href="/index.php?control=BuildHome&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
-                    <i class="fa fa-search"></i> Pipeline Home
-                </a>
-                <a href="/index.php?control=BuildList&action=show" class="list-group-item">
-                    <i class="fa fa-user"></i> All Pipelines
-                </a>
-                <a href="/index.php?control=Workspace&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
-                    <i class="fa fa-folder-open-o"></i> Workspace
-                </a>
-                <a href="#" class="list-group-item">
-                    <i class="fa fa-bar-chart-o"></i> Monitors <span class="badge">6</span>
-                </a>
-                <a href="#" class="list-group-item">
-                    <i class="fa fa-bar-chart-o"></i> History <span class="badge">3</span>
-                </a>
-                <a href="/index.php?control=BuildHome&action=delete&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
-                    <i class="fa fa-envelope"></i> Delete
-                </a>
-                <a href="/index.php?control=PipeRunner&action=start&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
-                    <i class="fa fa-envelope"></i> Run Now
-                </a>
             </div>
         </div>
 
@@ -48,13 +27,30 @@
 
                 <h3>Module and Extension Manager</h3>
 
-                <form class="form-horizontal custom-form" action="<?= $act ; ?>" method="POST">
-
                     <div class="form-group">
-                        <label for="project-name" class="col-sm-2 control-label text-left">Git Repository</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="new-module-repository" id="new-module-repository" placeholder="Git Repository" value="<?php echo $pageVars["data"]["new-module"]["project-name"] ; ?>" />
+
+                        <div class="col-sm-2">
+                            <label for="project-name" class="control-label text-left">Git Repository</label>
                         </div>
+
+                        <form class="form-horizontal custom-form" action="<?php echo '/index.php?control=ModuleManager&action=webaction' ; ?>" method="POST">
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="module-source" id="module-source" placeholder="Git Repository" value="<?php echo $pageVars["data"]["new-module"]["project-name"] ; ?>" />
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <button type="submit" class="btn btn-success">Download Module</button>
+                                    <input type="hidden" name="" id="item" value="" />
+                                    <input type="hidden" name="item" id="item" value="<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" />
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="form-group">
+                            <input type="hidden" name="item" id="item" value="<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" />
+                        </div>
+
                     </div>
 
                     <div class="form-group">
@@ -63,26 +59,44 @@
 
                             <h3>Available Modules</h3>
 
-                            <ul class="form-group ui-sortable moduleList" id="sortableSteps">
+                            <div class="col-sm-12" style="height: 150px; overflow-y: scroll; resize:both;">
 
-                                <?php
+                                <div class="form-group ui-sortable moduleList" id="sortableSteps">
 
-                                foreach ($pageVars["data"]["available_modules"] as $modSlug => $one_available_module) {
-                                    echo '<li class="form-group ui-state-default ui-sortable-handle moduleEntry" id="step'.$modSlug.'">' ;
-                                    echo ' <div class="col-sm-12">' ;
-                                    echo '  <div class="col-sm-10">' ;
-                                    echo '   <p><strong>'.$one_available_module["name"].'</strong></p>';
-                                    echo '   <p>'.$one_available_module["description"].'</p>';
-                                    echo '   <input type="hidden" id="steps['.$modSlug.'][module]" name="steps['.$modSlug.'][module]" value="'.$one_available_module["module"].'" />';
-                                    echo '   <input type="hidden" id="steps['.$modSlug.'][steptype]" name="steps['.$modSlug.'][steptype]" value="'.$one_available_module["steptype"].'" />';
-                                    echo '  </div>';
-                                    echo '  <div class="col-sm-2">'  ;
-                                    echo '   <a class="btn btn-success" onclick="deleteStepField(hash)">Add </a>' ;
-                                    echo '  </div>';
-                                    echo ' </div>';
-                                    echo '</li>'; } ?>
+                                    <?php
 
-                            </ul> <!-- sortable end -->
+                                    $oddeven = "Odd" ;
+
+                                    foreach ($pageVars["data"]["available_modules"] as $modSlug => $one_available_module) {
+                                        //echo '<div class="form-group ui-state-default ui-sortable-handle moduleEntry" id="step'.$modSlug.'">' ;
+
+                                        $oddeven = ($oddeven == "Odd") ? "Even" : "Odd" ;
+
+                                        echo ' <div class="col-sm-12 moduleEntry moduleEntry'.$oddeven.'" id="step'.$modSlug.'">' ;
+                                        echo '  <div class="col-sm-8">' ;
+                                        echo '   <p><strong>'.$one_available_module["name"].' </strong></p>';
+                                        echo '   <p>'.$one_available_module["description"].'</p>';
+                                        echo '   <p><strong>Dependencies: </strong>'.implode(", ", $one_available_module["dependencies"]).'</p>';
+                                        echo '   <input type="hidden" id="steps['.$modSlug.'][module]" name="steps['.$modSlug.'][module]" value="'.$one_available_module["module"].'" />';
+                                        echo '   <input type="hidden" id="steps['.$modSlug.'][steptype]" name="steps['.$modSlug.'][steptype]" value="'.$one_available_module["steptype"].'" />';
+                                        echo '  </div>';
+                                        echo '  <div class="col-sm-4">'  ;
+                                        echo '   <div class="col-sm-12">' ;
+                                        echo '    <a class="btn btn-success text-center" onclick="deleteStepField(hash)">Download</a>' ;
+                                        echo '   </div>';
+                                        echo '   <div class="col-sm-12">' ;
+                                        echo '    <a class="btn btn-success text-center" onclick="deleteStepField(hash)">Download Dependencies</a>' ;
+                                        echo '   </div>';
+                                        echo '  </div>';
+                                        echo ' </div>';
+                                        // echo '</div>';
+                                    } ?>
+
+                                    <br style="clear: both;" />
+
+                                </div> <!-- sortable end -->
+
+                            </div>
 
                         </div>
 
@@ -90,28 +104,39 @@
 
                     <div class="form-group">
 
-                        <div class="col-sm-6">
-                            <h3> Installed Modules: <i style="font-size: 18px;" class="fa fa-chevron-right"></i></h3>
-                            <hr />
-                            <?php
-                                foreach ($pageVars["data"]["installed_modules"] as $instModuleInfo) {
-                                    if ($instModuleInfo["hidden"] != true) {
-                                        echo '<p class="moduleListText"><strong>'.$instModuleInfo["command"].'</strong> - '.$instModuleInfo["name"]."</p>"; } }
-                            ?>
-                        </div>
+                            <div class="col-sm-12">
+                                <h3> Installed Modules: <i style="font-size: 18px;" class="fa fa-chevron-down"></i></h3>
+                                <hr />
+                                <div class="col-sm-12" style="height: 150px; overflow-y: scroll; resize:both;">
+                                <?php
+                                    foreach ($pageVars["data"]["installed_modules"] as $instModuleInfo) {
+                                        echo '<div class="col-sm-6">';
+                                        echo '  <p class="moduleListText"><strong>'.$instModuleInfo["command"].'</strong> - '.$instModuleInfo["name"]."</p>";
+                                        echo '</div>'; }
+                                ?>
+                                </div>
+                            </div>
 
-
-                        <div class="col-sm-6">
-                            <h3> Incompatible Modules: <i style="font-size: 18px;" class="fa fa-chevron-right"></i></h3>
-                            <hr />
-                            <?php
-                                foreach ($pageVars["data"]["incompatible_modules"] as $compatModuleInfo) {
-                                    if ($compatModuleInfo["hidden"] != true) {
-                                        echo '<p class="moduleListText"><strong>'.$compatModuleInfo["command"].'</strong> - '.$compatModuleInfo["name"]."</p>"; } }
-                            ?>
-                        </div>
+                            <div class="col-sm-12">
+                                <h3> Incompatible Modules: <i style="font-size: 18px;" class="fa fa-chevron-down"></i></h3>
+                                <hr />
+                                <div class="col-sm-12" style="height: 50px; overflow-y: scroll; resize:both;">
+                                <?php
+                                    if (count($pageVars["data"]["incompatible_modules"]) > 0) {
+                                        foreach ($pageVars["data"]["incompatible_modules"] as $compatModuleInfo) {
+                                            echo '<div class="col-sm-6">';
+                                            echo '  <p class="moduleListText"><strong>'.$compatModuleInfo["command"].'</strong> - '.$compatModuleInfo["name"]."</p>";
+                                            echo '</div>'; } }
+                                    else {
+                                        echo '<p>No incompatible modules found</p>' ; }
+                                ?>
+                                </div>
+                            </div>
 
                     </div>
+
+                <!--
+                <form class="form-horizontal custom-form" action="<?= $act ; ?>" method="POST">
 
                     <div class="form-group">
                         <div class="col-sm-12">
@@ -124,6 +149,7 @@
                     </div>
 
                 </form>
+                -->
             </div>
             <p>
                 ---------------------------------------<br/>

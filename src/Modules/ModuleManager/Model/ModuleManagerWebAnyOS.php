@@ -54,6 +54,7 @@ class ModuleManagerWebAnyOS extends BasePHPApp {
     }
 
     private function getAvailableModules() {
+
         $ray = array(
             "TestModuleOne" => array(
                 "repo_url" => "http://www.github.com/PharaohModules/test-one.git",

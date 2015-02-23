@@ -14,6 +14,9 @@
                 <a href="/index.php?control=Index&action=show" class="list-group-item">
                     <i class="fa fa-comment-o"></i> Dashboard
                 </a>
+                <a href="/index.php?control=ModuleManager&action=show" class="list-group-item">
+                    <i class="fa fa-user"></i> Module Manager
+                </a>
             </div>
         </div>
 
@@ -99,39 +102,6 @@
                             </div>
 
                         </div>
-
-                    </div>
-
-                    <div class="form-group">
-
-                            <div class="col-sm-12">
-                                <h3> Installed Modules: <i style="font-size: 18px;" class="fa fa-chevron-down"></i></h3>
-                                <hr />
-                                <div class="col-sm-12" style="height: 150px; overflow-y: scroll; resize:both;">
-                                <?php
-                                    foreach ($pageVars["data"]["installed_modules"] as $instModuleInfo) {
-                                        echo '<div class="col-sm-6">';
-                                        echo '  <p class="moduleListText"><strong>'.$instModuleInfo["command"].'</strong> - '.$instModuleInfo["name"]."</p>";
-                                        echo '</div>'; }
-                                ?>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-12">
-                                <h3> Incompatible Modules: <i style="font-size: 18px;" class="fa fa-chevron-down"></i></h3>
-                                <hr />
-                                <div class="col-sm-12" style="height: 50px; overflow-y: scroll; resize:both;">
-                                <?php
-                                    if (count($pageVars["data"]["incompatible_modules"]) > 0) {
-                                        foreach ($pageVars["data"]["incompatible_modules"] as $compatModuleInfo) {
-                                            echo '<div class="col-sm-6">';
-                                            echo '  <p class="moduleListText"><strong>'.$compatModuleInfo["command"].'</strong> - '.$compatModuleInfo["name"]."</p>";
-                                            echo '</div>'; } }
-                                    else {
-                                        echo '<p>No incompatible modules found</p>' ; }
-                                ?>
-                                </div>
-                            </div>
 
                     </div>
 
