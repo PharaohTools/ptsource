@@ -2,39 +2,36 @@
 
 Namespace Info;
 
-class ApplicationInstanceInfo extends PTConfigureBase {
+class UserSwitchingInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "Application Instance Configurations";
+    public $name = "User Switching Configurations";
 
     public function _construct() {
         parent::__construct();
     }
 
     public function routesAvailable() {
-        return array( "ApplicationInstance" => array_merge(parent::routesAvailable(), array("help") ) );
+        return array( "UserSwitching" => array_merge(parent::routesAvailable(), array("help") ) );
     }
 
     public function routeAliases() {
-        return array("xvnc"=>"ApplicationInstance");
+        return array("xvnc"=>"UserSwitching");
     }
 
     public function configuration() {
         return array(
-            "instance_id"=> array("type" => "text", "default" => "Instance ID", "label" => "Application Instance ID?", ),
-            "instance_title"=> array("type" => "text", "default" => "Example Title", "label" => "Application Instance Title?", ),
-            "organisation"=> array("type" => "text", "default" => "Example Organisation", "label" => "Organisation Name?", ),
-            "force_ssl"=> array("type" => "boolean", "default" => "on", "label" => "Force SSL?", ),
+            "switching_user"=> array("type" => "text", "default" => "www-data", "label" => "Username to Switch to", ),
         );
     }
 
     public function helpDefinition() {
        $help = <<<"HELPDATA"
-    This extension provides Application Instance Configuration It provides code
+    This extension provides User Switching Configuration It provides code
     functionality, but no extra CLI commands.
 
-    ApplicationInstance
+    UserSwitching
 
 HELPDATA;
       return $help ;

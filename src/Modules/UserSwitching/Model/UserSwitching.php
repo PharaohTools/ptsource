@@ -2,6 +2,6 @@
 
 Namespace Model;
 
-class ApplicationInstance extends BaseModelFactory {
+class UserSwitching extends BaseModelFactory {
 
 }

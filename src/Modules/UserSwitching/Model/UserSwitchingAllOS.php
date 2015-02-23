@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class ApplicationInstanceAllOS extends Base {
+class UserSwitchingAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
