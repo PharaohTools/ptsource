@@ -60,14 +60,35 @@ class ModuleManagerWebAnyOS extends BasePHPApp {
                 "description" => "This is the first test description",
                 "name" => "Test Module One",
                 "group" => "test_modules",
-                "dependenciee" => "http://www.github.com/PharaohModules/test-one.git",
+                "dependencies" => array("Logging", "SendEmail"),
             ),
             "TestModuleTwo" => array(
                 "repo_url" => "http://www.github.com/PharaohModules/test-two.git",
                 "description" => "This is the second test description",
                 "name" => "Test Module Two",
                 "group" => "test_modules",
-                "dependenciee" => "http://www.github.com/PharaohModules/test-two.git",
+                "dependencies" => array("Logging", "SendEmail"),
+            ),
+            "TestModuleThree" => array(
+                "repo_url" => "http://www.github.com/PharaohModules/test-three.git",
+                "description" => "This is the third test description",
+                "name" => "Test Module Three",
+                "group" => "test_modules",
+                "dependencies" => array("Logging", "SendEmail"),
+            ),
+            "TestModuleFour" => array(
+                "repo_url" => "http://www.github.com/PharaohModules/test-four.git",
+                "description" => "This is the fourth test description",
+                "name" => "Test Module Two",
+                "group" => "test_modules",
+                "dependencies" => array("Logging", "SendEmail"),
+            ),
+            "DummyLinuxModule" => array(
+                "repo_url" => "http://www.github.com/PharaohModules/test-two.git",
+                "description" => "This is the dummy linux module test description",
+                "name" => "Dummy Linux Module",
+                "group" => "dummy_modules",
+                "dependencies" => array("Logging", "SendEmail"),
             ),
         );
         return $ray ;
