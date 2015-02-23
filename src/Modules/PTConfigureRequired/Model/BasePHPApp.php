@@ -189,9 +189,10 @@ require('".$this->programDataFolder.DIRECTORY_SEPARATOR.$this->programExecutorTa
 
     protected function makeProgramDataFolderIfNeeded(){
         if (!file_exists($this->programDataFolder)) {
-            $command = 'sudo su golden -c"mkdir -p '.$this->programDataFolder.'"';
+            $app_config = \Model\AppConfig::getAppVariable("app_config");
+            $command = 'sudo su '.$app_config["UserSwitching"]["switching_user"].' -c"mkdir -p '.$this->programDataFolder.'"';
             self::executeAndOutput($command, "Program Data Folder $this->programDataFolder made");
-            $command = 'sudo su golden -c"chmod -R 777 '.$this->programDataFolder.'"';
+            $command = 'sudo su '.$app_config["UserSwitching"]["switching_user"].' -c"chmod -R 777 '.$this->programDataFolder.'"';
             self::executeAndOutput($command, "Program Data Folder $this->programDataFolder Chmodded"); }
     }
 
@@ -199,20 +200,23 @@ require('".$this->programDataFolder.DIRECTORY_SEPARATOR.$this->programExecutorTa
         $ms = $this->programDataFolder ;
         $name = substr($ms, strrpos($ms, "/"));
         $pdf = substr($this->programDataFolder, 0, strrpos($this->programDataFolder, "/")) ;
-        $command = 'sudo su golden -c"cp -r '.$this->tempDir.DIRECTORY_SEPARATOR.$this->programNameMachine.
+        $app_config = \Model\AppConfig::getAppVariable("app_config");
+        $command = 'sudo su '.$app_config["UserSwitching"]["switching_user"].' -c"cp -r '.$this->tempDir.DIRECTORY_SEPARATOR.$this->programNameMachine.
             $name.DIRECTORY_SEPARATOR.'* '.$this->programDataFolder.'"';
         error_log($command);
         return self::executeAndOutput($command, "Program Data folder populated");
     }
 
     protected function deleteExecutorIfExists(){
-        $command = 'sudo su golden -c"rm -f '.$this->programExecutorFolder.DS.$this->programNameMachine.'"';
+        $app_config = \Model\AppConfig::getAppVariable("app_config");
+        $command = 'sudo su '.$app_config["UserSwitching"]["switching_user"].' -c"rm -f '.$this->programExecutorFolder.DS.$this->programNameMachine.'"';
         self::executeAndOutput($command, "Program Executor Deleted if existed");
         return true;
     }
 
     protected function deleteInstallationFiles(){
-        $command = 'sudo su golden -c"rm -rf '.$this->tempDir.DS.$this->programNameMachine.'"';
+        $app_config = \Model\AppConfig::getAppVariable("app_config");
+        $command = 'sudo su '.$app_config["UserSwitching"]["switching_user"].' -c"rm -rf '.$this->tempDir.DS.$this->programNameMachine.'"';
         self::executeAndOutput($command);
     }
 
@@ -242,7 +246,8 @@ require('".$this->programDataFolder.DIRECTORY_SEPARATOR.$this->programExecutorTa
         $lpr["php-log"] = true ;
         $logging = $loggingFactory->getModel($lpr);
         foreach ($this->fileSources as $fileSource) {
-            $command  = 'sudo su golden -c"git clone ';
+            $app_config = \Model\AppConfig::getAppVariable("app_config");
+            $command  = 'sudo su '.$app_config["UserSwitching"]["switching_user"].' -c"git clone ';
             if (isset($fileSource[3]) && $fileSource[3] == true) { $command .= '--recursive ';}
             if ($fileSource[2] != null) { $command .= '-b '.$fileSource[2].' ';}
             $command .= escapeshellarg($fileSource[0]).' ';
