@@ -19,6 +19,7 @@ class EventAllOS extends Base {
         $loggingFactory = new \Model\Logging();
         $this->params["echo-log"] = true ;
         $logging = $loggingFactory->getModel($this->params);
+        $res = array();
         foreach ($modules as $module ) {
             $eventModuleFactoryClass = '\Model\\'.$module;
             $eventModuleFactory = new $eventModuleFactoryClass() ;
@@ -29,11 +30,11 @@ class EventAllOS extends Base {
                     foreach ($availableEventMethods as $oneMethod) {
                         if (method_exists($eventModel, $oneMethod)) {
                             $logging->log("Running ".get_class($eventModel)." with method $oneMethod", $this->getModuleName()) ;
-                            $eventModel->$oneMethod() ; }
+                            $res[] = $eventModel->$oneMethod() ; }
                         else {
-                            $logging->log("No method exists in ".get_class($eventModel)." with name $oneMethod", $this->getModuleName()) ; } } } } }
-        $ret = $event ;
-        return $ret ;
+                            $logging->log("No method exists in ".get_class($eventModel)." with name $oneMethod", $this->getModuleName()) ;
+                            $res[] = false ;} } } } }
+        return (in_array(false, $res)) ? false : true ;
     }
 
     public function getsModulesOfEvent($event) {

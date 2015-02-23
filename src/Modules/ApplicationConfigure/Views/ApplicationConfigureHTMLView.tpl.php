@@ -22,6 +22,9 @@
                 <a href="/index.php?control=UserManager&action=show" class="list-group-item">
                     <i class="fa fa-user"></i> User Manager
                 </a>
+                <a href="/index.php?control=ModuleManager&action=show" class="list-group-item">
+                    <i class="fa fa-user"></i> Module Manager
+                </a>
             </div>
         </div>
 
@@ -80,8 +83,8 @@
                     ?>
 
                     <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-success">Save App Config</button>
+                        <div class="col-sm-12">
+                            <button type="submit" class="btn btn-success">Save Configuration</button>
                             <button type="submit" class="btn btn-primary">Clear</button>
                             <button type="submit" class="btn btn-warning">Use Defaults</button>
                         </div>
@@ -104,27 +107,32 @@
                                     echo '<div class="form-group">' ;
                                     echo '  <label for="config_'.$one_config_slug.'" class="col-sm-6 control-label text-left">'.$one_conf_tails["label"].'</label>' ;
                                     echo '  <div class="col-sm-4">' ;
-                                    echo '      <p>' ;
                                     switch ($one_conf_tails["type"]) {
                                         case "boolean" :
-                                            if (isset($pageVars["data"]["current_configs"]["mod_config"][$module_name]["config_".$one_config_slug])) {
-                                                if ($pageVars["data"]["current_configs"]["mod_config"][$module_name]["config_".$one_config_slug] == true) {
-                                                    $onoff = "on";  }
-                                                else {
-                                                    $onoff = "off" ; } }
-                                            $onoff = (is_null($onoff))
-                                                ? $one_conf_tails["default"]
-                                                : null ;
-                                            echo '<input name="mod_config['.$module_name.'][config_'.$one_config_slug.']" id="mod_config['.$module_name.'][config_'.$one_config_slug.']" type="checkbox" value="'.$onoff.'" />' ;
+                                            if ( (isset($pageVars["data"]["current_configs"]["mod_config"][$module_name]["".$one_config_slug])) &&
+                                                $pageVars["data"]["current_configs"]["mod_config"][$module_name]["".$one_config_slug] == "on" ) {
+                                                $onoff = "on" ; }
+                                            else if ( (isset($pageVars["data"]["current_configs"]["mod_config"][$module_name][$one_config_slug])) &&
+                                                $pageVars["data"]["current_configs"]["mod_config"][$module_name][$one_config_slug] != "on" ) {
+                                                $onoff = "off" ; }
+                                            else {
+                                                $onoff = (!isset($onoff) || is_null($onoff))
+                                                    ? $one_conf_tails["default"]
+                                                    : $onoff ; }
+                                            if ($onoff === "on") { $onoff = 'checked="checked"' ;}
+                                            else {$onoff = "" ;}
+                                            echo '<input name="mod_config['.$module_name.']['.$one_config_slug.']" id="mod_config['.$module_name.']['.$one_config_slug.']" type="checkbox" '.$onoff.' />' ;
                                             break ;
                                         case "text" :
-                                            if (isset($pageVars["data"]["current_configs"]["mod_config"][$module_name]["config_".$one_config_slug])) {
-                                                $val = $pageVars["data"]["current_configs"]["mod_config"][$module_name]["config_".$one_config_slug];  }
-                                            if (!isset($val) && is_null($onoff)) {
-                                                $val = $one_conf_tails["default"] ; }
-                                            echo '<input name="mod_config['.$module_name.'][config_'.$one_config_slug.']" id="mod_config['.$module_name.'][config_'.$one_config_slug.']" type="text" class="form-control" value="'.$val.'" placeholder="'.$one_conf_tails["label"].'" />' ;
+                                            if (isset($pageVars["data"]["current_configs"]["mod_config"][$module_name][$one_config_slug]) &&
+                                                strlen($pageVars["data"]["current_configs"]["mod_config"][$module_name][$one_config_slug])>0) {
+                                                $val = ' value="'.$pageVars["data"]["current_configs"]["mod_config"][$module_name][$one_config_slug].'" ';  }
+                                            else {
+                                                $val = "" ; }
+                                            if ($val == "" || is_null($val)) {
+                                                $placeholder = ' placeholder="'.$one_conf_tails["default"].'" ' ; }
+                                            echo '<input name="mod_config['.$module_name.']['.$one_config_slug.']" id="mod_config['.$module_name.']['.$one_config_slug.']" type="text" class="form-control" '.$val.' '.$placeholder.' ></input>' ;
                                             break ; }
-                                    echo '</p>';
                                     echo '  </div>';
                                     echo '</div>'; } } }
                         else {
@@ -134,17 +142,23 @@
 
                     ?>
 
+                    <!--
+
                     <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
+                        <div class="col-sm-offset-2 col-sm-12">
                             <button type="submit" class="btn btn-success">Save App Config</button>
                             <button type="submit" class="btn btn-primary">Clear</button>
                             <button type="submit" class="btn btn-warning">Use Defaults</button>
                         </div>
                     </div>
 
+                    -->
+
                     <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-success">Save All Configurations</button>
+                        <div class="col-sm-12">
+                            <button type="submit" class="btn btn-success">Save Configuration</button>
+                            <button type="submit" class="btn btn-primary">Clear</button>
+                            <button type="submit" class="btn btn-warning">Use Defaults</button>
                         </div>
                     </div>
 

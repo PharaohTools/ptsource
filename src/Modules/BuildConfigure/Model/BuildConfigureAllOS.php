@@ -19,7 +19,6 @@ class BuildConfigureAllOS extends Base {
         $ret["builders"] = $this->getBuilders();
         $ret["settings"] = $this->getBuilderSettings();
         $ret["fields"] = $this->getBuilderFormFields();
-        $ret["plugin"] = $this->getInstalledPlugins();
         return $ret ;
     }
 
@@ -56,6 +55,7 @@ class BuildConfigureAllOS extends Base {
         $this->params["project-slug"] = $this->getFormattedSlug() ;
         $this->params["item"] = $this->params["project-slug"] ;
         $pipelineFactory = new \Model\Pipeline() ;
+        // @todo we need to put all of this into modules, as build settings.
         $data = array(
             "project-name" => $this->params["project-name"],
             "project-slug" => $this->params["project-slug"],
@@ -129,4 +129,5 @@ class BuildConfigureAllOS extends Base {
         }
         return  (isset($defaults) && is_array($defaults)) ? $defaults : array() ;
     }
+
 }

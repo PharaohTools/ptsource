@@ -23,6 +23,7 @@ class PipeRunner extends Base {
         if (in_array($pageVars["route"]["action"], array("start"))) {
            	$result=$thisModel->runPipe();
 			$this->content["pipex"] = $result; 
+<<<<<<< HEAD
 			if($result == "getParamValue") {
 				$this->content["data"] = $thisModel->getData();
 				return array ("type"=>"view", "view"=>"pipeRunnerGetValue", "pageVars"=>$this->content);}		
@@ -32,6 +33,13 @@ class PipeRunner extends Base {
 				return array ("type"=>"view", "view"=>"pipeRunner", "pageVars"=>$this->content);
 			}
 
+=======
+			if ($result == "getParamValue") {
+				$this->content["data"] = $thisModel->getData();
+				return array ("type"=>"view", "view"=>"pipeRunnerGetValue", "pageVars"=>$this->content); } }
+			else{
+				return array ("type"=>"view", "view"=>"pipeRunner", "pageVars"=>$this->content); }
+>>>>>>> origin/master
         $this->content["data"] = $thisModel->getData();
         return array ("type"=>"view", "view"=>"pipeRunner", "pageVars"=>$this->content);
     }

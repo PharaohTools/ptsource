@@ -104,6 +104,7 @@ class PipeRunnerAllOS extends Base {
 		}
 	}
 
+<<<<<<< HEAD
 	private function runPipeForkCommand($run) {
 		// this should be a phrank piperunner@cli and it should save the log to a named history
 		$cmd = PHRCOMM . ' piperunner child --pipe-dir="' . $this -> params["pipe-dir"] . '" ';
@@ -212,6 +213,138 @@ class PipeRunnerAllOS extends Base {
 		$file = $this -> params["pipe-dir"] . DS . $this -> params["item"] . DS . 'history' . DS . $run;
 		$buildOut = $this -> getExecutionOutput();
 		$top = "THIS IS A PLACEHOLDER TO SHOW A STARTED OUTPUT FILE\n\n";
+=======
+    private function runPipeForkCommand($run) {
+        // this should be a phrank piperunner@cli and it should save the log to a named history
+        $cmd  = "sudo su golden -c'".PHRCOMM.' piperunner child --pipe-dir="'.$this->params["pipe-dir"].'" ' ;
+        $cmd .= '--item="'.$this->params["item"].'" --run-id="'.$run.'" > '.PIPEDIR.DS.$this->params["item"].DS ;
+        $cmd .= 'tmpfile &'."'" ;
+        error_log($cmd);
+        $descr = array(
+            0 => array(
+                'pipe',
+                'r'
+            ) ,
+            1 => array(
+                'pipe',
+                'w'
+            ) ,
+            2 => array(
+                'pipe',
+                'w'
+            )
+        );
+        $pipes = array();
+        $process = proc_open($cmd, $descr, $pipes);
+        $stat = proc_get_status ( $process ) ;
+        proc_close($process);
+        return $stat["pid"]  ;
+    }
+
+    public function runChild() {
+        // @todo this is 30 lines long
+        $eventRunnerFactory = new \Model\EventRunner() ;
+        $eventRunner = $eventRunnerFactory->getModel($this->params) ;
+        $ev = $eventRunner->eventRunner("beforeSettings") ;
+        if ($ev == false) { return $this->failBuild() ; }
+        $this->params["build-settings"]["app_config"] = \Model\AppConfig::getAppVariable("app_config");
+        $this->params["build-settings"]["mod_config"] = \Model\AppConfig::getAppVariable("mod_config");
+        $eventRunnerFactory = new \Model\EventRunner() ;
+        $eventRunner = $eventRunnerFactory->getModel($this->params) ;
+        $ev = $eventRunner->eventRunner("afterSettings") ;
+        if ($ev == false) { return $this->failBuild() ; }
+        $loggingFactory = new \Model\Logging();
+        $this->params["echo-log"] = true ;
+        $logging = $loggingFactory->getModel($this->params);
+        $stepRunnerFactory = new \Model\StepRunner() ;
+        $stepRunner = $stepRunnerFactory->getModel($this->params) ;
+        $pipeline = $this->getPipeline();
+        $logging->log("Writing to temp file ". PIPEDIR.DS.$this->params["item"].DS.'tmpfile', $this->getModuleName()) ;
+        $logging->log("Executing as ".self::executeAndLoad("whoami"), $this->getModuleName()) ;
+        $workspace = $this->getWorkspace() ;
+        $dir = $workspace->getWorkspaceDir()  ;
+        $logging->log("Changing to workspace directory $dir", $this->getModuleName()) ;
+        chdir($dir);
+        $ressys = array() ;
+        $ev = $eventRunner->eventRunner("beforeBuild") ;
+        if ($ev == false) { return $this->failBuild() ; }
+        foreach ($pipeline["steps"] as $hash => $stepDetails) {
+            $logging->log("Executing step id $hash", $this->getModuleName()) ;
+            $res = $stepRunner->stepRunner($stepDetails, $this->params["item"]) ;
+            $evar  = "Step execution " ;
+            $evar .= ($res) ? "Success" : "Failed" ;
+            $evar .= ", ID $hash" ;
+            $logging->log($evar, $this->getModuleName()) ;
+            echo "\n" ;
+            $ressys[] = $res ;
+            if ($res==false) break ; }
+        $ev = $eventRunner->eventRunner("beforeBuildComplete") ;
+        if ($ev == false) { return $this->failBuild() ; }
+        $ret = (in_array(false, $ressys)) ? "FAILED EXECUTION\n" : "SUCCESSFUL EXECUTION\n" ;
+        $logging->log($ret, $this->getModuleName()) ;
+        $this->params["run-status"] = (in_array(false, $ressys)) ? "FAIL" : "SUCCESS" ;
+        $eventRunner->params = $this->params ;
+        $eventRunner->eventRunner("afterBuildComplete") ;
+		$this->setRunEndTime($this->params["run-status"]) ;
+        return $this->saveRunLog() ;
+    }
+
+    private function failBuild() {
+        $loggingFactory = new \Model\Logging();
+        $this->params["echo-log"] = true ;
+        $logging = $loggingFactory->getModel($this->params);
+        $ret = "FAILED EXECUTION" ;
+        $logging->log($ret, $this->getModuleName()) ;
+        return false ;
+    }
+
+    private function getExecutionOutput() {
+        $ofile = PIPEDIR.DS.$this->params["item"].DS.'tmpfile';
+        $o = file_get_contents($ofile) ;
+        return $o ;
+    }
+
+    private function getExecutionStatus($o = null) {
+        $o = ($o==null) ? $this->getExecutionOutput() : $o ;
+        if (strpos($o, "SUCCESSFUL EXECUTION") !== false ||
+           (strpos($o, "FAILED EXECUTION") !== false || strpos($o, "ABORTED EXECUTION" )))
+        { return true ; }
+        return false ;
+    }
+
+    private function getBuildNumber($nextorlast = "next") {
+        $builds = $this->getOldBuilds() ;
+        $highest = 0 ;
+        foreach ($builds as $build) {
+            $build = (int) $build ;
+            if ($build > $highest) {
+                $highest = $build ; } }
+		$ret = ($nextorlast == "next") ? $highest + 1 : $highest ;
+        return $ret ;
+    }
+
+    private function getOldBuilds() {
+        $builds = scandir($this->params["pipe-dir"].DS.$this->params["item"].DS.'history') ;
+        $buildsRay = array();
+        for ($i=0; $i<count($builds); $i++) {
+            if (!in_array($builds[$i], array(".", "..", "tmpfile"))){
+                $buildsRay[] = $builds[$i] ; } }
+        rsort($buildsRay) ;
+        return $buildsRay ;
+    }
+
+    private function getOneBuild($buildNum) {
+        $file = $this->params["pipe-dir"].DS.$this->params["item"].DS.'history'.DS.$buildNum ;
+        $o = file_get_contents($file) ;
+        return array("run-id" => $buildNum, "out" => $o) ;
+    }
+
+    public function saveRunPlaceHolder() {
+        $run = $this->getBuildNumber("next") ;
+        $file = $this->params["pipe-dir"].DS.$this->params["item"].DS.'history'.DS.$run ;
+        $buildOut = $this->getExecutionOutput() ;
+        $top = "THIS IS A PLACEHOLDER TO SHOW A STARTED OUTPUT FILE\n\n" ;
+>>>>>>> origin/master
 		file_put_contents($file, "$top.$buildOut");
 		if (file_exists($file)) {
 			return $run;
