@@ -14,6 +14,9 @@
                 <a href="/index.php?control=Index&action=show" class="list-group-item">
                     <i class="fa fa-comment-o"></i> Dashboard
                 </a>
+                <a href="/index.php?control=ModuleManager&action=show" class="list-group-item">
+                    <i class="fa fa-user"></i> Module Manager
+                </a>
             </div>
         </div>
 
@@ -32,17 +35,17 @@
                         <div class="col-sm-2">
                             <label for="project-name" class="control-label text-left">Git Repository</label>
                         </div>
-
-                        <form class="form-horizontal custom-form" action="<?php echo '/index.php?control=ModuleManager&action=webaction' ; ?>" method="POST">
+                        <form class="form-horizontal custom-form" action="<?php echo '/index.php?control=ModuleManager&action=save' ; ?>" method="POST">
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="module-source" id="module-source" placeholder="Git Repository" value="<?php echo $pageVars["data"]["new-module"]["project-name"] ; ?>" />
+                                <input type="text" class="form-control" name="new-module-repository" id="new-module-repository" placeholder="Git Repository" value="<?php echo $pageVars["data"]["new-module"]["project-name"] ; ?>" />
                             </div>
 
                             <div class="form-group">
                                 <div class="col-sm-12">
-                                    <button type="submit" class="btn btn-success">Download Module</button>
-                                    <input type="hidden" name="" id="item" value="" />
-                                    <input type="hidden" name="item" id="item" value="<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" />
+                                        <button type="submit" class="btn btn-success">Download Module</button>
+                                        <input type="hidden" name="" id="item" value="" />
+                                        <input type="hidden" name="item" id="item" value="<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" />
+                                        <input type="hidden" name="item" id="item" value="<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" />
                                 </div>
                             </div>
                         </form>
@@ -99,39 +102,6 @@
                             </div>
 
                         </div>
-
-                    </div>
-
-                    <div class="form-group">
-
-                            <div class="col-sm-12">
-                                <h3> Installed Modules: <i style="font-size: 18px;" class="fa fa-chevron-down"></i></h3>
-                                <hr />
-                                <div class="col-sm-12" style="height: 150px; overflow-y: scroll; resize:both;">
-                                <?php
-                                    foreach ($pageVars["data"]["installed_modules"] as $instModuleInfo) {
-                                        echo '<div class="col-sm-6">';
-                                        echo '  <p class="moduleListText"><strong>'.$instModuleInfo["command"].'</strong> - '.$instModuleInfo["name"]."</p>";
-                                        echo '</div>'; }
-                                ?>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-12">
-                                <h3> Incompatible Modules: <i style="font-size: 18px;" class="fa fa-chevron-down"></i></h3>
-                                <hr />
-                                <div class="col-sm-12" style="height: 50px; overflow-y: scroll; resize:both;">
-                                <?php
-                                    if (count($pageVars["data"]["incompatible_modules"]) > 0) {
-                                        foreach ($pageVars["data"]["incompatible_modules"] as $compatModuleInfo) {
-                                            echo '<div class="col-sm-6">';
-                                            echo '  <p class="moduleListText"><strong>'.$compatModuleInfo["command"].'</strong> - '.$compatModuleInfo["name"]."</p>";
-                                            echo '</div>'; } }
-                                    else {
-                                        echo '<p>No incompatible modules found</p>' ; }
-                                ?>
-                                </div>
-                            </div>
 
                     </div>
 

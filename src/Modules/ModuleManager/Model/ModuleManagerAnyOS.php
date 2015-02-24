@@ -28,28 +28,30 @@ class ModuleManagerAnyOS extends BasePHPApp {
     protected function setParameterOverrides() {
         $this->params["module-manager"] = true ;
         $this->params["no-executor"] = true ;
-        $ext_dir = dirname(dirname(dirname(__FILE__))) ;
-        $ext_dir .= DIRECTORY_SEPARATOR."Extensions" ;
+        $ms = $this->getModuleSource() ;
+        $name = substr($ms, strrpos($ms, "/"));
+        $ext_dir = dirname(dirname(dirname(dirname(__FILE__)))) ;
+        $ext_dir .= DS."Extensions".$name ;
         $this->params["program-data-directory"] = $ext_dir ;
     }
 
     protected function getFileSources() {
-        $fileSources =
+        $ms = $this->getModuleSource() ;
+        $name = substr($ms, strrpos($ms, "/"));
+        $fileSources[] =
             array(
-                array(
-                    $this->getModuleSource(),
-                    "module",
-                    null // can be null for none
-                )
+                $ms,
+                $name,
+                null // can be null for none
             );
         return $fileSources ;
     }
 
     protected function getModuleSource() {
-//        if (isset($this->params['module-source'])) { return $this->params['module-source'] ; }
-//        $question = "Enter the Git Repository URL of your module:";
-//        return self::askForInput($question, true);
-        return "" ;
+        if (isset($this->params['module-source'])) { return $this->params['module-source'] ; }
+        // @todo this breaks webface
+        // $question = "Enter the Git Repository URL of your module:";
+        // return self::askForInput($question, true);
     }
 
 }

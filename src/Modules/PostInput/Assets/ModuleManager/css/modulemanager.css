@@ -1,13 +1,26 @@
 p.moduleListText { margin: 0; }
 
-ul.moduleList {
+.moduleList {
+    display: block;
     list-style-type: none;
-    margin: 0 0 0 0 ;
-    padding: 1% 2% 1% 2% ;
+    position: relative;
 }
 
-li.moduleEntry {
-    background: url("images/ui-bg_glass_75_e6e6e6_1x400.png") repeat-x scroll 50% 50% #e6e6e6;
+.moduleEntry {
+    display: block;
     border: 1px solid #d3d3d3;
-    margin: 0 0 0 0 !important;
+    /*position: absolute;*/
+    /*top: 5px;*/
+    /*right: 5px;*/
+    /*bottom: 5px;*/
+}
+
+.moduleEntryOdd {
+    background-color: grey; }
+
+.moduleEntryEven{
+    background-color: white; }
+
+.moduleEntryFirst {
+    /*margin: 0 0 2% 0 !important; */
 }

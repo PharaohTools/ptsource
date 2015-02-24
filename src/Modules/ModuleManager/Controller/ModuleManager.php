@@ -11,11 +11,12 @@ class ModuleManager extends Base {
         if (is_array($thisModel)) { return $this->failDependencies($pageVars, $this->content, $thisModel) ; }
         if (in_array($pageVars["route"]["action"], array("show"))) {
             $webModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars, "Web") ;
-            $this->content["data"] = $webModel->getData();  }
-        if (in_array($pageVars["route"]["action"], array("save"))) {
-            $saveModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars, "Saver") ;
-            $this->content["data"]["saveState"] = $saveModel->saveAllConfigs();  }
-        return array ("type"=>"view", "view"=>"moduleManager", "pageVars"=>$this->content);
+            $this->content["data"] = $webModel->getData();
+            return array ("type"=>"view", "view"=>"moduleManager", "pageVars"=>$this->content);  }
+        if (in_array($pageVars["route"]["action"], array("webaction"))) {
+            $webActionModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars, "WebAction") ;
+            $this->content["data"]["webAction"] = $webActionModel->getData();
+            return array ("type"=>"view", "view"=>"moduleManagerWebAction", "pageVars"=>$this->content);  }
     }
 
 }

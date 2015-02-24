@@ -14,7 +14,7 @@ class ModuleManagerInfo extends PTConfigureBase {
 
     public function routesAvailable() {
       return array( "ModuleManager" =>  array_merge(parent::routesAvailable(), array(
-          "install", "ensure", "uninstall", "enable", "disable", "show"
+          "install", "ensure", "uninstall", "enable", "disable", "show", "webaction"
       )) );
     }
 

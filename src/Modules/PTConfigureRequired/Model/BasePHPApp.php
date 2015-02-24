@@ -182,30 +182,41 @@ require('".$this->programDataFolder.DIRECTORY_SEPARATOR.$this->programExecutorTa
 
     protected function deleteProgramDataFolderAsRootIfExists(){
         if ( is_dir($this->programDataFolder)) {
-          $command = 'rm -rf '.$this->programDataFolder;
+          $command = 'sudo su golden -c"rm -rf '.$this->programDataFolder.'"';
           self::executeAndOutput($command, "Program Data Folder $this->programDataFolder Deleted if existed"); }
         return true;
     }
 
     protected function makeProgramDataFolderIfNeeded(){
         if (!file_exists($this->programDataFolder)) {
-            mkdir($this->programDataFolder,  0777, true); }
+            $app_config = \Model\AppConfig::getAppVariable("app_config");
+            $command = 'sudo su '.$app_config["UserSwitching"]["switching_user"].' -c"mkdir -p '.$this->programDataFolder.'"';
+            self::executeAndOutput($command, "Program Data Folder $this->programDataFolder made");
+            $command = 'sudo su '.$app_config["UserSwitching"]["switching_user"].' -c"chmod -R 777 '.$this->programDataFolder.'"';
+            self::executeAndOutput($command, "Program Data Folder $this->programDataFolder Chmodded"); }
     }
 
     protected function copyFilesToProgramDataFolder(){
-        $command = 'cp -r '.$this->tempDir.DIRECTORY_SEPARATOR.$this->programNameMachine.
-            DIRECTORY_SEPARATOR.'* '.$this->programDataFolder;
+        $ms = $this->programDataFolder ;
+        $name = substr($ms, strrpos($ms, "/"));
+        $pdf = substr($this->programDataFolder, 0, strrpos($this->programDataFolder, "/")) ;
+        $app_config = \Model\AppConfig::getAppVariable("app_config");
+        $command = 'sudo su '.$app_config["UserSwitching"]["switching_user"].' -c"cp -r '.$this->tempDir.DIRECTORY_SEPARATOR.$this->programNameMachine.
+            $name.DIRECTORY_SEPARATOR.'* '.$this->programDataFolder.'"';
+        error_log($command);
         return self::executeAndOutput($command, "Program Data folder populated");
     }
 
     protected function deleteExecutorIfExists(){
-        $command = 'rm -f '.$this->programExecutorFolder.DIRECTORY_SEPARATOR.$this->programNameMachine;
+        $app_config = \Model\AppConfig::getAppVariable("app_config");
+        $command = 'sudo su '.$app_config["UserSwitching"]["switching_user"].' -c"rm -f '.$this->programExecutorFolder.DS.$this->programNameMachine.'"';
         self::executeAndOutput($command, "Program Executor Deleted if existed");
         return true;
     }
 
     protected function deleteInstallationFiles(){
-        $command = 'rm -rf '.$this->tempDir.'/'.$this->programNameMachine;
+        $app_config = \Model\AppConfig::getAppVariable("app_config");
+        $command = 'sudo su '.$app_config["UserSwitching"]["switching_user"].' -c"rm -rf '.$this->tempDir.DS.$this->programNameMachine.'"';
         self::executeAndOutput($command);
     }
 
@@ -228,20 +239,35 @@ require('".$this->programDataFolder.DIRECTORY_SEPARATOR.$this->programExecutorTa
     return true;
   }
 
-  protected function doGitCommand(){
-    $data = "";
-    foreach ($this->fileSources as $fileSource) {
-      $command  = 'git clone ';
-      if (isset($fileSource[3]) &&
-        $fileSource[3] = true) { $command .= '--recursive ';}
-      if ($fileSource[2] != null) { $command .= '-b '.$fileSource[2].' ';}
-      $command .= escapeshellarg($fileSource[0]).' ';
-      $command .= ' '.BASE_TEMP_DIR.$this->programNameMachine;
-      if ($fileSource[1] != null) { $command .= DIRECTORY_SEPARATOR.$fileSource[1];}
-      echo $command;
-      $data .= self::executeAndLoad($command); }
-    return $data;
-  }
+    protected function doGitCommand(){
+        $data = "";
+        $loggingFactory = new \Model\Logging();
+        $lpr = $this->params ;
+        $lpr["php-log"] = true ;
+        $logging = $loggingFactory->getModel($lpr);
+        foreach ($this->fileSources as $fileSource) {
+            $app_config = \Model\AppConfig::getAppVariable("app_config");
+            $command  = 'sudo su '.$app_config["UserSwitching"]["switching_user"].' -c"git clone ';
+            if (isset($fileSource[3]) && $fileSource[3] == true) { $command .= '--recursive ';}
+            if ($fileSource[2] != null) { $command .= '-b '.$fileSource[2].' ';}
+            $command .= escapeshellarg($fileSource[0]).' ';
+            $command .= ' '.BASE_TEMP_DIR.$this->programNameMachine;
+            if ($fileSource[1] != null) { $command .= DIRECTORY_SEPARATOR.$fileSource[1];}
+            $command .= '"' ;
+            $logging->log($command, $this->getModuleName());
+            $data .= self::executeAndLoad($command); }
+        return $data;
+    }
+
+    protected function getSwitchingUser() {
+        $app_config = \Model\AppConfig::getAppVariable("app_config");
+
+        $su = (isset($app_config["UserSwitching"]["switching_user"])) ? $app_config["UserSwitching"]["switching_user"] : "www-data" ;
+
+        $question .= ' Found "/opt/'.$this->programNameMachine.'" - use this? (Enter nothing for yes, no end slash)';
+        $input = (isset($this->params["yes"]) && $this->params["yes"]==true) ? "/opt/$this->programNameMachine" : self::askForInput($question);
+        return ($input=="") ? "/opt/$this->programNameMachine" : $input ;
+    }
 
 
     public function versionInstalledCommandTrimmer($text) {
