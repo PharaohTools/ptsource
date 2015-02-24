@@ -39,7 +39,34 @@ function displayStepField() {
     hash = hash.toString().replace(".", "") ;
     html = "" ;
 
-    if (field.type == "textarea") {
+    if (typeof(field.name) == "undefined") { field.name = module; }
+    if (module == "Plugin") {
+        html  = '<li class="form-group ui-state-default ui-sortable-handle" id="step'+hash+'">' ;
+        html += '  <div class="col-sm-2">' ;
+        html += '    <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' ;
+        html += '  </div>';
+        html += '  <div class="col-sm-10">' ;
+        html += '   <div class="col-sm-12">' ;
+        html += '    <h4>'+field.name+'</h4>' ;
+        html += '    <input type="hidden" id="steps['+hash+'][module]" name="steps['+hash+'][module]" value="'+module+'" />' ;
+        html += '    <input type="hidden" id="steps['+hash+'][steptype]" name="steps['+hash+'][steptype]" value="'+steptype+'" />' ;
+        field = field["buildconf"];
+        var i; console.log(field);
+        for (i = 0; i < field.length; i++) { 
+            if (field[i]["type"] = "text") {
+                html += '  <label>'+field[i]["name"]+'</label><br />';
+                html += '  <input type="text" id="steps['+hash+']['+field[i]["name"]+']" name="steps[' +hash+']['+field[i]["name"]+']" value="'+field[i]["value"]+'" class="form-control" />';
+            }
+        }
+        html += '  </div>' ;
+        html += '   <div class="col-sm-12">' ;
+        html += '    <a class="btn btn-warning" onclick="deleteStepField('+hash+')">Delete Step</a>' ;
+        html += '  </div>' ;
+        html += '  </div>' ;
+        html += ' </li>'; 
+        field.type = null; }
+    
+   if (field.type == "textarea") {
         html  = '<li class="form-group ui-state-default ui-sortable-handle" id="step'+hash+'">' ;
         html += '  <div class="col-sm-2">' ;
         html += '    <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' ;

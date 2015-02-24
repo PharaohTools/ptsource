@@ -19,6 +19,7 @@ class BuildConfigureAllOS extends Base {
         $ret["builders"] = $this->getBuilders();
         $ret["settings"] = $this->getBuilderSettings();
         $ret["fields"] = $this->getBuilderFormFields();
+        $ret["plugin"] = $this->getInstalledPlugins();
         return $ret ;
     }
 
