@@ -44,10 +44,10 @@ class SendEmailLinuxUnix extends Base {
         require_once dirname(dirname(__FILE__)).DS.'Libraries'.DS.'swift_required.php' ;
         // Create the Transport
         $transport = \Swift_SmtpTransport::newInstance(
-                $this->params["build-settings"]["mod_config"]["SendEmail"]["config_smtp_server"],
-            (int) $this->params["build-settings"]["mod_config"]["SendEmail"]["config_port"], 'ssl')
-            ->setUsername($this->params["build-settings"]["mod_config"]["SendEmail"]["config_username"])
-            ->setPassword($this->params["build-settings"]["mod_config"]["SendEmail"]["config_password"])
+                $this->params["build-settings"]["mod_config"]["SendEmail"]["smtp_server"],
+            (int) $this->params["build-settings"]["mod_config"]["SendEmail"]["port"], 'ssl')
+            ->setUsername($this->params["build-settings"]["mod_config"]["SendEmail"]["username"])
+            ->setPassword($this->params["build-settings"]["mod_config"]["SendEmail"]["password"])
         ;
         // Create the Mailer using your created Transport
         $mailer = \Swift_Mailer::newInstance($transport);
@@ -56,7 +56,7 @@ class SendEmailLinuxUnix extends Base {
             // Give the message a subject
             ->setSubject($subject)
             // Set the From address with an associative array
-            ->setFrom(array($this->params["build-settings"]["mod_config"]["SendEmail"]["config_from_email"] => "Pharaoh Build Server"))
+            ->setFrom(array($this->params["build-settings"]["mod_config"]["SendEmail"]["from_email"] => "Pharaoh Build Server"))
             // Set the To addresses with an associative array
             ->setTo(array($to))
             // Give it a body
@@ -69,10 +69,15 @@ class SendEmailLinuxUnix extends Base {
 
         $logging->log ("Sending alert mail", $this->getModuleName() ) ;
         // Send the message
-        $result = $mailer->send($message);
-        if ($result == true) { $logging->log ("Email sent successfully", $this->getModuleName() ) ; }
-        else { $logging->log ("Email sending error", $this->getModuleName() ) ; }
-        return $result;
+        try {
+            $result = $mailer->send($message);
+            if ($result == true) { $logging->log ("Email sent successfully", $this->getModuleName() ) ; }
+            else { $logging->log ("Email sending error", $this->getModuleName() ) ; }
+            return $result; }
+        catch (\Exception $e) {
+            $logging->log ("Error sending mail", $this->getModuleName() ) ;
+            return false; }
+
     }
 
 }
