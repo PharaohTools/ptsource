@@ -44,11 +44,10 @@ class SendEmailLinuxUnix extends Base {
         require_once dirname(dirname(__FILE__)).DS.'Libraries'.DS.'swift_required.php' ;
         // Create the Transport
         $transport = \Swift_SmtpTransport::newInstance(
-                $this->params["build-settings"]["mod_config"]["SendEmail"]["smtp_server"],
-            (int) $this->params["build-settings"]["mod_config"]["SendEmail"]["port"], 'ssl')
-            ->setUsername($this->params["build-settings"]["mod_config"]["SendEmail"]["username"])
-            ->setPassword($this->params["build-settings"]["mod_config"]["SendEmail"]["password"])
-        ;
+                $this->params["build-settings"]["mod_config"]["SendEmail"]["config_smtp_server"],
+            (int) $this->params["build-settings"]["mod_config"]["SendEmail"]["config_port"])
+            ->setUsername($this->params["build-settings"]["mod_config"]["SendEmail"]["config_username"])
+            ->setPassword($this->params["build-settings"]["mod_config"]["SendEmail"]["config_password"]) ;
         // Create the Mailer using your created Transport
         $mailer = \Swift_Mailer::newInstance($transport);
         // Create the message

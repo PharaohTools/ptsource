@@ -1,10 +1,239 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="03f6198e-7b92-4492-834b-a57d478943eb" name="Default" comment="" />
+    <list default="true" id="03f6198e-7b92-4492-834b-a57d478943eb" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/PostInput/Assets/BuildList/images/cross.png" afterPath="$PROJECT_DIR$/src/Modules/PostInput/Assets/BuildList/images/cross.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/PostInput/Assets/fonts/glyphicons-halflings-regular.eot" afterPath="$PROJECT_DIR$/src/Modules/PostInput/Assets/fonts/glyphicons-halflings-regular.eot" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/PostInput/Assets/fonts/glyphicons-halflings-regular.ttf" afterPath="$PROJECT_DIR$/src/Modules/PostInput/Assets/fonts/glyphicons-halflings-regular.ttf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/PostInput/Assets/fonts/glyphicons-halflings-regular.woff" afterPath="$PROJECT_DIR$/src/Modules/PostInput/Assets/fonts/glyphicons-halflings-regular.woff" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/PostInput/Assets/BuildList/images/green-ball.png" afterPath="$PROJECT_DIR$/src/Modules/PostInput/Assets/BuildList/images/green-ball.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/PostInput/Assets/BuildConfigure/images/loading.gif" afterPath="$PROJECT_DIR$/src/Modules/PostInput/Assets/BuildConfigure/images/loading.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/PostInput/Assets/ModuleManager/images/loading.gif" afterPath="$PROJECT_DIR$/src/Modules/PostInput/Assets/ModuleManager/images/loading.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/PostInput/Assets/PipeRunner/images/loading.gif" afterPath="$PROJECT_DIR$/src/Modules/PostInput/Assets/PipeRunner/images/loading.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/PostInput/Assets/BuildList/images/red-ball.png" afterPath="$PROJECT_DIR$/src/Modules/PostInput/Assets/BuildList/images/red-ball.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/PostInput/Assets/BuildList/images/run.png" afterPath="$PROJECT_DIR$/src/Modules/PostInput/Assets/BuildList/images/run.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/PostInput/Assets/BuildList/images/tick.png" afterPath="$PROJECT_DIR$/src/Modules/PostInput/Assets/BuildList/images/tick.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/ByteStream/AbstractFilterableInputStream.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/ByteStream/AbstractFilterableInputStream.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/Headers/AbstractHeader.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/Headers/AbstractHeader.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/AbstractSmtpTransport.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/AbstractSmtpTransport.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/AntiFloodPlugin.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/AntiFloodPlugin.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/ByteStream/ArrayByteStream.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/ByteStream/ArrayByteStream.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/CharacterStream/ArrayCharacterStream.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/CharacterStream/ArrayCharacterStream.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/KeyCache/ArrayKeyCache.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/KeyCache/ArrayKeyCache.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/Loggers/ArrayLogger.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/Loggers/ArrayLogger.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mailer/ArrayRecipientIterator.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mailer/ArrayRecipientIterator.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Attachment.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Attachment.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/Attachment.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/Attachment.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/Esmtp/AuthHandler.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/Esmtp/AuthHandler.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/Esmtp/Authenticator.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/Esmtp/Authenticator.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/BandwidthMonitorPlugin.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/BandwidthMonitorPlugin.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/ContentEncoder/Base64ContentEncoder.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/ContentEncoder/Base64ContentEncoder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Encoder/Base64Encoder.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Encoder/Base64Encoder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/HeaderEncoder/Base64HeaderEncoder.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/HeaderEncoder/Base64HeaderEncoder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Signers/BodySigner.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Signers/BodySigner.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/BuildConfigure/Model/BuildConfigureAllOS.php" afterPath="$PROJECT_DIR$/src/Modules/BuildConfigure/Model/BuildConfigureAllOS.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/BuildConfigure/Views/BuildConfigureHTMLView.tpl.php" afterPath="$PROJECT_DIR$/src/Modules/BuildConfigure/Views/BuildConfigureHTMLView.tpl.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/StreamFilters/ByteArrayReplacementFilter.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/StreamFilters/ByteArrayReplacementFilter.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/CharacterReader.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/CharacterReader.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/CharacterReaderFactory.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/CharacterReaderFactory.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/CharacterStream.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/CharacterStream.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/CharsetObserver.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/CharsetObserver.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Events/CommandEvent.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Events/CommandEvent.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Events/CommandListener.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Events/CommandListener.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/ConfigurableSpool.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/ConfigurableSpool.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/ContentEncoder.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/ContentEncoder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/Esmtp/Auth/CramMd5Authenticator.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/Esmtp/Auth/CramMd5Authenticator.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Signers/DKIMSigner.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Signers/DKIMSigner.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/Headers/DateHeader.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/Headers/DateHeader.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/DecoratorPlugin.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/DecoratorPlugin.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/DependencyContainer.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/DependencyContainer.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/DependencyException.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/DependencyException.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/KeyCache/DiskKeyCache.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/KeyCache/DiskKeyCache.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Signers/DomainKeySigner.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Signers/DomainKeySigner.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/Loggers/EchoLogger.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/Loggers/EchoLogger.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/EmbeddedFile.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/EmbeddedFile.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/EmbeddedFile.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/EmbeddedFile.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Encoder.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Encoder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Encoding.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Encoding.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/EncodingObserver.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/EncodingObserver.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/EsmtpHandler.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/EsmtpHandler.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/EsmtpTransport.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/EsmtpTransport.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Events/Event.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Events/Event.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Events/EventDispatcher.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Events/EventDispatcher.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Events/EventListener.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Events/EventListener.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Events/EventObject.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Events/EventObject.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/FailoverTransport.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/FailoverTransport.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/FailoverTransport.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/FailoverTransport.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/ByteStream/FileByteStream.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/ByteStream/FileByteStream.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/FileSpool.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/FileSpool.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/FileStream.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/FileStream.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Filterable.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Filterable.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/CharacterReader/GenericFixedWidthReader.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/CharacterReader/GenericFixedWidthReader.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/Grammar.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/Grammar.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/Header.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/Header.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/HeaderEncoder.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/HeaderEncoder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/HeaderFactory.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/HeaderFactory.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/HeaderSet.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/HeaderSet.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Signers/HeaderSigner.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Signers/HeaderSigner.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/Reporters/HitReporter.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/Reporters/HitReporter.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/Reporters/HtmlReporter.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/Reporters/HtmlReporter.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/Headers/IdentificationHeader.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/Headers/IdentificationHeader.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Image.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Image.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/ImpersonatePlugin.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/ImpersonatePlugin.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/InputByteStream.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/InputByteStream.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/IoBuffer.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/IoBuffer.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/IoException.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/IoException.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/KeyCache.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/KeyCache.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/KeyCache/KeyCacheInputStream.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/KeyCache/KeyCacheInputStream.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/LoadBalancedTransport.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/LoadBalancedTransport.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/LoadBalancedTransport.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/LoadBalancedTransport.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/Logger.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/Logger.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/LoggerPlugin.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/LoggerPlugin.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/Esmtp/Auth/LoginAuthenticator.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/Esmtp/Auth/LoginAuthenticator.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/MailInvoker.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/MailInvoker.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/MailTransport.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/MailTransport.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/MailTransport.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/MailTransport.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/Headers/MailboxHeader.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/Headers/MailboxHeader.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mailer.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mailer.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/MemorySpool.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/MemorySpool.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Message.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Message.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/Message.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/Message.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/MessageLogger.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/MessageLogger.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/MimeEntity.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/MimeEntity.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/MimePart.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/MimePart.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/MimePart.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/MimePart.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/ModuleManager/Controller/ModuleManager.php" afterPath="$PROJECT_DIR$/src/Modules/ModuleManager/Controller/ModuleManager.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/ModuleManager/Model/ModuleManager.php" afterPath="$PROJECT_DIR$/src/Modules/ModuleManager/Model/ModuleManager.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/ModuleManager/Model/ModuleManagerAnyOS.php" afterPath="$PROJECT_DIR$/src/Modules/ModuleManager/Model/ModuleManagerAnyOS.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/ModuleManager/Model/ModuleManagerWebActionAnyOS.php" afterPath="$PROJECT_DIR$/src/Modules/ModuleManager/Model/ModuleManagerWebActionAnyOS.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/ModuleManager/Model/ModuleManagerWebAnyOS.php" afterPath="$PROJECT_DIR$/src/Modules/ModuleManager/Model/ModuleManagerWebAnyOS.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/Esmtp/Auth/NTLMAuthenticator.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/Esmtp/Auth/NTLMAuthenticator.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/ContentEncoder/NativeQpContentEncoder.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/ContentEncoder/NativeQpContentEncoder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/CharacterStream/NgCharacterStream.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/CharacterStream/NgCharacterStream.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/KeyCache/NullKeyCache.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/KeyCache/NullKeyCache.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/NullTransport.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/NullTransport.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/NullTransport.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/NullTransport.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/Headers/OpenDKIMHeader.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/Headers/OpenDKIMHeader.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Signers/OpenDKIMSigner.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Signers/OpenDKIMSigner.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/OutputByteStream.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/OutputByteStream.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/ParameterizedHeader.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/ParameterizedHeader.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/Headers/ParameterizedHeader.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/Headers/ParameterizedHeader.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/Headers/PathHeader.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/Headers/PathHeader.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/PipeRunner/Model/PipeRunnerAllOS.php" afterPath="$PROJECT_DIR$/src/Modules/PipeRunner/Model/PipeRunnerAllOS.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/PipeRunner/Views/PipeRunnerGetValueHTMLView.tpl.php" afterPath="$PROJECT_DIR$/src/Modules/PipeRunner/Views/PipeRunnerGetValueHTMLView.tpl.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/Esmtp/Auth/PlainAuthenticator.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/Esmtp/Auth/PlainAuthenticator.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/ContentEncoder/PlainContentEncoder.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/ContentEncoder/PlainContentEncoder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/Pop/Pop3Connection.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/Pop/Pop3Connection.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/Pop/Pop3Exception.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/Pop/Pop3Exception.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/PopBeforeSmtpPlugin.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/PopBeforeSmtpPlugin.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Preferences.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Preferences.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/ContentEncoder/QpContentEncoder.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/ContentEncoder/QpContentEncoder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/ContentEncoder/QpContentEncoderProxy.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/ContentEncoder/QpContentEncoderProxy.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Encoder/QpEncoder.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Encoder/QpEncoder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/HeaderEncoder/QpHeaderEncoder.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/HeaderEncoder/QpHeaderEncoder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/ContentEncoder/RawContentEncoder.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/ContentEncoder/RawContentEncoder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mailer/RecipientIterator.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mailer/RecipientIterator.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/RedirectingPlugin.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/RedirectingPlugin.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/ReplacementFilterFactory.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/ReplacementFilterFactory.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/Decorator/Replacements.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/Decorator/Replacements.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/Reporter.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/Reporter.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/ReporterPlugin.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/ReporterPlugin.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Events/ResponseEvent.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Events/ResponseEvent.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Events/ResponseListener.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Events/ResponseListener.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Encoder/Rfc2231Encoder.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Encoder/Rfc2231Encoder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/RfcComplianceException.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/RfcComplianceException.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Signers/SMimeSigner.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Signers/SMimeSigner.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Model/SendEmailLinuxUnix.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Model/SendEmailLinuxUnix.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Events/SendEvent.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Events/SendEvent.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Events/SendListener.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Events/SendListener.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/SendmailTransport.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/SendmailTransport.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/SendmailTransport.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/SendmailTransport.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/SignedMessage.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/SignedMessage.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Signer.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Signer.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/CharacterReaderFactory/SimpleCharacterReaderFactory.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/CharacterReaderFactory/SimpleCharacterReaderFactory.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Events/SimpleEventDispatcher.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Events/SimpleEventDispatcher.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/SimpleHeaderFactory.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/SimpleHeaderFactory.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/SimpleHeaderSet.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/SimpleHeaderSet.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/KeyCache/SimpleKeyCacheInputStream.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/KeyCache/SimpleKeyCacheInputStream.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/SimpleMailInvoker.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/SimpleMailInvoker.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/SimpleMessage.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/SimpleMessage.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/SimpleMimeEntity.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/SimpleMimeEntity.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/Sleeper.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/Sleeper.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/SmtpAgent.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/SmtpAgent.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/SmtpTransport.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/SmtpTransport.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Spool.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Spool.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/SpoolTransport.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/SpoolTransport.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/SpoolTransport.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/SpoolTransport.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/StreamBuffer.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/StreamBuffer.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/StreamFilter.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/StreamFilter.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/StreamFilters/StringReplacementFilter.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/StreamFilters/StringReplacementFilter.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/StreamFilters/StringReplacementFilterFactory.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/StreamFilters/StringReplacementFilterFactory.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/SwiftException.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/SwiftException.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/ByteStream/TemporaryFileByteStream.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/ByteStream/TemporaryFileByteStream.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/ThrottlerPlugin.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/ThrottlerPlugin.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/Timer.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Plugins/Timer.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Events/TransportChangeEvent.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Events/TransportChangeEvent.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Events/TransportChangeListener.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Events/TransportChangeListener.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/TransportException.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/TransportException.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Events/TransportExceptionEvent.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Events/TransportExceptionEvent.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Events/TransportExceptionListener.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Events/TransportExceptionListener.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/Headers/UnstructuredHeader.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Mime/Headers/UnstructuredHeader.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/CharacterReader/UsAsciiReader.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/CharacterReader/UsAsciiReader.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/CharacterReader/Utf8Reader.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/CharacterReader/Utf8Reader.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Validate.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Validate.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/Esmtp/Auth/XOAuth2Authenticator.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/classes/Swift/Transport/Esmtp/Auth/XOAuth2Authenticator.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/PostInput/Assets/css/bootstrap-theme.css.map" afterPath="$PROJECT_DIR$/src/Modules/PostInput/Assets/css/bootstrap-theme.css.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/PostInput/Assets/css/bootstrap-theme.css" afterPath="$PROJECT_DIR$/src/Modules/PostInput/Assets/css/bootstrap-theme.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/PostInput/Assets/css/bootstrap-theme.min.css" afterPath="$PROJECT_DIR$/src/Modules/PostInput/Assets/css/bootstrap-theme.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/PostInput/Assets/css/bootstrap.css.map" afterPath="$PROJECT_DIR$/src/Modules/PostInput/Assets/css/bootstrap.css.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/PostInput/Assets/css/bootstrap.css" afterPath="$PROJECT_DIR$/src/Modules/PostInput/Assets/css/bootstrap.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/PostInput/Assets/js/bootstrap.js" afterPath="$PROJECT_DIR$/src/Modules/PostInput/Assets/js/bootstrap.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/PostInput/Assets/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/src/Modules/PostInput/Assets/css/bootstrap.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/PostInput/Assets/js/bootstrap.min.js" afterPath="$PROJECT_DIR$/src/Modules/PostInput/Assets/js/bootstrap.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/PostInput/Assets/BuildConfigure/css/buildconfigure.css" afterPath="$PROJECT_DIR$/src/Modules/PostInput/Assets/BuildConfigure/css/buildconfigure.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/PostInput/Assets/BuildConfigure/js/buildconfigure.js" afterPath="$PROJECT_DIR$/src/Modules/PostInput/Assets/BuildConfigure/js/buildconfigure.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/dependency_maps/cache_deps.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/dependency_maps/cache_deps.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/PostInput/Assets/fonts/glyphicons-halflings-regular.svg" afterPath="$PROJECT_DIR$/src/Modules/PostInput/Assets/fonts/glyphicons-halflings-regular.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/ModuleManager/info.ModuleManager.php" afterPath="$PROJECT_DIR$/src/Modules/ModuleManager/info.ModuleManager.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/PostInput/Assets/js/jquery-ui.min.js" afterPath="$PROJECT_DIR$/src/Modules/PostInput/Assets/js/jquery-ui.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/dependency_maps/message_deps.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/dependency_maps/message_deps.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/dependency_maps/mime_deps.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/dependency_maps/mime_deps.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/mime_types.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/mime_types.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/PostInput/Assets/ModuleManager/css/modulemanager.css" afterPath="$PROJECT_DIR$/src/Modules/PostInput/Assets/ModuleManager/css/modulemanager.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/PostInput/Assets/ModuleManager/js/modulemanager.js" afterPath="$PROJECT_DIR$/src/Modules/PostInput/Assets/ModuleManager/js/modulemanager.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/PostInput/Assets/js/npm.js" afterPath="$PROJECT_DIR$/src/Modules/PostInput/Assets/js/npm.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/phrankinsense.iml" afterPath="$PROJECT_DIR$/phrankinsense.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/PostInput/Assets/PipeRunner/js/piperunner.js" afterPath="$PROJECT_DIR$/src/Modules/PostInput/Assets/PipeRunner/js/piperunner.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/preferences.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/preferences.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ptbuildvars" afterPath="$PROJECT_DIR$/ptbuildvars" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/PostInput/Assets/Signup/js/signup.js" afterPath="$PROJECT_DIR$/src/Modules/PostInput/Assets/Signup/js/signup.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/PostInput/Assets/css/style.css" afterPath="$PROJECT_DIR$/src/Modules/PostInput/Assets/css/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/swift_init.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/swift_init.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/swift_required.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/swift_required.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/swift_required_pear.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/swift_required_pear.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/dependency_maps/transport_deps.php" afterPath="$PROJECT_DIR$/src/Modules/SendEmail/Libraries/dependency_maps/transport_deps.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="phrankinsense.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1420814583651" ignored="false" />
+    <file path="/Dummy.txt" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1424820948720" ignored="false" />
+    <file path="/a.dummy" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1424686338751" ignored="false" />
+    <file path="/ModuleManagerHTMLView.tpl.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1424726338601" ignored="false" />
+    <file path="/ModuleManagerWebAnyOS.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1424639087469" ignored="false" />
+    <file path="/ApplicationConfigureSaverAllOS.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1424640894267" ignored="false" />
+    <file path="/AppConfig.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1424641013592" ignored="false" />
+    <file path="/ApplicationInstanceLinuxUnix.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1424641785552" ignored="false" />
+    <file path="/ApplicationConfigureHTMLView.tpl.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1424642173458" ignored="false" />
+    <file path="/modulemanager.css" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1424648403589" ignored="false" />
+    <file path="/ModuleManagerWebActionsAnyOS.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1424660522777" ignored="false" />
+    <file path="/ModuleManager.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1424656342537" ignored="false" />
+    <file path="/BasePHPApp.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1424705357821" ignored="false" />
+    <file path="/ModuleManagerAnyOS.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1424659874961" ignored="false" />
+    <file path="/ModuleManagerWebActionHTMLView.tpl.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1424657630354" ignored="false" />
+    <file path="/SendEmailLinuxUnix.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1424811813245" ignored="false" />
+    <file path="/BuildConfigureHTMLView.tpl.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1424741081080" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,7 +248,7 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
-    <breakpoint_any>
+    <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
         <option name="NOTIFY_UNCAUGHT" value="true" />
@@ -55,11 +284,58 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="phrankinsense" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="ModuleManagerHTMLView.tpl.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Modules/ModuleManager/Views/ModuleManagerHTMLView.tpl.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="115" column="62" selection-start="6182" selection-end="6182" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PipeRunnerAllOS.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Modules/PipeRunner/Model/PipeRunnerAllOS.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="126" column="103" selection-start="3794" selection-end="3794" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BuildConfigureHTMLView.tpl.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Modules/BuildConfigure/Views/BuildConfigureHTMLView.tpl.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="145" column="0" selection-start="8544" selection-end="8544" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SendEmailLinuxUnix.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Modules/SendEmail/Model/SendEmailLinuxUnix.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="56" column="49" selection-start="2151" selection-end="2151" vertical-scroll-proportion="0.50442475">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="false" />
+    </FindUsagesManager>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -69,11 +345,34 @@
       <MyDateState />
     </option>
   </component>
+  <component name="IdeDocumentHistory">
+    <option name="changedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/src/Modules/ModuleManager/Model/ModuleManagerWebActionsAnyOS.php" />
+        <option value="$PROJECT_DIR$/src/Modules/ModuleManager/Views/ModuleManagerView.tpl.php" />
+        <option value="$PROJECT_DIR$/src/Modules/ModuleManager/Views/ModuleManagerWebActionHTMLView.tpl.php" />
+        <option value="$PROJECT_DIR$/src/Modules/ModuleManager/Controller/ModuleManager.php" />
+        <option value="$PROJECT_DIR$/src/Modules/ModuleManager/Model/ModuleManagerWebAnyOS.php" />
+        <option value="$PROJECT_DIR$/src/Modules/ModuleManager/Model/ModuleManagerWebActionAnyOS.php" />
+        <option value="$PROJECT_DIR$/src/Modules/ModuleManager/Model/ModuleManagerAnyOS.php" />
+        <option value="$PROJECT_DIR$/src/Modules/UserSwitching/Controller/UserSwitching.php" />
+        <option value="$PROJECT_DIR$/src/Modules/UserSwitching/info.UserSwitching.php" />
+        <option value="$PROJECT_DIR$/src/Modules/UserSwitching/Model/UserSwitching.php" />
+        <option value="$PROJECT_DIR$/src/Modules/PTConfigureRequired/Model/BasePHPApp.php" />
+        <option value="$PROJECT_DIR$/src/Modules/ModuleManager/Views/ModuleManagerHTMLView.tpl.php" />
+        <option value="$PROJECT_DIR$/src/Modules/PipeRunner/Views/PipeRunnerHTMLView.tpl.php" />
+        <option value="$PROJECT_DIR$/src/Modules/BuildConfigure/Views/BuildConfigureHTMLView.tpl.php" />
+        <option value="$PROJECT_DIR$/src/Modules/PipeRunner/Model/PipeRunnerAllOS.php" />
+        <option value="$PROJECT_DIR$/src/Modules/SendEmail/Model/SendEmailLinuxUnix.php" />
+      </list>
+    </option>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
     <option name="x" value="65" />
-    <option name="y" value="-4" />
+    <option name="y" value="24" />
     <option name="width" value="1301" />
-    <option name="height" value="772" />
+    <option name="height" value="744" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -88,6 +387,141 @@
   <component name="ProjectReloadState">
     <option name="STATE" value="0" />
   </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="phrankinsense" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="phrankinsense" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ptbuild" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="phrankinsense" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ptbuild" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="phrankinsense" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ptbuild" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="phrankinsense" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ptbuild" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PipeRunner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="phrankinsense" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ptbuild" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PipeRunner" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="phrankinsense" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ptbuild" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="plugins" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="installed" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+    </panes>
+  </component>
   <component name="PropertiesComponent">
     <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
@@ -97,13 +531,27 @@
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="MemberChooser.copyJavadoc" value="false" />
   </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/Modules" />
+      <recent name="$PROJECT_DIR$/src/Modules/ModuleManager/Views" />
+      <recent name="$PROJECT_DIR$/src/Modules/ModuleManager/Model" />
+    </key>
+  </component>
   <component name="RunManager">
+    <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner />
+      <method />
+    </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
       <option name="SHMEM_ADDRESS" value="javadebug" />
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
       <method />
     </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
@@ -156,26 +604,28 @@
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="ToolWindowManager">
-    <frame x="65" y="-4" width="1301" height="772" extended-state="6" />
-    <editor active="false" />
+    <frame x="65" y="24" width="1301" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Amazon EC2" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Amazon EC2" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20611285" sideWeight="0.6704362" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32956383" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -237,6 +687,92 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/Modules/ModuleManager/Views/ModuleManagerHTMLView.tpl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="115" column="62" selection-start="6182" selection-end="6182" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Modules/SendEmail/Model/SendEmailLinuxUnix.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="14" selection-start="1073" selection-end="1073" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Modules/BuildConfigure/Views/BuildConfigureHTMLView.tpl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="145" column="0" selection-start="8544" selection-end="8544" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Modules/ModuleManager/Model/ModuleManagerAnyOS.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="49" selection-start="1267" selection-end="1356" vertical-scroll-proportion="-9.583333" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Core/Base/Model/Base.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="182" column="27" selection-start="6313" selection-end="6313" vertical-scroll-proportion="0.772296" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Modules/PTConfigureRequired/Model/BasePHPApp.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="264" column="130" selection-start="12808" selection-end="12808" vertical-scroll-proportion="0.9456522" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Modules/PostInput/Assets/ModuleManager/css/modulemanager.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="57" selection-start="135" selection-end="135" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Modules/ApplicationConfigure/Views/ApplicationConfigureHTMLView.tpl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="23" selection-start="1743" selection-end="1743" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Modules/PipeRunner/Controller/PipeRunner.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="39" selection-start="876" selection-end="880" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Modules/PipeRunner/Views/PipeRunnerHTMLView.tpl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="117" column="0" selection-start="6420" selection-end="6460" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Modules/ModuleManager/Views/ModuleManagerHTMLView.tpl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="115" column="62" selection-start="6182" selection-end="6182" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Modules/BuildConfigure/Views/BuildConfigureHTMLView.tpl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="145" column="0" selection-start="8544" selection-end="8544" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Modules/PipeRunner/Model/PipeRunnerAllOS.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="126" column="103" selection-start="3794" selection-end="3794" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Modules/SendEmail/Model/SendEmailLinuxUnix.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="56" column="49" selection-start="2151" selection-end="2151" vertical-scroll-proportion="0.50442475">
+          <folding />
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>
 
