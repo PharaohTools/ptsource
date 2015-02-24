@@ -29,22 +29,20 @@
 
                     <div class="form-group">
 
-                        <div class="col-sm-2">
-                            <label for="project-name" class="control-label text-left">Git Repository</label>
-                        </div>
-
                         <form class="form-horizontal custom-form" action="<?php echo '/index.php?control=ModuleManager&action=webaction' ; ?>" method="POST">
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="module-source" id="module-source" placeholder="Git Repository" value="<?php echo $pageVars["data"]["new-module"]["project-name"] ; ?>" />
+
+                            <div class="col-sm-3">
+                                <label for="project-name" class="control-label text-left">Git Repository</label>
                             </div>
 
-                            <div class="form-group">
-                                <div class="col-sm-12">
-                                    <button type="submit" class="btn btn-success">Download Module</button>
-                                    <input type="hidden" name="" id="item" value="" />
-                                    <input type="hidden" name="item" id="item" value="<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" />
-                                </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="module-source" id="module-source" placeholder="Git Repository"  />
                             </div>
+
+                            <div class="col-sm-3">
+                                <button type="submit" class="btn btn-success">Download Module</button>
+                            </div>
+
                         </form>
 
                         <div class="form-group">
@@ -57,7 +55,10 @@
 
                         <div class="col-sm-12">
 
-                            <h3>Available Modules</h3>
+                            <div class="col-sm-12">
+                                <h3>Available Modules: <i style="font-size: 18px;" class="fa fa-chevron-down"></i> <a class="text-center" href="/index.php?control=ModuleManager&action=webcacheupdate">Update Cache</a></h3>
+                                <hr />
+                            </div>
 
                             <div class="col-sm-12" style="height: 150px; overflow-y: scroll; resize:both;">
 
@@ -82,10 +83,10 @@
                                         echo '  </div>';
                                         echo '  <div class="col-sm-4">'  ;
                                         echo '   <div class="col-sm-12">' ;
-                                        echo '    <a class="btn btn-success text-center" onclick="deleteStepField(hash)">Download</a>' ;
+                                        echo '    <a class="btn btn-success text-center" href="/index.php?control=ModuleManager&action=webinstall&source=defaultrepo&modname='.$modSlug.'">Download</a>' ;
                                         echo '   </div>';
                                         echo '   <div class="col-sm-12">' ;
-                                        echo '    <a class="btn btn-success text-center" onclick="deleteStepField(hash)">Download Dependencies</a>' ;
+                                        echo '    <a class="btn btn-success text-center" href="/index.php?control=ModuleManager&action=webinstall&source=defaultrepo&modname='.$modSlug.'&dependencies=true">Download Dependencies</a>' ;
                                         echo '   </div>';
                                         echo '  </div>';
                                         echo ' </div>';
@@ -105,21 +106,41 @@
                     <div class="form-group">
 
                             <div class="col-sm-12">
-                                <h3> Installed Modules: <i style="font-size: 18px;" class="fa fa-chevron-down"></i></h3>
-                                <hr />
+                                <div class="col-sm-12">
+                                    <h3> Installed Modules: <i style="font-size: 18px;" class="fa fa-chevron-down"></i></h3>
+                                    <hr />
+                                </div>
                                 <div class="col-sm-12" style="height: 150px; overflow-y: scroll; resize:both;">
                                 <?php
+
+                                    $oddeven = "Odd" ;
+
                                     foreach ($pageVars["data"]["installed_modules"] as $instModuleInfo) {
-                                        echo '<div class="col-sm-6">';
-                                        echo '  <p class="moduleListText"><strong>'.$instModuleInfo["command"].'</strong> - '.$instModuleInfo["name"]."</p>";
+                                        $oddeven = ($oddeven == "Odd") ? "Even" : "Odd" ;
+                                        echo '<div class="col-sm-12 moduleEntry moduleEntry'.$oddeven.'">';
+                                        echo '  <div class="col-sm-8">';
+                                        echo '    <p class="moduleListText"><strong>'.$instModuleInfo["command"].'</strong></p>';
+                                        echo '    <p>'.$instModuleInfo["name"]."</p>";
+                                        echo '  </div>';
+                                        echo '  <div class="col-sm-4">';
+                                        echo '    <a class="btn btn-success text-center" onclick="uninstallModule('.$instModuleInfo["command"].')">Uninstall</a>';
+
+                                        if ($instModuleInfo["enabled"]==true) {
+                                            echo '    <a class="btn btn-warning text-center" onclick="uninstallModule('.$instModuleInfo["command"].')">Disable</a>'; }
+                                        else {
+                                            echo '    <a class="btn btn-info text-center" onclick="uninstallModule('.$instModuleInfo["command"].')">Enable</a>'; }
+
+                                        echo '  </div>';
                                         echo '</div>'; }
                                 ?>
                                 </div>
                             </div>
 
                             <div class="col-sm-12">
-                                <h3> Incompatible Modules: <i style="font-size: 18px;" class="fa fa-chevron-down"></i></h3>
-                                <hr />
+                                <div class="col-sm-12">
+                                    <h3> Incompatible Modules: <i style="font-size: 18px;" class="fa fa-chevron-down"></i></h3>
+                                    <hr />
+                                </div>
                                 <div class="col-sm-12" style="height: 50px; overflow-y: scroll; resize:both;">
                                 <?php
                                     if (count($pageVars["data"]["incompatible_modules"]) > 0) {
