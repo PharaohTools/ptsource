@@ -42,7 +42,8 @@ class ShutdownLinuxUnix extends Base {
     public function disableBuildIfNeeded() {
         $this->params["build-settings"]["app_config"] = \Model\AppConfig::getAppVariable("app_config");
         $this->params["build-settings"]["mod_config"] = \Model\AppConfig::getAppVariable("mod_config");
-        if ($this->params["build-settings"]["mod_config"]["Shutdown"]["disable_build_execution"] == "on") {
+        if (isset($this->params["build-settings"]["mod_config"]["Shutdown"]) &&
+            $this->params["build-settings"]["mod_config"]["Shutdown"]["disable_build_execution"] == "on") {
             $loggingFactory = new \Model\Logging();
             $this->params["echo-log"] = true ;
             $logging = $loggingFactory->getModel($this->params);
