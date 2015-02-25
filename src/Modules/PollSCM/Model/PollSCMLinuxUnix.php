@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class SendEmailLinuxUnix extends Base {
+class PollSCMLinuxUnix extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -20,24 +20,24 @@ class SendEmailLinuxUnix extends Base {
 
     public function getSettingFormFields() {
         $ff = array(
-            "send_postbuild_email" =>
-            array(
-                "type" => "boolean",
-                "optional" => true,
-                "name" => "Send Email on Build Completion?"
-            ),
-            "send_postbuild_email_stability" =>
-            array(
-                "type" => "boolean",
-                "optional" => true,
-                "name" => "Only notify on failing, or first stable after failed Build?"
-            ),
-            "send_postbuild_email_address" =>
-            array(
-                "type" => "text",
-                "optional" => true,
-                "name" => "Email Address(es) to send to?"
-            ),
+            "poll_scm_enabled" =>
+                array(
+                    "type" => "boolean",
+                    "optional" => true,
+                    "name" => "Poll SCM?"
+                ),
+//            "send_postbuild_email_stability" =>
+//                array(
+//                    "type" => "boolean",
+//                    "optional" => true,
+//                    "name" => "Only notify on failing, or first stable after failed Build?"
+//                ),
+            "git_repository_url" =>
+                array(
+                    "type" => "text",
+                    "optional" => true,
+                    "name" => "Git Repository URL?"
+                ),
         );
         return $ff ;
     }
@@ -48,18 +48,14 @@ class SendEmailLinuxUnix extends Base {
 
     public function getEvents() {
         $ff = array(
-            "afterBuildComplete" => array(
-                "sendCompletionAlertMail",
+            "afterSettings" => array(
+                "pollSCMChanges",
             ),
         );
         return $ff ;
     }
 
-    public function sendCompletionAlertMail() {
-        $this->sendAlertMail(true);
-    }
-
-    public function sendAlertMail($completion) {
+    public function pollSCMChanges() {
 
         $loggingFactory = new \Model\Logging();
         $this->params["echo-log"] = true ;
@@ -76,9 +72,8 @@ class SendEmailLinuxUnix extends Base {
 
         $mn = $this->getModuleName() ;
 
-        if ($settings[$mn]["send_postbuild_email"] == "on" &&
-            $settings[$mn]["send_postbuild_email_stability"]=="on" &&
-            $completion ==true ) {
+        if ($settings[$mn]["poll_scm_enabled"] == "on" &&
+            $settings[$mn]["send_postbuild_email_stability"]=="on") {
             $logging->log ("Only Sending alert mail if poor stability", $this->getModuleName() ) ;
             if ($this->params["run-status"] == "SUCCESS") {
                 $logging->log ("Build currently stable, not emailing", $this->getModuleName() ) ;
@@ -86,7 +81,7 @@ class SendEmailLinuxUnix extends Base {
             else {
                 $logging->log ("Build unstable, emailing", $this->getModuleName() ) ; } }
 
-        if ($settings[$mn]["send_postbuild_email"] == "on") {
+        if ($settings[$mn]["poll_scm_enabled"] == "on") {
             // error_log(serialize($defaults)) ;
             $subject = "Pharaoh Build Result - ". $defaults["project-name"]." ".", Run ID -".$run;
             $message = "";
@@ -98,10 +93,10 @@ class SendEmailLinuxUnix extends Base {
             // Create the Transport
             try {
                 $transport = \Swift_SmtpTransport::newInstance(
-                    $this->params["build-settings"]["mod_config"]["SendEmail"]["config_smtp_server"],
-                    (int) $this->params["build-settings"]["mod_config"]["SendEmail"]["config_port"])
-                    ->setUsername($this->params["build-settings"]["mod_config"]["SendEmail"]["config_username"])
-                    ->setPassword($this->params["build-settings"]["mod_config"]["SendEmail"]["config_password"]) ;
+                    $this->params["build-settings"]["mod_config"]["PollSCM"]["config_smtp_server"],
+                    (int) $this->params["build-settings"]["mod_config"]["PollSCM"]["config_port"])
+                    ->setUsername($this->params["build-settings"]["mod_config"]["PollSCM"]["config_username"])
+                    ->setPassword($this->params["build-settings"]["mod_config"]["PollSCM"]["config_password"]) ;
                 // Create the Mailer using your created Transport
                 $mailer = \Swift_Mailer::newInstance($transport);
                 // Create the message
@@ -109,7 +104,7 @@ class SendEmailLinuxUnix extends Base {
                     // Give the message a subject
                     ->setSubject($subject)
                     // Set the From address with an associative array
-                    ->setFrom(array($this->params["build-settings"]["mod_config"]["SendEmail"]["from_email"] => "Pharaoh Build Server"))
+                    ->setFrom(array($this->params["build-settings"]["mod_config"]["PollSCM"]["from_email"] => "Pharaoh Build Server"))
                     // Set the To addresses with an associative array
                     ->setTo($to)
                     // Give it a body

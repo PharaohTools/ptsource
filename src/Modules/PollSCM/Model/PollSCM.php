@@ -2,6 +2,6 @@
 
 Namespace Model;
 
-class SendEmail extends BaseModelFactory {
+class PollSCM extends BaseModelFactory {
 
 }
