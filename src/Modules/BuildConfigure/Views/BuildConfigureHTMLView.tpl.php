@@ -76,7 +76,6 @@
                         </div>
                     </div>
 
-
                     <?php
 
                     foreach ($pageVars["data"]["settings"] as $one_config_slug => $one_conf_tails) {
@@ -115,7 +114,16 @@
                                         $val = $pageVars["data"]["current_configs"]["app"][$one_config_slug];  }
                                     if (!isset($val) && is_null($onoff)) {
                                         $val = $one_conf_tails["default"] ; }
-                                    echo '<input name="settings['.$one_config_slug.']['.$fieldSlug.']" id="settings['.$one_config_slug.']['.$fieldSlug.']" type="text" class="form-control" value="'.$one_conf_tails["value"].'" placeholder="'.$one_conf_tails["label"].'" />' ;
+
+
+                                    echo '  <div class="col-sm-12">' ;
+                                    echo '    <div class="col-sm-5">' ;
+                                    echo '      <input name="settings['.$one_config_slug.']['.$fieldSlug.']" id="settings['.$one_config_slug.']['.$fieldSlug.']" type="text" class="form-control" value="'.$one_conf_tails["value"].'" placeholder="'.$one_conf_tails["label"].'" />' ;
+                                    echo '    </div>' ;
+                                    echo '    <div class="col-sm-7">' ;
+                                    echo '      <label for="settings['.$one_config_slug.']['.$fieldSlug.']" class="control-label text-left">'.$fieldInfo["name"].':</label>' ;
+                                    echo '    </div>' ;
+                                    echo '  </div>' ;
                                     break ; }
                             echo '  </div>';}
                         echo '</div>'; } ?>
@@ -128,7 +136,7 @@
 
                     <ul class="form-group ui-sortable" id="sortableSteps">
 
-                    <?php
+                    <?php $plugins = $pageVars["data"]["plugin"]; $buildconf = $plugins['data'][$plugin]['buildconf'];
                         foreach ($pageVars["data"]["pipeline"]["steps"] as $hash => $one_build_step) {
                             echo '<li class="form-group ui-state-default ui-sortable-handle" id="step'.$hash.'">' ;
                             echo '  <div class="col-sm-2">' ;
@@ -142,11 +150,24 @@
                             echo '      <p><strong>Step Type: </strong>'.$one_build_step["steptype"].'</p>';
                             echo '      <input type="hidden" id="steps['.$hash.'][module]" name="steps['.$hash.'][module]" value="'.$one_build_step["module"].'" />';
                             echo '      <input type="hidden" id="steps['.$hash.'][steptype]" name="steps['.$hash.'][steptype]" value="'.$one_build_step["steptype"].'" />';
-                            echo '      <textarea id="steps['.$hash.'][data]" name="steps['.$hash.'][data]" value="'.$one_build_step["data"].'" class="form-control">'.$one_build_step["data"].'</textarea>';
-
+                            if ($one_build_step["module"] == "Plugin") { 
+                                $buildconf = $plugins['data'][$one_build_step["steptype"]]['buildconf'];
+                                foreach ($buildconf as $data ) {
+                                    echo '      <label for="'.$data['name'].'">'.$data['name'].'</label>'; 
+                                    if ($data['type'] == 'text') {
+                                        echo '      <input id="steps['.$hash.']['.$data['name'].']" name="steps['.$hash.']['.$data['name'].']" value="'.$one_build_step[$data['name']].'" class="form-control" />'; 
+                                    }
+                                    if ($data['type'] == 'textarea') {
+                                        echo '      <textarea id="steps['.$hash.']['.$data['name'].']" name="steps['.$hash.']['.$data['name'].']" class="form-control" />'.$one_build_step[$data['name']].'</textarea>'; 
+                                    }
+                                }
+                            }
+                            else {
+                                echo '      <textarea id="steps['.$hash.'][data]" name="steps['.$hash.'][data]" value="'.$one_build_step["data"].'" class="form-control">'.$one_build_step["data"].'</textarea>';
+                            }
                             echo '  </div>';
                             echo '   <div class="col-sm-12">'  ;
-                            echo '  <a class="btn btn-warning" onclick="deleteStepField(hash)">Delete Step</a>' ;
+                            echo '  <a class="btn btn-warning" onclick="deleteStepField('.hash.')">Delete Step</a>' ;
 
                             echo '  </div>';
                             echo '  </div>';
@@ -161,6 +182,8 @@
                                 <select name="new_step_module_selector" id="new_step_module_selector" onchange="changeModule(this)">
                                     <option value="nomoduleselected" selected="selected">-- Select Module --</option>
                                     <?php
+                                        $dataplugin['Plugin'] = $pageVars["data"]["plugin"]["data"];
+                                        $pageVars["data"]["fields"] = array_merge($pageVars["data"]["fields"],$dataplugin );
                                         foreach ($pageVars["data"]["fields"] as $builderName => $builderBits) {
                                             echo '  <option value="'.strtolower($builderName).'">'.$builderName.'</option>'; }
                                     ?>
