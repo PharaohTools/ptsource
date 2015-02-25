@@ -24,6 +24,10 @@ class SendEmailInfo extends PTConfigureBase {
         return array("afterBuildComplete");
     }
 
+    public function buildSettings() {
+        return array("send_postbuild_email", "send_postbuild_email_stability", "send_postbuild_email_address");
+    }
+
     public function configuration() {
         return array(
             "smtp_server"=> array( "type" => "text", "default" => "SMTP Server", "label" => "SMTP Server Address", ),
