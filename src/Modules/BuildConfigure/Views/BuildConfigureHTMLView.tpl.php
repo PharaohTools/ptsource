@@ -57,13 +57,13 @@
 
                 -->
 
-                <div class="form-group">
-                    <div class="col-sm-10">
-                        <h3>Build Settings</h3>
-                    </div>
-                </div>
-
                 <form class="form-horizontal custom-form" action="<?= $act ; ?>" method="POST">
+
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                            <h3>Build Settings</h3>
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <div class="col-sm-12">
