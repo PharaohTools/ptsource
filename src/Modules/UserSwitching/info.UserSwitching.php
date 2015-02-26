@@ -17,7 +17,7 @@ class UserSwitchingInfo extends PTConfigureBase {
     }
 
     public function routeAliases() {
-        return array("xvnc"=>"UserSwitching");
+        return array("userswitching"=>"UserSwitching", "user-switching"=>"UserSwitching");
     }
 
     public function configuration() {
