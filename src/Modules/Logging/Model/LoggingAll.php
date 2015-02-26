@@ -43,9 +43,9 @@ class LoggingAll extends BaseLinuxApp {
         $stx = (strlen($source)>0) ? "[$source] " : "" ;
         $fullMessage = "[Pharaoh Logging] " . $stx . $message . "\n" ;
         file_put_contents("php://stderr", $fullMessage );
-        if ($options["php-log"] == true || (isset($this->params["php-log"]) && $this->params["php-log"] == true) ) {
+        if ((isset($options["php-log"]) && $options["php-log"] == true) || (isset($this->params["php-log"]) && $this->params["php-log"] == true) ) {
             error_log($fullMessage) ; }
-        if ($options["echo-log"] == true || (isset($this->params["echo-log"]) && $this->params["echo-log"] == true) ) {
+        if ((isset($options["echo-log"]) && $options["echo-log"] == true) || (isset($this->params["echo-log"]) && $this->params["echo-log"] == true) ) {
             echo $fullMessage ; }
     }
 

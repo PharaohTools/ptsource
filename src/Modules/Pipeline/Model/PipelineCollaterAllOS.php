@@ -58,7 +58,7 @@ class PipelineCollaterAllOS extends Base {
 			$historyIndex = json_decode($historyIndex, true);
 			krsort($historyIndex);
 			foreach ($historyIndex as $run=>$val) {
-				if ($historyIndex[$run]['status'] == "SUCCESS") {
+				if (isset($historyIndex[$run]['status']) && $historyIndex[$run]['status'] == "SUCCESS") {
 					return array('time' => $historyIndex[$run]['end'], 'build' => $run) ; } } }
         return array('time' => false, 'build' => 0) ;
     }
@@ -69,7 +69,7 @@ class PipelineCollaterAllOS extends Base {
 			$historyIndex = json_decode($historyIndex, true);
 			krsort($historyIndex);
 			foreach ($historyIndex as $run=>$val) {
-				if ($historyIndex[$run]['status'] == "FAIL") {
+				if (isset($historyIndex[$run]['status']) && $historyIndex[$run]['status'] == "FAIL") {
 					return array('time' => $historyIndex[$run]['end'], 'build' => $run) ; } } }
         return array('time' => false, 'build' => 0) ;
     }

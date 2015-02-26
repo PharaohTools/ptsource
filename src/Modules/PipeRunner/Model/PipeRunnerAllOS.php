@@ -133,6 +133,7 @@ class PipeRunnerAllOS extends Base {
 
     public function runChild() {
         // @todo this is 30 lines long
+        $this->params["echo-log"] = true ;
         $eventRunnerFactory = new \Model\EventRunner() ;
         $eventRunner = $eventRunnerFactory->getModel($this->params) ;
         $ev = $eventRunner->eventRunner("beforeSettings") ;
@@ -144,7 +145,6 @@ class PipeRunnerAllOS extends Base {
         $ev = $eventRunner->eventRunner("afterSettings") ;
         if ($ev == false) { return $this->failBuild() ; }
         $loggingFactory = new \Model\Logging();
-        $this->params["echo-log"] = true ;
         $logging = $loggingFactory->getModel($this->params);
         $stepRunnerFactory = new \Model\StepRunner() ;
         $stepRunner = $stepRunnerFactory->getModel($this->params) ;
