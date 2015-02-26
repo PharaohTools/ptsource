@@ -95,20 +95,33 @@ class PipeRunnerAllOS extends Base {
 		file_put_contents($file, $historyIndex);
 	}
 
-	private function setPipeDir() {
-		if (isset($this -> params["guess"]) && $this -> params["guess"] == true) {
-			$this -> params["pipe-dir"] = PIPEDIR;
-		} else {
-			// @todo should probably ask a question here
-			$this -> params["pipe-dir"] = PIPEDIR;
-		}
-	}
+    private function setPipeDir() {
+        if (isset($this -> params["guess"]) && $this -> params["guess"] == true) {
+            $this -> params["pipe-dir"] = PIPEDIR;
+        } else {
+            // @todo should probably ask a question here
+            $this -> params["pipe-dir"] = PIPEDIR;
+        }
+    }
+
+    private function getSwitchUser() {
+        $modConfig = \Model\AppConfig::getAppVariable("mod_config");
+        if (isset($modConfig["UserSwitching"]["switching_user"])) {
+            return $modConfig["UserSwitching"]["switching_user"] ; }
+        else {
+            return false ; }
+    }
 
     private function runPipeForkCommand($run) {
+        $switch = $this->getSwitchUser() ;
+        $cmd = "" ;
+        if ($switch != false) { $cmd .= 'sudo su '.$switch.' -c '."'" ; }
         // this should be a phrank piperunner@cli and it should save the log to a named history
-        $cmd  = PHRCOMM.' piperunner child --pipe-dir="'.$this->params["pipe-dir"].'" ' ;
+        $cmd .= PHRCOMM.' piperunner child --pipe-dir="'.$this->params["pipe-dir"].'" ' ;
         $cmd .= '--item="'.$this->params["item"].'" --run-id="'.$run.'" > '.PIPEDIR.DS.$this->params["item"].DS ;
         $cmd .= 'tmpfile &';
+        if ($switch != false) { $cmd .= "'" ; }
+
         error_log($cmd);
         $descr = array(
             0 => array(
