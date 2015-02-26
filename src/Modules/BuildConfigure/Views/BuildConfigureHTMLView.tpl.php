@@ -120,17 +120,11 @@
                                         $onoff = (is_null($onoff))
                                             ? $fieldInfo["default"]
                                             : $onoff ; }
-
-
                                     if ($onoff === "on") { $onoff = 'checked="checked"' ;}
                                     else {$onoff = "" ;}
                                     echo '  <div class="col-sm-12">' ;
-                                    # echo '    <div class="col-sm-10">' ;
                                     echo '      <label for="settings['.$one_config_slug.']['.$fieldSlug.']" class="control-label text-left">'.$fieldInfo["name"].':</label>' ;
-                                    # echo '    </div>' ;
-                                    # echo '    <div class="col-sm-2">' ;
                                     echo '      <input name="settings['.$one_config_slug.']['.$fieldSlug.']" id="settings['.$one_config_slug.']['.$fieldSlug.']" type="checkbox" '.$onoff.' />' ;
-                                    # echo '    </div>' ;
                                     echo '  </div>' ;
                                     break ;
                                 case "text" :
@@ -139,12 +133,10 @@
                                     if (!isset($val)) {
                                         $val = $one_conf_tails["default"] ; }
                                     echo '  <div class="col-sm-12">' ;
-                                    # echo '    <div class="col-sm-7">' ;
                                     echo '      <label for="settings['.$one_config_slug.']['.$fieldSlug.']" class="control-label text-left">'.$fieldInfo["name"].':</label>' ;
-                                    # echo '    </div>' ;
-                                    # echo '    <div class="col-sm-5">' ;
-                                    echo '      <input name="settings['.$one_config_slug.']['.$fieldSlug.']" id="settings['.$one_config_slug.']['.$fieldSlug.']" type="text" class="form-control" value="'.$val.'" placeholder="'.$one_conf_tails["label"].'" />' ;
-                                    # echo '    </div>' ;
+                                    echo '      <input name="settings['.$one_config_slug.']['.$fieldSlug.']" id="settings['.
+                                        $one_config_slug.']['.$fieldSlug.']" type="text" class="form-control" value="'.
+                                        $val.'" placeholder="'.$one_conf_tails["label"].'" />' ;
                                     echo '  </div>' ;
                                     break ;
                                 case "textarea" :
@@ -153,12 +145,10 @@
                                     if (!isset($val)) {
                                         $val = $one_conf_tails["default"] ; }
                                     echo '  <div class="col-sm-12">' ;
-                                    # echo '    <div class="col-sm-5">' ;
                                     echo '      <label for="settings['.$one_config_slug.']['.$fieldSlug.']" class="control-label text-left">'.$fieldInfo["name"].':</label>' ;
-                                    # echo '    </div>' ;
-                                    # echo '    <div class="col-sm-7">' ;
-                                    echo '      <textarea name="settings['.$one_config_slug.']['.$fieldSlug.']" id="settings['.$one_config_slug.']['.$fieldSlug.']" type="text" class="form-control" placeholder="'.$one_conf_tails["label"].'" >'.$val.'</textarea>' ;
-                                    # echo '    </div>' ;
+                                    echo '      <textarea name="settings['.$one_config_slug.']['.$fieldSlug.']" id="settings['.
+                                        $one_config_slug.']['.$fieldSlug.']" type="text" class="form-control" placeholder="'.
+                                        $one_conf_tails["label"].'" >'.$val.'</textarea>' ;
                                     echo '  </div>' ;
                                     break ; }
                             echo '  </div>';}
