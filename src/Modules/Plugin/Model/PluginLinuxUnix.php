@@ -48,10 +48,9 @@ class PluginLinuxUnix extends Base {
             if (!file_exists($pluginWorkDir))
                 mkdir($pluginWorkDir, 0777);
             $logging->log("Running Plugin by Data...") ;
-            $pipeInstalledDir = PLUGININS;
-            $input["pluginWorkDir"] = $pluginWorkDir;
-            $input["tmpfile"] = PIPEDIR.DS.$this->params["item"].DS.'tmpfile';
-            if(!include_once($pipeInstalledDir.DS.$step["steptype"].DS.'Triger.php') ) {
+            if(!include_once(PLUGININS.DS.$step["steptype"].DS.'Triger.php') ) {
+            	$input["pluginWorkDir"] = $pluginWorkDir;
+            	$input["tmpfile"] = PIPEDIR.DS.$this->params["item"].DS.'tmpfile';
                 echo 'Plugin Removed';
                 $logging->log("Plugin Removed") ;
                 return false;
