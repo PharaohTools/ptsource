@@ -17,11 +17,11 @@ class GitInfo extends PTConfigureBase {
     }
 
     public function routeAliases() {
-        return array("shell"=>"Git");
+        return array("git"=>"Git");
     }
 
     public function buildSteps() {
-        return array("shellscript", "shellfile");
+        return array("gitscript", "gitfile");
     }
 
     public function helpDefinition() {

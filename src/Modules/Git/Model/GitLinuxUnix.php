@@ -20,14 +20,14 @@ class GitLinuxUnix extends Base {
 
     public function getFormFields() {
         $ff = array(
-            "shelldata" => array(
-                "type" => "textarea",
-                "name" => "Git Data",
-                "slug" => "data" ),
-            "shellscript" => array(
+            "gitclonedefault" => array(
+                "type" => "boolean",
+                "name" => "Git clone using default repo",
+                "slug" => "defaultrepo" ),
+            "gitclonedir" => array(
                 "type" => "text",
-                "name" => "Git Script",
-                "slug" => "script" ),
+                "name" => "Clone Directory",
+                "slug" => "clonedir" ),
         );
         return $ff ;
     }
@@ -35,20 +35,41 @@ class GitLinuxUnix extends Base {
     public function executeStep($step) {
         $loggingFactory = new \Model\Logging();
         $logging = $loggingFactory->getModel($this->params);
-        if ( $step["steptype"] == "shelldata") {
-            $logging->log("Running Git from Data...", $this->getModuleName()) ;
-			$output = array();
-			$rc = -1;
-			exec($step["data"], $output, $rc);
-			foreach ($output as $val) { echo $val.'<br />'; }
-            return (intval($rc) === 0) ? true : false ; }
-        else if ( $step["steptype"] == "shellscript") {
-            $logging->log("Running Git from Script...", $this->getModuleName()) ;
-            $this->executeAsGit($step["data"]) ;
-            return true ; }
+        $mn = $this->getModuleName() ;
+        if ( $step["steptype"] == "gitclonedefault") {
+            $logging->log("Running Git clone from default repo...", $this->getModuleName()) ;
+
+            $pipeline = $this->getPipeline() ;
+            $workspace = $this->getWorkspace() ;
+
+            $repo = $pipeline["settings"]["PollSCM"]["git_repository_url"] ;
+            $branch = $pipeline["settings"]["PollSCM"]["git_branch"] ;
+
+            $branchMakeCommand = 'git clone '.$repo.' .';
+            self::executeAndOutput($branchMakeCommand, $branchMakeCommand) ;
+            $initCommand = 'echo $?';
+            $rc1 = self::executeAndOutput($initCommand) ;
+            $branchMakeCommand = 'git checkout '.$branch ;
+            self::executeAndOutput($branchMakeCommand, $branchMakeCommand) ;
+            $initCommand = 'echo $?';
+            $rc2 = self::executeAndOutput($initCommand) ;
+            return (strpos($rc1, 0)==0 && strpos($rc2, 0)==0) ? true : false ; }
         else {
             $logging->log("Unrecognised Build Step Type {$step["type"]} specified in Git Module", $this->getModuleName()) ;
             return false ; }
     }
+
+    private function getPipeline() {
+        $pipelineFactory = new \Model\Pipeline() ;
+        $pipeline = $pipelineFactory->getModel($this->params);
+        return $pipeline->getPipeline($this->params["item"]);
+    }
+
+    private function getWorkspace() {
+        $workspaceFactory = new \Model\Workspace() ;
+        $workspace = $workspaceFactory->getModel($this->params);
+        return $workspace->getWorkspaceDir();
+    }
+
 
 }
