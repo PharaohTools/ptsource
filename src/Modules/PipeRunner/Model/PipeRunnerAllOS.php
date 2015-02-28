@@ -151,8 +151,10 @@ class PipeRunnerAllOS extends Base {
         $eventRunner = $eventRunnerFactory->getModel($this->params) ;
         $ev = $eventRunner->eventRunner("beforeSettings") ;
         if ($ev == false) { return $this->failBuild() ; }
-        $this->params["build-settings"]["app_config"] = \Model\AppConfig::getAppVariable("app_config");
-        $this->params["build-settings"]["mod_config"] = \Model\AppConfig::getAppVariable("mod_config");
+        $pipeline = $this->getPipeline();
+        $this->params["build-settings"] = $pipeline["settings"];
+        $this->params["app-settings"]["app_config"] = \Model\AppConfig::getAppVariable("app_config");
+        $this->params["app-settings"]["mod_config"] = \Model\AppConfig::getAppVariable("mod_config");
         $eventRunnerFactory = new \Model\EventRunner() ;
         $eventRunner = $eventRunnerFactory->getModel($this->params) ;
         $ev = $eventRunner->eventRunner("afterSettings") ;
@@ -161,7 +163,6 @@ class PipeRunnerAllOS extends Base {
         $logging = $loggingFactory->getModel($this->params);
         $stepRunnerFactory = new \Model\StepRunner() ;
         $stepRunner = $stepRunnerFactory->getModel($this->params) ;
-        $pipeline = $this->getPipeline();
         $logging->log("Writing to temp file ". PIPEDIR.DS.$this->params["item"].DS.'tmpfile', $this->getModuleName()) ;
         $logging->log("Executing as ".self::executeAndLoad("whoami"), $this->getModuleName()) ;
         $workspace = $this->getWorkspace() ;
