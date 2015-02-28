@@ -70,14 +70,10 @@ class SendEmailLinuxUnix extends Base {
         $defaults = file_get_contents($file) ;
         $defaults = new \ArrayObject(json_decode($defaults));
 
-        $file = PIPEDIR.DS.$this->params["item"].DS.'settings';
-        $settings = file_get_contents($file) ;
-        $settings = json_decode($settings, true);
-
         $mn = $this->getModuleName() ;
 
-        if ($settings[$mn]["send_postbuild_email"] == "on" &&
-            $settings[$mn]["send_postbuild_email_stability"]=="on" &&
+        if ($this->params["build-settings"][$mn]["send_postbuild_email"] == "on" &&
+            $this->params["build-settings"][$mn]["send_postbuild_email_stability"]=="on" &&
             $completion ==true ) {
             $logging->log ("Only Sending alert mail if poor stability", $this->getModuleName() ) ;
             if ($this->params["run-status"] == "SUCCESS") {
@@ -86,22 +82,22 @@ class SendEmailLinuxUnix extends Base {
             else {
                 $logging->log ("Build unstable, emailing", $this->getModuleName() ) ; } }
 
-        if ($settings[$mn]["send_postbuild_email"] == "on") {
+        if ($this->params["build-settings"][$mn]["send_postbuild_email"] == "on") {
             // error_log(serialize($defaults)) ;
             $subject = "Pharaoh Build Result - ". $defaults["project-name"]." ".", Run ID -".$run;
             $message = "";
             $message .= ($completion==true) ? "Your build has completed\n" : "";
-            $message .= ($settings[$mn]["send_postbuild_email_stability"]==true) ? "Your build has completed\n" : "";
+            $message .= ($this->params["build-settings"][$mn]["send_postbuild_email_stability"]==true) ? "Your build has completed\n" : "";
             $message .= $this->params["run-status"];
-            $to = explode(",", $settings[$mn]["send_postbuild_email_address"]) ;
+            $to = explode(",", $this->params["build-settings"][$mn]["send_postbuild_email_address"]) ;
             require_once dirname(dirname(__FILE__)).DS.'Libraries'.DS.'swift_required.php' ;
             // Create the Transport
             try {
                 $transport = \Swift_SmtpTransport::newInstance(
-                    $this->params["build-settings"]["mod_config"]["SendEmail"]["config_smtp_server"],
-                    (int) $this->params["build-settings"]["mod_config"]["SendEmail"]["config_port"])
-                    ->setUsername($this->params["build-settings"]["mod_config"]["SendEmail"]["config_username"])
-                    ->setPassword($this->params["build-settings"]["mod_config"]["SendEmail"]["config_password"]) ;
+                    $this->params["app-settings"]["mod_config"]["SendEmail"]["config_smtp_server"],
+                    (int) $this->params["app-settings"]["mod_config"]["SendEmail"]["config_port"])
+                    ->setUsername($this->params["app-settings"]["mod_config"]["SendEmail"]["config_username"])
+                    ->setPassword($this->params["app-settings"]["mod_config"]["SendEmail"]["config_password"]) ;
                 // Create the Mailer using your created Transport
                 $mailer = \Swift_Mailer::newInstance($transport);
                 // Create the message
@@ -109,7 +105,7 @@ class SendEmailLinuxUnix extends Base {
                     // Give the message a subject
                     ->setSubject($subject)
                     // Set the From address with an associative array
-                    ->setFrom(array($this->params["build-settings"]["mod_config"]["SendEmail"]["from_email"] => "Pharaoh Build Server"))
+                    ->setFrom(array($this->params["app-settings"]["mod_config"]["SendEmail"]["from_email"] => "Pharaoh Build Server"))
                     // Set the To addresses with an associative array
                     ->setTo($to)
                     // Give it a body
@@ -134,8 +130,6 @@ class SendEmailLinuxUnix extends Base {
             $logging->log ("Send Alert Mail ignoring...", $this->getModuleName() ) ;
             return true ;
         }
-
-
 
     }
 

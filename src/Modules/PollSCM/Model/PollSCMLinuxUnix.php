@@ -24,20 +24,26 @@ class PollSCMLinuxUnix extends Base {
                 array(
                     "type" => "boolean",
                     "optional" => true,
-                    "name" => "Poll SCM?"
+                    "name" => "Enable Polling of SCM Server?"
                 ),
-//            "send_postbuild_email_stability" =>
-//                array(
-//                    "type" => "boolean",
-//                    "optional" => true,
-//                    "name" => "Only notify on failing, or first stable after failed Build?"
-//                ),
             "git_repository_url" =>
-                array(
-                    "type" => "text",
-                    "optional" => true,
-                    "name" => "Git Repository URL?"
-                ),
+            array(
+                "type" => "text",
+                "optional" => true,
+                "name" => "Git Repository URL?"
+            ),
+            "git_branch" =>
+            array(
+                "type" => "text",
+                "optional" => true,
+                "name" => "Git Branch?"
+            ),
+            "cron_string" =>
+            array(
+                "type" => "textarea",
+                "optional" => true,
+                "name" => "Crontab Values"
+            ),
         );
         return $ff ;
     }
@@ -61,77 +67,64 @@ class PollSCMLinuxUnix extends Base {
         $this->params["echo-log"] = true ;
         $logging = $loggingFactory->getModel($this->params);
 
-        $run = $this->params["run-id"];
-        $file = PIPEDIR.DS.$this->params["item"].DS.'defaults';
-        $defaults = file_get_contents($file) ;
-        $defaults = new \ArrayObject(json_decode($defaults));
-
-        $file = PIPEDIR.DS.$this->params["item"].DS.'settings';
-        $settings = file_get_contents($file) ;
-        $settings = json_decode($settings, true);
+        $workspace = $this->getWorkspace() ;
 
         $mn = $this->getModuleName() ;
 
-        if ($settings[$mn]["poll_scm_enabled"] == "on" &&
-            $settings[$mn]["send_postbuild_email_stability"]=="on") {
-            $logging->log ("Only Sending alert mail if poor stability", $this->getModuleName() ) ;
-            if ($this->params["run-status"] == "SUCCESS") {
-                $logging->log ("Build currently stable, not emailing", $this->getModuleName() ) ;
-                return true; }
-            else {
-                $logging->log ("Build unstable, emailing", $this->getModuleName() ) ; } }
-
-        if ($settings[$mn]["poll_scm_enabled"] == "on") {
-            // error_log(serialize($defaults)) ;
-            $subject = "Pharaoh Build Result - ". $defaults["project-name"]." ".", Run ID -".$run;
-            $message = "";
-            $message .= ($completion==true) ? "Your build has completed\n" : "";
-            $message .= ($settings[$mn]["send_postbuild_email_stability"]==true) ? "Your build has completed\n" : "";
-            $message .= $this->params["run-status"];
-            $to = explode(",", $settings[$mn]["send_postbuild_email_address"]) ;
-            require_once dirname(dirname(__FILE__)).DS.'Libraries'.DS.'swift_required.php' ;
-            // Create the Transport
+        if ($this->params["build-settings"][$mn]["poll_scm_enabled"] == "on") {
+            $logging->log ("SCM Polling Enabled, attempting...", $this->getModuleName() ) ;
             try {
-                $transport = \Swift_SmtpTransport::newInstance(
-                    $this->params["build-settings"]["mod_config"]["PollSCM"]["config_smtp_server"],
-                    (int) $this->params["build-settings"]["mod_config"]["PollSCM"]["config_port"])
-                    ->setUsername($this->params["build-settings"]["mod_config"]["PollSCM"]["config_username"])
-                    ->setPassword($this->params["build-settings"]["mod_config"]["PollSCM"]["config_password"]) ;
-                // Create the Mailer using your created Transport
-                $mailer = \Swift_Mailer::newInstance($transport);
-                // Create the message
-                $message = \Swift_Message::newInstance()
-                    // Give the message a subject
-                    ->setSubject($subject)
-                    // Set the From address with an associative array
-                    ->setFrom(array($this->params["build-settings"]["mod_config"]["PollSCM"]["from_email"] => "Pharaoh Build Server"))
-                    // Set the To addresses with an associative array
-                    ->setTo($to)
-                    // Give it a body
-                    ->setBody($message)
-                    // And optionally an alternative body
-                    //->addPart("<q>$message</q>", 'text/html')
-                    // Optionally add any attachments
-                    //->attach(Swift_Attachment::fromPath('my-document.pdf'))
-                ;
-
-                $logging->log ("Sending alert mail", $this->getModuleName() ) ;
-                // Send the message
-                $result = $mailer->send($message);
-                if ($result == true) { $logging->log ("Email sent successfully", $this->getModuleName() ) ; }
-                else { $logging->log ("Email sending error", $this->getModuleName() ) ; }
+                $logging->log ("Polling SCM Server", $this->getModuleName() ) ;
+                $logging->log ("Changing Directory to workspace ".$workspace, $this->getModuleName() ) ;
+                chdir("Changing Directory to workspace ".$workspace);
+                // @todo other scm tpes
+                $repo = $this->params["build-settings"][$mn]["git_repository_url"] ;
+                $branch = $this->params["build-settings"][$mn]["git_branch"] ;
+                $lastSha = (isset($this->params["build-settings"][$mn]["last_sha"])) ? $this->params["build-settings"][$mn]["last_sha"] : null ;
+                if (strlen($lastSha)>0) {
+                    $logging->log ("Last commit built was $lastSha", $this->getModuleName() ) ;
+                    $lsCommand = 'git ls-remote '.$repo ;
+                    $all = self::executeAndLoad($lsCommand) ;
+                    $curSha = substr($all, 0, strpos($all, "HEAD")-1);
+                    $logging->log ("Current remote commit is $curSha", $this->getModuleName() ) ;
+                    if ($lastSha == $curSha) {
+                        $logging->log ("No remote changes", $this->getModuleName() ) ;
+                        $logging->log ("ABORTED EXECUTION", $this->getModuleName() ) ;
+                        $result = false; }
+                    else {
+                        $logging->log ("Remote changes available", $this->getModuleName() ) ;
+                        $result = true ; } }
+                else {
+                    $logging->log ("No last commit stored, assuming all remote changes", $this->getModuleName() ) ;
+                    $lsCommand = 'git ls-remote '.$repo ;
+                    $all = self::executeAndLoad($lsCommand) ;
+                    $curSha = substr($all, 0, strpos($all, "HEAD")-1);
+                    $logging->log ("Storing current remote commit ID $curSha", $this->getModuleName() ) ;
+                    $pipelineFactory = new \Model\Pipeline() ;
+                    $pipelineSaver = $pipelineFactory->getModel($this->params, "PipelineSaver");
+                    $this->params["build-settings"][$mn]["last_sha"] = $curSha ;
+                    $pipelineSaver->savePipeline(array("type" => "Settings", "data" => $this->params["build-settings"] ));
+                    $result = true ;}
                 return $result; }
             catch (\Exception $e) {
-                $logging->log ("Error sending mail", $this->getModuleName() ) ;
-                return false; }
+                $logging->log ("Error polling scm", $this->getModuleName() ) ;
+                return false; } }
+        else {
+            $logging->log ("SCM Polling Disabled, ignoring...", $this->getModuleName() ) ;
+            return true ; }
 
-        }  else {
-            $logging->log ("Send Alert Mail ignoring...", $this->getModuleName() ) ;
-            return true ;
-        }
+    }
 
+    private function getPipeline() {
+        $pipelineFactory = new \Model\Pipeline() ;
+        $pipeline = $pipelineFactory->getModel($this->params);
+        return $pipeline->getPipeline($this->params["item"]);
+    }
 
-
+    private function getWorkspace() {
+        $workspaceFactory = new \Model\Workspace() ;
+        $workspace = $workspaceFactory->getModel($this->params);
+        return $workspace->getWorkspaceDir();
     }
 
 }

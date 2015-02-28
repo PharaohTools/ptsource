@@ -17,7 +17,7 @@ class ApplicationInstanceInfo extends PTConfigureBase {
     }
 
     public function routeAliases() {
-        return array("xvnc"=>"ApplicationInstance");
+        return array("ApplicationInstance");
     }
 
     public function configuration() {
