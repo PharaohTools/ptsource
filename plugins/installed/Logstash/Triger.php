@@ -1,5 +1,5 @@
 <?php
-class Triger {
+class Logstash {
 	
 	function __construct() {
 		

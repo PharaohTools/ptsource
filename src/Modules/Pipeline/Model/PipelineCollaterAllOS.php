@@ -126,7 +126,7 @@ class PipelineCollaterAllOS extends Base {
     }
 
     private function getSteps() {
-        $steps = array();
+        $stepsForRun = $steps = array();
         $stepsForRunFile = PIPEDIR.DS.$this->params["item"].DS.'stepsForRun' ;
         if (file_exists($stepsForRunFile)) {
             $stepsForRunFileData =  file_get_contents($stepsForRunFile) ;

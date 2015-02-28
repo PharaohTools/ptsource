@@ -7,7 +7,7 @@ use GorkaLaucirica\HipchatAPIv2Client\API\RoomAPI;
 use GorkaLaucirica\HipchatAPIv2Client\Model\Message;
 
 
-class Triger {
+class Hipchat {
 
 	function __construct() {
 

@@ -1,6 +1,6 @@
 <?php
 
-class Triger {
+class SSH {
 	
 	function __construct() {
 		

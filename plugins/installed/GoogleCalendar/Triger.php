@@ -2,30 +2,30 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-class Triger {
+class GoogleCalendar {
 	
-	function __construct() {
+         function __construct() {
 		
-	}
+	 }
 	
-	public function startTriger($input)
-	{
+	 public function startTriger($input)
+	 {
 		
-           $id = $input['service_account_id'];           
-           $email = $input['service_account_Email'];           
-           $key = $input['path_p12key'];           
-           $mail = $input['your_email_id'];
+           $id = $input['Service account id'];           
+           $email = $input['Service account Email'];           
+           $key1 = $input['Path for p12key'];           
+           $mail = $input['Your Email id'];
            $sum = file_get_contents($input["tmpfile"]);
             
-          		// require __DIR__ . '/vendor/autoload.php';
+           //require __DIR__ . '/vendor/autoload.php';
 
-	   		//require_once 'Google/Client.php';
+	   //require_once 'Google/Client.php';
            //require_once 'Google/Service/Calendar.php';
            //require_once 'Google/Auth/AssertionCredentials.php';
 
            $client_id = $id;
            $Email_address = $email;
-           $key_file_location = $key;
+           $key_file_location = $key1;
            $client = new Google_Client();
            $client->setApplicationName("Client_Library_Examples");
            $key = file_get_contents($key_file_location);
@@ -52,13 +52,13 @@ class Triger {
           $event->setLocation('Somewhere');
           $start = new Google_Service_Calendar_EventDateTime();
           //$start->setDateTime('2015-02-25T10:00:00.000-07:00');
-          $start->setDateTime(date("Y-m-d\Th:i:s").'.000-06:30');
+          $start->setDateTime(date("Y-m-d\Th:i:s").'.190-05:30');
 
           $event->setStart($start);
  
           $end = new Google_Service_Calendar_EventDateTime();
           //$end->setDateTime('2015-02-25T10:25:00.000-07:00');
-          $end->setDateTime(date("Y-m-d\Th:i:s").'.000-06:30');
+          $end->setDateTime(date("Y-m-d\Th:i:s").'.190-05:30');
 
           $event->setEnd($end);
           $attendee1 = new Google_Service_Calendar_EventAttendee();

@@ -39,33 +39,48 @@ function displayStepField() {
     hash = hash.toString().replace(".", "") ;
     html = "" ;
 
-//    if (typeof(field.name) == "undefined") { field.name = module; }
-//    if (module == "Plugin") {
-//        html  = '<li class="form-group ui-state-default ui-sortable-handle" id="step'+hash+'">' ;
-//        html += '  <div class="col-sm-2">' ;
-//        html += '    <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' ;
-//        html += '  </div>';
-//        html += '  <div class="col-sm-10">' ;
-//        html += '   <div class="col-sm-12">' ;
-//        html += '    <h4>'+field.name+'</h4>' ;
-//        html += '    <input type="hidden" id="steps['+hash+'][module]" name="steps['+hash+'][module]" value="'+module+'" />' ;
-//        html += '    <input type="hidden" id="steps['+hash+'][steptype]" name="steps['+hash+'][steptype]" value="'+steptype+'" />' ;
-//        field = field["buildconf"];
-//        var i; console.log(field);
-//        for (i = 0; i < field.length; i++) {
-//            if (field[i]["type"] = "text") {
-//                html += '  <label>'+field[i]["name"]+'</label><br />';
-//                html += '  <input type="text" id="steps['+hash+']['+field[i]["name"]+']" name="steps[' +hash+']['+field[i]["name"]+']" value="'+field[i]["value"]+'" class="form-control" />';
-//            }
-//        }
-//        html += '  </div>' ;
-//        html += '   <div class="col-sm-12">' ;
-//        html += '    <a class="btn btn-warning" onclick="deleteStepField('+hash+')">Delete Step</a>' ;
-//        html += '  </div>' ;
-//        html += '  </div>' ;
-//        html += ' </li>';
-//        field.type = null; }
-    
+   if (module == "ConditionalStepRunner" || module == "Plugin") {
+        html  = '<li class="form-group ui-state-default ui-sortable-handle" id="step'+hash+'">' ;
+        html += '  <div class="col-sm-2">' ;
+        html += '    <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' ;
+        html += '  </div>';
+        html += '  <div class="col-sm-10">' ;
+        html += '   <div class="col-sm-12">' ;
+        html += '    <h4>'+module+'</h4>' ;
+        html += '    <input type="hidden" id="steps['+hash+'][module]" name="steps['+hash+'][module]" value="'+module+'" />' ;
+        html += '    <input type="hidden" id="steps['+hash+'][steptype]" name="steps['+hash+'][steptype]" value="'+steptype+'" />' ;
+        var i; console.log(field);
+        for (i = 0; i < field.length; i++) {
+        	html += '    <h5>'+field[i].name+'</h5>' ;
+            if (field[i]["type"] == "text") { console.log(field[i]);
+      			html += ' <input type="text" id="steps['+hash+']['+field[i].slug+']"' ;
+       			html += ' name="steps['+hash+']['+field[i].slug+']" />' ;
+            }
+            if (field[i]["type"] == "password") { console.log(field[i]);
+      			html += ' <input type="password" id="steps['+hash+']['+field[i].slug+']"' ;
+       			html += ' name="steps['+hash+']['+field[i].slug+']" />' ;
+            }
+            if (field[i]["type"] == "textarea") { console.log(field[i]);
+      			html += '<textarea id="steps['+hash+']['+field[i].slug+']"' ;
+       			html += ' name="steps['+hash+']['+field[i].slug+']" >' ;
+       			html += '</textarea>' ;
+            }
+            if (field[i]["type"] == "dropdown") { console.log(field[i]);
+            	html += '<select id="steps['+hash+']['+field[i].slug+'] name="steps['+hash+']['+field[i].slug+']>';
+            	$.each(field[i].data, function(index, value) { console.log(index);
+					html += '<option value="'+index+'">'+value+'</option>';
+				});
+            	html += '</select>';
+            }
+        }
+        html += '  </div>' ;
+        html += '   <div class="col-sm-12">' ;
+        html += '    <a class="btn btn-warning" onclick="deleteStepField('+hash+')">Delete Step</a>' ;
+        html += '  </div>' ;
+        html += '  </div>' ;
+        html += ' </li>';
+        }
+
    if (field.type == "textarea") {
         html  = '<li class="form-group ui-state-default ui-sortable-handle" id="step'+hash+'">' ;
         html += '  <div class="col-sm-2">' ;
@@ -81,7 +96,7 @@ function displayStepField() {
         html += '    </textarea>' ;
         html += '  </div>' ;
         html += '   <div class="col-sm-12">' ;
-        html += '    <a class="btn btn-warning" onclick="deleteStepField(hash)">Delete Step</a>' ;
+        html += '    <a class="btn btn-warning" onclick="deleteStepField('+hash+')">Delete Step</a>' ;
         html += '  </div>' ;
         html += '  </div>' ;
         html += ' </li>'; }
@@ -97,10 +112,10 @@ function displayStepField() {
         html += '  <input type="hidden" id="steps['+hash+'][module]" name="steps['+hash+'][module]" value="'+module+'" />' ;
         html += '  <input type="hidden" id="steps['+hash+'][steptype]" name="steps['+hash+'][steptype]" value="'+steptype+'" />' ;
         html += "  <input type='text' id='steps[" +'"'+hash+'"'+ ']["'+field.slug+'"]'+"' name='steps[" +'"'+hash+'"'+ '"]["'+field.slug+'"]'+' />' ;
-        html += '  <a class="btn btn-warning" onclick="deleteStepField(hash)">Delete Step</a>' ;
+        html += '  <a class="btn btn-warning" onclick="deleteStepField('+hash+')">Delete Step</a>' ;
         html += '  </div>' ;
         html += '   <div class="col-sm-12">' ;
-        html += '    <a class="btn btn-warning" onclick="deleteStepField(hash)">Delete Step</a>' ;
+        html += '    <a class="btn btn-warning" onclick="deleteStepField('+hash+')">Delete Step</a>' ;
         html += '  </div>' ;
         html += '  </div>' ;
         html += ' </li>'; }
@@ -118,7 +133,7 @@ function displayStepField() {
         html += '  <input type="checkbox" id="steps['+hash+'][data]" name="steps['+hash+'][data]" />' ;
         html += '  </div>' ;
         html += '   <div class="col-sm-12">' ;
-        html += '    <a class="btn btn-warning" onclick="deleteStepField(hash)">Delete Step</a>' ;
+        html += '    <a class="btn btn-warning" onclick="deleteStepField('+hash+')">Delete Step</a>' ;
         html += '  </div>' ;
         html += '  </div>' ;
         html += ' </li>'; }

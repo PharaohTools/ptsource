@@ -1,5 +1,5 @@
 <?php
-class Triger {
+class mongodb {
 	
 	function __construct() {
 		
@@ -9,12 +9,12 @@ class Triger {
 	{
          // $user = $input['username'];
         //  $pass = $input['password'];
-            $host = $input['hostname'];
-            $db1 = $input['dbname'];
-            $tit = $input['title'];
-            $col = $input['collection'];
+            $host = $input['Hostname'];
+            $db1 = $input['Dbname'];
+            $tit = $input['Title'];
+            $col = $input['Collection'];
             $tmpfile = $input['tmpfile'];
-            $path1 = $input['path'];
+            $path1 = $input['Path'];
             $m = new MongoClient($host);
             //$m = new MongoClient(mongodb://$host);
             

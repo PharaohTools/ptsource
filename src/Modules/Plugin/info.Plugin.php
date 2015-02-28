@@ -13,15 +13,15 @@ class PluginInfo extends PTConfigureBase {
     }
 
     public function routesAvailable() {
-        return array( "Shell" => array_merge(parent::routesAvailable(), array("help") ) );
+        return array( "Plugin" => array_merge(parent::routesAvailable(), array("help") ) );
     }
 
     public function routeAliases() {
-        return array("shell"=>"Shell");
+        return array("plugin"=>"Plugin");
     }
 
     public function buildSteps() {
-        return array("shellscript", "shellfile");
+        return array("plugin");
     }
 
     public function helpDefinition() {

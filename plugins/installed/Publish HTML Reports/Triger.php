@@ -1,6 +1,6 @@
 <?php
 
-class Triger {
+class Publish_HTML_Reports {
 
 	function __construct() {
 

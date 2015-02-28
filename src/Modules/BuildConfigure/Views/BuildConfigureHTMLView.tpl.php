@@ -136,7 +136,7 @@
 
                     <ul class="form-group ui-sortable" id="sortableSteps">
 
-                    <?php $plugins = $pageVars["data"]["plugin"]; $buildconf = $plugins['data'][$plugin]['buildconf'];
+                    <?php
                         foreach ($pageVars["data"]["pipeline"]["steps"] as $hash => $one_build_step) {
                             echo '<li class="form-group ui-state-default ui-sortable-handle" id="step'.$hash.'">' ;
                             echo '  <div class="col-sm-2">' ;
@@ -150,16 +150,29 @@
                             echo '      <p><strong>Step Type: </strong>'.$one_build_step["steptype"].'</p>';
                             echo '      <input type="hidden" id="steps['.$hash.'][module]" name="steps['.$hash.'][module]" value="'.$one_build_step["module"].'" />';
                             echo '      <input type="hidden" id="steps['.$hash.'][steptype]" name="steps['.$hash.'][steptype]" value="'.$one_build_step["steptype"].'" />';
-                            if ($one_build_step["module"] == "Plugin") { 
-                                $buildconf = $plugins['data'][$one_build_step["steptype"]]['buildconf'];
-                                foreach ($buildconf as $data ) {
-                                    echo '      <label for="'.$data['name'].'">'.$data['name'].'</label>'; 
+                            if ($one_build_step["module"] == "ConditionalStepRunner" || $one_build_step["module"] == "Plugin") {
+                                foreach ($pageVars['data']['builders'][$one_build_step["module"]]['fields'][$one_build_step["steptype"]] as $data ) {
+                                	echo '      <label for="'.$data['name'].'">'.$data['name'].'</label>'; 
                                     if ($data['type'] == 'text') {
-                                        echo '      <input id="steps['.$hash.']['.$data['name'].']" name="steps['.$hash.']['.$data['name'].']" value="'.$one_build_step[$data['name']].'" class="form-control" />'; 
+                                        echo '      <input id="steps['.$hash.']['.$data['slug'].']" name="steps['.$hash.']['.$data['slug'].']" value="'.$one_build_step[$data['slug']].'" class="form-control" type="text" />'; 
+                                    }
+                                    if ($data['type'] == 'password') {
+                                        echo '      <input id="steps['.$hash.']['.$data['slug'].']" name="steps['.$hash.']['.$data['slug'].']" class="form-control" type="password" />'; 
                                     }
                                     if ($data['type'] == 'textarea') {
-                                        echo '      <textarea id="steps['.$hash.']['.$data['name'].']" name="steps['.$hash.']['.$data['name'].']" class="form-control" />'.$one_build_step[$data['name']].'</textarea>'; 
+                                        echo '      <textarea id="steps['.$hash.']['.$data['slug'].']" name="steps['.$hash.']['.$data['slug'].']" class="form-control">'.$one_build_step[$data['slug']].'</textarea>'; 
                                     }
+									if ($data["type"] == "dropdown") {
+						            	echo '<select id="steps['.$hash.']['.$data['slug'].']" name="steps['.$hash.']['.$data['slug'].']" value="'.$one_build_step[$data['slug']].'" class="form-control">';
+						            	foreach ($data['data'] as $key => $value) {
+						            		$selected = ($one_build_step[$data['slug']] == $key)? 'selected' : '';
+											echo '<option '.$selected.' value="'.$key.'">'.$value.'</option>';
+										} 
+										//$.each(, function(index, value) { console.log(index);
+											
+										//});
+						            	echo '</select>';
+						            }
                                 }
                             }
                             else {
@@ -182,8 +195,6 @@
                                 <select name="new_step_module_selector" id="new_step_module_selector" onchange="changeModule(this)">
                                     <option value="nomoduleselected" selected="selected">-- Select Module --</option>
                                     <?php
-                                        $dataplugin['Plugin'] = $pageVars["data"]["plugin"]["data"];
-                                        $pageVars["data"]["fields"] = array_merge($pageVars["data"]["fields"],$dataplugin );
                                         foreach ($pageVars["data"]["fields"] as $builderName => $builderBits) {
                                             echo '  <option value="'.strtolower($builderName).'">'.$builderName.'</option>'; }
                                     ?>

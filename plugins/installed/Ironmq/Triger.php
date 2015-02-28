@@ -1,6 +1,6 @@
 <?php
 
-class Triger {
+class Ironmq {
 	
 	function __construct() {
 		
@@ -9,9 +9,9 @@ class Triger {
 	public function startTriger($input)
 	{
 		
-	   $tok = $input['token'];
-	   $id = $input['projectid'];
-	   $queue_name = $input["queuename"];
+	   $tok = $input['Token'];
+	   $id = $input['Projectid'];
+	   $queue_name = $input["Queuename"];
 	   $mes = file_get_contents($input["tmpfile"]);
 
 		   
