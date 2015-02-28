@@ -35,16 +35,10 @@ class GitLinuxUnix extends Base {
     public function executeStep($step) {
         $loggingFactory = new \Model\Logging();
         $logging = $loggingFactory->getModel($this->params);
-        $mn = $this->getModuleName() ;
         if ( $step["steptype"] == "gitclonedefault") {
             $logging->log("Running Git clone from default repo...", $this->getModuleName()) ;
-
-            $pipeline = $this->getPipeline() ;
-            $workspace = $this->getWorkspace() ;
-
-            $repo = $pipeline["settings"]["PollSCM"]["git_repository_url"] ;
-            $branch = $pipeline["settings"]["PollSCM"]["git_branch"] ;
-
+            $repo = $this->params["build-settings"]["PollSCM"]["git_repository_url"] ;
+            $branch = $this->params["build-settings"]["PollSCM"]["git_branch"] ;
             $branchMakeCommand = 'git clone '.$repo.' .';
             self::executeAndOutput($branchMakeCommand, $branchMakeCommand) ;
             $initCommand = 'echo $?';
@@ -58,18 +52,5 @@ class GitLinuxUnix extends Base {
             $logging->log("Unrecognised Build Step Type {$step["type"]} specified in Git Module", $this->getModuleName()) ;
             return false ; }
     }
-
-    private function getPipeline() {
-        $pipelineFactory = new \Model\Pipeline() ;
-        $pipeline = $pipelineFactory->getModel($this->params);
-        return $pipeline->getPipeline($this->params["item"]);
-    }
-
-    private function getWorkspace() {
-        $workspaceFactory = new \Model\Workspace() ;
-        $workspace = $workspaceFactory->getModel($this->params);
-        return $workspace->getWorkspaceDir();
-    }
-
 
 }
