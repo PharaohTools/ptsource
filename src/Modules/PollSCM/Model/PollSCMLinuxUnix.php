@@ -67,50 +67,44 @@ class PollSCMLinuxUnix extends Base {
         $this->params["echo-log"] = true ;
         $logging = $loggingFactory->getModel($this->params);
 
-        $run = $this->params["run-id"];
-        $file = PIPEDIR.DS.$this->params["item"].DS.'defaults';
-        $defaults = file_get_contents($file) ;
-        $defaults = new \ArrayObject(json_decode($defaults));
-
-        $file = PIPEDIR.DS.$this->params["item"].DS.'settings';
-        $settings = file_get_contents($file) ;
-        $settings = json_decode($settings, true);
-
-        $pipeline = $this->getPipeline() ;
         $workspace = $this->getWorkspace() ;
 
         $mn = $this->getModuleName() ;
 
-        if ($pipeline["settings"][$mn]["poll_scm_enabled"] == "on") {
+        if ($this->params["build-settings"][$mn]["poll_scm_enabled"] == "on") {
             $logging->log ("SCM Polling Enabled, attempting...", $this->getModuleName() ) ;
             try {
                 $logging->log ("Polling SCM Server", $this->getModuleName() ) ;
                 $logging->log ("Changing Directory to workspace ".$workspace, $this->getModuleName() ) ;
                 chdir("Changing Directory to workspace ".$workspace);
                 // @todo other scm tpes
-                $repo = $pipeline["settings"][$mn]["git_repository_url"] ;
-                $branch = $pipeline["settings"][$mn]["git_branch"] ;
-                $lastSha = (isset($pipeline["settings"][$mn]["last_sha"])) ? $pipeline["settings"][$mn]["last_sha"] : null ;
-                if ($lastSha !== null) {
-                    $initCommand = 'git init';
-                    self::executeAndOutput($initCommand) ;
-                    $branchMakeCommand = 'git remote add ptbuild-temp-polling-branch '.$repo ;
-                    self::executeAndOutput($branchMakeCommand) ;
-                    $pollCommand = 'git diff --name-only ptbuild-temp-polling-branch/'.$branch.' '.$lastSha;
-                    self::executeAndOutput($pollCommand) ;
-                    $pollCommand = 'git diff --name-only origin/master '.$lastSha;
-                    self::executeAndOutput($pollCommand) ;
-                    $branchDelCommand = 'git branch -D ptbuild-temp-polling-branch ';
-                    self::executeAndOutput($branchDelCommand) ;
-                    // an arra of resuls should all be rue
-                    $result = true ; }
+                $repo = $this->params["build-settings"][$mn]["git_repository_url"] ;
+                $branch = $this->params["build-settings"][$mn]["git_branch"] ;
+                $lastSha = (isset($this->params["build-settings"][$mn]["last_sha"])) ? $this->params["build-settings"][$mn]["last_sha"] : null ;
+                if (strlen($lastSha)>0) {
+                    $logging->log ("Last commit built was $lastSha", $this->getModuleName() ) ;
+                    $lsCommand = 'git ls-remote '.$repo ;
+                    $all = self::executeAndLoad($lsCommand) ;
+                    $curSha = substr($all, 0, strpos($all, "HEAD")-1);
+                    $logging->log ("Current remote commit is $curSha", $this->getModuleName() ) ;
+                    if ($lastSha == $curSha) {
+                        $logging->log ("No remote changes", $this->getModuleName() ) ;
+                        $logging->log ("ABORTED EXECUTION", $this->getModuleName() ) ;
+                        $result = false; }
+                    else {
+                        $logging->log ("Remote changes available", $this->getModuleName() ) ;
+                        $result = true ; } }
                 else {
-                    $logging->log ("No last commit stored", $this->getModuleName() ) ;
+                    $logging->log ("No last commit stored, assuming all remote changes", $this->getModuleName() ) ;
+                    $lsCommand = 'git ls-remote '.$repo ;
+                    $all = self::executeAndLoad($lsCommand) ;
+                    $curSha = substr($all, 0, strpos($all, "HEAD")-1);
+                    $logging->log ("Storing current remote commit ID $curSha", $this->getModuleName() ) ;
+                    $pipelineFactory = new \Model\Pipeline() ;
+                    $pipelineSaver = $pipelineFactory->getModel($this->params, "PipelineSaver");
+                    $this->params["build-settings"][$mn]["last_sha"] = $curSha ;
+                    $pipelineSaver->savePipeline(array("type" => "Settings", "data" => $this->params["build-settings"] ));
                     $result = true ;}
-                if ($result == true) {
-                    $_ENV["BUILD_SCM_CHANGE"] = true ;
-                    $logging->log ("SCM polled successfully", $this->getModuleName() ) ; }
-                else { $logging->log ("Error polling scm", $this->getModuleName() ) ; }
                 return $result; }
             catch (\Exception $e) {
                 $logging->log ("Error polling scm", $this->getModuleName() ) ;
