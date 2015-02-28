@@ -2,7 +2,7 @@
 
 Namespace Controller ;
 
-class XVFB extends Base {
+class Cron extends Base {
 
     public function execute($pageVars) {
 
@@ -16,7 +16,7 @@ class XVFB extends Base {
             $this->content["helpData"] = $helpModel->getHelpData($pageVars["route"]["control"]);
             return array ("type"=>"view", "view"=>"help", "pageVars"=>$this->content); }
 
-        $this->content["messages"][] = "Help is the only valid XVFB Action";
+        $this->content["messages"][] = "Help is the only valid Cron Action";
         return array ("type"=>"control", "control"=>"index", "pageVars"=>$this->content);
 
     }

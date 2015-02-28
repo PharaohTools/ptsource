@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class XVFBLinuxUnix extends Base {
+class CronLinuxUnix extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -14,87 +14,70 @@ class XVFBLinuxUnix extends Base {
     // Model Group
     public $modelGroup = array("Default") ;
 
-    public function getSettingTypes() {
-        return array_keys($this->getSettingFormFields());
-    }
-
-    public function getSettingFormFields() {
-        $ff = array(
-            "xvfb_during_build" =>
-                array(
-                    "type" => "boolean",
-                    "optional" => true,
-                    "name" => "Start XVFB before the build, and shut it down after?"
-                ),
-            );
-        return $ff ;
-    }
-
     public function getEventNames() {
         return array_keys($this->getEvents());
     }
 
     public function getEvents() {
         $ff = array(
-            "afterSettings" => array("startXvnc",),
-            "afterBuildComplete" => array("stopXvnc",),);
+            "afterApplicationConfigureSave" => array("applyCrontab",),
+        );
         return $ff ;
     }
 
-    public function startXvnc() {
-        $run = $this->params["run-id"];
-
+    public function applyCrontab() {
         $loggingFactory = new \Model\Logging();
-        $this->params["echo-log"] = true ;
+        $this->params["php-log"] = true ;
         $logging = $loggingFactory->getModel($this->params);
-
-        $file = PIPEDIR.DS.$this->params["item"].DS.'defaults';
-        $defaults = file_get_contents($file) ;
-        $defaults = json_decode($defaults, true);
-
-        $file = PIPEDIR.DS.$this->params["item"].DS.'settings';
-        $settings = file_get_contents($file) ;
-        $settings = json_decode($settings, true);
-
         $mn = $this->getModuleName() ;
-        if ($settings[$mn]["xvfb_during_build"] == "on") {
-            $logging->log ("XVFB Enabled for build, starting...", $this->getModuleName() ) ;
-            $xvfbCommand = "echo 'pretend to start xvfb'" ;
-            $result = self::executeAndOutput($xvfbCommand) ;
-            if ($result == true) { $logging->log ("XVFB started successfully", $this->getModuleName() ) ; }
-            else { $logging->log ("XVFB start error", $this->getModuleName() ) ; }
+        if ($this->params["app-settings"][$mn]["cron_enabled"] == "on") {
+            $logging->log ("Cron Enabled as scheduled task driver, creating...", $this->getModuleName() ) ;
+
+            $switch = $this->getSwitchUser() ;
+            $cmd = "" ;
+            if ($switch != false) { $cmd .= 'sudo su '.$switch.' -c '."'" ; }
+            // this should be a phrank piperunner@cli and it should save the log to a named history
+            $cmd .= PHRCOMM.' piperunner child --pipe-dir="'.$this->params["pipe-dir"].'" ' ;
+            $cmd .= '--item="'.$this->params["item"].'" --run-id="'.$run.'" > '.PIPEDIR.DS.$this->params["item"].DS ;
+            $cmd .= 'tmpfile &';
+            if ($switch != false) { $cmd .= "'" ; }
+
+            $currentSavedCrontabString = "" ; // get from settings like poll scm
+
+            $currentActualCrontabString = "" ; // get from settings like poll scm
+
+            if (strpos($currentActualCrontabString, $currentSavedCrontabString) !== false) {
+                $logging->log ("Crontab $currentSavedCrontabString already exists", $this->getModuleName() ) ;
+            }
+            else {
+
+                $logging->log ("Crontab $currentSavedCrontabString already exists", $this->getModuleName() ) ;
+            }
+
+            $result = self::executeAndOutput($cronCommand) ;
+            if ($result == true) { $logging->log ("Cron started successfully", $this->getModuleName() ) ; }
+            else { $logging->log ("Cron start error", $this->getModuleName() ) ; }
             return $result; }
         else {
-            $logging->log ("XVFB Not enabled for build, ignoring...", $this->getModuleName() ) ;
+            $logging->log ("Cron disabled, deleting current crontab...", $this->getModuleName() ) ;
+            $this->removeCrontabs() ;
             return true ; }
     }
 
-    public function stopXvnc() {
-        $run = $this->params["run-id"];
-
-        $loggingFactory = new \Model\Logging();
-        $this->params["echo-log"] = true ;
-        $logging = $loggingFactory->getModel($this->params);
-
-        $file = PIPEDIR.DS.$this->params["item"].DS.'defaults';
-        $defaults = file_get_contents($file) ;
-        $defaults = json_decode($defaults, true);
-
-        $file = PIPEDIR.DS.$this->params["item"].DS.'settings';
-        $settings = file_get_contents($file) ;
-        $settings = json_decode($settings, true);
-
-        $mn = $this->getModuleName() ;
-        if ($settings[$mn]["xvfb_during_build"] == "on") {
-            $logging->log ("XVFB Enabled for build, stopping...", $this->getModuleName() ) ;
-            $xvfbCommand = "echo 'pretend to stop xvfb'" ;
-            $result = self::executeAndOutput($xvfbCommand) ;
-            if ($result == true) { $logging->log ("XVFB stopped successfully", $this->getModuleName() ) ; }
-            else { $logging->log ("XVFB stop error", $this->getModuleName() ) ; }
-            return $result; }
+    private function getSwitchUser() {
+        $modConfig = \Model\AppConfig::getAppVariable("mod_config");
+        if (isset($modConfig["UserSwitching"]["switching_user"])) {
+            return $modConfig["UserSwitching"]["switching_user"] ; }
         else {
-            $logging->log ("XVFB Not enabled for build, ignoring...", $this->getModuleName() ) ;
-            return true ; }
+            return false ; }
+    }
+
+    private function getCurrentActualCrontab() {
+        $crontab->get();
+    }
+
+    private function addCrontab() {
+        $crontab->add();
     }
 
 }

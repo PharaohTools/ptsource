@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class CronLinuxUnix extends Base {
+class CrontabModifyAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -12,72 +12,71 @@ class CronLinuxUnix extends Base {
     public $architectures = array("any") ;
 
     // Model Group
-    public $modelGroup = array("Default") ;
+    public $modelGroup = array("CrontabModify") ;
 
-    public function getEventNames() {
-        return array_keys($this->getEvents());
+    private $path;
+    private $handle;
+    private $cron_file;
+
+    function __construct() {
+        $path_length     = strrpos(__FILE__, "/");
+        $this->path      = substr(__FILE__, 0, $path_length) . '/';
+        $this->handle    = 'crontab.txt';
+        $this->cron_file = "{$this->path}{$this->handle}";
+
     }
 
-    public function getEvents() {
-        $ff = array(
-            "afterApplicationConfigureSave" => array("applyCrontab",),
-        );
-        return $ff ;
+    public function write_to_file($path=NULL, $handle=NULL) {
+        if ( ! $this->crontab_file_exists()){
+            $this->handle = (is_null($handle)) ? $this->handle : $handle;
+            $this->path   = (is_null($path))   ? $this->path   : $path;
+            $this->cron_file = "{$this->path}{$this->handle}";
+            $init_cron = "crontab -l > {$this->cron_file} && [ -f {$this->cron_file} ] || > {$this->cron_file}";
+            self::executeAndOutput($init_cron); }
+        return $this;
     }
 
-    public function applyCrontab() {
-        $loggingFactory = new \Model\Logging();
-        $this->params["php-log"] = true ;
-        $logging = $loggingFactory->getModel($this->params);
-        $mn = $this->getModuleName() ;
-        if ($this->params["app-settings"][$mn]["cron_enabled"] == "on") {
-            $logging->log ("Cron Enabled as scheduled task driver, creating...", $this->getModuleName() ) ;
+    public function remove_file() {
+        if ($this->crontab_file_exists()) self::executeAndOutput("rm {$this->cron_file}");
+        return $this;
+    }
 
-            $switch = $this->getSwitchUser() ;
-            $cmd = "" ;
-            if ($switch != false) { $cmd .= 'sudo su '.$switch.' -c '."'" ; }
-            // this should be a phrank piperunner@cli and it should save the log to a named history
-            $cmd .= PHRCOMM.' piperunner child --pipe-dir="'.$this->params["pipe-dir"].'" ' ;
-            $cmd .= '--item="'.$this->params["item"].'" --run-id="'.$run.'" > '.PIPEDIR.DS.$this->params["item"].DS ;
-            $cmd .= 'tmpfile &';
-            if ($switch != false) { $cmd .= "'" ; }
+    public function append_cronjob($cron_jobs=NULL) {
+        if (is_null($cron_jobs)) $this->error_message("Nothing to append!  Please specify a cron job or an array of cron jobs.");
+        $append_cronfile = "echo '";
+        $append_cronfile .= (is_array($cron_jobs)) ? implode("\n", $cron_jobs) : $cron_jobs;
+        $append_cronfile .= "'  >> {$this->cron_file}";
+        $install_cron = "crontab {$this->cron_file}";
+        $this->write_to_file() ;
+        self::executeAndOutput($append_cronfile);
+        self::executeAndOutput($install_cron);
+        $this->remove_file();
+        return $this;
+    }
 
-            $currentSavedCrontabString = "" ; // get from settings like poll scm
-
-            $currentActualCrontabString = "" ; // get from settings like poll scm
-
-            if (strpos($currentActualCrontabString, $currentSavedCrontabString) !== false) {
-                $logging->log ("Crontab $currentSavedCrontabString already exists", $this->getModuleName() ) ;
-            }
-            else {
-
-                $logging->log ("Crontab $currentSavedCrontabString already exists", $this->getModuleName() ) ;
-            }
-
-            $result = self::executeAndOutput($cronCommand) ;
-            if ($result == true) { $logging->log ("Cron started successfully", $this->getModuleName() ) ; }
-            else { $logging->log ("Cron start error", $this->getModuleName() ) ; }
-            return $result; }
+    public function remove_cronjob($cron_jobs=NULL) {
+        if (is_null($cron_jobs)) $this->error_message("Nothing to remove!  Please specify a cron job or an array of cron jobs.");
+        $this->write_to_file();
+        $cron_array = file($this->cron_file, FILE_IGNORE_NEW_LINES);
+        if (empty($cron_array)) $this->error_message("Nothing to remove!  The cronTab is already empty.");
+        $original_count = count($cron_array);
+        if (is_array($cron_jobs)) {
+            foreach ($cron_jobs as $cron_regex) $cron_array = preg_grep($cron_regex, $cron_array, PREG_GREP_INVERT); }
         else {
-            $logging->log ("Cron disabled, deleting current crontab...", $this->getModuleName() ) ;
-            $this->removeCrontabs() ;
-            return true ; }
+            $cron_array = preg_grep($cron_jobs, $cron_array, PREG_GREP_INVERT); }
+        return ($original_count === count($cron_array)) ? $this->remove_file() : $this->remove_crontab()->append_cronjob($cron_array);
     }
 
-    private function getSwitchUser() {
-        $modConfig = \Model\AppConfig::getAppVariable("mod_config");
-        if (isset($modConfig["UserSwitching"]["switching_user"])) {
-            return $modConfig["UserSwitching"]["switching_user"] ; }
-        else {
-            return false ; }
+    public function remove_crontab() {
+        self::executeAndOutput("crontab -r") ;
+        $this->remove_file();
+        return $this;
     }
 
-    private function getCurrentActualCrontab() {
-        $crontab->get();
+    private function crontab_file_exists() {
+        return file_exists($this->cron_file);
     }
 
-    private function addCrontab() {
-        $crontab->add();
-    }
+
 
 }

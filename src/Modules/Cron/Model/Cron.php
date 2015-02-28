@@ -2,6 +2,6 @@
 
 Namespace Model;
 
-class XVFB extends BaseModelFactory {
+class Cron extends BaseModelFactory {
 
 }
