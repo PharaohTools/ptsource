@@ -149,18 +149,6 @@
 
                     ?>
 
-                    <!--
-
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-12">
-                            <button type="submit" class="btn btn-success">Save App Config</button>
-                            <button type="submit" class="btn btn-primary">Clear</button>
-                            <button type="submit" class="btn btn-warning">Use Defaults</button>
-                        </div>
-                    </div>
-
-                    -->
-
                     <div class="form-group">
                         <div class="col-sm-12">
                             <button type="submit" class="btn btn-success">Save Configuration</button>
