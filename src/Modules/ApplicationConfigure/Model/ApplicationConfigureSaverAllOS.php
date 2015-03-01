@@ -24,6 +24,8 @@ class ApplicationConfigureSaverAllOS extends Base {
         $appConfigVar = $_REQUEST["mod_config"] ;
         $appConfig = new \Model\AppConfig();
         $appConfig->setAppVariable("mod_config", $appConfigVar);
+        $this->params["display-log"] = false ;
+        $this->params["echo-log"] = false ;
 
         $eventRunnerFactory = new \Model\EventRunner() ;
         $eventRunner = $eventRunnerFactory->getModel($this->params) ;
