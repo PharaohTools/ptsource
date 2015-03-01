@@ -13,11 +13,14 @@ class CronInfo extends PTConfigureBase {
     }
 
     public function routesAvailable() {
-        return array( "Cron" => array_merge(parent::routesAvailable(), array("help") ) );
+        return array( "Cron" => array_merge(parent::routesAvailable(), array("help", "set-crontab") ) );
     }
 
     public function routeAliases() {
         return array("cron"=>"Cron");
+    }
+    public function events() {
+        return array("afterApplicationConfigureSave");
     }
 
     public function configuration() {
@@ -32,7 +35,7 @@ class CronInfo extends PTConfigureBase {
     public function helpDefinition() {
        $help = <<<"HELPDATA"
     This extension provides integration with Cron as a Scheduled Task Driver. It provides code
-    functionality, but no extra CLI commands.
+    functionality, and the CLI command of set crontab, to allow setting crontab as another user.
 
     Cron
 
