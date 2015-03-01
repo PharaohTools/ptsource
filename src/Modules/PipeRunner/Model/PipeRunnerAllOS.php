@@ -112,12 +112,21 @@ class PipeRunnerAllOS extends Base {
             return false ; }
     }
 
+    private function isWebSapi() {
+        if (!in_array(PHP_SAPI, array("cgi", "cli")))  { return true ; }
+        return false ;
+    }
+
     private function runPipeForkCommand($run) {
         $switch = $this->getSwitchUser() ;
         $cmd = "" ;
         if ($switch != false) { $cmd .= 'sudo su '.$switch.' -c '."'" ; }
         // this should be a phrank piperunner@cli and it should save the log to a named history
         $cmd .= PHRCOMM.' piperunner child --pipe-dir="'.$this->params["pipe-dir"].'" ' ;
+        if (isset($this->params["build-request-source"])) {
+            $cmd .= '--build-request-source="'.$this->params["build-request-source"].'" '; }
+        else if ($this->isWebSapi()==true) {
+            $cmd .= '--build-request-source="web" '; }
         $cmd .= '--item="'.$this->params["item"].'" --run-id="'.$run.'" > '.PIPEDIR.DS.$this->params["item"].DS ;
         $cmd .= 'tmpfile &';
         if ($switch != false) { $cmd .= "'" ; }
