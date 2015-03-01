@@ -53,6 +53,9 @@ class ClearWorkspaceLinuxUnix extends Base {
             $comm = "rm -rf $dir*" ;
             $logging->log("Executing $comm...", $this->getModuleName()) ;
             echo self::executeAndLoad($comm) ;
+            $comm = "rm -rf $dir.*" ;
+            $logging->log("Executing $comm...", $this->getModuleName()) ;
+            echo self::executeAndLoad($comm) ;
             $rc1 = self::executeAndLoad("echo $?") ;
             $comm = "ls -lah $dir" ;
             $logging->log("Executing $comm...", $this->getModuleName()) ;
