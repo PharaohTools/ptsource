@@ -16,7 +16,7 @@
                 <a href="/index.php?control=Index&action=show" class="list-group-item">
                     <i class="fa fa-comment-o"></i> Dashboard
                 </a>
-                <a href="#" class="list-group-item">
+                <a href="/index.php?control=ApplicationConfigure&action=show" class="list-group-item">
                     <i class="fa fa-search"></i> Configure PTBuild
                 </a>
                 <a href="/index.php?control=BuildConfigure&action=new" class="list-group-item">
