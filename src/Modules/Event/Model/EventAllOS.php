@@ -17,7 +17,6 @@ class EventAllOS extends Base {
     public function runEvent($event) {
         $modules = $this->getsModulesOfEvent($event) ;
         $loggingFactory = new \Model\Logging();
-        $this->params["echo-log"] = true ;
         $logging = $loggingFactory->getModel($this->params);
         $res = array();
         foreach ($modules as $module ) {
