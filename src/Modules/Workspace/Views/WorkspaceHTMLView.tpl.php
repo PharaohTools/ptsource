@@ -49,8 +49,9 @@
                 <h3><?= $stat; ?> Pipeline <?php echo $pageVars["data"]["pipeline"]["project-name"] ; ?></h3>
                 <?php
                     $rootPath = str_replace($pageVars["data"]["relpath"], "", $pageVars["data"]["wsdir"]) ;
-                    echo '<h3><a href=" href="/index.php?control=Workspace&action=show&item='.
+                    echo '<h3><a href="/index.php?control=Workspace&action=show&item='.
                          $pageVars["data"]["pipeline"]["project-slug"].'">'.$rootPath.'</a></h3>' ;
+
                     $act = '/index.php?control=Workspace&item='.$pageVars["data"]["pipeline"]["project-slug"].'&action=show' ;
                 ?>
 
