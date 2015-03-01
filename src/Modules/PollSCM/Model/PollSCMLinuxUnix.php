@@ -21,11 +21,17 @@ class PollSCMLinuxUnix extends Base {
     public function getSettingFormFields() {
         $ff = array(
             "poll_scm_enabled" =>
-                array(
-                    "type" => "boolean",
-                    "optional" => true,
-                    "name" => "Enable Polling of SCM Server?"
-                ),
+            array(
+                "type" => "boolean",
+                "optional" => true,
+                "name" => "Enable Polling of SCM Server?"
+            ),
+            "scm_always_allow_web" =>
+            array(
+                "type" => "boolean",
+                "optional" => true,
+                "name" => "Always allow builds from web interface, even without remote changes?"
+            ),
             "git_repository_url" =>
             array(
                 "type" => "text",
@@ -88,9 +94,17 @@ class PollSCMLinuxUnix extends Base {
                     $curSha = substr($all, 0, strpos($all, "HEAD")-1);
                     $logging->log ("Current remote commit is $curSha", $this->getModuleName() ) ;
                     if ($lastSha == $curSha) {
-                        $logging->log ("No remote changes", $this->getModuleName() ) ;
-                        $logging->log ("ABORTED EXECUTION", $this->getModuleName() ) ;
-                        $result = false; }
+                        if (isset($this->params["build-settings"][$mn]["scm_always_allow_web"]) &&
+                            $this->params["build-settings"][$mn]["scm_always_allow_web"] =="on") {
+                            if (isset($this->params["build-request-source"]) && $this->params["build-request-source"]=="web" ) {
+                                $logging->log ("Alwas allowing builds execued from web", $this->getModuleName() ) ;
+                                $result = true ; }
+                            else {
+                                $result = false ; } }
+                        else {
+                            $logging->log ("No remote changes", $this->getModuleName() ) ;
+                            $logging->log ("ABORTED EXECUTION", $this->getModuleName() ) ;
+                            $result = false; }}
                     else {
                         $logging->log ("Remote changes available", $this->getModuleName() ) ;
                         $result = true ; } }
