@@ -17,7 +17,7 @@ class ScheduledTasksInfo extends PTConfigureBase {
     }
 
     public function routeAliases() {
-      return array("piperunner"=>"ScheduledTasks", "scheduledTasks"=>"ScheduledTasks");
+      return array("scheduledtasks"=>"ScheduledTasks", "scheduledTasks"=>"ScheduledTasks");
     }
 
     public function helpDefinition() {
