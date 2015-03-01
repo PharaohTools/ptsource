@@ -36,18 +36,18 @@ class GitLinuxUnix extends Base {
         $loggingFactory = new \Model\Logging();
         $logging = $loggingFactory->getModel($this->params);
         if ( $step["steptype"] == "gitclonedefault") {
-            $logging->log("Running Git clone from default repo...", $this->getModuleName()) ;
             $repo = $this->params["build-settings"]["PollSCM"]["git_repository_url"] ;
             $branch = $this->params["build-settings"]["PollSCM"]["git_branch"] ;
-            $branchMakeCommand = 'git clone '.$repo.' .';
-            self::executeAndOutput($branchMakeCommand, $branchMakeCommand) ;
-            $initCommand = 'echo $?';
-            $rc1 = self::executeAndOutput($initCommand) ;
-            $branchMakeCommand = 'git checkout '.$branch ;
-            self::executeAndOutput($branchMakeCommand, $branchMakeCommand) ;
-            $initCommand = 'echo $?';
-            $rc2 = self::executeAndOutput($initCommand) ;
-            return (strpos($rc1, 0)==0 && strpos($rc2, 0)==0) ? true : false ; }
+            $logging->log("Running Git clone from default repo $repo to ".getcwd()."...", $this->getModuleName()) ;
+
+            $dn = dirname(dirname(__FILE__)).'/Libraries/git-wrapper/vendor/autoload.php';
+            require_once $dn ;
+            $wrapper = new \GitWrapper\GitWrapper();
+
+// Clone a repo into `/path/to/working/copy`, get a working copy object.
+            $git = $wrapper->clone($repo, getcwd());
+            print $git->getOutput();
+            return true ;}
         else {
             $logging->log("Unrecognised Build Step Type {$step["type"]} specified in Git Module", $this->getModuleName()) ;
             return false ; }
