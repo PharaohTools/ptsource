@@ -20,64 +20,74 @@ class CronLinuxUnix extends Base {
 
     public function getEvents() {
         $ff = array(
-            "afterApplicationConfigureSave" => array("applyCrontab",),
+            "afterApplicationConfigureSave" => array("crontabParent",),
         );
         return $ff ;
     }
 
-    public function applyCrontab() {
+    public function crontabParent() {
         $loggingFactory = new \Model\Logging();
         $this->params["php-log"] = true ;
         $logging = $loggingFactory->getModel($this->params);
         $mn = $this->getModuleName() ;
-        if ($this->params["app-settings"][$mn]["cron_enabled"] == "on") {
-            $logging->log ("Cron Enabled as scheduled task driver, creating...", $this->getModuleName() ) ;
+        $this->params["app-settings"] = \Model\AppConfig::getAppVariable("mod_config");
+        if ($this->params["app-settings"][$mn]["cron_enable"] == "on") {
+            $logging->log ("Cron Enabled as scheduled task driver, running cron create command...", $this->getModuleName() ) ;
 
             $switch = $this->getSwitchUser() ;
             $cmd = "" ;
             if ($switch != false) { $cmd .= 'sudo su '.$switch.' -c '."'" ; }
-            // this should be a phrank piperunner@cli and it should save the log to a named history
-            $cmd .= PHRCOMM.' piperunner child --pipe-dir="'.$this->params["pipe-dir"].'" ' ;
-            $cmd .= '--item="'.$this->params["item"].'" --run-id="'.$run.'" > '.PIPEDIR.DS.$this->params["item"].DS ;
-            $cmd .= 'tmpfile &';
+            $cmd .= PHRCOMM.' Cron set-crontab --yes --guess --frequency="'.$this->params["app-settings"][$mn]["cron_frequency"].
+                '"';
             if ($switch != false) { $cmd .= "'" ; }
+            error_log($cmd) ;
 
-            $currentSavedCrontabString = "" ; // get from settings like poll scm
-
-            $currentActualCrontabString = "" ; // get from settings like poll scm
-
-            if (strpos($currentActualCrontabString, $currentSavedCrontabString) !== false) {
-                $logging->log ("Crontab $currentSavedCrontabString already exists", $this->getModuleName() ) ;
-            }
-            else {
-
-                $logging->log ("Crontab $currentSavedCrontabString already exists", $this->getModuleName() ) ;
-            }
-
-            $result = self::executeAndOutput($cronCommand) ;
-            if ($result == true) { $logging->log ("Cron started successfully", $this->getModuleName() ) ; }
-            else { $logging->log ("Cron start error", $this->getModuleName() ) ; }
+            $cmd2 = "echo $?" ;
+            $result = self::executeAndLoad($cmd2) ;
+            if ($result == true) { $logging->log ("Cron job installed successfully", $this->getModuleName() ) ; }
+            else { $logging->log ("Cron job install error", $this->getModuleName() ) ; }
             return $result; }
         else {
             $logging->log ("Cron disabled, deleting current crontab...", $this->getModuleName() ) ;
-            $this->removeCrontabs() ;
+            $this->removeCrontab() ;
+            return true ; }
+    }
+
+    public function crontabChild() {
+        $this->params["app-settings"] = \Model\AppConfig::getAppVariable("mod_config");
+        $loggingFactory = new \Model\Logging();
+        $this->params["php-log"] = true ;
+        $logging = $loggingFactory->getModel($this->params);
+        $mn = $this->getModuleName() ;
+        if ($this->params["app-settings"][$mn]["cron_enable"] == "on") {
+            $logging->log ("Cron Enabled as scheduled task driver, creating...", $this->getModuleName() ) ;
+            $this->removeCrontab() ;
+            $this->addCrontab() ;
+            return true; }
+        else {
+            $logging->log ("Cron disabled, deleting current crontab...", $this->getModuleName() ) ;
+            $this->removeCrontab() ;
             return true ; }
     }
 
     private function getSwitchUser() {
-        $modConfig = \Model\AppConfig::getAppVariable("mod_config");
-        if (isset($modConfig["UserSwitching"]["switching_user"])) {
-            return $modConfig["UserSwitching"]["switching_user"] ; }
-        else {
-            return false ; }
-    }
-
-    private function getCurrentActualCrontab() {
-        $crontab->get();
+        if ($this->params["app-settings"]["Cron"]["cron_switch"] == "on") {
+            if (isset($this->params["app-settings"]["UserSwitching"]["switching_user"])) {
+                return $this->params["app-settings"]["UserSwitching"]["switching_user"] ; }
+            else {
+                return false ; } }
     }
 
     private function addCrontab() {
-        $crontab->add();
+        $cronFactory = new \Model\Cron();
+        $cronModify = $cronFactory->getModel($this->params, "CrontabModify");
+        $cronModify->addCronjob();
+    }
+
+    private function removeCrontab() {
+        $cronFactory = new \Model\Cron();
+        $cronModify = $cronFactory->getModel($this->params, "CrontabModify");
+        $cronModify->removeCronjob();
     }
 
 }
