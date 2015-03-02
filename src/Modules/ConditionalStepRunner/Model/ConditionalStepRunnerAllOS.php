@@ -31,7 +31,7 @@ class ConditionalStepRunnerAllOS extends BaseLinuxApp {
 					                "name" => "Base directory",
 					                "slug" => "baseDirectory",
 					                "data" => array( 'workspace' => 'Workspace',
-					                				 'fullPath'  => 'Full Path' )),
+					                				 'fullPath'  => 'Full Path'  )),
 					            array(
 					                "type" => "text",
 					                "name" => "File",
@@ -46,8 +46,42 @@ class ConditionalStepRunnerAllOS extends BaseLinuxApp {
 					                "type" => "dropdown",
 					                "name" => "Days",
 					                "slug" => "days",
+					                "action" => "onchange",
+					                "funName" => "CONDaysOfWeekDays",
 					                "data" => array( 'weekdays' => 'Week Days',
-					                				 'weekends'  => 'Week Ends' )),
+					                				 'weekends'  => 'Week Ends',
+					                				 'days' => 'Select Days' )),
+					            array(
+					                "type" => "div",
+					                "name" => "",
+					                "data" => array( 1 => 'Monday',
+													 2 => 'Tuesday',
+													 3 => 'Wednesday',
+													 4 => 'Thursday',
+													 5 => 'Friday',
+													 6 => 'Saturday',
+													 0 => 'Sunday'),
+					                "id" => "CONDaysOfWeekDays" ),
+					            array(
+					                "type" => "textarea",
+					                "name" => "Shell Data",
+					                "slug" => "data-shelldata" )
+					        ),
+			"String Compare" => array(
+            					array(
+					                "type" => "text",
+					                "name" => "String 1",
+					                "slug" => "firstString" ),
+					            array(
+					                "type" => "text",
+					                "name" => "String 2",
+					                "slug" => "secondString" ),
+					            array(
+					                "type" => "radio",
+					                "name" => "Condition",
+					                "slug" => "stringCondition",
+					                "data" => array( '1' => 'Case insensitive',
+					                				 '2' => 'Case sensitive' )),
 					            array(
 					                "type" => "textarea",
 					                "name" => "Shell Data",
@@ -80,8 +114,12 @@ class ConditionalStepRunnerAllOS extends BaseLinuxApp {
 	    		return $stepRunner->stepRunner($stepDetails, $this->params["item"]) ;
 			else
 				return true;
-	    
-    }
+		if ( $step['steptype'] == "String Compare")
+	    	if ($this->stringCompare($step))
+	    		return $stepRunner->stepRunner($stepDetails, $this->params["item"]) ;
+			else
+				return true;
+	}
 	
 	private function fileExist($step)
 	{
@@ -106,6 +144,9 @@ class ConditionalStepRunnerAllOS extends BaseLinuxApp {
 	{
 		$today = getdate()['wday'];
 		$day=$step['days'];
+		if (isset($step['exactdays'][$today])){
+			return TRUE;
+		}
 		$weekends = array(0,6);
 		$weekdays = array(1,2,3,4,5);
 		if ( $day == "weekdays" )
@@ -115,14 +156,30 @@ class ConditionalStepRunnerAllOS extends BaseLinuxApp {
 			if (in_array($today, $weekends))
 				return TRUE;
 		return FALSE;
-		/*if     ($today == $day || $day == 'weekdays' ){ return TRUE; }
-		elseif ($today == $day || $day == 'weekdays' ){ return TRUE; }
-		elseif ($today == $day || $day == 'weekdays' ){ return TRUE; }
-		elseif ($today == $day || $day == 'weekdays' ){ return TRUE; }
-		elseif ($today == $day || $day == 'weekdays' ){ return TRUE; }
-		elseif ($today == $day || $day == 'weekends' ){ return TRUE; }
-		elseif ($today == $day || $day == 'weekends' ){ return TRUE; }
-		else return false;
-		*/
+	}
+	
+	private function stringCompare($step) {
+		$case = $step['stringCondition'];
+		$case;
+		$string1 = $step["firstString"];
+		$string2 = $step["secondString"];
+			
+		switch ($case) {
+			case 1: {
+				if (strtolower($string1) == strtolower($string2)) {
+					return TRUE;
+				}
+			}
+				break;
+			case 2: {
+				if ($string1 === $string2) {
+					return TRUE;
+				}
+			}
+				break;
+			default :
+				return FALSE;
+				break;
+		}
 	}
 }

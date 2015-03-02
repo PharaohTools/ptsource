@@ -52,6 +52,8 @@ function displayStepField() {
         var i; console.log(field);
         for (i = 0; i < field.length; i++) {
         	html += '    <h5>'+field[i].name+'</h5>' ;
+        	action = "";
+        	if (typeof(field[i].action != "undefined")) { action = field[i].action+'="'+field[i].funName+'(\''+hash+'\')"'; }
             if (field[i]["type"] == "text") { console.log(field[i]);
       			html += ' <input type="text" id="steps['+hash+']['+field[i].slug+']"' ;
        			html += ' name="steps['+hash+']['+field[i].slug+']" />' ;
@@ -66,11 +68,19 @@ function displayStepField() {
        			html += '</textarea>' ;
             }
             if (field[i]["type"] == "dropdown") { console.log(field[i]);
-            	html += '<select id="steps['+hash+']['+field[i].slug+'] name="steps['+hash+']['+field[i].slug+']>';
+            	html += '<select id="steps['+hash+']['+field[i].slug+']" name="steps['+hash+']['+field[i].slug+']" '+action+'>';
             	$.each(field[i].data, function(index, value) { console.log(index);
 					html += '<option value="'+index+'">'+value+'</option>';
 				});
             	html += '</select>';
+            }
+            if (field[i]["type"] == "radio") { console.log(field[i]);
+            	$.each(field[i].data, function(index, value) { console.log(index);
+					html += ' <input type="radio" name="steps['+hash+']['+field[i].slug+']" value="'+index+'">'+value;
+				});
+            }
+            if (field[i]["type"] == "div") { console.log(field[i]);
+            	html += '<div id="'+field[i].id	+hash+'"></div>';
             }
         }
         html += '  </div>' ;
@@ -144,4 +154,23 @@ function displayStepField() {
 
 function deleteStepField(hash) {
     $('#step'+hash).remove();
+}
+
+function CONDaysOfWeekDays(hash) {
+	savedSteps = window.savedSteps ;
+	//if (typeof savedsteps[hash] != 'undefined') {}
+	value = $("#steps\\["+hash+"\\]\\[days\\]").find(":selected").val() ;
+	dayofweek = { 1:"Monday", 2:"Tuesday", 3:"Wednesday", 4:"Thursday", 5:"Friday", 6:"Saturday", 0:"Sunday" };
+    html = '';
+	if (value == 'days') {
+		$.each(dayofweek, function(index, value) {
+			checked = '';
+			if ( hash in savedSteps ) 
+				if ( 'exactdays' in savedSteps[hash] )
+					if( index in savedSteps[hash]['exactdays'] )
+						checked = "checked";
+			html += '<input class="col-sm-2 control-label text-left" type="checkbox" name="steps['+hash+'][exactdays]['+index+']" value="true" '+checked+'>'+value+'<br>';
+		});
+	}
+	$("#CONDaysOfWeekDays"+hash).html(html);
 }

@@ -46,6 +46,8 @@
             <h2 class="text-uppercase text-light"><a href="/"> Build - Pharaoh Tools </a></h2>
             <div class="row clearfix no-margin">
 
+                <!--
+
                 <h3><a class="lg-anchor text-light" href="#">Build Configure <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
 
                 <h5 class="text-uppercase text-light" style="margin-top: 15px;">
@@ -53,7 +55,21 @@
                         Pipeline Summary for <?php echo $pageVars["data"]["pipeline"]["project-name"] ; ?>-</a>
                 </h5>
 
+                -->
+
                 <form class="form-horizontal custom-form" action="<?= $act ; ?>" method="POST">
+
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                            <h3>Build Settings</h3>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <h4>Default Settings</h4>
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <label for="project-name" class="col-sm-2 control-label text-left">Project Name</label>
@@ -76,6 +92,12 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <h4>Module Settings</h4>
+                        </div>
+                    </div>
+
                     <?php
 
                     foreach ($pageVars["data"]["settings"] as $one_config_slug => $one_conf_tails) {
@@ -83,7 +105,9 @@
                         echo '  <label for="config_'.$one_config_slug.'" class="col-sm-2 control-label text-left">'.$one_config_slug.':</label>' ;
                         foreach ( $one_conf_tails["settings"] as $fieldSlug => $fieldInfo) {
                             echo '  <div class="col-sm-12">' ;
+
                             switch ($fieldInfo["type"]) {
+
                                 case "boolean" :
 
                                     if ( (isset($pageVars["data"]["pipeline"]["settings"][$one_config_slug][$fieldSlug])) &&
@@ -96,33 +120,35 @@
                                         $onoff = (is_null($onoff))
                                             ? $fieldInfo["default"]
                                             : $onoff ; }
-
-
                                     if ($onoff === "on") { $onoff = 'checked="checked"' ;}
                                     else {$onoff = "" ;}
                                     echo '  <div class="col-sm-12">' ;
-                                    echo '    <div class="col-sm-2">' ;
-                                    echo '      <input name="settings['.$one_config_slug.']['.$fieldSlug.']" id="settings['.$one_config_slug.']['.$fieldSlug.']" type="checkbox" '.$onoff.' />' ;
-                                    echo '    </div>' ;
-                                    echo '    <div class="col-sm-10">' ;
                                     echo '      <label for="settings['.$one_config_slug.']['.$fieldSlug.']" class="control-label text-left">'.$fieldInfo["name"].':</label>' ;
-                                    echo '    </div>' ;
+                                    echo '      <input name="settings['.$one_config_slug.']['.$fieldSlug.']" id="settings['.$one_config_slug.']['.$fieldSlug.']" type="checkbox" '.$onoff.' />' ;
                                     echo '  </div>' ;
                                     break ;
                                 case "text" :
-                                    if (isset($pageVars["data"]["current_configs"]["app"][$one_config_slug])) {
-                                        $val = $pageVars["data"]["current_configs"]["app"][$one_config_slug];  }
-                                    if (!isset($val) && is_null($onoff)) {
+                                    if (isset($pageVars["data"]["pipeline"]["settings"][$one_config_slug][$fieldSlug])) {
+                                        $val = $pageVars["data"]["pipeline"]["settings"][$one_config_slug][$fieldSlug];  }
+                                    if (!isset($val)) {
                                         $val = $one_conf_tails["default"] ; }
-
-
                                     echo '  <div class="col-sm-12">' ;
-                                    echo '    <div class="col-sm-5">' ;
-                                    echo '      <input name="settings['.$one_config_slug.']['.$fieldSlug.']" id="settings['.$one_config_slug.']['.$fieldSlug.']" type="text" class="form-control" value="'.$one_conf_tails["value"].'" placeholder="'.$one_conf_tails["label"].'" />' ;
-                                    echo '    </div>' ;
-                                    echo '    <div class="col-sm-7">' ;
                                     echo '      <label for="settings['.$one_config_slug.']['.$fieldSlug.']" class="control-label text-left">'.$fieldInfo["name"].':</label>' ;
-                                    echo '    </div>' ;
+                                    echo '      <input name="settings['.$one_config_slug.']['.$fieldSlug.']" id="settings['.
+                                        $one_config_slug.']['.$fieldSlug.']" type="text" class="form-control" value="'.
+                                        $val.'" placeholder="'.$one_conf_tails["label"].'" />' ;
+                                    echo '  </div>' ;
+                                    break ;
+                                case "textarea" :
+                                    if (isset($pageVars["data"]["pipeline"]["settings"][$one_config_slug][$fieldSlug])) {
+                                        $val = $pageVars["data"]["pipeline"]["settings"][$one_config_slug][$fieldSlug];  }
+                                    if (!isset($val)) {
+                                        $val = $one_conf_tails["default"] ; }
+                                    echo '  <div class="col-sm-12">' ;
+                                    echo '      <label for="settings['.$one_config_slug.']['.$fieldSlug.']" class="control-label text-left">'.$fieldInfo["name"].':</label>' ;
+                                    echo '      <textarea name="settings['.$one_config_slug.']['.$fieldSlug.']" id="settings['.
+                                        $one_config_slug.']['.$fieldSlug.']" type="text" class="form-control" placeholder="'.
+                                        $one_conf_tails["label"].'" >'.$val.'</textarea>' ;
                                     echo '  </div>' ;
                                     break ; }
                             echo '  </div>';}
@@ -153,6 +179,10 @@
                             if ($one_build_step["module"] == "ConditionalStepRunner" || $one_build_step["module"] == "Plugin") {
                                 foreach ($pageVars['data']['builders'][$one_build_step["module"]]['fields'][$one_build_step["steptype"]] as $data ) {
                                 	echo '      <label for="'.$data['name'].'">'.$data['name'].'</label>'; 
+									$action = "";
+									//echo $data['action'].'dsadsadsad';
+        							if (isset($data['action'])) { $action = $data['action'].'="'.$data['funName'].'(\''.$hash.'\')"'; }
+            
                                     if ($data['type'] == 'text') {
                                         echo '      <input id="steps['.$hash.']['.$data['slug'].']" name="steps['.$hash.']['.$data['slug'].']" value="'.$one_build_step[$data['slug']].'" class="form-control" type="text" />'; 
                                     }
@@ -163,16 +193,26 @@
                                         echo '      <textarea id="steps['.$hash.']['.$data['slug'].']" name="steps['.$hash.']['.$data['slug'].']" class="form-control">'.$one_build_step[$data['slug']].'</textarea>'; 
                                     }
 									if ($data["type"] == "dropdown") {
-						            	echo '<select id="steps['.$hash.']['.$data['slug'].']" name="steps['.$hash.']['.$data['slug'].']" value="'.$one_build_step[$data['slug']].'" class="form-control">';
+						            	echo '<select id="steps['.$hash.']['.$data['slug'].']" name="steps['.$hash.']['.$data['slug'].']" '.$action.' class="form-control">';
 						            	foreach ($data['data'] as $key => $value) {
 						            		$selected = ($one_build_step[$data['slug']] == $key)? 'selected' : '';
 											echo '<option '.$selected.' value="'.$key.'">'.$value.'</option>';
 										} 
-										//$.each(, function(index, value) { console.log(index);
-											
-										//});
-						            	echo '</select>';
+										echo '</select>';
 						            }
+									if ($data["type"] == "radio") {
+						            	foreach ($data['data'] as $key => $value) {
+						            		$selected = ($one_build_step[$data['slug']] == $key)? 'checked="checked"' : '';
+											echo ' <input type="radio" name="steps['.$hash.']['.$data["slug"].']" value="'.$key.'" '.$selected.'>'.$value;
+										}
+						            }
+									if ($data["type"] == "div") {
+						            	echo '<div id="'.$data["id"].$hash.'"></div>';
+						            }
+						            if (isset($data["funName"]))
+										echo '<script> $(document).ready(function() {
+															window.onload = CONDaysOfWeekDays(\''.$hash.'\');  
+														});</script>';
                                 }
                             }
                             else {
@@ -180,7 +220,7 @@
                             }
                             echo '  </div>';
                             echo '   <div class="col-sm-12">'  ;
-                            echo '  <a class="btn btn-warning" onclick="deleteStepField('.hash.')">Delete Step</a>' ;
+                            echo '  <a class="btn btn-warning" onclick="deleteStepField('.$hash.')">Delete Step</a>' ;
 
                             echo '  </div>';
                             echo '  </div>';
@@ -224,11 +264,6 @@
 
                     <input type="hidden" name="item" id="item" value="<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" />
 
-                    <h5 class="text-uppercase text-light">
-                        <a href="/index.php?control=BuildConfigure&action=save">
-                            Save configuration of <?php echo $pageVars["data"]["pipeline"]["project-name"] ; ?>-</a>
-                    </h5>
-
                 </form>
             </div>
             <p>
@@ -246,6 +281,7 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
 <link rel="stylesheet" href="/Assets/BuildConfigure/css/buildconfigure.css">
 <script type="text/javascript">
+	savedSteps = <?php echo json_encode($pageVars["data"]["pipeline"]["steps"]) ; ?> ;
     steps = <?php echo json_encode($pageVars["data"]["fields"]) ; ?> ;
 </script>
 <script type="text/javascript" src="/Assets/BuildConfigure/js/buildconfigure.js"></script>
