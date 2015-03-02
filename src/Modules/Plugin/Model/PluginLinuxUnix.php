@@ -15,15 +15,10 @@ class PluginLinuxUnix extends Base {
     public $modelGroup = array("Default") ;
 
     public function getStepTypes() {
-    	/*foreach ($this->getFormFields() as $key => $val)
-			$type[] = $key;
-		return $type;*/
-        //return array_keys($this->getFormFields());
-        return $this->getInstalledPlugins();
+    	return array_keys($this->getFormFields());
     }
 
     public function getFormFields() {
-        //print_r($this->getInstalledPluginsField);
         return $this->getInstalledPluginsField() ;
     }
 
@@ -78,7 +73,7 @@ class PluginLinuxUnix extends Base {
     }
     
         
-public function getInstalledPluginsField()
+	public function getInstalledPluginsField()
     {
     	$plugin = scandir(PLUGININS) ;
         for ($i=0; $i<count($plugin); $i++) {
@@ -99,22 +94,12 @@ public function getInstalledPluginsField()
     }
 */
     public function getInstalledPluginData($plugin) {
-        /*$file = PIPEDIR . DS . $this->params["item"] . DS . 'pluginData';
-        if ($pluginData = file_get_contents($file)) {
-            $pluginData = json_decode($pluginData, true);
-        }*/
         $defaultsFile = PLUGININS.DS.$plugin.DS.'data' ;
         if (file_exists($defaultsFile)) {
             $defaultsFileData =  file_get_contents($defaultsFile) ;
             $defaults = json_decode($defaultsFileData, true) ; 
         }
-        //print_r($defaults);
         foreach ($defaults['buildconf'] as $key=>$val) {
-            /*if (isset ($pluginData[$plugin][$val['name']]) ) {
-                $value = $pluginData[$plugin][$val['name']];
-                $defaults['buildconf'][$key]['value'] = $value;
-            }*/
-              //  $value = $pluginData[$plugin][$val['name']];
                 $data[][$key] = $val;
         }
         $defaults = $defaults['buildconf'];
