@@ -180,14 +180,13 @@
                                 foreach ($pageVars['data']['builders'][$one_build_step["module"]]['fields'][$one_build_step["steptype"]] as $data ) {
                                 	echo '      <label for="'.$data['name'].'">'.$data['name'].'</label>'; 
 									$action = "";
-									//echo $data['action'].'dsadsadsad';
-        							if (isset($data['action'])) { $action = $data['action'].'="'.$data['funName'].'(\''.$hash.'\')"'; }
+									if (isset($data['action'])) { $action = $data['action'].'="'.$data['funName'].'(\''.$hash.'\')"'; }
             
-                                    if ($data['type'] == 'text') {
-                                        echo '      <input id="steps['.$hash.']['.$data['slug'].']" name="steps['.$hash.']['.$data['slug'].']" value="'.$one_build_step[$data['slug']].'" class="form-control" type="text" />'; 
+                                    if ($data['type'] == 'text' || $data['type'] == 'time' || $data['type'] == 'number') {
+                                        echo '      <input id="steps['.$hash.']['.$data['slug'].']" name="steps['.$hash.']['.$data['slug'].']" value="'.$one_build_step[$data['slug']].'" class="form-control" type="'.$data['type'].'" />'; 
                                     }
                                     if ($data['type'] == 'password') {
-                                        echo '      <input id="steps['.$hash.']['.$data['slug'].']" name="steps['.$hash.']['.$data['slug'].']" class="form-control" type="password" />'; 
+                                        echo '      <input id="steps['.$hash.']['.$data['slug'].']" name="steps['.$hash.']['.$data['slug'].']" class="form-control" type="password" class="form-control"/>'; 
                                     }
                                     if ($data['type'] == 'textarea') {
                                         echo '      <textarea id="steps['.$hash.']['.$data['slug'].']" name="steps['.$hash.']['.$data['slug'].']" class="form-control">'.$one_build_step[$data['slug']].'</textarea>'; 
@@ -200,19 +199,21 @@
 										} 
 										echo '</select>';
 						            }
-									if ($data["type"] == "radio") {
+									if ($data["type"] == "radio" || $data["type"] == "checkbox") {
 						            	foreach ($data['data'] as $key => $value) {
 						            		$selected = ($one_build_step[$data['slug']] == $key)? 'checked="checked"' : '';
-											echo ' <input type="radio" name="steps['.$hash.']['.$data["slug"].']" value="'.$key.'" '.$selected.'>'.$value;
+											echo ' <input type="'.$data["type"].'" name="steps['.$hash.']['.$data["slug"].']" value="'.$key.'" '.$selected.' class="form-control">'.$value;
 										}
 						            }
 									if ($data["type"] == "div") {
 						            	echo '<div id="'.$data["id"].$hash.'"></div>';
 						            }
 						            if (isset($data["funName"]))
-										echo '<script> $(document).ready(function() {
-															window.onload = CONDaysOfWeekDays(\''.$hash.'\');  
-														});</script>';
+										echo '<script> 
+												$(document).ready(function() {
+													window.onload = CONDaysOfWeekDays(\''.$hash.'\');  
+												});
+											</script>';
                                 }
                             }
                             else {
@@ -220,7 +221,7 @@
                             }
                             echo '  </div>';
                             echo '   <div class="col-sm-12">'  ;
-                            echo '  <a class="btn btn-warning" onclick="deleteStepField('.$hash.')">Delete Step</a>' ;
+                            echo '  <a class="btn btn-warning" onclick="deleteStepField(\''.$hash.'\')">Delete Step</a>' ;
 
                             echo '  </div>';
                             echo '  </div>';

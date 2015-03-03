@@ -25,7 +25,7 @@ class ConditionalStepRunnerAllOS extends BaseLinuxApp {
 
     public function getFormFields() {
         $ff = array(
-            "File Exist" => array(
+            "File exist" => array(
             					array(
 					                "type" => "dropdown",
 					                "name" => "Base directory",
@@ -67,7 +67,7 @@ class ConditionalStepRunnerAllOS extends BaseLinuxApp {
 					                "name" => "Shell Data",
 					                "slug" => "data-shelldata" )
 					        ),
-			"String Compare" => array(
+			"String compare" => array(
             					array(
 					                "type" => "text",
 					                "name" => "String 1",
@@ -86,8 +86,36 @@ class ConditionalStepRunnerAllOS extends BaseLinuxApp {
 					                "type" => "textarea",
 					                "name" => "Shell Data",
 					                "slug" => "data-shelldata" )
+					        ),
+			"Time" => array(
+            					array(
+					                "type" => "time",
+					                "name" => "Earliest",
+					                "slug" => "earliest" ),
+					            array(
+					                "type" => "time",
+					                "name" => "Latest",
+					                "slug" => "latest" ),
+					            array(
+					                "type" => "textarea",
+					                "name" => "Shell Data",
+					                "slug" => "data-shelldata" )
+					        ),
+			"Files match" => array(
+            					array(
+					                "type" => "text",
+					                "name" => "Includes (Separate multiple patterns with a comma)",
+					                "slug" => "includes" ),
+					            array(
+					                "type" => "text",
+					                "name" => "Excludes",
+					                "slug" => "excludes" ),
+					            array(
+					                "type" => "textarea",
+					                "name" => "Shell Data",
+					                "slug" => "data-shelldata" )
 					        )
-        );
+					                );
         return $ff ;
     }
 
@@ -103,8 +131,7 @@ class ConditionalStepRunnerAllOS extends BaseLinuxApp {
 		$stepRunnerFactory = new \Model\StepRunner() ;
         $stepRunner = $stepRunnerFactory->getModel($this->params) ;
     	
-    	
-		if ( $step['steptype'] == "File Exist")
+    	if ( $step['steptype'] == "File exist")
 	    	if ($this->fileExist($step))    
 	    		return $stepRunner->stepRunner($stepDetails, $this->params["item"]) ;
 			else
@@ -114,8 +141,18 @@ class ConditionalStepRunnerAllOS extends BaseLinuxApp {
 	    		return $stepRunner->stepRunner($stepDetails, $this->params["item"]) ;
 			else
 				return true;
-		if ( $step['steptype'] == "String Compare")
+		if ( $step['steptype'] == "String compare")
 	    	if ($this->stringCompare($step))
+	    		return $stepRunner->stepRunner($stepDetails, $this->params["item"]) ;
+			else
+				return true;
+		if ( $step['steptype'] == "Time")
+	    	if ($this->time($step))
+	    		return $stepRunner->stepRunner($stepDetails, $this->params["item"]) ;
+			else
+				return true;
+		if ( $step['steptype'] == "Files match")
+	    	if ($this->filesMatch($step))
 	    		return $stepRunner->stepRunner($stepDetails, $this->params["item"]) ;
 			else
 				return true;
@@ -160,7 +197,6 @@ class ConditionalStepRunnerAllOS extends BaseLinuxApp {
 	
 	private function stringCompare($step) {
 		$case = $step['stringCondition'];
-		$case;
 		$string1 = $step["firstString"];
 		$string2 = $step["secondString"];
 			
@@ -181,5 +217,37 @@ class ConditionalStepRunnerAllOS extends BaseLinuxApp {
 				return FALSE;
 				break;
 		}
+	}
+	
+	private function time($step) {
+		$earliest = $step['earliest'];
+		$latest = $step["latest"];
+		if (strtotime($earliest) <= time() && strtotime($latest) >= time())
+			return TRUE;
+		return FALSE;
+	}
+	
+	private function filesMatch($step) {
+		$earliest = $step['includes'];
+		$latest = $step["excludes"];
+		$rules = explode(",",$earliest);
+		$result_array = array();
+		foreach($rules as $rule) {
+			if (!empty(glob($rule))) {
+				array_push($result_array, TRUE) ; }
+			else
+				array_push($result_array, FALSE) ;
+		}
+		$rules = explode(",",$latest);
+		foreach($rules as $rule) {
+			if (empty(glob($rule)))
+				array_push($result_array, TRUE) ;
+			else
+				array_push($result_array, FALSE) ;		
+		}
+		if (in_array(FALSE, $result_array))
+			return FALSE;
+		else
+			return TRUE;
 	}
 }

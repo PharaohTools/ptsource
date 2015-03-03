@@ -54,32 +54,32 @@ function displayStepField() {
         	html += '    <h5>'+field[i].name+'</h5>' ;
         	action = "";
         	if (typeof(field[i].action != "undefined")) { action = field[i].action+'="'+field[i].funName+'(\''+hash+'\')"'; }
-            if (field[i]["type"] == "text") { console.log(field[i]);
-      			html += ' <input type="text" id="steps['+hash+']['+field[i].slug+']"' ;
-       			html += ' name="steps['+hash+']['+field[i].slug+']" />' ;
+            if (field[i]["type"] == "text" || field[i]["type"] == "time" || field[i]["type"] == "number") { 
+      			html += ' <input type="'+field[i]["type"]+'" id="steps['+hash+']['+field[i].slug+']"' ;
+       			html += ' name="steps['+hash+']['+field[i].slug+']" class="form-control" />' ;
             }
-            if (field[i]["type"] == "password") { console.log(field[i]);
+            if (field[i]["type"] == "password") { 
       			html += ' <input type="password" id="steps['+hash+']['+field[i].slug+']"' ;
-       			html += ' name="steps['+hash+']['+field[i].slug+']" />' ;
+       			html += ' name="steps['+hash+']['+field[i].slug+']" class="form-control" />' ;
             }
-            if (field[i]["type"] == "textarea") { console.log(field[i]);
+            if (field[i]["type"] == "textarea") { 
       			html += '<textarea id="steps['+hash+']['+field[i].slug+']"' ;
-       			html += ' name="steps['+hash+']['+field[i].slug+']" >' ;
+       			html += ' name="steps['+hash+']['+field[i].slug+']"  class="form-control">' ;
        			html += '</textarea>' ;
             }
-            if (field[i]["type"] == "dropdown") { console.log(field[i]);
-            	html += '<select id="steps['+hash+']['+field[i].slug+']" name="steps['+hash+']['+field[i].slug+']" '+action+'>';
-            	$.each(field[i].data, function(index, value) { console.log(index);
+            if (field[i]["type"] == "dropdown") { 
+            	html += '<select id="steps['+hash+']['+field[i].slug+']" name="steps['+hash+']['+field[i].slug+']" '+action+' class="form-control">';
+            	$.each(field[i].data, function(index, value) {
 					html += '<option value="'+index+'">'+value+'</option>';
 				});
             	html += '</select>';
             }
-            if (field[i]["type"] == "radio") { console.log(field[i]);
-            	$.each(field[i].data, function(index, value) { console.log(index);
-					html += ' <input type="radio" name="steps['+hash+']['+field[i].slug+']" value="'+index+'">'+value;
+            if (field[i]["type"] == "radio" || field[i]["type"] == "checkbox") {
+            	$.each(field[i].data, function(index, value) {
+					html += ' <input type="'+field[i]["type"]+'" name="steps['+hash+']['+field[i].slug+']" value="'+index+'" class="form-control">'+value;
 				});
             }
-            if (field[i]["type"] == "div") { console.log(field[i]);
+            if (field[i]["type"] == "div") {
             	html += '<div id="'+field[i].id	+hash+'"></div>';
             }
         }
