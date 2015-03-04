@@ -114,8 +114,43 @@ class ConditionalStepRunnerAllOS extends BaseLinuxApp {
 					                "type" => "textarea",
 					                "name" => "Shell Data",
 					                "slug" => "data-shelldata" )
+					        ),
+			"Regular expression match" => array(
+            					array(
+					                "type" => "text",
+					                "name" => "Project Slug Match",
+					                "slug" => "projectNameMatch" ),
+					            array(
+					                "type" => "textarea",
+					                "name" => "Shell Data",
+					                "slug" => "data-shelldata" )
+					        ),
+			"Numerical comparison" => array(
+					            array(
+					                "type" => "text",
+					                "name" => "Left hand side	",
+					                "slug" => "lhs"),
+            					array(
+					                "type" => "dropdown",
+					                "name" => "Comparator",
+					                "slug" => "cmp",
+					                "data" => array( 'lessthan' => '< Less than',
+					                				 'greaterthan'  => '> Greater than',
+                                                     'equalto' => '== Equal to',
+                                                     'notequalto' => '!= Not Equal to',
+                                                     'lessthanorequalto' => '<= Less than Equal to',
+                                                     'greaterthanequalto' => '>= Greater than Equal to')),
+
+					            array(
+					                "type" => "textarea",
+					                "name" => "Right hand side",
+					                "slug" => "rhs"),
+					            array(
+					                "type" => "textarea",
+					                "name" => "Shell Data",
+					                "slug" => "data-shelldata" )
 					        )
-					                );
+		);
         return $ff ;
     }
 
@@ -153,6 +188,16 @@ class ConditionalStepRunnerAllOS extends BaseLinuxApp {
 				return true;
 		if ( $step['steptype'] == "Files match")
 	    	if ($this->filesMatch($step))
+	    		return $stepRunner->stepRunner($stepDetails, $this->params["item"]) ;
+			else
+				return true;
+		if ( $step['steptype'] == "Numerical comparison")
+	    	if ($this->numericalComparison($step))
+	    		return $stepRunner->stepRunner($stepDetails, $this->params["item"]) ;
+			else
+				return true;
+		if ( $step['steptype'] == "Regular expression match")
+	    	if ($this->regularExpressionMatch($step))
 	    		return $stepRunner->stepRunner($stepDetails, $this->params["item"]) ;
 			else
 				return true;
@@ -249,5 +294,61 @@ class ConditionalStepRunnerAllOS extends BaseLinuxApp {
 			return FALSE;
 		else
 			return TRUE;
+	}
+	
+	private function numericalComparison($step) {
+		$case = $step['cmp'];
+		$lhs = intval($step["lhs"]);
+		$rhs = intval($step["rhs"]);
+			
+		switch ($case) {
+			case 'lessthan': {
+				if ($lhs < $rhs) {
+					return TRUE;
+				}
+			}
+				break;
+			case 'greaterthan': {
+				if ($lhs > $rhs) {
+					return TRUE;
+				}
+			}
+				break;
+			case 'equalto': {
+				if ($lhs == $rhs) {
+					return TRUE;
+				}
+			}
+				break;
+			case 'notequalto': {
+				if ($lhs != $rhs) {
+					return TRUE;
+				}
+			}
+				break;
+			case 'lessthanorequalto': {
+				if ($lhs <= $rhs) {
+					return TRUE;
+				}
+			}
+				break;
+			case 'greaterthanequalto': {
+				if ($lhs >= $rhs) {
+					return TRUE;
+				}
+			}
+				break;
+             default :
+				  return FALSE;
+				  break;
+		}
+	}
+	
+	private function regularExpressionMatch($step) {
+		$projectNameMatch = $step['projectNameMatch'];
+		if (strcmp( $projectNameMatch, $this->params['item'] ) > 0)
+			return TRUE;
+		else
+			return FALSE;
 	}
 }
