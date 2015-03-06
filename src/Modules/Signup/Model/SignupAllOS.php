@@ -42,7 +42,7 @@ class SignupAllOS extends Base {
         if (in_array($usr, $users) && in_array(md5($pass), $passwords))
         {
             $_SESSION["login-status"]=TRUE;
-            $_SESSION["username"] = $users;
+            $_SESSION["username"] = $usr;
             echo json_encode(array("status" => TRUE));
             return;
         }
