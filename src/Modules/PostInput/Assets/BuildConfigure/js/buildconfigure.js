@@ -165,10 +165,11 @@ function CONDaysOfWeekDays(hash) {
 	if (value == 'days') {
 		$.each(dayofweek, function(index, value) {
 			checked = '';
-			if ( hash in savedSteps ) 
-				if ( 'exactdays' in savedSteps[hash] )
-					if( index in savedSteps[hash]['exactdays'] )
-						checked = "checked";
+			if ( savedSteps != null)
+				if ( hash in savedSteps )
+					if ( 'exactdays' in savedSteps[hash] )
+						if( index in savedSteps[hash]['exactdays'] )
+							checked = "checked";
 			html += '<input class="col-sm-2 control-label text-left" type="checkbox" name="steps['+hash+'][exactdays]['+index+']" value="true" '+checked+'>'+value+'<br>';
 		});
 	}
