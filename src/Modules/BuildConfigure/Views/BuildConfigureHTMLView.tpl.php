@@ -101,8 +101,15 @@
                     <?php
 
                     foreach ($pageVars["data"]["settings"] as $one_config_slug => $one_conf_tails) {
-                        echo '<div class="form-group">' ;
-                        echo '  <label for="config_'.$one_config_slug.'" class="col-sm-2 control-label text-left">'.$one_config_slug.':</label>' ;
+                        echo '<div class="form-group confSettingsSlideySection" id="slidey'.$one_config_slug.'">' ;
+                        echo '  <div class="col-sm-12">' ;
+                        echo '    <label for="config_'.$one_config_slug.'" class="control-label text-left">'.$one_config_slug.':</label>' ;
+                        echo '    <a class="glyphicon glyphicon-chevron-down slideyToggleIcon" id="slideyToggleIcon'.$one_config_slug.'"' ;
+                        echo ' onclick="toggleConfSetting(this, \'slidey'.$one_config_slug.'\')"></a>' ;
+                        echo '    <a class="btn-info" id="slideyToggleIcon'.$one_config_slug.'"' ;
+                        echo ' onclick="hideConfSetting(\'slidey'.$one_config_slug.'\')">Hide</a>' ;
+                        echo '  </div>' ;
+                        echo '  <div class="col-sm-12 sliderFields">' ;
                         foreach ( $one_conf_tails["settings"] as $fieldSlug => $fieldInfo) {
                             echo '  <div class="col-sm-12">' ;
 
@@ -152,6 +159,7 @@
                                     echo '  </div>' ;
                                     break ; }
                             echo '  </div>';}
+                        echo '  </div>';
                         echo '</div>'; } ?>
 
                     <div class="form-group">

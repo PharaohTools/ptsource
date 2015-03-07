@@ -27,6 +27,27 @@ function changeStepTypeSelector(element) {
     $('#new_step_button_wrap').html(html);
 }
 
+function toggleConfSetting(toggler, element) {
+    sel = $("#"+element) ;
+    sliderFields = sel.find(".sliderFields");
+    if (sliderFields.css('display') == 'none') {
+        $(toggler).removeClass("glyphicon-chevron-down");
+        $(toggler).addClass("glyphicon-chevron-right");
+        sliderFields.slideDown(); }
+    else {
+        $(toggler).removeClass("glyphicon-chevron-right");
+        $(toggler).addClass("glyphicon-chevron-down");
+        sliderFields.slideUp();}
+}
+
+function toggleViewConfSetting(element) {
+    sel = $("#"+element) ;
+    if (sel.css('display') == 'none') {
+        sliderFields.slideDown(); }
+    else {
+        sliderFields.slideUp();}
+}
+
 function displayStepField() {
     steptype = $("#new_step_type_selector").find(":selected").text() ;
     module = $("#new_step_module_selector").find(":selected").text() ;
