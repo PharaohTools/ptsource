@@ -2,6 +2,6 @@
 
 Namespace Model;
 
-class BuildMoniter extends BaseModelFactory {
+class BuildMonitor extends BaseModelFactory {
 
 }

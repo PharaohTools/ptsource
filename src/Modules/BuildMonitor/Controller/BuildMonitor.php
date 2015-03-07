@@ -2,7 +2,7 @@
 
 Namespace Controller ;
 
-class BuildMoniter extends Base {
+class BuildMonitor extends Base {
 
     public function execute($pageVars) {
       $thisModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars) ;
@@ -10,7 +10,7 @@ class BuildMoniter extends Base {
       $this->content = $pageVars ;
       if (is_array($thisModel)) { return $this->failDependencies($pageVars, $this->content, $thisModel) ; }
       $this->content["data"] = $thisModel->getData();
-      return array ("type"=>"view", "view"=>"buildMoniter", "pageVars"=>$this->content);
+      return array ("type"=>"view", "view"=>"buildMonitor", "pageVars"=>$this->content);
     }
 
 }

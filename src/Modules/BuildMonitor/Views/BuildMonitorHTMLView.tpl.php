@@ -22,8 +22,8 @@
                 <a href="/index.php?control=Workspace&action=show&item=<?php echo $pageVars["data"]["item"] ; ?>" class="list-group-item">
                     <i class="fa fa-folder-open-o"></i> Workspace
                 </a>
-                <a href="index.php?control=BuildMoniter&action=show&item=<?php echo $pageVars["data"]["item"] ; ?>" class="list-group-item">
-                    <i class="fa fa-bar-chart-o"></i> Moniter
+                <a href="index.php?control=BuildMonitor&action=show&item=<?php echo $pageVars["data"]["item"] ; ?>" class="list-group-item">
+                    <i class="fa fa-bar-chart-o"></i> Monitors
                 </a>
                 <a href="/index.php?control=BuildHome&action=changes&item=<?php echo $pageVars["data"]["item"] ; ?>" class="list-group-item">
                     <i class="fa fa-bar-chart-o"></i> Changes <span class="badge">3</span>
@@ -60,7 +60,7 @@
 					    border-color: rgba(0,0,0,.2);
 					}
 				</style>
-                <script src="Assets/BuildMoniter/js/Chart.js"></script>
+                <script src="Assets/BuildMonitor/js/Chart.js"></script>
                 <div id="canvas-holder">
 					<canvas id="chart-area" width="300" height="300"/>
 				</div>

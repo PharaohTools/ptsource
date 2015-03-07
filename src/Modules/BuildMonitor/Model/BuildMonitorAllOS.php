@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class BuildMoniterAllOS extends Base {
+class BuildMonitorAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;

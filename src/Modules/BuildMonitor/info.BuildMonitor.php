@@ -2,22 +2,22 @@
 
 Namespace Info;
 
-class BuildMoniterInfo extends PTConfigureBase {
+class BuildMonitorInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "BuildMoniter/Home Page";
+    public $name = "BuildMonitor/Home Page";
 
     public function _construct() {
       parent::__construct();
     }
 
     public function routesAvailable() {
-      return array( "BuildMoniter" => array("show") );
+      return array( "BuildMonitor" => array("show") );
     }
 
     public function routeAliases() {
-      return array("buildMoniter"=>"BuildMoniter");
+      return array("buildMonitor"=>"BuildMonitor");
     }
 
     public function helpDefinition() {
