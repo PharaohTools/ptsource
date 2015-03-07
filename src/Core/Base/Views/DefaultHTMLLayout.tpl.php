@@ -69,6 +69,7 @@
         <?php }else{?>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
+                    <!--
                     <li class="active"><a href="/index.php?control=BuildConfigure&action=new">New Pipeline</a></li>
                     <li><a href="#">History</a></li>
                     <li class="dropdown">
@@ -84,6 +85,7 @@
                         </ul>
                     </li>
                     <li><a href="/index.php?control=Signup&action=logout">Logout</a></li>
+                    -->
                 </ul>
                 <form class="navbar-form navbar-right" role="search">
                     <div class="form-group">
