@@ -42,12 +42,18 @@ class ShutdownLinuxUnix extends Base {
     public function disableBuildIfNeeded() {
         $this->params["app-settings"]["app_config"] = \Model\AppConfig::getAppVariable("app_config");
         $this->params["app-settings"]["mod_config"] = \Model\AppConfig::getAppVariable("mod_config");
+        $loggingFactory = new \Model\Logging();
+        $this->params["echo-log"] = true ;
+        $logging = $loggingFactory->getModel($this->params);
         if (isset($this->params["app-settings"]["mod_config"]["Shutdown"]) &&
             $this->params["app-settings"]["mod_config"]["Shutdown"]["disable_build_execution"] == "on") {
-            $loggingFactory = new \Model\Logging();
-            $this->params["echo-log"] = true ;
-            $logging = $loggingFactory->getModel($this->params);
-            $logging->log ("Build execution disabled through shutdown module, aborting...", $this->getModuleName() ) ;
+            $logging->log ("Build execution of all builds disabled through shutdown module a application level, aborting...", $this->getModuleName() ) ;
+            $logging->log ("ABORTED EXECUTION", $this->getModuleName() ) ;
+            return false ; }
+        $mn = $this->getModuleName() ;
+        if (isset($this->params["build-settings"][$mn]["Shutdown"]) &&
+            $this->params["build-settings"][$mn]["Shutdown"]["disable_build_execution"] == "on") {
+            $logging->log ("Build execution of this build disabled through shutdown module at build level, aborting...", $this->getModuleName() ) ;
             $logging->log ("ABORTED EXECUTION", $this->getModuleName() ) ;
             return false ; }
         else {
