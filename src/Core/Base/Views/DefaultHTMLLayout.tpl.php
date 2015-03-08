@@ -24,9 +24,10 @@
 
     <![endif]-->
     <!--  sign up add -->
-    <script src="/Assets/Signup/js/signup.js"></script>
-    <script src="/Assets/js/jquery.min.js"></script>
-    <script src="/Assets/js/jquery-ui.min.js"></script>
+
+    <script src="/index.php?control=AssetLoader&action=show&module=BuildConfigure&type=js&asset=signup.js"></script>
+    <script src="/index.php?control=AssetLoader&action=show&module=PostInput&type=js&asset=jquery.min.js"></script>
+    <script src="/index.php?control=AssetLoader&action=show&module=PostInput&type=js&asset=jquery-ui.min.js"></script>
     <style>
         body{
             padding-top: 72px;
@@ -46,7 +47,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="/index.php?control=Index&action=show"><img src="/Assets/images/5.png" class="navbar-img" /></a>
+            <a href="/index.php?control=Index&action=show"><img src="/index.php?control=AssetLoader&action=show&module=PostInput&type=image&asset=5.png" class="navbar-img" /></a>
             <a class="navbar-brand" href="/index.php?control=Index&action=show">PTBuild</a>
         </div>
 
@@ -106,7 +107,7 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="/Assets/js/bootstrap.min.js"></script>
+<script src="/index.php?control=AssetLoader&action=show&module=PostInput&type=js&asset=bootstrap.min.js"></script>
 <script>
     $(function() {
         $('#slide-submenu').on('click', function() {
