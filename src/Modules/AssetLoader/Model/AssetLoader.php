@@ -2,6 +2,6 @@
 
 Namespace Model;
 
-class BuildHome extends BaseModelFactory {
+class AssetLoader extends BaseModelFactory {
 
 }

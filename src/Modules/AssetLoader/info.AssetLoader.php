@@ -2,22 +2,22 @@
 
 Namespace Info;
 
-class BuildHomeInfo extends PTConfigureBase {
+class AssetLoaderInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "BuildHome/Home Page";
+    public $name = "Asset Loader";
 
     public function _construct() {
       parent::__construct();
     }
 
     public function routesAvailable() {
-      return array( "BuildHome" => array("show", "delete") );
+      return array( "AssetLoader" => array("show", "delete") );
     }
 
     public function routeAliases() {
-      return array("buildHome"=>"BuildHome");
+      return array("assetLoader"=>"AssetLoader");
     }
 
     public function helpDefinition() {
