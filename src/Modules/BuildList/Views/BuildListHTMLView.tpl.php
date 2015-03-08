@@ -87,9 +87,9 @@
                                             <td>
                                                 <?php
                                                 if ($pipelineDetails["last_status"] === true) {
-                                                    echo '<img class="listImage listImageWide" src="/Assets/BuildList/images/green-ball.png" />' ; }
+                                                    echo '<img class="listImage listImageWide" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=green-ball.png" />' ; }
                                                 else {
-                                                    echo '<img class="listImage listImageWide" src="/Assets/BuildList/images/red-ball.png" />' ; }
+                                                    echo '<img class="listImage listImageWide" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=red-ball.png" />' ; }
                                                 ?>
                                             </td>
                                             <td>
@@ -122,24 +122,24 @@
                                             <td>
                                                 <?php
                                                 if ($pipelineDetails["has_parents"] === true) {
-                                                    echo '<img class="listImage" src="/Assets/BuildList/images/tick.png" />' ; }
+                                                    echo '<img class="listImage" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=tick.png" />' ; }
                                                 else {
-                                                    echo '<img class="listImage" src="/Assets/BuildList/images/cross.png" />' ; }
+                                                    echo '<img class="listImage" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=cross.png" />' ; }
                                                 ?>
                                             </td>
                                             <td>
                                                 <?php
                                                 if ($pipelineDetails["has_children"] === true) {
-                                                    echo '<img class="listImage" src="/Assets/BuildList/images/tick.png" />' ; }
+                                                    echo '<img class="listImage" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=tick.png" />' ; }
                                                 else {
-                                                    echo '<img class="listImage" src="/Assets/BuildList/images/cross.png" />' ; }
+                                                    echo '<img class="listImage" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=cross.png" />' ; }
                                                 ?>
                                             </td>
                                             -->
                                             <td>
                                                 <?php
                                                 echo '<a href="/index.php?control=PipeRunner&action=start&item='.$pipelineDetails["project-slug"].'">';
-                                                echo '<img class="listImage" src="/Assets/BuildList/images/run.png" /></a>' ;
+                                                echo '<img class="listImage" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=run.png" /></a>' ;
                                                 ?>
                                             </td>
                                         </tr>
@@ -178,9 +178,9 @@
                                             <td>
                                                 <?php
                                                 if ($pipelineDetails["last_status"] === true) {
-                                                    echo '<img class="listImage listImageWide" src="/Assets/BuildList/images/green-ball.png" />' ; }
+                                                    echo '<img class="listImage listImageWide" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=green-ball.png" />' ; }
                                                 else {
-                                                    echo '<img class="listImage listImageWide" src="/Assets/BuildList/images/red-ball.png" />' ; }
+                                                    echo '<img class="listImage listImageWide" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=red-ball.png" />' ; }
                                                 ?>
                                             </td>
                                             <td>
@@ -210,23 +210,23 @@
                                             <td>
                                                 <?php
                                                 if ($pipelineDetails["has_parents"] === true) {
-                                                    echo '<img class="listImage" src="/Assets/BuildList/images/tick.png" />' ; }
+                                                    echo '<img class="listImage" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=tick.png" />' ; }
                                                 else {
-                                                    echo '<img class="listImage" src="/Assets/BuildList/images/cross.png" />' ; }
+                                                    echo '<img class="listImage" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=cross.png" />' ; }
                                                 ?>
                                             </td>
                                             <td>
                                                 <?php
                                                 if ($pipelineDetails["has_children"] === true) {
-                                                    echo '<img class="listImage" src="/Assets/BuildList/images/tick.png" />' ; }
+                                                    echo '<img class="listImage" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=tick.png" />' ; }
                                                 else {
-                                                    echo '<img class="listImage" src="/Assets/BuildList/images/cross.png" />' ; }
+                                                    echo '<img class="listImage" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=cross.png" />' ; }
                                                 ?>
                                             </td>
                                             <td>
                                                 <?php
                                                 echo '<a href="/index.php?control=PipeRunner&action=start&item='.$pipelineDetails["project-slug"].'">';
-                                                echo '<img class="listImage" src="/Assets/BuildList/images/run.png" /></a>' ;
+                                                echo '<img class="listImage" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=run.png" /></a>' ;
                                                 ?>
                                             </td>
                                         </tr>
@@ -264,9 +264,9 @@
                                             <td>
                                                 <?php
                                                 if ($pipelineDetails["last_status"] === true) {
-                                                    echo '<img class="listImage listImageWide" src="/Assets/BuildList/images/green-ball.png" />' ; }
+                                                    echo '<img class="listImage listImageWide" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=green-ball.png" />' ; }
                                                 else {
-                                                    echo '<img class="listImage listImageWide" src="/Assets/BuildList/images/red-ball.png" />' ; }
+                                                    echo '<img class="listImage listImageWide" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=red-ball.png" />' ; }
                                                 ?>
                                             </td>
                                             <td>
@@ -296,23 +296,23 @@
                                             <td>
                                                 <?php
                                                 if ($pipelineDetails["has_parents"] === true) {
-                                                    echo '<img class="listImage" src="/Assets/BuildList/images/tick.png" />' ; }
+                                                    echo '<img class="listImage" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=tick.png" />' ; }
                                                 else {
-                                                    echo '<img class="listImage" src="/Assets/BuildList/images/cross.png" />' ; }
+                                                    echo '<img class="listImage" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=cross.png" />' ; }
                                                 ?>
                                             </td>
                                             <td>
                                                 <?php
                                                 if ($pipelineDetails["has_children"] === true) {
-                                                    echo '<img class="listImage" src="/Assets/BuildList/images/tick.png" />' ; }
+                                                    echo '<img class="listImage" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=tick.png" />' ; }
                                                 else {
-                                                    echo '<img class="listImage" src="/Assets/BuildList/images/cross.png" />' ; }
+                                                    echo '<img class="listImage" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=cross.png" />' ; }
                                                 ?>
                                             </td>
                                             <td>
                                                 <?php
                                                 echo '<a href="/index.php?control=PipeRunner&action=start&item='.$pipelineDetails["project-slug"].'">';
-                                                echo '<img class="listImage" src="/Assets/BuildList/images/run.png" /></a>' ;
+                                                echo '<img class="listImage" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=run.png" /></a>' ;
                                                 ?>
                                             </td>
                                         </tr>
@@ -350,9 +350,9 @@
                                             <td>
                                                 <?php
                                                 if ($pipelineDetails["last_status"] === true) {
-                                                    echo '<img class="listImage listImageWide" src="/Assets/BuildList/images/green-ball.png" />' ; }
+                                                    echo '<img class="listImage listImageWide" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=green-ball.png" />' ; }
                                                 else {
-                                                    echo '<img class="listImage listImageWide" src="/Assets/BuildList/images/red-ball.png" />' ; }
+                                                    echo '<img class="listImage listImageWide" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=red-ball.png" />' ; }
                                                 ?>
                                             </td>
                                             <td>
@@ -382,23 +382,23 @@
                                             <td>
                                                 <?php
                                                 if ($pipelineDetails["has_parents"] === true) {
-                                                    echo '<img class="listImage" src="/Assets/BuildList/images/tick.png" />' ; }
+                                                    echo '<img class="listImage" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=tick.png" />' ; }
                                                 else {
-                                                    echo '<img class="listImage" src="/Assets/BuildList/images/cross.png" />' ; }
+                                                    echo '<img class="listImage" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=cross.png" />' ; }
                                                 ?>
                                             </td>
                                             <td>
                                                 <?php
                                                 if ($pipelineDetails["has_children"] === true) {
-                                                    echo '<img class="listImage" src="/Assets/BuildList/images/tick.png" />' ; }
+                                                    echo '<img class="listImage" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=tick.png" />' ; }
                                                 else {
-                                                    echo '<img class="listImage" src="/Assets/BuildList/images/cross.png" />' ; }
+                                                    echo '<img class="listImage" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=cross.png" />' ; }
                                                 ?>
                                             </td>
                                             <td>
                                                 <?php
                                                 echo '<a href="/index.php?control=PipeRunner&action=start&item='.$pipelineDetails["project-slug"].'">';
-                                                echo '<img class="listImage" src="/Assets/BuildList/images/run.png" /></a>' ;
+                                                echo '<img class="listImage" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=run.png" /></a>' ;
                                                 ?>
                                             </td>
                                         </tr>

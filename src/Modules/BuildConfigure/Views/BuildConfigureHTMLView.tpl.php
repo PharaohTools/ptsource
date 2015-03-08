@@ -273,11 +273,11 @@
 
 
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
-<link rel="stylesheet" href="/Assets/BuildConfigure/css/buildconfigure.css">
+<link rel="stylesheet" type="text/css" href="/index.php?control=AssetLoader&action=show&module=BuildConfigure&type=css&asset=buildconfigure.css">
 <script type="text/javascript">
     steps = <?php echo json_encode($pageVars["data"]["fields"]) ; ?> ;
 </script>
-<script type="text/javascript" src="/Assets/BuildConfigure/js/buildconfigure.js"></script>
+<script type="text/javascript" src="/index.php?control=AssetLoader&action=show&module=BuildConfigure&type=js&asset=buildconfigure.js"></script>
 <script type="text/javascript">
 
     $(function() {
