@@ -25,7 +25,7 @@
     <![endif]-->
     <!--  sign up add -->
 
-    <script src="/index.php?control=AssetLoader&action=show&module=BuildConfigure&type=js&asset=signup.js"></script>
+    <script src="/index.php?control=AssetLoader&action=show&module=Signup&type=js&asset=signup.js"></script>
     <script src="/index.php?control=AssetLoader&action=show&module=PostInput&type=js&asset=jquery.min.js"></script>
     <script src="/index.php?control=AssetLoader&action=show&module=PostInput&type=js&asset=jquery-ui.min.js"></script>
     <style>
