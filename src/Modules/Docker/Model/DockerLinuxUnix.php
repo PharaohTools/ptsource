@@ -64,13 +64,28 @@ class DockerLinuxUnix extends Base {
 			return false;
 		}
 		else {
-			$logging->log("Pulling files from Docker repo", $this->getModuleName());
 			//$auth = new Docker\Manager\ContainerManager;
-	        require __DIR__ . '/../Libraries/vendor/autoload.php';
+	        /*require __DIR__ . '/../Libraries/vendor/autoload.php';
 			$client = new \Docker\Http\DockerClient();//array(), 'tcp://127.0.0.1'
 			$docker = new \Docker\Docker($client);
 			$container = new \Docker\Container();//array('Image' => $this->params["build-settings"][$mn]["repository"].':precise')
 			$docker->getContainerManager()->run($container);
+			*/
+			//$this->executeAndGetReturnCode('docker pull '.$this->params["build-settings"][$mn]["repository"]);
+			
+			$logging->log("Pulling image from Docker repo", $this->getModuleName());
+			//$this->executeAndOutput('docker pull '.$this->params["build-settings"][$mn]["repository"]);
+			
+			$logging->log("Running Docker ".$this->params["build-settings"][$mn]["repository"]. ' container');
+			$this->executeAndGetReturnCode('docker run -i -t '.$this->params["build-settings"][$mn]["repository"].' &');// /bin/bash
+			
+			
+			$logging->log("Running command inside ".$this->params["build-settings"][$mn]["repository"]. ' container');
+			///tmp/execWorks
+			$this->executeAndGetReturnCode('docker exec -d '.$this->params["build-settings"][$mn]["repository"].' '.$this->params["build-settings"][$mn]["commandToRun"]);
+			
+			$logging->log('Stoping container');
+			$this->executeAndGetReturnCode('docker stop '.$this->params["build-settings"][$mn]["repository"]);
 			return TRUE;
 		}
 	}
