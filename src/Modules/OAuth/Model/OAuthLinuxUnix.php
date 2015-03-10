@@ -57,14 +57,15 @@ class OAuthLinuxUnix extends Base {
 	{
 	$signupFactory = new \Model\Signup() ;
         $signup = $signupFactory->getModel($this->params);
-        $signup->loginByOAuth($user->name,$user->email,$user->id);
+        $signup->loginByOAuth($user->name,$user->email,$user);
 	}
 	else
 	{
 	echo HtmlSpecialChars($client->error);
 	}
 }
-   
+
+/*   
   //login by google	
    public function google_login(){
 	require_once dirname(dirname(__FILE__)).DS.'Libraries'.DS.'http.php' ;
@@ -88,7 +89,7 @@ class OAuthLinuxUnix extends Base {
 			' set the client_id to Client ID and client_secret with Client Secret. '.
 			'The callback URL must be '.$client->redirect_uri.' but make sure '.
 			'the domain is valid and can be resolved by a public DNS.');
-	/* API permissions */
+	// API permissions 
 	$client->scope = 'https://www.googleapis.com/auth/userinfo.email '.
 		'https://www.googleapis.com/auth/userinfo.profile';
 	if(($success = $client->Initialize()))
@@ -115,13 +116,14 @@ class OAuthLinuxUnix extends Base {
 	{
 	$signupFactory = new \Model\Signup() ;
         $signup = $signupFactory->getModel($this->params);
-        $signup->loginByOAuth($user->name,$user->email,$user->id);
+        $signup->loginByOAuth($user->name,$user->email,$user);
 	}
 	else
 	{
 	echo HtmlSpecialChars($client->error);
 	}
 }
+*/
    // login by facebook
    public function fb_login(){	
 	require_once dirname(dirname(__FILE__)).DS.'Libraries'.DS.'http.php' ;
@@ -160,7 +162,7 @@ class OAuthLinuxUnix extends Base {
 	{
 	$signupFactory = new \Model\Signup() ;
         $signup = $signupFactory->getModel($this->params);
-        $signup->loginByOAuth($user->name,$user->email,$user->id);
+        $signup->loginByOAuth($user->name,$user->email,$user);
 	}
 	else
 	{

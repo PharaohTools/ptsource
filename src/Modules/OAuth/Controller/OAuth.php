@@ -26,8 +26,7 @@ class OAuth extends Base
        } 
 	if ($pageVars["route"]["action"] == "fblogin") { 
             $this->content["data"] = $thisModel->fb_login();
-       } 
-$_SESSION["login-status"]=TRUE;
-     //   return array("type" => "view", "view" => "Signup", "pageVars" => $this->content);
+       }
+        return array("type" => "view", "view" => "index", "pageVars" => $this->content);
     }
 }

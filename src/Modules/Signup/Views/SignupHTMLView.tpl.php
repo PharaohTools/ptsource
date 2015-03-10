@@ -29,6 +29,27 @@
                                 <button type="button" onclick="submit_login();" class="btn btn-info">Login</button>
                             </div>
                         </div>
+			<div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <a href="/index.php?control=OAuth&action=githublogin">
+				<button type="button"  class="btn btn-info">Login with GitHub</button>
+				</a>
+                            </div>
+                        </div>
+		<!--	<div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <a href="/index.php?control=OAuth&action=googlelogin">
+				<button type="button"  class="btn btn-info">Login with Google</button>
+				</a>
+                            </div> 
+                        </div> -->
+			<div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <a href="/index.php?control=OAuth&action=fblogin">
+				<button type="button"  class="btn btn-info">Login with Facebook</button>
+				</a>
+                            </div>
+                        </div>
                     </form>
                 </div>
                 <p>
