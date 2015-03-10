@@ -20,6 +20,12 @@ class LogstashLinuxUnix extends Base {
 
     public function getSettingFormFields() {
         $ff = array(
+           "logstash_enabled" =>
+            	array(
+                	"type" => "boolean",
+                	"optional" => true,
+                	"name" => "logstash on Build Completion?"
+            ),
             "ipaddress" => array(
                 "type" => "text",
                 "optional" => false,
@@ -63,7 +69,8 @@ class LogstashLinuxUnix extends Base {
            
         $pipeline = $this->getPipeline() ;
         
-        $mn = $this->getModuleName() ;	
+        $mn = $this->getModuleName() ;
+	    if ($pipeline["settings"][$mn]["logstash_enabled"] == "on") {	
 		$errno  = 0;
 		$tmpfile = PIPEDIR.DS.$this->params["item"].DS."tmpfile";
 		$str = array( "log" => file_get_contents($tmpfile),
@@ -78,7 +85,12 @@ class LogstashLinuxUnix extends Base {
 		{
 			$logging->log ("Success: Pushed in to logstash", $this->getModuleName() ) ;
 			return TRUE;
-		}       
+		}
+}
+   else
+  {
+echo "logstash not run";
+}
     }
 
     private function getPipeline() {

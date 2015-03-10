@@ -20,6 +20,12 @@ class IronmqLinuxUnix extends Base {
 
     public function getSettingFormFields() {
         $ff = array(
+           "ironmq_enabled" =>
+            	array(
+                	"type" => "boolean",
+                	"optional" => true,
+                	"name" => "ironmq on Build Completion?"
+            ),
             "token" => array(
                 "type" => "text",
                 "optional" => true,
@@ -73,6 +79,7 @@ class IronmqLinuxUnix extends Base {
         //$buildsettings = $pipeline->getData();
 
         $mn = $this->getModuleName() ;
+	    if ($pipeline["settings"][$mn]["ironmq_enabled"] == "on") {
               
         require __DIR__ . '/../Libraries/vendor/autoload.php';
 		
@@ -88,6 +95,12 @@ class IronmqLinuxUnix extends Base {
 		    "project_id" => $pipeline["settings"][$mn]["projectid"]
 		));
 		$ironmq->postMessage($pipeline["settings"][$mn]["queuename"], $tmpfile);
+}
+   else
+  {
+echo "ironmq not run";
+}
+
 	}
 
     private function getPipeline() {
