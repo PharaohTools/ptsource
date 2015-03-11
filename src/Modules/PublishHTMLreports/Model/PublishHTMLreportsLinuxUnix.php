@@ -20,7 +20,13 @@ class PublishHTMLreportsLinuxUnix extends Base {
 
     public function getSettingFormFields() {
         $ff = array(
-           "Report_Directory" => 
+           "Publish_Report" =>
+            	array(
+                	"type" => "boolean",
+                	"optional" => true,
+                	"name" => "Publish HTML reports on Build Completion?"
+            ),
+	   "Report_Directory" => 
 		array(   "type" => "text",
 			 "name" => "HTML Directory to archieve",
 			 "slug" => "htmlreportdirectory"),
@@ -52,6 +58,7 @@ class PublishHTMLreportsLinuxUnix extends Base {
         $steps = json_decode($steps, true);
 	
 	$mn = $this->getModuleName() ;
+	if ($steps[$mn]["Publish_Report"] == "on") {
 	$dir = $steps[$mn]["Report_Directory"];
 	if (substr($dir, -1) != '/') { $dir = $dir . '/';}
 		
@@ -99,6 +106,8 @@ FOOTER;
 			{	return true;	}
 	else	{ 	return false;	}
 	}
-	return false;     
+	}
+	else { $logging->log ("Publish HTML reports ignoring...", $this->getModuleName() ) ;
+            	return true ; }      
    }
 }

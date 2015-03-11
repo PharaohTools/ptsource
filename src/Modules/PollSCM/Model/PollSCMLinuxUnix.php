@@ -71,6 +71,7 @@ class PollSCMLinuxUnix extends Base {
 
         $loggingFactory = new \Model\Logging();
         $this->params["echo-log"] = true ;
+        $this->params["php-log"] = true ;
         $logging = $loggingFactory->getModel($this->params);
 
         $workspace = $this->getWorkspace() ;
@@ -97,7 +98,7 @@ class PollSCMLinuxUnix extends Base {
                         if (isset($this->params["build-settings"][$mn]["scm_always_allow_web"]) &&
                             $this->params["build-settings"][$mn]["scm_always_allow_web"] =="on") {
                             if (isset($this->params["build-request-source"]) && $this->params["build-request-source"]=="web" ) {
-                                $logging->log ("Alwas allowing builds execued from web", $this->getModuleName() ) ;
+                                $logging->log ("Always allowing builds executed from web", $this->getModuleName() ) ;
                                 $result = true ; }
                             else {
                                 $result = false ; } }

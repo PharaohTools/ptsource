@@ -2,27 +2,27 @@
 
 Namespace Info;
 
-class BuildMoniterInfo extends PTConfigureBase {
+class AssetLoaderInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "BuildMoniter/Home Page";
+    public $name = "Asset Loader";
 
     public function _construct() {
       parent::__construct();
     }
 
     public function routesAvailable() {
-      return array( "BuildMoniter" => array("show") );
+      return array( "AssetLoader" => array("show", "delete") );
     }
 
     public function routeAliases() {
-      return array("buildMoniter"=>"BuildMoniter");
+      return array("assetLoader"=>"AssetLoader");
     }
 
     public function helpDefinition() {
       $help = <<<"HELPDATA"
-  This command is part of Core - its the default route and only used for help and as an Intro really...
+  This is the Build Home page module for a single build...
 HELPDATA;
       return $help ;
     }

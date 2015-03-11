@@ -182,4 +182,4 @@
     </div>
 </div><!-- container -->
 
-<link rel="stylesheet" href="/Assets/ModuleManager/css/modulemanager.css">
+<link rel="stylesheet" href="/index.php?control=AssetLoader&action=show&module=ModuleManager&type=css&asset=modulemanager.css">

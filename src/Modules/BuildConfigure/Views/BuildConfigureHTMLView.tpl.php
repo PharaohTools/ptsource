@@ -23,11 +23,9 @@
                 <a href="/index.php?control=Workspace&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
                     <i class="fa fa-folder-open-o"></i> Workspace
                 </a>
-                <!--
-                <a href="#" class="list-group-item">
-                    <i class="fa fa-bar-chart-o"></i> Monitors <span class="badge">6</span>
+                <a href="index.php?control=BuildMonitor&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
+                    <i class="fa fa-bar-chart-o"></i> Monitors
                 </a>
-                -->
                 <a href="/index.php?control=PipeRunner&action=history&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
                     <i class="fa fa-bar-chart-o"></i> History <span class="badge"><?php echo $pageVars["data"]["history_count"] ; ?></span>
                 </a>
@@ -103,8 +101,15 @@
                     <?php
 
                     foreach ($pageVars["data"]["settings"] as $one_config_slug => $one_conf_tails) {
-                        echo '<div class="form-group">' ;
-                        echo '  <label for="config_'.$one_config_slug.'" class="col-sm-2 control-label text-left">'.$one_config_slug.':</label>' ;
+                        echo '<div class="form-group confSettingsSlideySection" id="slidey'.$one_config_slug.'">' ;
+                        echo '  <div class="col-sm-12">' ;
+                        echo '    <label for="config_'.$one_config_slug.'" class="control-label text-left">'.$one_config_slug.':</label>' ;
+                        echo '    <a class="glyphicon glyphicon-chevron-down slideyToggleIcon" id="slideyToggleIcon'.$one_config_slug.'"' ;
+                        echo ' onclick="toggleConfSetting(this, \'slidey'.$one_config_slug.'\')"></a>' ;
+                        echo '    <a class="btn-info" id="slideyToggleIcon'.$one_config_slug.'"' ;
+                        echo ' onclick="hideConfSetting(\'slidey'.$one_config_slug.'\')">Hide</a>' ;
+                        echo '  </div>' ;
+                        echo '  <div class="col-sm-12 sliderFields">' ;
                         foreach ( $one_conf_tails["settings"] as $fieldSlug => $fieldInfo) {
                             echo '  <div class="col-sm-12">' ;
 
@@ -154,6 +159,7 @@
                                     echo '  </div>' ;
                                     break ; }
                             echo '  </div>';}
+                        echo '  </div>';
                         echo '</div>'; } ?>
 
                     <div class="form-group">
@@ -267,11 +273,11 @@
 
 
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
-<link rel="stylesheet" href="/Assets/BuildConfigure/css/buildconfigure.css">
+<link rel="stylesheet" type="text/css" href="/index.php?control=AssetLoader&action=show&module=BuildConfigure&type=css&asset=buildconfigure.css">
 <script type="text/javascript">
     steps = <?php echo json_encode($pageVars["data"]["fields"]) ; ?> ;
 </script>
-<script type="text/javascript" src="/Assets/BuildConfigure/js/buildconfigure.js"></script>
+<script type="text/javascript" src="/index.php?control=AssetLoader&action=show&module=BuildConfigure&type=js&asset=buildconfigure.js"></script>
 <script type="text/javascript">
 
     $(function() {
