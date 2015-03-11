@@ -123,15 +123,6 @@ body{
     max-height:20%;
 }
 
-.listImage {
-    max-width:40%;
-    max-height:40%;
-}
-
-.listImageWide {
-    max-width:50%;
-}
-
 .navbar-img {
     float: left;
     max-height: 50px;
