@@ -1,25 +1,3 @@
-.ui-state-default:hover {
-     background-color: lightgray;
-     cursor: pointer;
- }
-
-#sortableSteps { list-style-type: none; margin: 0; padding: 0; }
-#sortableSteps li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; }
-#sortableSteps li span { position: absolute; margin-left: -1.3em; }
-
-.confSettingsSlideySection .sliderFields {
-    display: none ;
-}
-
-.confSettingsSlideySection {
-    margin-bottom: 0;
-}
-
-.confSettingsHideSectionButton {
-}
-
-
-
 .listImage {
     max-width:40px;
     max-height:40px;

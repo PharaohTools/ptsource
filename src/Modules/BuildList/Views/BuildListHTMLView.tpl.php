@@ -425,5 +425,7 @@
     </div>
 
 </div><!-- /.container -->
+<link rel="stylesheet" type="text/css" href="/index.php?control=AssetLoader&action=show&module=BuildList&type=css&asset=buildlist.css">
+
 
 
