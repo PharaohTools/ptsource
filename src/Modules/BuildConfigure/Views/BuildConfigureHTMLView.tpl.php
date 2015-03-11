@@ -229,7 +229,7 @@
                                 <select name="new_step_module_selector" id="new_step_module_selector" onchange="changeModule(this)">
                                     <option value="nomoduleselected" selected="selected">-- Select Module --</option>
                                     <?php
-                                        foreach ($pageVars["data"]["fields"] as $builderName => $builderBits) {
+                                        foreach ($pageVars["data"]["stepFields"] as $builderName => $builderBits) {
                                             echo '  <option value="'.strtolower($builderName).'">'.$builderName.'</option>'; }
                                     ?>
                                 </select>
