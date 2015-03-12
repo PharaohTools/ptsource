@@ -357,6 +357,12 @@
                                             </td>
                                             <td>
                                                 <?php
+                                                echo '<a href="/index.php?control=PipeRunner&action=start&item='.$pipelineDetails["project-slug"].'">';
+                                                echo '<img class="listImage" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=run.png" /></a>' ;
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <?php
                                                 if ($pipelineDetails["last_success"] != false) {
                                                     echo '20:13:55 01/02/2015' ; }
                                                 else {
@@ -393,12 +399,6 @@
                                                     echo '<img class="listImage" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=tick.png" />' ; }
                                                 else {
                                                     echo '<img class="listImage" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=cross.png" />' ; }
-                                                ?>
-                                            </td>
-                                            <td>
-                                                <?php
-                                                echo '<a href="/index.php?control=PipeRunner&action=start&item='.$pipelineDetails["project-slug"].'">';
-                                                echo '<img class="listImage" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=run.png" /></a>' ;
                                                 ?>
                                             </td>
                                         </tr>
