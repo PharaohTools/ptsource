@@ -5,11 +5,13 @@
 		<div class="col-md-4 col-md-offset-4">
 			<div class="login-panel panel panel-default">
 				<div class="panel-heading">
-					<h3 class="panel-title"><center><b>Login</b></center> </h3> 
+					<h3 class="panel-title"><strong>Login</strong> </h3>
 				</div>
 				<div class="panel-body">
-					<h4 class="text-uppercase text-light"><a href="/"> <center>PTBuild - Pharaoh Tools <center></a></h4>
-					<a href="#"><img src="/Assets/images/5.png" class="navbar-img" style="height: 50px;margin-left: auto;margin-right: auto;display: block" /></a>
+					<h4 class="text-uppercase text-light"><a href="/">PTBuild - Pharaoh Tools</h4>
+					<a href="/">
+                        <img src="/index.php?control=AssetLoader&action=show&module=PostInput&type=image&asset=5.png" class="navbar-img" style="height: 50px;margin-left: auto;margin-right: auto;display: block" />
+                    </a>
 					<div class="row clearfix no-margin">
 						<h5 class="text-uppercase text-light" style="margin-top: 15px;">  </h5>
 						<p style="color: #ff6312; margin-left: 137px;" id="login_error_msg"></p>
@@ -59,7 +61,7 @@
 					<h3 class="panel-title"><center><b>Registration</b></center> </h3> 
 				</div>
 					<h4 class="text-uppercase text-light"><a href="/"> <center>PTBuild - Pharaoh Tools <center></a></h4>
-					<a href="#"><img src="/Assets/images/5.png" class="navbar-img" style="height: 50px;margin-left: auto;margin-right: auto;display: block" /></a>
+					<a href="#"><img src="/index.php?control=AssetLoader&action=show&module=PostInput&type=image&asset=5.png" class="navbar-img" style="height: 50px;margin-left: auto;margin-right: auto;display: block" /></a>
 					<div class="row clearfix no-margin">
 						<h5 class="text-uppercase text-light" style="margin-top: 15px;margin-left: 51px;">  </h5>
 						<p style="color: #ff6312; margin-left: 137px;" id="registration_error_msg"></p>
@@ -116,3 +118,4 @@
 
 			<!-- /.container -->
 
+<script type="text/javascript" src="/index.php?control=AssetLoader&action=show&module=Signup&type=js&asset=signup.js"></script>
