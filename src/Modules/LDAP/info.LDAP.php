@@ -25,7 +25,7 @@ class LDAPInfo extends PTConfigureBase {
     }
 
     public function buildSettings() {
-        return array("server", "root DN", "pass");
+        return array("enable", "server", "base DN", "cn", "user", "pass");
     }
 
     public function helpDefinition() {
