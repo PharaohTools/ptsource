@@ -29,27 +29,18 @@
                                 <button type="button" onclick="submit_login();" class="btn btn-info">Login</button>
                             </div>
                         </div>
-			<div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <a href="/index.php?control=OAuth&action=githublogin">
-				<button type="button"  class="btn btn-info">Login with GitHub</button>
+			<div>
+				<h5><b>Login with:</b></h5>
+				<a href="/index.php?control=OAuth&action=githublogin">
+				<img style="width:50px; height:50px;" src="Assets/images/github.png">
 				</a>
-                            </div>
-                        </div>
-		<!--	<div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <a href="/index.php?control=OAuth&action=googlelogin">
-				<button type="button"  class="btn btn-info">Login with Google</button>
+				<a href="/index.php?control=OAuth&action=fblogin">
+				<img style="width:50px; height:50px;" src="Assets/images/fb.png">
 				</a>
-                            </div> 
-                        </div> -->
-			<div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <a href="/index.php?control=OAuth&action=fblogin">
-				<button type="button"  class="btn btn-info">Login with Facebook</button>
+				<a href="/index.php?control=OAuth&action=linkedinlogin">
+				<img style="width:50px; height:50px;" src="Assets/images/linked-in.png">
 				</a>
-                            </div>
-                        </div>
+			</div>
                     </form>
                 </div>
                 <p>
