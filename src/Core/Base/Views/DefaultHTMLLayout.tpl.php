@@ -6,35 +6,34 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="description" content="">
 		<meta name="author" content="">
-		<link rel="icon" href="Assets/startbootstrap-sb-admin-2-1.0.5/Assets/startbootstrap-sb-admin-2-1.0.5/favicon.ico">
+		<link rel="icon" href="/index.php?control=AssetLoader&action=show&module=PostInput&type=image&asset=favicon.ico">
 
 		<title>PTBuild - Pharaoh Tools</title>
 
+        <script src="/index.php?control=AssetLoader&action=show&module=PostInput&type=js&asset=jquery.min.js"></script>
+        <script src="/index.php?control=AssetLoader&action=show&module=PostInput&type=js&asset=jquery-ui.min.js"></script>
+        <script src="/index.php?control=AssetLoader&action=show&module=PostInput&type=js&asset=bootstrap.min.js"></script>
+
 		<!-- Bootstrap Core CSS -->
-		<link href="Assets/startbootstrap-sb-admin-2-1.0.5/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/index.php?control=AssetLoader&action=show&module=PostInput&type=css&asset=bootstrap.min.css" rel="stylesheet">
 
 		<!-- MetisMenu CSS -->
-		<link href="Assets/startbootstrap-sb-admin-2-1.0.5/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+		<link href="/Assets/startbootstrap-sb-admin-2-1.0.5/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
 		<!-- Timeline CSS -->
-		<link href="Assets/startbootstrap-sb-admin-2-1.0.5/dist/css/timeline.css" rel="stylesheet">
+		<link href="/Assets/startbootstrap-sb-admin-2-1.0.5/dist/css/timeline.css" rel="stylesheet">
 
 		<!-- Custom CSS -->
-		<link href="Assets/startbootstrap-sb-admin-2-1.0.5/dist/css/sb-admin-2.css" rel="stylesheet">
+		<link href="/Assets/startbootstrap-sb-admin-2-1.0.5/dist/css/sb-admin-2.css" rel="stylesheet">
 
 		<!-- Custom Fonts -->
-		<link href="Assets/startbootstrap-sb-admin-2-1.0.5/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-		<script src="Assets/startbootstrap-sb-admin-2-1.0.5/bower_components/jquery/dist/jquery.min.js"></script>
-
-		<!-- Bootstrap Core JavaScript --
-		<script src="Assets/startbootstrap-sb-admin-2-1.0.5/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>-->
+		<link href="/Assets/startbootstrap-sb-admin-2-1.0.5/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
 		<!-- Metis Menu Plugin JavaScript -->
-		<script src="Assets/startbootstrap-sb-admin-2-1.0.5/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+		<script src="/Assets/startbootstrap-sb-admin-2-1.0.5/bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
 		<!-- Custom Theme JavaScript 
-		<script src="Assets/startbootstrap-sb-admin-2-1.0.5/dist/js/sb-admin-2.js"></script>-->
+		<script src="/Assets/startbootstrap-sb-admin-2-1.0.5/dist/js/sb-admin-2.js"></script>-->
 
 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -50,14 +49,9 @@
 
 		<![endif]-->
 		<!--  sign up add -->
-		<script src="Assets/Signup/js/signup.js"></script>
-		<script src="Assets/startbootstrap-sb-admin-2-1.0.5/bower_components/jquery/dist/jquery.min.js"></script>
-		<script src="Assets/js/jquery-ui.min.js"></script>
-		<style>
-			body {
-				padding-top: 72px;
-			}
-		</style>
+        <!-- Bootstrap Core CSS -->
+        <link href="/index.php?control=AssetLoader&action=show&module=PostInput&type=css&asset=default.css" rel="stylesheet">
+
 	</head>
 
 	<body>
@@ -73,7 +67,9 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-" href="/index.php?control=Index&action=show"><img src="/Assets/images/5.png" class="navbar-img" style="height: 60px;padding: 5px" /><b>PTBuild</b></a>
+					<a class="navbar-" href="/index.php?control=Index&action=show">
+                        <img src="/index.php?control=AssetLoader&action=show&module=PostInput&type=image&asset=5.png" class="navbar-img" style="height: 60px;padding: 5px" /><b>PTBuild</b>
+                    </a>
 				</div>
 				<!-- /.navbar-header -->
 
@@ -129,7 +125,6 @@
 			<!-- Bootstrap core JavaScript
 			================================================== -->
 			<!-- Placed at the end of the document so the pages load faster -->
-			<script src="/Assets/js/bootstrap.min.js"></script>
 			<script>
 				$(function() {
 					$('#slide-submenu').on('click', function() {
