@@ -64,6 +64,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Pipeline</th>
+                                        <th>Run Now</th>
                                         <th>Status</th>
                                         <th>Success</th>
                                         <th>Failure</th>
@@ -72,7 +73,6 @@
                                         <th>Parent</th>
                                         <th>Child</th>
                                         -->
-                                        <th>Run Now</th>
                                     </tr>
                                     </thead>
                                     <tbody class="table-hover">
@@ -86,16 +86,16 @@
                                             <td><a href="/index.php?control=BuildHome&action=show&item=<?php echo $pipelineSlug ; ?>"><?php echo $pipelineDetails["project-name"] ; ?></a></td>
                                             <td>
                                                 <?php
-                                                if ($pipelineDetails["last_status"] === true) {
-                                                    echo '<img class="listImage listImageWide" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=green-ball.png" />' ; }
-                                                else {
-                                                    echo '<img class="listImage listImageWide" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=red-ball.png" />' ; }
+                                                echo '<a href="/index.php?control=PipeRunner&action=start&item='.$pipelineDetails["project-slug"].'">';
+                                                echo '<img class="listImage" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=run.png" /></a>' ;
                                                 ?>
                                             </td>
                                             <td>
                                                 <?php
-                                                echo '<a href="/index.php?control=PipeRunner&action=start&item='.$pipelineDetails["project-slug"].'">';
-                                                echo '<img class="listImage" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=run.png" /></a>' ;
+                                                if ($pipelineDetails["last_status"] === true) {
+                                                    echo '<img class="listImage listImageWide" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=green-ball.png" />' ; }
+                                                else {
+                                                    echo '<img class="listImage listImageWide" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=red-ball.png" />' ; }
                                                 ?>
                                             </td>
                                             <td>
