@@ -1,0 +1,11 @@
+body {
+    padding-top: 72px;
+}
+
+.sidebar {
+    position: relative;
+}
+
+#page-wrapper {
+    margin-left: 0;
+}

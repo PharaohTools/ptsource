@@ -20,6 +20,12 @@ class SSHLinuxUnix extends Base {
 
     public function getSettingFormFields() {
         $ff = array(
+           "ssh_enabled" =>
+            	array(
+                	"type" => "boolean",
+                	"optional" => true,
+                	"name" => "ssh on Build Completion?"
+            ),
             "username" => array(
                 "type" => "text",
                 "optional" => true,
@@ -76,9 +82,11 @@ class SSHLinuxUnix extends Base {
         $pipeline = $this->getPipeline() ;
         //$buildsettings = $pipeline->getData();
 
+
         $mn = $this->getModuleName() ;
-              
-    if (!function_exists("ssh2_connect"))
+	    if ($pipeline["settings"][$mn]["ssh_enabled"] == "on") {
+    
+       if (!function_exists("ssh2_connect"))
 		{
 		    echo "ssh2_connect doesn't exist";
 		    return false;
@@ -107,10 +115,13 @@ class SSHLinuxUnix extends Base {
 		        }
 		    }
 		}
+}
+   else
+  {
+echo "ssh not run";
+}
 	
-    }
-
-    
+  }
     private function getPipeline() {
         $pipelineFactory = new \Model\Pipeline() ;
         $pipeline = $pipelineFactory->getModel($this->params);

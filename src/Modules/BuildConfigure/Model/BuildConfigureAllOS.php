@@ -19,7 +19,7 @@ class BuildConfigureAllOS extends Base {
         $ret["builders"] = $this->getBuilders();
         $ret["settings"] = $this->getBuilderSettings();
         $ret["fields"] = $this->getBuilderFormFields();
-        // $ret["plugin"] = $this->getInstalledPlugins();
+        $ret["stepFields"] = $this->getStepBuildersFormFields();
         return $ret ;
     }
 
@@ -50,7 +50,12 @@ class BuildConfigureAllOS extends Base {
         $builder = $builderFactory->getModel($this->params, "BuilderRepository");
         return $builder->getAllBuildersFormFields();
     }
-    #
+
+    public function getStepBuildersFormFields() {
+        $builderFactory = new \Model\Builder() ;
+        $builder = $builderFactory->getModel($this->params, "BuilderRepository");
+        return $builder->getStepBuildersFormFields();
+    }
 
     public function savePipeline() {
         $this->params["project-slug"] = $this->getFormattedSlug() ;
@@ -92,9 +97,8 @@ class BuildConfigureAllOS extends Base {
         return $this->params["project-slug"] ;
     }
     
-    public function getInstalledPlugins()
-    {
-    $plugin = scandir(PLUGININS) ;
+    public function getInstalledPlugins() {
+        $plugin = scandir(PLUGININS) ;
         for ($i=0; $i<count($plugin); $i++) {
             if (!in_array($plugin[$i], array(".", "..", "tmpfile"))){
                 if(is_dir(PLUGININS.DS.$plugin[$i])) {

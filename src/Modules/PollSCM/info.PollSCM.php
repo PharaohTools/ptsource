@@ -28,11 +28,11 @@ class PollSCMInfo extends PTConfigureBase {
         return array("send_postbuild_email", "send_postbuild_email_stability", "send_postbuild_email_address");
     }
 
-//    public function configuration() {
-//        return array(
-//            "smtp_server"=> array( "type" => "text", "default" => "SMTP Server", "label" => "SMTP Server Address", ),
-//        );
-//    }
+    public function configuration() {
+        return array(
+            "exec_delay"=> array( "type" => "text", "default" => "180", "label" => "Minimum execution delay between SCM Poll runs", ),
+        );
+    }
 
     public function helpDefinition() {
        $help = <<<"HELPDATA"
