@@ -1,5 +1,4 @@
 <div class="container" id="wrapper">
-
     <div class="navbar-default col-sm-2 sidebar" role="navigation">
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav in" id="side-menu">
@@ -39,7 +38,6 @@
                 </li>
                 <li>
                     <a href="/index.php?control=Monitors&action=DefaultHistory"><i class="fa fa-history fa-fw"></i> History<span class="fa arrow"></span></a>
-                </li>
                 </li>
             </ul>
         </div>
@@ -162,19 +160,14 @@
                             </table>
                         </div>
                     </div>
-
                 </div>
-
             </div>
-
         </div>
-
         <p>
             ---------------------------------------<br/>
             Visit www.pharaohtools.com for more
         </p>
     </div>
-
 </div><!-- /.container -->
 <link rel="stylesheet" type="text/css" href="/index.php?control=AssetLoader&action=show&module=BuildList&type=css&asset=buildlist.css">
 

@@ -40,7 +40,6 @@
 				<li>
 					<a href="/index.php?control=Monitors&action=DefaultHistory"><i class="fa fa-history fa-fw"></i> History<span class="fa arrow"></span></a>
 				</li>
-				</li>
 			</ul>
 		</div>
 	</div>

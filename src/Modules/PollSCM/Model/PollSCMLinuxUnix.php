@@ -92,15 +92,13 @@ class PollSCMLinuxUnix extends Base {
     }
 
     private function doBuildSCMPollingEnabled() {
-        $workspace = $this->getWorkspace() ;
         $mn = $this->getModuleName() ;
         $this->lm->log ("SCM Polling Enabled, attempting...", $this->getModuleName() ) ;
-        if ($this->pollIfEnoughTimePassed()) {
+        $this->collateAndRun() ;
+        $enoughTime = $this->pollIfEnoughTimePassed() ;
+        if ($enoughTime == true) {
             try {
-                $this->lm->log ("Polling SCM Server", $this->getModuleName() ) ;
-                $this->lm->log ("Changing Directory to workspace ".$workspace, $this->getModuleName() ) ;
-                chdir("Changing Directory to workspace ".$workspace);
-                // @todo other scm tpes
+                // @todo other scm types @kevellcorp do svn
                 $lastSha = (isset($this->params["build-settings"][$mn]["last_sha"])) ? $this->params["build-settings"][$mn]["last_sha"] : null ;
                 if (strlen($lastSha)>0) { $result = $this->doLastCommitStored() ; }
                 else { $result = $this->doNoLastCommitStored() ; }
@@ -109,8 +107,7 @@ class PollSCMLinuxUnix extends Base {
                 $this->lm->log ("Error polling scm", $this->getModuleName() ) ;
                 return false; } }
         else {
-            $this->collateAndRun() ;
-            return false ; }
+            return $enoughTime ; }
     }
 
     private function pollIfEnoughTimePassed() {
@@ -120,10 +117,15 @@ class PollSCMLinuxUnix extends Base {
         $exec_delay = $this->params["app-settings"][$mn]["exec_delay"] ;
         // check now - last poll time > exec delay
         if (($time - $last_poll ) > $exec_delay) {
-            $this->lm->log ("Enough time passed since last run, aborting...", $this->getModuleName() ) ;
+            $this->lm->log ("Enough time passed since last run...", $this->getModuleName() ) ;
+            $this->lm->log ("Polling SCM Server", $this->getModuleName() ) ;
+            $workspace = $this->getWorkspace() ;
+            $this->lm->log ("Changing Directory to workspace ".$workspace, $this->getModuleName() ) ;
+            chdir($workspace);
             return true ; }
         else {
             $this->lm->log ("Not enough time passed since last run, aborting...", $this->getModuleName() ) ;
+            // @todo this should probably be true
             return false ; }
     }
 
@@ -133,6 +135,20 @@ class PollSCMLinuxUnix extends Base {
          */
     }
 
+    private function collateWaitingJobs() {
+        $jobs = array() ;
+        $allPipes = $this->getAllPipelines() ;
+        foreach ($allPipes as $onePipe) {
+            $isWaiting = $this->isPipeWaiting();
+        }
+        return $jobs ;
+    }
+
+    private function getAllPipelines() {
+        $pipelineFactory = new \Model\Pipeline() ;
+        $pipeline = $pipelineFactory->getModel($this->params);
+        return $pipeline->getPipelines();
+    }
 
     private function doLastCommitStored() {
         $mn = $this->getModuleName() ;

@@ -1,42 +1,29 @@
-<div class="container">
-    <div class="row">
-        <div class="col-sm-4 col-md-3 sidebar">
-            <div class="mini-submenu">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </div>
-            <div class="list-group sidebar-list">
-                <span href="#" class="list-group-item active"> Menu <span class="pull-right" id="slide-submenu">
-                    <i class="fa fa-times"></i>
-                </span> </span>
-                <a href="/index.php?control=Index&action=show" class="list-group-item">
-                    <i class="fa fa-comment-o"></i> Dashboard
-                </a>
-                <a href="/index.php?control=BuildList&action=show" class="list-group-item">
-                    <i class="fa fa-search"></i> All Pipelines
-                </a>
-                <a href="/index.php?control=BuildConfigure&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
-                    <i class="fa fa-user"></i> Configure
-                </a>
-                <a href="/index.php?control=Workspace&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
-                    <i class="fa fa-folder-open-o"></i> Workspace
-                </a>
-                <a href="/index.php?control=About&action=changes&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
-                    <i class="fa fa-bar-chart-o"></i> Changes <span class="badge">3</span>
-                </a>
-                <a href="/index.php?control=About&action=history&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
-                    <i class="fa fa-bar-chart-o"></i> History <span class="badge">3</span>
-                </a>
-                <a href="/index.php?control=About&action=delete&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
-                    <i class="fa fa-envelope"></i> Delete
-                </a>
-                <a href="/index.php?control=PipeRunner&action=start&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
-                    <i class="fa fa-envelope"></i> Run Now
-                </a>
-            </div>
+<div class="container" id="wrapper">
+    <div class="navbar-default col-sm-2 sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse">
+            <ul class="nav in" id="side-menu">
+                <li class="sidebar-search">
+                    <div class="input-group custom-search-form">
+                        <input type="text" class="form-control" placeholder="Search...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                    </div>
+                    <!-- /input-group -->
+                </li>
+                <li>
+                    <a href="/index.php?control=Index&action=show" class="active"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                </li>
+                <li>
+                    <a href="/index.php?control=BuildConfigure&action=new"><i class="fa fa-table fa-fw"></i> New Pipeline</a>
+                </li>
+            </ul>
         </div>
-        <div class="col-sm-8 col-md-9 clearfix main-container">
+    </div>
+
+    <div class="col-md-9 col-sm-10" id="page-wrapper">
             <h4 class="text-uppercase text-light">Pipeline</h4>
             <div class="row clearfix no-margin">
                 <h3><a class="lg-anchor text-light" href="">PTBuild - Pharaoh Tools <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>

@@ -3,5 +3,9 @@ body {
 }
 
 .sidebar {
-    position: relative !important;
+    position: relative;
+}
+
+#page-wrapper {
+    margin-left: 0;
 }
