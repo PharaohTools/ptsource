@@ -37,7 +37,12 @@
 										Login
 									</button> 
 								<br>
-									<a href="http://www.ptbuild.tld/index.php?control=Signup&action=registration"> Registration </a>
+								<a href="http://www.ptbuild.tld/index.php?control=Signup&action=registration"> Registration </a>
+								<br />
+								Sign in with:
+								<a href="/index.php?control=OAuth&action=githublogin" class="btn btn-social-icon btn-lg" title="Github"><i class="fa fa-github"></i></a>
+								<a href="/index.php?control=OAuth&action=fblogin" class="btn btn-social-icon btn-lg" title="Facebook"><i class="fa fa-facebook"></i></a>
+								<a href="/index.php?control=OAuth&action=linkedinlogin" class="btn btn-social-icon btn-lg" title="LinkedIn"><i class="fa fa-linkedin"></i></a>
 								</div>
 							</div>
 						</form>
