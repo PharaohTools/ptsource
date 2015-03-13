@@ -146,7 +146,7 @@ class SignupAllOS extends Base {
         header("Location: /index.php?control=Signup&action=login");
     }
     
-    public function mailVerification() {
+   public function mailVerification() {
     	$file = __DIR__."/../Data/users.txt";
     	$accountsJson = file_get_contents($file);
     	$accounts = json_decode($accountsJson);
@@ -167,6 +167,27 @@ class SignupAllOS extends Base {
 		$_SESSION["login-status"] = TRUE;
         $_SESSION["username"] = $email;
 		$_SESSION["userrole"] = 3;
+		$myfile = fopen(__DIR__."/../Data/oauthusers.txt", "r") or die("Unable to open file!");
+        $oldData='';
+        while(!feof($myfile))
+            $oldData.=fgets($myfile);
+        fclose($myfile);
+        $oldData=json_decode($oldData);
+
+        foreach($oldData as $data)
+        {
+			if($data==$user)
+            {
+					return;
+            }   
+		}
+		$myfile = fopen(__DIR__."/../Data/oauthusers.txt", "w") or die("Unable to open file!");
+        if($oldData==null) {
+            fwrite($myfile, json_encode(array($user)));//@todo change format of saved data.
+        }
+        else{
+            fwrite($myfile, json_encode(array_merge($oldData, array($user))));//@todo change the format of saved data.
+        }
 		header("Location: /index.php?control=Index&action=index");
     }
     
