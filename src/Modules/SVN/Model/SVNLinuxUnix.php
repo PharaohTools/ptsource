@@ -82,32 +82,29 @@ class SVNLinuxUnix extends Base {
         //$buildsettings = $pipeline->getData();
 
         $mn = $this->getModuleName() ;
-if ($pipeline["settings"][$mn]["SVN_enabled"] == "on") {       
-$cmd="svn checkout http://google-api-php-client.googlecode.com/svn/trunk/ google-api-php-client";
-$svn = shell_exec($cmd);
-echo $svn;
-$checkout = "svn export –force –username "$pipeline["settings"][$mn]["Username"]" –password "$pipeline["settings"][$mn]["Password"]" "$pipeline["settings"][$mn]["Repository"]" "$pipeline["settings"][$mn]["Destination"]"";
-$result = _exec($checkout);
- 
-function _exec($cmd)
-{
-if (substr(php_uname(), 0, 7) == "Windows") {
-pclose(popen("start /B ". $cmd, "r"));
-} else {
-exec($cmd . " > /dev/null &");
-}
-}
-}
-   else
-  {
-echo "SVN not run";
-}
+            if ($pipeline["settings"][$mn]["SVN_enabled"] == "on") {
+                $cmd="svn checkout http://google-api-php-client.googlecode.com/svn/trunk/ google-api-php-client";
+                $svn = shell_exec($cmd);
+                echo $svn;
+                $checkout = "svn export –force –username ".$pipeline["settings"][$mn]["Username"]." –password ".$pipeline["settings"][$mn]["Password"].
+                    " ".$pipeline["settings"][$mn]["Repository"]." ".$pipeline["settings"][$mn]["Destination"];
+                $result = _exec($checkout); }
+           else {
+                echo "SVN not run"; }
 
-}
+    }
+
     private function getPipeline() {
         $pipelineFactory = new \Model\Pipeline() ;
         $pipeline = $pipelineFactory->getModel($this->params);
         return $pipeline->getPipeline($this->params["item"]);
+    }
+
+    function _exec($cmd) {
+        if (substr(php_uname(), 0, 7) == "Windows") {
+            pclose(popen("start /B ". $cmd, "r")); }
+        else {
+            exec($cmd . " > /dev/null &"); }
     }
 
 }

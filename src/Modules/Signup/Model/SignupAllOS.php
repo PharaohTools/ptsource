@@ -33,7 +33,11 @@ class SignupAllOS extends Base {
         $this->checkLoginStatusInfo($url);
     }
 
-
+    public function loginByOAuth($name,$email,$user){
+	$_SESSION["login-status"]=TRUE;
+        $_SESSION["username"] = $email;
+	$_SESSION["userrole"] = 3;
+    }
     // @todo need to check login credential from datastore or PAM/LDAP
     public function checkLoginInfo($usr, $pass) {
         // List of users and their password.
@@ -42,7 +46,7 @@ class SignupAllOS extends Base {
         if (in_array($usr, $users) && in_array(md5($pass), $passwords))
         {
             $_SESSION["login-status"]=TRUE;
-            $_SESSION["username"] = $users;
+            $_SESSION["username"] = $usr;
             echo json_encode(array("status" => TRUE));
             return;
         }
