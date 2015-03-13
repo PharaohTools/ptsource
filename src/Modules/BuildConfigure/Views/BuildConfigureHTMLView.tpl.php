@@ -18,16 +18,25 @@
                         <i class="fa fa-comment-o"></i> Dashboard
                     </a>
                 </li>
+                <?php
+                if ($pageVars["route"]["action"] !== "new") {
+                ?>
                 <li>
                     <a href="/index.php?control=BuildHome&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
                         <i class="fa fa-search"></i> Pipeline Home
                     </a>
                 </li>
+                <?php
+                }
+                ?>
                 <li>
                     <a href="/index.php?control=BuildList&action=show">
                         <i class="fa fa-user"></i> All Pipelines
                     </a>
                 </li>
+                <?php
+                if ($pageVars["route"]["action"] !== "new") {
+                ?>
                 <li>
                     <a href="/index.php?control=Workspace&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
                         <i class="fa fa-folder-open-o"></i> Workspace
@@ -53,6 +62,9 @@
                         <i class="fa fa-envelope"></i> Run Now
                     </a>
                 </li>
+                <?php
+                }
+                ?>
             </ul>
         </div>
     </div>
