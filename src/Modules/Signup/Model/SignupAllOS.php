@@ -178,6 +178,7 @@ class SignupAllOS extends Base {
         {
 			if($data==$user)
             {
+					header("Location: /index.php?control=Index&action=index");
 					return;
             }   
 		}
