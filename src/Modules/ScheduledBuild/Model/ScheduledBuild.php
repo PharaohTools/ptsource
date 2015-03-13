@@ -2,6 +2,6 @@
 
 Namespace Model;
 
-class ScheduledTasks extends BaseModelFactory {
+class ScheduledBuild extends BaseModelFactory {
 
 }

@@ -2,7 +2,7 @@
 
 Namespace Info;
 
-class ScheduledTasksInfo extends PTConfigureBase {
+class ScheduledBuildInfo extends PTConfigureBase {
 
     public $hidden = false;
 
@@ -13,11 +13,11 @@ class ScheduledTasksInfo extends PTConfigureBase {
     }
 
     public function routesAvailable() {
-      return array( "ScheduledTasks" => array("start", "apistart", "service", "pipestatus", "show", "child", "history", "summary") );
+      return array( "ScheduledBuild" => array("start", "apistart", "service", "pipestatus", "show", "child", "history", "summary") );
     }
 
     public function routeAliases() {
-      return array("scheduledtasks"=>"ScheduledTasks", "scheduledTasks"=>"ScheduledTasks");
+      return array("ScheduledBuild"=>"ScheduledBuild", "ScheduledBuild"=>"ScheduledBuild");
     }
 
     public function helpDefinition() {

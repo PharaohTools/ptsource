@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class ScheduledTasksAllOS extends Base {
+class ScheduledBuildAllOS extends Base {
 
 	// Compatibility
 	public $os = array("any");

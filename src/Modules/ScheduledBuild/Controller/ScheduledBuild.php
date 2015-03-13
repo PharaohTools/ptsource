@@ -2,7 +2,7 @@
 
 Namespace Controller ;
 
-class ScheduledTasks extends Base {
+class ScheduledBuild extends Base {
 
     public function execute($pageVars) {
         $thisModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars) ;
@@ -14,22 +14,22 @@ class ScheduledTasks extends Base {
             $this->content["params"]["output-format"] = strtoupper($pageVars["route"]["action"]);
             $this->content["route"]["extraParams"]["output-format"] = strtoupper($pageVars["route"]["action"]);
             $this->content["data"] = $thisModel->getServiceData();
-            return array ("type"=>"view", "view"=>"scheduledTasks", "pageVars"=>$this->content); }
+            return array ("type"=>"view", "view"=>"ScheduledBuild", "pageVars"=>$this->content); }
         if (in_array($pageVars["route"]["action"], array("child"))) {
             $this->content["pid"] = $thisModel->runChild();
             $this->content["data"] = $thisModel->getChildData();
             $this->content["route"]["extraParams"]["output-format"] = "CLI";
-            return array ("type"=>"view", "view"=>"scheduledTasksChild", "pageVars"=>$this->content); }
+            return array ("type"=>"view", "view"=>"ScheduledBuildChild", "pageVars"=>$this->content); }
         if (in_array($pageVars["route"]["action"], array("start"))) {
            	$result=$thisModel->runPipe();
 			$this->content["pipex"] = $result; 
 			if ($result == "getParamValue") {
 				$this->content["data"] = $thisModel->getData();
-				return array ("type"=>"view", "view"=>"scheduledTasksGetValue", "pageVars"=>$this->content); } }
+				return array ("type"=>"view", "view"=>"ScheduledBuildGetValue", "pageVars"=>$this->content); } }
 			else{
-				return array ("type"=>"view", "view"=>"scheduledTasks", "pageVars"=>$this->content); }
+				return array ("type"=>"view", "view"=>"ScheduledBuild", "pageVars"=>$this->content); }
         $this->content["data"] = $thisModel->getData();
-        return array ("type"=>"view", "view"=>"scheduledTasks", "pageVars"=>$this->content);
+        return array ("type"=>"view", "view"=>"ScheduledBuild", "pageVars"=>$this->content);
     }
 
 }
