@@ -21,7 +21,6 @@ class EventRunnerAllOS extends BaseLinuxApp {
 
     public function eventRunner($event) {
         $loggingFactory = new \Model\Logging();
-        $this->params["echo-log"] = true ;
         $logging = $loggingFactory->getModel($this->params);
         $logging->log("Executing event $event", $this->getModuleName()) ;
         $eventFactory = new \Model\Event() ;

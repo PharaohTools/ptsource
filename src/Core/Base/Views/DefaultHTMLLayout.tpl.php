@@ -1,140 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<link rel="icon" href="/index.php?control=AssetLoader&action=show&module=PostInput&type=image&asset=favicon.ico">
 
-    <title>PTBuild - Pharaoh Tools</title>
+		<title>PTBuild - Pharaoh Tools</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="Assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="Assets/css/style.css" rel="stylesheet">
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+        <script src="/index.php?control=AssetLoader&action=show&module=PostInput&type=js&asset=jquery.min.js"></script>
+        <script src="/index.php?control=AssetLoader&action=show&module=PostInput&type=js&asset=jquery-ui.min.js"></script>
+        <script src="/index.php?control=AssetLoader&action=show&module=PostInput&type=js&asset=bootstrap.min.js"></script>
 
+		<!-- Bootstrap Core CSS -->
+		<link href="/index.php?control=AssetLoader&action=show&module=PostInput&type=css&asset=bootstrap.min.css" rel="stylesheet">
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<!-- MetisMenu CSS -->
+		<link href="/Assets/startbootstrap-sb-admin-2-1.0.5/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
+		<!-- Timeline CSS -->
+		<link href="/Assets/startbootstrap-sb-admin-2-1.0.5/dist/css/timeline.css" rel="stylesheet">
 
-    <![endif]-->
-    <!--  sign up add -->
-    <script src="/Assets/Signup/js/signup.js"></script>
-    <script src="/Assets/js/jquery.min.js"></script>
-    <script src="/Assets/js/jquery-ui.min.js"></script>
-    <style>
-        body{
-            padding-top: 72px;
-        }
-    </style>
-</head>
+		<!-- Custom CSS -->
+		<link href="/Assets/startbootstrap-sb-admin-2-1.0.5/dist/css/sb-admin-2.css" rel="stylesheet">
 
-<body>
-<input type="hidden" id="base_url" value="http://www.ptbuild.tld">
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="/index.php?control=Index&action=show"><img src="/Assets/images/5.png" class="navbar-img" /></a>
-            <a class="navbar-brand" href="/index.php?control=Index&action=show">PTBuild</a>
-        </div>
+		<!-- Custom Fonts -->
+		<link href="/Assets/startbootstrap-sb-admin-2-1.0.5/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <?php if($pageVars["route"]["control"] == "Signup"){ ?>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="/index.php?control=Signup&action=login">Login</a></li>
-                    <li><a href="/index.php?control=Signup&action=registration">Registration</a></li>
-                </ul>
+		<!-- Metis Menu Plugin JavaScript -->
+		<script src="/Assets/startbootstrap-sb-admin-2-1.0.5/bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
-                <form class="navbar-form navbar-right" role="search">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search">
-                    </div>
-                    <button type="submit" class="btn btn-info">Submit</button>
-                </form>
+		<!-- Custom Theme JavaScript 
+		<script src="/Assets/startbootstrap-sb-admin-2-1.0.5/dist/js/sb-admin-2.js"></script>-->
 
-            </div><!-- /.navbar-collapse -->
-        <?php }else{?>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="/index.php?control=BuildConfigure&action=new">New Pipeline</a></li>
-                    <li><a href="#">History</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Others <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">One more separated link</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="/index.php?control=Signup&action=logout">Logout</a></li>
-                </ul>
-                <form class="navbar-form navbar-right" role="search">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search">
-                    </div>
-                    <button type="submit" class="btn btn-info">Submit</button>
-                </form>
-            </div><!-- /.navbar-collapse -->
-        <?php } ?>
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
 
-    </div><!-- /.container-fluid -->
-</nav>
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 
-<?php echo $this->renderMessages($pageVars); ?>
-<?php echo $templateData; ?>
+		<![endif]-->
+		<!--  sign up add -->
+        <!-- Bootstrap Core CSS -->
+        <link href="/index.php?control=AssetLoader&action=show&module=PostInput&type=css&asset=default.css" rel="stylesheet">
 
+	</head>
 
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="/Assets/js/bootstrap.min.js"></script>
-<script>
-    $(function() {
-        $('#slide-submenu').on('click', function() {
-            $(this).closest('.list-group').fadeOut('slide', function() {
-                $('.mini-submenu').fadeIn();
-            });
-        });
+	<body>
+		<input type="hidden" id="base_url" value="http://www.ptbuild.tld">
+<?php
+	if($pageVars["route"]["action"] != "registration" && $pageVars["route"]["action"] != "login") { ?>
+		<div id="wrapper">
+			<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-top: -70px">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-" href="/index.php?control=Index&action=show">
+                        <img src="/index.php?control=AssetLoader&action=show&module=PostInput&type=image&asset=5.png" class="navbar-img" style="height: 60px;padding: 5px" /><b>PTBuild</b>
+                    </a>
+				</div>
+				<!-- /.navbar-header -->
 
-        $('.mini-submenu').on('click', function() {
-            $(this).next('.list-group').toggle('slide');
-            $('.mini-submenu').hide();
-        });
+				<ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-alerts">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-comment fa-fw"></i> New Comment
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                       
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>See All Alerts</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-alerts --
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="/index.php?control=Signup&action=logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>   
+            <!-- /.navbar-top-links -->
+			</nav>
+<?php } ?>
+			<?php echo $this -> renderMessages($pageVars); ?>
+			<?php echo $templateData; ?>
 
-        $.ajax({
-            type: 'POST',
-            url: $('#base_url').val() + '/index.php?control=Signup&action=login-status',
-            data: {
-                url:document.URL
-            },
-            dataType: "json",
-            success: function(result)
-            {
-                if(result.status == false){
-                    window.location.assign($('#base_url').val() + '/index.php?control=Signup&action=login');
-                }
-            }
-        });
-    })
+			<!-- Bootstrap core JavaScript
+			================================================== -->
+			<!-- Placed at the end of the document so the pages load faster -->
+			<script>
+				$(function() {
+					$('#slide-submenu').on('click', function() {
+						$(this).closest('.list-group').fadeOut('slide', function() {
+							$('.mini-submenu').fadeIn();
+						});
+					});
 
+					$('.mini-submenu').on('click', function() {
+						$(this).next('.list-group').toggle('slide');
+						$('.mini-submenu').hide();
+					});
 
-</script>
-</body>
+					$.ajax({
+						type : 'POST',
+						url : $('#base_url').val() + '/index.php?control=Signup&action=login-status',
+						data : {
+							url : document.URL
+						},
+						dataType : "json",
+						success : function(result) {
+							if (result.status == false) {
+								window.location.assign($('#base_url').val() + '/index.php?control=Signup&action=login');
+							}
+						}
+					});
+				})
+
+			</script>
+	</body>
 </html>

@@ -138,4 +138,15 @@ class AutoLoader{
         return false ;
     }
 
+    public static function findModulePath($module) {
+        $allModuleParentDirectories = array("Extensions", "Modules", "Core");
+        foreach ($allModuleParentDirectories as $oneModuleParentDirectory) {
+            $currentModulesParentDir = dirname(__FILE__) . DIRECTORY_SEPARATOR . $oneModuleParentDirectory ;
+            $modulesIndividualDirectories = scandir($currentModulesParentDir);
+            foreach ($modulesIndividualDirectories as $singleModuleDir) {
+                if ($singleModuleDir == $module) {
+                    return $currentModulesParentDir.DIRECTORY_SEPARATOR.$singleModuleDir.DIRECTORY_SEPARATOR; } } }
+        return false ;
+    }
+
 }

@@ -48,16 +48,8 @@ class XVFBLinuxUnix extends Base {
         $this->params["echo-log"] = true ;
         $logging = $loggingFactory->getModel($this->params);
 
-        $file = PIPEDIR.DS.$this->params["item"].DS.'defaults';
-        $defaults = file_get_contents($file) ;
-        $defaults = json_decode($defaults, true);
-
-        $file = PIPEDIR.DS.$this->params["item"].DS.'settings';
-        $settings = file_get_contents($file) ;
-        $settings = json_decode($settings, true);
-
         $mn = $this->getModuleName() ;
-        if ($settings[$mn]["xvfb_during_build"] == "on") {
+        if ($this->params["build-settings"][$mn]["xvfb_during_build"] == "on") {
             $logging->log ("XVFB Enabled for build, starting...", $this->getModuleName() ) ;
             $xvfbCommand = "echo 'pretend to start xvfb'" ;
             $result = self::executeAndOutput($xvfbCommand) ;
@@ -70,22 +62,12 @@ class XVFBLinuxUnix extends Base {
     }
 
     public function stopXvnc() {
-        $run = $this->params["run-id"];
-
         $loggingFactory = new \Model\Logging();
         $this->params["echo-log"] = true ;
         $logging = $loggingFactory->getModel($this->params);
 
-        $file = PIPEDIR.DS.$this->params["item"].DS.'defaults';
-        $defaults = file_get_contents($file) ;
-        $defaults = json_decode($defaults, true);
-
-        $file = PIPEDIR.DS.$this->params["item"].DS.'settings';
-        $settings = file_get_contents($file) ;
-        $settings = json_decode($settings, true);
-
         $mn = $this->getModuleName() ;
-        if ($settings[$mn]["xvfb_during_build"] == "on") {
+        if ($this->params["build-settings"][$mn]["xvfb_during_build"] == "on") {
             $logging->log ("XVFB Enabled for build, stopping...", $this->getModuleName() ) ;
             $xvfbCommand = "echo 'pretend to stop xvfb'" ;
             $result = self::executeAndOutput($xvfbCommand) ;

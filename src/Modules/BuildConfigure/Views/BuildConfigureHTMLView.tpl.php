@@ -1,48 +1,69 @@
-<div class="container">
-    <div class="row">
-        <div class="col-sm-4 col-md-3 sidebar">
-            <div class="mini-submenu">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </div>
-            <div class="list-group sidebar-list">
-                <span href="#" class="list-group-item active">
-                    Menu
-                    <span class="pull-right" id="slide-submenu"> <i class="fa fa-times"></i> </span>
-                </span>
-                <a href="/index.php?control=Index&action=show" class="list-group-item">
-                    <i class="fa fa-comment-o"></i> Dashboard
-                </a>
-                <a href="/index.php?control=BuildHome&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
-                    <i class="fa fa-search"></i> Pipeline Home
-                </a>
-                <a href="/index.php?control=BuildList&action=show" class="list-group-item">
-                    <i class="fa fa-user"></i> All Pipelines
-                </a>
-                <a href="/index.php?control=Workspace&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
-                    <i class="fa fa-folder-open-o"></i> Workspace
-                </a>
-                <a href="#" class="list-group-item">
-                    <i class="fa fa-bar-chart-o"></i> Monitors <span class="badge">6</span>
-                </a>
-                <a href="#" class="list-group-item">
-                    <i class="fa fa-bar-chart-o"></i> History <span class="badge">3</span>
-                </a>
-                <a href="/index.php?control=BuildHome&action=delete&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
-                    <i class="fa fa-envelope"></i> Delete
-                </a>
-                <a href="/index.php?control=PipeRunner&action=start&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
-                    <i class="fa fa-envelope"></i> Run Now
-                </a>
-            </div>
+<div class="container" id="wrapper">
+    <div class="navbar-default col-sm-2 sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse">
+            <ul class="nav in" id="side-menu">
+                <li class="sidebar-search">
+                    <div class="input-group custom-search-form">
+                        <input type="text" class="form-control" placeholder="Search...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                    <!-- /input-group -->
+                </li>
+                <li>
+                    <a href="/index.php?control=Index&action=show">
+                        <i class="fa fa-comment-o"></i> Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="/index.php?control=BuildHome&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
+                        <i class="fa fa-search"></i> Pipeline Home
+                    </a>
+                </li>
+                <li>
+                    <a href="/index.php?control=BuildList&action=show">
+                        <i class="fa fa-user"></i> All Pipelines
+                    </a>
+                </li>
+                <li>
+                    <a href="/index.php?control=Workspace&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
+                        <i class="fa fa-folder-open-o"></i> Workspace
+                    </a>
+                </li>
+                <li>
+                    <a href="index.php?control=BuildMonitor&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
+                        <i class="fa fa-bar-chart-o"></i> Monitors
+                    </a>
+                </li>
+                <li>
+                    <a href="/index.php?control=PipeRunner&action=history&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
+                        <i class="fa fa-bar-chart-o"></i> History <span class="badge"><?php echo $pageVars["data"]["history_count"] ; ?></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/index.php?control=BuildHome&action=delete&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
+                        <i class="fa fa-envelope"></i> Delete
+                    </a>
+                </li>
+                <li>
+                    <a href="/index.php?control=PipeRunner&action=start&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
+                        <i class="fa fa-envelope"></i> Run Now
+                    </a>
+                </li>
+            </ul>
         </div>
+    </div>
 
-        <?php
-            $act = '/index.php?control=BuildConfigure&item='.$pageVars["data"]["pipeline"]["project-slug"].'&action=save' ;
-        ?>
+    <div class="col-md-9 col-sm-10" id="page-wrapper">
 
         <div class="col-sm-8 col-md-9 clearfix main-container">
+
+        <?php
+        $act = '/index.php?control=BuildConfigure&item='.$pageVars["data"]["pipeline"]["project-slug"].'&action=save' ;
+        ?>
             <h2 class="text-uppercase text-light"><a href="/"> Build - Pharaoh Tools </a></h2>
             <div class="row clearfix no-margin">
 
@@ -101,8 +122,15 @@
                     <?php
 
                     foreach ($pageVars["data"]["settings"] as $one_config_slug => $one_conf_tails) {
-                        echo '<div class="form-group">' ;
-                        echo '  <label for="config_'.$one_config_slug.'" class="col-sm-2 control-label text-left">'.$one_config_slug.':</label>' ;
+                        echo '<div class="form-group confSettingsSlideySection" id="slidey'.$one_config_slug.'">' ;
+                        echo '  <div class="col-sm-12">' ;
+                        echo '    <label for="config_'.$one_config_slug.'" class="control-label text-left">'.$one_config_slug.':</label>' ;
+                        echo '    <a class="glyphicon glyphicon-chevron-down slideyToggleIcon" id="slideyToggleIcon'.$one_config_slug.'"' ;
+                        echo ' onclick="toggleConfSetting(this, \'slidey'.$one_config_slug.'\')"></a>' ;
+                        echo '    <a class="btn-info" id="slideyToggleIcon'.$one_config_slug.'"' ;
+                        echo ' onclick="hideConfSetting(\'slidey'.$one_config_slug.'\')">Hide</a>' ;
+                        echo '  </div>' ;
+                        echo '  <div class="col-sm-12 sliderFields">' ;
                         foreach ( $one_conf_tails["settings"] as $fieldSlug => $fieldInfo) {
                             echo '  <div class="col-sm-12">' ;
 
@@ -152,6 +180,7 @@
                                     echo '  </div>' ;
                                     break ; }
                             echo '  </div>';}
+                        echo '  </div>';
                         echo '</div>'; } ?>
 
                     <div class="form-group">
@@ -236,7 +265,7 @@
                                 <select name="new_step_module_selector" id="new_step_module_selector" onchange="changeModule(this)">
                                     <option value="nomoduleselected" selected="selected">-- Select Module --</option>
                                     <?php
-                                        foreach ($pageVars["data"]["fields"] as $builderName => $builderBits) {
+                                        foreach ($pageVars["data"]["stepFields"] as $builderName => $builderBits) {
                                             echo '  <option value="'.strtolower($builderName).'">'.$builderName.'</option>'; }
                                     ?>
                                 </select>
@@ -280,12 +309,12 @@
 
 
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
-<link rel="stylesheet" href="/Assets/BuildConfigure/css/buildconfigure.css">
+<link rel="stylesheet" type="text/css" href="/index.php?control=AssetLoader&action=show&module=BuildConfigure&type=css&asset=buildconfigure.css">
 <script type="text/javascript">
 	savedSteps = <?php echo json_encode($pageVars["data"]["pipeline"]["steps"]) ; ?> ;
     steps = <?php echo json_encode($pageVars["data"]["fields"]) ; ?> ;
 </script>
-<script type="text/javascript" src="/Assets/BuildConfigure/js/buildconfigure.js"></script>
+<script type="text/javascript" src="/index.php?control=AssetLoader&action=show&module=BuildConfigure&type=js&asset=buildconfigure.js"></script>
 <script type="text/javascript">
 
     $(function() {

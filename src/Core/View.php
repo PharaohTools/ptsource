@@ -8,6 +8,7 @@ class View {
       $ep = (isset($viewVars["route"]["extraParams"])) ? $viewVars["route"]["extraParams"] : array() ;
       $baseMod = new \Model\Base($ep) ;
       $viewVars["params"] = $baseMod->params ;
+      $viewVars = $this->outFormOverrideParam($viewVars);
       $vvLayoutCond1 = (isset($viewVars["params"]["output-format"])
           && $viewVars["params"]["output-format"] == "HTML") ;
       $vvLayoutCond2 = (isset($viewVars["params"]["output-format"])
@@ -21,6 +22,14 @@ class View {
       $data = $this->loadLayout ( $viewVars["layout"], $templateData, $viewVars) ;
       $this->renderAll($data) ;
   }
+
+    private function outFormOverrideParam($viewVars) {
+        for ($i = 0; $i<count($viewVars["route"]["extraParams"]); $i++) {
+            $stp = strpos($viewVars["route"]["extraParams"][$i], '--output-format=') ;
+            if (is_int($stp)) {
+                $viewVars["params"]["output-format"] = substr($viewVars["route"]["extraParams"][$i], $stp+16) ; } }
+        return $viewVars ;
+    }
 
   public function loadLayout ($layout, $templateData, Array $pageVars) {
       ob_start();

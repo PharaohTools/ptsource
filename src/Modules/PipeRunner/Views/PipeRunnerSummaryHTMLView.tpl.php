@@ -22,16 +22,16 @@
                 <a href="/index.php?control=BuildList&action=show" class="list-group-item">
                     <i class="fa fa-user"></i> All Pipelines
                 </a>
-                <a href="#" class="list-group-item">
+                <a href="/index.php?control=Workspace&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
                     <i class="fa fa-folder-open-o"></i> Workspace
                 </a>
                 <a href="#" class="list-group-item">
                     <i class="fa fa-bar-chart-o"></i> Monitors <span class="badge">6</span>
                 </a>
-                <a href="#" class="list-group-item">
-                    <i class="fa fa-bar-chart-o"></i> History <span class="badge">3</span>
+                <a href="/index.php?control=PipeRunner&action=history&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
+                    <i class="fa fa-bar-chart-o"></i> History <span class="badge"><?php echo $pageVars["data"]["history_count"] ; ?></span>
                 </a>
-                <a href="/index.php?control=PipeRunner&action=start&item=<?php echo $pageVars["data"]["pipeline"]["project_slug"]["value"] ; ?>" class="list-group-item">
+                <a href="/index.php?control=PipeRunner&action=start&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
                     <i class="fa fa-envelope"></i> Run Again
                 </a>
             </div>
@@ -43,9 +43,9 @@
                 <?php
                     $stat = ($pageVars["route"]["action"] == "start") ? "Now Executing " : "Execution Summary of " ;
                 ?>
-                <h3><?= $stat; ?> Pipeline <?php echo $pageVars["data"]["pipeline"]["project_title"]["value"] ; ?> <i style="font-size: 18px;" class="fa fa-chevron-right"></i></h3>
+                <h3><?= $stat; ?> Pipeline <?php echo $pageVars["data"]["pipeline"]["project-title"] ; ?> <i style="font-size: 18px;" class="fa fa-chevron-right"></i></h3>
                 <h5 class="text-uppercase text-light" style="margin-top: 15px;">
-                    <a href="/index.php?control=BuildHome&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project_slug"]["value"] ; ?>"></a>
+                    <a href="/index.php?control=BuildHome&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>"></a>
                 </h5>
                 <form class="form-horizontal custom-form" action="/index.php?control=PipeRunner&action=show" method="POST">
 
@@ -87,7 +87,7 @@
                             </div>
                         </div>
                     </div>
-                    <input type="hidden" id="item" value="<?= $pageVars["data"]["pipeline"]["project_slug"]["value"] ;?>" />
+                    <input type="hidden" id="item" value="<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" />
                     <input type="hidden" id="pid" value="<?= $pageVars["pipex"] ;?>" />
 
                 </form>

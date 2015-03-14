@@ -25,8 +25,8 @@
                 <a href="/index.php?control=Workspace&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
                     <i class="fa fa-folder-open-o"></i> Workspace
                 </a>
-                <a href="#" class="list-group-item">
-                    <i class="fa fa-bar-chart-o"></i> Monitors <span class="badge">6</span>
+                <a href="index.php?control=BuildMonitor&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
+                    <i class="fa fa-bar-chart-o"></i> Monitors
                 </a>
                 <a href="/index.php?control=Workspace&action=history&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
                     <i class="fa fa-bar-chart-o"></i> History <span class="badge"><?php echo $pageVars["data"]["history_count"] ; ?></span>
@@ -49,8 +49,9 @@
                 <h3><?= $stat; ?> Pipeline <?php echo $pageVars["data"]["pipeline"]["project-name"] ; ?></h3>
                 <?php
                     $rootPath = str_replace($pageVars["data"]["relpath"], "", $pageVars["data"]["wsdir"]) ;
-                    echo '<h3><a href=" href="/index.php?control=Workspace&action=show&item='.
+                    echo '<h3><a href="/index.php?control=Workspace&action=show&item='.
                          $pageVars["data"]["pipeline"]["project-slug"].'">'.$rootPath.'</a></h3>' ;
+
                     $act = '/index.php?control=Workspace&item='.$pageVars["data"]["pipeline"]["project-slug"].'&action=show' ;
                 ?>
 

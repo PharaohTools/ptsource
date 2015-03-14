@@ -42,22 +42,12 @@ class XVNCLinuxUnix extends Base {
     }
 
     public function startXvnc() {
-        $run = $this->params["run-id"];
-
         $loggingFactory = new \Model\Logging();
         $this->params["echo-log"] = true ;
         $logging = $loggingFactory->getModel($this->params);
 
-        $file = PIPEDIR.DS.$this->params["item"].DS.'defaults';
-        $defaults = file_get_contents($file) ;
-        $defaults = json_decode($defaults, true);
-
-        $file = PIPEDIR.DS.$this->params["item"].DS.'settings';
-        $settings = file_get_contents($file) ;
-        $settings = json_decode($settings, true);
-
         $mn = $this->getModuleName() ;
-        if ($settings[$mn]["xvnc_during_build"] == "on") {
+        if ($this->params["build-settings"][$mn]["xvnc_during_build"] == "on") {
             $logging->log ("XVNC Enabled for build, starting...", $this->getModuleName() ) ;
             $xvncCommand = "echo 'pretend to start xvnc'" ;
             $result = self::executeAndOutput($xvncCommand) ;
@@ -71,22 +61,12 @@ class XVNCLinuxUnix extends Base {
     }
 
     public function stopXvnc() {
-        $run = $this->params["run-id"];
-
         $loggingFactory = new \Model\Logging();
         $this->params["echo-log"] = true ;
         $logging = $loggingFactory->getModel($this->params);
 
-        $file = PIPEDIR.DS.$this->params["item"].DS.'defaults';
-        $defaults = file_get_contents($file) ;
-        $defaults = json_decode($defaults, true);
-
-        $file = PIPEDIR.DS.$this->params["item"].DS.'settings';
-        $settings = file_get_contents($file) ;
-        $settings = json_decode($settings, true);
-
         $mn = $this->getModuleName() ;
-        if ($settings[$mn]["xvnc_during_build"] == "on") {
+        if ($this->params["build-settings"][$mn]["xvnc_during_build"] == "on") {
             $logging->log ("XVNC Enabled for build, stopping...", $this->getModuleName() ) ;
             $xvncCommand = "echo 'pretend to stop xvnc'" ;
             $result = self::executeAndOutput($xvncCommand) ;

@@ -25,8 +25,8 @@
                 <a href="/index.php?control=Workspace&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
                     <i class="fa fa-folder-open-o"></i> Workspace
                 </a>
-                <a href="#" class="list-group-item">
-                    <i class="fa fa-bar-chart-o"></i> Monitors <span class="badge">6</span>
+                <a href="index.php?control=BuildMonitor&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
+                    <i class="fa fa-bar-chart-o"></i> Monitors
                 </a>
                 <a href="/index.php?control=PipeRunner&action=history&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
                     <i class="fa fa-bar-chart-o"></i> History <span class="badge"><?php echo $pageVars["data"]["history_count"] ; ?></span>
@@ -108,11 +108,11 @@
                               window.pipeitem = "'.$pageVars["data"]["pipeline"]["project-slug"].'" ;
                               window.runid = "'.$pageVars["pipex"].'" ;
                           </script>
-                              <script type="text/javascript" src="/Assets/PipeRunner/js/piperunner.js"></script>
+                              <script type="text/javascript" src="/index.php?control=AssetLoader&action=show&module=PipeRunner&type=js&asset=piperunner.js"></script>
                               <div class="form-group" id="loading-holder">
                                   <div class="col-sm-offset-2 col-sm-8">
                                       <div class="text-center">
-                                          <img class="loadingImage" src="/Assets/PipeRunner/images/loading.gif" />
+                                          <img class="loadingImage" src="/index.php?control=AssetLoader&action=show&module=PipeRunner&type=image&asset=loading.gif" />
                                       </div>
                                  </div>
                              </div>'; }

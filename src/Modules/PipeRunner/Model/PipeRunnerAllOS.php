@@ -95,20 +95,42 @@ class PipeRunnerAllOS extends Base {
 		file_put_contents($file, $historyIndex);
 	}
 
-	private function setPipeDir() {
-		if (isset($this -> params["guess"]) && $this -> params["guess"] == true) {
-			$this -> params["pipe-dir"] = PIPEDIR;
-		} else {
-			// @todo should probably ask a question here
-			$this -> params["pipe-dir"] = PIPEDIR;
-		}
-	}
+    private function setPipeDir() {
+        if (isset($this -> params["guess"]) && $this -> params["guess"] == true) {
+            $this -> params["pipe-dir"] = PIPEDIR;
+        } else {
+            // @todo should probably ask a question here
+            $this -> params["pipe-dir"] = PIPEDIR;
+        }
+    }
+
+    private function getSwitchUser() {
+        $modConfig = \Model\AppConfig::getAppVariable("mod_config");
+        if (isset($modConfig["UserSwitching"]["switching_user"])) {
+            return $modConfig["UserSwitching"]["switching_user"] ; }
+        else {
+            return false ; }
+    }
+
+    private function isWebSapi() {
+        if (!in_array(PHP_SAPI, array("cgi", "cli")))  { return true ; }
+        return false ;
+    }
 
     private function runPipeForkCommand($run) {
+        $switch = $this->getSwitchUser() ;
+        $cmd = "" ;
+        if ($switch != false) { $cmd .= 'sudo su '.$switch.' -c '."'" ; }
         // this should be a phrank piperunner@cli and it should save the log to a named history
-        $cmd  = PHRCOMM.' piperunner child --pipe-dir="'.$this->params["pipe-dir"].'" ' ;
+        $cmd .= PHRCOMM.' piperunner child --pipe-dir="'.$this->params["pipe-dir"].'" ' ;
+        if (isset($this->params["build-request-source"])) {
+            $cmd .= '--build-request-source="'.$this->params["build-request-source"].'" '; }
+        else if ($this->isWebSapi()==true) {
+            $cmd .= '--build-request-source="web" '; }
         $cmd .= '--item="'.$this->params["item"].'" --run-id="'.$run.'" > '.PIPEDIR.DS.$this->params["item"].DS ;
         $cmd .= 'tmpfile &';
+        if ($switch != false) { $cmd .= "'" ; }
+
         error_log($cmd);
         $descr = array(
             0 => array(
@@ -138,8 +160,10 @@ class PipeRunnerAllOS extends Base {
         $eventRunner = $eventRunnerFactory->getModel($this->params) ;
         $ev = $eventRunner->eventRunner("beforeSettings") ;
         if ($ev == false) { return $this->failBuild() ; }
-        $this->params["build-settings"]["app_config"] = \Model\AppConfig::getAppVariable("app_config");
-        $this->params["build-settings"]["mod_config"] = \Model\AppConfig::getAppVariable("mod_config");
+        $pipeline = $this->getPipeline();
+        $this->params["build-settings"] = $pipeline["settings"];
+        $this->params["app-settings"]["app_config"] = \Model\AppConfig::getAppVariable("app_config");
+        $this->params["app-settings"]["mod_config"] = \Model\AppConfig::getAppVariable("mod_config");
         $eventRunnerFactory = new \Model\EventRunner() ;
         $eventRunner = $eventRunnerFactory->getModel($this->params) ;
         $ev = $eventRunner->eventRunner("afterSettings") ;
@@ -148,7 +172,6 @@ class PipeRunnerAllOS extends Base {
         $logging = $loggingFactory->getModel($this->params);
         $stepRunnerFactory = new \Model\StepRunner() ;
         $stepRunner = $stepRunnerFactory->getModel($this->params) ;
-        $pipeline = $this->getPipeline();
         $logging->log("Writing to temp file ". PIPEDIR.DS.$this->params["item"].DS.'tmpfile', $this->getModuleName()) ;
         $logging->log("Executing as ".self::executeAndLoad("whoami"), $this->getModuleName()) ;
         $workspace = $this->getWorkspace() ;
