@@ -14,7 +14,7 @@
                     </a>
 					<div class="row clearfix no-margin">
 						<h5 class="text-uppercase text-light" style="margin-top: 15px;">  </h5>
-						<p style="color: #ff6312; margin-left: 137px;" id="login_error_msg"></p>
+						<p style="color: #ff6312; margin-left: 46px;" id="login_error_msg"></p>
 						<form class="form-horizontal custom-form">
 							<div class="form-group">
 								<label for="inputEmail3" class="col-sm-1 control-label text-left"></label>
@@ -37,7 +37,12 @@
 										Login
 									</button> 
 								<br>
-									<a href="http://www.ptbuild.tld/index.php?control=Signup&action=registration"> Registration </a>
+								<a href="http://www.ptbuild.tld/index.php?control=Signup&action=registration"> Registration </a>
+								<br />
+								Sign in with:
+								<a href="/index.php?control=OAuth&action=githublogin" class="btn btn-social-icon btn-lg" title="Github"><i class="fa fa-github"></i></a>
+								<a href="/index.php?control=OAuth&action=fblogin" class="btn btn-social-icon btn-lg" title="Facebook"><i class="fa fa-facebook"></i></a>
+								<a href="/index.php?control=OAuth&action=linkedinlogin" class="btn btn-social-icon btn-lg" title="LinkedIn"><i class="fa fa-linkedin"></i></a>
 								</div>
 							</div>
 						</form>
@@ -63,8 +68,8 @@
 					<h4 class="text-uppercase text-light"><a href="/"> <center>PTBuild - Pharaoh Tools <center></a></h4>
 					<a href="#"><img src="/index.php?control=AssetLoader&action=show&module=PostInput&type=image&asset=5.png" class="navbar-img" style="height: 50px;margin-left: auto;margin-right: auto;display: block" /></a>
 					<div class="row clearfix no-margin">
-						<h5 class="text-uppercase text-light" style="margin-top: 15px;margin-left: 51px;">  </h5>
-						<p style="color: #ff6312; margin-left: 137px;" id="registration_error_msg"></p>
+						<h5 class="text-uppercase text-light" style="margin-top: 15px;margin-left: 51px;">  </h5> 
+						<p style="color: #6DA900; margin-left: 100px;" id="registration_error_msg"></p> 
 						<form class="form-horizontal custom-form">
 							<div class="form-group">
 								<label for="login_username" class="col-sm-1 control-label text-left"></label>

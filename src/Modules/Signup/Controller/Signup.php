@@ -39,6 +39,11 @@ class Signup extends Base
         if ($pageVars["route"]["action"] == "logout") {
             $thisModel->allLoginInfoDestroy();
         }
+		
+		if ($pageVars["route"]["action"] == "verify") {
+            $thisModel->mailVerification();
+        }
+		
         return array("type" => "view", "view" => "signup", "pageVars" => $this->content);
     }
 }

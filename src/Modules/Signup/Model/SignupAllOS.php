@@ -33,28 +33,28 @@ class SignupAllOS extends Base {
         $this->checkLoginStatusInfo($url);
     }
 
-    public function loginByOAuth($name,$email,$user){
-	$_SESSION["login-status"]=TRUE;
-        $_SESSION["username"] = $email;
-	$_SESSION["userrole"] = 3;
-    }
+
     // @todo need to check login credential from datastore or PAM/LDAP
     public function checkLoginInfo($usr, $pass) {
-        // List of users and their password.
-        $users = array(1 => 'test1', 2 => 'test2', 3 => 'test3', 4 => 'test4', 5 => "bigboss");
-        $passwords = array(1 => 'e10adc3949ba59abbe56e057f20f883e', 2 => 'e10adc3949ba59abbe56e057f20f883e', 3 => 'e10adc3949ba59abbe56e057f20f883e', 4 => 'e10adc3949ba59abbe56e057f20f883e', 5 => '81dc9bdb52d04dc20036dbd8313ed055');
-        if (in_array($usr, $users) && in_array(md5($pass), $passwords))
-        {
-            $_SESSION["login-status"]=TRUE;
+    	$file = __DIR__."/../Data/users.txt";
+    	$accountsJson = file_get_contents($file);
+    	$accounts = json_decode($accountsJson);
+		$verified = FALSE;
+		foreach($accounts as $index=>$account) {
+			if ($account->username == $usr && $account->password == md5($this->salt.$pass)) {
+				$verified = TRUE;
+			}
+		}
+		if ($verified === TRUE) {
+			$_SESSION["login-status"]=TRUE;
             $_SESSION["username"] = $usr;
-            echo json_encode(array("status" => TRUE));
+		    echo json_encode(array("status" => TRUE));
             return;
         }
-        else{
-            echo json_encode(array("status" => FALSE, "msg" => "Sorry!! Wrong User name Or Password"));
+		else {
+			echo json_encode(array("status" => FALSE, "msg" => "Sorry!! Wrong User name Or Password"));
             return;
-        }
-
+		}
     }
 
     public function checkLoginStatusInfo($url) {
@@ -97,11 +97,9 @@ class SignupAllOS extends Base {
         }
     }
 
-
-
     public function registrationSubmit(){
 
-        $registrationData=array('username'=>$_POST['username'],'email'=>$_POST['email'],'password'=>md5($this->salt.$_POST['password']));
+        $registrationData=array('username'=>$_POST['username'],'email'=>$_POST['email'],'password'=>md5($this->salt.$_POST['password']),'verificationcode'=> hash('sha512', 'aDv@4gtm%7rfeEg4!gsFe'),'status'=> 0);
         $myfile = fopen(__DIR__."/../Data/users.txt", "r") or die("Unable to open file!");
         $oldData='';
         while(!feof($myfile))
@@ -131,14 +129,14 @@ class SignupAllOS extends Base {
         }
         else{
             fwrite($myfile, json_encode(array_merge($oldData, array($registrationData))));
+			$message = 'Hi <br /> <a href="http://www.ptbuild.tld/index.php?control=Signup&action=verify&verificationCode=verify">Click here to activate account</a>';
+			mail($_POST['email'], 'Verifiation mail from PTBuild', $message);
         }
        // print_r(array_merge($oldData, array($registrationData)));
         fclose($myfile);
         echo json_encode(array("status" => TRUE, "id"=>"registration_error_msg", "msg" => "Registration Successful!!"));
-        return;
+		return;
     }
-
-
 
     public function allLoginInfoDestroy() {
         session_destroy();
@@ -147,5 +145,51 @@ class SignupAllOS extends Base {
          //return array( "Signup" => array("login") );
         header("Location: /index.php?control=Signup&action=login");
     }
+    
+   public function mailVerification() {
+    	$file = __DIR__."/../Data/users.txt";
+    	$accountsJson = file_get_contents($file);
+    	$accounts = json_decode($accountsJson);
+		$verified = FALSE;
+		foreach($accounts as $index=>$account) {
+			if ($account->verificationcode == $this->params['verificationCode']) {
+				$verified = TRUE;
+				$accounts[$index][$account->status] = 1;
+			}
+		}
+		if ($verified === TRUE) {
+			$accountsJson = json_encode($accounts);
+			file_put_contents($file, $accountsJson);
+		}
+    }
+	
+	public function loginByOAuth($name, $email, $user){
+		$_SESSION["login-status"] = TRUE;
+        $_SESSION["username"] = $email;
+		$_SESSION["userrole"] = 3;
+		$myfile = fopen(__DIR__."/../Data/oauthusers.txt", "r") or die("Unable to open file!");
+        $oldData='';
+        while(!feof($myfile))
+            $oldData.=fgets($myfile);
+        fclose($myfile);
+        $oldData=json_decode($oldData);
 
+        foreach($oldData as $data)
+        {
+			if($data==$user)
+            {
+					header("Location: /index.php?control=Index&action=index");
+					return;
+            }   
+		}
+		$myfile = fopen(__DIR__."/../Data/oauthusers.txt", "w") or die("Unable to open file!");
+        if($oldData==null) {
+            fwrite($myfile, json_encode(array($user)));//@todo change format of saved data.
+        }
+        else{
+            fwrite($myfile, json_encode(array_merge($oldData, array($user))));//@todo change the format of saved data.
+        }
+		header("Location: /index.php?control=Index&action=index");
+    }
+    
 }
