@@ -43,7 +43,7 @@
 			</ul>
 		</div>
 	</div>
-
+<?php print_r($pageVars['pipesDetail']['total']); ?>
     <div class="col-md-9 col-sm-10" id="page-wrapper">
         <h4 class="text-uppercase text-light">Pharaoh Tools</h4>
         <div class="row clearfix no-margin">
@@ -56,8 +56,8 @@
                                         <i class="fa fa-database   fa-4x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">100</div>
-                                        <div>All !</div>
+                                        <div class="huge"><?php echo $pageVars['pipesDetail']['total']; ?></div>
+                                        <div>All!</div>
                                     </div>
                                 </div>
                             </div>
@@ -78,8 +78,8 @@
                                         <i class="fa fa-check-circle fa-4x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">50</div>
-                                        <div>All sucess !</div>
+                                        <div class="huge"><?php echo $pageVars['pipesDetail']['success']; ?></div>
+                                        <div>All sucess!</div>
                                     </div>
                                 </div>
                             </div>
@@ -100,8 +100,8 @@
                                         <i class="fa fa-times-circle fa-4x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">20</div>
-                                        <div>All Failed !</div>
+                                        <div class="huge"><?php echo $pageVars['pipesDetail']['fail']; ?></div>
+                                        <div>All Failed!</div>
                                     </div>
                                 </div>
                             </div>
@@ -122,8 +122,8 @@
                                         <i class="fa fa-chain-broken fa-4x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">30</div>
-                                        <div>All Unstable !</div>
+                                        <div class="huge"><?php echo $pageVars['pipesDetail']['unstable']; ?></div>
+                                        <div>All Unstable!</div>
                                     </div>
                                 </div>
                             </div>
