@@ -53,11 +53,11 @@
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-3">
-                                        <i class="fa fa-cog fa-spin fa-5x"></i>
+                                        <i class="fa fa-database   fa-4x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <div class="huge">100</div>
-                                        <div>All!</div>
+                                        <div>All !</div>
                                     </div>
                                 </div>
                             </div>
@@ -75,11 +75,11 @@
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-3">
-                                        <i class="fa fa-check-circle fa-5x"></i>
+                                        <i class="fa fa-check-circle fa-4x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <div class="huge">50</div>
-                                        <div>All sucess!</div>
+                                        <div>All sucess !</div>
                                     </div>
                                 </div>
                             </div>
@@ -97,11 +97,11 @@
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-3">
-                                        <i class="fa fa-times-circle fa-5x"></i>
+                                        <i class="fa fa-times-circle fa-4x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <div class="huge">20</div>
-                                        <div>All Failed!</div>
+                                        <div>All Failed !</div>
                                     </div>
                                 </div>
                             </div>
@@ -119,11 +119,11 @@
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-3">
-                                        <i class="fa fa-chain-broken fa-5x"></i>
+                                        <i class="fa fa-chain-broken fa-4x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <div class="huge">30</div>
-                                        <div>All Unstable!</div>
+                                        <div>All Unstable !</div>
                                     </div>
                                 </div>
                             </div>
