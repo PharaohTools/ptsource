@@ -1,46 +1,69 @@
-<div class="container">
-    <div class="row">
-        <div class="col-sm-4 col-md-3 sidebar">
-            <div class="mini-submenu">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </div>
-            <div class="list-group sidebar-list">
-                <span href="#" class="list-group-item active"> Menu <span class="pull-right" id="slide-submenu">
-                    <i class="fa fa-times"></i>
-                </span> </span>
-                <a href="/index.php?control=Index&action=show" class="list-group-item">
-                    <i class="fa fa-comment-o"></i> Dashboard
-                </a>
-                <a href="/index.php?control=BuildList&action=show" class="list-group-item">
-                    <i class="fa fa-search"></i> All Pipelines
-                </a>
-                <a href="/index.php?control=BuildConfigure&action=show&item=<?php echo $pageVars["data"]["item"] ; ?>" class="list-group-item">
-                    <i class="fa fa-user"></i> Configure
-                </a>
-                <a href="/index.php?control=Workspace&action=show&item=<?php echo $pageVars["data"]["item"] ; ?>" class="list-group-item">
-                    <i class="fa fa-folder-open-o"></i> Workspace
-                </a>
-                <a href="index.php?control=BuildMonitor&action=show&item=<?php echo $pageVars["data"]["item"] ; ?>" class="list-group-item">
-                    <i class="fa fa-bar-chart-o"></i> Monitors
-                </a>
-                <a href="/index.php?control=BuildHome&action=changes&item=<?php echo $pageVars["data"]["item"] ; ?>" class="list-group-item">
-                    <i class="fa fa-bar-chart-o"></i> Changes <span class="badge">3</span>
-                </a>
-                <a href="/index.php?control=BuildHome&action=history&item=<?php echo $pageVars["data"]["item"] ; ?>" class="list-group-item">
-                    <i class="fa fa-bar-chart-o"></i> History <span class="badge">3</span>
-                </a>
-                <a href="/index.php?control=BuildHome&action=delete&item=<?php echo $pageVars["data"]["item"] ; ?>" class="list-group-item">
-                    <i class="fa fa-envelope"></i> Delete
-                </a>
-                <a href="/index.php?control=PipeRunner&action=start&item=<?php echo $pageVars["data"]["item"] ; ?>" class="list-group-item">
-                    <i class="fa fa-envelope"></i> Run Now
-                </a>
-            </div>
+<div class="container" id="wrapper">
+    <div class="navbar-default col-sm-2 sidebar" role="navigation">
+		<div class="sidebar-nav navbar-collapse">
+			<ul class="nav in" id="side-menu">
+				<li class="sidebar-search">
+					<div class="input-group custom-search-form">
+						<input type="text" class="form-control" placeholder="Search...">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button">
+								<i class="fa fa-search"></i>
+							</button>
+                        </span>
+					</div>
+					 </li>
+                <li>
+                    <a href="/index.php?control=Index&amp;action=show">
+                        <i class="fa fa-comment-o"></i> Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="/index.php?control=BuildList&amp;action=show">
+                        <i class="fa fa-user"></i> All Pipelines
+                    </a>
+                </li>
+                <li>
+                    <a href="index.php?control=BuildConfigure&action=show&item=<?php echo $pageVars["data"]["item"] ; ?>">
+                        <i class="fa fa-user"></i> Configure
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="index.php?control=Workspace&action=show&item=<?php echo $pageVars["data"]["item"] ; ?>">
+                        <i class="fa fa-folder-open-o"></i> Workspace
+                    </a>
+                </li>
+                <li>
+                    <a href="index.php?control=BuildMonitor&action=show&item=<?php echo $pageVars["data"]["item"] ; ?>">
+                        <i class="fa fa-bar-chart-o"></i> Monitors
+                    </a>
+                </li>
+                <li>
+                    <a href="index.php?control=BuildHome&action=changes&item=<?php echo $pageVars["data"]["item"] ; ?>">
+                        <i class="fa fa-bar-chart-o"></i> Changes
+                    </a>
+                </li>
+                <li>
+                    <a href="index.php?control=BuildHome&action=history&item=<?php echo $pageVars["data"]["item"] ; ?>">
+                        <i class="fa fa-bar-chart-o"></i> History <span class="badge"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="index.php?control=BuildHome&action=delete&item=<?php echo $pageVars["data"]["item"] ; ?>">
+                        <i class="fa fa-envelope"></i> Delete
+                    </a>
+                </li>
+                <li>
+                    <a href="index.php?control=PipeRunner&action=start&item=<?php echo $pageVars["data"]["item"] ; ?>">
+                        <i class="fa fa-envelope"></i> Run Now
+                    </a>
+                </li>
+            </ul>
         </div>
-        <div class="col-sm-8 col-md-9 clearfix main-container">
-            <h2 class="text-uppercase text-light"><a href="/"> PTBuild - Pharaoh Tools</a></h2>
+       </div>
+    
+       <div class="col-md-9 col-sm-10" id="page-wrapper">
+       <h2 class="text-uppercase text-light"><a href="/"> PTBuild - Pharaoh Tools</a></h2>
 
             <div class="row clearfix no-margin">
                 <!--<h4 class="text-uppercase text-light">Chart For <?php echo $pageVars['data']["item"]; ?></h4>-->
