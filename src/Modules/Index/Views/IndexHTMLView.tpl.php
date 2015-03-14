@@ -43,7 +43,6 @@
 			</ul>
 		</div>
 	</div>
-<?php print_r($pageVars['pipesDetail']['total']); ?>
     <div class="col-md-9 col-sm-10" id="page-wrapper">
         <h4 class="text-uppercase text-light">Pharaoh Tools</h4>
         <div class="row clearfix no-margin">
@@ -137,6 +136,80 @@
                         </div>
                     </div>
                 </div>
+                <?php
+                $graphData = array();
+                foreach ($pageVars['pipesDetail']['buildHistory']['history'] as $key => $value) {
+                	if(date('m', $value->start) == date('m', time())) {
+                		$old_start = $value->start;
+                		if(date('m', $value->start) == date('m', $old_start)) {
+                			$start++; 
+                		}
+						else {
+							$start = 0; $start++;
+						}
+						$graphData[date("j", $value->start)] = $start;
+					}
+				}
+                ?>
+                <div class="row">
+	                <div class="col-lg-12">
+	                    <div class="panel panel-default">
+	                        <div class="panel-heading">
+	                            <i class="fa fa-bar-chart-o fa-fw"></i> All Pipes Build Status
+	                            <div class="pull-right">
+	                                <!--<div class="btn-group">
+	                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+	                                        Actions
+	                                        <span class="caret"></span>
+	                                    </button>
+	                                    <ul class="dropdown-menu pull-right" role="menu">
+	                                        <li><a href="#">Action</a>
+	                                        </li>
+	                                        <li><a href="#">Another action</a>
+	                                        </li>
+	                                        <li><a href="#">Something else here</a>
+	                                        </li>
+	                                        <li class="divider"></li>
+	                                        <li><a href="#">Separated link</a>
+	                                        </li>
+	                                    </ul>
+	                                </div>-->
+	                            </div>
+	                        </div>
+	                        <!-- /.panel-heading -->
+	                        <div class="panel-body">
+	                            <div id="pipes-build-chart"></div>
+	                        </div>
+	                        <!-- /.panel-body -->	                    
+	                	</div>
+	                </div>             
+            </div>    
+<?php 
+				 	foreach ($graphData as $key => $value) {
+						$data[] = array( 'period'  => $key,
+										 'success' => $value,
+										 'fail'	=> 3333,
+										 'runnung' => 555
+										);
+					}
+				?>
+			    
+			<script>
+				$(function() {
+				    Morris.Area({
+				        element: 'pipes-build-chart',
+				        data: <?php echo json_encode($data); ?>,
+				        xkey: 'period',
+				        ykeys: ['success', 'fail', 'running'],
+				        labels: ['Success', 'Failed', 'Running'],
+				        pointSize: 2,
+				        hideHover: 'auto',
+				        resize: true
+				    });
+				
+				});
+			</script>
+                
             <h3><a class="lg-anchor text-light" href=""> PTBuild - The Builder <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
             <p>
                 Build and Monitoring Server in PHP.

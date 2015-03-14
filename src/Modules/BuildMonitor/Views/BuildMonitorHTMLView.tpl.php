@@ -83,7 +83,7 @@
 					    border-color: rgba(0,0,0,.2);
 					}
 				</style>
-                <script src="Assets/BuildMonitor/js/Chart.js"></script>
+                <script src="index.php?control=AssetLoader&action=show&module=BuildMonitor&type=js&asset=Chart.js"></script>
                 <div id="canvas-holder">
 					<canvas id="chart-area" width="300" height="300"/>
 				</div>
