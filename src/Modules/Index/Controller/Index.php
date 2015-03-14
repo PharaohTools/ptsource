@@ -9,6 +9,7 @@ class Index extends Base {
       // if we don't have an object, its an array of errors
       $this->content = $pageVars ;
       if (is_array($thisModel)) { return $this->failDependencies($pageVars, $this->content, $thisModel) ; }
+      $this->content["pipesDetail"] = $thisModel->pipesDetail();
       $this->content["modulesInfo"] = $thisModel->findModuleNames($pageVars["route"]["extraParams"]);
       return array ("type"=>"view", "view"=>"index", "pageVars"=>$this->content);
     }

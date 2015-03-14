@@ -8,7 +8,7 @@
 					<h3 class="panel-title"><strong>Login</strong> </h3>
 				</div>
 				<div class="panel-body">
-					<h4 class="text-uppercase text-light"><a href="/">PTBuild - Pharaoh Tools</h4>
+					<h4 class="text-uppercase text-light"><a href="/"><center> PTBuild - Pharaoh Tools </center></h4>
 					<a href="/">
                         <img src="/index.php?control=AssetLoader&action=show&module=PostInput&type=image&asset=5.png" class="navbar-img" style="height: 50px;margin-left: auto;margin-right: auto;display: block" />
                     </a>
@@ -68,8 +68,8 @@
 					<h4 class="text-uppercase text-light"><a href="/"> <center>PTBuild - Pharaoh Tools <center></a></h4>
 					<a href="#"><img src="/index.php?control=AssetLoader&action=show&module=PostInput&type=image&asset=5.png" class="navbar-img" style="height: 50px;margin-left: auto;margin-right: auto;display: block" /></a>
 					<div class="row clearfix no-margin">
-						<h5 class="text-uppercase text-light" style="margin-top: 15px;margin-left: 51px;">  </h5> 
-						<p style="color: #6DA900; margin-left: 100px;" id="registration_error_msg"></p> 
+						<h5 class="text-uppercase text-light" style="margin-top: 15px;margin-left: 51px;">  </h5>
+						<p style="color: #7CFC00; margin-left: 100px;" id="registration_error_msg"></p>
 						<form class="form-horizontal custom-form">
 							<div class="form-group">
 								<label for="login_username" class="col-sm-1 control-label text-left"></label>
