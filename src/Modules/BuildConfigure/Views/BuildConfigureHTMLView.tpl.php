@@ -220,26 +220,41 @@
                             if ($one_build_step["module"] == "ConditionalStepRunner" || $one_build_step["module"] == "Plugin") {
                                 foreach ($pageVars['data']['builders'][$one_build_step["module"]]['fields'][$one_build_step["steptype"]] as $data ) {
                                 	echo '      <label for="'.$data['name'].'">'.$data['name'].'</label>'; 
-                                    if ($data['type'] == 'text') {
-                                        echo '      <input id="steps['.$hash.']['.$data['slug'].']" name="steps['.$hash.']['.$data['slug'].']" value="'.$one_build_step[$data['slug']].'" class="form-control" type="text" />'; 
+									$action = "";
+									if (isset($data['action'])) { $action = $data['action'].'="'.$data['funName'].'(\''.$hash.'\')"'; }
+            
+                                    if ($data['type'] == 'text' || $data['type'] == 'time' || $data['type'] == 'number') {
+                                        echo '      <input id="steps['.$hash.']['.$data['slug'].']" name="steps['.$hash.']['.$data['slug'].']" value="'.$one_build_step[$data['slug']].'" class="form-control" type="'.$data['type'].'" />'; 
                                     }
                                     if ($data['type'] == 'password') {
-                                        echo '      <input id="steps['.$hash.']['.$data['slug'].']" name="steps['.$hash.']['.$data['slug'].']" class="form-control" type="password" />'; 
+                                        echo '      <input id="steps['.$hash.']['.$data['slug'].']" name="steps['.$hash.']['.$data['slug'].']" class="form-control" type="password" class="form-control"/>'; 
                                     }
                                     if ($data['type'] == 'textarea') {
                                         echo '      <textarea id="steps['.$hash.']['.$data['slug'].']" name="steps['.$hash.']['.$data['slug'].']" class="form-control">'.$one_build_step[$data['slug']].'</textarea>'; 
                                     }
 									if ($data["type"] == "dropdown") {
-						            	echo '<select id="steps['.$hash.']['.$data['slug'].']" name="steps['.$hash.']['.$data['slug'].']" value="'.$one_build_step[$data['slug']].'" class="form-control">';
+						            	echo '<select id="steps['.$hash.']['.$data['slug'].']" name="steps['.$hash.']['.$data['slug'].']" '.$action.' class="form-control">';
 						            	foreach ($data['data'] as $key => $value) {
 						            		$selected = ($one_build_step[$data['slug']] == $key)? 'selected' : '';
 											echo '<option '.$selected.' value="'.$key.'">'.$value.'</option>';
 										} 
-										//$.each(, function(index, value) { console.log(index);
-											
-										//});
-						            	echo '</select>';
+										echo '</select>';
 						            }
+									if ($data["type"] == "radio" || $data["type"] == "checkbox") {
+						            	foreach ($data['data'] as $key => $value) {
+						            		$selected = ($one_build_step[$data['slug']] == $key)? 'checked="checked"' : '';
+											echo ' <input type="'.$data["type"].'" name="steps['.$hash.']['.$data["slug"].']" value="'.$key.'" '.$selected.' class="form-control">'.$value;
+										}
+						            }
+									if ($data["type"] == "div") {
+						            	echo '<div id="'.$data["id"].$hash.'"></div>';
+						            }
+						            if (isset($data["funName"]))
+										echo '<script> 
+												$(document).ready(function() {
+													window.onload = CONDaysOfWeekDays(\''.$hash.'\');  
+												});
+											</script>';
                                 }
                             }
                             else {
@@ -308,6 +323,7 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
 <link rel="stylesheet" type="text/css" href="/index.php?control=AssetLoader&action=show&module=BuildConfigure&type=css&asset=buildconfigure.css">
 <script type="text/javascript">
+	savedSteps = <?php echo json_encode($pageVars["data"]["pipeline"]["steps"]) ; ?> ;
     steps = <?php echo json_encode($pageVars["data"]["fields"]) ; ?> ;
 </script>
 <script type="text/javascript" src="/index.php?control=AssetLoader&action=show&module=BuildConfigure&type=js&asset=buildconfigure.js"></script>

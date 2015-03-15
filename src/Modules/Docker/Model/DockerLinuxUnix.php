@@ -64,28 +64,20 @@ class DockerLinuxUnix extends Base {
 			return false;
 		}
 		else {
-			//$auth = new Docker\Manager\ContainerManager;
-	        /*require __DIR__ . '/../Libraries/vendor/autoload.php';
-			$client = new \Docker\Http\DockerClient();//array(), 'tcp://127.0.0.1'
-			$docker = new \Docker\Docker($client);
-			$container = new \Docker\Container();//array('Image' => $this->params["build-settings"][$mn]["repository"].':precise')
-			$docker->getContainerManager()->run($container);
-			*/
-			//$this->executeAndGetReturnCode('docker pull '.$this->params["build-settings"][$mn]["repository"]);
-			
-			$logging->log("Pulling image from Docker repo", $this->getModuleName());
-			//$this->executeAndOutput('docker pull '.$this->params["build-settings"][$mn]["repository"]);
-			
 			$logging->log("Running Docker ".$this->params["build-settings"][$mn]["repository"]. ' container');
-			$this->executeAndGetReturnCode('docker run -i -t '.$this->params["build-settings"][$mn]["repository"].' &');// /bin/bash
-			
-			
+			if ($this->executeAndGetReturnCode('docker start '.$this->params["build-settings"][$mn]["repository"].' &') > 0) {
+				$logging->log("Pulling image from Docker repo", $this->getModuleName());
+				$this->executeAndOutput('docker pull '.$this->params["build-settings"][$mn]["repository"]); }
+			$this->executeAndGetReturnCode('docker start '.$this->params["build-settings"][$mn]["repository"].' &');
+			sleep(10);
+			$container_id = $this->executeAndLoad("docker ps | grep ".$this->params["build-settings"][$mn]["repository"]." | awk '{print $1}'");
+			echo $container_id;
 			$logging->log("Running command inside ".$this->params["build-settings"][$mn]["repository"]. ' container');
-			///tmp/execWorks
-			$this->executeAndGetReturnCode('docker exec -d '.$this->params["build-settings"][$mn]["repository"].' '.$this->params["build-settings"][$mn]["commandToRun"]);
+			$container_id = str_replace(PHP_EOL, '', $container_id);
+			$this->executeAndGetReturnCode('docker exec '.$container_id.' '.$this->params["build-settings"][$mn]["commandToRun"]);
 			
 			$logging->log('Stoping container');
-			$this->executeAndGetReturnCode('docker stop '.$this->params["build-settings"][$mn]["repository"]);
+			//$this->executeAndGetReturnCode('docker stop '.$container_id);
 			return TRUE;
 		}
 	}
