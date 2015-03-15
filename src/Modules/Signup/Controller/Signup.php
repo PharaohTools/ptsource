@@ -23,6 +23,7 @@ class Signup extends Base
         }
         if ($pageVars["route"]["action"] == "registration") {
             $this->content["data"] = "registration";
+            return array("type" => "view", "view" => "signupRegistration", "pageVars" => $this->content);
         }
 
         if ($pageVars["route"]["action"] == "registration-submit") {
@@ -44,6 +45,7 @@ class Signup extends Base
             $thisModel->mailVerification();
         }
 		
-        return array("type" => "view", "view" => "signup", "pageVars" => $this->content);
+        return array("type" => "view", "view" => "signupLogin", "pageVars" => $this->content);
+
     }
 }
