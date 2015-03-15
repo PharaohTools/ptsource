@@ -26,6 +26,12 @@ class HipchatLinuxUnix extends Base {
 
     public function getSettingFormFields() {
       $ff = array(
+           "hipchat_enabled" =>
+            	array(
+                	"type" => "boolean",
+                	"optional" => true,
+                	"name" => "hipchat on Build Completion?"
+            ),
             "Token" => array(
                 "type" => "text",
                 "optional" => true,
@@ -78,7 +84,7 @@ class HipchatLinuxUnix extends Base {
         //$buildsettings = $pipeline->getData();
 
         $mn = $this->getModuleName() ;
-        
+ if ($pipeline["settings"][$mn]["hipchat_enabled"] == "on") {       
         //require_once dirname(dirname(__FILE__)).DS.'vendor'.DS.'autoload.php';
         //require_once dirname(dirname(__FILE__)).DS.'vendor'.DS.'gorkalaucirica/hipchat-v2-api-client/GorkaLaucirica/HipchatAPIv2Client/Auth/OAuth2.
         require __DIR__ . '/../Libraries/vendor/autoload.php';
@@ -105,9 +111,13 @@ class HipchatLinuxUnix extends Base {
 		$msg['color'] = 'random';
 		$message = new \GorkaLaucirica\HipchatAPIv2Client\Model\Message($msg);
 		$roomAPI->sendRoomNotification($pipeline["settings"][$mn]["Room Id or Name"], $message );
+}
+   else
+  {
+echo "hipchat not run";
+}
 
-
-    }
+}
     private function getPipeline() {
         $pipelineFactory = new \Model\Pipeline() ;
         $pipeline = $pipelineFactory->getModel($this->params);
