@@ -19,6 +19,7 @@ class CronInfo extends PTConfigureBase {
     public function routeAliases() {
         return array("cron"=>"Cron");
     }
+
     public function events() {
         return array("afterApplicationConfigureSave");
     }
