@@ -1,3 +1,3 @@
 <?php
 
-echo json_encode($pageVars) ;
+// echo json_encode($pageVars["data"]) ;

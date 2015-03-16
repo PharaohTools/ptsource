@@ -1,4 +1,8 @@
-function submit_registration() {
+function subReg() {
+    // alert("reg 1") ;
+    rurl = $('#base_url').val() + '/index.php?control=Signup&action=registration-submit&output-format=JSON' ;
+    console.log(rurl) ;
+
     $('#login_error_msg').html('');
     $('#login_username_alert').html('');
     $('#login_email_alert').html('');
@@ -38,7 +42,7 @@ function submit_registration() {
 
     $.ajax({
         type: 'POST',
-        url: $('#base_url').val() + '/index.php?control=Signup&action=registration-submit',
+        url: rurl,
         data: {
             username:$('#login_username').val(),
             email:$('#login_email').val(),
@@ -46,12 +50,13 @@ function submit_registration() {
         },
         dataType: "json",
         success: function(result) {
-                $('#registration_error_msg').html('&nbsp;&nbsp;'+result.msg);
-                $('#registration_error_msg').focus(); }
+            $('#registration_error_msg').html('&nbsp;&nbsp;'+result.msg);
+            $('#registration_error_msg').focus(); },
+        error: function(result, textStatus, errorThrown) {
+            $('#registration_error_msg').html('&nbsp;&nbsp;'+result.msg);
+            $('#registration_error_msg').focus(); }
+
     });
-
-    alert("reg sent") ;
-
 }
 
 function validateEmail(email) {

@@ -30,7 +30,7 @@ class Signup extends Base
 
         if ($pageVars["route"]["action"] == "registration-submit") {
             $this->content["data"] = $thisModel->registrationSubmit();
-            $this->content["output-format"] = "JSON" ;
+            $this->content["route"]["extraParams"]["output-format"] = "CLI" ;
             return array("type" => "view", "view" => "signupRegistrationResult", "pageVars" => $this->content);
         }
 

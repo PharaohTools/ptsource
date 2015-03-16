@@ -46,7 +46,7 @@
 
                         <div class="form-group">
                             <div class="col-sm-offset-1 col-sm-10">
-                                <button type="button" onclick="submit_registration();" class="btn btn-lg btn-info btn-block">
+                                <button type="button" onclick="subReg();" class="btn btn-lg btn-info btn-block">
                                     Sign up
                                 </button>
 
