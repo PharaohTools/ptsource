@@ -30,10 +30,10 @@
                     <i class="fa fa-bar-chart-o"></i> Monitors <span class="badge">6</span>
                 </a>
                 -->
-                <a href="/index.php?control=ScheduledTasks&action=history&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
+                <a href="/index.php?control=ScheduledBuild&action=history&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
                     <i class="fa fa-bar-chart-o"></i> History <span class="badge"><?php echo $pageVars["data"]["history_count"] ; ?></span>
                 </a>
-                <a href="/index.php?control=ScheduledTasks&action=start&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
+                <a href="/index.php?control=ScheduledBuild&action=start&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
                     <i class="fa fa-envelope"></i> Run Again
                 </a>
             </div>
@@ -67,9 +67,9 @@
                 </h5>
                 <?php
                     if ($pageVars["route"]["action"] != "summary") {
-                        $act = '/index.php?control=ScheduledTasks&item='.$pageVars["data"]["pipeline"]["project-slug"].'&action=summary' ; }
+                        $act = '/index.php?control=ScheduledBuild&item='.$pageVars["data"]["pipeline"]["project-slug"].'&action=summary' ; }
                     else {
-                        $act = '/index.php?control=ScheduledTasks&item='.$pageVars["data"]["pipeline"]["project-slug"].'&action=summary&run-id='.$pageVars["data"]["historic_build"]["run-id"]  ; }
+                        $act = '/index.php?control=ScheduledBuild&item='.$pageVars["data"]["pipeline"]["project-slug"].'&action=summary&run-id='.$pageVars["data"]["historic_build"]["run-id"]  ; }
                 ?>
 
                 <form class="form-horizontal custom-form" action="<?= $act ; ?>" method="POST">
@@ -96,7 +96,7 @@
                                 if ($pageVars["route"]["action"]=="history") {
                                     echo '<p>Historic builds</p>';
                                     foreach ($pageVars["data"]["historic_builds"] as $hb) {
-                                        echo '<a href="/index.php?control=ScheduledTasks&action=summary&item='.$pageVars["data"]["pipeline"]["project-slug"].'&run-id='.$hb.'">'.$hb.'</a><br />' ; } }
+                                        echo '<a href="/index.php?control=ScheduledBuild&action=summary&item='.$pageVars["data"]["pipeline"]["project-slug"].'&run-id='.$hb.'">'.$hb.'</a><br />' ; } }
                                 else if ($pageVars["route"]["action"]=="summary") {
                                     echo '<pre>'.$pageVars["data"]["historic_build"]["out"].'</pre>'; }
                                 ?>
@@ -110,11 +110,11 @@
                               window.pipeitem = "'.$pageVars["data"]["pipeline"]["project-slug"].'" ;
                               window.runid = "'.$pageVars["pipex"].'" ;
                           </script>
-                              <script type="text/javascript" src="/Assets/ScheduledTasks/js/piperunner.js"></script>
+                              <script type="text/javascript" src="/Assets/ScheduledBuild/js/piperunner.js"></script>
                               <div class="form-group" id="loading-holder">
                                   <div class="col-sm-offset-2 col-sm-8">
                                       <div class="text-center">
-                                          <img class="loadingImage" src="/Assets/ScheduledTasks/images/loading.gif" />
+                                          <img class="loadingImage" src="/Assets/ScheduledBuild/images/loading.gif" />
                                       </div>
                                  </div>
                              </div>'; }
