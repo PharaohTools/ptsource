@@ -20,6 +20,12 @@ class GoogleCalendarLinuxUnix extends Base {
 
     public function getSettingFormFields() {
         $ff = array(
+           "googlecalendar_enabled" =>
+            	array(
+                	"type" => "boolean",
+                	"optional" => true,
+                	"name" => "googlecalendar on Build Completion?"
+            ),
             "clientid" => array(
                 "type" => "text",
                 "optional" => true,
@@ -77,7 +83,7 @@ class GoogleCalendarLinuxUnix extends Base {
         //$buildsettings = $pipeline->getData();
 
         $mn = $this->getModuleName() ;
-              
+	    if ($pipeline["settings"][$mn]["googlecalendar_enabled"] == "on") {   
         require __DIR__ . '/../Libraries/vendor/autoload.php';
 
 	       //require_once 'Google/Client.php';
@@ -131,6 +137,11 @@ class GoogleCalendarLinuxUnix extends Base {
           echo $createdEvent->getId();
            
           return true;
+}
+   else
+  {
+echo "googlecalendar not run";
+}
 
 	}
 
