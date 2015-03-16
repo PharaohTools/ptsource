@@ -220,18 +220,6 @@
 				
 				});
 			</script>
-                
-            <h3><a class="lg-anchor text-light" href=""> PTBuild - The Builder <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
-            <p>
-                Build and Monitoring Server in PHP.
-                <br/>
-                Create simple or complex build pipelines fully integrated with pharaoh tools
-                <br/>
-                Create monitoring application features in minutes.
-                <br/>
-                Using Convention over Configuration, a lot of common build tasks can be completed with little or
-                no extra implementation work.
-            </p>
         </div>
         <hr>
         <div class="row clearfix no-margin">
