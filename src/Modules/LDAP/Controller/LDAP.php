@@ -15,7 +15,7 @@ class LDAP extends Base {
 
         // @todo This is functionality. It should be in the Model, not here
         // @todo do not Start the session here. At most, this should be in a wrapper like $session->ensureSession();
-       session_start();
+       // session_start();
 
        if ($pageVars["route"]["action"] == "ldaplogin") { 
             $this->content["data"] = "ldaplogin";
@@ -26,6 +26,7 @@ class LDAP extends Base {
         }
 
        return array("type" => "view", "view" => "ldap", "pageVars" => $this->content);
+
     }
 
 }

@@ -14,7 +14,7 @@
                     <!-- /input-group -->
                 </li>
                 <li>
-                    <a href="/index.php?control=Index&action=show" class="active"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                    <a href="/index.php?control=Index&action=show" ><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                 </li>
                 <li>
                     <a href="/index.php?control=ApplicationConfigure&action=show">
@@ -34,7 +34,7 @@
                     <a href="/index.php?control=BuildConfigure&action=new"><i class="fa fa-table fa-fw"></i> New Pipeline</a>
                 </li>
                 <li>
-                    <a href="/index.php?control=BuildList&action=show"><i class="fa fa-edit fa-fw"></i> All Pipelines</a>
+                    <a href="/index.php?control=BuildList&action=show" class="active"><i class="fa fa-edit fa-fw"></i> All Pipelines</a>
                 </li>
                 <li>
                     <a href="/index.php?control=Monitors&action=DefaultHistory"><i class="fa fa-history fa-fw"></i> History<span class="fa arrow"></span></a>

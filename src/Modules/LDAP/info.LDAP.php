@@ -13,7 +13,7 @@ class LDAPInfo extends PTConfigureBase {
     }
 
     public function routesAvailable() {
-        return array("LDAP" => array("ldaplogin", "ldap-submit") );
+        return array("LDAP" => array("ldaplogin", "ldap-submit", "help") );
     }
 
     public function routeAliases() {
