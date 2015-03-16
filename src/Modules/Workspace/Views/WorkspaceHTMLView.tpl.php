@@ -14,17 +14,17 @@
 					</li>
                 <li>
                     <a href="/index.php?control=Index&amp;action=show">
-                        <i class="fa fa-comment-o"></i> Dashboard
+                        <i class="fa fa-dashboard"></i> Dashboard
                     </a>
                 </li>
                 <li>
                     <a href="index.php?control=BuildList&action=show">
-                        <i class="fa fa-user"></i>  Pipeline Home
+                        <i class="fa fa-home"></i>  Pipeline Home
                     </a>
                 </li>
                 <li>
                     <a href="/index.php?control=BuildList&amp;action=show">
-                        <i class="fa fa-user"></i> All Pipelines
+                        <i class="fa fa-bars"></i> All Pipelines
                     </a>
                 </li>
                 
@@ -41,13 +41,13 @@
                 </li>
                 <li>
                     <a href="index.php?control=PipeRunner&action=history&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
-                        <i class="fa fa-bar-chart-o"></i> History <span class="badge"></span>
+                        <i class="fa fa-history"></i> History <span class="badge"></span>
                     </a>
                 </li>
                 
                 <li>
                     <a href="/index.php?control=Workspace&action=start&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
-                        <i class="fa fa-envelope"></i> Run Again
+                        <i class="fa fa-sign-in fa-fw"></i> Run Again
                     </a>
                 </li>
             </ul>

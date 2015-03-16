@@ -19,7 +19,7 @@
 				</li>
 				<li>
 					<a href="/index.php?control=ApplicationConfigure&action=show">
-                        <i class="fa fa-sitemap fa-fw"></i> Configure PTBuild<span class="fa arrow"></span>
+                        <i class="fa fa-cogs fa-fw"></i> Configure PTBuild<span class="fa arrow"></span>
                     </a>
 					<ul class="nav nav-second-level collapse">
 						<li>
@@ -32,10 +32,10 @@
 					<!-- /.nav-second-level -->
 				</li>
 				<li>
-					<a href="/index.php?control=BuildConfigure&action=new"><i class="fa fa-table fa-fw"></i> New Pipeline</a>
+					<a href="/index.php?control=BuildConfigure&action=new"><i class="fa fa-edit fa-fw"></i> New Pipeline</a>
 				</li>
 				<li>
-					<a href="/index.php?control=BuildList&action=show"><i class="fa fa-edit fa-fw"></i> All Pipelines</a>
+					<a href="/index.php?control=BuildList&action=show"><i class="fa fa-bars fa-fw"></i> All Pipelines</a>
 				</li>
 				<li>
 					<a href="/index.php?control=Monitors&action=DefaultHistory"><i class="fa fa-history fa-fw"></i> History<span class="fa arrow"></span></a>

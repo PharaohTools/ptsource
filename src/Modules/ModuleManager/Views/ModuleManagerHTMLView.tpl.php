@@ -15,17 +15,17 @@
                 </li>
                 <li>
                     <a href="/index.php?control=Index&action=show">
-                        <i class="fa fa-comment-o"></i> Dashboard
+                        <i class="fa fa-dashboard"></i> Dashboard
                     </a>
                 </li>
                 <li>
                     <a href="/index.php?control=ApplicationConfigure&action=show">
-                        <i class="fa fa-sitemap fa-fw"></i> Configure PTBuild<span class="fa arrow"></span>
+                        <i class="fa fa-cogs fa-fw"></i> Configure PTBuild<span class="fa arrow"></span>
                     </a>
                 </li>
                 <li>
                     <a href="/index.php?control=UserManager&action=show">
-                        <i class="fa fa-user"></i> User Manager
+                        <i class="fa fa-group"></i> User Manager
                     </a>
                 </li>
             </ul>

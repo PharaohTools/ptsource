@@ -2,8 +2,9 @@
 	<div class="row">
 		<?php if($pageVars["route"]["action"] == "login"){
 		?>
-		<div class="col-md-4 col-md-offset-4">
-			<div class="login-panel panel panel-default">
+		
+		<div class="col-md-4 col-md-offset-4" >
+			<div class="login-panel panel panel-default" style="box-shadow: 0px 0px 2px 1px #EBE5E5;">
 				<div class="panel-heading">
 					<h3 class="panel-title"><strong>Login</strong> </h3>
 				</div>
@@ -124,3 +125,4 @@
 			<!-- /.container -->
 
 <script type="text/javascript" src="/index.php?control=AssetLoader&action=show&module=Signup&type=js&asset=signup.js"></script>
+ 
