@@ -16,7 +16,7 @@ class ScheduledBuildAllOS extends Base {
 
 
     public function getData() {
-        $ret["pipelines"] = $this->getPipelines();
+        $ret["pipelines"] = "" ; //$this->getPipelines();
         return $ret ;
     }
 

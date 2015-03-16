@@ -6,14 +6,14 @@ class ScheduledBuildInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "Pipe Running Functionality and Pages";
+    public $name = "Scheduled Build Executor Functionality";
 
     public function _construct() {
       parent::__construct();
     }
 
     public function routesAvailable() {
-      return array( "ScheduledBuild" => array("run-cycle") );
+      return array( "ScheduledBuild" => array("run-cycle", "help") );
     }
 
     public function routeAliases() {
