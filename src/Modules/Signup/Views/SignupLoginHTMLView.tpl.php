@@ -41,7 +41,9 @@
 								<a href="/index.php?control=OAuth&action=githublogin" class="btn btn-social-icon btn-lg" title="Github"><i class="fa fa-github"></i></a>
 								<a href="/index.php?control=OAuth&action=fblogin" class="btn btn-social-icon btn-lg" title="Facebook"><i class="fa fa-facebook"></i></a>
 								<a href="/index.php?control=OAuth&action=linkedinlogin" class="btn btn-social-icon btn-lg" title="LinkedIn"><i class="fa fa-linkedin"></i></a>
-								</div>
+                                <a href="/index.php?control=ldap&action=ldaplogin" class="btn btn-social-icon btn-lg" title="LDAP">LDAP</a>
+
+                                </div>
 							</div>
 						</form>
 					</div>
