@@ -166,21 +166,25 @@ class SignupAllOS extends Base {
 	public function loginByOAuth($name, $email, $user){
 		$_SESSION["login-status"] = TRUE;
         $_SESSION["username"] = $email;
-		$_SESSION["userrole"] = 3;
-		$myfile = fopen(__DIR__."/../Data/oauthusers.txt", "r") or die("Unable to open file!");
-        $oldData='';
-        while(!feof($myfile))
-            $oldData.=fgets($myfile);
-        fclose($myfile);
-        $oldData=json_decode($oldData);
-
-        foreach($oldData as $data)
+		$oldData = $this->getUsersData();
+		if ($this->userExist($email) == TRUE) {
+			$_SESSION["userrole"] = $this->getUserRole();
+			header("Location: /index.php?control=Index&action=index");
+			return;
+		}
+		else {
+			$newUser = array('name' => $name, 'username'=>$email, 'email'=>$email, 'password'=>md5($this->salt.mt_rand(5, 15)), 'verificationcode'=> hash('sha512', 'aDv@4gtm%7rfeEg4!gsFe'), 'data'=>$user, 'status'=> 1);
+			$this->createNewUser($newUser);
+			$_SESSION["userrole"] = 3;
+		}
+		header("Location: /index.php?control=Index&action=index");
+        /*foreach($oldData as $data)
         {
 			if($data==$user)
             {
-					header("Location: /index.php?control=Index&action=index");
-					return;
-            }   
+				header("Location: /index.php?control=Index&action=index");
+				return;
+		    }
 		}
 		$myfile = fopen(__DIR__."/../Data/oauthusers.txt", "w") or die("Unable to open file!");
         if($oldData==null) {
@@ -189,7 +193,67 @@ class SignupAllOS extends Base {
         else{
             fwrite($myfile, json_encode(array_merge($oldData, array($user))));//@todo change the format of saved data.
         }
-		header("Location: /index.php?control=Index&action=index");
+		header("Location: /index.php?control=Index&action=index");*/
+    }
+	public function loginByLDAP($name, $email, $user){
+		$_SESSION["login-status"] = TRUE;
+        $_SESSION["username"] = $email;
+		$oldData = $this->getUsersData();
+		if ($this->userExist($email) == TRUE) {
+			$_SESSION["userrole"] = $this->getUserRole();
+			header("Location: /index.php?control=Index&action=index");
+			return;
+		}
+		else {
+			$newUser = array('name' => $name, 'username'=>$email, 'email'=>$email, 'password'=>md5($this->salt.mt_rand(5, 15)), 'verificationcode'=> hash('sha512', 'aDv@4gtm%7rfeEg4!gsFe'), 'data'=>$user, 'status'=> 1);
+			$this->createNewUser($newUser);
+			$_SESSION["userrole"] = 3;
+		}
+	}
+	
+	public function getUsersData()
+	{
+		$myfile = fopen(__DIR__."/../Data/users.txt", "r") or die("Unable to open file!");
+        $oldData='';
+        while(!feof($myfile))
+            $oldData.=fgets($myfile);
+        fclose($myfile);
+        $oldData=json_decode($oldData);
+		return $oldData;
+	}
+    
+    public function createNewUser($newUser)
+	{
+		if (!$this->userExist($newUser['email'])) {
+			$oldData=$this->getUsersData();
+	        $myfile = fopen(__DIR__."/../Data/users.txt", "w") or die("Unable to open file in write mode!");
+	        if($oldData==null) {
+	            fwrite($myfile, json_encode(array($newUser)));//@todo change format of saved data.
+	        }
+	        else{
+	            fwrite($myfile, json_encode(array_merge($oldData, array($newUser))));//@todo change the format of saved data.
+	        }
+		}
+	}
+    
+    public function userExist($email)
+    {
+    	$users = $this->getUsersData();
+		foreach ($users as $user) {
+			if ($user['email'] == $email)
+				return TRUE;
+		}
+		return FALSE;
     }
     
+    public function getUserRole($email) {
+    	if ($this->userExist($email)) {
+			$users = $this->getUsersData();
+			foreach ($users as $user) {
+				if ($user['email'] == $email)
+					return $user['role'];
+			}
+		}
+		return 3;
+    }
 }
