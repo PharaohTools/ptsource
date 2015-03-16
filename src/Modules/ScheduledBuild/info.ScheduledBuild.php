@@ -13,11 +13,13 @@ class ScheduledBuildInfo extends PTConfigureBase {
     }
 
     public function routesAvailable() {
-      return array( "ScheduledBuild" => array("start", "apistart", "service", "pipestatus", "show", "child", "history", "summary") );
+      return array( "ScheduledBuild" => array("run-cycle") );
     }
 
     public function routeAliases() {
-      return array("ScheduledBuild"=>"ScheduledBuild", "ScheduledBuild"=>"ScheduledBuild");
+      return array("ScheduledBuild"=>"ScheduledBuild",
+          "scheduledbuild"=>"ScheduledBuild",
+          "scheduledBuild"=>"ScheduledBuild");
     }
 
     public function helpDefinition() {
