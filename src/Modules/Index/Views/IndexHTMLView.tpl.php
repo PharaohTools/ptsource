@@ -162,8 +162,6 @@
 								$running++ ;
 						}
 						$graphData[date("j", $value->start)] = array( 'success' => $success, 'fail' => $fail, 'running' => $running );
-						$graphData[1] = array( 'success' => $success, 'fail' => $fail, 'running' => $running );
-						$graphData[10] = array( 'success' => $success, 'fail' => $fail, 'running' => $running );
 					}
 				}
 				foreach ($graphData as $key => $value) {
