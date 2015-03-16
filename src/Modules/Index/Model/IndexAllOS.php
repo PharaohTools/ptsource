@@ -17,15 +17,20 @@ class IndexAllOS extends Base {
     public function pipesDetail() {
         $pipelineFactory = new \Model\Pipeline() ;
         $pipeline = $pipelineFactory->getModel($this->params);
-		$total = $success = $fail = $unstable = 0;
+		$buildMonitorClass = new \Model\BuildMonitor() ;
+        $total = $success = $fail = $unstable = 0;
+		$buildHistory = array();
         foreach ($pipeline->getPipelines() as $key => $value) {
-        	$total++;
+        	$this->params['item'] = $key;
+        	$buildMonitor = $buildMonitorClass->getModel($this->params);
+			$buildHistory = array_merge($buildHistory, $buildMonitor->getPipelinesDetails());
+			$total++;
             if ($value['last_status'])
 				$success++;
-			if ($value['last_fail'])
+			else if ($value['last_fail'])
 				$fail++;
         }
-		return array( 'total' => $total, 'success' => $success, 'fail' => $fail, 'unstable' => 'N/A' );
+		return array( 'total' => $total, 'success' => $success, 'fail' => $fail, 'unstable' => 'N/A', 'buildHistory' => $buildHistory );
     }
     
     public function findModuleNames($params) {
