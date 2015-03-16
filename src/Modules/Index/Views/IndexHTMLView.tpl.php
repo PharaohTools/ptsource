@@ -138,17 +138,40 @@
                 </div>
                 <?php
                 $graphData = array();
+				$success = $fail = $running = 0;
                 foreach ($pageVars['pipesDetail']['buildHistory']['history'] as $key => $value) {
                 	if(date('m', $value->start) == date('m', time())) {
                 		$old_start = $value->start;
                 		if(date('m', $value->start) == date('m', $old_start)) {
-                			$start++; 
+                			if (isset($value->status)) 
+                				if ($value->status == 'SUCCESS') 
+									$success++ ; 
+								if ($value->status == 'FAIL') 
+									$fail++ ;
+							else
+								$running++ ;
                 		}
 						else {
-							$start = 0; $start++;
+							$success = $fail = $running = 0;
+                			if (isset($value->status)) 
+                				if ($value->status == 'success') 
+									$success++ ; 
+								if ($value->status == 'fail') 
+									$fail++ ;
+							else
+								$running++ ;
 						}
-						$graphData[date("j", $value->start)] = $start;
+						$graphData[date("j", $value->start)] = array( 'success' => $success, 'fail' => $fail, 'running' => $running );
+						$graphData[1] = array( 'success' => $success, 'fail' => $fail, 'running' => $running );
+						$graphData[10] = array( 'success' => $success, 'fail' => $fail, 'running' => $running );
 					}
+				}
+				foreach ($graphData as $key => $value) {
+					$data[] = array( 'period'  => $key,
+									 'success' => $value['success'],
+									 'fail'	=> $value['fail'],
+									 'runnung' => $value['running']
+									);
 				}
                 ?>
                 <div class="row">
@@ -184,16 +207,6 @@
 	                	</div>
 	                </div>             
             </div>    
-<?php 
-				 	foreach ($graphData as $key => $value) {
-						$data[] = array( 'period'  => $key,
-										 'success' => $value,
-										 'fail'	=> 3333,
-										 'runnung' => 555
-										);
-					}
-				?>
-			    
 			<script>
 				$(function() {
 				    Morris.Area({
