@@ -19,9 +19,7 @@
 				</li>
 				<li>
 					<a href="/index.php?control=ApplicationConfigure&action=show">
-                        <i class="fa fa-cogs fa-fw "></i> Configure PTBuild
-                    </a>
-					
+                        <i class="fa fa-cogs fa-fw"></i> Configure PTBuild</a>
 					<!-- /.nav-second-level -->
 				</li>
 				<li>
