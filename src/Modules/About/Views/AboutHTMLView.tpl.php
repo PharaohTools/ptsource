@@ -16,20 +16,27 @@
                 <li>
                     <a href="/index.php?control=Index&action=show" class="active"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                 </li>
-                <li>
-                    <a href="/index.php?control=BuildConfigure&action=new"><i class="fa fa-table fa-fw"></i> New Pipeline</a>
-                </li>
             </ul>
         </div>
     </div>
 
     <div class="col-md-9 col-sm-10" id="page-wrapper">
-            <h4 class="text-uppercase text-light">Pipeline</h4>
             <div class="row clearfix no-margin">
-                <h3><a class="lg-anchor text-light" href="">PTBuild - Pharaoh Tools <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
+                <h3><a class="lg-anchor text-light" href=""> PTBuild - The Builder, Pharaoh Tools
+                        <i style="font-size: 18px;" class="fa fa-chevron-right"></i>
+                    </a></h3>
                 <p> Pharaoh Tools: Build </p>
                 <p> Part of the Pharaoh Tools Package </p>
-
+                <p>
+                    Build and Monitoring Server in PHP.
+                    <br/>
+                    Create simple or complex build pipelines fully integrated with pharaoh tools
+                    <br/>
+                    Create monitoring application features in minutes.
+                    <br/>
+                    Using Convention over Configuration, a lot of common build tasks can be completed with little or
+                    no extra implementation work.
+                </p>
             </div>
             <div class="row clearfix no-margin">
                 <p>

@@ -2,22 +2,24 @@
 
 Namespace Info;
 
-class ScheduledTasksInfo extends PTConfigureBase {
+class ScheduledBuildInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "Pipe Running Functionality and Pages";
+    public $name = "Scheduled Build Executor Functionality";
 
     public function _construct() {
       parent::__construct();
     }
 
     public function routesAvailable() {
-      return array( "ScheduledTasks" => array("start", "apistart", "service", "pipestatus", "show", "child", "history", "summary") );
+      return array( "ScheduledBuild" => array("run-cycle", "help") );
     }
 
     public function routeAliases() {
-      return array("scheduledtasks"=>"ScheduledTasks", "scheduledTasks"=>"ScheduledTasks");
+      return array("ScheduledBuild"=>"ScheduledBuild",
+          "scheduledbuild"=>"ScheduledBuild",
+          "scheduledBuild"=>"ScheduledBuild");
     }
 
     public function helpDefinition() {

@@ -28,10 +28,10 @@
                 <a href="#" class="list-group-item">
                     <i class="fa fa-bar-chart-o"></i> Monitors <span class="badge">6</span>
                 </a>
-                <a href="/index.php?control=ScheduledTasks&action=history&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
+                <a href="/index.php?control=ScheduledBuild&action=history&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
                     <i class="fa fa-bar-chart-o"></i> History <span class="badge"><?php echo $pageVars["data"]["history_count"] ; ?></span>
                 </a>
-                <a href="/index.php?control=ScheduledTasks&action=start&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
+                <a href="/index.php?control=ScheduledBuild&action=start&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="list-group-item">
                     <i class="fa fa-envelope"></i> Run Again
                 </a>
             </div>
@@ -47,7 +47,7 @@
                 <h5 class="text-uppercase text-light" style="margin-top: 15px;">
                     <a href="/index.php?control=BuildHome&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>"></a>
                 </h5>
-                <form class="form-horizontal custom-form" action="/index.php?control=ScheduledTasks&action=show" method="POST">
+                <form class="form-horizontal custom-form" action="/index.php?control=ScheduledBuild&action=show" method="POST">
 
                     <?php
                     if (isset($pageVars["pipex"])) {
@@ -71,12 +71,12 @@
                         </div>
                     </div>
 
-                    <script type="text/javascript" src="/Assets/ScheduledTasks/js/piperunner.js"></script>
+                    <script type="text/javascript" src="/Assets/ScheduledBuild/js/piperunner.js"></script>
 
                     <div class="form-group" id="loading-holder">
                         <div class="col-sm-offset-2 col-sm-8">
                             <div class="text-center">
-                                <img class="loadingImage" src="/Assets/ScheduledTasks/images/loading.gif" />'
+                                <img class="loadingImage" src="/Assets/ScheduledBuild/images/loading.gif" />'
                             </div>
                         </div>
                     </div>

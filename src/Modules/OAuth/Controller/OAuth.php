@@ -27,6 +27,9 @@ class OAuth extends Base
 	if ($pageVars["route"]["action"] == "fblogin") { 
             $this->content["data"] = $thisModel->fb_login();
        }
-        return array("type" => "view", "view" => "index", "pageVars" => $this->content);
+       if ($pageVars["route"]["action"] == "linkedinlogin") {
+            $this->content["data"] = $thisModel->linkedin_login();
+       }
+	 return array("type" => "view", "view" => "index", "pageVars" => $this->content);
     }
 }

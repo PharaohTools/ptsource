@@ -19,16 +19,9 @@
 				</li>
 				<li>
 					<a href="/index.php?control=ApplicationConfigure&action=show">
-                        <i class="fa fa-cogs fa-fw "></i> Configure PTBuild<span class="fa arrow"></span>
+                        <i class="fa fa-cogs fa-fw "></i> Configure PTBuild
                     </a>
-					<ul class="nav nav-second-level collapse">
-						<li>
-							<a href="flot.html">New Pipeline</a>
-						</li>
-						<li>
-							<a href="morris.html">Morris.js Charts</a>
-						</li>
-					</ul>
+					
 					<!-- /.nav-second-level -->
 				</li>
 				<li>
@@ -38,12 +31,13 @@
 					<a href="/index.php?control=BuildList&action=show"><i class="fa fa-bars fa-fw"></i> All Pipelines</a>
 				</li>
 				<li>
-					<a href="/index.php?control=Monitors&action=DefaultHistory"><i class="fa fa-history fa-fw"></i> History<span class="fa arrow"></span></a>
+					<a href="/index.php?control=Monitors&action=DefaultHistory"><i class="fa fa-history fa-fw"></i> History</a>
 				</li>
 			</ul>
 		</div>
 	</div>
-    <div class="col-md-9 col-sm-10" id="page-wrapper">
+    <div class="col-lg-9">
+                    <div class="well well-lg"> 
         <h4 class="text-uppercase text-light">Pharaoh Tools</h4>
         <div class="row clearfix no-margin">
             <div class="row">
@@ -220,6 +214,7 @@
 				
 				});
 			</script>
+
 			<div class="col-lg-14">
                     <div class="well well-lg">
                         <h3><a class="lg-anchor text-light" href=""> PTBuild - The Builder <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
@@ -236,6 +231,9 @@
                     </div>
                 </div>
                </div>
+
+        </div>
+
         <hr>
         <div class="col-lg-13">
                     <div class="well well-lg">

@@ -13,7 +13,7 @@ class OAuthInfo extends PTConfigureBase {
     }
 
     public function routesAvailable() {
-      return array( "OAuth" => array("githublogin","googlelogin","fblogin","login-status","registration","registration-submit") );
+      return array( "OAuth" => array("githublogin","googlelogin","fblogin","linkedinlogin") );
     }
 
     public function routeAliases() {

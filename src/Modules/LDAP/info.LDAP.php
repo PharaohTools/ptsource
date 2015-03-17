@@ -13,26 +13,18 @@ class LDAPInfo extends PTConfigureBase {
     }
 
     public function routesAvailable() {
-        return array("LDAP" => array_merge(parent::routesAvailable(), array("help") ) );
+        return array("LDAP" => array("ldaplogin", "ldap-submit", "help") );
     }
 
     public function routeAliases() {
         return array("ldap"=>"LDAP");
     }
 
-    public function events() {
-        return array("afterBuildComplete");
-    }
-
-    public function buildSettings() {
-        return array("enable", "server", "base DN", "cn", "user", "pass");
-    }
-
     public function helpDefinition() {
        $help = <<<"HELPDATA"
-    This extension provides integration with SVN.
+    This extension provides integration with LDAP.
 
-    SVN
+    LDAP
 
 HELPDATA;
       return $help ;
