@@ -173,7 +173,7 @@ class SignupAllOS extends Base {
 			return;
 		}
 		else {
-			$newUser = array('name' => $name, 'username'=>$email, 'email'=>$email, 'password'=>md5($this->salt.mt_rand(5, 15)), 'verificationcode'=> hash('sha512', 'aDv@4gtm%7rfeEg4!gsFe'), 'data'=>$user, 'status'=> 1);
+			$newUser = array('name' => $name, 'username'=>$email, 'email'=>$email, 'password'=>md5($this->salt.mt_rand(5, 15)), 'verificationcode'=> hash('sha512', 'aDv@4gtm%7rfeEg4!gsFe'), 'data'=>$user,'role'=>3,'status'=> 1);
 			$this->createNewUser($newUser);
 			$_SESSION["userrole"] = 3;
 		}
@@ -189,7 +189,7 @@ class SignupAllOS extends Base {
 			return;
 		}
 		else {
-			$newUser = array('name' => $name, 'username'=>$email, 'email'=>$email, 'password'=>md5($this->salt.mt_rand(5, 15)), 'verificationcode'=> hash('sha512', 'aDv@4gtm%7rfeEg4!gsFe'), 'data'=>$user, 'status'=> 1);
+			$newUser = array('name' => $name, 'username'=>$email, 'email'=>$email, 'password'=>md5($this->salt.mt_rand(5, 15)), 'verificationcode'=> hash('sha512', 'aDv@4gtm%7rfeEg4!gsFe'), 'data'=>$user,'role'=>3,'status'=> 1);
 			$this->createNewUser($newUser);
 			$_SESSION["userrole"] = 3;
 		}

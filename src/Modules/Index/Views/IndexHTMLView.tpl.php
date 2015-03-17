@@ -21,14 +21,6 @@
 					<a href="/index.php?control=ApplicationConfigure&action=show">
                         <i class="fa fa-cogs fa-fw"></i> Configure PTBuild<span class="fa arrow"></span>
                     </a>
-					<ul class="nav nav-second-level collapse">
-						<li>
-							<a href="flot.html">New Pipeline</a>
-						</li>
-						<li>
-							<a href="morris.html">Morris.js Charts</a>
-						</li>
-					</ul>
 					<!-- /.nav-second-level -->
 				</li>
 				<li>
