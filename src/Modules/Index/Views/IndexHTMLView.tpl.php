@@ -19,7 +19,7 @@
 				</li>
 				<li>
 					<a href="/index.php?control=ApplicationConfigure&action=show">
-                        <i class="fa fa-cogs fa-fw"></i> Configure PTBuild<span class="fa arrow"></span>
+                        <i class="fa fa-cogs fa-fw "></i> Configure PTBuild<span class="fa arrow"></span>
                     </a>
 					<ul class="nav nav-second-level collapse">
 						<li>
@@ -220,8 +220,9 @@
 				
 				});
 			</script>
-                
-            <h3><a class="lg-anchor text-light" href=""> PTBuild - The Builder <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
+			<div class="col-lg-14">
+                    <div class="well well-lg">
+                        <h3><a class="lg-anchor text-light" href=""> PTBuild - The Builder <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
             <p>
                 Build and Monitoring Server in PHP.
                 <br/>
@@ -232,9 +233,12 @@
                 Using Convention over Configuration, a lot of common build tasks can be completed with little or
                 no extra implementation work.
             </p>
-        </div>
+                    </div>
+                </div>
+               </div>
         <hr>
-        <div class="row clearfix no-margin">
+        <div class="col-lg-13">
+                    <div class="well well-lg">
             <h3> Available Modules: <i style="font-size: 18px;" class="fa fa-chevron-right"></i></h3>
             <p>
                 ---------------------------------------

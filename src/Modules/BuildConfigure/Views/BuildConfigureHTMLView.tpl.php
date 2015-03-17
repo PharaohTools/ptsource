@@ -56,10 +56,8 @@
             </ul>
         </div>
     </div>
-
-    <div class="col-md-9 col-sm-10" id="page-wrapper">
-
-        <div class="col-sm-8 col-md-9 clearfix main-container">
+<div class="col-lg-9">
+                    <div class="well well-lg">
 
         <?php
         $act = '/index.php?control=BuildConfigure&item='.$pageVars["data"]["pipeline"]["project-slug"].'&action=save' ;
@@ -125,7 +123,7 @@
                         echo '<div class="form-group confSettingsSlideySection" id="slidey'.$one_config_slug.'">' ;
                         echo '  <div class="col-sm-12">' ;
                         echo '    <label for="config_'.$one_config_slug.'" class="control-label text-left">'.$one_config_slug.':</label>' ;
-                        echo '    <a class="glyphicon glyphicon-chevron-down slideyToggleIcon" id="slideyToggleIcon'.$one_config_slug.'"' ;
+                        echo '    <a class="glyphicon glyphicon-triangle-right slideyToggleIcon" id="slideyToggleIcon'.$one_config_slug.'"' ;
                         echo ' onclick="toggleConfSetting(this, \'slidey'.$one_config_slug.'\')"></a>' ;
                         echo '    <a class="btn-info" id="slideyToggleIcon'.$one_config_slug.'"' ;
                         echo ' onclick="hideConfSetting(\'slidey'.$one_config_slug.'\')"></a>' ;
