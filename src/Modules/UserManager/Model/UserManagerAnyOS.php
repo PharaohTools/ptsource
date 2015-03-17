@@ -21,7 +21,7 @@ class UserManagerAnyOS extends BasePHPApp {
         $this->programNameFriendly = " UserManager "; // 12 chars
         $this->programNameInstaller = "UserManager";
         $this->initialize();
-    }
+	}
 
     public function getUserDetails() {
         $myfile = fopen(__DIR__."/../../Signup/Data/users.txt", "r") or die("Unable to open file!");
@@ -30,7 +30,26 @@ class UserManagerAnyOS extends BasePHPApp {
         $oldData.=fgets($myfile);
         fclose($myfile);
         $oldData=json_decode($oldData);
-      return $oldData;
-   }
-
+        return $oldData;
+	}
+   
+   public function changeRole(){
+		$myfile = fopen(__DIR__."/../../Signup/Data/users.txt", "r") or die("Unable to open file!");
+        $oldData='';
+        while(!feof($myfile))
+        $oldData.=fgets($myfile);
+        fclose($myfile);
+		$oldData=json_decode($oldData);
+        foreach($oldData as $key => $data){
+			if($data->username==$_GET["username"] && $data->email==$_GET["email"]){
+				$data->username=$_GET["username"];
+				$data->email=$_GET["email"];
+				$data->role=$_GET["role"];
+				$oldData[$key] = $data;
+			}
+		}
+		$myfile = fopen(__DIR__."/../../Signup/Data/users.txt", "w") or die("Unable to open file!");
+		fwrite($myfile, json_encode($oldData));
+	    fclose($myfile);
+    }
 }

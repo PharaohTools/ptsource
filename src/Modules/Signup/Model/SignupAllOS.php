@@ -178,22 +178,6 @@ class SignupAllOS extends Base {
 			$_SESSION["userrole"] = 3;
 		}
 		header("Location: /index.php?control=Index&action=index");
-        /*foreach($oldData as $data)
-        {
-			if($data==$user)
-            {
-				header("Location: /index.php?control=Index&action=index");
-				return;
-		    }
-		}
-		$myfile = fopen(__DIR__."/../Data/oauthusers.txt", "w") or die("Unable to open file!");
-        if($oldData==null) {
-            fwrite($myfile, json_encode(array($user)));//@todo change format of saved data.
-        }
-        else{
-            fwrite($myfile, json_encode(array_merge($oldData, array($user))));//@todo change the format of saved data.
-        }
-		header("Location: /index.php?control=Index&action=index");*/
     }
 	public function loginByLDAP($name, $email, $user){
 		$_SESSION["login-status"] = TRUE;
@@ -240,7 +224,7 @@ class SignupAllOS extends Base {
     {
     	$users = $this->getUsersData();
 		foreach ($users as $user) {
-			if ($user['email'] == $email)
+			if ($user->email== $email)
 				return TRUE;
 		}
 		return FALSE;
@@ -250,7 +234,7 @@ class SignupAllOS extends Base {
     	if ($this->userExist($email)) {
 			$users = $this->getUsersData();
 			foreach ($users as $user) {
-				if ($user['email'] == $email)
+				if ($user->email== $email)
 					return $user['role'];
 			}
 		}
