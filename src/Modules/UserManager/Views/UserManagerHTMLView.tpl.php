@@ -20,8 +20,7 @@
                 </li>
                 <li>
                     <a href="/index.php?control=ApplicationConfigure&action=show">
-                        <i class="fa fa-sitemap fa-fw"></i> Configure PTBuild<span class="fa arrow"></span>
-                    </a>
+                        <i class="fa fa-sitemap fa-fw"></i> Configure PTBuild</a>
                 </li>
                 <li>
                     <a href="/index.php?control=UserManager&action=show">

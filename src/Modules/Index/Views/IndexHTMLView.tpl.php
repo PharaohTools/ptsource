@@ -19,8 +19,7 @@
 				</li>
 				<li>
 					<a href="/index.php?control=ApplicationConfigure&action=show">
-                        <i class="fa fa-cogs fa-fw"></i> Configure PTBuild<span class="fa arrow"></span>
-                    </a>
+                        <i class="fa fa-cogs fa-fw"></i> Configure PTBuild</a>
 					<!-- /.nav-second-level -->
 				</li>
 				<li>
@@ -30,7 +29,7 @@
 					<a href="/index.php?control=BuildList&action=show"><i class="fa fa-bars fa-fw"></i> All Pipelines</a>
 				</li>
 				<li>
-					<a href="/index.php?control=Monitors&action=DefaultHistory"><i class="fa fa-history fa-fw"></i> History<span class="fa arrow"></span></a>
+					<a href="/index.php?control=Monitors&action=DefaultHistory"><i class="fa fa-history fa-fw"></i> History</a>
 				</li>
 			</ul>
 		</div>
