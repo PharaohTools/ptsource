@@ -15,7 +15,7 @@
                 </li>
                 <li>
                     <a href="/index.php?control=Index&action=show">
-                        <i class="fa fa-comment-o"></i> Dashboard
+                        <i class="fa fa-dashboard fa-fw"></i> Dashboard
                     </a>
                 </li>
                 <?php
@@ -23,7 +23,7 @@
                 ?>
                 <li>
                     <a href="/index.php?control=BuildHome&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
-                        <i class="fa fa-search"></i> Pipeline Home
+                        <i class="fa fa-home"></i> Pipeline Home
                     </a>
                 </li>
                 <?php
@@ -31,7 +31,7 @@
                 ?>
                 <li>
                     <a href="/index.php?control=BuildList&action=show">
-                        <i class="fa fa-user"></i> All Pipelines
+                        <i class="fa fa-bars fa-fw"></i> All Pipelines
                     </a>
                 </li>
                 <?php
@@ -49,17 +49,17 @@
                 </li>
                 <li>
                     <a href="/index.php?control=PipeRunner&action=history&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
-                        <i class="fa fa-bar-chart-o"></i> History <span class="badge"><?php echo $pageVars["data"]["history_count"] ; ?></span>
+                        <i class="fa fa-history fa-fw"></i> History <span class="badge"><?php echo $pageVars["data"]["history_count"] ; ?></span>
                     </a>
                 </li>
                 <li>
                     <a href="/index.php?control=BuildHome&action=delete&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
-                        <i class="fa fa-envelope"></i> Delete
+                        <i class="fa fa-trash fa-fw"></i> Delete
                     </a>
                 </li>
                 <li>
                     <a href="/index.php?control=PipeRunner&action=start&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
-                        <i class="fa fa-envelope"></i> Run Now
+                        <i class="fa fa-sign-in fa-fw"></i> Run Now
                     </a>
                 </li>
                 <?php
@@ -137,10 +137,10 @@
                         echo '<div class="form-group confSettingsSlideySection" id="slidey'.$one_config_slug.'">' ;
                         echo '  <div class="col-sm-12">' ;
                         echo '    <label for="config_'.$one_config_slug.'" class="control-label text-left">'.$one_config_slug.':</label>' ;
-                        echo '    <a class="glyphicon glyphicon-chevron-down slideyToggleIcon" id="slideyToggleIcon'.$one_config_slug.'"' ;
+                        echo '    <a class="fa fa-chevron-down slideyToggleIcon" id="slideyToggleIcon'.$one_config_slug.'"' ;
                         echo ' onclick="toggleConfSetting(this, \'slidey'.$one_config_slug.'\')"></a>' ;
                         echo '    <a class="btn-info" id="slideyToggleIcon'.$one_config_slug.'"' ;
-                        echo ' onclick="hideConfSetting(\'slidey'.$one_config_slug.'\')">Hide</a>' ;
+                        echo ' onclick="hideConfSetting(\'slidey'.$one_config_slug.'\')"></a>' ;
                         echo '  </div>' ;
                         echo '  <div class="col-sm-12 sliderFields">' ;
                         foreach ( $one_conf_tails["settings"] as $fieldSlug => $fieldInfo) {

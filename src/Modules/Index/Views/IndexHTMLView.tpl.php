@@ -19,7 +19,7 @@
 				</li>
 				<li>
 					<a href="/index.php?control=ApplicationConfigure&action=show">
-                        <i class="fa fa-sitemap fa-fw"></i> Configure PTBuild<span class="fa arrow"></span>
+                        <i class="fa fa-cogs fa-fw"></i> Configure PTBuild<span class="fa arrow"></span>
                     </a>
 					<ul class="nav nav-second-level collapse">
 						<li>
@@ -32,10 +32,10 @@
 					<!-- /.nav-second-level -->
 				</li>
 				<li>
-					<a href="/index.php?control=BuildConfigure&action=new"><i class="fa fa-table fa-fw"></i> New Pipeline</a>
+					<a href="/index.php?control=BuildConfigure&action=new"><i class="fa fa-edit fa-fw"></i> New Pipeline</a>
 				</li>
 				<li>
-					<a href="/index.php?control=BuildList&action=show"><i class="fa fa-edit fa-fw"></i> All Pipelines</a>
+					<a href="/index.php?control=BuildList&action=show"><i class="fa fa-bars fa-fw"></i> All Pipelines</a>
 				</li>
 				<li>
 					<a href="/index.php?control=Monitors&action=DefaultHistory"><i class="fa fa-history fa-fw"></i> History<span class="fa arrow"></span></a>
@@ -138,17 +138,38 @@
                 </div>
                 <?php
                 $graphData = array();
+				$success = $fail = $running = 0;
                 foreach ($pageVars['pipesDetail']['buildHistory']['history'] as $key => $value) {
                 	if(date('m', $value->start) == date('m', time())) {
                 		$old_start = $value->start;
                 		if(date('m', $value->start) == date('m', $old_start)) {
-                			$start++; 
+                			if (isset($value->status)) 
+                				if ($value->status == 'SUCCESS') 
+									$success++ ; 
+								if ($value->status == 'FAIL') 
+									$fail++ ;
+							else
+								$running++ ;
                 		}
 						else {
-							$start = 0; $start++;
+							$success = $fail = $running = 0;
+                			if (isset($value->status)) 
+                				if ($value->status == 'success') 
+									$success++ ; 
+								if ($value->status == 'fail') 
+									$fail++ ;
+							else
+								$running++ ;
 						}
-						$graphData[date("j", $value->start)] = $start;
+						$graphData[date("j", $value->start)] = array( 'success' => $success, 'fail' => $fail, 'running' => $running );
 					}
+				}
+				foreach ($graphData as $key => $value) {
+					$data[] = array( 'period'  => $key,
+									 'success' => $value['success'],
+									 'fail'	=> $value['fail'],
+									 'runnung' => $value['running']
+									);
 				}
                 ?>
                 <div class="row">
@@ -184,16 +205,6 @@
 	                	</div>
 	                </div>             
             </div>    
-<?php 
-				 	foreach ($graphData as $key => $value) {
-						$data[] = array( 'period'  => $key,
-										 'success' => $value,
-										 'fail'	=> 3333,
-										 'runnung' => 555
-										);
-					}
-				?>
-			    
 			<script>
 				$(function() {
 				    Morris.Area({
@@ -209,18 +220,6 @@
 				
 				});
 			</script>
-                
-            <h3><a class="lg-anchor text-light" href=""> PTBuild - The Builder <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
-            <p>
-                Build and Monitoring Server in PHP.
-                <br/>
-                Create simple or complex build pipelines fully integrated with pharaoh tools
-                <br/>
-                Create monitoring application features in minutes.
-                <br/>
-                Using Convention over Configuration, a lot of common build tasks can be completed with little or
-                no extra implementation work.
-            </p>
         </div>
         <hr>
         <div class="row clearfix no-margin">

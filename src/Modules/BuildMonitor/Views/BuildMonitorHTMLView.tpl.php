@@ -14,17 +14,17 @@
 					 </li>
                 <li>
                     <a href="/index.php?control=Index&amp;action=show">
-                        <i class="fa fa-comment-o"></i> Dashboard
+                        <i class="fa fa-dashboard"></i> Dashboard
                     </a>
                 </li>
                 <li>
                     <a href="/index.php?control=BuildList&amp;action=show">
-                        <i class="fa fa-user"></i> All Pipelines
+                        <i class="fa fa-bars"></i> All Pipelines
                     </a>
                 </li>
                 <li>
                     <a href="index.php?control=BuildConfigure&action=show&item=<?php echo $pageVars["data"]["item"] ; ?>">
-                        <i class="fa fa-user"></i> Configure
+                        <i class="fa fa-cog"></i> Configure
                     </a>
                 </li>
                 
@@ -40,22 +40,22 @@
                 </li>
                 <li>
                     <a href="index.php?control=BuildHome&action=changes&item=<?php echo $pageVars["data"]["item"] ; ?>">
-                        <i class="fa fa-bar-chart-o"></i> Changes
+                        <i class="fa fa-exchange"></i> Changes
                     </a>
                 </li>
                 <li>
                     <a href="index.php?control=BuildHome&action=history&item=<?php echo $pageVars["data"]["item"] ; ?>">
-                        <i class="fa fa-bar-chart-o"></i> History <span class="badge"></span>
+                        <i class="fa fa-history"></i> History <span class="badge"></span>
                     </a>
                 </li>
                 <li>
                     <a href="index.php?control=BuildHome&action=delete&item=<?php echo $pageVars["data"]["item"] ; ?>">
-                        <i class="fa fa-envelope"></i> Delete
+                        <i class="fa fa-trash"></i> Delete
                     </a>
                 </li>
                 <li>
                     <a href="index.php?control=PipeRunner&action=start&item=<?php echo $pageVars["data"]["item"] ; ?>">
-                        <i class="fa fa-envelope"></i> Run Now
+                        <i class="fa fa-sign-in fa-fw"></i> Run Now
                     </a>
                 </li>
             </ul>

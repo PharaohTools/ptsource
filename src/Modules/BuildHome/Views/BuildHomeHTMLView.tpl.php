@@ -16,17 +16,17 @@
                 </li>
                 <li>
                     <a href="/index.php?control=Index&amp;action=show">
-                        <i class="fa fa-comment-o"></i> Dashboard
+                        <i class="fa fa-dashboard fa-fw"></i> Dashboard
                     </a>
                 </li>
                 <li>
                     <a href="/index.php?control=BuildList&amp;action=show">
-                        <i class="fa fa-user"></i> All Pipelines
+                        <i class="fa fa-bars fa-fw"></i> All Pipelines
                     </a>
                 </li>
                 <li>
                     <a href="index.php?control=BuildConfigure&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
-                        <i class="fa fa-user"></i> Configure
+                        <i class="fa  fa-cog fa-fw"></i> Configure
                     </a>
                 </li>
                 
@@ -42,17 +42,17 @@
                 </li>
                 <li>
                     <a href="index.php?control=PipeRunner&action=history&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
-                        <i class="fa fa-bar-chart-o"></i> History <span class="badge"></span>
+                        <i class="fa fa-history fa-fw"></i> History <span class="badge"></span>
                     </a>
                 </li>
                 <li>
                     <a href="index.php?control=BuildHome&action=delete&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
-                        <i class="fa fa-envelope"></i> Delete
+                        <i class="fa fa-trash fa-fw"></i> Delete
                     </a>
                 </li>
                 <li>
                     <a href="index.php?control=PipeRunner&action=start&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
-                        <i class="fa fa-envelope"></i> Run Now
+                        <i class="fa fa-sign-in fa-fw"></i> Run Now
                     </a>
                 </li>
             </ul>

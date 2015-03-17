@@ -51,6 +51,7 @@
 		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 
+
 		<![endif]-->
 		<!--  sign up add -->
         <!-- Bootstrap Core CSS -->
@@ -59,8 +60,10 @@
 	</head>
 
 	<body>
-		<input type="hidden" id="base_url" value="http://www.ptbuild.tld">
+		<input type="hidden" id="base_url" value="<?php echo "" ; ?>">
 <?php
+   // @todo this doesn't seem right
+   // @todo can we do HTML output with a blank template
 	if($pageVars["route"]["action"] != "registration" && $pageVars["route"]["action"] != "login") { ?>
 		<div id="wrapper">
 			<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-top: -70px">
@@ -111,6 +114,8 @@
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li>
+                        <li><a href="/index.php?control=About&action=show"><i class="fa fa-help fa-fw"></i> About</a>
                         </li>
                         <li class="divider"></li>
                         <li><a href="/index.php?control=Signup&action=logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>

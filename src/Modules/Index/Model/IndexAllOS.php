@@ -27,7 +27,7 @@ class IndexAllOS extends Base {
 			$total++;
             if ($value['last_status'])
 				$success++;
-			if ($value['last_fail'])
+			else if ($value['last_fail'])
 				$fail++;
         }
 		return array( 'total' => $total, 'success' => $success, 'fail' => $fail, 'unstable' => 'N/A', 'buildHistory' => $buildHistory );

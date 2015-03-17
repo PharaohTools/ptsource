@@ -15,7 +15,7 @@
                 </li>
                 <li>
                     <a href="/index.php?control=Index&action=show">
-                        <i class="fa fa-comment-o"></i> Dashboard
+                        <i class="fa fa-dashboard fa-fw"></i> Dashboard
                     </a>
                 </li>
                 <li>
@@ -25,12 +25,13 @@
                 </li>
                 <li>
                     <a href="/index.php?control=UserManager&action=show">
-                        <i class="fa fa-user"></i> User Manager
+                        <i class="fa fa-group"></i> User Manager
+                      
                     </a>
                 </li>
                 <li>
                     <a href="/index.php?control=ModuleManager&action=show">
-                        <i class="fa fa-user"></i> Module Manager
+                        <i class="fa fa-suitcase"></i> Module Manager
                     </a>
                 </li>
             </ul>
