@@ -15,12 +15,12 @@
                 </li>
                 <li>
                     <a href="/index.php?control=Index&action=show">
-                        <i class="fa fa-comment-o"></i> Dashboard
+                        <i class="fa fa-dashboard"></i> Dashboard
                     </a>
                 </li>
                 <li>
                     <a href="/index.php?control=ApplicationConfigure&action=show">
-                        <i class="fa fa-sitemap fa-fw"></i> Configure PTBuild</a>
+                        <i class="fa fa-cogs fa-fw"></i> Configure PTBuild</a>
                 </li>
                 <li>
                     <a href="/index.php?control=UserManager&action=show">
@@ -29,14 +29,15 @@
                 </li>
                 <li>
                     <a href="/index.php?control=ModuleManager&action=show">
-                        <i class="fa fa-user"></i> Module Manager
+                        <i class="fa fa-suitcase"></i> Module Manager
                     </a>
                 </li>
             </ul>
         </div>
     </div>
 
-  <div class="col-md-9 col-sm-10" id="page-wrapper">
+  <div class="col-lg-9">
+                    <div class="well well-lg">
         <h2 class="text-uppercase text-light"><a href="/"> PTBuild - Pharaoh Tools</a></h2>
 
         <div class="row clearfix no-margin">
