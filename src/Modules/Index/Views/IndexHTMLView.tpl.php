@@ -206,6 +206,7 @@
 				        ykeys: ['success', 'fail', 'running'],
 				        labels: ['Success', 'Failed', 'Running'],
 				        pointSize: 2,
+				        lineColors: ['#d9534f','#5cb85c','#F0AD4E'],
 				        hideHover: 'auto',
 				        resize: true
 				    });
