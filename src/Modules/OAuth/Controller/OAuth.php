@@ -18,18 +18,17 @@ class OAuth extends Base
         // @todo do not Start the session here. At most, this should be in a wrapper like $session->ensureSession();
         session_start();
 
-       if ($pageVars["route"]["action"] == "githublogin") { 
+		if ($pageVars["route"]["action"] == "githublogin") { 
             $this->content["data"] = $thisModel->github_login();
-       }
-	if ($pageVars["route"]["action"] == "googlelogin") { 
+		}
+		if ($pageVars["route"]["action"] == "googlelogin") { 
             $this->content["data"] = $thisModel->google_login();
-       } 
-	if ($pageVars["route"]["action"] == "fblogin") { 
+		} 
+		if ($pageVars["route"]["action"] == "fblogin") { 
             $this->content["data"] = $thisModel->fb_login();
-       }
-       if ($pageVars["route"]["action"] == "linkedinlogin") {
+		}
+		if ($pageVars["route"]["action"] == "linkedinlogin") {
             $this->content["data"] = $thisModel->linkedin_login();
-       }
-	 return array("type" => "view", "view" => "index", "pageVars" => $this->content);
+		}
     }
 }
