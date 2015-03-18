@@ -99,7 +99,7 @@ class SignupAllOS extends Base {
 
     public function registrationSubmit(){
 
-        $registrationData=array('username'=>$_POST['username'],'email'=>$_POST['email'],'password'=>md5($this->salt.$_POST['password']),'verificationcode'=> hash('sha512', 'aDv@4gtm%7rfeEg4!gsFe'),'status'=> 0);
+        $registrationData=array('username'=>$_POST['username'],'email'=>$_POST['email'],'password'=>md5($this->salt.$_POST['password']),'verificationcode'=> hash('sha512', 'aDv@4gtm%7rfeEg4!gsFe'),'status'=> 0,'role'=>3);
         $myfile = fopen(__DIR__."/../Data/users.txt", "r") or die("Unable to open file!");
         $oldData='';
         while(!feof($myfile))
@@ -200,7 +200,7 @@ class SignupAllOS extends Base {
 		$myfile = fopen(__DIR__."/../Data/users.txt", "r") or die("Unable to open file!");
         $oldData='';
         while(!feof($myfile))
-            $oldData.=fgets($myfile);
+        $oldData.=fgets($myfile);
         fclose($myfile);
         $oldData=json_decode($oldData);
 		return $oldData;
@@ -231,11 +231,11 @@ class SignupAllOS extends Base {
     }
     
     public function getUserRole($email) {
-    	if ($this->userExist($email)) {
+		   	if ($this->userExist($email)) {
 			$users = $this->getUsersData();
 			foreach ($users as $user) {
 				if ($user->email== $email)
-					return $user['role'];
+					return $user->role;
 			}
 		}
 		return 3;

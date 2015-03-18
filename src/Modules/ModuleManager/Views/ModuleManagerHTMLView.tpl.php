@@ -20,12 +20,17 @@
                 </li>
                 <li>
                     <a href="/index.php?control=ApplicationConfigure&action=show">
-                        <i class="fa fa-cogs fa-fw"></i> Configure PTBuild<span class="fa arrow"></span>
+                        <i class="fa fa-cogs fa-fw"></i> Configure PTBuild
                     </a>
                 </li>
                 <li>
                     <a href="/index.php?control=UserManager&action=show">
                         <i class="fa fa-group"></i> User Manager
+                    </a>
+                </li>
+				<li>
+                    <a href="/index.php?control=UserManager&action=show">
+                        <i class="fa fa-group"></i> Module Manager
                     </a>
                 </li>
             </ul>
@@ -38,7 +43,7 @@
             $act = '/index.php?control=ModuleManager&item='.$pageVars["data"]["pipeline"]["project-slug"].'&action=save' ;
             ?>
 
-            <h2 class="text-uppercase text-light"><a href="/"> Build - Pharaoh Tools </a></h2>
+            <h2 class="text-uppercase text-light"><a href="/">PTBuild - Pharaoh Tools </a></h2>
             <div class="row clearfix no-margin">
 
                 <h3>Module and Extension Manager</h3>
