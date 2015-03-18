@@ -134,7 +134,7 @@ class PipelineCollaterAllOS extends Base {
         else {
             $loggingFactory = new \Model\Logging() ;
             $logging = $loggingFactory->getModel($this->params) ;
-            $logging->log("No steps For Run file available in build", $this->getModuleName()) ; }
+            $logging->log("No steps For Run file available in build ".$this->params["item"], $this->getModuleName()) ; }
         $stepsFile = PIPEDIR.DS.$this->params["item"].DS.'steps' ;
         if (file_exists($stepsFile)) {
             $stepsFileData =  file_get_contents($stepsFile) ;
@@ -142,7 +142,7 @@ class PipelineCollaterAllOS extends Base {
         else {
             $loggingFactory = new \Model\Logging() ;
             $logging = $loggingFactory->getModel($this->params) ;
-            $logging->log("No steps file available in build", $this->getModuleName()) ; }
+            $logging->log("No steps file available in build ".$this->params["item"], $this->getModuleName()) ; }
         return array("steps" => $steps, "steps-for-run" => $stepsForRun ) ;
     }
 
@@ -155,7 +155,7 @@ class PipelineCollaterAllOS extends Base {
         else {
             $loggingFactory = new \Model\Logging() ;
             $logging = $loggingFactory->getModel($this->params) ;
-            $logging->log("No settings file available in build", $this->getModuleName()) ; }
+            $logging->log("No settings file available in build ".$this->params["item"], $this->getModuleName()) ; }
         return array("settings" => $settings) ;
     }
 
