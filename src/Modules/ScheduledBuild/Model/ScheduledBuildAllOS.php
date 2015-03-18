@@ -16,55 +16,82 @@ class ScheduledBuildAllOS extends Base {
 
 
     public function getData() {
-        $ret["pipelines"] = "" ; //$this->getPipelines();
+        $ret["scheduled"] = $this->getPipelinesRequiringExecution();
+        $ret["executions"] = $this->executePipes();
         return $ret ;
+    }
+
+    private function executePipes() {
+        $psts = $this->getPipelinesWithScheduledTasks() ;
+        $psrxs = array() ;
+        foreach ($psts as $pst) {
+            $prx = $this->pipeRequiresExecution($pst) ;
+            if ($prx == true) {
+                $psrxs[] = $pst ; } }
+        return $psrxs;
     }
 
     public function getPipelinesRequiringExecution() {
         $psts = $this->getPipelinesWithScheduledTasks() ;
         $psrxs = array() ;
         foreach ($psts as $pst) {
-            if ($this->pipeRequiresExecution($pst) == true) {
+            $prx = $this->pipeRequiresExecution($pst) ;
+            if ($prx == true) {
                 $psrxs[] = $pst ; } }
         return $psrxs;
     }
 
     public function pipeRequiresExecution($pst) {
-        $cronString = $pst["settings"]["PollSCM"]["poll_scm_enabled"] ;
-        $lastRun = $pst["settings"]["PollSCM"]["last_poll_timestamp"] ;
+        $cronString = $pst["settings"]["PollSCM"]["cron_string"] ;
+        $cronString = rtrim($cronString) ;
+        $cronString = ltrim($cronString) ;
+        $lastRun = (isset($pst["settings"]["PollSCM"]["last_scheduled"]))
+            ? $pst["settings"]["PollSCM"]["last_scheduled"]
+            : 0 ;
         $cronParts = explode(" ", $cronString) ;
         $slots = array("minute", "hour", "dow", "dom", "month");
-        $partsDone = array() ;
+        $prx = array();
         for ($i=0; $i<count($cronParts); $i++) {
-            $partsDone[$slots[$i]] = $cronParts[$i] ;
-            var_dump($partsDone[$slots[$i]]) ; }
-        return false;
+            $prx[$slots[$i]] = $this->slotShouldRun($slots[$i], $cronParts[$i], $lastRun) ; }
+        return !in_array(false, $prx);
     }
 
-    /*
-     *
-     * This field follows the syntax of cron (with minor differences). Specifically, each line consists of 5 fields separated by TAB or whitespace:
-MINUTE HOUR DOM MONTH DOW
-MINUTE	Minutes within the hour (0–59)
-HOUR	The hour of the day (0–23)
-DOM	The day of the month (1–31)
-MONTH	The month (1–12)
-DOW	The day of the week (0–7) where 0 and 7 are Sunday.
-To specify multiple values for one field, the following operators are available. In the order of precedence,
-
-* specifies all valid values
-M-N specifies a range of values
-M-N/X or * / m       X steps by intervals of X through the specified range or whole valid range
-A,B,...,Z enumerates multiple values
-To allow periodically scheduled tasks to produce even load on the system, the symbol H (for “hash”) should be used wherever possible. For example, using 0 0 * * * for a dozen daily jobs will cause a large spike at midnight. In contrast, using H H * * * would still execute each job once a day, but not all at the same time, better using limited resources.
-     *
-     */
+    private function slotShouldRun($slot, $value, $lastRun) {
+        $time = time();
+        switch ($slot) {
+            case "minute" :
+                if ($value == "*" && (($time - $lastRun) > 60)) { return true ; }
+                else { return false ; }
+                break ;
+            case "hour" :
+                if ($value == "*" && (($time - $lastRun) > 1800)) { return true ; }
+                else { return false ; }
+                break ;
+            case "dow" :
+                //@todo
+                if ($value == "*" && (($time - $lastRun) > 60)) { return true ; }
+                else { return false ; }
+                break ;
+            case "dom" :
+                //@todo
+                if ($value == "*" && (($time - $lastRun) > 60)) { return true ; }
+                else { return false ; }
+                break ;
+            case "month" :
+                //@todo
+                if ($value == "*" && (($time - $lastRun) > 60)) { return true ; }
+                else { return false ; }
+                break ;
+            default :
+                return false ; }
+    }
 
     public function getPipelinesWithScheduledTasks() {
         $allPipelines = $this->getPipelines() ;
         $pst = array() ;
         foreach ($allPipelines as $onePipeline) {
-            if ($onePipeline["settings"]["poll_scm_enabled"] == "on") {
+            if (isset($onePipeline["settings"]["PollSCM"]["poll_scm_enabled"]) &&
+                $onePipeline["settings"]["PollSCM"]["poll_scm_enabled"] == "on") {
                 $pst[] = $onePipeline ; } }
         return $pst;
     }

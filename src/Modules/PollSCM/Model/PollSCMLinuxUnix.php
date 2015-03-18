@@ -78,7 +78,6 @@ class PollSCMLinuxUnix extends Base {
             return $this->doBuildSCMPollingEnabled() ; }
         else {
             return $this->doBuildSCMPollingDisabled() ; }
-
     }
 
     private function checkBuildSCMPollingEnabled() {
@@ -118,14 +117,9 @@ class PollSCMLinuxUnix extends Base {
         // check now - last poll time > exec delay
         if (($time - $last_poll ) > $exec_delay) {
             $this->lm->log ("Enough time passed since last run...", $this->getModuleName() ) ;
-            $this->lm->log ("Polling SCM Server", $this->getModuleName() ) ;
-            $workspace = $this->getWorkspace() ;
-            $this->lm->log ("Changing Directory to workspace ".$workspace, $this->getModuleName() ) ;
-            chdir($workspace);
             return true ; }
         else {
             $this->lm->log ("Not enough time passed since last run, aborting...", $this->getModuleName() ) ;
-            // @todo this should probably be true
             return false ; }
     }
 
