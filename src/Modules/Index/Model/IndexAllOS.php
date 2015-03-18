@@ -23,7 +23,13 @@ class IndexAllOS extends Base {
         foreach ($pipeline->getPipelines() as $key => $value) {
         	$this->params['item'] = $key;
         	$buildMonitor = $buildMonitorClass->getModel($this->params);
-			$buildHistory = array_merge($buildHistory, $buildMonitor->getPipelinesDetails());
+			$newPipeDetail = $buildMonitor->getPipelinesDetails();
+			if ( isset($newPipeDetail['history']) ) {
+				$newPipeDetailHistory = $newPipeDetail['history'];
+				foreach ($newPipeDetailHistory as &$status)
+					foreach ($status as $key => $value)
+						$buildHistory[] = $status;
+			}
 			$total++;
             if ($value['last_status'])
 				$success++;
