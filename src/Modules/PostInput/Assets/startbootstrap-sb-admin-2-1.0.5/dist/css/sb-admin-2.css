@@ -6,10 +6,21 @@
 
 body {
     background-color: #f8f8f8;
-    font-family: 'Podkova', serif;
+    font-family: WST_Czec;
     font-size: 14px;
 }
-
+.title{
+	color:#F8F8F8;
+	font-family: 'Roboto Condensed', Helvetica, Arial, sans-serif;
+    font-size: 18px;
+	
+}
+#bell{
+	color:#F8F8F8;
+}
+#caret{
+	color:#F8F8F8;
+}
 #wrapper {
     width: 100%;
 }
@@ -214,7 +225,8 @@ body {
 }
 
 .login-panel {
-    margin-top: 4%;
+    margin-top: 8%;
+    margin-left: 10%;
 }
 
 .flot-chart {
@@ -355,3 +367,4 @@ table.dataTable thead .sorting:after {
 .panel-yellow a:hover {
     color: #df8a13;
 }
+  
