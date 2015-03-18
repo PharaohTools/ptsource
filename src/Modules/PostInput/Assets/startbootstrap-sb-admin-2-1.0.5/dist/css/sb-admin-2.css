@@ -6,6 +6,8 @@
 
 body {
     background-color: #f8f8f8;
+    font-family: 'Podkova', serif;
+    font-size: 14px;
 }
 
 #wrapper {
@@ -212,7 +214,7 @@ body {
 }
 
 .login-panel {
-    margin-top: 25%;
+    margin-top: 4%;
 }
 
 .flot-chart {

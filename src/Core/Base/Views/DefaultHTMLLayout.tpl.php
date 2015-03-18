@@ -64,7 +64,7 @@
 <?php
    // @todo this doesn't seem right
    // @todo can we do HTML output with a blank template
-	if($pageVars["route"]["action"] != "registration" && $pageVars["route"]["action"] != "login") { ?>
+	 ?>
 		<div id="wrapper">
 			<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-top: -70px">
 				<div class="navbar-header">
@@ -116,10 +116,12 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li><a href="/index.php?control=About&action=show"><i class="fa fa-help fa-fw"></i> About</a>
-                        </li>
+                        </li> 
+                        <?php 
+                        if($pageVars["route"]["action"] != "registration" && $pageVars["route"]["action"] != "login") { ?>
                         <li class="divider"></li>
                         <li><a href="/index.php?control=Signup&action=logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
+                        </li><?php } ?>
                     </ul>
                     <!-- /.dropdown-user -->
                 </li>
@@ -127,7 +129,6 @@
             </ul>   
             <!-- /.navbar-top-links -->
 			</nav>
-<?php } ?>
 			<?php echo $this -> renderMessages($pageVars); ?>
 			<?php echo $templateData; ?>
 
