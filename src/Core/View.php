@@ -25,9 +25,10 @@ class View {
 
     private function outFormOverrideParam($viewVars) {
         for ($i = 0; $i<count($viewVars["route"]["extraParams"]); $i++) {
-            $stp = strpos($viewVars["route"]["extraParams"][$i], '--output-format=') ;
-            if (is_int($stp)) {
-                $viewVars["params"]["output-format"] = substr($viewVars["route"]["extraParams"][$i], $stp+16) ; } }
+            if (isset($viewVars["route"]["extraParams"][$i])) {
+                $stp = strpos($viewVars["route"]["extraParams"][$i], '--output-format=') ;
+                if (is_int($stp)) {
+                    $viewVars["params"]["output-format"] = substr($viewVars["route"]["extraParams"][$i], $stp+16) ; } } }
         return $viewVars ;
     }
 
