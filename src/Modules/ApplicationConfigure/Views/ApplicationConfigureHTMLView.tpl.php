@@ -38,8 +38,9 @@
         </div>
     </div>
 
-    <div class="col-md-9 col-sm-10" id="page-wrapper">
-            <h2 class="text-uppercase text-light"><a href="/">PTBuild - Pharaoh Tools</a></h2>
+    <div class="col-lg-9">
+                    <div class="well well-lg">         
+                    	<h2 class="text-uppercase text-light"><a href="/">PTBuild - Pharaoh Tools</a></h2>
             <div class="row clearfix no-margin">
 
                 <?php

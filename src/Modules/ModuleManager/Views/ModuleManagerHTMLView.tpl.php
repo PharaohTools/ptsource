@@ -32,7 +32,8 @@
         </div>
     </div>
 
-    <div class="col-md-9 col-sm-10" id="page-wrapper">
+    <div class="col-lg-9">
+                    <div class="well well-lg">
             <?php
             $act = '/index.php?control=ModuleManager&item='.$pageVars["data"]["pipeline"]["project-slug"].'&action=save' ;
             ?>
