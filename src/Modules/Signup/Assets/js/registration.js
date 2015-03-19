@@ -53,7 +53,7 @@ function subReg() {
             $('#registration_error_msg').html('&nbsp;&nbsp;'+result.msg);
             $('#registration_error_msg').focus(); },
         error: function(result, textStatus, errorThrown) {
-            $('#registration_error_msg').html('&nbsp;&nbsp;'+result.msg);
+            $('#registration_error_msg').html('&nbsp;&nbsp;'+textStatus+' '+errorThrown+' '+result.msg);
             $('#registration_error_msg').focus(); }
 
     });

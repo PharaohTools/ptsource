@@ -14,31 +14,31 @@
                     <p style="color: #7CFC00; margin-left: 100px;" id="registration_error_msg"></p>
                     <form class="form-horizontal custom-form">
                         <div class="form-group">
-                            <label for="login_username" class="col-sm-4 control-label text-left "style="color:#757575">User Name</label>
+                            <label for="login_username" class="col-sm-4 control-label text-left" style="color:#757575">User Name</label>
                             <div class="col-sm-7">
-                                <input type="text" class="form-control" id="login_username" placeholder="User Name">
+                                <input type="text" class="form-control" id="login_username" name="login_username" placeholder="User Name">
                                 <span style="color:#FF0000;" id="login_username_alert"></span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="login_email" class="col-sm-4 control-label text-left"style="color:#757575">Email</label>
+                            <label for="login_email" class="col-sm-4 control-label text-left" style="color:#757575">Email</label>
                             <div class="col-sm-7">
-                                <input type="text" class="form-control" id="login_email" placeholder=" Email">
+                                <input type="text" class="form-control" id="login_email" name="login_email" placeholder=" Email">
                                 <span style="color:#FF0000;" id="login_email_alert"></span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="login_password" class="col-sm-4 control-label text-left"style="color:#757575">Password</label>
+                            <label for="login_password" class="col-sm-4 control-label text-left" style="color:#757575">Password</label>
                             <div class="col-sm-7">
-                                <input type="password" class="form-control" id="login_password" placeholder="Password">
+                                <input type="password" class="form-control" id="login_password" name="login_password" placeholder="Password">
                                 <span style="color:#FF0000;" id="login_password_alert"></span>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="login_password_match" class="col-sm-4 control-label text-left"style="color:#757575;" >Retype Password</label>
+                            <label for="login_password_match" class="col-sm-4 control-label text-left" style="color:#757575;" >Retype Password</label>
                             <div class="col-sm-7">
-                                <input type="password" class="form-control" id="login_password_match" placeholder="Retype Password">
+                                <input type="password" class="form-control" id="login_password_match" name="login_password_match" placeholder="Retype Password">
                                 <span style="color:#FF0000;" id="login_password_match_alert"></span>
                             </div>
                         </div>
