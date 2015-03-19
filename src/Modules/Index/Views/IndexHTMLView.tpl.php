@@ -47,8 +47,7 @@
 		</div>
 	</div>
     <div class="col-lg-9">
-                    <div class="well well-lg"> 
-        <h4 class="text-uppercase text-light">Pharaoh Tools</h4>
+                    <div class="well well-lg">
         <div class="row clearfix no-margin">
             <div class="row">
                     <div class="col-lg-3 col-md-6">
@@ -224,21 +223,6 @@
 			</script>
 				        
 
-			<div class="col-lg-14">
-                    <div class="well well-lg">
-                        <h3><a class="lg-anchor text-light" href=""> PTBuild - The Builder <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
-            <p>
-                Build and Monitoring Server in PHP.
-                <br/>
-                Create simple or complex build pipelines fully integrated with pharaoh tools
-                <br/>
-                Create monitoring application features in minutes.
-                <br/>
-                Using Convention over Configuration, a lot of common build tasks can be completed with little or
-                no extra implementation work.
-            </p>
-                    </div>
-                </div>
                </div>
 
         </div>
