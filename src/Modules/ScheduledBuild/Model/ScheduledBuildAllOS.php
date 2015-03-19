@@ -17,18 +17,32 @@ class ScheduledBuildAllOS extends Base {
 
     public function getData() {
         $ret["scheduled"] = $this->getPipelinesRequiringExecution();
-        $ret["executions"] = $this->executePipes();
+        $ret["executions"] = $this->executePipes($ret["scheduled"]);
         return $ret ;
     }
 
-    private function executePipes() {
-        $psts = $this->getPipelinesWithScheduledTasks() ;
-        $psrxs = array() ;
-        foreach ($psts as $pst) {
-            $prx = $this->pipeRequiresExecution($pst) ;
-            if ($prx == true) {
-                $psrxs[] = $pst ; } }
-        return $psrxs;
+    private function executePipes($pipes) {
+        $prFactory = new \Model\PipeRunner() ;
+        $results = array();
+        foreach ($pipes as $pipe) {
+            $params = $this->params ;
+            $params["item"] = $pipe["project-slug"] ;
+            $params["build-request-source"] = "schedule" ;
+            $pr = $prFactory->getModel($params) ;
+            $results[$pipe["project-slug"]] =
+                array(
+                    "name" => $pipe["project-name"],
+                    "result" => $pr->runPipe()
+                ) ;
+            // @todo create a specific log for scheduled build execution?
+            $filename = "/tmp/ptb-schedx-log.txt" ;
+            $orig = file_get_contents($filename) ;
+            $new  = $orig."Build: ".$pipe["project-name"].", " ;
+            $new .= "Run ID: ".$results[$pipe["project-slug"]]["result"].", " ;
+            $new .= "Stamp: ". time().", Date: ".date("H:i:s")."\n" ;
+            file_put_contents($filename, $new) ;
+        }
+        return $results ;
     }
 
     public function getPipelinesRequiringExecution() {
@@ -61,10 +75,12 @@ class ScheduledBuildAllOS extends Base {
         switch ($slot) {
             case "minute" :
                 if ($value == "*" && (($time - $lastRun) > 60)) { return true ; }
+                else if (is_int($value) == "*" && date('i')==$value) { return true ; }
                 else { return false ; }
                 break ;
             case "hour" :
                 if ($value == "*" && (($time - $lastRun) > 1800)) { return true ; }
+                else if ($value == "*" && date('H')==$value) { return true ; }
                 else { return false ; }
                 break ;
             case "dow" :

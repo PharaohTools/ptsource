@@ -22,10 +22,13 @@
                     </a>
                     <ul class="nav nav-second-level collapse">
                         <li>
-                            <a href="flot.html">New Pipeline</a>
+                            <a href="/index.php?control=ApplicationConfigure&action=show">Application</a>
                         </li>
                         <li>
-                            <a href="morris.html">Morris.js Charts</a>
+                            <a href="/index.php?control=UserManager&action=show">Users</a>
+                        </li>
+                        <li>
+                            <a href="/index.php?control=ModuleManager&action=show">Modules</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
