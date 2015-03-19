@@ -94,13 +94,12 @@
                             <button type="button" class="btn btn-primary  btn-xs">Options</button>
 							<button type="button" class="btn btn-default  btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button>
 							<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-							<li><a href="#" class="btn-primary">Change role</a></li>
-							<li class="divider"></li>
+							<li class="divider"></li><li><a class="bg-info">Change role</a></li><li class="divider"></li>
 							<li><a href="<?php echo'/index.php?control=UserManager&action=changerole&username='.$userdetails->username.'&email='.$userdetails->email.'&role=2' ?>">Builder</a></li>
 							<li><a href="<?php echo'/index.php?control=UserManager&action=changerole&username='.$userdetails->username.'&email='.$userdetails->email.'&role=3' ?>">Viewer</a></li>
-							<li class="divider"></li>
+							<li class="divider"></li><li><a class="bg-info">User option</a></li><li class="divider"></li>
 							<li><a href="<?php echo'/index.php?control=UserManager&action=removeuser&username='.$userdetails->username.'&email='.$userdetails->email.'' ?>" class="text-info">Restrict user</a></li>
-							<li><a href="<?php echo'/index.php?control=UserManager&action=adduser&username='.$userdetails->username.'&email='.$userdetails->email.'' ?>" class="text-info">Add user</a></li>
+							<li><a href="<?php echo'/index.php?control=UserManager&action=adduser&username='.$userdetails->username.'&email='.$userdetails->email.'' ?>" class="text-info">Allow user</a></li>
 							</ul>
 							</div><?php }
                             if ($userdetails->role == 2) { ?>
@@ -108,13 +107,12 @@
                             <button type="button" class="btn btn-primary  btn-xs">Options</button>
 							<button type="button" class="btn btn-default  btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button>
 							<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-							<li><a href="#" class="text-info">Change role</a></li>
-							<li class="divider"></li>
+							<li class="divider"></li><li><a class="bg-info">Change role</a></li><li class="divider"></li>
 							<li><a href="<?php echo'/index.php?control=UserManager&action=changerole&username='.$userdetails->username.'&email='.$userdetails->email.'&role=1' ?>">Admin</a></li>
 							<li><a href="<?php echo'/index.php?control=UserManager&action=changerole&username='.$userdetails->username.'&email='.$userdetails->email.'&role=3' ?>">Viewer</a></li>
-							<li class="divider"></li>
+							<li class="divider"></li><li><a class="bg-info">User option</a></li><li class="divider"></li>
 							<li><a href="<?php echo'/index.php?control=UserManager&action=removeuser&username='.$userdetails->username.'&email='.$userdetails->email.'' ?>" class="text-info">Restrict user</a></li>
-							<li><a href="<?php echo'/index.php?control=UserManager&action=adduser&username='.$userdetails->username.'&email='.$userdetails->email.'' ?>" class="text-info">Add user</a></li>
+							<li><a href="<?php echo'/index.php?control=UserManager&action=adduser&username='.$userdetails->username.'&email='.$userdetails->email.'' ?>" class="text-info">Allow user</a></li>
 							</ul>
 							</div><?php }
 		                    if ($userdetails->role == 3) { ?>
@@ -122,13 +120,12 @@
                            <button type="button" class="btn btn-primary  btn-xs">Options</button>
 							<button type="button" class="btn btn-default  btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button>
 							<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-							<li><a href="#" class="text-info">Change role</a></li>
-							<li class="divider"></li>
+							<li class="divider"></li><li><a class="bg-info">Change role</a></li><li class="divider"></li>
 							<li><a href="<?php echo'/index.php?control=UserManager&action=changerole&username='.$userdetails->username.'&email='.$userdetails->email.'&role=1' ?>">Admin</a></li>
 							<li><a href="<?php echo'/index.php?control=UserManager&action=changerole&username='.$userdetails->username.'&email='.$userdetails->email.'&role=2' ?>">Builder</a></li>
-							<li class="divider"></li>
+							<li class="divider"></li><li><a class="bg-info">User option</a></li><li class="divider"></li>
 							<li><a href="<?php echo'/index.php?control=UserManager&action=removeuser&username='.$userdetails->username.'&email='.$userdetails->email.'' ?>" class="text-info">Restrict user</a></li>
-							<li><a href="<?php echo'/index.php?control=UserManager&action=adduser&username='.$userdetails->username.'&email='.$userdetails->email.'' ?>" class="text-info">Add user</a></li>
+							<li><a href="<?php echo'/index.php?control=UserManager&action=adduser&username='.$userdetails->username.'&email='.$userdetails->email.'' ?>" class="text-info">Allow user</a></li>
 							</ul>
 							</div><?php } ?>
         		            </td>
