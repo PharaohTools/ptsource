@@ -28,6 +28,11 @@ class UserManager extends Base {
             $this->content["userdata"] = $thisModel->getUserDetails(); 
             return array ("type"=>"view", "view"=>"userManager", "pageVars"=>$this->content);     
        }
+        if ($pageVars["route"]["action"] == "adduser") { 
+            $thisModel->addUser();
+            $this->content["userdata"] = $thisModel->getUserDetails(); 
+            return array ("type"=>"view", "view"=>"userManager", "pageVars"=>$this->content);     
+       }
     }
 
 }

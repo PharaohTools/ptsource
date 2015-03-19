@@ -41,7 +41,7 @@ class SignupAllOS extends Base {
     	$accounts = json_decode($accountsJson);
 		$verified = FALSE;
 		foreach($accounts as $index=>$account) {
-			if ($account->username == $usr && $account->password == md5($this->salt.$pass)) {
+			if ($account->username == $usr && $account->password == md5($this->salt.$pass) && $account->removestatus == 0) {
 				$verified = TRUE;
 			}
 		}

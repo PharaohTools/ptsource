@@ -67,8 +67,9 @@
                                     <th>#</th>
                                     <th>User Name</th>
                                     <th>Email</th>
-                                    <th>User Group</th>
+                                    <th>Role</th>
                                     <th>Action</th>
+                                    <th>Status</th>
                                  </tr></thead>
 				<tbody class="table-hover">
 				<?php      
@@ -93,12 +94,13 @@
                             <button type="button" class="btn btn-primary  btn-xs">Options</button>
 							<button type="button" class="btn btn-default  btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button>
 							<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-							<li><a href="#" class="">Change role</a></li>
+							<li><a href="#" class="btn-primary">Change role</a></li>
 							<li class="divider"></li>
 							<li><a href="<?php echo'/index.php?control=UserManager&action=changerole&username='.$userdetails->username.'&email='.$userdetails->email.'&role=2' ?>">Builder</a></li>
 							<li><a href="<?php echo'/index.php?control=UserManager&action=changerole&username='.$userdetails->username.'&email='.$userdetails->email.'&role=3' ?>">Viewer</a></li>
 							<li class="divider"></li>
-							<li><a href="<?php echo'/index.php?control=UserManager&action=removeuser&username='.$userdetails->username.'&email='.$userdetails->email.'' ?> class="text-info">Remove user</a></li>
+							<li><a href="<?php echo'/index.php?control=UserManager&action=removeuser&username='.$userdetails->username.'&email='.$userdetails->email.'' ?>" class="text-info">Restrict user</a></li>
+							<li><a href="<?php echo'/index.php?control=UserManager&action=adduser&username='.$userdetails->username.'&email='.$userdetails->email.'' ?>" class="text-info">Add user</a></li>
 							</ul>
 							</div><?php }
                             if ($userdetails->role == 2) { ?>
@@ -111,7 +113,8 @@
 							<li><a href="<?php echo'/index.php?control=UserManager&action=changerole&username='.$userdetails->username.'&email='.$userdetails->email.'&role=1' ?>">Admin</a></li>
 							<li><a href="<?php echo'/index.php?control=UserManager&action=changerole&username='.$userdetails->username.'&email='.$userdetails->email.'&role=3' ?>">Viewer</a></li>
 							<li class="divider"></li>
-							<li><a href="<?php echo'/index.php?control=UserManager&action=removeuser&username='.$userdetails->username.'&email='.$userdetails->email.'' ?>" class="text-info">Remove user</a></li>
+							<li><a href="<?php echo'/index.php?control=UserManager&action=removeuser&username='.$userdetails->username.'&email='.$userdetails->email.'' ?>" class="text-info">Restrict user</a></li>
+							<li><a href="<?php echo'/index.php?control=UserManager&action=adduser&username='.$userdetails->username.'&email='.$userdetails->email.'' ?>" class="text-info">Add user</a></li>
 							</ul>
 							</div><?php }
 		                    if ($userdetails->role == 3) { ?>
@@ -124,9 +127,17 @@
 							<li><a href="<?php echo'/index.php?control=UserManager&action=changerole&username='.$userdetails->username.'&email='.$userdetails->email.'&role=1' ?>">Admin</a></li>
 							<li><a href="<?php echo'/index.php?control=UserManager&action=changerole&username='.$userdetails->username.'&email='.$userdetails->email.'&role=2' ?>">Builder</a></li>
 							<li class="divider"></li>
-							<li><a href="<?php echo'/index.php?control=UserManager&action=removeuser&username='.$userdetails->username.'&email='.$userdetails->email.'' ?>" class="text-info">Remove user</a></li>
+							<li><a href="<?php echo'/index.php?control=UserManager&action=removeuser&username='.$userdetails->username.'&email='.$userdetails->email.'' ?>" class="text-info">Restrict user</a></li>
+							<li><a href="<?php echo'/index.php?control=UserManager&action=adduser&username='.$userdetails->username.'&email='.$userdetails->email.'' ?>" class="text-info">Add user</a></li>
 							</ul>
 							</div><?php } ?>
+        		            </td>
+        		            <td>
+        		            <?php if($userdetails->restrict == 0) { 
+								echo '<b><p class="text-success">Active</p></b>'; }
+								else{
+								echo '<b><p class="text-danger">Restricted</p></b>';}
+								?>
         		            </td> 
                             </tr>
 							<?php 
