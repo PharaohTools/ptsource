@@ -93,12 +93,12 @@
                 	
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     	
-                        <i class="fa fa-bell fa-fw hvr-buzz" id="bell"></i>  <i class="fa fa-caret-down" id="caret"></i>
+                        <i class="fa fa-bell fa-fw hvr-buzz" id="bell"></i>  <i class="fa fa-caret-down hvr-buzz" id="caret"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-alerts">
                         <li>
                             <a href="#">
-                                <div class="hvr-bounce-in">
+                                <div >
                                     <i class="fa fa-comment fa-fw "></i> New Comment
                                     <span class="pull-right text-muted small"> 4 minutes ago</span>
                                 </div>

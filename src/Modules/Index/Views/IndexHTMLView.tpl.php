@@ -25,13 +25,13 @@
                     </a>
 					<ul class="nav nav-second-level collapse">
                         <li>
-                            <a href="/index.php?control=ApplicationConfigure&action=show" class=" hvr-bounce-out">Application</a>
+                            <a href="/index.php?control=ApplicationConfigure&action=show" class=" hvr-curl-bottom-right">Application</a>
                         </li>
                         <li>
-                            <a href="/index.php?control=UserManager&action=show" class=" hvr-bounce-out">Users</a>
+                            <a href="/index.php?control=UserManager&action=show" class=" hvr-curl-bottom-right">Users</a>
                         </li>
                         <li>
-                            <a href="/index.php?control=ModuleManager&action=show" class=" hvr-bounce-out">Modules</a>
+                            <a href="/index.php?control=ModuleManager&action=show" class=" hvr-curl-bottom-right">Modules</a>
                         </li>
 					</ul>
 					<!-- /.nav-second-level -->
@@ -60,7 +60,7 @@
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-3">
-                                        <i class="fa fa-database   fa-4x"></i>
+                                        <i class="fa fa-database   fa-4x hvr-buzz-out"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <div class="huge hvr-grow-rotate" ><?php echo $pageVars['pipesDetail']['total']; ?></div>
@@ -82,7 +82,7 @@
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-3">
-                                        <i class="fa fa-check-circle fa-4x"></i>
+                                        <i class="fa fa-check-circle fa-4x hvr-buzz-out"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <div class="huge  hvr-grow-rotate"><?php echo $pageVars['pipesDetail']['success']; ?></div>
@@ -104,7 +104,7 @@
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-3">
-                                        <i class="fa fa-times-circle fa-4x hvr-buzz"></i>
+                                        <i class="fa fa-times-circle fa-4x hvr-buzz-out"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <div class="huge  hvr-grow-rotate"><?php echo $pageVars['pipesDetail']['fail']; ?></div>
@@ -126,7 +126,7 @@
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-3">
-                                        <i class="fa fa-chain-broken fa-4x"></i>
+                                        <i class="fa fa-chain-broken fa-4x hvr-buzz-out"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <div class="huge hvr-grow-rotate"><?php echo $pageVars['pipesDetail']['unstable']; ?></div>
