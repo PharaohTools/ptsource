@@ -66,7 +66,7 @@
    // @todo can we do HTML output with a blank template
 	 ?>
 		<div id="wrapper">
-			<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-top: -70px  ; background-color: #242424;  border-color:#242424;">
+			<nav class="navbar navbar-default navbar-static-top navbar-fixed-top" role="navigation" style="background-color: #242424;  border-color:#242424;">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" style="color:#FFFFFF" coldata-toggle="collapse" data-target=".navbar-collapse">
 						<span class="sr-only">Toggle navigation</span>
