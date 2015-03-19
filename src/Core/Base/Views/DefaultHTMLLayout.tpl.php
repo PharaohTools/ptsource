@@ -64,18 +64,19 @@
 <?php
    // @todo this doesn't seem right
    // @todo can we do HTML output with a blank template
-	if($pageVars["route"]["action"] != "registration" && $pageVars["route"]["action"] != "login") { ?>
+	 ?>
 		<div id="wrapper">
-			<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-top: -70px">
+			<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-top: -70px  ; background-color: #242424;  border-color:#242424;">
 				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<button type="button" class="navbar-toggle" style="color:#FFFFFF" coldata-toggle="collapse" data-target=".navbar-collapse">
 						<span class="sr-only">Toggle navigation</span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
 					<a class="navbar-" href="/index.php?control=Index&action=show">
-                        <img src="/index.php?control=AssetLoader&action=show&module=PostInput&type=image&asset=5.png" class="navbar-img" style="height: 60px;padding: 5px" /><b>PTBuild</b>
+                        <img src="/index.php?control=AssetLoader&action=show&module=PostInput&type=image&asset=5.png" class="navbar-img" style="height: 60px;padding: 5px;" />
+                        <span class="title">PTBuild</span>
                     </a>
 				</div>
 				<!-- /.navbar-header -->
@@ -83,7 +84,7 @@
 				<ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <i class="fa fa-bell fa-fw" id="bell"></i>  <i class="fa fa-caret-down" id="caret"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-alerts">
                         <li>
@@ -108,7 +109,7 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <i class="fa fa-user fa-fw" id="bell"></i>  <i class="fa fa-caret-down" id="caret"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
@@ -116,10 +117,12 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li><a href="/index.php?control=About&action=show"><i class="fa fa-help fa-fw"></i> About</a>
-                        </li>
+                        </li> 
+                        <?php 
+                        if($pageVars["route"]["action"] != "registration" && $pageVars["route"]["action"] != "login") { ?>
                         <li class="divider"></li>
                         <li><a href="/index.php?control=Signup&action=logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
+                        </li><?php } ?>
                     </ul>
                     <!-- /.dropdown-user -->
                 </li>
@@ -127,7 +130,6 @@
             </ul>   
             <!-- /.navbar-top-links -->
 			</nav>
-<?php } ?>
 			<?php echo $this -> renderMessages($pageVars); ?>
 			<?php echo $templateData; ?>
 

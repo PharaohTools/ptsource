@@ -15,13 +15,12 @@
                 </li>
                 <li>
                     <a href="/index.php?control=Index&action=show">
-                        <i class="fa fa-comment-o"></i> Dashboard
+                        <i class="fa fa-dashboard"></i> Dashboard
                     </a>
                 </li>
                 <li>
                     <a href="/index.php?control=ApplicationConfigure&action=show">
-                        <i class="fa fa-sitemap fa-fw"></i> Configure PTBuild<span class="fa arrow"></span>
-                    </a>
+                        <i class="fa fa-cogs fa-fw"></i> Configure PTBuild</a>
                 </li>
                 <li>
                     <a href="/index.php?control=UserManager&action=show">
@@ -30,14 +29,15 @@
                 </li>
                 <li>
                     <a href="/index.php?control=ModuleManager&action=show">
-                        <i class="fa fa-user"></i> Module Manager
+                        <i class="fa fa-suitcase"></i> Module Manager
                     </a>
                 </li>
             </ul>
         </div>
     </div>
 
-  <div class="col-md-9 col-sm-10" id="page-wrapper">
+  <div class="col-lg-9">
+                    <div class="well well-lg">
         <h2 class="text-uppercase text-light"><a href="/"> PTBuild - Pharaoh Tools</a></h2>
 
         <div class="row clearfix no-margin">
@@ -62,46 +62,84 @@
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="all">
                         <div class="table-responsive">
-                            <table class="table table-bordered table-custom">
+                            <table class="table table-hover table-custom" >
                                 <thead>
-                                <tr>
+                                <tr class="active">
                                     <th>#</th>
-                                    <th>UserName</th>
+                                    <th>User Name</th>
                                     <th>Email</th>
-                                    <th>UserGroup</th>
-                                    <!--
-                                    <th>Parent</th>
-                                    <th>Child</th>
-                                    -->
-								</tr> </thead><tbody class=
-								"table-hover">
-						<?php        
-							$i = 1;   
-								foreach ($pageVars["data"] as $userdetails) { ?>
-                                    <tr>
-                                        <th scope="row">
-											<?php echo $i ; ?>
-                                        </th>
-                                       <td>
-											<?php echo $userdetails->username; ?>
-										</td>
-                                        <td>
-											<?php echo $userdetails->email; ?>
-                                        </td>
-                                        <td>
-											<?php $i++; ?>
-                                        </td>  
-                                    </tr>
-                                    <?php 
-                                   }  
-                                   ?>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-       </div>
+                                    <th>User Group</th>
+                                    <th>Action</th>
+                                 </tr></thead>
+				<tbody class="table-hover">
+				<?php      
+					$i = 1;   
+					foreach ($pageVars["userdata"] as $userdetails) { ?>
+                	    <tr class="default">
+                	    <th scope="row"><?php echo $i ; ?></th>
+	           	        <td><?php echo '<b>'.$userdetails->username.'</b>'; ?></td>
+                	    <td><?php echo '<p style="">'.$userdetails->email.'</p>'; ?></td>
+                        <td><?php 
+							if($userdetails->role==1){
+							echo '<b><p class="text-primary">Admin</p></b>'; }
+							if($userdetails->role==2){
+							echo '<b><p class="text-success">Builder</p></b>'; }
+							if($userdetails->role==3){
+							echo '<b><p class="text-warning">Viewer</p></b>'; } ?>
+						</td>
+						<td>
+				<?php
+                     if ($userdetails->role == 1) {
+                           echo'<div class="btn-group">
+                            <button type="button" class="btn btn-primary  btn-xs">Options</button>
+							<button type="button" class="btn btn-default  btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button>
+							<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+							<li><a href="#" class="text-info">Change role</a></li>
+							<li class="divider"></li>
+							<li><a href="/index.php?control=UserManager&action=changerole&username='.$userdetails->username.'&email='.$userdetails->email.'&role=2">Builder</a></li>
+							<li><a href="/index.php?control=UserManager&action=changerole&username='.$userdetails->username.'&email='.$userdetails->email.'&role=3">Viewer</a></li>
+							<li class="divider"></li>
+							<li><a href="#" class="text-info">Remove user</a></li>
+							</ul>
+							</div>';}
+                            if ($userdetails->role == 2) {
+							 echo'<div class="btn-group">
+                            <button type="button" class="btn btn-primary  btn-xs">Options</button>
+							<button type="button" class="btn btn-default  btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button>
+							<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+							<li><a href="#" class="text-info">Change role</a></li>
+							<li class="divider"></li>
+							<li><a href="/index.php?control=UserManager&action=changerole&username='.$userdetails->username.'&email='.$userdetails->email.'&role=1">Admin</a></li>
+							<li><a href="/index.php?control=UserManager&action=changerole&username='.$userdetails->username.'&email='.$userdetails->email.'&role=3">Viewer</a></li>
+							<li class="divider"></li>
+							<li><a href="#" class="text-info">Remove user</a></li>
+							</ul>
+							</div>';}
+		                    if ($userdetails->role == 3) {
+                            echo'<div class="btn-group">
+                           <button type="button" class="btn btn-primary  btn-xs">Options</button>
+							<button type="button" class="btn btn-default  btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button>
+							<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+							<li><a href="#" class="text-info">Change role</a></li>
+							<li class="divider"></li>
+							<li><a href="/index.php?control=UserManager&action=changerole&username='.$userdetails->username.'&email='.$userdetails->email.'&role=1">Admin</a></li>
+							<li><a href="/index.php?control=UserManager&action=changerole&username='.$userdetails->username.'&email='.$userdetails->email.'&role=2">Builder</a></li>
+							<li class="divider"></li>
+							<li><a href="#" class="text-info">Remove user</a></li>
+							</ul>
+							</div>';} ?>
+        		            </td> 
+                            </tr>
+							<?php 
+                            $i++; }  
+                            ?>
+                         </tbody>
+                     </div>
+                  </div></table>
+               </div>
+			</div> 
+		  </div> 
+     
        <p>
             ---------------------------------------<br/>
             Visit www.pharaohtools.com for more

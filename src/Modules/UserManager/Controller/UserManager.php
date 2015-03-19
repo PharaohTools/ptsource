@@ -12,18 +12,15 @@ class UserManager extends Base {
 			return $this->failDependencies($pageVars, $this->content, $thisModel) ;
 		}
         if (in_array($pageVars["route"]["action"], array("show"))) {
-		    $webModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars, "Web") ;
-            $this->content["data"] = $thisModel->getUserDetails();          
+		    $this->content["userdata"] = $thisModel->getUserDetails();          
             return array ("type"=>"view", "view"=>"userManager", "pageVars"=>$this->content); 
         }
-        if (in_array($pageVars["route"]["action"], array("webaction"))) {
-            $webActionModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars, "WebAction") ;
-            $this->content["data"]["webAction"] = $webActionModel->getData();
-            return array ("type"=>"view", "view"=>"userManagerWebAction", "pageVars"=>$this->content); 
-		}
-        if ($pageVars["route"]["action"] == "getuserdetails") { 
-            $this->content["data"] = $thisModel->getUserDetails();
+        if ($pageVars["route"]["action"] == "changerole") { 
+            $this->content["userdata"] = $thisModel->changeRole();
+            $this->content["userdata"] = $thisModel->getUserDetails(); 
+            return array ("type"=>"view", "view"=>"userManager", "pageVars"=>$this->content);     
        }
+       
     }
 
 }

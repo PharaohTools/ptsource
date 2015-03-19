@@ -20,7 +20,7 @@
                 </li>
                 <li>
                     <a href="/index.php?control=ApplicationConfigure&action=show">
-                        <i class="fa fa-cogs fa-fw"></i> Configure PTBuild<span class="fa arrow"></span>
+                        <i class="fa fa-cogs fa-fw"></i> Configure PTBuild
                     </a>
                 </li>
                 <li>
@@ -32,7 +32,8 @@
         </div>
     </div>
 
-    <div class="col-md-9 col-sm-10" id="page-wrapper">
+    <div class="col-lg-9">
+                    <div class="well well-lg">
             <?php
             $act = '/index.php?control=ModuleManager&item='.$pageVars["data"]["pipeline"]["project-slug"].'&action=save' ;
             ?>

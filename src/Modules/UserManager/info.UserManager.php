@@ -13,7 +13,7 @@ class UserManagerInfo extends PTConfigureBase {
     }
 
     public function routesAvailable() {
-      return array( "UserManager" =>  array("show","getuserdetails") );
+      return array( "UserManager" =>  array("show","getuserdetails","changerole"));
     }
 
     public function routeAliases() {
