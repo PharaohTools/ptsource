@@ -24,23 +24,15 @@ class UserManagerAnyOS extends BasePHPApp {
 	}
 
     public function getUserDetails() {
-        $myfile = fopen(__DIR__."/../../Signup/Data/users.txt", "r") or die("Unable to open file!");
-        $oldData='';
-        while(!feof($myfile))
-        $oldData.=fgets($myfile);
-        fclose($myfile);
-        $oldData=json_decode($oldData);
+		$signupFactory = new \Model\Signup();
+		$signup = $signupFactory->getModel($this->params);
+		$oldData=$signup->getUsersData();
         return $oldData;
 	}
    
    public function changeRole(){
-		$myfile = fopen(__DIR__."/../../Signup/Data/users.txt", "r") or die("Unable to open file!");
-        $oldData='';
-        while(!feof($myfile))
-        $oldData.=fgets($myfile);
-        fclose($myfile);
-		$oldData=json_decode($oldData);
-        foreach($oldData as $key => $data){
+		$oldData=$this->getUserDetails();
+		foreach($oldData as $key => $data){
 			if($data->username==$_GET["username"] && $data->email==$_GET["email"]){
 				$data->username=$_GET["username"];
 				$data->email=$_GET["email"];
@@ -52,4 +44,14 @@ class UserManagerAnyOS extends BasePHPApp {
 		fwrite($myfile, json_encode($oldData));
 	    fclose($myfile);
     }
+    
+    public function checkRole(){
+		$oldData=$this->getUserDetails();
+		foreach($oldData as $data){
+			if($data->username==$_SESSION["username"]){
+				if($data->role=1)
+				return TRUE;
+		     }
+		}
+	}
 }

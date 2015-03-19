@@ -18,15 +18,13 @@
                         <i class="fa fa-dashboard fa-fw"></i> Dashboard
                     </a>
                 </li>
-                <li>
-                    <a href="/index.php?control=Licensing&action=show">
-                        <i class="fa fa-bar-chart-o"></i> Licensing <span class="badge">OK</span>
-                    </a>
+               <li>
+                    <a href="/index.php?control=ApplicationConfigure&action=show">
+                        <i class="fa fa-cogs fa-fw"></i> Configure PTBuild</a>
                 </li>
                 <li>
                     <a href="/index.php?control=UserManager&action=show">
                         <i class="fa fa-group"></i> User Manager
-                      
                     </a>
                 </li>
                 <li>

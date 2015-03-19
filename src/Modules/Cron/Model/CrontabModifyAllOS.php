@@ -21,7 +21,7 @@ class CrontabModifyAllOS extends Base {
         $logging = $loggingFactory->getModel($this->params);
         $cronJobs = $this->getCronjobs() ;
         $cronJobs[] = $cronCmd ;
-        $this->saveCronjobs($cronJobs) ;
+        return $this->saveCronjobs($cronJobs) ;
     }
 
     public function removeCronjob() {

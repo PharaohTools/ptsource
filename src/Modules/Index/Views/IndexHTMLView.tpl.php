@@ -19,7 +19,19 @@
 				</li>
 				<li>
 					<a href="/index.php?control=ApplicationConfigure&action=show">
-                        <i class="fa fa-cogs fa-fw"></i> Configure PTBuild</a>
+                        <i class="fa fa-cogs fa-fw"></i> Configure PTBuild<span class="fa arrow"></span>
+                    </a>
+					<ul class="nav nav-second-level collapse">
+                        <li>
+                            <a href="/index.php?control=ApplicationConfigure&action=show">Application</a>
+                        </li>
+                        <li>
+                            <a href="/index.php?control=UserManager&action=show">Users</a>
+                        </li>
+                        <li>
+                            <a href="/index.php?control=ModuleManager&action=show">Modules</a>
+                        </li>
+					</ul>
 					<!-- /.nav-second-level -->
 				</li>
 				<li>
@@ -130,40 +142,36 @@
                 </div>
                 <?php
                 $graphData = array();
-				$success = $fail = $running = 0;
-                foreach ($pageVars['pipesDetail']['buildHistory']['history'] as $key => $value) {
+                foreach ($pageVars['pipesDetail']['buildHistory'] as $key => $value) {
+					$day = date('j', $value->start);
                 	if(date('m', $value->start) == date('m', time())) {
-                		$old_start = $value->start;
-                		if(date('m', $value->start) == date('m', $old_start)) {
-                			if (isset($value->status)) 
+                		if (in_array($day, array_keys($graphData))) { 
+                			if (isset($value->status)) {
+                				if ($value->status == 'SUCCESS')
+									$graphData[$day]['success']++;
+								if ($value->status == 'FAIL')
+									$graphData[$day]['fail']++;
+							}
+							else
+								$graphData[$day]['unstable']++;
+                		} else {
+							if (isset($value->status)) 
                 				if ($value->status == 'SUCCESS') 
-									$success++ ; 
+									$graphData[$day] = array( 'success' => 1, 'fail' => 0, 'unstable' => 0 ); 
 								if ($value->status == 'FAIL') 
-									$fail++ ;
+									$graphData[$day] = array( 'success' => 0, 'fail' => 1, 'unstable' => 0 );
 							else
-								$running++ ;
-                		}
-						else {
-							$success = $fail = $running = 0;
-                			if (isset($value->status)) 
-                				if ($value->status == 'success') 
-									$success++ ; 
-								if ($value->status == 'fail') 
-									$fail++ ;
-							else
-								$running++ ;
+								$graphData[$day] = array( 'success' => 0, 'fail' => 0, 'unstable' => 1);
 						}
-						$graphData[date("j", $value->start)] = array( 'success' => $success, 'fail' => $fail, 'running' => $running );
 					}
 				}
 				foreach ($graphData as $key => $value) {
-					$data[] = array( 'period'  => $key,
+					$data[] = array( 'day'  => $key,
 									 'success' => $value['success'],
 									 'fail'	=> $value['fail'],
-									 'runnung' => $value['running']
+									 'unstable' => $value['unstable']
 									);
-				}
-                ?>
+				} ?>
                 <div class="row">
 	                <div class="col-lg-12">
 	                    <div class="panel panel-default">
@@ -202,10 +210,11 @@
 				    Morris.Area({
 				        element: 'pipes-build-chart',
 				        data: <?php echo json_encode($data); ?>,
-				        xkey: 'period',
-				        ykeys: ['success', 'fail', 'running'],
-				        labels: ['Success', 'Failed', 'Running'],
-				        pointSize: 2,
+				        xkey: 'day',
+				        ykeys: ['success', 'fail', 'unstable'],
+				        labels: ['Success', 'Failed', 'Unstable'],
+				        xLabelFormat: ['day'],
+				        pointSize: 1,
 				        lineColors: ['#d9534f','#5cb85c','#F0AD4E'],
 				        hideHover: 'auto',
 				        resize: true
@@ -213,6 +222,7 @@
 				
 				});
 			</script>
+				        
 
 			<div class="col-lg-14">
                     <div class="well well-lg">
