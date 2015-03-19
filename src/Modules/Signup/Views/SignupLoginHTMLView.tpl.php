@@ -21,32 +21,33 @@
 						<p style="color: #ff6312; margin-left: 46px;" id="login_error_msg"></p>
 						<form class="form-horizontal custom-form">
 							<div class="form-group" >
+								
 								<label for="inputEmail3" class="col-sm-3 control-label text-left" style="color:#757575;">User Name</label>
 								<div class="col-sm-8">
-									<input type="text" class="form-control" id="login_username" placeholder="User Name">
+									<input type="text" class="form-control " id="login_username" placeholder="User Name">
 									<span style="color:#FF0000;" id="login_username_alert"></span>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputPassword3" class="col-sm-3 control-label text-left" style="color:#757575;">Password</label>
 								<div class="col-sm-8">
-									<input type="password" class="form-control" id="login_password" placeholder="Password">
+									<input type="password" class="form-control " id="login_password" placeholder="Password">
 									<span style="color:#FF0000;" id="login_password_alert"></span>
 								</div>
 							</div>
 
 							<div class="form-group">
 								<div class="col-sm-offset-3 col-sm-4">
-									<div>
-									<label for="Signed in"><input name="Signed in" id="Signed in" value="forever" type="checkbox" style="color:#A2A1A1;"> Keep Me Signed in</label>
+									<div >
+									<label for="Signed in"><input name="Signed in" id="Signed in"  type="checkbox" style="color:#A2A1A1;"> Keep Me Signed in</label>
 									</div>	
-									<button type="button" onclick="submit_login();" class="btn  btn-primary " >
+									<button type="button" onclick="submit_login();" class="btn  btn-primary  btn-1 btn-1a hvr-box-shadow-outset" >
 										Log in
 									</button>
 									
 									</div>
 									
-									<div class="col-sm-offset-3 col-sm-12">
+									<div class="col-sm-offset-3 col-sm-12 ">
 									
 									<a href="http://www.ptbuild.tld/index.php?control=Signup&action=registration">  <b> Need an account ? Sign Up  </b> </a> 
 									
@@ -60,11 +61,11 @@
   </span>
 </div>
                                 
-							    <div class="text-center">
-								<a href="/index.php?control=OAuth&action=githublogin" class="btn btn-github " title="Github"><i class="fa fa-github"></i> Github </a> | 
-								<a href="/index.php?control=OAuth&action=fblogin" class="btn btn-facebook" title="Facebook"><i class="fa fa-facebook"></i>  Facebook</a>  |
-								<a href="/index.php?control=OAuth&action=linkedinlogin" class="btn btn-linkedin" title="LinkedIn"><i class="fa fa-linkedin"></i> linkedin</a> |
-                                <a href="/index.php?control=ldap&action=ldaplogin" class="btn btn-social-icon " title="LDAP">LDAP</a>
+							    <div class="text-center ">
+								<a href="/index.php?control=OAuth&action=githublogin" class="btn btn-github hvr-pop" title="Github"><i class="fa fa-github"></i> Github </a> | 
+								<a href="/index.php?control=OAuth&action=fblogin" class="btn btn-facebook hvr-pop" title="Facebook"><i class="fa fa-facebook"></i>  Facebook</a>  |
+								<a href="/index.php?control=OAuth&action=linkedinlogin" class="btn btn-linkedin hvr-pop" title="LinkedIn"><i class="fa fa-linkedin"></i> linkedin</a> |
+                                <a href="/index.php?control=ldap&action=ldaplogin" class="btn btn-social-icon hvr-pop" title="LDAP">LDAP</a>
 
                                 </div>
                                 
@@ -84,6 +85,6 @@
         </div>
     </div>
 </div>
-<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Palatino Linotype">
 
 <script type="text/javascript" src="/index.php?control=AssetLoader&action=show&module=Signup&type=js&asset=signup.js"></script>

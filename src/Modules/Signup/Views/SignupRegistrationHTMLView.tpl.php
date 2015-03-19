@@ -45,7 +45,7 @@
 
                         <div class="form-group">
                             <div class="col-sm-offset-4 col-sm-3">
-                                <button type="button" onclick="subReg();" class="btn  btn-info btn-block">
+                                <button type="button" onclick="subReg();" class="btn  btn-primary hvr-box-shadow-outset">
                                   Sign up
                                 </button>
 

@@ -6,8 +6,8 @@
 
 body {
     background-color: #f8f8f8;
-    font-family: WST_Czec;
-    font-size: 14px;
+    font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;
+    font-size: 15px;
 }
 .title{
 	color:#F8F8F8;
@@ -367,4 +367,7 @@ table.dataTable thead .sorting:after {
 .panel-yellow a:hover {
     color: #df8a13;
 }
-  
+  #hi-icon{
+  	height: 10px;
+  }
+ 

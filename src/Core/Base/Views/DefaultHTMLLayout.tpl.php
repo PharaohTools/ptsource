@@ -13,10 +13,14 @@
         <script src="/index.php?control=AssetLoader&action=show&module=PostInput&type=js&asset=jquery.min.js"></script>
         <script src="/index.php?control=AssetLoader&action=show&module=PostInput&type=js&asset=jquery-ui.min.js"></script>
         <script src="/index.php?control=AssetLoader&action=show&module=PostInput&type=js&asset=bootstrap.min.js"></script>
+        
+       <link href="Assets/Hover-master/css/hover.css" rel="stylesheet" media="all">
+		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" media="all">
 
 		<!-- Bootstrap Core CSS -->
 		<link href="/index.php?control=AssetLoader&action=show&module=PostInput&type=css&asset=bootstrap.min.css" rel="stylesheet">
-
+		
+		
 		<!-- MetisMenu CSS -->
 		<link href="/Assets/startbootstrap-sb-admin-2-1.0.5/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
@@ -44,6 +48,8 @@
     
 		<!-- Custom Theme JavaScript -->
 		<script src="/Assets/startbootstrap-sb-admin-2-1.0.5/dist/js/sb-admin-2.js"></script>
+		
+		
 
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -75,23 +81,26 @@
 						<span class="icon-bar"></span>
 					</button>
 					<a class="navbar-" href="/index.php?control=Index&action=show">
-                        <img src="/index.php?control=AssetLoader&action=show&module=PostInput&type=image&asset=5.png" class="navbar-img" style="height: 60px;padding: 5px;" />
-                        <span class="title">PTBuild</span>
+						<figure class="rollover">
+                        <img src="/index.php?control=AssetLoader&action=show&module=PostInput&type=image&asset=5.png" class="navbar-img hvr-bounce-in" style="height: 60px;padding: 5px;" />
+                        <span class="title hvr-bounce-in">PTBuild</span>
                     </a>
 				</div>
 				<!-- /.navbar-header -->
-
 				<ul class="nav navbar-top-links navbar-right">
+					
                 <li class="dropdown">
+                	
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell fa-fw" id="bell"></i>  <i class="fa fa-caret-down" id="caret"></i>
+                    	
+                        <i class="fa fa-bell fa-fw hvr-buzz" id="bell"></i>  <i class="fa fa-caret-down" id="caret"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-alerts">
                         <li>
                             <a href="#">
-                                <div>
-                                    <i class="fa fa-comment fa-fw"></i> New Comment
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                <div class="hvr-bounce-in">
+                                    <i class="fa fa-comment fa-fw "></i> New Comment
+                                    <span class="pull-right text-muted small"> 4 minutes ago</span>
                                 </div>
                             </a>
                         </li>
