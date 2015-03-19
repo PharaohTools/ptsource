@@ -19,11 +19,15 @@ class UserManager extends Base {
 		 return array ("type"=>"view", "view"=>"UserManagerAlert", "pageVars"=>$this->content); 
         }
         if ($pageVars["route"]["action"] == "changerole") { 
-            $this->content["userdata"] = $thisModel->changeRole();
+            $thisModel->changeRole();
             $this->content["userdata"] = $thisModel->getUserDetails(); 
             return array ("type"=>"view", "view"=>"userManager", "pageVars"=>$this->content);     
        }
-       
+       if ($pageVars["route"]["action"] == "removeuser") { 
+            $thisModel->removeUser();
+            $this->content["userdata"] = $thisModel->getUserDetails(); 
+            return array ("type"=>"view", "view"=>"userManager", "pageVars"=>$this->content);     
+       }
     }
 
 }

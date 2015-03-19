@@ -39,9 +39,8 @@
   <div class="col-lg-9">
                     <div class="well well-lg">
         <h2 class="text-uppercase text-light"><a href="/"> PTBuild - Pharaoh Tools</a></h2>
-
         <div class="row clearfix no-margin">
-            <h4 class="text-uppercase text-light">List of users</h4>
+           <h4 class="text-uppercase text-primary"><i class="fa fa-users"></i>  Users</h4>
             <!--
             <h3>
                 <a class="lg-anchor text-light" href="/index.php?control=BuildList&action=show">
@@ -50,18 +49,18 @@
             -->
             <div role="tabpanel">
 
-                <!-- Nav tabs -->
+                <!-- Nav tabs
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active"><a href="#all" aria-controls="all" role="tab" data-toggle="tab">All</a></li>
                     <li role="presentation"><a href="#success" aria-controls="success" role="tab" data-toggle="tab">Group 1</a></li>
                     <li role="presentation"><a href="#failed" aria-controls="failed" role="tab" data-toggle="tab">Group 2</a></li>
                     <li role="presentation"><a href="#unstable" aria-controls="unstable" role="tab" data-toggle="tab">Group 3</a></li>
                 </ul>
-
+				-->
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="all">
-                        <div class="table-responsive">
+                        <div class="table">
                             <table class="table table-hover table-custom" >
                                 <thead>
                                 <tr class="active">
@@ -89,53 +88,53 @@
 						</td>
 						<td>
 				<?php
-                     if ($userdetails->role == 1) {
-                           echo'<div class="btn-group">
+                     if ($userdetails->role == 1) { ?>
+                           <div class="btn-group">
+                            <button type="button" class="btn btn-primary  btn-xs">Options</button>
+							<button type="button" class="btn btn-default  btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button>
+							<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+							<li><a href="#" class="">Change role</a></li>
+							<li class="divider"></li>
+							<li><a href="<?php echo'/index.php?control=UserManager&action=changerole&username='.$userdetails->username.'&email='.$userdetails->email.'&role=2' ?>">Builder</a></li>
+							<li><a href="<?php echo'/index.php?control=UserManager&action=changerole&username='.$userdetails->username.'&email='.$userdetails->email.'&role=3' ?>">Viewer</a></li>
+							<li class="divider"></li>
+							<li><a href="<?php echo'/index.php?control=UserManager&action=removeuser&username='.$userdetails->username.'&email='.$userdetails->email.'' ?> class="text-info">Remove user</a></li>
+							</ul>
+							</div><?php }
+                            if ($userdetails->role == 2) { ?>
+							 <div class="btn-group">
                             <button type="button" class="btn btn-primary  btn-xs">Options</button>
 							<button type="button" class="btn btn-default  btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button>
 							<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
 							<li><a href="#" class="text-info">Change role</a></li>
 							<li class="divider"></li>
-							<li><a href="/index.php?control=UserManager&action=changerole&username='.$userdetails->username.'&email='.$userdetails->email.'&role=2">Builder</a></li>
-							<li><a href="/index.php?control=UserManager&action=changerole&username='.$userdetails->username.'&email='.$userdetails->email.'&role=3">Viewer</a></li>
+							<li><a href="<?php echo'/index.php?control=UserManager&action=changerole&username='.$userdetails->username.'&email='.$userdetails->email.'&role=1' ?>">Admin</a></li>
+							<li><a href="<?php echo'/index.php?control=UserManager&action=changerole&username='.$userdetails->username.'&email='.$userdetails->email.'&role=3' ?>">Viewer</a></li>
 							<li class="divider"></li>
-							<li><a href="#" class="text-info">Remove user</a></li>
+							<li><a href="<?php echo'/index.php?control=UserManager&action=removeuser&username='.$userdetails->username.'&email='.$userdetails->email.'' ?>" class="text-info">Remove user</a></li>
 							</ul>
-							</div>';}
-                            if ($userdetails->role == 2) {
-							 echo'<div class="btn-group">
-                            <button type="button" class="btn btn-primary  btn-xs">Options</button>
-							<button type="button" class="btn btn-default  btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button>
-							<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-							<li><a href="#" class="text-info">Change role</a></li>
-							<li class="divider"></li>
-							<li><a href="/index.php?control=UserManager&action=changerole&username='.$userdetails->username.'&email='.$userdetails->email.'&role=1">Admin</a></li>
-							<li><a href="/index.php?control=UserManager&action=changerole&username='.$userdetails->username.'&email='.$userdetails->email.'&role=3">Viewer</a></li>
-							<li class="divider"></li>
-							<li><a href="#" class="text-info">Remove user</a></li>
-							</ul>
-							</div>';}
-		                    if ($userdetails->role == 3) {
-                            echo'<div class="btn-group">
+							</div><?php }
+		                    if ($userdetails->role == 3) { ?>
+                           <div class="btn-group">
                            <button type="button" class="btn btn-primary  btn-xs">Options</button>
 							<button type="button" class="btn btn-default  btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button>
 							<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
 							<li><a href="#" class="text-info">Change role</a></li>
 							<li class="divider"></li>
-							<li><a href="/index.php?control=UserManager&action=changerole&username='.$userdetails->username.'&email='.$userdetails->email.'&role=1">Admin</a></li>
-							<li><a href="/index.php?control=UserManager&action=changerole&username='.$userdetails->username.'&email='.$userdetails->email.'&role=2">Builder</a></li>
+							<li><a href="<?php echo'/index.php?control=UserManager&action=changerole&username='.$userdetails->username.'&email='.$userdetails->email.'&role=1' ?>">Admin</a></li>
+							<li><a href="<?php echo'/index.php?control=UserManager&action=changerole&username='.$userdetails->username.'&email='.$userdetails->email.'&role=2' ?>">Builder</a></li>
 							<li class="divider"></li>
-							<li><a href="#" class="text-info">Remove user</a></li>
+							<li><a href="<?php echo'/index.php?control=UserManager&action=removeuser&username='.$userdetails->username.'&email='.$userdetails->email.'' ?>" class="text-info">Remove user</a></li>
 							</ul>
-							</div>';} ?>
+							</div><?php } ?>
         		            </td> 
                             </tr>
 							<?php 
                             $i++; }  
                             ?>
-                         </tbody>
+                         </tbody></table>
                      </div>
-                  </div></table>
+                  </div>
                </div>
 			</div> 
 		  </div> 
@@ -146,4 +145,5 @@
         </p>
     </div>
 </div><!-- container -->
-<link rel="stylesheet" href="/index.php?control=AssetLoader&action=show&user=UserManager&type=css&asset=usermanager.css">
+<link rel="stylesheet" href="/index.php?control=AssetLoader&action=show&module=UserManager&type=css&asset=usermanager.css">
+

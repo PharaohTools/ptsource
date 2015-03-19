@@ -54,4 +54,17 @@ class UserManagerAnyOS extends BasePHPApp {
 		     }
 		}
 	}
+	
+	public function removeUser(){
+		$oldData=$this->getUserDetails();
+		foreach($oldData as $key => $data){
+			if($data->username==$_GET["username"] && $data->email==$_GET["email"]){
+			$data->removestatus=1;
+				$oldData[$key] = $data;
+			}
+		}
+		$myfile = fopen(__DIR__."/../../Signup/Data/users.txt", "w") or die("Unable to open file!");
+		fwrite($myfile, json_encode($oldData));
+	    fclose($myfile);
+	}
 }
