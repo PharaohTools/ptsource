@@ -279,17 +279,19 @@ class ConditionalStepRunnerAllOS extends BaseLinuxApp {
 		$rules = explode(",",$earliest);
 		$result_array = array();
 		foreach($rules as $rule) {
-			if (!empty(glob($rule))) {
-				array_push($result_array, TRUE) ; }
-			else
-				array_push($result_array, FALSE) ;
+            // @todo @karthik this is breaking
+//			if (!empty(glob($rule))) {
+//				array_push($result_array, TRUE) ; }
+//			else
+//				array_push($result_array, FALSE) ;
 		}
 		$rules = explode(",",$latest);
 		foreach($rules as $rule) {
-			if (empty(glob($rule)))
-				array_push($result_array, TRUE) ;
-			else
-				array_push($result_array, FALSE) ;		
+            // @todo @karthik this is breaking
+//			if (empty(glob($rule)))
+//				array_push($result_array, TRUE) ;
+//			else
+//				array_push($result_array, FALSE) ;
 		}
 		if (in_array(FALSE, $result_array))
 			return FALSE;
