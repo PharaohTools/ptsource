@@ -47,7 +47,7 @@ class GitLinuxUnix extends Base {
             if (isset($this->params["build-settings"]["PollSCM"]["git_privkey_path"]) &&
                 $this->params["build-settings"]["PollSCM"]["git_privkey_path"] != "")  {
                 // Optionally specify a private key other than one of the defaults.
-                $wrapper->setPrivateKey('/path/to/private/key');
+                $wrapper->setPrivateKey($this->params["build-settings"]["PollSCM"]["git_privkey_path"]);
             }
 
             $git = $wrapper->cloneRepository($repo, getcwd());
