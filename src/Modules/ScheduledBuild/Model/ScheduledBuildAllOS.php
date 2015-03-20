@@ -38,7 +38,7 @@ class ScheduledBuildAllOS extends Base {
             $filename = "/tmp/ptb-schedx-log.txt" ;
             $orig = file_get_contents($filename) ;
             $new  = $orig."Build: ".$pipe["project-name"].", " ;
-            $new .= "Run ID: ".$results[$pipe["project-slug"]]["result"].", " ;
+            $new .= "Result: ".$results[$pipe["project-slug"]]["result"].", " ;
             $new .= "Stamp: ". time().", Date: ".date("H:i:s")."\n" ;
             file_put_contents($filename, $new) ;
         }
