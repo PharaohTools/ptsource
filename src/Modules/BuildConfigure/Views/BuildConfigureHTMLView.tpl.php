@@ -256,7 +256,7 @@
                                 }
                             }
                             else {
-                                echo '      <textarea id="steps['.$hash.'][data]" name="steps['.$hash.'][data]" value="'.$one_build_step["data"].'" class="form-control">'.$one_build_step["data"].'</textarea>';
+                                echo '      <textarea id="steps['.$hash.'][data]" name="steps['.$hash.'][data]" class="form-control">'.$one_build_step["data"].'</textarea>';
                             }
                             echo '  </div>';
                             echo '   <div class="col-sm-12">'  ;
