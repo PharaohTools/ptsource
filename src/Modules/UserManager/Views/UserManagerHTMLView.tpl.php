@@ -3,7 +3,7 @@
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav in" id="side-menu">
                 <li class="sidebar-search">
-                    <div class="input-group custom-search-form">
+                    <div class="input-group custom-search-form hvr-bounce-in">
                         <input type="text" class="form-control" placeholder="Search...">
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="button">
@@ -14,22 +14,22 @@
                     <!-- /input-group -->
                 </li>
                 <li>
-                    <a href="/index.php?control=Index&action=show">
-                        <i class="fa fa-dashboard"></i> Dashboard
+                    <a href="/index.php?control=Index&action=show" class=" hvr-bounce-in">
+                        <i class="fa fa-dashboard hvr-bounce-in"></i> Dashboard
                     </a>
                 </li>
                 <li>
-                    <a href="/index.php?control=ApplicationConfigure&action=show">
-                        <i class="fa fa-cogs fa-fw"></i> Configure PTBuild</a>
+                    <a href="/index.php?control=ApplicationConfigure&action=show" class=" hvr-bounce-in">
+                        <i class="fa fa-cogs fa-fw hvr-bounce-in"></i> Configure PTBuild</a>
                 </li>
                 <li>
-                    <a href="/index.php?control=UserManager&action=show">
-                        <i class="fa fa-user"></i> User Manager
+                    <a href="/index.php?control=UserManager&action=show" class=" hvr-bounce-in">
+                        <i class="fa fa-group hvr-bounce-in"></i> User Manager
                     </a>
                 </li>
                 <li>
-                    <a href="/index.php?control=ModuleManager&action=show">
-                        <i class="fa fa-suitcase"></i> Module Manager
+                    <a href="/index.php?control=ModuleManager&action=show" class=" hvr-bounce-in">
+                        <i class="fa fa-suitcase hvr-bounce-in"></i> Module Manager
                     </a>
                 </li>
             </ul>

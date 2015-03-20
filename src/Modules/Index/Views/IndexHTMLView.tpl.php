@@ -17,7 +17,7 @@
 				</li>
 				
 				<li>
-					<a href="/index.php?control=Index&action=show" class="active hvr-bounce-in"><i class="fa fa-dashboard fa-fw hvr-pop"></i> Dashboard</a>
+					<a href="/index.php?control=Index&action=show" class="active hvr-bounce-in"><i class="fa fa-dashboard fa-fw hvr-bounce-in"></i> Dashboard</a>
 				</li>
 				<li>
 					<a href="/index.php?control=ApplicationConfigure&action=show" class=" hvr-bounce-in">
@@ -37,13 +37,13 @@
 					<!-- /.nav-second-level -->
 				</li>
 				<li>
-					<a href="/index.php?control=BuildConfigure&action=new" class=" hvr-bounce-in"><i class="fa fa-edit fa-fw"></i> New Pipeline</a>
+					<a href="/index.php?control=BuildConfigure&action=new" class=" hvr-bounce-in"><i class="fa fa-edit fa-fw hvr-bounce-in"></i> New Pipeline</a>
 				</li>
 				<li>
-					<a href="/index.php?control=BuildList&action=show" class=" hvr-bounce-in"><i class="fa fa-bars fa-fw"></i> All Pipelines</a>
+					<a href="/index.php?control=BuildList&action=show" class=" hvr-bounce-in"><i class="fa fa-bars fa-fw hvr-bounce-in"></i> All Pipelines</a>
 				</li>
 				<li>
-					<a href="/index.php?control=Monitors&action=DefaultHistory" class=" hvr-bounce-in"><i class="fa fa-history fa-fw"></i> History</a>
+					<a href="/index.php?control=Monitors&action=DefaultHistory" class=" hvr-bounce-in"><i class="fa fa-history fa-fw hvr-bounce-in"></i> History</a>
 				</li>
 			</ul>
 		</div>

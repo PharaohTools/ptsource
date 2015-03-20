@@ -3,7 +3,7 @@
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav in" id="side-menu">
                 <li class="sidebar-search">
-                    <div class="input-group custom-search-form">
+                    <div class="input-group custom-search-form hvr-bounce-in">
                         <input type="text" class="form-control" placeholder="Search...">
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="button">
@@ -14,24 +14,24 @@
                     <!-- /input-group -->
                 </li>
                 <li>
-                    <a href="/index.php?control=Index&action=show">
-                        <i class="fa fa-dashboard fa-fw"></i> Dashboard
+                    <a href="/index.php?control=Index&action=show" class=" hvr-bounce-in">
+                        <i class="fa fa-dashboard fa-fw hvr-bounce-in"></i> Dashboard
                     </a>
                 </li>
                 <?php
                 if ($pageVars["route"]["action"] !== "new") {
                 ?>
                 <li>
-                    <a href="/index.php?control=BuildHome&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
-                        <i class="fa fa-home"></i> Pipeline Home
+                    <a href="/index.php?control=BuildHome&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class=" hvr-bounce-in">
+                        <i class="fa fa-home hvr-bounce-in"></i> Pipeline Home
                     </a>
                 </li>
                 <?php
                 }
                 ?>
                 <li>
-                    <a href="/index.php?control=BuildList&action=show">
-                        <i class="fa fa-bars fa-fw"></i> All Pipelines
+                    <a href="/index.php?control=BuildList&action=show" class=" hvr-bounce-in">
+                        <i class="fa fa-bars fa-fw hvr-bounce-in"></i> All Pipelines
                     </a>
                 </li>
                 <?php
