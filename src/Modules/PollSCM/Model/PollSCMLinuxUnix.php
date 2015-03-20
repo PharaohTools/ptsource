@@ -15,6 +15,7 @@ class PollSCMLinuxUnix extends Base {
     public $modelGroup = array("Default") ;
 
     private $lm ;
+    private $pipeline ;
 
     public function getSettingTypes() {
         return array_keys($this->getSettingFormFields());
@@ -62,7 +63,7 @@ class PollSCMLinuxUnix extends Base {
 
     public function getEvents() {
         $ff = array(
-            "afterSettings" => array(
+            "prepareBuild" => array(
                 "pollSCMChanges",
             ),
         );
@@ -73,6 +74,10 @@ class PollSCMLinuxUnix extends Base {
         $loggingFactory = new \Model\Logging();
         $this->params["echo-log"] = true ;
         $this->params["php-log"] = true ;
+        $this->pipeline = $this->getPipeline();
+        $this->params["build-settings"] = $this->pipeline["settings"];
+        $this->params["app-settings"]["app_config"] = \Model\AppConfig::getAppVariable("app_config");
+        $this->params["app-settings"]["mod_config"] = \Model\AppConfig::getAppVariable("mod_config");
         $this->lm = $loggingFactory->getModel($this->params);
         if ($this->checkBuildSCMPollingEnabled()) {
             return $this->doBuildSCMPollingEnabled() ; }
@@ -87,13 +92,12 @@ class PollSCMLinuxUnix extends Base {
 
     private function doBuildSCMPollingDisabled() {
         $this->lm->log ("SCM Polling Disabled, ignoring...", $this->getModuleName() ) ;
-        return true ;
+        return false ;
     }
 
     private function doBuildSCMPollingEnabled() {
         $mn = $this->getModuleName() ;
-        $this->lm->log ("SCM Polling Enabled, attempting...", $this->getModuleName() ) ;
-        $this->collateAndRun() ;
+        $this->lm->log ("SCM Polling Enabled for {$this->pipeline["project-name"]}, attempting...", $this->getModuleName() ) ;
         $enoughTime = $this->pollIfEnoughTimePassed() ;
         if ($enoughTime == true) {
             try {
@@ -112,8 +116,12 @@ class PollSCMLinuxUnix extends Base {
     private function pollIfEnoughTimePassed() {
         $mn = $this->getModuleName() ;
         $time = time() ;
-        $last_poll = $this->params["build-settings"][$mn]["last_poll_timestamp"] ;
-        $exec_delay = $this->params["app-settings"][$mn]["exec_delay"] ;
+        $last_poll = isset($this->params["build-settings"][$mn]["last_poll_timestamp"])
+            ? $this->params["build-settings"][$mn]["last_poll_timestamp"]
+            : 0 ;
+        $exec_delay = isset($this->params["app-settings"]["mod_config"][$mn]["exec_delay"])
+            ? $this->params["app-settings"]["mod_config"][$mn]["exec_delay"]
+            : 0 ;
         // check now - last poll time > exec delay
         if (($time - $last_poll ) > $exec_delay) {
             $this->lm->log ("Enough time passed since last run...", $this->getModuleName() ) ;
@@ -121,27 +129,6 @@ class PollSCMLinuxUnix extends Base {
         else {
             $this->lm->log ("Not enough time passed since last run, aborting...", $this->getModuleName() ) ;
             return false ; }
-    }
-
-    private function collateAndRun() {
-        /*
-         * collate all cron jobs due to run between check now + last poll time
-         */
-    }
-
-    private function collateWaitingJobs() {
-        $jobs = array() ;
-        $allPipes = $this->getAllPipelines() ;
-        foreach ($allPipes as $onePipe) {
-            $isWaiting = $this->isPipeWaiting();
-        }
-        return $jobs ;
-    }
-
-    private function getAllPipelines() {
-        $pipelineFactory = new \Model\Pipeline() ;
-        $pipeline = $pipelineFactory->getModel($this->params);
-        return $pipeline->getPipelines();
     }
 
     private function doLastCommitStored() {
@@ -152,6 +139,7 @@ class PollSCMLinuxUnix extends Base {
         $lsCommand = 'git ls-remote '.$repo ;
         $all = self::executeAndLoad($lsCommand) ;
         $curSha = substr($all, 0, strpos($all, "HEAD")-1);
+        $this->savePollSHAAndTimestamp($curSha);
         $this->lm->log ("Current remote commit is $curSha", $this->getModuleName() ) ;
         if ($lastSha == $curSha) {
             if (isset($this->params["build-settings"][$mn]["scm_always_allow_web"]) &&
@@ -160,10 +148,10 @@ class PollSCMLinuxUnix extends Base {
                     $this->lm->log ("Always allowing builds executed from web", $this->getModuleName() ) ;
                     $result = true ; }
                 else {
+                    $this->lm->log ("No remote changes", $this->getModuleName() ) ;
                     $result = false ; } }
             else {
                 $this->lm->log ("No remote changes", $this->getModuleName() ) ;
-                $this->lm->log ("ABORTED EXECUTION", $this->getModuleName() ) ;
                 $result = false; } }
         else {
             $this->lm->log ("Remote changes available", $this->getModuleName() ) ;
@@ -178,10 +166,19 @@ class PollSCMLinuxUnix extends Base {
         $lsCommand = 'git ls-remote '.$repo ;
         $all = self::executeAndLoad($lsCommand) ;
         $curSha = substr($all, 0, strpos($all, "HEAD")-1);
+        $this->savePollSHAAndTimestamp($curSha);
+        $result = true ;
+        return $result ;
+    }
+
+    private function savePollSHAAndTimestamp($curSha) {
         $this->lm->log ("Storing current remote commit ID $curSha", $this->getModuleName() ) ;
+        $time = time();
+        $this->lm->log ("Storing last poll timestamp $time", $this->getModuleName() ) ;
         $pipelineFactory = new \Model\Pipeline() ;
         $pipelineSaver = $pipelineFactory->getModel($this->params, "PipelineSaver");
-        $this->params["build-settings"][$mn]["last_sha"] = $curSha ;
+        $this->params["build-settings"]["PollSCM"]["last_sha"] = $curSha ;
+        $this->params["build-settings"]["PollSCM"]["last_poll_timestamp"] = $time ;
         $pipelineSaver->savePipeline(array("type" => "Settings", "data" => $this->params["build-settings"] ));
         $result = true ;
         return $result ;
@@ -191,12 +188,6 @@ class PollSCMLinuxUnix extends Base {
         $pipelineFactory = new \Model\Pipeline() ;
         $pipeline = $pipelineFactory->getModel($this->params);
         return $pipeline->getPipeline($this->params["item"]);
-    }
-
-    private function getWorkspace() {
-        $workspaceFactory = new \Model\Workspace() ;
-        $workspace = $workspaceFactory->getModel($this->params);
-        return $workspace->getWorkspaceDir();
     }
 
 }

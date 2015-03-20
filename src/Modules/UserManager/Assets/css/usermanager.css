@@ -24,3 +24,10 @@ p.moduleListText { margin: 0; }
 .moduleEntryFirst {
     /*margin: 0 0 2% 0 !important; */
 }
+.list-group.panel > .list-group-item {
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px
+}
+.list-group-submenu {
+  margin-left:20px;
+}
