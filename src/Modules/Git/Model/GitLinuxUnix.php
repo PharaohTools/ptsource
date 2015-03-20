@@ -43,6 +43,13 @@ class GitLinuxUnix extends Base {
             require_once $dn ;
             $wrapper = new \GitWrapper\GitWrapper();
             // Clone a repo into `/path/to/working/copy`, get a working copy object.
+
+            if (isset($this->params["build-settings"]["PollSCM"]["git_privkey_path"]) &&
+                $this->params["build-settings"]["PollSCM"]["git_privkey_path"] != "")  {
+                // Optionally specify a private key other than one of the defaults.
+                $wrapper->setPrivateKey('/path/to/private/key');
+            }
+
             $git = $wrapper->cloneRepository($repo, getcwd());
             print $git->getOutput();
             return true ;}
