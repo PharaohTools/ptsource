@@ -47,6 +47,12 @@ class PollSCMLinuxUnix extends Base {
                 "optional" => true,
                 "name" => "Git Branch?"
             ),
+            "git_privkey_path" =>
+            array(
+                "type" => "text",
+                "optional" => true,
+                "name" => "Git Private Key Path?"
+            ),
             "cron_string" =>
             array(
                 "type" => "textarea",
