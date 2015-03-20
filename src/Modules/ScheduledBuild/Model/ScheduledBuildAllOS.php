@@ -34,13 +34,6 @@ class ScheduledBuildAllOS extends Base {
                     "name" => $pipe["project-name"],
                     "result" => $pr->runPipe()
                 ) ;
-            // @todo create a specific log for scheduled build execution?
-            $filename = "/tmp/ptb-schedx-log.txt" ;
-            $orig = file_get_contents($filename) ;
-            $new  = $orig."Build: ".$pipe["project-name"].", " ;
-            $new .= "Result: ".$results[$pipe["project-slug"]]["result"].", " ;
-            $new .= "Stamp: ". time().", Date: ".date("H:i:s")."\n" ;
-            file_put_contents($filename, $new) ;
         }
         return $results ;
     }
@@ -106,6 +99,7 @@ class ScheduledBuildAllOS extends Base {
         $allPipelines = $this->getPipelines() ;
         $pst = array() ;
         foreach ($allPipelines as $onePipeline) {
+            //@todo this should not be tied to only poll scm, so that we can cron/etc builds without polling
             if (isset($onePipeline["settings"]["PollSCM"]["poll_scm_enabled"]) &&
                 $onePipeline["settings"]["PollSCM"]["poll_scm_enabled"] == "on") {
                 $pst[] = $onePipeline ; } }
