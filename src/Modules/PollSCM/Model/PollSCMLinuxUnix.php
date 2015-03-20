@@ -98,7 +98,6 @@ class PollSCMLinuxUnix extends Base {
     private function doBuildSCMPollingEnabled() {
         $mn = $this->getModuleName() ;
         $this->lm->log ("SCM Polling Enabled for {$this->pipeline["project-name"]}, attempting...", $this->getModuleName() ) ;
-        $this->collateAndRun() ;
         $enoughTime = $this->pollIfEnoughTimePassed() ;
         if ($enoughTime == true) {
             try {
