@@ -20,10 +20,10 @@ class GitLinuxUnix extends Base {
 
     public function getFormFields() {
         $ff = array(
-            "gitclonedefault" => array(
+            "gitclonepoll" => array(
                 "type" => "boolean",
-                "name" => "Git clone using default repo",
-                "slug" => "defaultrepo" ),
+                "name" => "Git clone using Polling  repo",
+                "slug" => "pollrepo" ),
             "gitclonedir" => array(
                 "type" => "text",
                 "name" => "Clone Directory",
@@ -35,17 +35,15 @@ class GitLinuxUnix extends Base {
     public function executeStep($step) {
         $loggingFactory = new \Model\Logging();
         $logging = $loggingFactory->getModel($this->params);
-        if ( $step["steptype"] == "gitclonedefault") {
+        if ( $step["steptype"] == "gitclonepoll") {
             $repo = $this->params["build-settings"]["PollSCM"]["git_repository_url"] ;
             $branch = $this->params["build-settings"]["PollSCM"]["git_branch"] ;
             $logging->log("Running Git clone from default repo $repo to ".getcwd()."...", $this->getModuleName()) ;
-
             $dn = dirname(dirname(__FILE__)).'/Libraries/git-wrapper/vendor/autoload.php';
             require_once $dn ;
             $wrapper = new \GitWrapper\GitWrapper();
-
-// Clone a repo into `/path/to/working/copy`, get a working copy object.
-            $git = $wrapper->clone($repo, getcwd());
+            // Clone a repo into `/path/to/working/copy`, get a working copy object.
+            $git = $wrapper->cloneRepository($repo, getcwd());
             print $git->getOutput();
             return true ;}
         else {
