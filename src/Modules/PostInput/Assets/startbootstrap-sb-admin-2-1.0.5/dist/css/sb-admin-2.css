@@ -372,11 +372,11 @@ table.dataTable thead .sorting:after {
   #hi-icon{
   	height: 10px;
   }
- .nav .open>a, .nav .open>a:hover, .nav .open>a:focus {
+ .navbar-right .open>a, .navbar-right .open>a:hover, .navbar-right .open>a:focus {
   background-color: #565656;
   border-color: #337ab7;
 }
-.nav>li>a:hover, .nav>li>a:focus {
+.navbar-right>li>a:hover, .navbar-right>li>a:focus {
   text-decoration: none;
   background-color: #242424;
 }
