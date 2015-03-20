@@ -35,15 +35,18 @@
             </ul>
         </div>
     </div>
-<div>
-  <div class="well well-lg">
+
+   <div class="col-lg-9">
+     <div class="well well-lg">
         <h2 class="text-uppercase text-light"><a href="/"> PTBuild - Pharaoh Tools</a></h2>
-				<h3 class="text-danger">You don't have permission to access this page</h3>
-		</div> 
+		<div class="row clearfix no-margin">
+			<h4 class="alert alert-warning">You don't have permission to access this page</h4>
      	<p>
             ---------------------------------------<br/>
             Visit www.pharaohtools.com for more
         </p>
-    </div>
+		</div>
+	  </div>
+	</div>
 </div><!-- container -->
 <link rel="stylesheet" href="/index.php?control=AssetLoader&action=show&user=UserManager&type=css&asset=usermanager.css">
