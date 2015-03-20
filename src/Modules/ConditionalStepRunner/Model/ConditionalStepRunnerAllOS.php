@@ -224,7 +224,8 @@ class ConditionalStepRunnerAllOS extends BaseLinuxApp {
 	
 	private function daysOfWeek($step)
 	{
-		$today = getdate()['wday'];
+        $date = getdate() ;
+		$today = $date['wday'];
 		$day=$step['days'];
 		if (isset($step['exactdays'][$today])){
 			return TRUE;
