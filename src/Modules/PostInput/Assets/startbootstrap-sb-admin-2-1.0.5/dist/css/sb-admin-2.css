@@ -5,6 +5,7 @@
  */
 
 body {
+	background: #fff url(../image/stucco.png) repeat top left;
     background-color: #f8f8f8;
     font-family: 'Roboto Condensed', Helvetica, Arial, sans-serif;
     font-size: 15px;

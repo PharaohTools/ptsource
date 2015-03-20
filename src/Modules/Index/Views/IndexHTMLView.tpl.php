@@ -234,7 +234,7 @@
 
         <hr>
         <div class="col-lg-13">
-                    <div class="well well-lg">
+                    <div class="well well-lg ">
             <h3> Available Modules: <i style="font-size: 18px;" class="fa fa-chevron-right"></i></h3>
             <p>
                 ---------------------------------------
