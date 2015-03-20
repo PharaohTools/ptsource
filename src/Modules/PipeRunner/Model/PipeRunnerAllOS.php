@@ -54,25 +54,28 @@ class PipeRunnerAllOS extends Base {
 				file_put_contents($file, json_encode($defaults));
 				return false;
 			}
-			return true;
 		}
 		return false;
 	}
 
 	public function runPipe() {
 		if ($this -> checkPipeVariables()) {
-			return "getParamValue";
-		} else {
+			return "getParamValue"; }
+        else {
 			// set build dir
 			$this -> setPipeDir();
 			// ensure build dir exists
+            $eventRunnerFactory = new \Model\EventRunner() ;
+            $eventRunner = $eventRunnerFactory->getModel($this->params) ;
+            $ev = $eventRunner->eventRunner("prepareBuild") ;
+            if ($ev == false) { return $this->failBuild() ; }
+            // @todo we need a pre-build event, so we can stop execution here if poll scm fails
 			// run pipe fork command
 			$run = $this -> saveRunPlaceHolder();
 			$this -> setRunStartTime($run);
 			// save run
 			$this -> runPipeForkCommand($run);
-			return $run;
-		}
+			return $run; }
 	}
 
 	private function setRunStartTime($run) {
@@ -97,11 +100,10 @@ class PipeRunnerAllOS extends Base {
 
     private function setPipeDir() {
         if (isset($this -> params["guess"]) && $this -> params["guess"] == true) {
-            $this -> params["pipe-dir"] = PIPEDIR;
-        } else {
+            $this -> params["pipe-dir"] = PIPEDIR; }
+        else {
             // @todo should probably ask a question here
-            $this -> params["pipe-dir"] = PIPEDIR;
-        }
+            $this -> params["pipe-dir"] = PIPEDIR; }
     }
 
     private function getSwitchUser() {
