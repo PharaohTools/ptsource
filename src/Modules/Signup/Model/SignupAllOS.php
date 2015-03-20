@@ -100,7 +100,12 @@ class SignupAllOS extends Base {
     public function registrationSubmit(){
 
         $registrationData=array('username'=>$_POST['username'],'email'=>$_POST['email'],'password'=>md5($this->salt.$_POST['password']),'verificationcode'=> hash('sha512', 'aDv@4gtm%7rfeEg4!gsFe'),'status'=> 0,'role'=>3);
-        $myfile = fopen(__DIR__."/../Data/users.txt", "r") or die("Unable to open file!");
+        if ($myfile = fopen(__DIR__."/../Data/users.txt", "r")) {
+        }
+        else {
+            echo json_encode(array("status" => FALSE, "id"=>"registration_error_msg", "msg" => "Unable to read users datastore. Contact Administrator."));
+            return ;
+        }
         $oldData='';
         while(!feof($myfile))
             $oldData.=fgets($myfile);
@@ -123,17 +128,19 @@ class SignupAllOS extends Base {
 
         }
 
-        $myfile = fopen(__DIR__."/../Data/users.txt", "w") or die("Unable to open file!");
-        if($oldData==null) {
-            fwrite($myfile, json_encode(array($registrationData)));
-        }
+        if ($myfile = fopen(__DIR__."/../Data/users.txt", "w")) { }
+        else {
+            echo json_encode(array("status" => FALSE, "id"=>"registration_error_msg", "msg" => "Unable to write to users datastore. Contact Administrator."));
+            return ; }
+        if($oldData==null) { fwrite($myfile, json_encode(array($registrationData))); }
         else{
             fwrite($myfile, json_encode(array_merge($oldData, array($registrationData))));
+            // @todo dont hardcode url?
 			$message = 'Hi <br /> <a href="http://www.ptbuild.tld/index.php?control=Signup&action=verify&verificationCode=verify">Click here to activate account</a>';
-			mail($_POST['email'], 'Verifiation mail from PTBuild', $message);
-        }
+			mail($_POST['email'], 'Verifiation mail from PTBuild', $message); }
        // print_r(array_merge($oldData, array($registrationData)));
         fclose($myfile);
+        // @todo dont output from model?
         echo json_encode(array("status" => TRUE, "id"=>"registration_error_msg", "msg" => "Registration Successful!!"));
 		return;
     }
@@ -168,7 +175,7 @@ class SignupAllOS extends Base {
         $_SESSION["username"] = $email;
 		$oldData = $this->getUsersData();
 		if ($this->userExist($email) == TRUE) {
-			$_SESSION["userrole"] = $this->getUserRole();
+			$_SESSION["userrole"] = $this->getUserRole($email);
 			header("Location: /index.php?control=Index&action=index");
 			return;
 		}
@@ -184,7 +191,7 @@ class SignupAllOS extends Base {
         $_SESSION["username"] = $email;
 		$oldData = $this->getUsersData();
 		if ($this->userExist($email) == TRUE) {
-			$_SESSION["userrole"] = $this->getUserRole();
+			$_SESSION["userrole"] = $this->getUserRole($email);
 			header("Location: /index.php?control=Index&action=index");
 			return;
 		}
@@ -197,7 +204,12 @@ class SignupAllOS extends Base {
 	
 	public function getUsersData()
 	{
-		$myfile = fopen(__DIR__."/../Data/users.txt", "r") or die("Unable to open file!");
+        if ($myfile = fopen(__DIR__."/../Data/users.txt", "r")) {
+        }
+        else {
+            echo json_encode(array("status" => FALSE, "id"=>"registration_error_msg", "msg" => "Unable to read users datastore. Contact Administrator."));
+
+        }
         $oldData='';
         while(!feof($myfile))
         $oldData.=fgets($myfile);
@@ -210,7 +222,12 @@ class SignupAllOS extends Base {
 	{
 		if (!$this->userExist($newUser['email'])) {
 			$oldData=$this->getUsersData();
-	        $myfile = fopen(__DIR__."/../Data/users.txt", "w") or die("Unable to open file in write mode!");
+            if ($myfile = fopen(__DIR__."/../Data/users.txt", "w")) {
+            }
+            else {
+                echo json_encode(array("status" => FALSE, "id"=>"registration_error_msg", "msg" => "Unable to write to users datastore. Contact Administrator."));
+
+            }
 	        if($oldData==null) {
 	            fwrite($myfile, json_encode(array($newUser)));//@todo change format of saved data.
 	        }
