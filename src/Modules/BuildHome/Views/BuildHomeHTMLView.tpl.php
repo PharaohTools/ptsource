@@ -59,7 +59,8 @@
         </div>
        </div>
     
-       <div class="col-md-9 col-sm-10" id="page-wrapper">
+        <div class="col-lg-9">
+                    <div class="well well-lg">
             <h4 class="text-uppercase text-light">Pipeline</h4>
             <div class="row clearfix no-margin">
             	

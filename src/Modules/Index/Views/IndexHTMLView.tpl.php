@@ -53,7 +53,7 @@
         <div class="row clearfix no-margin">
             <div class="row">
             	 
-                    <div class="col-lg-3 col-md-6 hvr-pop">
+                    <div class="col-lg-3 col-md-4 hvr-pop">
                     	
                         <div class="panel panel-primary">
                             <div class="panel-heading">
