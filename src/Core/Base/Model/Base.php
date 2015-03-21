@@ -88,7 +88,7 @@ COMPLETION;
         shell_exec("chmod 755 $tempFile 2>/dev/null");
         echo "Changing $tempFile Permissions\n";
         echo "Executing $tempFile\n";
-        shell_exec($tempFile);
+        echo shell_exec($tempFile);
         $rc = $this->executeAndLoad('echo $?');
         //foreach ($outputArray as $outputLine) { echo $outputLine; }
         if ($message !== null) { echo $message."\n"; }
