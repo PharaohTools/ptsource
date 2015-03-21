@@ -22,7 +22,7 @@ class GitLinuxUnix extends Base {
         $ff = array(
             "gitclonepoll" => array(
                 "type" => "boolean",
-                "name" => "Git clone using Polling  repo",
+                "name" => "Git clone using Polling repo",
                 "slug" => "pollrepo" ),
             "gitclonedir" => array(
                 "type" => "text",
@@ -46,13 +46,16 @@ class GitLinuxUnix extends Base {
             $cmd = PTDCOMM." GitClone clone --yes --guess --change-owner-permissions=false ".
                 ' --repository-url="'.$repo.'"' ;
 
-            if (strlen($targetDir > 0)) { $cmd .= ' --custom-clone-dir="'.$targetDir.'" ' ; }
+            if (strlen($targetDir > 0)) {
+                $cmd .= ' --custom-clone-dir="'.$targetDir.'" ' ; }
 
-            if (strlen($branch > 0)) { $cmd .= ' --custom-branch="'.$branch.'" ' ; }
+            if (strlen($branch > 0)) {
+                $cmd .= ' --custom-branch="'.$branch.'" ' ; }
 
             if (isset($this->params["build-settings"]["PollSCM"]["git_privkey_path"]) &&
                 $this->params["build-settings"]["PollSCM"]["git_privkey_path"] != "")  {
-                $logging->log("Adding Private Key for cloning Git", $this->getModuleName()) ; }
+                $logging->log("Adding Private Key for cloning Git", $this->getModuleName()) ;
+                $cmd .= ' --private-key="'.$this->params["build-settings"]["PollSCM"]["git_privkey_path"].'" ' ; }
 
             self::executeAndOutput($cmd) ;
             $rc = self::executeAndLoad('echo $?') ;
