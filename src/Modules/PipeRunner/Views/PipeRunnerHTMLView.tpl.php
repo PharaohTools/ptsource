@@ -46,7 +46,7 @@
                 </li>
                 
                 <li>
-                    <a href="/index.php?control=Workspace&action=start&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
+                    <a href="/index.php?control=PipeRunner&action=start&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
                         <i class="fa fa-sign-in fa-fw"></i> Run Again
                     </a>
                 </li>
@@ -111,8 +111,10 @@
                             <div id="updatable">
                                 Checking Pipeline Execution Output...
                                 <?php
+
                                 if ($pageVars["route"]["action"]=="history") {
                                     echo '<p>Historic builds</p>';
+
                                     foreach ($pageVars["data"]["historic_builds"] as $hb) {
                                         echo '<a href="/index.php?control=PipeRunner&action=summary&item='.$pageVars["data"]["pipeline"]["project-slug"].'&run-id='.$hb.'">'.$hb.'</a><br />' ; } }
                                 else if ($pageVars["route"]["action"]=="summary") {
@@ -138,24 +140,32 @@
                              </div>'; }
                     ?>
 
-                    <div class="form-group" id="submit-holder">
-                        <div class="col-sm-offset-2 col-sm-8">
-                            <div class="text-center">
-                            	<i class="fa fa-spinner fa-spin fa-5x "> </i>
-                            	
-                            
+
+                    <?php
+                    if ($pageVars["route"]["action"] =="start") {
+                    ?>
+                        <div class="form-group" id="submit-holder">
+                            <div class="col-sm-offset-2 col-sm-8">
+                                <div class="text-center">
+                                    <i class="fa fa-spinner fa-spin fa-5x "> </i>
+
+
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group" id="submit-holder">
-                        <div class="col-sm-offset-2 col-sm-8">
-                            <div class="text-center">
-                            	
-                            	
-                                <button type="submit" class="btn btn-danger" id="end-now">End Now</button>
+                        <div class="form-group" id="submit-holder">
+                            <div class="col-sm-offset-2 col-sm-8">
+                                <div class="text-center">
+
+
+                                    <button type="submit" class="btn btn-danger" id="end-now">End Now</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    <?php
+                       }
+                    ?>
+
                     <input type="hidden" id="item" value="<?= $pageVars["data"]["pipeline"]["project-slug"] ;?>" />
                     <input type="hidden" id="pid" value="<?= $pageVars["pipex"] ;?>" />
                     <?php
