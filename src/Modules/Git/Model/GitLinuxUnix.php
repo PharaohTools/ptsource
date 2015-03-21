@@ -38,38 +38,25 @@ class GitLinuxUnix extends Base {
         if ( $step["steptype"] == "gitclonepoll") {
             $repo = $this->params["build-settings"]["PollSCM"]["git_repository_url"] ;
             $branch = $this->params["build-settings"]["PollSCM"]["git_branch"] ;
-            $targetDir = $this->params["build-settings"]["PollSCM"]["target_dir"] ;
-            $logging->log("Running Git clone from default repo $repo to ".getcwd()."...", $this->getModuleName()) ;
-
-//            $dn = dirname(dirname(__FILE__)).'/Libraries/git-wrapper/vendor/autoload.php';
-//            require_once $dn ;
-//            $wrapper = new \GitWrapper\GitWrapper();
-//            Clone a repo into `/path/to/working/copy`, get a working copy object.
+            $targetDir = (isset($this->params["build-settings"]["PollSCM"]["target_dir"]))
+                ? $this->params["build-settings"]["PollSCM"]["target_dir"]
+                : getcwd() ;
+            $logging->log("Running Git clone from default repo $repo to ".$targetDir."...", $this->getModuleName()) ;
 
             $cmd = PTDCOMM." GitClone clone --yes --guess --change-owner-permissions=false ".
-                ' --repository-url="git@bitbucket.org:phpengine/pharaohtools.git"' ;
+                ' --repository-url="'.$repo.'"' ;
 
-            if (strlen($targetDir > 0)) {
-                $cmd .= ' --custom-clone-dir="'.$targetDir.'" '  ;
-            }
+            if (strlen($targetDir > 0)) { $cmd .= ' --custom-clone-dir="'.$targetDir.'" ' ; }
 
-            if (strlen($branch > 0)) {
-                $cmd .= ' --custom-branch="'.$branch.'" '  ;
-            }
+            if (strlen($branch > 0)) { $cmd .= ' --custom-branch="'.$branch.'" ' ; }
 
             if (isset($this->params["build-settings"]["PollSCM"]["git_privkey_path"]) &&
                 $this->params["build-settings"]["PollSCM"]["git_privkey_path"] != "")  {
-                $logging->log("Adding Private Key for cloning Git", $this->getModuleName()) ;
-                // Optionally specify a private key other than one of the defaults.
-                // $wrapper->setPrivateKey($this->params["build-settings"]["PollSCM"]["git_privkey_path"]);
-            }
+                $logging->log("Adding Private Key for cloning Git", $this->getModuleName()) ; }
 
             self::executeAndOutput($cmd) ;
             $rc = self::executeAndLoad('echo $?') ;
-
-            //$git = $wrapper->cloneRepository($repo, getcwd());
-            //print $git->getOutput();
-            return $rc ;}
+            return $rc ; }
         else {
             $logging->log("Unrecognised Build Step Type {$step["type"]} specified in Git Module", $this->getModuleName()) ;
             return false ; }
