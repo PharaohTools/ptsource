@@ -46,7 +46,7 @@ class GitLinuxUnix extends Base {
 //            $wrapper = new \GitWrapper\GitWrapper();
 //            Clone a repo into `/path/to/working/copy`, get a working copy object.
 
-            $cmd = PTDCOMM." GitClone clone --guess --change-owner-permissions=false ".
+            $cmd = PTDCOMM." GitClone clone --yes --guess --change-owner-permissions=false ".
                 ' --repository-url="git@bitbucket.org:phpengine/pharaohtools.git"' ;
 
             if (strlen($targetDir > 0)) {
