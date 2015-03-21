@@ -31,12 +31,12 @@ function toggleConfSetting(toggler, element) {
     sel = $("#"+element) ;
     sliderFields = sel.find(".sliderFields");
     if (sliderFields.css('display') == 'none') {
-        $(toggler).removeClass("fa fa-chevron-bottom");
-        $(toggler).addClass("fa fa-chevron-right");
+        $(toggler).removeClass("fa fa-toggle-off");
+        $(toggler).addClass("fa fa-toggle-on");
         sliderFields.slideDown(); }
     else {
-        $(toggler).removeClass("fa fa-chevron-right");
-        $(toggler).addClass("fa fa-chevron-bottom");
+        $(toggler).removeClass("fa fa-toggle-on");
+        $(toggler).addClass("fa fa-toggle-off");
         sliderFields.slideUp();}
 }
 
