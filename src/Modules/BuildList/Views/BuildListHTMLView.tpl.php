@@ -71,10 +71,10 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="all">
-                        <div class="table-responsive">
+                        <div class="table-responsive" ">
                             <table class="table table-bordered table-custom">
                                 <thead>
-                                <tr>
+                                <tr style="background-color: fff">
                                     <th>#</th>
                                     <th>Pipeline</th>
                                     <th>Run Now</th>

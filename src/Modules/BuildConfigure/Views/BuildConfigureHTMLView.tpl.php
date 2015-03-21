@@ -206,12 +206,12 @@
                             echo '<li class="form-group ui-state-default ui-sortable-handle" id="step'.$hash.'">' ;
                             echo '  <div class="col-sm-2">' ;
                             echo '    <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' ;
-                            echo '  </div>';
+                            echo '  </div><h3>'.$one_build_step["title"].'</h3>';
                             echo '  <div class="col-sm-10">' ;
                             echo '   <div class="col-sm-12">' ;
                             echo '    <label for="steps['.$hash.'][data]" class="control-label text-left">'.$one_build_step["title"].'</label>' ;
-                            echo '      <p><strong>Hash: </strong>'.$hash.'</p>';
-                            echo '      <p><strong>Module: </strong>'.$one_build_step["module"].'</p>';
+                            echo '    <!--  <p><strong>Hash: </strong>'.$hash.'</p>';
+                            echo '      <p><strong>Module: </strong>'.$one_build_step["module"].'</p>-->';
                             echo '      <p><strong>Step Type: </strong>'.$one_build_step["steptype"].'</p>';
                             echo '      <input type="hidden" id="steps['.$hash.'][module]" name="steps['.$hash.'][module]" value="'.$one_build_step["module"].'" />';
                             echo '      <input type="hidden" id="steps['.$hash.'][steptype]" name="steps['.$hash.'][steptype]" value="'.$one_build_step["steptype"].'" />';

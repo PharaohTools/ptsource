@@ -385,3 +385,7 @@ input[type=radio], input[type=checkbox] {
   margin-top: 1px \9;
   line-height: normal;
  }
+ .table-bordered {
+  border: 1px solid #ddd;
+  background-color: #fff;
+ }
