@@ -81,20 +81,25 @@ COMPLETION;
         $tempFile = $this->tempDir."/ptconfigure-temp-script-".mt_rand(100, 99999999999).".sh";
         echo "Creating $tempFile\n";
         $fileVar = "";
-        if (is_array($multiLineCommand) && count($multiLineCommand)>0) {
-            foreach ($multiLineCommand as $command) { $fileVar .= $command."\n" ; } }
-        file_put_contents($tempFile, $fileVar);
+        $multiLineCommand = str_replace("\r", "", $multiLineCommand) ;
+        $multiLineCommand = explode("\r\n", $multiLineCommand) ;
+        foreach ($multiLineCommand as $command) { $fileVar .= $command."\n" ; }
+        file_put_contents($tempFile, $fileVar) ;
+        //@note these chmods are required to make bash run scripts
         echo "chmod 755 $tempFile 2>/dev/null\n";
         shell_exec("chmod 755 $tempFile 2>/dev/null");
+        echo "chmod +x $tempFile 2>/dev/null\n";
+        shell_exec("chmod +x $tempFile 2>/dev/null");
         echo "Changing $tempFile Permissions\n";
         echo "Executing $tempFile\n";
-        $output = shell_exec("sh $tempFile");
-        echo $output;
-        $retVal = $this->executeAndLoad('echo $?');
+        // @todo this should refer to the actual shell we are running
+        $outy = shell_exec("bash {$tempFile} 2>&1");
+        echo $outy;
+        $rc = $this->executeAndLoad("echo $?") ;
         if ($message !== null) { echo $message."\n"; }
         shell_exec("rm $tempFile");
         echo "Temp File $tempFile Removed\n";
-        return $retVal ;
+        return $rc ;
     }
 
     protected function executeAndOutput($command, $message=null) {
