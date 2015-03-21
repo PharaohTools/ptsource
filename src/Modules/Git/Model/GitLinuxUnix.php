@@ -57,6 +57,8 @@ class GitLinuxUnix extends Base {
                 $logging->log("Adding Private Key for cloning Git", $this->getModuleName()) ;
                 $cmd .= ' --private-key="'.$this->params["build-settings"]["PollSCM"]["git_privkey_path"].'" ' ; }
 
+            echo $cmd."\n" ;
+
             self::executeAndOutput($cmd) ;
             $rc = self::executeAndLoad('echo $?') ;
             return $rc ; }
