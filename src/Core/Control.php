@@ -8,7 +8,6 @@ class Control {
     	$userPermissionClass = '\\Controller\\UserPermission';
 		$userPermissionControlObject = new $userPermissionClass;
 		session_start();
-		//PostInput control must be removed
 		if (!in_array($pageVars['route']['control'], array('Signup', 'OAuth', 'LDAP', 'AssetLoader'))) {
 			if ($_SESSION["login-status"] === TRUE) {
 				if ($userPermissionControlObject->execute($pageVars) == false) {
