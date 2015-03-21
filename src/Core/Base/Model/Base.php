@@ -88,13 +88,13 @@ COMPLETION;
         shell_exec("chmod 755 $tempFile 2>/dev/null");
         echo "Changing $tempFile Permissions\n";
         echo "Executing $tempFile\n";
-        echo shell_exec($tempFile);
-        $rc = $this->executeAndLoad('echo $?');
-        //foreach ($outputArray as $outputLine) { echo $outputLine; }
+        $output = shell_exec("sh $tempFile");
+        echo $output;
+        $retVal = $this->executeAndLoad('echo $?');
         if ($message !== null) { echo $message."\n"; }
         shell_exec("rm $tempFile");
         echo "Temp File $tempFile Removed\n";
-        return $rc ;
+        return $retVal ;
     }
 
     protected function executeAndOutput($command, $message=null) {
