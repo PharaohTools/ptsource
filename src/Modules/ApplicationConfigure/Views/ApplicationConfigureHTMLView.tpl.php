@@ -61,7 +61,7 @@
                                 echo '  </div>';
                                 foreach ($one_mod_confs as $one_config_slug => $one_conf_tails) {
                                     echo '<div class="form-group">' ;
-                                    echo '  <label for="'.$one_config_slug.'" class="col-sm-6 control-label text-left">'.$one_conf_tails["label"].'</label>' ;
+                                    echo '  <label for="'.$one_config_slug.'" class="col-sm-4 control-label text-left">'.$one_conf_tails["label"].'</label>' ;
                                     echo '  <div class="col-sm-4">' ;
                                     switch ($one_conf_tails["type"]) {
                                         case "boolean" :
