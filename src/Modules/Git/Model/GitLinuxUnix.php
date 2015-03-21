@@ -43,7 +43,7 @@ class GitLinuxUnix extends Base {
                 : getcwd() ;
             $logging->log("Running Git clone from default repo $repo to ".$targetDir."...", $this->getModuleName()) ;
 
-            $cmd = PTDCOMM." GitClone clone --yes --guess --change-owner-permissions=false ".
+            $cmd = PTDCOMM.' GitClone clone --yes --guess --change-owner-permissions="false" '.
                 ' --repository-url="'.$repo.'"' ;
 
             if (strlen($targetDir > 0)) {
