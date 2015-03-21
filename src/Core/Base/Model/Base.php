@@ -88,11 +88,12 @@ COMPLETION;
         shell_exec("chmod 755 $tempFile 2>/dev/null");
         echo "Changing $tempFile Permissions\n";
         echo "Executing $tempFile\n";
-        $outputText = shell_exec($tempFile);
+        exec($tempFile, $outputText, $retVal);
         if ($message !== null) { $outputText .= "$message\n"; }
         echo $outputText;
         shell_exec("rm $tempFile");
         echo "Temp File $tempFile Removed\n";
+        return $retVal ;
     }
 
     protected function executeAndOutput($command, $message=null) {
