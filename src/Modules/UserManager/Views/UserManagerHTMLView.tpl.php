@@ -40,7 +40,7 @@
                     <div class="well well-lg">
         <h2 class="text-uppercase text-light"><a href="/"> PTBuild - Pharaoh Tools</a></h2>
         <div class="row clearfix no-margin">
-           <h4 class="text-uppercase text-primary"><i class="fa fa-users"></i>  Users</h4>
+           <h4 class="text-uppercase text-primary"><i class="fa fa-users hvr-grow-rotate"></i>  Users</h4>
             <!--
             <h3>
                 <a class="lg-anchor text-light" href="/index.php?control=BuildList&action=show">
