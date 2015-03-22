@@ -153,7 +153,7 @@ class PollSCMLinuxUnix extends Base {
             $gitc = "git-key-safe" ;}
 
         $lsCommand = $gitc.' '.$iString.' ls-remote '.$repo.' '.$branch ;
-        $all = self::executeAndLoad($lsCommand) ;
+        $all = self::executeAndOutput($lsCommand) ;
         $curSha = substr($all, 0, strpos($all, "refs")-1);
         $this->savePollSHAAndTimestamp($curSha);
         $this->lm->log ("Current remote commit is $curSha $all, $lsCommand, $curSha", $this->getModuleName() ) ;
