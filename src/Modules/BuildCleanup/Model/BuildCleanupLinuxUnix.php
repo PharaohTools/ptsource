@@ -45,7 +45,7 @@ class BuildCleanupLinuxUnix extends Base {
 
     public function getEvents() {
         $ff = array(
-            "prepareBuild" => array(
+            "buildComplete" => array(
                 "buildCleanup",
             ),
         );
