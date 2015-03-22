@@ -149,7 +149,7 @@ class PollSCMLinuxUnix extends Base {
         if (isset($this->params["build-settings"]["PollSCM"]["git_privkey_path"]) &&
             $this->params["build-settings"]["PollSCM"]["git_privkey_path"] != "")  {
             $this->lm->log("Adding Private Key for cloning Git", $this->getModuleName()) ;
-            $iString .= ' -i="'.$this->params["build-settings"]["PollSCM"]["git_privkey_path"].'" ' ;
+            $iString .= ' -i "'.$this->params["build-settings"]["PollSCM"]["git_privkey_path"].'" ' ;
             $gitc = "git-key-safe" ;}
 
         $lsCommand = $gitc.' '.$iString.' ls-remote '.$repo.' '.$branch ;
