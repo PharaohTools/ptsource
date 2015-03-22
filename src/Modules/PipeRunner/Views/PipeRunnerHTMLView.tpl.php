@@ -18,7 +18,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="index.php?control=BuildList&action=show">
+                    <a href="index.php?control=BuildHome&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
                         <i class="fa fa-home fa-fw"></i>  Pipeline Home
                     </a>
                 </li>
