@@ -145,6 +145,7 @@ class PollSCMLinuxUnix extends Base {
         $this->lm->log ("Last commit built was $lastSha", $this->getModuleName() ) ;
         $lsCommand = 'git ls-remote '.$repo.' '.$branch ;
         $all = self::executeAndLoad($lsCommand) ;
+        var_dump($all);
         $curSha = substr($all, 0, strpos($all, "refs")-1);
         $this->savePollSHAAndTimestamp($curSha);
         $this->lm->log ("Current remote commit is $curSha", $this->getModuleName() ) ;
