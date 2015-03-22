@@ -155,9 +155,8 @@ class PollSCMLinuxUnix extends Base {
         $lsCommand = $gitc.' '.$iString.' ls-remote '.$repo.' '.$branch ;
         $all = self::executeAndLoad($lsCommand) ;
         $curSha = substr($all, 0, strpos($all, "refs")-1);
-        var_dump($all, $lsCommand, $curSha);
         $this->savePollSHAAndTimestamp($curSha);
-        $this->lm->log ("Current remote commit is $curSha", $this->getModuleName() ) ;
+        $this->lm->log ("Current remote commit is $curSha $all, $lsCommand, $curSha", $this->getModuleName() ) ;
         if ($lastSha == $curSha) {
             if (isset($this->params["build-settings"][$mn]["scm_always_allow_web"]) &&
                 $this->params["build-settings"][$mn]["scm_always_allow_web"] =="on") {
