@@ -37,6 +37,7 @@ class ShellLinuxUnix extends Base {
         $logging = $loggingFactory->getModel($this->params);
         if ( $step["steptype"] == "shelldata") {
             $logging->log("Running Shell from Data...", $this->getModuleName()) ;
+            putenv("WORKSPACE=/opt/ptbuild/pipes/pharaoh_tools_website_continuous_staging/");
             $rc = $this->executeAsShell($step["data"]);
             return (intval($rc) === 0) ? true : false ; }
         else if ( $step["steptype"] == "shellscript") {

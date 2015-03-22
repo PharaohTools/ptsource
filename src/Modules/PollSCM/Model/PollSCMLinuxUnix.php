@@ -98,7 +98,7 @@ class PollSCMLinuxUnix extends Base {
 
     private function doBuildSCMPollingDisabled() {
         $this->lm->log ("SCM Polling Disabled, ignoring...", $this->getModuleName() ) ;
-        return false ;
+        return true ;
     }
 
     private function doBuildSCMPollingEnabled() {
