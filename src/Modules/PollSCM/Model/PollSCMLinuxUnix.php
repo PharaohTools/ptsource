@@ -141,7 +141,7 @@ class PollSCMLinuxUnix extends Base {
         $mn = $this->getModuleName() ;
         $lastSha = (isset($this->params["build-settings"][$mn]["last_sha"])) ? $this->params["build-settings"][$mn]["last_sha"] : null ;
         $repo = $this->params["build-settings"][$mn]["git_repository_url"] ;
-        $branch = $this->params["build-settings"][$mn]["git_repository_url"] ;
+        $branch = $this->params["build-settings"][$mn]["git_branch"] ;
         $this->lm->log ("Last commit built was $lastSha", $this->getModuleName() ) ;
         $lsCommand = 'git ls-remote '.$repo.' '.$branch ;
         $all = self::executeAndLoad($lsCommand) ;
