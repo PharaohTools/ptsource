@@ -2,6 +2,6 @@
 
 Namespace Model;
 
-class PollSCM extends BaseModelFactory {
+class BuildCleanup extends BaseModelFactory {
 
 }

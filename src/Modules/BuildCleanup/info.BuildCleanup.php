@@ -2,22 +2,22 @@
 
 Namespace Info;
 
-class PollSCMInfo extends PTConfigureBase {
+class BuildCleanupInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "PollSCM Provisioner Integration";
+    public $name = "Build Cleanup Integration";
 
     public function _construct() {
         parent::__construct();
     }
 
     public function routesAvailable() {
-        return array( "PollSCM" => array_merge(parent::routesAvailable(), array("help") ) );
+        return array( "BuildCleanup" => array_merge(parent::routesAvailable(), array("help") ) );
     }
 
     public function routeAliases() {
-        return array("sendemail"=>"PollSCM");
+        return array("buildcleanup"=>"BuildCleanup");
     }
 
     public function events() {
@@ -25,21 +25,15 @@ class PollSCMInfo extends PTConfigureBase {
     }
 
     public function buildSettings() {
-        return array("send_postbuild_email", "send_postbuild_email_stability", "send_postbuild_email_address");
-    }
-
-    public function configuration() {
-        return array(
-            "exec_delay"=> array( "type" => "text", "default" => "180", "label" => "Minimum execution delay between SCM Poll runs", ),
-        );
+        return array("build_cleanup_enabled", "no_to_keep");
     }
 
     public function helpDefinition() {
        $help = <<<"HELPDATA"
-    This extension provides integration with PollSCM as a Build Step. It provides code
-    functionality, but no extra CLI commands.
+    This extension provides integration with BuildCleanup as Build Settings. It provides code
+    functionality, but no extra CLI commands. This is used for removing old build files.
 
-    PollSCM
+    BuildCleanup
 
 HELPDATA;
       return $help ;

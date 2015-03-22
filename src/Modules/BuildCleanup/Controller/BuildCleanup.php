@@ -2,7 +2,7 @@
 
 Namespace Controller ;
 
-class PollSCM extends Base {
+class BuildCleanup extends Base {
 
     public function execute($pageVars) {
 
@@ -16,7 +16,7 @@ class PollSCM extends Base {
             $this->content["helpData"] = $helpModel->getHelpData($pageVars["route"]["control"]);
             return array ("type"=>"view", "view"=>"help", "pageVars"=>$this->content); }
 
-        $this->content["messages"][] = "Help is the only valid PollSCM Action";
+        $this->content["messages"][] = "Help is the only valid BuildCleanup Action";
         return array ("type"=>"control", "control"=>"index", "pageVars"=>$this->content);
 
     }

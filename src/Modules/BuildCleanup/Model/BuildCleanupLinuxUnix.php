@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class PollSCMLinuxUnix extends Base {
+class BuildCleanupLinuxUnix extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -23,41 +23,17 @@ class PollSCMLinuxUnix extends Base {
 
     public function getSettingFormFields() {
         $ff = array(
-            "poll_scm_enabled" =>
+            "build_cleanup_enabled" =>
             array(
                 "type" => "boolean",
                 "optional" => true,
-                "name" => "Enable Polling of SCM Server?"
+                "name" => "Enable Removal of Old Builds?"
             ),
-            "scm_always_allow_web" =>
-            array(
-                "type" => "boolean",
-                "optional" => true,
-                "name" => "Always allow builds from web interface, even without remote changes?"
-            ),
-            "git_repository_url" =>
+            "no_to_keep" =>
             array(
                 "type" => "text",
                 "optional" => true,
-                "name" => "Git Repository URL?"
-            ),
-            "git_branch" =>
-            array(
-                "type" => "text",
-                "optional" => true,
-                "name" => "Git Branch?"
-            ),
-            "git_privkey_path" =>
-            array(
-                "type" => "text",
-                "optional" => true,
-                "name" => "Git Private Key Path?"
-            ),
-            "cron_string" =>
-            array(
-                "type" => "textarea",
-                "optional" => true,
-                "name" => "Crontab Values"
+                "name" => "Number of builds to keep?"
             ),
         );
         return $ff ;
@@ -70,13 +46,13 @@ class PollSCMLinuxUnix extends Base {
     public function getEvents() {
         $ff = array(
             "prepareBuild" => array(
-                "pollSCMChanges",
+                "buildCleanup",
             ),
         );
         return $ff ;
     }
 
-    public function pollSCMChanges() {
+    public function buildCleanup() {
         $loggingFactory = new \Model\Logging();
         $this->params["echo-log"] = true ;
         $this->params["php-log"] = true ;
@@ -85,107 +61,86 @@ class PollSCMLinuxUnix extends Base {
         $this->params["app-settings"]["app_config"] = \Model\AppConfig::getAppVariable("app_config");
         $this->params["app-settings"]["mod_config"] = \Model\AppConfig::getAppVariable("mod_config");
         $this->lm = $loggingFactory->getModel($this->params);
-        if ($this->checkBuildSCMPollingEnabled()) {
-            return $this->doBuildSCMPollingEnabled() ; }
+        if ($this->checkBuildCleanupsEnabled()) {
+            return $this->doBuildCleanupsEnabled() ; }
         else {
-            return $this->doBuildSCMPollingDisabled() ; }
+            return $this->doBuildCleanupsDisabled() ; }
     }
 
-    private function checkBuildSCMPollingEnabled() {
+    private function checkBuildCleanupsEnabled() {
         $mn = $this->getModuleName() ;
         return ($this->params["build-settings"][$mn]["poll_scm_enabled"] == "on") ? true : false ;
     }
 
-    private function doBuildSCMPollingDisabled() {
-        $this->lm->log ("SCM Polling Disabled, ignoring...", $this->getModuleName() ) ;
+    private function doBuildCleanupsDisabled() {
+        $this->lm->log ("Build Cleanup Disabled, ignoring...", $this->getModuleName() ) ;
         return false ;
     }
 
-    private function doBuildSCMPollingEnabled() {
-        $mn = $this->getModuleName() ;
-        $this->lm->log ("SCM Polling Enabled for {$this->pipeline["project-name"]}, attempting...", $this->getModuleName() ) ;
-        $enoughTime = $this->pollIfEnoughTimePassed() ;
-        if ($enoughTime == true) {
-            try {
-                // @todo other scm types @kevellcorp do svn
-                $lastSha = (isset($this->params["build-settings"][$mn]["last_sha"])) ? $this->params["build-settings"][$mn]["last_sha"] : null ;
-                if (strlen($lastSha)>0) { $result = $this->doLastCommitStored() ; }
-                else { $result = $this->doNoLastCommitStored() ; }
-                return $result; }
-            catch (\Exception $e) {
-                $this->lm->log ("Error polling scm", $this->getModuleName() ) ;
-                return false; } }
-        else {
-            return $enoughTime ; }
+    private function doBuildCleanupsEnabled() {
+        $this->lm->log ("Build Cleanup Enabled for {$this->pipeline["project-name"]}, attempting...", $this->getModuleName() ) ;
+        try {
+            $this->removeHistoryFiles() ;
+            $this->removeStepsHistoryFiles() ;
+            $this->trimHistoryIndex() ;
+            return true; }
+        catch (\Exception $e) {
+            $this->lm->log ("Error polling scm", $this->getModuleName() ) ;
+            return false; }
     }
 
-    private function pollIfEnoughTimePassed() {
+    private function removeHistoryFiles() {
+        $historyFiles = scandir(PIPEDIR.DS.$this->params["item"].DS.'history') ;
+        asort($historyFiles);
+        $arr = array_reverse($historyFiles);
         $mn = $this->getModuleName() ;
-        $time = time() ;
-        $last_poll = isset($this->params["build-settings"][$mn]["last_poll_timestamp"])
-            ? $this->params["build-settings"][$mn]["last_poll_timestamp"]
-            : 0 ;
-        $exec_delay = isset($this->params["app-settings"]["mod_config"][$mn]["exec_delay"])
-            ? $this->params["app-settings"]["mod_config"][$mn]["exec_delay"]
-            : 0 ;
-        // check now - last poll time > exec delay
-        if (($time - $last_poll ) > $exec_delay) {
-            $this->lm->log ("Enough time passed since last run...", $this->getModuleName() ) ;
-            return true ; }
+        if (isset($this->params["build-settings"][$mn]["no_to_keep"]) &&
+            is_int($this->params["build-settings"][$mn]["no_to_keep"])) {
+            $nk = $this->params["build-settings"][$mn]["no_to_keep"]; }
         else {
-            $this->lm->log ("Not enough time passed since last run, aborting...", $this->getModuleName() ) ;
-            return false ; }
-    }
-
-    private function doLastCommitStored() {
-        $mn = $this->getModuleName() ;
-        $lastSha = (isset($this->params["build-settings"][$mn]["last_sha"])) ? $this->params["build-settings"][$mn]["last_sha"] : null ;
-        $repo = $this->params["build-settings"][$mn]["git_repository_url"] ;
-        $this->lm->log ("Last commit built was $lastSha", $this->getModuleName() ) ;
-        $lsCommand = 'git ls-remote '.$repo ;
-        $all = self::executeAndLoad($lsCommand) ;
-        $curSha = substr($all, 0, strpos($all, "HEAD")-1);
-        $this->savePollSHAAndTimestamp($curSha);
-        $this->lm->log ("Current remote commit is $curSha", $this->getModuleName() ) ;
-        if ($lastSha == $curSha) {
-            if (isset($this->params["build-settings"][$mn]["scm_always_allow_web"]) &&
-                $this->params["build-settings"][$mn]["scm_always_allow_web"] =="on") {
-                if (isset($this->params["build-request-source"]) && $this->params["build-request-source"]=="web" ) {
-                    $this->lm->log ("Always allowing builds executed from web", $this->getModuleName() ) ;
-                    $result = true ; }
-                else {
-                    $this->lm->log ("No remote changes", $this->getModuleName() ) ;
-                    $result = false ; } }
-            else {
-                $this->lm->log ("No remote changes", $this->getModuleName() ) ;
-                $result = false; } }
-        else {
-            $this->lm->log ("Remote changes available", $this->getModuleName() ) ;
-            $result = true ; }
-        return $result ;
-    }
-
-    private function doNoLastCommitStored() {
-        $mn = $this->getModuleName() ;
-        $repo = $this->params["build-settings"][$mn]["git_repository_url"] ;
-        $this->lm->log ("No last commit stored, assuming all remote changes", $this->getModuleName() ) ;
-        $lsCommand = 'git ls-remote '.$repo ;
-        $all = self::executeAndLoad($lsCommand) ;
-        $curSha = substr($all, 0, strpos($all, "HEAD")-1);
-        $this->savePollSHAAndTimestamp($curSha);
+            $this->lm->log ("No amount of builds to keep has ben set, defaulting to three", $this->getModuleName() ) ;
+            $nk = 3; }
+        $keeps = array_slice($arr, 0, $nk);
+        $drops = array_diff($historyFiles, $keeps);
+        foreach ($drops as $dropfile) {
+            $this->lm->log ("Removing History file {$dropfile}", $this->getModuleName() ) ;
+            $rmCommand = 'rm -f '.$dropfile ;
+            self::executeAndOutput($rmCommand) ; }
         $result = true ;
         return $result ;
     }
 
-    private function savePollSHAAndTimestamp($curSha) {
-        $this->lm->log ("Storing current remote commit ID $curSha", $this->getModuleName() ) ;
-        $time = time();
-        $this->lm->log ("Storing last poll timestamp $time", $this->getModuleName() ) ;
-        $pipelineFactory = new \Model\Pipeline() ;
-        $pipelineSaver = $pipelineFactory->getModel($this->params, "PipelineSaver");
-        $this->params["build-settings"]["PollSCM"]["last_sha"] = $curSha ;
-        $this->params["build-settings"]["PollSCM"]["last_poll_timestamp"] = $time ;
-        $pipelineSaver->savePipeline(array("type" => "Settings", "data" => $this->params["build-settings"] ));
+    private function removeStepsHistoryFiles() {
+        $historyFiles = scandir(PIPEDIR.DS.$this->params["item"].DS.'stepsHistory') ;
+        asort($historyFiles);
+        $arr = array_reverse($historyFiles);
+        $mn = $this->getModuleName() ;
+        if (isset($this->params["build-settings"][$mn]["no_to_keep"]) &&
+            is_int($this->params["build-settings"][$mn]["no_to_keep"])) {
+            $nk = $this->params["build-settings"][$mn]["no_to_keep"]; }
+        else {
+            $this->lm->log ("No amount of builds to keep has ben set, defaulting to three", $this->getModuleName() ) ;
+            $nk = 3; }
+        $keeps = array_slice($arr, 0, $nk);
+        $drops = array_diff($historyFiles, $keeps);
+        foreach ($drops as $dropfile) {
+            $this->lm->log ("Removing History file {$dropfile}", $this->getModuleName() ) ;
+            $rmCommand = 'rm -f '.$dropfile ;
+            self::executeAndOutput($rmCommand) ; }
+        $result = true ;
+        return $result ;
+    }
+
+    private function trimHistoryIndex() {
+//        $historyFiles = scandir(PIPEDIR.DS.$this->params["item"].DS.'history') ;
+//        asort($historyFiles);
+//        $arr = array_reverse($historyFiles);
+//        $keeps = array_slice($arr, 0, 3);
+//        $drops = array_diff($historyFiles, $keeps);
+//        foreach ($drops as $dropfile) {
+//            $this->lm->log ("Removing History file {$dropfile}", $this->getModuleName() ) ;
+//            $rmCommand = 'rm '.$dropfile ;
+//            self::executeAndOutput($rmCommand) ; }
         $result = true ;
         return $result ;
     }
