@@ -1,53 +1,44 @@
 done = false ;
 max = 0 ;
-window.outUpdater = setInterval(function () { updatePage() }, 5000);
+window.outUpdater = setInterval(function () { updatePage() }, 10000);
 
 function updatePage() {
     console.log("running update page js method");
     item = window.pipeitem ;
-    url = "/index.php?control=PipeRunner&action=service&item=" + item + "&output-format=SERVICE";
+    url = "/index.php?control=PipeRunner&action=findrunning&output-format=JSON";
     $.ajax({
         url: url,
         success: function(data) {
-            $('#updatable').html(data); },
-        complete: function() {
-            // Schedule the next request when the current one's complete
-            setStatus();
-            console.log("Req Status: " + window.reqStatus);
-            if (window.reqStatus == "OK") {
-                doCompletion(); } }
-    });
-}
-
-function setStatus() {
-    item = window.pipeitem ;
-    pid = window.runid ;
-    url = "/index.php?control=PipeRunner&action=pipestatus&item=" + item + "&pid=" + pid + "&output-format=PIPESTATUS";
-    console.log(url);
-    $.ajax({
-        url: url,
-        success: function(data) {
-            window.reqStatus = data ;
-            console.log("pipestat: " + data) ;
+            setBuildList(data) ;
         }
+//,
+//        complete: function() {
+//            // Schedule the next request when the current one's complete
+//            setStatus();
+//            console.log("Req Status: " + window.reqStatus);
+//            if (window.reqStatus == "OK") {
+//                doCompletion(); } }
     });
 }
 
-function doCompletion() {
-    removeWaitImage();
-    changeSubButton();
-    clearInterval(window.outUpdater);
-}
-
-function removeWaitImage() {
-    $("#loading-holder").hide() ;
-}
-
-function changeSubButton() {
-    subhtml  = '<div class="col-sm-offset-2 col-sm-8">';
-    subhtml += '  <div class="text-center">';
-    subhtml += '    <button type="submit" class="btn btn-primary" id="close-complete">Close Execution Screen</button>';
-    subhtml += '  </div>';
-    subhtml += '</div>' ;
-    $("#submit-holder").html(subhtml) ;
+function setBuildList(data) {
+    data = JSON.parse(data);
+    console.log(data);
+    if (data.length == 0) {
+        $('.buildRow').removeClass("runningBuildRow");
+        ht = "<p>No builds currently being executed...</p>" ;
+        $('#runningBuilds').html(ht); }
+    else {
+        ht = "" ;
+        for (index = 0; index < data.length; index++) {
+            $('#blRow_'+data[index].item).addClass("runningBuildRow");
+            ht += '<div class="runningBuild">' ;
+            ht += "  <p>Pipeline "+data[index].item+"</p>" ;
+            ht += "  <p>Pipedir "+data[index].pipedir+"</p>" ;
+            ht += "  <p>PID "+data[index].pid+"</p>" ;
+            ht += "  <p>Source "+data[index].brs+"</p>" ;
+            ht += "  <p>Run ID "+data[index].runid+"</p>" ;
+            ht += "  <p>User "+data[index].runuser+"</p>" ;
+            ht += "</div>" ; }
+        $('#runningBuilds').html(ht); }
 }
