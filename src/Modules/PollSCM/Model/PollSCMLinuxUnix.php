@@ -194,6 +194,7 @@ class PollSCMLinuxUnix extends Base {
         $all = self::executeAndLoad($lsCommand) ;
 
         $curSha = substr($all, 0, strpos($all, "refs")-1);
+        var_dump($all, $lsCommand, $curSha);
         $this->lm->log("dump $all, $lsCommand, $curSha", $this->getModuleName()) ;
         $this->savePollSHAAndTimestamp($curSha);
         $result = true ;
