@@ -143,7 +143,16 @@ class PollSCMLinuxUnix extends Base {
         $repo = $this->params["build-settings"][$mn]["git_repository_url"] ;
         $branch = $this->params["build-settings"][$mn]["git_branch"] ;
         $this->lm->log ("Last commit built was $lastSha", $this->getModuleName() ) ;
-        $lsCommand = 'git ls-remote '.$repo.' '.$branch ;
+
+        $iString = "" ;
+        $gitc = "git" ;
+        if (isset($this->params["build-settings"]["PollSCM"]["git_privkey_path"]) &&
+            $this->params["build-settings"]["PollSCM"]["git_privkey_path"] != "")  {
+            $this->lm->log("Adding Private Key for cloning Git", $this->getModuleName()) ;
+            $iString .= ' -i="'.$this->params["build-settings"]["PollSCM"]["git_privkey_path"].'" ' ;
+            $gitc = "git-key-safe" ;}
+
+        $lsCommand = $gitc.' '.$iString.' ls-remote '.$repo.' '.$branch ;
         $all = self::executeAndLoad($lsCommand) ;
         var_dump($all, $lsCommand);
         $curSha = substr($all, 0, strpos($all, "refs")-1);
