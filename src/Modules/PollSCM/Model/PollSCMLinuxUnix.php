@@ -201,12 +201,18 @@ class PollSCMLinuxUnix extends Base {
     }
 
     private function savePollSHAAndTimestamp($curSha) {
-        $this->lm->log ("Storing current remote commit ID $curSha", $this->getModuleName() ) ;
+        if ($curSha !== "") {
+
+            $this->lm->log ("Storing current remote commit ID $curSha", $this->getModuleName() ) ;
+            $this->params["build-settings"]["PollSCM"]["last_sha"] = $curSha ;
+        } else {
+            $this->lm->log ("Incorrect SHA not storing : $curSha", $this->getModuleName() ) ;
+
+        }
         $time = time();
         $this->lm->log ("Storing last poll timestamp $time", $this->getModuleName() ) ;
         $pipelineFactory = new \Model\Pipeline() ;
         $pipelineSaver = $pipelineFactory->getModel($this->params, "PipelineSaver");
-        $this->params["build-settings"]["PollSCM"]["last_sha"] = $curSha ;
         $this->params["build-settings"]["PollSCM"]["last_poll_timestamp"] = $time ;
         $pipelineSaver->savePipeline(array("type" => "Settings", "data" => $this->params["build-settings"] ));
         $result = true ;
