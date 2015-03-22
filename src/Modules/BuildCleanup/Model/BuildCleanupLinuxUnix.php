@@ -104,7 +104,7 @@ class BuildCleanupLinuxUnix extends Base {
         $drops = array_diff($historyFiles, $keeps);
         foreach ($drops as $dropfile) {
             $this->lm->log ("Removing History file {$dropfile}", $this->getModuleName() ) ;
-            $rmCommand = 'rm -f '.$dropfile ;
+            $rmCommand = 'rm -f '.PIPEDIR.DS.$this->params["item"].DS.'history'.DS.$dropfile ;
             self::executeAndOutput($rmCommand) ; }
         $result = true ;
         return $result ;
