@@ -69,7 +69,7 @@ class BuildCleanupLinuxUnix extends Base {
 
     private function checkBuildCleanupsEnabled() {
         $mn = $this->getModuleName() ;
-        return ($this->params["build-settings"][$mn]["poll_scm_enabled"] == "on") ? true : false ;
+        return ($this->params["build-settings"][$mn]["build_cleanup_enabled"] == "on") ? true : false ;
     }
 
     private function doBuildCleanupsDisabled() {
