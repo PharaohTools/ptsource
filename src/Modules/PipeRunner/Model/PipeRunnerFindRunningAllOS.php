@@ -80,11 +80,11 @@ class PipeRunnerFindRunningAllOS extends Base {
 
         return array(
             "runuser" => $users,
-            "pipe-dir" => $pds,
+            "pipedir" => $pds,
             "pid" => $pids,
-            "build-request-source" => $brss,
+            "brs" => $brss,
             "item" => $items,
-            "run-id" => $rids
+            "runid" => $rids
         ) ;
     }
 
