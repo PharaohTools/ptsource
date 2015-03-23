@@ -16,8 +16,7 @@ class Signup extends Base
         // @todo This is functionality. It should be in the Model, not here
         // @todo do not Start the session here. At the very least, this should be in a wrapper
         // like $session->ensureSession();
-        session_start();
-
+        
         if ($pageVars["route"]["action"] == "login") {
             $this->content["data"] = $thisModel->getlogin();
         }

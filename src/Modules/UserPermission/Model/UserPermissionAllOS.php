@@ -24,7 +24,6 @@ class UserPermissionAllOS extends Base {
 		$groupCannotAccess[2] = array( 'UserManager' => array('show') );
 		$groupCannotAccess[3] = array( 'BuildConfigure' => array('new','save'),
 									   'PipeRunner'     => array('start') );
-		session_start();
 		$status = isset($_SESSION['login-status']) ? $_SESSION['login-status'] : "";
         $username = isset($_SESSION['username']) ? $_SESSION['username'] : "";
 		if ($status == TRUE) {
