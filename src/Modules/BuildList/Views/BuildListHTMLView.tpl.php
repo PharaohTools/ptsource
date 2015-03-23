@@ -100,15 +100,15 @@
                                         <td>
                                             <?php
                                             echo '<a href="/index.php?control=PipeRunner&action=start&item='.$pipelineDetails["project-slug"].'">';
-                                            echo '<i class="fa fa-play fa-2x hvr-icon-forward"></i></a>' ;
+                                            echo '<i class="fa fa-play fa-2x hvr-grow-shadow" style="color:green"></i></a>' ;
                                             ?>
                                         </td>
                                         <td>
                                             <?php
                                             if ($pipelineDetails["last_status"] === true) {
-                                                echo '<img class="listImage listImageWide" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=green-ball.png" />' ; }
+                                                echo '<i class="fa fa-circle fa-2x " style="color:green"></i>' ; }
                                             else {
-                                                echo '<img class="listImage listImageWide" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=red-ball.png" />' ; }
+                                                echo ' <i class="fa fa-circle fa-2x " style="color:#D32B2B"></i>' ; }
                                             ?>
                                         </td>
                                         <td>
