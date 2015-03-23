@@ -66,7 +66,7 @@ function displayStepField() {
         html += '    <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' ;
         html += '  </div><h3>'+module+'</h3>';
         html += '  <div class="col-sm-10">' ;
-        html += '   <div class="col-sm-12">' ;
+        html += '   <div class="form-group col-sm-12">' ;
         html += '    <h4>'+module+'</h4>' ;
         html += '    <input type="hidden" id="steps['+hash+'][module]" name="steps['+hash+'][module]" value="'+module+'" />' ;
         html += '    <input type="hidden" id="steps['+hash+'][steptype]" name="steps['+hash+'][steptype]" value="'+steptype+'" />' ;
@@ -111,7 +111,7 @@ function displayStepField() {
         html += '  </div>' ;
         html += '  </div>';
         html += '  </div>';
-        html += '  <div>';
+        html += '  <div class="form-group">';
         html += ' 	<label for="delete" class="col-sm-2 control-label text-left"></label>';	
         html += '   <div class="col-sm-12">' ;
         html += '    <a class="btn btn-warning" onclick="deleteStepField('+hash+')">Delete Step</a>' ;
