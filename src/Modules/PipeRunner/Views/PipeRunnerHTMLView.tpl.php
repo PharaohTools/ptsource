@@ -3,7 +3,7 @@
 		<div class="sidebar-nav navbar-collapse">
 			<ul class="nav in" id="side-menu">
 				<li class="sidebar-search">
-					<div class="input-group custom-search-form">
+					<div class="input-group custom-search-form hvr-bounce-in">
 						<input type="text" class="form-control" placeholder="Search...">
 						<span class="input-group-btn">
 							<button class="btn btn-default" type="button">
@@ -13,41 +13,51 @@
 					</div>
 					</li>
                 <li>
-                    <a href="/index.php?control=Index&amp;action=show">
-                        <i class="fa fa-dashboard fa-fw"></i> Dashboard
+                    <a href="/index.php?control=Index&amp;action=show" class="hvr-bounce-in">
+                        <i class="fa fa-dashboard fa-fw hvr-bounce-in"></i> Dashboard
                     </a>
                 </li>
                 <li>
-                    <a href="index.php?control=BuildList&action=show">
+<<<<<<< HEAD
+                    <a href="index.php?control=BuildList&action=show"  class="hvr-bounce-in">
+                        <i class="fa fa-home fa-fw hvr-bounce-in"></i>  Pipeline Home
+=======
+                    <a href="index.php?control=BuildHome&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
                         <i class="fa fa-home fa-fw"></i>  Pipeline Home
+>>>>>>> master
                     </a>
                 </li>
                 <li>
-                    <a href="/index.php?control=BuildList&amp;action=show">
-                        <i class="fa fa-bars fa-fw"></i> All Pipelines
-                    </a>
-                </li>
-                
-                
-                <li>
-                    <a href="index.php?control=Workspace&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
-                        <i class="fa fa-folder-open-o"></i> Workspace
-                    </a>
-                </li>
-                <li>
-                    <a href="index.php?control=BuildMonitor&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
-                        <i class="fa fa-bar-chart-o"></i> Monitors
-                    </a>
-                </li>
-                <li>
-                    <a href="index.php?control=PipeRunner&action=history&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
-                        <i class="fa fa-history fa-fw"></i> History <span class="badge"></span>
+                    <a href="/index.php?control=BuildList&amp;action=show" class="hvr-bounce-in">
+                        <i class="fa fa-bars fa-fw hvr-bounce-in"></i> All Pipelines
                     </a>
                 </li>
                 
+                
                 <li>
-                    <a href="/index.php?control=Workspace&action=start&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
+                    <a href="index.php?control=Workspace&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>"  class="hvr-bounce-in">
+                        <i class="fa fa-folder-open-o hvr-bounce-in"></i> Workspace
+                    </a>
+                </li>
+                <li>
+                    <a href="index.php?control=BuildMonitor&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>"  class="hvr-bounce-in">
+                        <i class="fa fa-bar-chart-o hvr-bounce-in"></i> Monitors
+                    </a>
+                </li>
+                <li>
+                    <a href="index.php?control=PipeRunner&action=history&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>"  class="hvr-bounce-in">
+                        <i class="fa fa-history fa-fw hvr-bounce-in"></i> History <span class="badge"></span>
+                    </a>
+                </li>
+                
+                <li>
+<<<<<<< HEAD
+                    <a href="/index.php?control=Workspace&action=start&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>"  class="hvr-bounce-in">
+                        <i class="fa fa-sign-in fa-fw hvr-bounce-in"></i> Run Again
+=======
+                    <a href="/index.php?control=PipeRunner&action=start&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
                         <i class="fa fa-sign-in fa-fw"></i> Run Again
+>>>>>>> master
                     </a>
                 </li>
             </ul>
@@ -111,8 +121,10 @@
                             <div id="updatable">
                                 Checking Pipeline Execution Output...
                                 <?php
+
                                 if ($pageVars["route"]["action"]=="history") {
                                     echo '<p>Historic builds</p>';
+
                                     foreach ($pageVars["data"]["historic_builds"] as $hb) {
                                         echo '<a href="/index.php?control=PipeRunner&action=summary&item='.$pageVars["data"]["pipeline"]["project-slug"].'&run-id='.$hb.'">'.$hb.'</a><br />' ; } }
                                 else if ($pageVars["route"]["action"]=="summary") {
@@ -138,24 +150,32 @@
                              </div>'; }
                     ?>
 
-                    <div class="form-group" id="submit-holder">
-                        <div class="col-sm-offset-2 col-sm-8">
-                            <div class="text-center">
-                            	<i class="fa fa-spinner fa-spin fa-5x "> </i>
-                            	
-                            
+
+                    <?php
+                    if ($pageVars["route"]["action"] =="start") {
+                    ?>
+                        <div class="form-group" id="submit-holder">
+                            <div class="col-sm-offset-2 col-sm-8">
+                                <div class="text-center">
+                                    <i class="fa fa-spinner fa-spin fa-5x "> </i>
+
+
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group" id="submit-holder">
-                        <div class="col-sm-offset-2 col-sm-8">
-                            <div class="text-center">
-                            	
-                            	
-                                <button type="submit" class="btn btn-danger" id="end-now">End Now</button>
+                        <div class="form-group" id="submit-holder">
+                            <div class="col-sm-offset-2 col-sm-8">
+                                <div class="text-center">
+
+
+                                    <button type="submit" class="btn btn-danger" id="end-now">End Now</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    <?php
+                       }
+                    ?>
+
                     <input type="hidden" id="item" value="<?= $pageVars["data"]["pipeline"]["project-slug"] ;?>" />
                     <input type="hidden" id="pid" value="<?= $pageVars["pipex"] ;?>" />
                     <?php

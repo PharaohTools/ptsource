@@ -9,6 +9,8 @@
 		<link rel="icon" href="/index.php?control=AssetLoader&action=show&module=PostInput&type=image&asset=favicon.ico">
 
 		<title>PTBuild - Pharaoh Tools</title>
+		 <link rel="stylesheet" type="text/css" href="Assets/typo/css/demo.css" />
+        <link rel="stylesheet" type="text/css" href="Assets/typo/css/style.css" />
 		
 
         <script src="/index.php?control=AssetLoader&action=show&module=PostInput&type=js&asset=jquery.min.js"></script>
@@ -87,6 +89,8 @@
                         <span class="title hvr-grow-shadow">PTBuild</span>
                     </a>
 				</div>
+				
+				
 				<!-- /.navbar-header -->
 				<ul class="nav navbar-top-links navbar-right">
 					
@@ -96,7 +100,7 @@
                     	
                         <i class="fa fa-bell fa-fw " id="bell"></i>  <i class="fa fa-caret-down " id="caret"></i>
                     </a>
-                    <ul class="dropdown-menu dropdown-alerts">
+                    <ul class="dropdown-menu dropdown-alerts hvr-grow-shadow">
                         <li>
                             <a href="#">
                                 <div >
@@ -121,7 +125,7 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw" id="bell"></i>  <i class="fa fa-caret-down" id="caret"></i>
                     </a>
-                    <ul class="dropdown-menu dropdown-user">
+                    <ul class="dropdown-menu dropdown-user ">
                         <li><a href="#" class=" hvr-grow-shadow"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
                         <li><a href="#" class=" hvr-grow-shadow"><i class="fa fa-gear fa-fw"></i> Settings</a>

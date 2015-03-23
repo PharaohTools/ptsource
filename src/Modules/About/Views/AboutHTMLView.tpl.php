@@ -20,7 +20,8 @@
         </div>
     </div>
 
-    <div class="col-md-9 col-sm-10" id="page-wrapper">
+    <div class="col-lg-9">
+                    <div class="well well-lg">
             <div class="row clearfix no-margin">
                 <h3><a class="lg-anchor text-light" href=""> PTBuild - The Builder, Pharaoh Tools
                         <i style="font-size: 18px;" class="fa fa-chevron-right"></i>

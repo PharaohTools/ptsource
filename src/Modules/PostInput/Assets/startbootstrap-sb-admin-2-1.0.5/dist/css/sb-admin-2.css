@@ -380,3 +380,12 @@ table.dataTable thead .sorting:after {
   text-decoration: none;
   background-color: #242424;
 }
+input[type=radio], input[type=checkbox] {
+  margin: 14px 0 0;
+  margin-top: 1px \9;
+  line-height: normal;
+ }
+ .table-bordered {
+  border: 1px solid #ddd;
+  background-color: #fff;
+ }

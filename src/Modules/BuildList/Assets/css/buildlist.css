@@ -6,3 +6,17 @@
 .listImageWide {
     max-width:50%;
 }
+
+.runningBuild {
+    background-color: #dee;
+    margin: 0 0 10px 0;
+    overflow-x: hidden;
+}
+
+.runningBuildRow {
+    background-color: #dee;
+}
+
+.runningBuild p {
+    margin: 0 0 0 0;
+}
