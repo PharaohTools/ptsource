@@ -46,7 +46,7 @@
                 </li>
                 
                 <li>
-<<<<<<< HEAD
+
                     <a href="/index.php?control=Workspace&action=start&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>"  class="hvr-bounce-in">
                         <i class="fa fa-sign-in fa-fw hvr-bounce-in"></i> Run Again
                     </a>
@@ -141,23 +141,7 @@
                              </div>'; }
                     ?>
 
-<<<<<<< HEAD
-                    <div class="form-group" id="submit-holder">
-                        <div class="col-sm-offset-2 col-sm-8">
-                            <div class="text-center">
-                          
-                            	
-                            
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group" id="submit-holder">
-                        <div class="col-sm-offset-2 col-sm-8">
-                            <div class="text-center">
-                            	
-                            	
-                                
-=======
+
 
                     <?php
                     if ($pageVars["route"]["action"] =="start") {
@@ -178,7 +162,7 @@
 
                                     <button type="submit" class="btn btn-danger" id="end-now">End Now</button>
                                 </div>
->>>>>>> a94209d811047b66857b16ad10f750e9e0e2753f
+
                             </div>
                         </div>
                     <?php
