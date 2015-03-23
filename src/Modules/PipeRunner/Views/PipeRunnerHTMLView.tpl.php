@@ -3,7 +3,7 @@
 		<div class="sidebar-nav navbar-collapse">
 			<ul class="nav in" id="side-menu">
 				<li class="sidebar-search">
-					<div class="input-group custom-search-form">
+					<div class="input-group custom-search-form hvr-bounce-in">
 						<input type="text" class="form-control" placeholder="Search...">
 						<span class="input-group-btn">
 							<button class="btn btn-default" type="button">
@@ -13,41 +13,41 @@
 					</div>
 					</li>
                 <li>
-                    <a href="/index.php?control=Index&amp;action=show">
-                        <i class="fa fa-dashboard fa-fw"></i> Dashboard
+                    <a href="/index.php?control=Index&amp;action=show" class="hvr-bounce-in">
+                        <i class="fa fa-dashboard fa-fw hvr-bounce-in"></i> Dashboard
                     </a>
                 </li>
                 <li>
-                    <a href="index.php?control=BuildList&action=show">
-                        <i class="fa fa-home fa-fw"></i>  Pipeline Home
+                    <a href="index.php?control=BuildList&action=show"  class="hvr-bounce-in">
+                        <i class="fa fa-home fa-fw hvr-bounce-in"></i>  Pipeline Home
                     </a>
                 </li>
                 <li>
-                    <a href="/index.php?control=BuildList&amp;action=show">
-                        <i class="fa fa-bars fa-fw"></i> All Pipelines
-                    </a>
-                </li>
-                
-                
-                <li>
-                    <a href="index.php?control=Workspace&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
-                        <i class="fa fa-folder-open-o"></i> Workspace
-                    </a>
-                </li>
-                <li>
-                    <a href="index.php?control=BuildMonitor&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
-                        <i class="fa fa-bar-chart-o"></i> Monitors
-                    </a>
-                </li>
-                <li>
-                    <a href="index.php?control=PipeRunner&action=history&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
-                        <i class="fa fa-history fa-fw"></i> History <span class="badge"></span>
+                    <a href="/index.php?control=BuildList&amp;action=show" class="hvr-bounce-in">
+                        <i class="fa fa-bars fa-fw hvr-bounce-in"></i> All Pipelines
                     </a>
                 </li>
                 
+                
                 <li>
-                    <a href="/index.php?control=Workspace&action=start&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
-                        <i class="fa fa-sign-in fa-fw"></i> Run Again
+                    <a href="index.php?control=Workspace&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>"  class="hvr-bounce-in">
+                        <i class="fa fa-folder-open-o hvr-bounce-in"></i> Workspace
+                    </a>
+                </li>
+                <li>
+                    <a href="index.php?control=BuildMonitor&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>"  class="hvr-bounce-in">
+                        <i class="fa fa-bar-chart-o hvr-bounce-in"></i> Monitors
+                    </a>
+                </li>
+                <li>
+                    <a href="index.php?control=PipeRunner&action=history&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>"  class="hvr-bounce-in">
+                        <i class="fa fa-history fa-fw hvr-bounce-in"></i> History <span class="badge"></span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/index.php?control=Workspace&action=start&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>"  class="hvr-bounce-in">
+                        <i class="fa fa-sign-in fa-fw hvr-bounce-in"></i> Run Again
                     </a>
                 </li>
             </ul>

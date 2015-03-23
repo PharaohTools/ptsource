@@ -141,7 +141,7 @@
                         echo '<div class="form-group confSettingsSlideySection" id="slidey'.$one_config_slug.'">' ;
                         echo '  <div class="col-sm-12">' ;
                         echo '    <label for="config_'.$one_config_slug.'" class="control-label text-left">'.$one_config_slug.':</label>' ;
-                        echo '    <i class="fa fa-2x fa-toggle-off" id="slideyToggleIcon'.$one_config_slug.'"' ;
+                        echo '    <i class="fa fa-1x fa-toggle-off" id="slideyToggleIcon'.$one_config_slug.'"' ;
                         echo ' onclick="toggleConfSetting(this, \'slidey'.$one_config_slug.'\')"></i>' ;
                         echo '    <a class="btn-info" id="slideyToggleIcon'.$one_config_slug.'"' ;
                         echo ' onclick="hideConfSetting(\'slidey'.$one_config_slug.'\')"></a>' ;
@@ -168,7 +168,7 @@
                                     else {$onoff = "" ;}
                                     echo '  <div class="col-sm-12">' ;
                                     echo '      <label for="settings['.$one_config_slug.']['.$fieldSlug.']" class="control-label text-left">'.$fieldInfo["name"].':</label>' ;
-                                    echo '      <input name="settings['.$one_config_slug.']['.$fieldSlug.']" id="settings['.$one_config_slug.']['.$fieldSlug.']" type="checkbox" '.$onoff.' />' ;
+                                    echo '      <input name="settings['.$one_config_slug.']['.$fieldSlug.']" id="settings['.$one_config_slg.']['.$fieldSlug.']" type="checkbox" '.$onoff.' />' ;
                                     echo '  </div>' ;
                                     break ;
                                 case "text" :
@@ -225,7 +225,7 @@
                             echo '      <p><strong>Step Type: </strong>'.$one_build_step["steptype"].'</p>-->';
                             echo '      <input type="hidden" id="steps['.$hash.'][module]" name="steps['.$hash.'][module]" value="'.$one_build_step["module"].'" />';
                             echo '      <input type="hidden" id="steps['.$hash.'][steptype]" name="steps['.$hash.'][steptype]" value="'.$one_build_step["steptype"].'" />';
-							echo ' 		<div class="form-group">';
+							echo '  	<div>' ;
                             echo ' 		<label for="'.$one_build_step["steptype"].'" class="col-sm-2 control-label text-left">'.$one_build_step["steptype"].'</label>';	
                             echo '		<div class="col-sm-10">';		
                             if ($one_build_step["module"] == "ConditionalStepRunner" || $one_build_step["module"] == "Plugin") {
@@ -273,8 +273,8 @@
                             }
                             echo '  </div>';
                             echo '  </div>';
-							echo '  </div>';
-                            echo ' 		<div class="form-group">';
+                            echo '  </div>';
+							echo '  <div>' ;
                             echo ' 		<label for="delete" class="col-sm-2 control-label text-left"></label>';	
                             echo '   <div class="col-sm-10">'  ;
                             echo '  <a class="btn btn-warning" onclick="deleteStepField(\''.$hash.'\')">Delete Step</a>' ;
