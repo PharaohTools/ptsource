@@ -60,10 +60,10 @@
        </div>
     
         <div class="col-lg-9">
-                    <div class="well well-lg">
-            <h4 class="text-uppercase text-light">Pipeline</h4>
+                    <div class="well well-lg ">
+           
             <div class="row clearfix no-margin">
-            	
+            	 <h3 class="text-uppercase text-light ">Pipeline</h3>
                 <!--
                 <h3><a class="lg-anchor text-light" href="">PTBuild - Pharaoh Tools <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
                 -->

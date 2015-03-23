@@ -79,7 +79,7 @@
                         echo ', Run '.$pageVars["data"]["historic_build"]["run-id"] ; }
                     ?>
 
-                    <i style="font-size: 18px;" class="fa fa-chevron-right"></i></h3>
+                    <i style="font-size: 18px;" </i></h3>
                 <h5 class="text-uppercase text-light" style="margin-top: 15px;">
                     <a href="/index.php?control=BuildHome&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>"></a>
                 </h5>
@@ -141,7 +141,7 @@
                     <div class="form-group" id="submit-holder">
                         <div class="col-sm-offset-2 col-sm-8">
                             <div class="text-center">
-                            	<i class="fa fa-spinner fa-spin fa-5x "> </i>
+                          
                             	
                             
                             </div>
@@ -152,7 +152,7 @@
                             <div class="text-center">
                             	
                             	
-                                <button type="submit" class="btn btn-danger" id="end-now">End Now</button>
+                                
                             </div>
                         </div>
                     </div>

@@ -385,7 +385,12 @@ input[type=radio], input[type=checkbox] {
   margin-top: 1px \9;
   line-height: normal;
  }
- .table-bordered {
-  border: 1px solid #ddd;
-  background-color: #fff;
- }
+ .bg-primary {
+  color: #fff;
+  background-color: #274C76;
+}
+ .bg-primary {
+  color: #fff;
+  background-color: #A6516D;
+  border-color: #242424;
+}
