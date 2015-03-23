@@ -44,6 +44,14 @@
                 </li>
             </ul>
         </div>
+
+        <div class="navbar-collapse">
+            <h4>Running Builds</h4>
+            <div id="runningBuilds">
+                <p>No builds currently being executed</p>
+            </div>
+        </div>
+
     </div>
 
     <div class="col-lg-9">
@@ -94,7 +102,7 @@
 
                                 $i = 1;
                                 foreach ($pageVars["data"]["pipelines"] as $pipelineSlug => $pipelineDetails) { ?>
-                                    <tr>
+                                    <tr class="buildRow" id="blRow_<?php echo $pipelineSlug; ?>">
                                         <th scope="row"><?php echo $i ; ?></th>
                                         <td><a href="/index.php?control=BuildHome&action=show&item=<?php echo $pipelineSlug ; ?>"><?php echo $pipelineDetails["project-name"] ; ?></a></td>
                                         <td>
@@ -174,6 +182,4 @@
     </div>
 </div><!-- /.container -->
 <link rel="stylesheet" type="text/css" href="/index.php?control=AssetLoader&action=show&module=BuildList&type=css&asset=buildlist.css">
-
-
-
+<script type="text/javascript" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=js&asset=buildlist.js"></script>
