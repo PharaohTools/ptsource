@@ -85,11 +85,13 @@
 					}
 				</style>
                 <script src="index.php?control=AssetLoader&action=show&module=BuildMonitor&type=js&asset=Chart.js"></script>
-                <div id="canvas-holder">
-					<canvas id="chart-area" width="300" height="300"/>
-				</div>
-				<div class="col-sm-8 col-md-9">
-					<canvas id="canvas" height="450" width="600"></canvas>
+                <div class="col-sm-12 col-md-12 col-lg-12">
+	                <div class="col-sm-6 col-md-6 col-lg-6" id="canvas-holder">
+						<canvas id="chart-area" width="" height=""/></canvas>
+					</div>
+					<div class="col-sm-6 col-md-6 col-lg-6">
+						<canvas id="canvas" height="" width=""></canvas>
+					</div>
 				</div>
 				<?php
 				$success = $fail = $running = $date = array();
