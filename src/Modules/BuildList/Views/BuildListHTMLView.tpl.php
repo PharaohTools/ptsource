@@ -106,9 +106,9 @@
                                         <td>
                                             <?php
                                             if ($pipelineDetails["last_status"] === true) {
-                                                echo '<i class="fa fa-circle fa-2x " style="color:green"></i>' ; }
+                                                echo '<i class="fa fa-circle fa-3x " style="color:green"></i>' ; }
                                             else {
-                                                echo ' <i class="fa fa-circle fa-2x " style="color:#D32B2B"></i>' ; }
+                                                echo ' <i class="fa fa-circle fa-3x " style="color:#D32B2B"></i>' ; }
                                             ?>
                                         </td>
                                         <td>
