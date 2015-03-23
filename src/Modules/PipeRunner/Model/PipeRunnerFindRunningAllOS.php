@@ -67,8 +67,8 @@ class PipeRunnerFindRunningAllOS extends Base {
         $pids = substr($line, $pidstart, ($pidend - $pidstart));
 
         $ridstart = strpos($line, "--run-id=")+9;
-        $ridend = strpos($line, " ", $ridstart);
-        $rids = substr($line, $ridstart, ($ridend - $ridstart));
+        //$ridend = strpos($line, " ", $ridstart);
+        $rids = substr($line, $ridstart ); //, ($ridend - $ridstart));
 
         $brsstart = strpos($line, "--build-request-source=")+23;
         $brsend = strpos($line, " ", $brsstart);

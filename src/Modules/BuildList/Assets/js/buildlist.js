@@ -33,12 +33,12 @@ function setBuildList(data) {
         for (index = 0; index < data.length; index++) {
             $('#blRow_'+data[index].item).addClass("runningBuildRow");
             ht += '<div class="runningBuild">' ;
-            ht += "  <p>Pipeline "+data[index].item+"</p>" ;
-            ht += "  <p>Pipedir "+data[index].pipedir+"</p>" ;
-            ht += "  <p>PID "+data[index].pid+"</p>" ;
-            ht += "  <p>Source "+data[index].brs+"</p>" ;
-            ht += "  <p>Run ID "+data[index].runid+"</p>" ;
-            ht += "  <p>User "+data[index].runuser+"</p>" ;
+            ht += "  <p><strong>Pipeline:</strong> "+data[index].item+"</p>" ;
+            ht += "  <p><strong>Pipedir:</strong> "+data[index].pipedir+"</p>" ;
+            ht += "  <p><strong>PID:</strong> "+data[index].pid+"</p>" ;
+            ht += "  <p><strong>Source:</strong> "+data[index].brs+"</p>" ;
+            ht += "  <p><strong>Run ID:</strong> "+data[index].runid+"</p>" ;
+            ht += "  <p><strong>User:</strong> "+data[index].runuser+"</p>" ;
             ht += "</div>" ; }
         $('#runningBuilds').html(ht); }
 }
