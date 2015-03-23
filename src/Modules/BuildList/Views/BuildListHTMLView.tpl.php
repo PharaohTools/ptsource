@@ -3,7 +3,7 @@
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav in" id="side-menu">
                 <li class="sidebar-search">
-                    <div class="input-group custom-search-form">
+                    <div class="input-group custom-search-form  hvr-bounce-in">
                         <input type="text" class="form-control" placeholder="Search...">
                             <span class="input-group-btn">
                                 <button class="btn btn-default" type="button">
@@ -14,33 +14,33 @@
                     <!-- /input-group -->
                 </li>
                 <li>
-                    <a href="/index.php?control=Index&action=show" ><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                    <a href="/index.php?control=Index&action=show" class=" hvr-bounce-in"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                 </li>
                 <li>
-                    <a href="/index.php?control=ApplicationConfigure&action=show">
+                    <a href="/index.php?control=ApplicationConfigure&action=show" class=" hvr-bounce-in">
                         <i class="fa fa-cogs fa-fw"></i> Configure PTBuild<span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level collapse">
                         <li>
-                            <a href="/index.php?control=ApplicationConfigure&action=show">Application</a>
+                            <a href="/index.php?control=ApplicationConfigure&action=show" class=" hvr-curl-bottom-right">Application</a>
                         </li>
                         <li>
-                            <a href="/index.php?control=UserManager&action=show">Users</a>
+                            <a href="/index.php?control=UserManager&action=show" class=" hvr-curl-bottom-right">Users</a>
                         </li>
                         <li>
-                            <a href="/index.php?control=ModuleManager&action=show">Modules</a>
+                            <a href="/index.php?control=ModuleManager&action=show" class=" hvr-curl-bottom-right">Modules</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>
                 <li>
-                    <a href="/index.php?control=BuildConfigure&action=new"><i class="fa fa-edit fa-fw"></i> New Pipeline</a>
+                    <a href="/index.php?control=BuildConfigure&action=new"class=" hvr-bounce-in"><i class="fa fa-edit fa-fw hvr-bounce-in"></i> New Pipeline</a>
                 </li>
                 <li>
-                    <a href="/index.php?control=BuildList&action=show" class="active"><i class="fa fa-bars fa-fw"></i> All Pipelines</a>
+                    <a href="/index.php?control=BuildList&action=show " class="active  hvr-bounce-in"><i class="fa fa-bars fa-fw hvr-bounce-in"></i> All Pipelines</a>
                 </li>
                 <li>
-                    <a href="/index.php?control=Monitors&action=DefaultHistory"><i class="fa fa-history fa-fw"></i> History<span class="fa arrow"></span></a>
+                    <a href="/index.php?control=Monitors&action=DefaultHistory" class=" hvr-bounce-in"><i class="fa fa-history fa-fw hvr-bounce-in"></i> History<span class="fa arrow"></span></a>
                 </li>
             </ul>
         </div>

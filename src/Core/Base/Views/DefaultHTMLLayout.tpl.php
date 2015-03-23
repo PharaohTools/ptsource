@@ -9,6 +9,7 @@
 		<link rel="icon" href="/index.php?control=AssetLoader&action=show&module=PostInput&type=image&asset=favicon.ico">
 
 		<title>PTBuild - Pharaoh Tools</title>
+		
 
         <script src="/index.php?control=AssetLoader&action=show&module=PostInput&type=js&asset=jquery.min.js"></script>
         <script src="/index.php?control=AssetLoader&action=show&module=PostInput&type=js&asset=jquery-ui.min.js"></script>
@@ -82,18 +83,18 @@
 					</button>
 					<a class="navbar-" href="/index.php?control=Index&action=show">
 						<figure class="rollover">
-                        <img src="/index.php?control=AssetLoader&action=show&module=PostInput&type=image&asset=5.png" class="navbar-img hvr-bounce-in" style="height: 60px;padding: 5px;" />
-                        <span class="title hvr-bounce-in">PTBuild</span>
+                        <img src="/index.php?control=AssetLoader&action=show&module=PostInput&type=image&asset=5.png" class="navbar-img hvr-grow-shadow" style="height: 60px;padding: 5px;" />
+                        <span class="title hvr-grow-shadow">PTBuild</span>
                     </a>
 				</div>
 				<!-- /.navbar-header -->
 				<ul class="nav navbar-top-links navbar-right">
 					
-                <li class="dropdown">
+                <li class="dropdown hvr-hang">
                 	
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     	
-                        <i class="fa fa-bell fa-fw hvr-buzz" id="bell"></i>  <i class="fa fa-caret-down hvr-buzz" id="caret"></i>
+                        <i class="fa fa-bell fa-fw " id="bell"></i>  <i class="fa fa-caret-down " id="caret"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-alerts">
                         <li>
@@ -116,21 +117,21 @@
                     <!-- /.dropdown-alerts --
                 </li>
                 <!-- /.dropdown -->
-                <li class="dropdown">
+                <li class="dropdown  hvr-hang">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw" id="bell"></i>  <i class="fa fa-caret-down" id="caret"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        <li><a href="#" class=" hvr-grow-shadow"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        <li><a href="#" class=" hvr-grow-shadow"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
-                        <li><a href="/index.php?control=About&action=show"><i class="fa fa-help fa-fw"></i> About</a>
+                        <li><a href="/index.php?control=About&action=show" class=" hvr-grow-shadow"><i class="fa fa-help fa-fw"></i> About</a>
                         </li> 
                         <?php 
                         if($pageVars["route"]["action"] != "registration" && $pageVars["route"]["action"] != "login") { ?>
                         <li class="divider"></li>
-                        <li><a href="/index.php?control=Signup&action=logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="/index.php?control=Signup&action=logout" class=" hvr-grow-shadow"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li><?php } ?>
                     </ul>
                     <!-- /.dropdown-user -->

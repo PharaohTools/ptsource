@@ -3,7 +3,7 @@
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav in" id="side-menu">
                 <li class="sidebar-search">
-                    <div class="input-group custom-search-form">
+                    <div class="input-group custom-search-form hvr-bounce-in">
                         <input type="text" class="form-control" placeholder="Search...">
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="button">
@@ -14,24 +14,24 @@
                     <!-- /input-group -->
                 </li>
                 <li>
-                    <a href="/index.php?control=Index&action=show">
-                        <i class="fa fa-dashboard fa-fw"></i> Dashboard
+                    <a href="/index.php?control=Index&action=show" class=" hvr-bounce-in">
+                        <i class="fa fa-dashboard fa-fw hvr-bounce-in"></i> Dashboard
                     </a>
                 </li>
                 <?php
                 if ($pageVars["route"]["action"] !== "new") {
                 ?>
                 <li>
-                    <a href="/index.php?control=BuildHome&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
-                        <i class="fa fa-home"></i> Pipeline Home
+                    <a href="/index.php?control=BuildHome&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class=" hvr-bounce-in">
+                        <i class="fa fa-home hvr-bounce-in"></i> Pipeline Home
                     </a>
                 </li>
                 <?php
                 }
                 ?>
                 <li>
-                    <a href="/index.php?control=BuildList&action=show">
-                        <i class="fa fa-bars fa-fw"></i> All Pipelines
+                    <a href="/index.php?control=BuildList&action=show" class=" hvr-bounce-in">
+                        <i class="fa fa-bars fa-fw hvr-bounce-in"></i> All Pipelines
                     </a>
                 </li>
                 <?php
@@ -135,8 +135,8 @@
                         echo '<div class="form-group confSettingsSlideySection" id="slidey'.$one_config_slug.'">' ;
                         echo '  <div class="col-sm-12">' ;
                         echo '    <label for="config_'.$one_config_slug.'" class="control-label text-left">'.$one_config_slug.':</label>' ;
-                        echo '    <a class="fa fa-chevron-right slideyToggleIcon" id="slideyToggleIcon'.$one_config_slug.'"' ;
-                        echo ' onclick="toggleConfSetting(this, \'slidey'.$one_config_slug.'\')"></a>' ;
+                        echo '    <i class="fa fa-2x fa-toggle-off" id="slideyToggleIcon'.$one_config_slug.'"' ;
+                        echo ' onclick="toggleConfSetting(this, \'slidey'.$one_config_slug.'\')"></i>' ;
                         echo '    <a class="btn-info" id="slideyToggleIcon'.$one_config_slug.'"' ;
                         echo ' onclick="hideConfSetting(\'slidey'.$one_config_slug.'\')"></a>' ;
                         echo '  </div>' ;
@@ -256,7 +256,7 @@
                                 }
                             }
                             else {
-                                echo '      <textarea id="steps['.$hash.'][data]" name="steps['.$hash.'][data]" value="'.$one_build_step["data"].'" class="form-control">'.$one_build_step["data"].'</textarea>';
+                                echo '      <textarea id="steps['.$hash.'][data]" name="steps['.$hash.'][data]" class="form-control">'.$one_build_step["data"].'</textarea>';
                             }
                             echo '  </div>';
                             echo '   <div class="col-sm-12">'  ;
