@@ -152,12 +152,12 @@ class PollSCMLinuxUnix extends Base {
             $iString .= ' -i "'.$this->params["build-settings"]["PollSCM"]["git_privkey_path"].'" ' ;
             $gitc = "git-key-safe" ;}
 
-        $lsCommand = $gitc.' '.$iString.' ls-remote '.$repo.' '.$branch ;
+        $lsCommand = $gitc.' '.$iString.' ls-remote -h '.$repo.' '.$branch ;
         $all = self::executeAndOutput($lsCommand) ;
         $curSha = substr($all, 0, strpos($all, "refs")-1);
         $this->savePollSHAAndTimestamp($curSha);
         $this->lm->log ("Current remote commit is $curSha $all, $lsCommand, $curSha", $this->getModuleName() ) ;
-        if ($lastSha == $curSha) {
+        if ($lastSha == $curSha ) {
             if (isset($this->params["build-settings"][$mn]["scm_always_allow_web"]) &&
                 $this->params["build-settings"][$mn]["scm_always_allow_web"] =="on") {
                 if (isset($this->params["build-request-source"]) && $this->params["build-request-source"]=="web" ) {
@@ -189,7 +189,7 @@ class PollSCMLinuxUnix extends Base {
             $iString .= ' -i "'.$this->params["build-settings"]["PollSCM"]["git_privkey_path"].'" ' ;
             $gitc = "git-key-safe" ;}
 
-        $lsCommand = $gitc.' '.$iString.' ls-remote '.$repo.' '.$branch ;
+        $lsCommand = $gitc.' '.$iString.' ls-remote -h '.$repo.' '.$branch ;
         $all = self::executeAndLoad($lsCommand) ;
 
         $curSha = substr($all, 0, strpos($all, "refs")-1);
