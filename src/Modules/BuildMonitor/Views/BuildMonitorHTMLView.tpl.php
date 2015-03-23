@@ -3,7 +3,7 @@
 		<div class="sidebar-nav navbar-collapse">
 			<ul class="nav in" id="side-menu">
 				<li class="sidebar-search">
-					<div class="input-group custom-search-form">
+					<div class="input-group custom-search-form hvr-bounce-in">
 						<input type="text" class="form-control" placeholder="Search...">
 						<span class="input-group-btn">
 							<button class="btn btn-default" type="button">
@@ -13,49 +13,49 @@
 					</div>
 					 </li>
                 <li>
-                    <a href="/index.php?control=Index&amp;action=show">
-                        <i class="fa fa-dashboard"></i> Dashboard
+                    <a href="/index.php?control=Index&amp;action=show "class="hvr-bounce-in">
+                        <i class="fa fa-dashboard hvr-bounce-in"></i> Dashboard
                     </a>
                 </li>
                 <li>
-                    <a href="/index.php?control=BuildList&amp;action=show">
-                        <i class="fa fa-bars"></i> All Pipelines
+                    <a href="/index.php?control=BuildList&amp;action=show" class="hvr-bounce-in">
+                        <i class="fa fa-bars hvr-bounce-in"></i> All Pipelines
                     </a>
                 </li>
                 <li>
-                    <a href="index.php?control=BuildConfigure&action=show&item=<?php echo $pageVars["data"]["item"] ; ?>">
-                        <i class="fa fa-cog"></i> Configure
+                    <a href="index.php?control=BuildConfigure&action=show&item=<?php echo $pageVars["data"]["item"] ; ?>" class="hvr-bounce-in">
+                        <i class="fa fa-cog hvr-bounce-in"></i> Configure
                     </a>
                 </li>
                 
                 <li>
-                    <a href="index.php?control=Workspace&action=show&item=<?php echo $pageVars["data"]["item"] ; ?>">
-                        <i class="fa fa-folder-open-o"></i> Workspace
+                    <a href="index.php?control=Workspace&action=show&item=<?php echo $pageVars["data"]["item"] ; ?>" class="hvr-bounce-in">
+                        <i class="fa fa-folder-open-o hvr-bounce-in"></i> Workspace
                     </a>
                 </li>
                 <li>
-                    <a href="index.php?control=BuildMonitor&action=show&item=<?php echo $pageVars["data"]["item"] ; ?>">
-                        <i class="fa fa-bar-chart-o"></i> Monitors
+                    <a href="index.php?control=BuildMonitor&action=show&item=<?php echo $pageVars["data"]["item"] ; ?>" class="hvr-bounce-in">
+                        <i class="fa fa-bar-chart-o hvr-bounce-in"></i> Monitors
                     </a>
                 </li>
                 <li>
-                    <a href="index.php?control=BuildHome&action=changes&item=<?php echo $pageVars["data"]["item"] ; ?>">
-                        <i class="fa fa-exchange"></i> Changes
+                    <a href="index.php?control=BuildHome&action=changes&item=<?php echo $pageVars["data"]["item"] ; ?>" class="hvr-bounce-in">
+                        <i class="fa fa-exchange hvr-bounce-in"></i> Changes
                     </a>
                 </li>
                 <li>
-                    <a href="index.php?control=BuildHome&action=history&item=<?php echo $pageVars["data"]["item"] ; ?>">
-                        <i class="fa fa-history"></i> History <span class="badge"></span>
+                    <a href="index.php?control=BuildHome&action=history&item=<?php echo $pageVars["data"]["item"] ; ?>" class="hvr-bounce-in">
+                        <i class="fa fa-history hvr-bounce-in"></i> History <span class="badge"></span>
                     </a>
                 </li>
                 <li>
-                    <a href="index.php?control=BuildHome&action=delete&item=<?php echo $pageVars["data"]["item"] ; ?>">
-                        <i class="fa fa-trash"></i> Delete
+                    <a href="index.php?control=BuildHome&action=delete&item=<?php echo $pageVars["data"]["item"] ; ?>" class="hvr-bounce-in">
+                        <i class="fa fa-trash hvr-bounce-in"></i> Delete
                     </a>
                 </li>
                 <li>
-                    <a href="index.php?control=PipeRunner&action=start&item=<?php echo $pageVars["data"]["item"] ; ?>">
-                        <i class="fa fa-sign-in fa-fw"></i> Run Now
+                    <a href="index.php?control=PipeRunner&action=start&item=<?php echo $pageVars["data"]["item"] ; ?>" class="hvr-bounce-in">
+                        <i class="fa fa-sign-in fa-fw hvr-bounce-in"></i> Run Now
                     </a>
                 </li>
             </ul>

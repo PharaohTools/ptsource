@@ -3,7 +3,7 @@
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav in" id="side-menu">
                 <li class="sidebar-search">
-                    <div class="input-group custom-search-form">
+                    <div class="input-group custom-search-form hvr-bounce-in">
                         <input type="text" class="form-control" placeholder="Search...">
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="button">
@@ -14,52 +14,52 @@
                     <!-- /input-group -->
                 </li>
                 <li>
-                    <a href="/index.php?control=Index&action=show">
-                        <i class="fa fa-dashboard fa-fw"></i> Dashboard
+                    <a href="/index.php?control=Index&action=show" class=" hvr-bounce-in">
+                        <i class="fa fa-dashboard fa-fw hvr-bounce-in"></i> Dashboard
                     </a>
                 </li>
                 <?php
                 if ($pageVars["route"]["action"] !== "new") {
                 ?>
                 <li>
-                    <a href="/index.php?control=BuildHome&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
-                        <i class="fa fa-home"></i> Pipeline Home
+                    <a href="/index.php?control=BuildHome&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class=" hvr-bounce-in">
+                        <i class="fa fa-home hvr-bounce-in"></i> Pipeline Home
                     </a>
                 </li>
                 <?php
                 }
                 ?>
                 <li>
-                    <a href="/index.php?control=BuildList&action=show">
-                        <i class="fa fa-bars fa-fw"></i> All Pipelines
+                    <a href="/index.php?control=BuildList&action=show" class=" hvr-bounce-in">
+                        <i class="fa fa-bars fa-fw hvr-bounce-in"></i> All Pipelines
                     </a>
                 </li>
                 <?php
                 if ($pageVars["route"]["action"] !== "new") {
                 ?>
                 <li>
-                    <a href="/index.php?control=Workspace&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
-                        <i class="fa fa-folder-open-o"></i> Workspace
+                    <a href="/index.php?control=Workspace&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>"class=" hvr-bounce-in">
+                        <i class="fa fa-folder-open-o hvr-bounce-in"></i> Workspace
                     </a>
                 </li>
                 <li>
-                    <a href="index.php?control=BuildMonitor&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
-                        <i class="fa fa-bar-chart-o"></i> Monitors
+                    <a href="index.php?control=BuildMonitor&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>"class=" hvr-bounce-in">
+                        <i class="fa fa-bar-chart-o hvr-bounce-in"></i> Monitors
                     </a>
                 </li>
                 <li>
-                    <a href="/index.php?control=PipeRunner&action=history&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
-                        <i class="fa fa-history fa-fw"></i> History <span class="badge"><?php echo $pageVars["data"]["history_count"] ; ?></span>
+                    <a href="/index.php?control=PipeRunner&action=history&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>"class=" hvr-bounce-in">
+                        <i class="fa fa-history fa-fw hvr-bounce-in"></i> History <span class="badge"><?php echo $pageVars["data"]["history_count"] ; ?></span>
                     </a>
                 </li>
                 <li>
-                    <a href="/index.php?control=BuildHome&action=delete&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
-                        <i class="fa fa-trash fa-fw"></i> Delete
+                    <a href="/index.php?control=BuildHome&action=delete&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>"class=" hvr-bounce-in">
+                        <i class="fa fa-trash fa-fw hvr-bounce-in"></i> Delete
                     </a>
                 </li>
                 <li>
-                    <a href="/index.php?control=PipeRunner&action=start&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
-                        <i class="fa fa-sign-in fa-fw"></i> Run Now
+                    <a href="/index.php?control=PipeRunner&action=start&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>"class=" hvr-bounce-in">
+                        <i class="fa fa-sign-in fa-fw hvr-bounce-in"></i> Run Now
                     </a>
                 </li>
                 <?php
@@ -122,12 +122,18 @@
                             <textarea id="project-description" name="project-description" class="form-control"><?php echo $pageVars["data"]["pipeline"]["project-description"] ; ?></textarea>
                         </div>
                     </div>
+                    <hr>
 
                     <div class="form-group">
                         <div class="col-sm-12">
                             <h4>Module Settings</h4>
                         </div>
                     </div>
+                    
+                    <div class="form-group">
+                        <label for="project-slug" class="col-sm-1 control-label"></label>
+                        <div class="col-sm-10">
+                    
 
                     <?php
 
@@ -135,8 +141,8 @@
                         echo '<div class="form-group confSettingsSlideySection" id="slidey'.$one_config_slug.'">' ;
                         echo '  <div class="col-sm-12">' ;
                         echo '    <label for="config_'.$one_config_slug.'" class="control-label text-left">'.$one_config_slug.':</label>' ;
-                        echo '    <a class="fa fa-chevron-right slideyToggleIcon" id="slideyToggleIcon'.$one_config_slug.'"' ;
-                        echo ' onclick="toggleConfSetting(this, \'slidey'.$one_config_slug.'\')"></a>' ;
+                        echo '    <i class="fa fa-1x fa-toggle-off" id="slideyToggleIcon'.$one_config_slug.'"' ;
+                        echo ' onclick="toggleConfSetting(this, \'slidey'.$one_config_slug.'\')"></i>' ;
                         echo '    <a class="btn-info" id="slideyToggleIcon'.$one_config_slug.'"' ;
                         echo ' onclick="hideConfSetting(\'slidey'.$one_config_slug.'\')"></a>' ;
                         echo '  </div>' ;
@@ -162,7 +168,7 @@
                                     else {$onoff = "" ;}
                                     echo '  <div class="col-sm-12">' ;
                                     echo '      <label for="settings['.$one_config_slug.']['.$fieldSlug.']" class="control-label text-left">'.$fieldInfo["name"].':</label>' ;
-                                    echo '      <input name="settings['.$one_config_slug.']['.$fieldSlug.']" id="settings['.$one_config_slug.']['.$fieldSlug.']" type="checkbox" '.$onoff.' />' ;
+                                    echo '      <input name="settings['.$one_config_slug.']['.$fieldSlug.']" id="settings['.$one_config_slg.']['.$fieldSlug.']" type="checkbox" '.$onoff.' />' ;
                                     echo '  </div>' ;
                                     break ;
                                 case "text" :
@@ -192,7 +198,11 @@
                             echo '  </div>';}
                         echo '  </div>';
                         echo '</div>'; } ?>
+                    </div>
+                    <label for="project-slug" class="col-sm-1 control-label"></label>
+                </div>
 
+                               <hr>
                     <div class="form-group">
                         <div class="col-sm-10">
                             <h3>Build Steps</h3>
@@ -206,15 +216,18 @@
                             echo '<li class="form-group ui-state-default ui-sortable-handle" id="step'.$hash.'">' ;
                             echo '  <div class="col-sm-2">' ;
                             echo '    <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' ;
-                            echo '  </div>';
+                            echo '  </div><h3>'.$one_build_step["module"].'</h3>';
                             echo '  <div class="col-sm-10">' ;
                             echo '   <div class="col-sm-12">' ;
-                            echo '    <label for="steps['.$hash.'][data]" class="control-label text-left">'.$one_build_step["title"].'</label>' ;
+                            echo '    <!--<label for="steps['.$hash.'][data]" class="control-label text-left">'.$one_build_step["title"].'</label>' ;
                             echo '      <p><strong>Hash: </strong>'.$hash.'</p>';
                             echo '      <p><strong>Module: </strong>'.$one_build_step["module"].'</p>';
-                            echo '      <p><strong>Step Type: </strong>'.$one_build_step["steptype"].'</p>';
+                            echo '      <p><strong>Step Type: </strong>'.$one_build_step["steptype"].'</p>-->';
                             echo '      <input type="hidden" id="steps['.$hash.'][module]" name="steps['.$hash.'][module]" value="'.$one_build_step["module"].'" />';
                             echo '      <input type="hidden" id="steps['.$hash.'][steptype]" name="steps['.$hash.'][steptype]" value="'.$one_build_step["steptype"].'" />';
+							echo '  	<div>' ;
+                            echo ' 		<label for="'.$one_build_step["steptype"].'" class="col-sm-2 control-label text-left">'.$one_build_step["steptype"].'</label>';	
+                            echo '		<div class="col-sm-10">';		
                             if ($one_build_step["module"] == "ConditionalStepRunner" || $one_build_step["module"] == "Plugin") {
                                 foreach ($pageVars['data']['builders'][$one_build_step["module"]]['fields'][$one_build_step["steptype"]] as $data ) {
                                 	echo '      <label for="'.$data['name'].'">'.$data['name'].'</label>'; 
@@ -256,16 +269,20 @@
                                 }
                             }
                             else {
-                                echo '      <textarea id="steps['.$hash.'][data]" name="steps['.$hash.'][data]" value="'.$one_build_step["data"].'" class="form-control">'.$one_build_step["data"].'</textarea>';
+                                echo '      <textarea id="steps['.$hash.'][data]" name="steps['.$hash.'][data]" class="form-control">'.$one_build_step["data"].'</textarea>';
                             }
                             echo '  </div>';
-                            echo '   <div class="col-sm-12">'  ;
+                            echo '  </div>';
+                            echo '  </div>';
+							echo '  <div>' ;
+                            echo ' 		<label for="delete" class="col-sm-2 control-label text-left"></label>';	
+                            echo '   <div class="col-sm-10">'  ;
                             echo '  <a class="btn btn-warning" onclick="deleteStepField(\''.$hash.'\')">Delete Step</a>' ;
-
+                            echo '  </div>';
                             echo '  </div>';
                             echo '  </div>';
                             echo '</li>'; } ?>
-
+                                    
                     </ul> <!-- sortable end -->
 
                     <div class="form-group">

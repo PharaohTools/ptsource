@@ -37,10 +37,8 @@ class ShellLinuxUnix extends Base {
         $logging = $loggingFactory->getModel($this->params);
         if ( $step["steptype"] == "shelldata") {
             $logging->log("Running Shell from Data...", $this->getModuleName()) ;
-			$output = array();
-			$rc = -1;
-			exec($step["data"], $output, $rc);
-			foreach ($output as $val) { echo $val.'<br />'; }
+            putenv("WORKSPACE=/opt/ptbuild/pipes/pharaoh_tools_website_continuous_staging/");
+            $rc = $this->executeAsShell($step["data"]);
             return (intval($rc) === 0) ? true : false ; }
         else if ( $step["steptype"] == "shellscript") {
             $logging->log("Running Shell from Script...", $this->getModuleName()) ;

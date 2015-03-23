@@ -3,7 +3,7 @@
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav in" id="side-menu">
                 <li class="sidebar-search">
-                    <div class="input-group custom-search-form">
+                    <div class="input-group custom-search-form hvr-bounce-in">
                         <input type="text" class="form-control" placeholder="Search...">
                             <span class="input-group-btn">
                                 <button class="btn btn-default" type="button">
@@ -14,13 +14,14 @@
                     <!-- /input-group -->
                 </li>
                 <li>
-                    <a href="/index.php?control=Index&action=show" class="active"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                    <a href="/index.php?control=Index&action=show" class="active hvr-bounce-in"><i class="fa fa-dashboard fa-fw hvr-grow-shadow"></i> Dashboard</a>
                 </li>
             </ul>
         </div>
     </div>
 
-    <div class="col-md-9 col-sm-10" id="page-wrapper">
+    <div class="col-lg-9">
+                    <div class="well well-lg">
             <div class="row clearfix no-margin">
                 <h3><a class="lg-anchor text-light" href=""> PTBuild - The Builder, Pharaoh Tools
                         <i style="font-size: 18px;" class="fa fa-chevron-right"></i>

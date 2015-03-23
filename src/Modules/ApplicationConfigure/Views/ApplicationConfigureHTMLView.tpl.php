@@ -2,8 +2,8 @@
     <div class="navbar-default col-sm-2 sidebar" role="navigation">
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav in" id="side-menu">
-                <li class="sidebar-search">
-                    <div class="input-group custom-search-form">
+                <li class="sidebar-search  ">
+                    <div class="input-group custom-search-form  hvr-bounce-in">
                         <input type="text" class="form-control" placeholder="Search...">
                     <span class="input-group-btn">
                         <button class="btn btn-default" type="button">
@@ -14,22 +14,22 @@
                     <!-- /input-group -->
                 </li>
                 <li>
-                    <a href="/index.php?control=Index&action=show">
-                        <i class="fa fa-dashboard fa-fw"></i> Dashboard
+                    <a href="/index.php?control=Index&action=show" class=" hvr-bounce-in">
+                        <i class="fa fa-dashboard fa-fw hvr-bounce-in"></i> Dashboard
                     </a>
                 </li>
                <li>
-                    <a href="/index.php?control=ApplicationConfigure&action=show">
-                        <i class="fa fa-cogs fa-fw"></i> Configure PTBuild</a>
+                    <a href="/index.php?control=ApplicationConfigure&action=show"class=" active hvr-bounce-in">
+                        <i class="fa fa-cogs fa-fw hvr-bounce-in"></i> Configure PTBuild</a>
                 </li>
                 <li>
-                    <a href="/index.php?control=UserManager&action=show">
-                        <i class="fa fa-group"></i> User Manager
+                    <a href="/index.php?control=UserManager&action=show"class=" hvr-bounce-in">
+                        <i class="fa fa-group hvr-bounce-in"></i> User Manager
                     </a>
                 </li>
                 <li>
-                    <a href="/index.php?control=ModuleManager&action=show">
-                        <i class="fa fa-suitcase"></i> Module Manager
+                    <a href="/index.php?control=ModuleManager&action=show"class=" hvr-bounce-in">
+                        <i class="fa fa-suitcase hvr-bounce-in"></i> Module Manager
                     </a>
                 </li>
             </ul>
@@ -61,7 +61,7 @@
                                 echo '  </div>';
                                 foreach ($one_mod_confs as $one_config_slug => $one_conf_tails) {
                                     echo '<div class="form-group">' ;
-                                    echo '  <label for="'.$one_config_slug.'" class="col-sm-6 control-label text-left">'.$one_conf_tails["label"].'</label>' ;
+                                    echo '  <label for="'.$one_config_slug.'" class="col-sm-4 control-label text-left">'.$one_conf_tails["label"].'</label>' ;
                                     echo '  <div class="col-sm-4">' ;
                                     switch ($one_conf_tails["type"]) {
                                         case "boolean" :
@@ -100,9 +100,9 @@
 
                     <div class="form-group">
                         <div class="col-sm-12">
-                            <button type="submit" class="btn btn-success">Save Configuration</button>
-                            <button type="submit" class="btn btn-primary">Clear</button>
-                            <button type="submit" class="btn btn-warning">Use Defaults</button>
+                            <button type="submit" class="btn btn-success hvr-box-shadow-outset">Save Configuration</button>
+                            <button type="submit" class="btn btn-primary hvr-box-shadow-outset">Clear</button>
+                            <button type="submit" class="btn btn-warning hvr-box-shadow-outset">Use Defaults</button>
                         </div>
                     </div>
 

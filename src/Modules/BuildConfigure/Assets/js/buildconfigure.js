@@ -31,12 +31,12 @@ function toggleConfSetting(toggler, element) {
     sel = $("#"+element) ;
     sliderFields = sel.find(".sliderFields");
     if (sliderFields.css('display') == 'none') {
-        $(toggler).removeClass("fa fa-chevron-bottom");
-        $(toggler).addClass("fa fa-chevron-right");
+        $(toggler).removeClass("fa fa-toggle-off");
+        $(toggler).addClass("fa fa-toggle-on");
         sliderFields.slideDown(); }
     else {
-        $(toggler).removeClass("fa fa-chevron-right");
-        $(toggler).addClass("fa fa-chevron-bottom");
+        $(toggler).removeClass("fa fa-toggle-on");
+        $(toggler).addClass("fa fa-toggle-off");
         sliderFields.slideUp();}
 }
 
@@ -64,12 +64,16 @@ function displayStepField() {
         html  = '<li class="form-group ui-state-default ui-sortable-handle" id="step'+hash+'">' ;
         html += '  <div class="col-sm-2">' ;
         html += '    <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' ;
-        html += '  </div>';
+        html += '  </div><h3>'+module+'</h3>';
         html += '  <div class="col-sm-10">' ;
         html += '   <div class="col-sm-12">' ;
         html += '    <h4>'+module+'</h4>' ;
         html += '    <input type="hidden" id="steps['+hash+'][module]" name="steps['+hash+'][module]" value="'+module+'" />' ;
         html += '    <input type="hidden" id="steps['+hash+'][steptype]" name="steps['+hash+'][steptype]" value="'+steptype+'" />' ;
+        html += '   <div>' ;
+        html += ' 	<label for="'+steptype+'" class="col-sm-2 control-label text-left">'+steptype+'</label>';	
+        html +=  '	<div class="col-sm-10">';		
+
         var i; console.log(field);
         for (i = 0; i < field.length; i++) {
         	html += '    <h5>'+field[i].name+'</h5>' ;
@@ -105,8 +109,13 @@ function displayStepField() {
             }
         }
         html += '  </div>' ;
+        html += '  </div>';
+        html += '  </div>';
+        html += '  <div>';
+        html += ' 	<label for="delete" class="col-sm-2 control-label text-left"></label>';	
         html += '   <div class="col-sm-12">' ;
         html += '    <a class="btn btn-warning" onclick="deleteStepField('+hash+')">Delete Step</a>' ;
+        html += '  </div>' ;
         html += '  </div>' ;
         html += '  </div>' ;
         html += ' </li>';
@@ -123,9 +132,11 @@ function displayStepField() {
         html += '    <input type="hidden" id="steps['+hash+'][module]" name="steps['+hash+'][module]" value="'+module+'" />' ;
         html += '    <input type="hidden" id="steps['+hash+'][steptype]" name="steps['+hash+'][steptype]" value="'+steptype+'" />' ;
         html += '    <textarea id="steps['+hash+']['+field.slug+']"' ;
-        html += ' name="steps['+hash+']['+field.slug+']" >' ;
+        html += ' name="steps['+hash+']['+field.slug+']" class="form-control" >' ;
         html += '    </textarea>' ;
         html += '  </div>' ;
+        html += '  </div>';
+        html += ' 	<label for="delete" class="col-sm-2 control-label text-left"></label>';	
         html += '   <div class="col-sm-12">' ;
         html += '    <a class="btn btn-warning" onclick="deleteStepField('+hash+')">Delete Step</a>' ;
         html += '  </div>' ;
@@ -142,9 +153,11 @@ function displayStepField() {
         html += '  <h4>'+field.name+'</h4>' ;
         html += '  <input type="hidden" id="steps['+hash+'][module]" name="steps['+hash+'][module]" value="'+module+'" />' ;
         html += '  <input type="hidden" id="steps['+hash+'][steptype]" name="steps['+hash+'][steptype]" value="'+steptype+'" />' ;
-        html += "  <input type='text' id='steps[" +'"'+hash+'"'+ ']["'+field.slug+'"]'+"' name='steps[" +'"'+hash+'"'+ '"]["'+field.slug+'"]'+' />' ;
+        html += "  <input type='text' id='steps[" +'"'+hash+'"'+ ']["'+field.slug+'"]'+"' name='steps[" +'"'+hash+'"'+ '"]["'+field.slug+'"]'+'  class="form-control"/>' ;
         html += '  <a class="btn btn-warning" onclick="deleteStepField('+hash+')">Delete Step</a>' ;
         html += '  </div>' ;
+        html += '  </div>';
+        html += ' 	<label for="delete" class="col-sm-2 control-label text-left"></label>';	
         html += '   <div class="col-sm-12">' ;
         html += '    <a class="btn btn-warning" onclick="deleteStepField('+hash+')">Delete Step</a>' ;
         html += '  </div>' ;
@@ -163,6 +176,8 @@ function displayStepField() {
         html += '  <input type="hidden" id="steps['+hash+'][steptype]" name="steps['+hash+'][steptype]" value="'+steptype+'" />' ;
         html += '  <input type="checkbox" id="steps['+hash+'][data]" name="steps['+hash+'][data]" />' ;
         html += '  </div>' ;
+        html += '  </div>';
+        html += ' 	<label for="delete" class="col-sm-2 control-label text-left"></label>';	
         html += '   <div class="col-sm-12">' ;
         html += '    <a class="btn btn-warning" onclick="deleteStepField('+hash+')">Delete Step</a>' ;
         html += '  </div>' ;

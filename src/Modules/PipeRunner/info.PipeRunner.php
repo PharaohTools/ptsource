@@ -13,7 +13,8 @@ class PipeRunnerInfo extends PTConfigureBase {
     }
 
     public function routesAvailable() {
-      return array( "PipeRunner" => array("start", "apistart", "service", "pipestatus", "show", "child", "history", "summary") );
+      return array( "PipeRunner" => array("start", "apistart", "service", "pipestatus", "show", "child", "history",
+          "summary", "findrunning") );
     }
 
     public function routeAliases() {

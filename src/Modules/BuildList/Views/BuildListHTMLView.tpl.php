@@ -3,7 +3,7 @@
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav in" id="side-menu">
                 <li class="sidebar-search">
-                    <div class="input-group custom-search-form">
+                    <div class="input-group custom-search-form  hvr-bounce-in">
                         <input type="text" class="form-control" placeholder="Search...">
                             <span class="input-group-btn">
                                 <button class="btn btn-default" type="button">
@@ -14,36 +14,44 @@
                     <!-- /input-group -->
                 </li>
                 <li>
-                    <a href="/index.php?control=Index&action=show" ><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                    <a href="/index.php?control=Index&action=show" class=" hvr-bounce-in"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                 </li>
                 <li>
-                    <a href="/index.php?control=ApplicationConfigure&action=show">
+                    <a href="/index.php?control=ApplicationConfigure&action=show" class=" hvr-bounce-in">
                         <i class="fa fa-cogs fa-fw"></i> Configure PTBuild<span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level collapse">
                         <li>
-                            <a href="/index.php?control=ApplicationConfigure&action=show">Application</a>
+                            <a href="/index.php?control=ApplicationConfigure&action=show" class=" hvr-curl-bottom-right">Application</a>
                         </li>
                         <li>
-                            <a href="/index.php?control=UserManager&action=show">Users</a>
+                            <a href="/index.php?control=UserManager&action=show" class=" hvr-curl-bottom-right">Users</a>
                         </li>
                         <li>
-                            <a href="/index.php?control=ModuleManager&action=show">Modules</a>
+                            <a href="/index.php?control=ModuleManager&action=show" class=" hvr-curl-bottom-right">Modules</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>
                 <li>
-                    <a href="/index.php?control=BuildConfigure&action=new"><i class="fa fa-edit fa-fw"></i> New Pipeline</a>
+                    <a href="/index.php?control=BuildConfigure&action=new"class=" hvr-bounce-in"><i class="fa fa-edit fa-fw hvr-bounce-in"></i> New Pipeline</a>
                 </li>
                 <li>
-                    <a href="/index.php?control=BuildList&action=show" class="active"><i class="fa fa-bars fa-fw"></i> All Pipelines</a>
+                    <a href="/index.php?control=BuildList&action=show " class="active  hvr-bounce-in"><i class="fa fa-bars fa-fw hvr-bounce-in"></i> All Pipelines</a>
                 </li>
                 <li>
-                    <a href="/index.php?control=Monitors&action=DefaultHistory"><i class="fa fa-history fa-fw"></i> History<span class="fa arrow"></span></a>
+                    <a href="/index.php?control=Monitors&action=DefaultHistory" class=" hvr-bounce-in"><i class="fa fa-history fa-fw hvr-bounce-in"></i> History<span class="fa arrow"></span></a>
                 </li>
             </ul>
         </div>
+
+        <div class="navbar-collapse">
+            <h4>Running Builds</h4>
+            <div id="runningBuilds">
+                <p>No builds currently being executed</p>
+            </div>
+        </div>
+
     </div>
 
     <div class="col-lg-9">
@@ -71,10 +79,10 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="all">
-                        <div class="table-responsive">
+                        <div class="table-responsive" ">
                             <table class="table table-bordered table-custom">
                                 <thead>
-                                <tr>
+                                <tr style="background-color: fff">
                                     <th>#</th>
                                     <th>Pipeline</th>
                                     <th>Run Now</th>
@@ -94,21 +102,21 @@
 
                                 $i = 1;
                                 foreach ($pageVars["data"]["pipelines"] as $pipelineSlug => $pipelineDetails) { ?>
-                                    <tr>
+                                    <tr class="buildRow" id="blRow_<?php echo $pipelineSlug; ?>">
                                         <th scope="row"><?php echo $i ; ?></th>
                                         <td><a href="/index.php?control=BuildHome&action=show&item=<?php echo $pipelineSlug ; ?>"><?php echo $pipelineDetails["project-name"] ; ?></a></td>
                                         <td>
                                             <?php
                                             echo '<a href="/index.php?control=PipeRunner&action=start&item='.$pipelineDetails["project-slug"].'">';
-                                            echo '<img class="listImage" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=run.png" /></a>' ;
+                                            echo '<i class="fa fa-play fa-2x hvr-grow-shadow" style="color:green"></i></a>' ;
                                             ?>
                                         </td>
                                         <td>
                                             <?php
                                             if ($pipelineDetails["last_status"] === true) {
-                                                echo '<img class="listImage listImageWide" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=green-ball.png" />' ; }
+                                                echo '<i class="fa fa-circle fa-2x " style="color:green"></i>' ; }
                                             else {
-                                                echo '<img class="listImage listImageWide" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=red-ball.png" />' ; }
+                                                echo ' <i class="fa fa-circle fa-2x " style="color:#D32B2B"></i>' ; }
                                             ?>
                                         </td>
                                         <td>
@@ -174,6 +182,4 @@
     </div>
 </div><!-- /.container -->
 <link rel="stylesheet" type="text/css" href="/index.php?control=AssetLoader&action=show&module=BuildList&type=css&asset=buildlist.css">
-
-
-
+<script type="text/javascript" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=js&asset=buildlist.js"></script>
