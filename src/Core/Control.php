@@ -8,7 +8,7 @@ class Control {
     	$userPermissionClass = '\\Controller\\UserPermission';
 		$userPermissionControlObject = new $userPermissionClass;
 		session_start();
-		if (!in_array($pageVars['route']['control'], array('Signup', 'OAuth', 'LDAP', 'AssetLoader'))) {
+		if (!in_array($pageVars['route']['control'], array('Signup', 'OAuth', 'LDAP', 'AssetLoader', 'PipeRunner'))) {
 			if ($_SESSION["login-status"] === TRUE) {
 				if ($userPermissionControlObject->execute($pageVars) == false) {
 					$control = 'index';
