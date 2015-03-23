@@ -98,7 +98,7 @@ class PollSCMLinuxUnix extends Base {
 
     private function doBuildSCMPollingDisabled() {
         $this->lm->log ("SCM Polling Disabled, ignoring...", $this->getModuleName() ) ;
-        return false ;
+        return true ;
     }
 
     private function doBuildSCMPollingEnabled() {
@@ -141,13 +141,23 @@ class PollSCMLinuxUnix extends Base {
         $mn = $this->getModuleName() ;
         $lastSha = (isset($this->params["build-settings"][$mn]["last_sha"])) ? $this->params["build-settings"][$mn]["last_sha"] : null ;
         $repo = $this->params["build-settings"][$mn]["git_repository_url"] ;
+        $branch = $this->params["build-settings"][$mn]["git_branch"] ;
         $this->lm->log ("Last commit built was $lastSha", $this->getModuleName() ) ;
-        $lsCommand = 'git ls-remote '.$repo ;
-        $all = self::executeAndLoad($lsCommand) ;
-        $curSha = substr($all, 0, strpos($all, "HEAD")-1);
+
+        $iString = "" ;
+        $gitc = "git" ;
+        if (isset($this->params["build-settings"]["PollSCM"]["git_privkey_path"]) &&
+            $this->params["build-settings"]["PollSCM"]["git_privkey_path"] != "")  {
+            $this->lm->log("Adding Private Key for cloning Git", $this->getModuleName()) ;
+            $iString .= ' -i "'.$this->params["build-settings"]["PollSCM"]["git_privkey_path"].'" ' ;
+            $gitc = "git-key-safe" ;}
+
+        $lsCommand = $gitc.' '.$iString.' ls-remote -h '.$repo.' '.$branch ;
+        $all = self::executeAndOutput($lsCommand) ;
+        $curSha = substr($all, 0, strpos($all, "refs")-1);
         $this->savePollSHAAndTimestamp($curSha);
-        $this->lm->log ("Current remote commit is $curSha", $this->getModuleName() ) ;
-        if ($lastSha == $curSha) {
+        $this->lm->log ("Current remote commit is $curSha $all, $lsCommand, $curSha", $this->getModuleName() ) ;
+        if ($lastSha == $curSha ) {
             if (isset($this->params["build-settings"][$mn]["scm_always_allow_web"]) &&
                 $this->params["build-settings"][$mn]["scm_always_allow_web"] =="on") {
                 if (isset($this->params["build-request-source"]) && $this->params["build-request-source"]=="web" ) {
@@ -168,22 +178,40 @@ class PollSCMLinuxUnix extends Base {
     private function doNoLastCommitStored() {
         $mn = $this->getModuleName() ;
         $repo = $this->params["build-settings"][$mn]["git_repository_url"] ;
+        $branch = $this->params["build-settings"][$mn]["git_branch"] ;
         $this->lm->log ("No last commit stored, assuming all remote changes", $this->getModuleName() ) ;
-        $lsCommand = 'git ls-remote '.$repo ;
+
+        $iString = "" ;
+        $gitc = "git" ;
+        if (isset($this->params["build-settings"]["PollSCM"]["git_privkey_path"]) &&
+            $this->params["build-settings"]["PollSCM"]["git_privkey_path"] != "")  {
+            $this->lm->log("Adding Private Key for cloning Git", $this->getModuleName()) ;
+            $iString .= ' -i "'.$this->params["build-settings"]["PollSCM"]["git_privkey_path"].'" ' ;
+            $gitc = "git-key-safe" ;}
+
+        $lsCommand = $gitc.' '.$iString.' ls-remote -h '.$repo.' '.$branch ;
         $all = self::executeAndLoad($lsCommand) ;
-        $curSha = substr($all, 0, strpos($all, "HEAD")-1);
+
+        $curSha = substr($all, 0, strpos($all, "refs")-1);
+        $this->lm->log("dump $all, $lsCommand, $curSha", $this->getModuleName()) ;
         $this->savePollSHAAndTimestamp($curSha);
         $result = true ;
         return $result ;
     }
 
     private function savePollSHAAndTimestamp($curSha) {
-        $this->lm->log ("Storing current remote commit ID $curSha", $this->getModuleName() ) ;
+        if ($curSha !== "") {
+
+            $this->lm->log ("Storing current remote commit ID $curSha", $this->getModuleName() ) ;
+            $this->params["build-settings"]["PollSCM"]["last_sha"] = $curSha ;
+        } else {
+            $this->lm->log ("Incorrect SHA not storing : $curSha", $this->getModuleName() ) ;
+
+        }
         $time = time();
         $this->lm->log ("Storing last poll timestamp $time", $this->getModuleName() ) ;
         $pipelineFactory = new \Model\Pipeline() ;
         $pipelineSaver = $pipelineFactory->getModel($this->params, "PipelineSaver");
-        $this->params["build-settings"]["PollSCM"]["last_sha"] = $curSha ;
         $this->params["build-settings"]["PollSCM"]["last_poll_timestamp"] = $time ;
         $pipelineSaver->savePipeline(array("type" => "Settings", "data" => $this->params["build-settings"] ));
         $result = true ;

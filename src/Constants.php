@@ -15,8 +15,8 @@ if (in_array(PHP_OS, array("Windows", "WINNT"))) {
     exec($command, $outputArray);
     define('VBOXMGCOMM', "\"{$outputArray[0]}\" ") ;
     define('PFILESDIR', $sd."\\PharaohTools\\") ;
-    define('CLEOCOMM', PFILESDIR.'ptconfigure.cmd"') ;
-    define('DAPPCOMM',  PFILESDIR."ptdeploy.cmd") ;
+    define('PTCCOMM', PFILESDIR.'ptconfigure.cmd"') ;
+    define('PTDCOMM',  PFILESDIR."ptdeploy.cmd") ;
     define('PHLCOMM',  PFILESDIR."phlagrant.cmd") ;
     define('PHRCOMM',  PFILESDIR."ptbuild.cmd") ;
     define('HORCOMM',  PFILESDIR."horus.cmd") ;
@@ -30,8 +30,8 @@ else if (in_array(PHP_OS, array("Linux", "Solaris", "FreeBSD", "OpenBSD", "Darwi
     define('DS', "/") ;
     define('VBOXMGCOMM', "vboxmanage ") ;
     define('PFILESDIR', "/opt/") ;
-    define('CLEOCOMM', "ptconfigure ") ;
-    define('DAPPCOMM', "ptdeploy ") ;
+    define('PTCCOMM', "ptconfigure ") ;
+    define('PTDCOMM', "ptdeploy ") ;
     define('PHLCOMM', "phlagrant") ;
     define('PHRCOMM', "ptbuild") ;
     define('HORCOMM', "horus") ;
