@@ -100,7 +100,7 @@
                                         <td>
                                             <?php
                                             echo '<a href="/index.php?control=PipeRunner&action=start&item='.$pipelineDetails["project-slug"].'">';
-                                            echo '<img class="listImage" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=run.png" /></a>' ;
+                                            echo '<i class="fa fa-play fa-2x hvr-icon-forward"></i></a>' ;
                                             ?>
                                         </td>
                                         <td>
