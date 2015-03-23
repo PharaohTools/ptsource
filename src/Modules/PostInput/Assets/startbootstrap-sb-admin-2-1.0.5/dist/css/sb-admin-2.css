@@ -391,6 +391,6 @@ input[type=radio], input[type=checkbox] {
 }
  .bg-primary {
   color: #fff;
-  background-color: #A6516D;
-  border-color: #242424;
+  background: -webkit-linear-gradient(360deg, #A6516D 70%, rgb(198, 145, 163));
+  
 }
