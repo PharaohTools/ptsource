@@ -14,6 +14,55 @@ class ScheduledBuildAllOS extends Base {
 	// Model Group
 	public $modelGroup = array("Default");
 
+    public function getSettingTypes() {
+        return array_keys($this->getSettingFormFields());
+    }
+
+    public function getSettingFormFields() {
+        $ff = array(
+            "scheduled_build_enabled" =>
+            array(
+                "type" => "boolean",
+                "optional" => true,
+                "name" => "Enable running builds via schedule?"
+            ),
+            "cron_string" =>
+            array(
+                "type" => "textarea",
+                "optional" => true,
+                "name" => "Crontab Values"
+            ),
+        );
+        return $ff ;
+    }
+
+    public function getEventNames() {
+        return array_keys($this->getEvents());
+    }
+
+    public function getEvents() {
+        $ff = array(
+            "prepareBuild" => array(
+                "pollSCMChanges",
+            ),
+        );
+        return $ff ;
+    }
+
+    public function pollSCMChanges() {
+        $loggingFactory = new \Model\Logging();
+        $this->params["echo-log"] = true ;
+        $this->params["php-log"] = true ;
+        $this->pipeline = $this->getPipeline();
+        $this->params["build-settings"] = $this->pipeline["settings"];
+        $this->params["app-settings"]["app_config"] = \Model\AppConfig::getAppVariable("app_config");
+        $this->params["app-settings"]["mod_config"] = \Model\AppConfig::getAppVariable("mod_config");
+        $this->lm = $loggingFactory->getModel($this->params);
+        if ($this->checkBuildSCMPollingEnabled()) {
+            return $this->doBuildSCMPollingEnabled() ; }
+        else {
+            return $this->doBuildSCMPollingDisabled() ; }
+    }
 
     public function getData() {
         $ret["scheduled"] = $this->getPipelinesRequiringExecution();

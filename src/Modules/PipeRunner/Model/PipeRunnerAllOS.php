@@ -48,13 +48,11 @@ class PipeRunnerAllOS extends Base {
 			$defaults = json_decode($defaults, true);
 		if ($defaults["parameter-status"] == "on") {
 			if (!$_POST["parameter-input"]) {
-				return true;
-			} else {
+				return true; }
+            else {
 				$defaults["parameter-input"] = $_POST["parameter-input"];
 				file_put_contents($file, json_encode($defaults));
-				return false;
-			}
-		}
+				return false; } }
 		return false;
 	}
 

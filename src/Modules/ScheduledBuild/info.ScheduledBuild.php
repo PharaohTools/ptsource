@@ -16,9 +16,14 @@ class ScheduledBuildInfo extends PTConfigureBase {
       return array( "ScheduledBuild" => array("run-cycle", "help") );
     }
 
+    public function buildSettings() {
+        return array("scheduled_build_enabled", "cron_string");
+    }
+
     public function routeAliases() {
       return array("ScheduledBuild"=>"ScheduledBuild",
           "scheduledbuild"=>"ScheduledBuild",
+          "scheduled-build"=>"ScheduledBuild",
           "scheduledBuild"=>"ScheduledBuild");
     }
 
