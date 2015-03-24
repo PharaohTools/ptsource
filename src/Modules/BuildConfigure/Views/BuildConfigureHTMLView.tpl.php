@@ -213,7 +213,7 @@
 
                     <?php
                         foreach ($pageVars["data"]["pipeline"]["steps"] as $hash => $one_build_step) {
-                            echo '<li class="form-group  bg-primary" id="step'.$hash.'">' ;
+                            echo '<li class="form-group  bg-primary " id="step'.$hash.'">' ;
                             echo '  <div class=" col-sm-2 hvr-grow">' ;
                             echo '    <span class="fa fa-arrows-v fa-1x"></span>' ;
                             echo '  </div><h3>'.$one_build_step["module"].'</h3>';

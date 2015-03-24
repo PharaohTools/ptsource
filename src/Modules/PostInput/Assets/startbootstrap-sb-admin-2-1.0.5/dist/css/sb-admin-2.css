@@ -394,3 +394,6 @@ input[type=radio], input[type=checkbox] {
   background: -webkit-linear-gradient(360deg, #A6516D 70%, rgb(198, 145, 163));
   
 }
+.runningBuildRow {
+    -webkit-filter: blur(5px) grayscale(50%);
+}
