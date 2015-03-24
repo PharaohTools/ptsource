@@ -129,6 +129,7 @@
 							}
 							?>
 							</td>
+							
 							<td>
 							<?php
 							if ($pipelineDetails["last_success"] != false) {
