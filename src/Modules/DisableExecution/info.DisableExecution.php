@@ -21,7 +21,7 @@ class DisableExecutionInfo extends PTConfigureBase {
     }
 
     public function events() {
-        return array("beforeSettings");
+        return array("prepareBuild");
     }
 
     public function configuration() {

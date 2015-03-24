@@ -35,7 +35,7 @@ class DisableExecutionLinuxUnix extends Base {
     }
 
     public function getEvents() {
-        $ff = array("beforeSettings" => array("disableBuildIfNeeded",),);
+        $ff = array("prepareBuild" => array("disableBuildIfNeeded",),);
         return $ff ;
     }
 
