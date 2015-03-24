@@ -69,7 +69,6 @@ class PipeRunnerAllOS extends Base {
             $eventRunner = $eventRunnerFactory->getModel($this->params) ;
             $ev = $eventRunner->eventRunner("prepareBuild") ;
             if ($ev == false) { return $this->failBuild() ; }
-            // @todo we need a pre-build event, so we can stop execution here if poll scm fails
 			// run pipe fork command
 			$run = $this -> saveRunPlaceHolder();
 			$this -> setRunStartTime($run);
