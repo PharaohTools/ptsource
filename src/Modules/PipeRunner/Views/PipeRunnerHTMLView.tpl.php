@@ -160,7 +160,7 @@
                                 <div class="text-center">
 
 
-                                    <button type="submit" class="btn btn-danger" id="end-now">End Now</button>
+                                    <button type="submit" class="btn btn-danger hvr-float-shadow" id="end-now">End Now</button>
                                 </div>
 
                             </div>
