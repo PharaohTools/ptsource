@@ -140,7 +140,7 @@ class GoogleCalendarLinuxUnix extends Base {
 }
    else
   {
-echo "googlecalendar not run";
+echo "googlecalendar not run\n";
 }
 
 	}
