@@ -43,13 +43,13 @@ class ScheduledBuildAllOS extends Base {
     public function getEvents() {
         $ff = array(
             "prepareBuild" => array(
-                "pollSCMChanges",
+                "checkBuildSchedule",
             ),
         );
         return $ff ;
     }
 
-    public function pollSCMChanges() {
+    public function checkBuildSchedule() {
         $loggingFactory = new \Model\Logging();
         $this->params["echo-log"] = true ;
         $this->params["php-log"] = true ;
@@ -58,10 +58,34 @@ class ScheduledBuildAllOS extends Base {
         $this->params["app-settings"]["app_config"] = \Model\AppConfig::getAppVariable("app_config");
         $this->params["app-settings"]["mod_config"] = \Model\AppConfig::getAppVariable("mod_config");
         $this->lm = $loggingFactory->getModel($this->params);
-        if ($this->checkBuildSCMPollingEnabled()) {
-            return $this->doBuildSCMPollingEnabled() ; }
+        if ($this->checkBuildScheduleEnabled()) {
+            return $this->doBuildScheduleEnabled() ; }
         else {
-            return $this->doBuildSCMPollingDisabled() ; }
+            return $this->doBuildScheduleDisabled() ; }
+    }
+
+    private function checkBuildScheduleEnabled() {
+        $mn = $this->getModuleName() ;
+        return ($this->params["build-settings"][$mn]["poll_scm_enabled"] == "on") ? true : false ;
+    }
+
+    private function doBuildScheduleDisabled() {
+        $this->lm->log ("Time Scheduled Builds Disabled, ignoring...", $this->getModuleName() ) ;
+        return true ;
+    }
+
+    private function doBuildScheduleEnabled() {
+        $mn = $this->getModuleName() ;
+        $this->lm->log ("Time Scheduled Builds Enabled for {$this->pipeline["project-name"]}, attempting...", $this->getModuleName() ) ;
+            try {
+                // @todo other scm types @kevellcorp do svn
+                $lastSha = (isset($this->params["build-settings"][$mn]["last_sha"])) ? $this->params["build-settings"][$mn]["last_sha"] : null ;
+                if (strlen($lastSha)>0) { $result = $this->doLastCommitStored() ; }
+                else { $result = $this->doNoLastCommitStored() ; }
+                return $result; }
+            catch (\Exception $e) {
+                $this->lm->log ("Error polling scm", $this->getModuleName() ) ;
+                return false; }
     }
 
     public function getData() {
@@ -97,12 +121,14 @@ class ScheduledBuildAllOS extends Base {
         return $psrxs;
     }
 
-    public function pipeRequiresExecution($pst) {
-        $cronString = $pst["settings"]["PollSCM"]["cron_string"] ;
+    // @todo we need to check multiple modules and return true if any are true, we should also
+    // @todo say which one of the mods is tru
+    public function pipeRequiresExecution($pst, $mod="ScheduledBuild") {
+        $cronString = $pst["settings"][$mod]["cron_string"] ;
         $cronString = rtrim($cronString) ;
         $cronString = ltrim($cronString) ;
-        $lastRun = (isset($pst["settings"]["PollSCM"]["last_scheduled"]))
-            ? $pst["settings"]["PollSCM"]["last_scheduled"]
+        $lastRun = (isset($pst["settings"][$mod]["last_scheduled"]))
+            ? $pst["settings"][$mod]["last_scheduled"]
             : 0 ;
         $cronParts = explode(" ", $cronString) ;
         $slots = array("minute", "hour", "dow", "dom", "month");
@@ -151,6 +177,9 @@ class ScheduledBuildAllOS extends Base {
             //@todo this should not be tied to only poll scm, so that we can cron/etc builds without polling
             if (isset($onePipeline["settings"]["PollSCM"]["poll_scm_enabled"]) &&
                 $onePipeline["settings"]["PollSCM"]["poll_scm_enabled"] == "on") {
+                $pst[] = $onePipeline ; }
+            if (isset($onePipeline["settings"]["ScheduledBuild"]["scheduled_build_enabled"]) &&
+                $onePipeline["settings"]["ScheduledBuild"]["scheduled_build_enabled"] == "on") {
                 $pst[] = $onePipeline ; } }
         return $pst;
     }
