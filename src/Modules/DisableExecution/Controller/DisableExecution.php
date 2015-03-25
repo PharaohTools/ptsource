@@ -2,7 +2,7 @@
 
 Namespace Controller ;
 
-class Shutdown extends Base {
+class DisableExecution extends Base {
 
     public function execute($pageVars) {
 
@@ -16,7 +16,7 @@ class Shutdown extends Base {
             $this->content["helpData"] = $helpModel->getHelpData($pageVars["route"]["control"]);
             return array ("type"=>"view", "view"=>"help", "pageVars"=>$this->content); }
 
-        $this->content["messages"][] = "Help is the only valid Shutdown Action";
+        $this->content["messages"][] = "Help is the only valid DisableExecution Action";
         return array ("type"=>"control", "control"=>"index", "pageVars"=>$this->content);
 
     }

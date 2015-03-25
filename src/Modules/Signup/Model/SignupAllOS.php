@@ -136,7 +136,7 @@ class SignupAllOS extends Base {
         else{
             fwrite($myfile, json_encode(array_merge($oldData, array($registrationData))));
             // @todo dont hardcode url?
-			$message = 'Hi <br /> <a href="http://www.ptbuild.tld/index.php?control=Signup&action=verify&verificationCode=verify">Click here to activate account</a>';
+			$message = 'Hi <br /> <a href="/index.php?control=Signup&action=verify&verificationCode=verify">Click here to activate account</a>';
 			mail($_POST['email'], 'Verifiation mail from PTBuild', $message); }
        // print_r(array_merge($oldData, array($registrationData)));
         fclose($myfile);

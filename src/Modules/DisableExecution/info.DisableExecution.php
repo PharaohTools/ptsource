@@ -2,26 +2,26 @@
 
 Namespace Info;
 
-class ShutdownInfo extends PTConfigureBase {
+class DisableExecutionInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "Shutdown Virtual Desktop Integration";
+    public $name = "DisableExecution Virtual Desktop Integration";
 
     public function _construct() {
         parent::__construct();
     }
 
     public function routesAvailable() {
-        return array( "Shutdown" => array_merge(parent::routesAvailable(), array("help") ) );
+        return array( "DisableExecution" => array_merge(parent::routesAvailable(), array("help") ) );
     }
 
     public function routeAliases() {
-        return array("shutdown"=>"Shutdown");
+        return array("DisableExecution"=>"DisableExecution");
     }
 
     public function events() {
-        return array("beforeSettings");
+        return array("prepareBuild");
     }
 
     public function configuration() {
@@ -32,10 +32,10 @@ class ShutdownInfo extends PTConfigureBase {
 
     public function helpDefinition() {
        $help = <<<"HELPDATA"
-    This extension provides integration with Shutdown as a Build Step. It provides code
+    This extension provides integration with DisableExecution as a Build Step. It provides code
     functionality, but no extra CLI commands.
 
-    Shutdown
+    DisableExecution
 
 HELPDATA;
       return $help ;

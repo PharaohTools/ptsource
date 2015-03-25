@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class ShutdownLinuxUnix extends Base {
+class DisableExecutionLinuxUnix extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -35,7 +35,7 @@ class ShutdownLinuxUnix extends Base {
     }
 
     public function getEvents() {
-        $ff = array("beforeSettings" => array("disableBuildIfNeeded",),);
+        $ff = array("prepareBuild" => array("disableBuildIfNeeded",),);
         return $ff ;
     }
 
@@ -45,15 +45,15 @@ class ShutdownLinuxUnix extends Base {
         $loggingFactory = new \Model\Logging();
         $this->params["echo-log"] = true ;
         $logging = $loggingFactory->getModel($this->params);
-        if (isset($this->params["app-settings"]["mod_config"]["Shutdown"]) &&
-            $this->params["app-settings"]["mod_config"]["Shutdown"]["disable_build_execution"] == "on") {
-            $logging->log ("Build execution of all builds disabled through shutdown module a application level, aborting...", $this->getModuleName() ) ;
+        if (isset($this->params["app-settings"]["mod_config"]["DisableExecution"]) &&
+            $this->params["app-settings"]["mod_config"]["DisableExecution"]["disable_build_execution"] == "on") {
+            $logging->log ("Build execution of all builds disabled through DisableExecution module a application level, aborting...", $this->getModuleName() ) ;
             $logging->log ("ABORTED EXECUTION", $this->getModuleName() ) ;
             return false ; }
         $mn = $this->getModuleName() ;
-        if (isset($this->params["build-settings"][$mn]["Shutdown"]) &&
-            $this->params["build-settings"][$mn]["Shutdown"]["disable_build_execution"] == "on") {
-            $logging->log ("Build execution of this build disabled through shutdown module at build level, aborting...", $this->getModuleName() ) ;
+        if (isset($this->params["build-settings"][$mn]["DisableExecution"]) &&
+            $this->params["build-settings"][$mn]["DisableExecution"]["disable_build_execution"] == "on") {
+            $logging->log ("Build execution of this build disabled through DisableExecution module at build level, aborting...", $this->getModuleName() ) ;
             $logging->log ("ABORTED EXECUTION", $this->getModuleName() ) ;
             return false ; }
         else {

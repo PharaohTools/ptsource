@@ -48,13 +48,11 @@ class PipeRunnerAllOS extends Base {
 			$defaults = json_decode($defaults, true);
 		if ($defaults["parameter-status"] == "on") {
 			if (!$_POST["parameter-input"]) {
-				return true;
-			} else {
+				return true; }
+            else {
 				$defaults["parameter-input"] = $_POST["parameter-input"];
 				file_put_contents($file, json_encode($defaults));
-				return false;
-			}
-		}
+				return false; } }
 		return false;
 	}
 
@@ -69,7 +67,6 @@ class PipeRunnerAllOS extends Base {
             $eventRunner = $eventRunnerFactory->getModel($this->params) ;
             $ev = $eventRunner->eventRunner("prepareBuild") ;
             if ($ev == false) { return $this->failBuild() ; }
-            // @todo we need a pre-build event, so we can stop execution here if poll scm fails
 			// run pipe fork command
 			$run = $this -> saveRunPlaceHolder();
 			$this -> setRunStartTime($run);

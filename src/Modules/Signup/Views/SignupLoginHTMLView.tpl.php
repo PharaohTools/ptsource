@@ -46,12 +46,13 @@
 									</button>
 									
 									</div>
-									</div>
-                               <div class="col-sm-offset-3 col-sm-12 ">
-							 <a href="/index.php?control=Signup&action=registration">  <b> Need an account ? Sign Up  </b> </a> 
-							 </div>
-							 <br />
-							 <br />
+									
+									<div class="col-sm-offset-3 col-sm-12 ">
+									
+									<a href="/index.php?control=Signup&action=registration">  <b> Need an account ? Sign Up  </b> </a> 
+									
+								</div>
+							</div>
 					           
 								<div style="height: 1.5px; background-color: #eee; text-align: center">
   <span style="background-color: white; position: relative; top: -0.7em;color:#337ab7"><b>or</b>

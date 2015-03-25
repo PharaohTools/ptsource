@@ -18,7 +18,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="index.php?control=BuildList&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>"  class="hvr-bounce-in">
+                    <a href="index.php?control=BuildList&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="hvr-bounce-in">
                         <i class="fa fa-home fa-fw hvr-bounce-in"></i>  Pipeline Home
                     </a>
                 </li>
@@ -44,9 +44,7 @@
                         <i class="fa fa-history fa-fw hvr-bounce-in"></i> History <span class="badge"></span>
                     </a>
                 </li>
-                
                 <li>
-
                     <a href="/index.php?control=Workspace&action=start&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>"  class="hvr-bounce-in">
                         <i class="fa fa-sign-in fa-fw hvr-bounce-in"></i> Run Again
                     </a>

@@ -1,6 +1,6 @@
 done = false ;
 max = 0 ;
-window.outUpdater = setInterval(function () { updatePage() }, 10000);
+window.outUpdater = setInterval(function () { updatePage() }, 4000);
 
 function updatePage() {
     console.log("running update page js method");
@@ -8,20 +8,11 @@ function updatePage() {
     url = "/index.php?control=PipeRunner&action=findrunning&output-format=JSON";
     $.ajax({
         url: url,
-        success: function(data) {
-            setBuildList(data) ;
-        }
-//,
-//        complete: function() {
-//            // Schedule the next request when the current one's complete
-//            setStatus();
-//            console.log("Req Status: " + window.reqStatus);
-//            if (window.reqStatus == "OK") {
-//                doCompletion(); } }
+        success: function(data) { setRunningBuildList(data) ; }
     });
 }
 
-function setBuildList(data) {
+function setRunningBuildList(data) {
     data = JSON.parse(data);
     console.log(data);
     if (data.length == 0) {
