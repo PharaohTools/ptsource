@@ -136,13 +136,9 @@ class GoogleCalendarLinuxUnix extends Base {
 
           echo $createdEvent->getId();
            
-          return true;
-}
-   else
-  {
-echo "googlecalendar not run\n";
-}
-
+          return true; }
+        else {
+          echo "googlecalendar not run\n"; }
 	}
 
     private function getPipeline() {
