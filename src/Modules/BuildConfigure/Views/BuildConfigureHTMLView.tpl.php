@@ -141,7 +141,7 @@
                         echo '<div class="form-group confSettingsSlideySection" id="slidey'.$one_config_slug.'">' ;
                         echo '  <div class="col-sm-12">' ;
                         echo '    <label for="config_'.$one_config_slug.'" class="control-label text-left">'.$one_config_slug.':</label>' ;
-                        echo '    <i class="fa fa-1x fa-toggle-off" id="slideyToggleIcon'.$one_config_slug.'"' ;
+                        echo '    <i class="fa fa-1x fa-toggle-off hvr-grow" id="slideyToggleIcon'.$one_config_slug.'"' ;
                         echo ' onclick="toggleConfSetting(this, \'slidey'.$one_config_slug.'\')"></i>' ;
                         echo '    <a class="btn-info" id="slideyToggleIcon'.$one_config_slug.'"' ;
                         echo ' onclick="hideConfSetting(\'slidey'.$one_config_slug.'\')"></a>' ;
