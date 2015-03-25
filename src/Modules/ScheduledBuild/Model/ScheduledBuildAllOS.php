@@ -51,7 +51,7 @@ class ScheduledBuildAllOS extends Base {
 
     public function checkBuildSchedule() {
         $loggingFactory = new \Model\Logging();
-        $this->params["echo-log"] = true ;
+        if (!$this->isWebSapi()) { $this->params["echo-log"] = true ; }
         $this->params["php-log"] = true ;
         $this->pipeline = $this->getPipeline();
         $this->params["build-settings"] = $this->pipeline["settings"];
@@ -188,6 +188,11 @@ class ScheduledBuildAllOS extends Base {
         $pipelineFactory = new \Model\Pipeline() ;
         $pipeline = $pipelineFactory->getModel($this->params);
         return $pipeline->getPipelines();
+    }
+
+    private function isWebSapi() {
+        if (!in_array(PHP_SAPI, array("cgi", "cli")))  { return true ; }
+        return false ;
     }
 
 }
