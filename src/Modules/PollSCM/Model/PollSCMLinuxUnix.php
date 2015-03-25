@@ -78,8 +78,7 @@ class PollSCMLinuxUnix extends Base {
 
     public function pollSCMChanges() {
         $loggingFactory = new \Model\Logging();
-        if (!$this->isWebSapi()) {
-            $this->params["echo-log"] = true ; }
+        if (!$this->isWebSapi()) { $this->params["echo-log"] = true ; }
         $this->params["php-log"] = true ;
         $this->pipeline = $this->getPipeline();
         $this->params["build-settings"] = $this->pipeline["settings"];
