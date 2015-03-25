@@ -100,9 +100,9 @@
 
                     <div class="form-group">
                         <div class="col-sm-12">
-                            <button type="submit" class="btn btn-success hvr-box-shadow-outset">Save Configuration</button>
-                            <button type="submit" class="btn btn-primary hvr-box-shadow-outset">Clear</button>
-                            <button type="submit" class="btn btn-warning hvr-box-shadow-outset">Use Defaults</button>
+                            <button type="submit" class="btn btn-success hvr-float-shadow">Save Configuration</button>
+                            <button type="submit" class="btn btn-primary hvr-float-shadow">Clear</button>
+                            <button type="submit" class="btn btn-warning hvr-float-shadow">Use Defaults</button>
                         </div>
                     </div>
 

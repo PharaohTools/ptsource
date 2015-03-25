@@ -23,7 +23,7 @@ function changeModule(element) {
 }
 
 function changeStepTypeSelector(element) {
-    html = '<a class="btn btn-info" onclick="displayStepField()">Add Step</a>' ;
+    html = '<a class="btn btn-info hvr-grow-shadow" onclick="displayStepField()">Add Step</a>' ;
     $('#new_step_button_wrap').html(html);
 }
 

@@ -395,7 +395,8 @@ input[type=radio], input[type=checkbox] {
   
 }
 .runningBuildRow {
-    -webkit-filter: blur(5px) grayscale(50%);
-     background: -webkit-image-set(../image/stucco.png) repeat top left;
-}
+  
+   background-image:url('../image/726.GIF');
+    margin:40px auto  ;
+    }
 
