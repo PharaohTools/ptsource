@@ -78,7 +78,8 @@ class PollSCMLinuxUnix extends Base {
 
     public function pollSCMChanges() {
         $loggingFactory = new \Model\Logging();
-        $this->params["echo-log"] = true ;
+        if (!$this->isWebSapi()) {
+            $this->params["echo-log"] = true ; }
         $this->params["php-log"] = true ;
         $this->pipeline = $this->getPipeline();
         $this->params["build-settings"] = $this->pipeline["settings"];
@@ -222,6 +223,11 @@ class PollSCMLinuxUnix extends Base {
         $pipelineFactory = new \Model\Pipeline() ;
         $pipeline = $pipelineFactory->getModel($this->params);
         return $pipeline->getPipeline($this->params["item"]);
+    }
+
+    private function isWebSapi() {
+        if (!in_array(PHP_SAPI, array("cgi", "cli")))  { return true ; }
+        return false ;
     }
 
 }
