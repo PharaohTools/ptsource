@@ -1,1 +1,0 @@
-{"preconf":[{"name":"detail","slug":"detail","type":"textarea","value":""}],"buildconf":[{"name":"Host (TCP)","slug":"Host (TCP)","type":"text","value":"0.0.0.0"},{"name":"Port No","slug":"Port No","type":"text","value":"8888"}]}
