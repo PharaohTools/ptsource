@@ -395,9 +395,8 @@ input[type=radio], input[type=checkbox] {
   
 }
 .runningBuildRow {
-  
-   background-image:url('../image/726.GIF');
-    margin:40px auto  ;
+  background-image:url('../image/726.GIF');
+   margin:40px auto  ;
     }
 .scroll-top-wrapper {
     position: fixed;

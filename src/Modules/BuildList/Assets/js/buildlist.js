@@ -12,17 +12,27 @@ function updatePage() {
     });
 }
 
+var row;
 function setRunningBuildList(data) {
     data = JSON.parse(data);
     console.log(data);
     if (data.length == 0) {
-        $('.buildRow').removeClass("runningBuildRow");
+        
+        //$('#blRow_'+data[index].item +" > th ").html(row);
+          $('.runningBuildRow' +" > td ").animate({ opacity: 100 });
+          $('.runningBuildRow' +" > th ").animate({ opacity: 100 });
+          $('.buildRow').removeClass("runningBuildRow");
         ht = "<p>No builds currently being executed...</p>" ;
         $('#runningBuilds').html(ht); }
     else {
         ht = "" ;
         for (index = 0; index < data.length; index++) {
             $('#blRow_'+data[index].item).addClass("runningBuildRow");
+            //$('#blRow_'+data[index].item +" > td ").css('display',"none");
+            $('.runningBuildRow' +" > td ").animate({ opacity: 0 });
+            $('.runningBuildRow' +" > th ").animate({ opacity: 0 });
+            //row = $('#blRow_'+data[index].item +" > td ").html();
+            //$('#blRow_'+data[index].item +" > td ").html(' ');
             ht += '<div class=" well well-sm">' ;
             ht += '  <h5><strong>Pipeline:</strong> '+data[index].item+' &nbsp;&nbsp;&nbsp;<span class="fa fa-spinner fa-spin fa-2x"></span></h5>' ;
             ht += '  <h5><strong>Pipedir:</strong> '+data[index].pipedir+'</h5>' ;
