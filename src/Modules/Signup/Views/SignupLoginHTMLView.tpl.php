@@ -53,7 +53,6 @@
 									
 								</div>
 							</div>
-
 					           
 								<div style="height: 1.5px; background-color: #eee; text-align: center">
   <span style="background-color: white; position: relative; top: -0.7em;color:#337ab7"><b>or</b>
