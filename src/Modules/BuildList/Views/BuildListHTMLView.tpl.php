@@ -113,7 +113,7 @@
 							foreach ($pageVars["data"]["pipelines"] as $pipelineSlug => $pipelineDetails) { ?>
 							<tr class="buildRow " id="blRow_<?php echo $pipelineSlug; ?>" >
 							<th scope="row"><?php echo $i; ?> </th>
-							<td><a style="font-weight: bold;font-size:20px;font-style: italic"; href="/index.php?control=BuildHome&action=show&item=<?php echo $pipelineSlug; ?>"><?php echo $pipelineDetails["project-name"]; ?>  </a> </td>
+							<td><a style="font-weight: bold;font-size:16px;"; href="/index.php?control=BuildHome&action=show&item=<?php echo $pipelineSlug; ?>"><?php echo $pipelineDetails["project-name"]; ?>  </a> </td>
 							
 							<td>
 							<?php

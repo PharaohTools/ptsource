@@ -147,7 +147,7 @@
                         <div class="form-group" id="submit-holder">
                             <div class="col-sm-offset-2 col-sm-8">
                                 <div class="text-center">
-                                    <img src="Assets/startbootstrap-sb-admin-2-1.0.5/dist/image/b.GIF">
+                                    <img src="Assets/startbootstrap-sb-admin-2-1.0.5/dist/image/rt.GIF" style="width:150px;">
 
 
                                 </div>
