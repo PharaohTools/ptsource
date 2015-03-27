@@ -349,9 +349,9 @@ class ConditionalStepRunnerAllOS extends BaseLinuxApp {
 	
 	private function regularExpressionMatch($step) {
 		$projectNameMatch = $step['projectNameMatch'];
-		if (strcmp( $projectNameMatch, $this->params['item'] ) > 0)
-			return TRUE;
-		else
+		if (strpos( $this->params['item'], $projectNameMatch ) === false)
 			return FALSE;
+		else
+			return TRUE;
 	}
 }
