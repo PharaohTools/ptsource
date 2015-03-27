@@ -25,6 +25,7 @@ function setRunningBuildList(data) {
             $('#blRow_'+data[index].item).addClass("runningBuildRow");
             ht += '<div class=" well well-sm">' ;
             ht += '  <h5><strong>Pipeline:</strong> '+data[index].item+' &nbsp;&nbsp;&nbsp;<span class="fa fa-spinner fa-spin fa-2x"></span></h5>' ;
+            ht += '  <h5><strong>Build start at:</strong> '+data[index].starttime+'</h5>' ;
             ht += '  <h5><strong>Pipedir:</strong> '+data[index].pipedir+'</h5>' ;
             ht += '  <h5><strong>PID:</strong> '+data[index].pid+'</h5>' ;
             ht += '  <h5><strong>Source:</strong> '+data[index].brs+'</h5>' ;

@@ -78,13 +78,18 @@ class PipeRunnerFindRunningAllOS extends Base {
         $itemend = strpos($line, " ", $itemstart);
         $items = substr($line, $itemstart, ($itemend - $itemstart));
 
+        $timestart = strpos($line, 'S')+2;
+        //$timeend = strpos($line, " /", $timestart);
+        $time = substr($line, $timestart, 8);
+
         return array(
             "runuser" => $users,
             "pipedir" => $pds,
             "pid" => $pids,
             "brs" => $brss,
             "item" => $items,
-            "runid" => $rids
+            "runid" => $rids,
+            "starttime" => $time
         ) ;
     }
 
