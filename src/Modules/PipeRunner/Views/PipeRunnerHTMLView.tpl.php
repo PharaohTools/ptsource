@@ -45,7 +45,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/index.php?control=Workspace&action=start&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>"  class="hvr-bounce-in">
+                    <a href="/index.php?control=PipeRunner&action=start&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>"  class="hvr-bounce-in">
                         <i class="fa fa-sign-in fa-fw hvr-bounce-in"></i> Run Again
                     </a>
                 </li>
