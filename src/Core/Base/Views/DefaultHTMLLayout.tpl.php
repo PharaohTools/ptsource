@@ -93,13 +93,13 @@
 				<!-- /.navbar-header -->
 				<ul class="nav navbar-top-links navbar-right">
 					
-                <li class="dropdown hvr-hang">
+                <li class="dropdown hvr-hang ">
                 	
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     	
                         <i class="fa fa-bell fa-fw " id="bell"></i>  <i class="fa fa-caret-down " id="caret"></i>
                     </a>
-                    <ul class="dropdown-menu dropdown-alerts hvr-grow-shadow">
+                    <ul class="dropdown-menu dropdown-alerts hvr-grow-shadow ">
                         <li>
                             <a href="#">
                                 <div >

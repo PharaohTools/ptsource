@@ -89,7 +89,7 @@
 					<div class="tab-content">
 						<div role="tabpanel" class="tab-pane active" id="all">
 							<div class="table-responsive" ">
-							<table class="table table-bordered table-custom ">
+							<table class="table table-striped table-bordered table-condensed">
 							<thead>
 							<tr style="background-color: fff">
 							<th>#</th>
@@ -191,11 +191,10 @@
 				</div>
 			</div>
 		</div>
-		<p>
-			---------------------------------------
-			<br/>
-			Visit www.pharaohtools.com for more
-		</p>
+		 <hr>
+                <p class="text-center">
+                Visit www.pharaohtools.com for more
+            </p>
 	</div>
 </div><!-- /.container -->
 <link rel="stylesheet" type="text/css" href="/index.php?control=AssetLoader&action=show&module=BuildList&type=css&asset=buildlist.css">
