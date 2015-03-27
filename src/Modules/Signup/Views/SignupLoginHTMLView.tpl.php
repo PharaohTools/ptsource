@@ -49,9 +49,10 @@
 									
 									
 									<div class="col-sm-offset-3 col-sm-12 ">
-									
+									<br />	
+									<div>
 									<a href="/index.php?control=Signup&action=registration">  <b> Need an account ? Sign Up  </b> </a> 
-									
+									</div>
 								</div>
 							</div>
 					           
