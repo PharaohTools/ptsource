@@ -3,13 +3,13 @@
 		<div class="sidebar-nav navbar-collapse">
 			<ul class="nav in" id="side-menu">
 				<li class="sidebar-search">
-					<div class="input-group custom-search-form hvr-bounce-in">
+					<div class="input-group custom-search-form  hvr-bounce-in">
 						<input type="text" class="form-control" placeholder="Search...">
 						<span class="input-group-btn">
 							<button class="btn btn-default" type="button">
 								<i class="fa fa-search"></i>
-							</button>
-                        </span>
+							</button> </span>
+                        
 					</div>
 					</li>
                 <li>
@@ -158,7 +158,7 @@
                                 <div class="text-center">
 
 
-                                    <button type="submit" class="btn btn-danger" id="end-now">End Now</button>
+                                    <button type="submit" class="btn btn-danger hvr-float-shadow" id="end-now">End Now</button>
                                 </div>
 
                             </div>

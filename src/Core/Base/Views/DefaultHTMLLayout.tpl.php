@@ -7,10 +7,9 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 		<link rel="icon" href="/index.php?control=AssetLoader&action=show&module=PostInput&type=image&asset=favicon.ico">
-
+		
 		<title>PTBuild - Pharaoh Tools</title>
-		 <link rel="stylesheet" type="text/css" href="Assets/typo/css/demo.css" />
-        <link rel="stylesheet" type="text/css" href="Assets/typo/css/style.css" />
+		 
 		
 
         <script src="/index.php?control=AssetLoader&action=show&module=PostInput&type=js&asset=jquery.min.js"></script>
@@ -144,6 +143,7 @@
             </ul>   
             <!-- /.navbar-top-links -->
 			</nav>
+			
 			<?php echo $this -> renderMessages($pageVars); ?>
 			<?php echo $templateData; ?>
 
@@ -179,5 +179,11 @@
 				})
 
 			</script>
+	
+			<div class="scroll-top-wrapper ">
+           <span class="scroll-top-inner">
+           <i class="fa fa-2x fa-arrow-circle-up"></i>
+           </span>
+           </div>
 	</body>
 </html>

@@ -1,1 +1,0 @@
-{"preconf":[],"buildconf":[{"name":"Token","slug":"Token","type":"textarea","value":"tok"},{"name":"Room Id or Name","slug":"Room Id or Name","type":"textarea","value":"rid"},{"name":"From","slug":"From","type":"textarea","value":"message"}]}

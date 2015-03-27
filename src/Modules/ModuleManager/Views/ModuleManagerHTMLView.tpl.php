@@ -103,7 +103,7 @@
                                         echo '   <input type="hidden" id="steps['.$modSlug.'][steptype]" name="steps['.$modSlug.'][steptype]" value="'.$one_available_module["steptype"].'" />';
                                         echo '  </div>';
                                         echo '  <div class="col-sm-4">'  ;
-                                        echo '   <div class="col-sm-12">' ;
+                                        echo '   <div class="col-sm-12 ">' ;
                                         echo '    <a class="btn btn-success text-center" href="/index.php?control=ModuleManager&action=webinstall&source=defaultrepo&modname='.$modSlug.'">Download</a>' ;
                                         echo '   </div>';
                                         echo '   <div class="col-sm-12">' ;
