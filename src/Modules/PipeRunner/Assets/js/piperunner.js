@@ -1,6 +1,6 @@
 done = false ;
 max = 0 ;
-window.outUpdater = setInterval(function () { updatePage() }, 5000);
+window.outUpdater = setInterval(function () { updatePage() }, 1000);
 
 function updatePage() {
     console.log("running update page js method");

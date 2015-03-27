@@ -434,3 +434,18 @@ opacity: 1.0;
 .scroll-top-wrapper i.fa {
 line-height: inherit;
 }
+pre {
+  display: block;
+  padding: 9.5px;
+  margin: 0 0 10px;
+  font-size: 13px;
+  font-weight:bold;
+  line-height: 1.42857143;
+  color: #ffffff;
+  word-break: break-all;
+  word-wrap: break-word;
+  background-color: #383838;
+  border: 2px solid #E4E4E4;
+  border-radius: 4px;
+  min-height: 600px;
+}
