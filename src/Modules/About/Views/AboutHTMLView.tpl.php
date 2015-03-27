@@ -40,10 +40,10 @@
                 </p>
             </div>
             <div class="row clearfix no-margin">
-                <p>
-                    ---------------------------------------<br/>
-                    Visit www.pharaohtools.com for more
-                </p>
+                <hr>
+                <p class="text-center">
+                Visit www.pharaohtools.com for more
+            </p>
             </div>
 
         </div>

@@ -163,9 +163,8 @@
 					</script>
 
             </div>
-
-            <p>
-                ---------------------------------------<br/>
+ <hr>
+                <p class="text-center">
                 Visit www.pharaohtools.com for more
             </p>
         </div>

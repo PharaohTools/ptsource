@@ -147,10 +147,10 @@
 			</div> 
 		  </div> 
      
-       <p>
-            ---------------------------------------<br/>
-            Visit www.pharaohtools.com for more
-        </p>
+        <hr>
+                <p class="text-center">
+                Visit www.pharaohtools.com for more
+            </p>
     </div>
 </div><!-- container -->
 <link rel="stylesheet" href="/index.php?control=AssetLoader&action=show&module=UserManager&type=css&asset=usermanager.css">
