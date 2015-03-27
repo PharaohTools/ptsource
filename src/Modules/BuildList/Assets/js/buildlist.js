@@ -34,7 +34,8 @@ function setRunningBuildList(data) {
             //row = $('#blRow_'+data[index].item +" > td ").html();
             //$('#blRow_'+data[index].item +" > td ").html(' ');
             ht += '<div class=" well well-sm">' ;
-            ht += '  <h5><strong>Pipeline:</strong> '+data[index].item+' &nbsp;&nbsp;&nbsp;<span class="fa fa-spinner fa-spin fa-2x"></span></h5>' ;
+            ht += '<img src="Assets/startbootstrap-sb-admin-2-1.0.5/dist/image/rt.GIF" style="width:150px;">' ;
+            ht += '  <h5><strong>Pipeline:</strong> '+data[index].item+'</h5>' ;
             ht += '  <h5><strong>Build start at:</strong> '+data[index].starttime+'</h5>' ;
             ht += '  <h5><strong>Pipedir:</strong> '+data[index].pipedir+'</h5>' ;
             ht += '  <h5><strong>PID:</strong> '+data[index].pid+'</h5>' ;

@@ -147,7 +147,7 @@
                         <div class="form-group" id="submit-holder">
                             <div class="col-sm-offset-2 col-sm-8">
                                 <div class="text-center">
-                                    <i class="fa fa-spinner fa-spin fa-5x "> </i>
+                                    <img src="Assets/startbootstrap-sb-admin-2-1.0.5/dist/image/b.GIF">
 
 
                                 </div>

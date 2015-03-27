@@ -118,15 +118,15 @@
 							<td>
 							<?php
 							echo '<a href="/index.php?control=PipeRunner&action=start&item=' . $pipelineDetails["project-slug"] . '">';
-							echo '<i class="fa fa-play fa-2x hvr-grow-shadow" style="color:green"></i></a>';
+							echo '<i class="fa fa-play fa-2x hvr-grow-shadow" style="color:rgb(13, 193, 42);"></i></a>';
 							?>
 							</td>
 							<td>
 							<?php
 							if ($pipelineDetails["last_status"] === true) {
-								echo '<i class="fa fa-circle fa-3x " style="color:green"></i>';
+								echo '<i class="fa fa-circle fa-2x " style="color:rgb(13, 193, 42);"></i>';
 							} else {
-								echo ' <i class="fa fa-circle fa-3x " style="color:#D32B2B"></i>';
+								echo ' <i class="fa fa-circle fa-2x " style="color:#D32B2B"></i>';
 							}
 							?>
 							</td>
