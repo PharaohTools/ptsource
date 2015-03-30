@@ -40,15 +40,13 @@
 							</div>
 
 							<div class="form-group">
-								<div class="col-sm-offset-3 col-sm-4">
-									<div >
-									<label for="Signed in"><input name="Signed in" id="Signed in"  type="checkbox" style="color:#A2A1A1;"> Keep Me Signed in</label>
-									</div>	<br>
+								<div class="col-sm-offset-3 col-sm-9">
+										
 									<button type="button" onclick="submit_login();" class="btn  btn-primary  btn-1 btn-1a hvr-grow-shadow" >
 										Log in
 									</button>
-									
-									</div>
+									<label  style="color:#337ab7;   margin-left: 145px;;" for="Signed in "><input name="Signed in" id="Signed in"  type="checkbox" > Keep Me Signed in</label>
+								    </div>
 									
 									
 									<div class="col-sm-offset-3 col-sm-12 ">
