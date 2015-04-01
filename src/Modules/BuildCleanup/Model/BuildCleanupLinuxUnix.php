@@ -90,6 +90,7 @@ class BuildCleanupLinuxUnix extends Base {
     }
 
     private function removeHistoryFiles() {
+        $this->lm->log ("Cleaning up History files", $this->getModuleName() ) ;
         $historyFiles = scandir(PIPEDIR.DS.$this->params["item"].DS.'history') ;
         asort($historyFiles);
         $arr = array_reverse($historyFiles);
@@ -98,7 +99,7 @@ class BuildCleanupLinuxUnix extends Base {
             is_int($this->params["build-settings"][$mn]["no_to_keep"])) {
             $nk = $this->params["build-settings"][$mn]["no_to_keep"]; }
         else {
-            $this->lm->log ("No amount of builds to keep has ben set, defaulting to three", $this->getModuleName() ) ;
+            $this->lm->log ("No amount of builds to keep has been set, defaulting to three", $this->getModuleName() ) ;
             $nk = 3; }
         $keeps = array_slice($arr, 0, $nk);
         $drops = array_diff($historyFiles, $keeps);
@@ -111,6 +112,7 @@ class BuildCleanupLinuxUnix extends Base {
     }
 
     private function removeStepsHistoryFiles() {
+        $this->lm->log ("Cleaning up Steps History files", $this->getModuleName() ) ;
         $historyFiles = scandir(PIPEDIR.DS.$this->params["item"].DS.'stepsHistory') ;
         asort($historyFiles);
         $arr = array_reverse($historyFiles);
@@ -119,19 +121,20 @@ class BuildCleanupLinuxUnix extends Base {
             is_int($this->params["build-settings"][$mn]["no_to_keep"])) {
             $nk = $this->params["build-settings"][$mn]["no_to_keep"]; }
         else {
-            $this->lm->log ("No amount of builds to keep has ben set, defaulting to three", $this->getModuleName() ) ;
+            $this->lm->log ("No amount of builds to keep has been set, defaulting to three", $this->getModuleName() ) ;
             $nk = 3; }
         $keeps = array_slice($arr, 0, $nk);
         $drops = array_diff($historyFiles, $keeps);
         foreach ($drops as $dropfile) {
-            $this->lm->log ("Removing History file {$dropfile}", $this->getModuleName() ) ;
-            $rmCommand = 'rm -f '.$dropfile ;
+            $this->lm->log ("Removing Steps History file {$dropfile}", $this->getModuleName() ) ;
+            $rmCommand = 'rm -f '.PIPEDIR.DS.$this->params["item"].DS.'stepsHistory'.DS.$dropfile ;
             self::executeAndOutput($rmCommand) ; }
         $result = true ;
         return $result ;
     }
 
     private function trimHistoryIndex() {
+        // @todo this doesnt do anythin
 //        $historyFiles = scandir(PIPEDIR.DS.$this->params["item"].DS.'history') ;
 //        asort($historyFiles);
 //        $arr = array_reverse($historyFiles);
