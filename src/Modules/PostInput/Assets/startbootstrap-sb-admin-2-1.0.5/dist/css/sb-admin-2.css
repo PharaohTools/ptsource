@@ -453,5 +453,8 @@ pre {
   margin-bottom: 16px;
   margin-top: 9px;
 }
-
+.col-sm-4 {
+  width: 33.33333333%;
+  margin-top: 10px;
+}
 
