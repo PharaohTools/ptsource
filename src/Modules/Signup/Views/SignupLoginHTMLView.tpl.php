@@ -62,6 +62,7 @@
 </div>
                                 
 							    <div class="text-center ">
+							    <a href="/index.php?control=OAuth&action=googlelogin" class="btn btn-google hvr-pop" title="Google"><i class="fa fa-google"></i> Google </a> |
 								<a href="/index.php?control=OAuth&action=githublogin" class="btn btn-github hvr-pop" title="Github"><i class="fa fa-github"></i> Github </a> | 
 								<a href="/index.php?control=OAuth&action=fblogin" class="btn btn-facebook hvr-pop" title="Facebook"><i class="fa fa-facebook"></i>  Facebook</a>  |
 								<a href="/index.php?control=OAuth&action=linkedinlogin" class="btn btn-linkedin hvr-pop" title="LinkedIn"><i class="fa fa-linkedin"></i> linkedin</a> |
