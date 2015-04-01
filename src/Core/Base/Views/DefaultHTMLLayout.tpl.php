@@ -48,6 +48,8 @@
     	<!-- Custom Theme JavaScript -->
 	    <script src="/Assets/startbootstrap-sb-admin-2-1.0.5/dist/js/sb-admin-2.js"></script>
     
+    	<script src="/Assets/js/notification.js"></script>
+    
 		<!-- Custom Theme JavaScript -->
 		<script src="/Assets/startbootstrap-sb-admin-2-1.0.5/dist/js/sb-admin-2.js"></script>
 		
@@ -99,16 +101,14 @@
                     	
                         <i class="fa fa-bell fa-fw " id="bell"></i>  <i class="fa fa-caret-down " id="caret"></i>
                     </a>
-                    <ul class="dropdown-menu dropdown-alerts hvr-grow-shadow ">
+                    <ul class="dropdown-menu dropdown-alerts hvr-grow-shadow" id="runningBuildsnotif">
                         <li>
-                            <a href="#">
-                                <div >
-                                    <i class="fa fa-comment fa-fw "></i> New Comment
-                                    <span class="pull-right text-muted small"> 4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                       
+                        	<a href="#">
+                        		<div>
+        							<span>No builds currently being executed...</span>
+        						</div >
+        					</a>
+        				</li>
                         <li class="divider"></li>
                         <li>
                             <a class="text-center" href="#">
