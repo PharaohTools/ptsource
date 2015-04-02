@@ -6,7 +6,8 @@
 *
 */
 if ( !isset($_REQUEST['control']) || !isset($_REQUEST['action']) ) {
-    echo '<p>Control or Action is missing, using default</p>';
+    // @todo i dont think this requires an echo
+    // echo '<p>Control or Action is missing, using default</p>';
     $_REQUEST['control'] = "Index" ;
     $_REQUEST['action'] = "index" ;}
 if (!isset($_REQUEST['output-format'])) { $_REQUEST['output-format'] = "HTML"; }
