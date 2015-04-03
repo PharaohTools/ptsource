@@ -308,7 +308,7 @@
 
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class=" btn btn-success hvr-float-shadow">Save Configuration</button>
+                            <button type="submit" id="bt" class=" btn btn-success hvr-float-shadow data-toggle="tooltip" data-placement="top" title="Save configure" data-original-title="Tooltip on right"">Save Configuration</button>
                         </div>
                     </div>
 
@@ -325,7 +325,7 @@
             </div>
              <hr>
                 <p class="text-center">
-                Visit www.pharaohtools.com for more
+                Visit <a href="http://www.pharaohtools.com">www.pharaohtools.com</a> for more
             </p>
 
         </div>
