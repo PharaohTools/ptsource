@@ -17,7 +17,7 @@
 				</li>
 				
 				<li>
-					<a href="/index.php?control=Index&action=show" class="active hvr-bounce-in"><i class="fa fa-dashboard fa-fw hvr-bounce-in"></i> Dashboard</a>
+					<a href="/index.php?control=Index&action=show" class="active hvr-bounce-in" ><i class="fa fa-dashboard fa-fw hvr-bounce-in"></i> Dashboard</a>
 				</li>
 				<li>
 					<a href="/index.php?control=ApplicationConfigure&action=show" class=" hvr-bounce-in">

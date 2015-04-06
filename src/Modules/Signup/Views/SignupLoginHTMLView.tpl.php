@@ -6,7 +6,7 @@
 				<div class="col-md-12">
 					<h3 class="hero-unit"><strong>Log in</strong> </h3>
 					
-									<p class="text-right"><a href="/index.php?control=Signup&action=registration">  <b> Need an account ? Sign Up  </b> </a> </p>
+									<p class="text-right "><a href="/index.php?control=Signup&action=registration">  <b> Need an account ? Sign Up  </b> </a> </p>
 									
 					<!--<div class="pull-right">
 					switch to
@@ -42,7 +42,7 @@
 							<div class="form-group">
 								<div class="col-sm-offset-3 col-sm-9">
 										
-									<button type="button" onclick="submit_login();" class="btn  btn-primary  btn-1 btn-1a hvr-grow-shadow" >
+									<button type="button" onclick="submit_login();"  class="btn  btn-primary  btn-1 btn-1a hvr-grow-shadow" >
 										Log in
 									</button>
 									<label  style="color:#337ab7;   margin-left: 145px;;" for="Signed in "><input name="Signed in" id="Signed in"  type="checkbox" > Keep Me Signed in</label>
@@ -77,7 +77,7 @@
 					<p class="text-center" style="color:#337ab7">
 						---------------------------------------
 						<br/>
-						Visit www.pharaohtools.com for more
+						Visit <a href="http://www.pharaohtools.com">www.pharaohtools.com</a> for more
 					</p>
 
 				</div>
