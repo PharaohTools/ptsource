@@ -132,7 +132,7 @@
                         <li><a href="/index.php?control=About&action=show" class=" hvr-grow-shadow"><i class="fa fa-help fa-fw"></i> About</a>
                         </li> 
                         <?php 
-                        if($pageVars["route"]["action"] != "registration" && $pageVars["route"]["action"] != "login") { ?>
+                        if($pageVars["route"]["action"] != "registration" && $pageVars["route"]["action"] != "ldaplogin" && $pageVars["route"]["action"] != "login") { ?>
                         <li class="divider"></li>
                         <li><a href="/index.php?control=Signup&action=logout" class=" hvr-grow-shadow"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li><?php } ?>
