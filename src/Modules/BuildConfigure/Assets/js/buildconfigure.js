@@ -206,7 +206,7 @@ function CONDaysOfWeekDays(hash) {
 					if ( 'exactdays' in savedSteps[hash] )
 						if( index in savedSteps[hash]['exactdays'] )
 							checked = "checked";
-			html += '<input class="col-sm-2 control-label text-left" type="checkbox" name="steps['+hash+'][exactdays]['+index+']" value="true" '+checked+'>'+value+'<br>';
+			html += '<input class="col-sm-2 control-label text-left" type="checkbox" name="steps['+hash+'][exactdays]['+index+']" value="true" '+checked+'><li>'+value+'</li>';
 		});
 	}
 	$("#CONDaysOfWeekDays"+hash).html(html);
