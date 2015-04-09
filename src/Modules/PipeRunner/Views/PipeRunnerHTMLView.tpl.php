@@ -147,7 +147,7 @@
                         <div class="form-group" id="submit-holder">
                             <div class="col-sm-offset-2 col-sm-8">
                                 <div class="text-center">
-                                    <img src="Assets/startbootstrap-sb-admin-2-1.0.5/dist/image/rt.GIF" style="width:150px;">
+                                    <img src="Assets/startbootstrap-sb-admin-2-1.0.5/dist/image/712.GIF" style="width:100px;">
 
 
                                 </div>
@@ -178,7 +178,7 @@
             </div>
             <hr>
                 <p class="text-center">
-                Visit www.pharaohtools.com for more
+                Visit <a href="http://www.pharaohtools.com">www.pharaohtools.com</a> for more
             </p>
 
         </div>

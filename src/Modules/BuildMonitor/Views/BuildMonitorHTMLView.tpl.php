@@ -164,8 +164,8 @@
 
             </div>
  <hr>
-                <p class="text-center">
-                Visit www.pharaohtools.com for more
+                 <p class="text-center">
+                Visit <a href="http://www.pharaohtools.com">www.pharaohtools.com</a> for more
             </p>
         </div>
 

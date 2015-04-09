@@ -5,6 +5,9 @@
 			<div class="login-panel panel panel-default">
 				<div class="col-md-12">
 					<h3 class="hero-unit"><strong>Log in</strong> </h3>
+					
+									<p class="text-right "><a href="/index.php?control=Signup&action=registration">  <b> Need an account ? Sign Up  </b> </a> </p>
+									
 					<!--<div class="pull-right">
 					switch to
 					<a href="http://www.ptbuild.tld/index.php?control=Signup&action=registration"> OpenID log in</a>
@@ -37,22 +40,18 @@
 							</div>
 
 							<div class="form-group">
-								<div class="col-sm-offset-3 col-sm-4">
-									<div >
-									<label for="Signed in"><input name="Signed in" id="Signed in"  type="checkbox" style="color:#A2A1A1;"> Keep Me Signed in</label>
-									</div>	
-									<button type="button" onclick="submit_login();" class="btn  btn-primary  btn-1 btn-1a hvr-grow-shadow" >
+								<div class="col-sm-offset-3 col-sm-9">
+										
+									<button type="button" onclick="submit_login();"  class="btn  btn-primary  btn-1 btn-1a hvr-grow-shadow" >
 										Log in
 									</button>
-									
-									</div>
+									<label  style="color:#337ab7;   margin-left: 145px;;" for="Signed in "><input name="Signed in" id="Signed in"  type="checkbox" > Keep Me Signed in</label>
+								    </div>
 									
 									
 									<div class="col-sm-offset-3 col-sm-12 ">
 									<br />	
-									<div>
-									<a href="/index.php?control=Signup&action=registration">  <b> Need an account ? Sign Up  </b> </a> 
-									</div>
+									
 								</div>
 							</div>
 					           
@@ -77,7 +76,7 @@
 					<p class="text-center" style="color:#337ab7">
 						---------------------------------------
 						<br/>
-						Visit www.pharaohtools.com for more
+						Visit <a href="http://www.pharaohtools.com">www.pharaohtools.com</a> for more
 					</p>
 
 				</div>
