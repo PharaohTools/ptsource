@@ -52,9 +52,10 @@ class AssetLoaderAllOS extends Base {
 
     private function getImageMimeType() {
         $ext = substr($this->params["asset"], strrpos($this->params["asset"], ".")+1 ) ;
-        if ($ext == "jpg") { $ext = "jpeg" ; }
+		$mime="";
+		if ($ext == "jpg") { $ext = "jpeg" ; }
         if (in_array($ext, array("png", "jpeg", "gif"))) { $mime = 'image/'.$ext ; }
-        else if ($ext == 'svg') { $mime = 'image/svg+xml' ; }
+        else if ($ext == "svg") { $mime = 'image/svg+xml' ; }
         return $mime ;
     }
 

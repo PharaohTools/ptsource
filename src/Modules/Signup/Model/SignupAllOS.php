@@ -64,9 +64,9 @@ class SignupAllOS extends Base {
             $url_spl = explode("&", $url_split[1]);
             if(isset($url_spl[0])){
                 $url_sp = explode("=", $url_spl[0]);
-                if(isset($url_sp[1]) && $url_sp[1] =="Signup"){
+                if(isset($url_sp[1]) && $url_sp[1] =="Signup" || $url_sp[1] == "ldap"){
                     $url_s = explode("=", $url_spl[1]);
-                    if(isset($url_s[1]) && ($url_s[1] =="login" || $url_s[1] =="logout" || $url_s[1] =="login-submit" || $url_s[1] =="registration" || $url_s[1] =="registration-submit")){
+                    if(isset($url_s[1]) && ($url_s[1] =="login" || $url_s[1] =="logout" || $url_s[1] =="login-submit" || $url_s[1] =="registration" || $url_s[1] =="registration-submit" || $url_s[1] =="ldaplogin")){
                         echo json_encode(array("status" => TRUE));
                         return;
                     }
