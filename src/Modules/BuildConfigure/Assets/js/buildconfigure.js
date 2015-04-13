@@ -67,11 +67,11 @@ function displayStepField() {
         html += '  </div><h3>'+module+'</h3>';
         html += '  <div class="col-sm-10">' ;
         html += '   <div class="form-group col-sm-12">' ;
-        html += '    <h4>'+module+'</h4>' ;
+        html += '    <h4>'+steptype+'</h4>' ;
         html += '    <input type="hidden" id="steps['+hash+'][module]" name="steps['+hash+'][module]" value="'+module+'" />' ;
         html += '    <input type="hidden" id="steps['+hash+'][steptype]" name="steps['+hash+'][steptype]" value="'+steptype+'" />' ;
         html += '   <div>' ;
-        html += ' 	<label for="'+steptype+'" class="col-sm-2 control-label text-left">'+steptype+'</label>';	
+        html += ' 	<label for="'+steptype+'" class="col-sm-2 control-label text-left"> </label>';	
         html +=  '	<div class="col-sm-10">';		
 
         var i; console.log(field);
@@ -153,8 +153,8 @@ function displayStepField() {
         html += '  <h4>'+field.name+'</h4>' ;
         html += '  <input type="hidden" id="steps['+hash+'][module]" name="steps['+hash+'][module]" value="'+module+'" />' ;
         html += '  <input type="hidden" id="steps['+hash+'][steptype]" name="steps['+hash+'][steptype]" value="'+steptype+'" />' ;
-        html += "  <input type='text' id='steps[" +'"'+hash+'"'+ ']["'+field.slug+'"]'+"' name='steps[" +'"'+hash+'"'+ '"]["'+field.slug+'"]'+'  class="form-control"/>' ;
-        html += '  <a class="btn btn-warning" onclick="deleteStepField('+hash+')">Delete Step</a>' ;
+        html += '  <input type="text" id="steps[' +'"'+hash+'"'+ ']['+field.slug+']'+'" name="steps[' +'"'+hash+'"'+ ']['+field.slug+']'+'"  class="form-control"/>' ;
+      
         html += '  </div>' ;
         html += '  </div>';
         html += ' 	<label for="delete" class="col-sm-2 control-label text-left"></label>';	
@@ -206,7 +206,7 @@ function CONDaysOfWeekDays(hash) {
 					if ( 'exactdays' in savedSteps[hash] )
 						if( index in savedSteps[hash]['exactdays'] )
 							checked = "checked";
-			html += '<input class="col-sm-2 control-label text-left" type="checkbox" name="steps['+hash+'][exactdays]['+index+']" value="true" '+checked+'>'+value+'<br>';
+			html += '<input class="col-sm-2 control-label text-left" type="checkbox" name="steps['+hash+'][exactdays]['+index+']" value="true" '+checked+'><li>'+value+'</li>';
 		});
 	}
 	$("#CONDaysOfWeekDays"+hash).html(html);
