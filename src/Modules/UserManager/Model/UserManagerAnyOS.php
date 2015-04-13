@@ -49,7 +49,7 @@ class UserManagerAnyOS extends BasePHPApp {
 		$oldData=$this->getUserDetails();
 		foreach($oldData as $data){
 			if($data->username==$_SESSION["username"]){
-				if($data->role=1)
+				if($data->role==1)
 				return TRUE;
 		     }
 		}
@@ -79,5 +79,14 @@ class UserManagerAnyOS extends BasePHPApp {
 		$myfile = fopen(__DIR__."/../../Signup/Data/users.txt", "w") or die("Unable to open file!");
 		fwrite($myfile, json_encode($oldData));
 	    fclose($myfile);
+	}
+	
+	public function getCurrentUser(){
+		$oldData=$this->getUserDetails();
+		foreach($oldData as $data){
+			if($data->username==$_SESSION["username"]){
+					return $data;
+		     }
+		}		
 	}
 }

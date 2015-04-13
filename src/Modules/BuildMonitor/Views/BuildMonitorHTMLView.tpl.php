@@ -39,11 +39,6 @@
                     </a>
                 </li>
                 <li>
-                    <a href="index.php?control=BuildHome&action=changes&item=<?php echo $pageVars["data"]["item"] ; ?>" class="hvr-bounce-in">
-                        <i class="fa fa-exchange hvr-bounce-in"></i> Changes
-                    </a>
-                </li>
-                <li>
                     <a href="index.php?control=BuildHome&action=history&item=<?php echo $pageVars["data"]["item"] ; ?>" class="hvr-bounce-in">
                         <i class="fa fa-history hvr-bounce-in"></i> History <span class="badge"></span>
                     </a>
