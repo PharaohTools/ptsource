@@ -49,7 +49,7 @@ class PipelineAllOS extends Base {
         $logging = $loggingFactory->getModel($this->params);
         if (file_exists(PIPEDIR.DS.$name)) {
             $logging->log("Directory exists at ".PIPEDIR.DS."{$name}. Attempting removal.", $this->getModuleName()) ;
-            $rc = self::executeAndGetReturnCode('mkdir -p '.PIPEDIR.DS.$name);
+            $rc = self::executeAndGetReturnCode('rm -rf '.PIPEDIR.DS.$name);
             return $rc ; }
         else  {
             $logging->log("No directory exists at ".PIPEDIR.DS."$name to delete", $this->getModuleName()) ;
