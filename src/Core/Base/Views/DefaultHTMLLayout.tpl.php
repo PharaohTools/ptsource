@@ -127,7 +127,7 @@
                         <i class="fa fa-user fa-fw" id="bell"></i>  <i class="fa fa-caret-down" id="caret"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user ">
-                        <li><a href="#" class=" hvr-grow-shadow"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        <li><a href="/index.php?control=UserManager&action=userprofile" class=" hvr-grow-shadow"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
                         <li><a href="#" class=" hvr-grow-shadow"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
