@@ -95,6 +95,8 @@
 				<!-- /.navbar-header -->
 				<ul class="nav navbar-top-links navbar-right">
 					
+                <?php 
+                        if($pageVars["route"]["action"] != "registration" && $pageVars["route"]["action"] != "login") { ?>
                 <li class="dropdown hvr-hang ">
                 	
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -109,16 +111,16 @@
         						</div >
         					</a>
         				</li>
-                        <li class="divider"></li>
+                     <!--   <li class="divider"></li>
                         <li>
                             <a class="text-center" href="#">
                                 <strong>See All Alerts</strong>
                                 <i class="fa fa-angle-right"></i>
                             </a>
-                        </li>
+                        </li> -->
                     </ul>
-                    <!-- /.dropdown-alerts --
                 </li>
+                <?php } ?>
                 <!-- /.dropdown -->
                 <li class="dropdown  hvr-hang">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
