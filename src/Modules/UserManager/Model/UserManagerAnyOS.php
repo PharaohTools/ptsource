@@ -89,4 +89,24 @@ class UserManagerAnyOS extends BasePHPApp {
 		     }
 		}		
 	}
+	
+	public function changePassword(){
+		$oldData=$this->getUserDetails();
+		foreach($oldData as $data){
+            if($data->password==$_POST['oldPassword'])
+            {
+            }
+
+           /*if($data->email==$_POST['email'])
+            {
+                echo json_encode(array("status" => FALSE,"id"=>"login_username_alert", "msg" => "User Name Already Exist!!!"));
+                return;
+                echo json_encode(array("status" => FALSE,"id"=>"login_email_alert", "msg" => "Email Already Exist!!!"));
+                return;
+            }*/
+
+        }
+        return;
+		
+		}
 }
