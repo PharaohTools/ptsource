@@ -49,7 +49,8 @@ class UserManagerAnyOS extends BasePHPApp {
 		$oldData=$this->getUserDetails();
 		foreach($oldData as $data){
 			if($data->username==$_SESSION["username"]){
-				if($data->role=1)
+				print_r($data);
+				if($data->role==1)
 				return TRUE;
 		     }
 		}

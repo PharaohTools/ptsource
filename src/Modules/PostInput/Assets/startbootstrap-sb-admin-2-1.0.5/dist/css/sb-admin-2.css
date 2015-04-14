@@ -448,3 +448,12 @@ pre {
   border: 2px solid #E4E4E4;
   border-radius: 4px;
 }
+.col-sm-12 {
+  width: 100%;
+  margin-bottom: 16px;
+  margin-top: 9px;
+}
+.col-sm-4 {
+  width: 33.33333333%;
+  margin-top: 10px;
+}
