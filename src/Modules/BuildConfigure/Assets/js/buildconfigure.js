@@ -153,8 +153,8 @@ function displayStepField() {
         html += '  <h4>'+field.name+'</h4>' ;
         html += '  <input type="hidden" id="steps['+hash+'][module]" name="steps['+hash+'][module]" value="'+module+'" />' ;
         html += '  <input type="hidden" id="steps['+hash+'][steptype]" name="steps['+hash+'][steptype]" value="'+steptype+'" />' ;
-        html += "  <input type='text' id='steps[" +'"'+hash+'"'+ ']["'+field.slug+'"]'+"' name='steps[" +'"'+hash+'"'+ '"]["'+field.slug+'"]'+'  class="form-control"/>' ;
-        html += '  <a class="btn btn-warning" onclick="deleteStepField('+hash+')">Delete Step</a>' ;
+        html += '  <input type="text" id="steps[' +'"'+hash+'"'+ ']['+field.slug+']'+'" name="steps[' +'"'+hash+'"'+ ']['+field.slug+']'+'"  class="form-control"/>' ;
+      
         html += '  </div>' ;
         html += '  </div>';
         html += ' 	<label for="delete" class="col-sm-2 control-label text-left"></label>';	
