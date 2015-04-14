@@ -108,7 +108,7 @@
 
                 </form>
 
-            </div>
+            </div><hr>
               <p class="text-center">
                 Visit <a href="http://www.pharaohtools.com">www.pharaohtools.com</a> for more
             </p>
