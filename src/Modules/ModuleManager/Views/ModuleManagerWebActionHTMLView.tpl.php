@@ -1,16 +1,18 @@
-<div class="container">
-    <div class="row">
-        <div class="col-sm-4 col-md-3 sidebar">
-            <div class="mini-submenu">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </div>
-            <div class="list-group sidebar-list">
-                <span href="#" class="list-group-item active">
-                    Menu
-                    <span class="pull-right" id="slide-submenu"> <i class="fa fa-times"></i> </span>
-                </span>
+<div class="container" id="wrapper">
+    <div class="navbar-default col-sm-2 sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse">
+            <ul class="nav in" id="side-menu">
+                <li class="sidebar-search  ">
+                    <div class="input-group custom-search-form  hvr-bounce-in">
+                        <input type="text" class="form-control" placeholder="Search...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </span>
+                    </div>
+                    <!-- /input-group -->
+                </li>
                 <a href="/index.php?control=Index&action=show" class="list-group-item">
                     <i class="fa fa-comment-o"></i> Dashboard
                 </a>
@@ -24,7 +26,8 @@
             $act = '/index.php?control=ModuleManager&item='.$pageVars["data"]["pipeline"]["project-slug"].'&action=save' ;
         ?>
 
-        <div class="col-sm-8 col-md-9 clearfix main-container">
+         <div class="col-lg-9">
+                    <div class="well well-lg"> 
             <h2 class="text-uppercase text-light"><a href="/"> Build - Pharaoh Tools </a></h2>
             <div class="row clearfix no-margin">
 
@@ -121,9 +124,9 @@
                 </form>
                 -->
             </div>
-            <p>
-                ---------------------------------------<br/>
-                Visit www.pharaohtools.com for more
+            <hr>
+              <p class="text-center">
+                Visit <a href="http://www.pharaohtools.com">www.pharaohtools.com</a> for more
             </p>
 
         </div>
