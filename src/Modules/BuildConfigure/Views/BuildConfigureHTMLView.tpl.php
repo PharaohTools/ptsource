@@ -346,6 +346,6 @@
 
     $(function() {
         $( "#sortableSteps" ).sortable();
-        $( "#sortableSteps" ).disableSelection();
+       // $( "#sortableSteps" ).disableSelection();
     });
 </script>
