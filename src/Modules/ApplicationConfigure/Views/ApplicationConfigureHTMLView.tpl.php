@@ -101,8 +101,9 @@
                     <div class="form-group">
                         <div class="col-sm-12">
                             <button type="submit" class="btn btn-success hvr-float-shadow">Save Configuration</button>
-                            <button type="submit" class="btn btn-primary hvr-float-shadow">Clear</button>
-                            <button type="submit" class="btn btn-warning hvr-float-shadow">Use Defaults</button>
+                            <button type="button" class="btn btn-primary hvr-float-shadow" onclick="$('input').val('')">Clear</button>
+                          
+                            <a href="/"> <button type="button" class="btn btn-warning hvr-float-shadow">Cancle</button></a>
                         </div>
                     </div>
 
