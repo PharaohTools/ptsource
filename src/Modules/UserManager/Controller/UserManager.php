@@ -40,7 +40,7 @@ class UserManager extends Base {
        if ($pageVars["route"]["action"] == "changepassword") {
             $this->content["data"] = $thisModel->changePassword();
             $this->content["route"]["extraParams"]["output-format"] = "CLI" ;
-            return array("type" => "view", "view" => "userProfile", "pageVars" => $this->content);
+            return array("type" => "view", "view" => "changePasswordResult", "pageVars" => $this->content);
         }
     }
 
