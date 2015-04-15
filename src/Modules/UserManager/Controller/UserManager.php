@@ -33,6 +33,15 @@ class UserManager extends Base {
             $this->content["userdata"] = $thisModel->getUserDetails(); 
             return array ("type"=>"view", "view"=>"userManager", "pageVars"=>$this->content);     
        }
+       if ($pageVars["route"]["action"] == "userprofile") {
+            $this->content["currentuser"] = $thisModel->getCurrentUser(); 
+            return array ("type"=>"view", "view"=>"userProfile", "pageVars"=>$this->content);     
+       }
+       if ($pageVars["route"]["action"] == "changepassword") {
+            $this->content["data"] = $thisModel->changePassword();
+            $this->content["route"]["extraParams"]["output-format"] = "CLI" ;
+            return array("type" => "view", "view" => "changePasswordResult", "pageVars" => $this->content);
+        }
     }
 
 }

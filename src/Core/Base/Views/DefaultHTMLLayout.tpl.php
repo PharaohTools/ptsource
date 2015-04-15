@@ -95,6 +95,8 @@
 				<!-- /.navbar-header -->
 				<ul class="nav navbar-top-links navbar-right">
 					
+                <?php 
+                        if($pageVars["route"]["action"] != "registration" && $pageVars["route"]["action"] != "login") { ?>
                 <li class="dropdown hvr-hang ">
                 	
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -109,29 +111,29 @@
         						</div >
         					</a>
         				</li>
-                        <li class="divider"></li>
+                     <!--   <li class="divider"></li>
                         <li>
                             <a class="text-center" href="#">
                                 <strong>See All Alerts</strong>
                                 <i class="fa fa-angle-right"></i>
                             </a>
-                        </li>
+                        </li> -->
                     </ul>
-                    <!-- /.dropdown-alerts --
                 </li>
+               
                 <!-- /.dropdown -->
                 <li class="dropdown  hvr-hang">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw" id="bell"></i>  <i class="fa fa-caret-down" id="caret"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user ">
-                        <li><a href="#" class=" hvr-grow-shadow"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        <li><a href="/index.php?control=UserManager&action=userprofile" class=" hvr-grow-shadow"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
-                        <li><a href="#" class=" hvr-grow-shadow"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
+                        <li><a href="/index.php?control=ApplicationConfigure&action=show" class=" hvr-grow-shadow"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li> 
                         <li><a href="/index.php?control=About&action=show" class=" hvr-grow-shadow"><i class="fa fa-help fa-fw"></i> About</a>
                         </li> 
-                        <?php 
+                        <?php }
                         if($pageVars["route"]["action"] != "registration" && $pageVars["route"]["action"] != "ldaplogin" && $pageVars["route"]["action"] != "login") { ?>
                         <li class="divider"></li>
                         <li><a href="/index.php?control=Signup&action=logout" class=" hvr-grow-shadow"><i class="fa fa-sign-out fa-fw"></i> Logout</a>

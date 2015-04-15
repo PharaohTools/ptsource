@@ -49,7 +49,6 @@ class UserManagerAnyOS extends BasePHPApp {
 		$oldData=$this->getUserDetails();
 		foreach($oldData as $data){
 			if($data->username==$_SESSION["username"]){
-				print_r($data);
 				if($data->role==1)
 				return TRUE;
 		     }
@@ -81,4 +80,33 @@ class UserManagerAnyOS extends BasePHPApp {
 		fwrite($myfile, json_encode($oldData));
 	    fclose($myfile);
 	}
+	
+	public function getCurrentUser(){
+		$oldData=$this->getUserDetails();
+		foreach($oldData as $data){
+			if($data->username==$_SESSION["username"]){
+					return $data;
+		     }
+		}		
+	}
+	
+	public function changePassword(){
+		$oldData=$this->getUserDetails();
+		foreach($oldData as $data){
+            if($data->password==$_POST['oldPassword'])
+            {
+            }
+
+           /*if($data->email==$_POST['email'])
+            {
+                echo json_encode(array("status" => FALSE,"id"=>"login_username_alert", "msg" => "User Name Already Exist!!!"));
+                return;
+                echo json_encode(array("status" => FALSE,"id"=>"login_email_alert", "msg" => "Email Already Exist!!!"));
+                return;
+            }*/
+
+        }
+        return;
+		
+		}
 }

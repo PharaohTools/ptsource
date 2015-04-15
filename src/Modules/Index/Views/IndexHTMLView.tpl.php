@@ -1,4 +1,4 @@
-<link href="styles/ihover.css" rel="stylesheet">
+	<link href="styles/ihover.css" rel="stylesheet">
 <div class="container" id="wrapper">
 
 	<div class="navbar-default col-sm-2 sidebar" role="navigation">
@@ -41,9 +41,6 @@
 				</li>
 				<li>
 					<a href="/index.php?control=BuildList&action=show" class=" hvr-bounce-in"><i class="fa fa-bars fa-fw hvr-bounce-in"></i> All Pipelines</a>
-				</li>
-				<li>
-					<a href="/index.php?control=Monitors&action=DefaultHistory" class=" hvr-bounce-in"><i class="fa fa-history fa-fw hvr-bounce-in"></i> History</a>
 				</li>
 			</ul>
 		</div>

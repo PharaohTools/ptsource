@@ -36,6 +36,24 @@ class TriggerRemoteLinuxUnix extends Base {
         return $ff ;
     }
 
+	public function getStepTypes() {
+        return array_keys($this->getFormFields());
+    }
+	
+	public function getFormFields() {
+        $ff = array(
+            "shelldata" => array(
+                "type" => "textarea",
+                "name" => "Trigger Remote Shell Data",
+                "slug" => "data" ),
+            "shellscript" => array(
+                "type" => "text",
+                "name" => "Trigger Remote Shell Script",
+                "slug" => "script" ),
+        );
+        return $ff ;
+    }
+
     public function executeStep($step) {
         $loggingFactory = new \Model\Logging();
         $logging = $loggingFactory->getModel($this->params);
@@ -48,7 +66,7 @@ class TriggerRemoteLinuxUnix extends Base {
             return (intval($rc) === 0) ? true : false ; }
         else if ( $step["steptype"] == "trigger-remote-script") {
             $logging->log("Running TriggerRemote from Script...") ;
-            $this->executeAsTriggerRemote($step["data"]) ;
+            $this->executeAsTriggerRemote($step["script"]) ;
             return true ; }
         else {
             $logging->log("Unrecognised Build Step Type {$step["type"]} specified in TriggerRemote Module") ;
