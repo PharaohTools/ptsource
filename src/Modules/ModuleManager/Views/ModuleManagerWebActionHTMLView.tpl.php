@@ -62,14 +62,22 @@
                     <div class="form-group">
 
                         <div class="col-sm-12">
+                       <?php
 
-                            <h3>Available Modules</h3>
+                       if($pageVars["data"]["available_modules"]!=null)
+									{?>
+									  <h3>Available Modules</h3>
+					  <?php
+
+									}?>
+                            
 
                             <div class="col-sm-12" style="height: 150px; overflow-y: scroll; resize:both;">
 
                                 <div class="form-group ui-sortable moduleList" id="sortableSteps">
 
                                     <?php
+                                   
 
                                     $oddeven = "Odd" ;
 
