@@ -20,7 +20,7 @@ class ModuleManagerWebActionAnyOS extends BasePHPApp {
     }
 
     private function installModules() {
-        var_dump($_REQUEST["module-source"]);
+        //var_dump($_REQUEST["module-source"]);
         if (isset($_REQUEST["module-source"]) && strlen($_REQUEST["module-source"]) > 0) {
             $modFactory = new \Model\ModuleManager() ;
             $mmpr = $this->params ;
