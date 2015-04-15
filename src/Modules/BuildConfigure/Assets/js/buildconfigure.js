@@ -114,7 +114,7 @@ function displayStepField() {
         html += '  <div class="form-group">';
         html += ' 	<label for="delete" class="col-sm-2 control-label text-left"></label>';	
         html += '   <div class="col-sm-10">' ;
-        html += '    <a class="btn btn-warning" onclick="deleteStepField('+hash+')">Delete Step</a>' ;
+        html += '    <a class="btn btn-warning" onclick="deleteStepField(\''+hash+'\')">Delete Step</a>' ;
         html += '  </div>' ;
         html += '  </div>' ;
         html += '  </div>' ;
@@ -138,7 +138,7 @@ function displayStepField() {
         html += '  </div>';
         html += ' 	<label for="delete" class="col-sm-2 control-label text-left"></label>';	
         html += '   <div class="col-sm-12">' ;
-        html += '    <a class="btn btn-warning" onclick="deleteStepField('+hash+')">Delete Step</a>' ;
+        html += '    <a class="btn btn-warning" onclick="deleteStepField(\''+hash+'\')">Delete Step</a>' ;
         html += '  </div>' ;
         html += '  </div>' ;
         html += ' </li>'; }
@@ -159,7 +159,7 @@ function displayStepField() {
         html += '  </div>';
         html += ' 	<label for="delete" class="col-sm-2 control-label text-left"></label>';	
         html += '   <div class="col-sm-12">' ;
-        html += '    <a class="btn btn-warning" onclick="deleteStepField('+hash+')">Delete Step</a>' ;
+        html += '    <a class="btn btn-warning" onclick="deleteStepField(\''+hash+'\')">Delete Step</a>' ;
         html += '  </div>' ;
         html += '  </div>' ;
         html += ' </li>'; }
@@ -179,7 +179,7 @@ function displayStepField() {
         html += '  </div>';
         html += ' 	<label for="delete" class="col-sm-2 control-label text-left"></label>';	
         html += '   <div class="col-sm-12">' ;
-        html += '    <a class="btn btn-warning" onclick="deleteStepField('+hash+')">Delete Step</a>' ;
+        html += '    <a class="btn btn-warning" onclick="deleteStepField(\''+hash+'\')">Delete Step</a>' ;
         html += '  </div>' ;
         html += '  </div>' ;
         html += ' </li>'; }
