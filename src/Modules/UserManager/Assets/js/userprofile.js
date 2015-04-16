@@ -1,5 +1,5 @@
 function changePassword() {
-    rurl = $('#base_url').val() + '/index.php?control=UserManager&action=changepassword' ;
+    rurl = $('#base_url').val() + '/index.php?control=UserManager&action=changepassword&output-format=JSON' ;
     console.log(rurl) ;
     
     $('#old_password').html('');
@@ -41,10 +41,10 @@ function changePassword() {
             newPassword:$('#new_password').val(),
         },
         dataType: "json",
-        success: function(result) {
-            $('#password_error_msg').html('&nbsp;&nbsp;'+result.msg);
-            $('#password_error_msg').focus(); },
-        error: function(result, textStatus, errorThrown) {
+        success: function(result) { console.log(result);
+            $('#form_alert').html('&nbsp;&nbsp;'+result.msg);
+            $('#form_alert').focus(); },
+        error: function(result, textStatus, errorThrown) { console.log(result);
             $('#password_error_msg').html('&nbsp;&nbsp;'+textStatus+' '+errorThrown+' '+result.msg);
             $('#password_error_msg').focus(); }
 

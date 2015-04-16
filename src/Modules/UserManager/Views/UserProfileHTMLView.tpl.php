@@ -92,6 +92,7 @@
 					<form class="form-horizontal custom-form">
                     <div class="form-group col-md-5 alert-primary">
                         <h3>Change Password</h3>
+                        <h6 id="form_alert"></h6>
                         <hr>
                         <label>Enter Old Password</label>
                         <input type="password" class="form-control" id="old_password" name="old_password">
