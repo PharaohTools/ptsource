@@ -218,7 +218,7 @@ class SignupAllOS extends Base {
 		return $oldData;
 	}
     
-    public function createNewUser($newUser)
+	public function createNewUser($newUser)
 	{
 		if (!$this->userExist($newUser['email'])) {
 			$oldData=$this->getUsersData();
@@ -257,4 +257,15 @@ class SignupAllOS extends Base {
 		}
 		return 3;
     }
+	
+	public function putUsersData($data = null)
+	{
+		if ($data != NULL) {
+		    if (!$myfile = fopen(__DIR__."/../../Signup/Data/users.txt", "w")) return FALSE;
+			fwrite($myfile, json_encode($data));
+		    fclose($myfile);
+		}
+	}
+    
+	
 }

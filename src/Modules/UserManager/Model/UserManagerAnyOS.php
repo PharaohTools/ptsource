@@ -26,8 +26,8 @@ class UserManagerAnyOS extends BasePHPApp {
     public function getUserDetails() {
 		$signupFactory = new \Model\Signup();
 		$signup = $signupFactory->getModel($this->params);
-		$oldData=$signup->getUsersData();
-        return $oldData;
+		$data=$signup->getUsersData();
+        return $data;
 	}
    
    public function changeRole(){
@@ -91,22 +91,26 @@ class UserManagerAnyOS extends BasePHPApp {
 	}
 	
 	public function changePassword(){
-		$oldData=$this->getUserDetails();
-		foreach($oldData as $data){
-            if($data->password==$_POST['oldPassword'])
-            {
-            }
-
-           /*if($data->email==$_POST['email'])
-            {
-                echo json_encode(array("status" => FALSE,"id"=>"login_username_alert", "msg" => "User Name Already Exist!!!"));
-                return;
-                echo json_encode(array("status" => FALSE,"id"=>"login_email_alert", "msg" => "Email Already Exist!!!"));
-                return;
-            }*/
-
+		if($_POST['oldPassword'] && strlen($_POST['newPassword']) > 2)
+        {
+        	$oldData=$this->getUserDetails();
+			foreach($oldData as $i=>$data){
+	            if($data->username == $_SESSION["username"] || $data->email == $_SESSION["username"]){
+	            	if($data->password == md5($this->salt.$_POST['oldPassword'])){
+	            		$oldData[$i]->password = md5($this->salt.$_POST['newPassword']);
+						echo json_encode(array("status" => true , "id"=>"form_alert", "msg" => "Success"));
+						$signupFactory = new \Model\Signup();
+						$signup = $signupFactory->getModel($this->params);
+						$signup->putUsersData($oldData);
+	                	return;
+	                }
+					else {
+						echo json_encode(array("status" => FALSE, "id"=>"form_alert", "msg" => "Check Old Password!!!"));
+	                	return;
+					}
+	            }
+	        }
+	        return;
         }
-        return;
-		
-		}
+	}
 }
