@@ -36,9 +36,9 @@
 				<li>
 					<a href="/index.php?control=BuildList&action=show " class="active  hvr-bounce-in"><i class="fa fa-bars fa-fw hvr-bounce-in"></i> All Pipelines</a>
 				</li>
-				<li>
+				<!--<li>
 					<a href="/index.php?control=Monitors&action=DefaultHistory" class=" hvr-bounce-in"><i class="fa fa-history fa-fw hvr-bounce-in"></i> History<span class="fa arrow"></span></a>
-				</li>
+				</li> -->
 			</ul>
 		</div>
 		<br />
