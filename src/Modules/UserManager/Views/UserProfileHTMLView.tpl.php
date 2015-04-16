@@ -68,13 +68,13 @@
 
     <div class="well-lg col-md-12 alert-info">
                 <div class="form-group col-md-5 alert-primary">
-                    <h3 class="text-primary">Profile</h3>
+                    <h3 class="text-primary"style="color:#5F98B9">Profile</h3>
                     <hr>
-                    <h4 class="text-primary">User name :
+                    <h4 class="text-primary" style="color:#5F98B9">User name :
                     <strong class="text-danger"><?php foreach($pageVars as $key => $value ) { echo $value->username; }?></strong></h4>
-					<h4 class="text-primary">User email :
+					<h4 class="text-primary"style="color:#5F98B9">User email :
                     <strong class="text-danger"><?php foreach($pageVars as $key => $value ) { echo $value->email; }?></strong></h4>
-                    <h4 class="text-primary">User Role &nbsp;:
+                    <h4 class="text-primary"style="color:#5F98B9">User Role &nbsp;:
                     <strong class="text-danger"><?php 
 						foreach($pageVars as $key => $value ) { 
 							if($value->role == 1){ 
@@ -86,25 +86,26 @@
 							if($value->role == 3){ 
 								echo "Viewer";
 								} 
-							}?></strong></h4>
+						}?></strong></h4>
                     <!-- a href="#" class="btn btn-success">Update Details</a -->
                 </div>
 					<form class="form-horizontal custom-form">
                     <div class="form-group col-md-5 alert-primary">
-                        <h3>Change Password</h3>
-                        <h6 id="form_alert"></h6>
+                       <h3>Change Password</h3>
+                      <!--  <h6 style="color :#FF826B" id="form_alert"></h6>-->
                         <hr>
                         <label>Enter Old Password</label>
                         <input type="password" class="form-control" id="old_password" name="old_password">
-                        <p style="color: #7CFC00;" id="old_password_alert"></p>
+                        <p style="color: #7CFC00;font-family:"Courier New";" id="old_password_alert"></p>
                         <label>Enter New Password</label>
                         <input type="password" class="form-control" id="new_password" name="new_password">
-                        <p style="color: #7CFC00;" id="new_password_alert"></p>
+                        <p style="color: #7CFC00;font-family:"Courier New";" id="new_password_alert"></p>
                         <label>Confirm New Password</label>
                         <input type="password" class="form-control" id="new_password_match" name="new_password_match">
-                        <p style="color: #7CFC00;" id="new_password_match_alert"></p>
-                        <p style="color: #7CFC00;" id="password_match_error"></p>
-                        <br/>
+                        <p style="color: #7CFC00;font-family:"Courier New";" id="new_password_match_alert"></p>
+                        <p style="color:#7CFC00 ;font-family:"Courier New";" id="password_match_error"></p>                         
+                        <p style="color :#FF826B; font-family:"Courier New";" id="form_alert"></p>
+                     <br/>
                         <button type="button" onclick="changePassword();" class="btn  btn-primary hvr-grow-shadow">Change Password</button>
                     </div>
                     </form>
