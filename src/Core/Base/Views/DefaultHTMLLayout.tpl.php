@@ -47,13 +47,8 @@
     	
     	<!-- Custom Theme JavaScript -->
 	    <script src="/Assets/startbootstrap-sb-admin-2-1.0.5/dist/js/sb-admin-2.js"></script>
-    
+
     	<script src="/Assets/js/notification.js"></script>
-    
-		<!-- Custom Theme JavaScript -->
-		<script src="/Assets/startbootstrap-sb-admin-2-1.0.5/dist/js/sb-admin-2.js"></script>
-		
-		
 
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -152,35 +147,6 @@
 			<!-- Bootstrap core JavaScript
 			================================================== -->
 			<!-- Placed at the end of the document so the pages load faster -->
-			<script>
-				$(function() {
-					$('#slide-submenu').on('click', function() {
-						$(this).closest('.list-group').fadeOut('slide', function() {
-							$('.mini-submenu').fadeIn();
-						});
-					});
-
-					$('.mini-submenu').on('click', function() {
-						$(this).next('.list-group').toggle('slide');
-						$('.mini-submenu').hide();
-					});
-
-					$.ajax({
-						type : 'POST',
-						url : $('#base_url').val() + '/index.php?control=Signup&action=login-status',
-						data : {
-							url : document.URL
-						},
-						dataType : "json",
-						success : function(result) {
-							if (result.status == false) {
-								window.location.assign($('#base_url').val() + '/index.php?control=Signup&action=login');
-							}
-						}
-					});
-				})
-
-			</script>
 	
 			<div class="scroll-top-wrapper ">
            <span class="scroll-top-inner">
