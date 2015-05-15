@@ -27,7 +27,7 @@ class AssetPublisherLinuxUnix extends Base {
 
     public function publishAssets() {
         $loggingFactory = new \Model\Logging();
-        $this->params["echo-log"] ;
+        $this->params["echo-log"] = true ;
         $logging = $loggingFactory->getModel($this->params);
         $modDir = "/opt/".PHARAOH_APP."/".PHARAOH_APP."/src/Modules/" ;
         $mods = scandir($modDir) ;
