@@ -336,12 +336,12 @@
 
 
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
-<link rel="stylesheet" type="text/css" href="/index.php?control=AssetLoader&action=show&module=BuildConfigure&type=css&asset=buildconfigure.css">
+<link rel="stylesheet" type="text/css" href="/Assets/Modules/BuildConfigure/css/buildconfigure.css">
 <script type="text/javascript">
 	savedSteps = <?php echo json_encode($pageVars["data"]["pipeline"]["steps"]) ; ?> ;
     steps = <?php echo json_encode($pageVars["data"]["fields"]) ; ?> ;
 </script>
-<script type="text/javascript" src="/index.php?control=AssetLoader&action=show&module=BuildConfigure&type=js&asset=buildconfigure.js"></script>
+<script type="text/javascript" src="/Assets/Modules/BuildConfigure/js/buildconfigure.js"></script>
 <script type="text/javascript">
 
     $(function() {
