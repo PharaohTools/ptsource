@@ -8,7 +8,7 @@
 		<meta name="author" content="">
 		<link rel="icon" href="/Assets/Modules/DefaultSkin/image/favicon.ico">
 		
-		<title>PTTrack - Pharaoh Tools</title>
+		<title>Build - Pharaoh Tools</title>
 
         <script src="/Assets/Modules/DefaultSkin/js/jquery.min.js"></script>
         <script src="/Assets/Modules/DefaultSkin/js/jquery-ui.min.js"></script>
@@ -78,7 +78,7 @@
 					<a class="navbar-" href="/index.php?control=Index&action=show">
 						<figure class="rollover">
                         <img src="/Assets/Modules/DefaultSkin/image/5.png" class="navbar-img hvr-grow-shadow" style="height: 60px;padding: 5px;" />
-                        <span class="title hvr-grow-shadow">PTTrack</span>
+                        <span class="title hvr-grow-shadow">PTBuild</span>
                     </a>
 				</div>
 				

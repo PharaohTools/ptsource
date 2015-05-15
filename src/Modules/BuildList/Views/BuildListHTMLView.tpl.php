@@ -164,17 +164,17 @@
 							<td>
 							<?php
 							if ($pipelineDetails["has_parents"] === true) {
-							echo '<img class="listImage" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=tick.png" />' ; }
+							echo '<img class="listImage" src="/Assets/Modules/BuildList/image/tick.png" />' ; }
 							else {
-							echo '<img class="listImage" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=cross.png" />' ; }
+							echo '<img class="listImage" src="/Assets/Modules/BuildList/image/cross.png" />' ; }
 							?>
 							</td>
 							<td>
 							<?php
 							if ($pipelineDetails["has_children"] === true) {
-							echo '<img class="listImage" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=tick.png" />' ; }
+							echo '<img class="listImage" src="/Assets/Modules/BuildList/image/tick.png" />' ; }
 							else {
-							echo '<img class="listImage" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=image&asset=cross.png" />' ; }
+							echo '<img class="listImage" src="/Assets/Modules/BuildList/image/cross.png" />' ; }
 							?>
 							</td>
 							-->
@@ -197,5 +197,5 @@
             </p>
 	</div>
 </div><!-- /.container -->
-<link rel="stylesheet" type="text/css" href="/index.php?control=AssetLoader&action=show&module=BuildList&type=css&asset=buildlist.css">
-<script type="text/javascript" src="/index.php?control=AssetLoader&action=show&module=BuildList&type=js&asset=buildlist.js"></script>
+<link rel="stylesheet" type="text/css" href="/Assets/Modules/BuildList/css/buildlist.css">
+<script type="text/javascript" src="/Assets/Modules/BuildList/js/buildlist.js"></script>
