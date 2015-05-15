@@ -1,4 +1,4 @@
-<script type="text/javascript" src="/index.php?control=AssetLoader&action=show&module=Signup&type=js&asset=registration.js"></script>
+<script type="text/javascript" src="/Assets/Modules/Signup/js/registration.js"></script>
 <div class="container" id="wapper">
 	<div class="row">
         <div class=" col-md-7 col-md-offset-2 ">
@@ -59,7 +59,7 @@
                 <p class="text-center" style="color:#337ab7">
 						---------------------------------------
 						<br/>
-						Visit <a href="http://www.pharaohtools.com">www.pharaohtools.com</a> for more
+						Visit www.pharaohtools.com for more
 					</p>
             </div>
         </div>

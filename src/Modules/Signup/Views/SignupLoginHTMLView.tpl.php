@@ -5,12 +5,9 @@
 			<div class="login-panel panel panel-default">
 				<div class="col-md-12">
 					<h3 class="hero-unit"><strong>Log in</strong> </h3>
-					
-									<p class="text-right "><a href="/index.php?control=Signup&action=registration">  <b> Need an account ? Sign Up  </b> </a> </p>
-									
 					<!--<div class="pull-right">
 					switch to
-					<a href="http://www.ptbuild.tld/index.php?control=Signup&action=registration"> OpenID log in</a>
+					<a href="http://www.pttrack.tld/index.php?control=Signup&action=registration"> OpenID log in</a>
 					</div> -->
 					<hr>
 				</div>
@@ -40,18 +37,22 @@
 							</div>
 
 							<div class="form-group">
-								<div class="col-sm-offset-3 col-sm-9">
-										
-									<button type="button" onclick="submit_login();"  class="btn  btn-primary  btn-1 btn-1a hvr-grow-shadow" >
+								<div class="col-sm-offset-3 col-sm-4">
+									<div >
+									<label for="Signed in"><input name="Signed in" id="Signed in"  type="checkbox" style="color:#A2A1A1;"> Keep Me Signed in</label>
+									</div>	
+									<button type="button" onclick="submit_login();" class="btn  btn-primary  btn-1 btn-1a hvr-grow-shadow" >
 										Log in
 									</button>
-									<label  style="color:#337ab7;   margin-left: 145px;;" for="Signed in "><input name="Signed in" id="Signed in"  type="checkbox" > Keep Me Signed in</label>
-								    </div>
+									
+									</div>
 									
 									
 									<div class="col-sm-offset-3 col-sm-12 ">
 									<br />	
-									
+									<div>
+									<a href="/index.php?control=Signup&action=registration">  <b> Need an account ? Sign Up  </b> </a> 
+									</div>
 								</div>
 							</div>
 					           
@@ -62,7 +63,6 @@
 </div>
                                 
 							    <div class="text-center ">
-							    <a href="/index.php?control=OAuth&action=googlelogin" class="btn btn-google hvr-pop" title="Google"><i class="fa fa-google"></i> Google </a> |
 								<a href="/index.php?control=OAuth&action=githublogin" class="btn btn-github hvr-pop" title="Github"><i class="fa fa-github"></i> Github </a> | 
 								<a href="/index.php?control=OAuth&action=fblogin" class="btn btn-facebook hvr-pop" title="Facebook"><i class="fa fa-facebook"></i>  Facebook</a>  |
 								<a href="/index.php?control=OAuth&action=linkedinlogin" class="btn btn-linkedin hvr-pop" title="LinkedIn"><i class="fa fa-linkedin"></i> linkedin</a> |
@@ -77,7 +77,7 @@
 					<p class="text-center" style="color:#337ab7">
 						---------------------------------------
 						<br/>
-						Visit <a href="http://www.pharaohtools.com">www.pharaohtools.com</a> for more
+						Visit www.pharaohtools.com for more
 					</p>
 
 				</div>
@@ -86,6 +86,5 @@
         </div>
     </div>
 </div>
-<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Palatino Linotype">
-
-<script type="text/javascript" src="/index.php?control=AssetLoader&action=show&module=Signup&type=js&asset=signup.js"></script>
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Palatino+Linotype">
+<script type="text/javascript" src="/Assets/Modules/Signup/js/signup.js"></script>
