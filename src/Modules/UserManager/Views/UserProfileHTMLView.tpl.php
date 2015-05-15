@@ -119,5 +119,5 @@
    </div>
 </div> 
 </div><!-- container -->
-<link rel="stylesheet" href="/index.php?control=AssetLoader&action=show&module=UserManager&type=css&asset=usermanager.css">
-<script type="text/javascript" src="/index.php?control=AssetLoader&action=show&module=UserManager&type=js&asset=userprofile.js"></script>
+<link rel="stylesheet" href="/Assets/Modules/UserManager/css/usermanager.css">
+<script type="text/javascript" src="/Assets/Modules/UserManager/js/userprofile.js"></script>

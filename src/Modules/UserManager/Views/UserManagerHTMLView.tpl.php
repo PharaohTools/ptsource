@@ -153,5 +153,5 @@
             </p>
     </div>
 </div><!-- container -->
-<link rel="stylesheet" href="/index.php?control=AssetLoader&action=show&module=UserManager&type=css&asset=usermanager.css">
+<link rel="stylesheet" href="/Assets/Modules/UserManager/css/usermanager.css">
 

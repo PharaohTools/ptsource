@@ -21,96 +21,84 @@ class UserManagerAnyOS extends BasePHPApp {
         $this->programNameFriendly = " UserManager "; // 12 chars
         $this->programNameInstaller = "UserManager";
         $this->initialize();
-	}
+    }
 
     public function getUserDetails() {
-		$signupFactory = new \Model\Signup();
-		$signup = $signupFactory->getModel($this->params);
-		$data=$signup->getUsersData();
-        return $data;
-	}
-   
-   public function changeRole(){
-		$oldData=$this->getUserDetails();
-		foreach($oldData as $key => $data){
-			if($data->username==$_GET["username"] && $data->email==$_GET["email"]){
-				$data->username=$_GET["username"];
-				$data->email=$_GET["email"];
-				$data->role=$_GET["role"];
-				$oldData[$key] = $data;
-			}
-		}
-		$myfile = fopen(__DIR__."/../../Signup/Data/users.txt", "w") or die("Unable to open file!");
-		fwrite($myfile, json_encode($oldData));
-	    fclose($myfile);
+        $signupFactory = new \Model\Signup();
+        $signup = $signupFactory->getModel($this->params);
+        $oldData=$signup->getUsersData();
+        return $oldData;
     }
-    
+
+    public function changeRole(){
+        $oldData=$this->getUserDetails();
+        foreach($oldData as $key => $data){
+            // @todo security use post
+            if($data->username==$_REQUEST["username"] && $data->email==$_REQUEST["email"]){
+                $data->username=$_REQUEST["username"];
+                $data->email=$_REQUEST["email"];
+                $data->role=$_REQUEST["role"];
+                $oldData[$key] = $data; } }
+        $myfile = fopen(__DIR__."/../../Signup/Data/users.txt", "w") or die("Unable to open file!");
+        fwrite($myfile, json_encode($oldData));
+        fclose($myfile);
+    }
+
     public function checkRole(){
-		$oldData=$this->getUserDetails();
-		foreach($oldData as $data){
-			if($data->username==$_SESSION["username"]){
-				if($data->role==1)
-				return TRUE;
-		     }
-		}
-	}
-	
-	public function removeUser(){
-		$oldData=$this->getUserDetails();
-		foreach($oldData as $key => $data){
-			if($data->username==$_GET["username"] && $data->email==$_GET["email"]){
-			$data->restrict=1;
-				$oldData[$key] = $data;
-			}
-		}
-		$myfile = fopen(__DIR__."/../../Signup/Data/users.txt", "w") or die("Unable to open file!");
-		fwrite($myfile, json_encode($oldData));
-	    fclose($myfile);
-	}
-	
-	public function addUser(){
-		$oldData=$this->getUserDetails();
-		foreach($oldData as $key => $data){
-			if($data->username==$_GET["username"] && $data->email==$_GET["email"]){
-			$data->restrict=0;
-				$oldData[$key] = $data;
-			}
-		}
-		$myfile = fopen(__DIR__."/../../Signup/Data/users.txt", "w") or die("Unable to open file!");
-		fwrite($myfile, json_encode($oldData));
-	    fclose($myfile);
-	}
-	
-	public function getCurrentUser(){
-		$oldData=$this->getUserDetails();
-		foreach($oldData as $data){
-			if($data->username==$_SESSION["username"]){
-					return $data;
-		     }
-		}		
-	}
-	
-	public function changePassword(){
-		if($_POST['oldPassword'] && strlen($_POST['newPassword']) > 2)
-        {
-        	$oldData=$this->getUserDetails();
-			foreach($oldData as $i=>$data){
-	            if($data->username == $_SESSION["username"] || $data->email == $_SESSION["username"]){
-	            	if($data->password == md5($this->salt.$_POST['oldPassword'])){
-	            		$oldData[$i]->password = md5($this->salt.$_POST['newPassword']);
-						echo json_encode(array("status" => true , "id"=>"form_alert", "msg" => "Success"));
-						$signupFactory = new \Model\Signup();
-						$signup = $signupFactory->getModel($this->params);
-						$signup->putUsersData($oldData);
-	                	return;
-	                }
-					else {
-						echo json_encode(array("status" => FALSE, "id"=>"form_alert", "msg" => "Check Old Password!!!"));
-	                	return;
-					}
-	            }
-	        }
-	        return;
+        $oldData=$this->getUserDetails();
+        foreach($oldData as $data){
+            if($data->username==$_SESSION["username"]){
+                if($data->role=1)
+                    return TRUE; } }
+    }
+
+    public function getMyUserRoleId() {
+        $oldData=$this->getUserDetails();
+        foreach($oldData as $data) {
+            if($data->username==$_SESSION["username"]) {
+                return $data->role; } }
+        return false ;
+    }
+
+    public function getMyUserSlug() {
+        $oldData=$this->getUserDetails();
+        foreach($oldData as $data) {
+            if($data->username==$_SESSION["username"]) {
+                return $_SESSION["username"]; } }
+        return false ;
+    }
+
+    public function getRestrictionStatus($oneUser = null) {
+        if (is_null($oneUser)) { $oneUser = $_SESSION["username"] ; }
+        $oldData = $this->getUserDetails();
+        foreach($oldData as $data) {
+            if ($data->username == $oneUser) {
+                if ($data->restrict == 1) {
+                    return true; } } }
+        return false ;
+    }
+
+    public function restrictUser(){
+        $oldData=$this->getUserDetails();
+        foreach($oldData as $key => $data){
+            if ($data->username==$_REQUEST["username"] && $data->email==$_REQUEST["email"]){
+                $data->restrict=1;
+                $oldData[$key] = $data; } }
+        $myfile = fopen(__DIR__."/../../Signup/Data/users.txt", "w") or die("Unable to open file!");
+        fwrite($myfile, json_encode($oldData));
+        fclose($myfile);
+    }
+
+    public function addUser(){
+        $oldData=$this->getUserDetails();
+        foreach($oldData as $key => $data){
+            if($data->username==$_REQUEST["username"] && $data->email==$_REQUEST["email"]){
+                $data->restrict=0;
+                $oldData[$key] = $data;
+            }
         }
-	}
+        $myfile = fopen(__DIR__."/../../Signup/Data/users.txt", "w") or die("Unable to open file!");
+        fwrite($myfile, json_encode($oldData));
+        fclose($myfile);
+    }
 }

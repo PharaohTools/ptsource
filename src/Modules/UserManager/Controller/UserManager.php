@@ -34,8 +34,8 @@ class UserManager extends Base {
             return array ("type"=>"view", "view"=>"userManager", "pageVars"=>$this->content);     
        }
        if ($pageVars["route"]["action"] == "userprofile") {
-            $this->content["currentuser"] = $thisModel->getCurrentUser(); 
-            return array ("type"=>"view", "view"=>"userProfile", "pageVars"=>$this->content);     
+            $this->content["currentuser"] = $thisModel->getCurrentUser();
+            return array ("type"=>"view", "view"=>"userProfile", "pageVars"=>$this->content);
        }
        if ($pageVars["route"]["action"] == "changepassword") {
             $this->content["data"] = $thisModel->changePassword();
