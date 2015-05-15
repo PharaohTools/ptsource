@@ -122,23 +122,25 @@ COMPLETION;
         return $retVal;
     }
 
-    protected function setCmdLineParams($params) {
+    protected function setCmdLineParams($params = array()) {
         $cmdParams = array();
-        if (!is_array($params)) {
-            var_dump($params) ;
-            debug_print_backtrace() ; }
-        foreach ($params as $paramKey => $paramValue) {
-            if (is_array($paramValue)) {
-                // if the value is a php array, the param must be already formatted so do nothing
-            }
-            else if (substr($paramValue, 0, 2)=="--" && strpos($paramValue, '=') != null ) {
-                $equalsPos = strpos($paramValue, "=") ;
-                $paramKey = substr($paramValue, 2, $equalsPos-2) ;
-                $paramValue = substr($paramValue, $equalsPos+1, strlen($paramValue)) ; }
-            else if (substr($paramValue, 0, 2)=="--" && strpos($paramValue, '=') == false ) {
-                $paramKey = substr($paramValue, 2) ;
-                $paramValue = true ; }
-            $cmdParams = array_merge($cmdParams, array($paramKey => $paramValue)); }
+        // if (!is_array($params)) {
+        //    var_dump($params) ;
+        //    debug_print_backtrace() ;
+        // }
+        if (count($params)>0) {
+            foreach ($params as $paramKey => $paramValue) {
+                if (is_array($paramValue)) {
+                    // if the value is a php array, the param must be already formatted so do nothing
+                }
+                else if (substr($paramValue, 0, 2)=="--" && strpos($paramValue, '=') != null ) {
+                    $equalsPos = strpos($paramValue, "=") ;
+                    $paramKey = substr($paramValue, 2, $equalsPos-2) ;
+                    $paramValue = substr($paramValue, $equalsPos+1, strlen($paramValue)) ; }
+                else if (substr($paramValue, 0, 2)=="--" && strpos($paramValue, '=') == false ) {
+                    $paramKey = substr($paramValue, 2) ;
+                    $paramValue = true ; }
+                $cmdParams = array_merge($cmdParams, array($paramKey => $paramValue)); } }
         $this->params = (is_array($this->params)) ? array_merge($this->params, $cmdParams) : $cmdParams;
     }
 
