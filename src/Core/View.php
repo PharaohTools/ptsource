@@ -4,31 +4,32 @@ Namespace Core;
 
 class View {
 
-  public function executeView($view, Array $viewVars) {
-      $ep = (isset($viewVars["route"]["extraParams"])) ? $viewVars["route"]["extraParams"] : array() ;
-      $baseMod = new \Model\Base($ep) ;
-      $viewVars["params"] = $baseMod->params ;
-      $viewVars = $this->outFormOverrideParam($viewVars);
-      $vvLayoutCond1 = (isset($viewVars["params"]["output-format"])
-          && $viewVars["params"]["output-format"] == "HTML") ;
-      $vvLayoutCond2 = (isset($viewVars["params"]["output-format"])
-          && $viewVars["params"]["output-format"] != "cli"
-          && $viewVars["params"]["output-format"] != "HTML") ;
-      if (!isset($viewVars["layout"])) {
-          if ($vvLayoutCond1) { $viewVars["layout"] = "DefaultHTML" ; }
-          else if ($vvLayoutCond2) { $viewVars["layout"] = "blank" ; }
-          else { $viewVars["layout"] = "default" ; } }
-      $templateData = $this->loadTemplate ($view, $viewVars) ;
-      $data = $this->loadLayout ( $viewVars["layout"], $templateData, $viewVars) ;
-      $this->renderAll($data) ;
-  }
+    public function executeView($view, Array $viewVars) {
+        $ep = (isset($viewVars["route"]["extraParams"])) ? $viewVars["route"]["extraParams"] : array() ;
+        $baseMod = new \Model\Base($ep) ;
+        $viewVars["params"] = $baseMod->params ;
+        $viewVars = $this->outFormOverrideParam($viewVars);
+        $vvLayoutCond1 = (isset($viewVars["params"]["output-format"])
+            && $viewVars["params"]["output-format"] == "HTML") ;
+        $vvLayoutCond2 = (isset($viewVars["params"]["output-format"])
+            && $viewVars["params"]["output-format"] != "cli"
+            && $viewVars["params"]["output-format"] != "HTML") ;
+        if (!isset($viewVars["layout"])) {
+            if ($vvLayoutCond1) { $viewVars["layout"] = "DefaultHTML" ; }
+            else if ($vvLayoutCond2) { $viewVars["layout"] = "blank" ; }
+            else { $viewVars["layout"] = "blank" ; } }
+        $templateData = $this->loadTemplate ($view, $viewVars) ;
+        $data = $this->loadLayout ( $viewVars["layout"], $templateData, $viewVars) ;
+        $this->renderAll($data) ;
+    }
 
     private function outFormOverrideParam($viewVars) {
         for ($i = 0; $i<count($viewVars["route"]["extraParams"]); $i++) {
             if (isset($viewVars["route"]["extraParams"][$i])) {
                 $stp = strpos($viewVars["route"]["extraParams"][$i], '--output-format=') ;
-                if (is_int($stp)) {
-                    $viewVars["params"]["output-format"] = substr($viewVars["route"]["extraParams"][$i], $stp+16) ; } } }
+                if (is_int($stp) && isset($viewVars["output-format"])) {
+                    $viewVars["params"]["output-format"] = $viewVars["output-format"] ;
+                    $viewVars["route"]["extraParams"][$i] = '--output-format='.$viewVars["output-format"] ; } } }
         return $viewVars ;
     }
 
