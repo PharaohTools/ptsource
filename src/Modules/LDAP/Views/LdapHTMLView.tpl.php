@@ -12,7 +12,7 @@
 					<h3 class="panel-title"><center><b>LDAP</b></center> </h3> 
 				</div>
 					<h4 class="text-uppercase text-light"><a href="/"> <center>PTBuild - Pharaoh Tools <center></a></h4>
-					<a href="#"><img src="/index.php?control=AssetLoader&action=show&module=PostInput&type=image&asset=5.png" class="navbar-img" style="height: 50px;margin-left: auto;margin-right: auto;display: block" /></a>
+					<a href="#"><img src="/Assets/Modules/DefaultSkin/image/5.png" class="navbar-img" style="height: 50px;margin-left: auto;margin-right: auto;display: block" /></a>
 					<div class="row clearfix no-margin">
 						<h5 class="text-uppercase text-light" style="margin-top: 15px;margin-left: 51px;">  </h5> 
 						<p style="color: #6DA900; margin-left: 100px;" id="login_error_msg"></p> 
@@ -60,4 +60,4 @@
     </div><!---->
 
 <!-- /.container -->
-<script type="text/javascript" src="/index.php?control=AssetLoader&action=show&module=LDAP&type=js&asset=ldap.js"></script>
+<script type="text/javascript" src="/Assets/Modules/LDAP/js/ldap.js"></script>
