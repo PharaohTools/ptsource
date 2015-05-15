@@ -18,5 +18,5 @@ $cleo_vars[2] = $_REQUEST['action'];
 foreach($_REQUEST as $post_key => $post_var) {
     if (!in_array($post_key, array('control', 'action'))) {
         $cleo_vars[] = "--$post_key=$_REQUEST[$post_key]" ; } }
-$_ENV['cleo_bootstrap'] = serialize($cleo_vars);
-include("../../Bootstrap.php");
+$_ENV['ptbuild_bootstrap'] = serialize($cleo_vars);
+include(dirname(dirname(__DIR__)).DIRECTORY_SEPARATOR."Bootstrap.php");
