@@ -14,12 +14,12 @@ class EventAllOS extends Base {
     // Model Group
     public $modelGroup = array("Default") ;
 
-    public function runEvent($event) {
-        $modules = $this->getsModulesOfEvent($event) ;
+    public function runEvent($event, $allResults=false) {
         $loggingFactory = new \Model\Logging();
         $logging = $loggingFactory->getModel($this->params);
         $res = array();
-        foreach ($modules as $module ) {
+        $modules = $this->getsModulesOfEvent($event) ;
+        foreach ($modules as $module) {
             $eventModuleFactoryClass = '\Model\\'.$module;
             $eventModuleFactory = new $eventModuleFactoryClass() ;
             $eventModel = $eventModuleFactory->getModel($this->params) ;
@@ -30,12 +30,14 @@ class EventAllOS extends Base {
                         if (method_exists($eventModel, $oneMethod)) {
                             $logging->log("Running ".get_class($eventModel)." with method $oneMethod", $this->getModuleName()) ;
                             $oneres = $eventModel->$oneMethod() ;
-                            $res[] = $oneres ;
-                            if ($oneres == false) return false ; }
+                            $res[] = $oneres ; }
                         else {
                             $logging->log("No method exists in ".get_class($eventModel)." with name $oneMethod", $this->getModuleName()) ;
-                            $res[] = false ;} } } } }
-        return (in_array(false, $res)) ? false : true ;
+                            $res[] = false ; } } } } }
+        if ($allResults==true) {
+            return $res ; }
+        else {
+            return (in_array(false, $res)) ? false : true ; }
     }
 
     public function getsModulesOfEvent($event) {
