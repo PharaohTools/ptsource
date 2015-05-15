@@ -29,16 +29,19 @@ class Signup extends Base
 
         if ($pageVars["route"]["action"] == "registration-submit") {
             $this->content["data"] = $thisModel->registrationSubmit();
-            $this->content["route"]["extraParams"]["output-format"] = "CLI" ;
+            $this->content["output-format"] = "JSON" ;
             return array("type" => "view", "view" => "signupRegistrationResult", "pageVars" => $this->content);
         }
 
         if ($pageVars["route"]["action"] == "login-status") {
-            return $thisModel->checkLoginStatus();
-        }
+            $this->content["data"] =  $thisModel->checkLoginStatus();
+            $this->content["output-format"] = "JSON" ;
+            return array("type" => "view", "view" => "signupLoginSubmit", "pageVars" => $this->content); }
+
         if ($pageVars["route"]["action"] == "login-submit") {
-            return $thisModel->checkLogin();
-        }
+            $this->content["data"] = $thisModel->checkLogin();
+            $this->content["output-format"] = "JSON" ;
+            return array("type" => "view", "view" => "signupLoginSubmit", "pageVars" => $this->content); }
 
         if ($pageVars["route"]["action"] == "logout") {
             $thisModel->allLoginInfoDestroy();
