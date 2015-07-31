@@ -84,10 +84,12 @@
                 <p>Build History:</p>
                 <div class="pipe-history-block pipe-block">
                 <?php
-                    foreach ($pageVars["data"]["pipeline"]["build_history"] as $build_history) {
-                        if ($moduleInfo["hidden"] != true) {
-                            echo '<p><a href="/index.php?control=BuildConfigure&action=show&item=">'.$build_history["count"].
-                                ' - '.$build_history["status"].' - '.$build_history["message"]."</p>"; } }
+                    if (isset($pageVars["data"]["pipeline"]["build_history"]) &&
+                        count($pageVars["data"]["pipeline"]["build_history"])>0 ) {
+                        foreach ($pageVars["data"]["pipeline"]["build_history"] as $build_history) {
+                            if ($moduleInfo["hidden"] != true) {
+                                echo '<p><a href="/index.php?control=BuildConfigure&action=show&item=">'.$build_history["count"].
+                                    ' - '.$build_history["status"].' - '.$build_history["message"]."</p>"; } } }
                 ?>
                 </div>
 
