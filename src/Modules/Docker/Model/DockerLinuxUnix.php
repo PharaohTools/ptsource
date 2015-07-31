@@ -55,7 +55,7 @@ class DockerLinuxUnix extends Base {
 		$logging = $loggingFactory->getModel($this->params);
 		$mn = $this->getModuleName();
 		if ($this->params["build-settings"][$mn]["docker"] != "on"){
-			$logging->log("Docker Not enabled for build, ignoring...");
+//			$logging->log("Docker Not enabled for build, ignoring...");
 			return TRUE;
 		}
 		if (!$this->ensureInstalled() == 'not installed')

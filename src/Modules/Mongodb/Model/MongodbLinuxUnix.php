@@ -110,7 +110,8 @@ class MongodbLinuxUnix extends Base {
 }
    else
   {
-echo "Mongodb not run";
+//echo "Mongodb not run";
+       return true ;
 }
 
 	}

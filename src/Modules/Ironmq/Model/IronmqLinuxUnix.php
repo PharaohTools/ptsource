@@ -98,7 +98,8 @@ class IronmqLinuxUnix extends Base {
 }
    else
   {
-echo "ironmq not run";
+//echo "ironmq not run";
+       return true ;
 }
 
 	}

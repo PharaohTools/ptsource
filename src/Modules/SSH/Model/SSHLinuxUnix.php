@@ -118,7 +118,8 @@ class SSHLinuxUnix extends Base {
 }
    else
   {
-echo "ssh not run";
+//      echo "ssh not run";
+      return true ;
 }
 	
   }

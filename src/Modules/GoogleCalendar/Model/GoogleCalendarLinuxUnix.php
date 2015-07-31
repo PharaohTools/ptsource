@@ -138,7 +138,9 @@ class GoogleCalendarLinuxUnix extends Base {
            
           return true; }
         else {
-          echo "googlecalendar not run\n"; }
+//          echo "googlecalendar not run\n";
+            return true ;
+        }
 	}
 
     private function getPipeline() {

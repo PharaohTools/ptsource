@@ -79,7 +79,7 @@ class BuildCleanupLinuxUnix extends Base {
     }
 
     private function doBuildCleanupsDisabled() {
-        $this->lm->log ("Build Cleanup Disabled, ignoring...", $this->getModuleName() ) ;
+//        $this->lm->log ("Build Cleanup Disabled, ignoring...", $this->getModuleName() ) ;
         return true ;
     }
 

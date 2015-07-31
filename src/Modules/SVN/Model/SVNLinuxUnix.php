@@ -75,7 +75,8 @@ class SVNLinuxUnix extends Base {
 				$logging -> log($svn, $this -> getModuleName());
 			}
 		} else {
-			$logging -> log("SVN not run", $this -> getModuleName());
+//			$logging -> log("SVN not run", $this -> getModuleName());
+			return true ;
 		}
 
 	}

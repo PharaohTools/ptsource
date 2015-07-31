@@ -114,7 +114,7 @@ class HipchatLinuxUnix extends Base {
 }
    else
   {
-echo "hipchat not run";
+//echo "hipchat not run";
 }
 
 }
