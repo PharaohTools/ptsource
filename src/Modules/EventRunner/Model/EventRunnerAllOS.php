@@ -25,7 +25,7 @@ class EventRunnerAllOS extends BaseLinuxApp {
         $logging->log("Executing event $event", $this->getModuleName()) ;
         $this->params["app-settings"]["app_config"] = \Model\AppConfig::getAppVariable("app_config");
         $this->params["app-settings"]["mod_config"] = \Model\AppConfig::getAppVariable("mod_config");
-        $logging->log("Loading application settings during event $event", $this->getModuleName()) ;
+//         $logging->log("Loading application settings during event $event", $this->getModuleName()) ;
         $eventFactory = new \Model\Event() ;
         $eventModel = $eventFactory->getModel($this->params);
         $eventResult = $eventModel->runEvent($event, $allResults) ;
