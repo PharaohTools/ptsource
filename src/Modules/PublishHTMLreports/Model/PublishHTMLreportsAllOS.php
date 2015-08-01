@@ -107,7 +107,8 @@ FOOTER;
 	else	{ 	return false;	}
 	}
 	}
-	else { $logging->log ("Publish HTML reports ignoring...", $this->getModuleName() ) ;
+	else {
+//$logging->log ("Publish HTML reports ignoring...", $this->getModuleName() ) ;
             	return true ; }      
    }
 }
