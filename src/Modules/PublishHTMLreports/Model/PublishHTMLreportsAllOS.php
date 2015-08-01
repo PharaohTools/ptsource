@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class PublishHTMLreportsLinuxUnix extends Base {
+class PublishHTMLreportsAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
