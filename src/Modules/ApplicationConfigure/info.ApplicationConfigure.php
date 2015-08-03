@@ -21,9 +21,7 @@ class ApplicationConfigureInfo extends PTConfigureBase {
     }
 
     public function helpDefinition() {
-      $help = <<<"HELPDATA"
-This module provides application level configuration settings for this instance of Pharaoh Build ...
-HELPDATA;
+      $help = "This module provides application level configuration settings for this instance of Pharaoh ".PHARAOH_APP."... " ;
       return $help ;
     }
 
