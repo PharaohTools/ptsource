@@ -27,8 +27,7 @@ class ShellLinuxUnix extends Base {
             "shellscript" => array(
                 "type" => "text",
                 "name" => "Shell Script",
-                "slug" => "script" ),
-        );
+                "slug" => "script" ), );
         return $ff ;
     }
 
@@ -37,13 +36,14 @@ class ShellLinuxUnix extends Base {
         $logging = $loggingFactory->getModel($this->params);
         if ( $step["steptype"] == "shelldata") {
             $logging->log("Running Shell from Data...", $this->getModuleName()) ;
-            putenv("WORKSPACE=/opt/ptbuild/pipes/pharaoh_tools_website_continuous_staging/");
             $rc = $this->executeAsShell($step["data"]);
-            return (intval($rc) === 0) ? true : false ; }
+            $res = ($rc == 0) ? true : false ;
+            return $res ; }
         else if ( $step["steptype"] == "shellscript") {
             $logging->log("Running Shell from Script...", $this->getModuleName()) ;
-            $this->executeAsShell($step["data"]) ;
-            return true ; }
+            $rc = $this->executeAsShell("bash {$step["data"]}") ;
+            $res = ($rc == 0) ? true : false ;
+            return $res ; }
         else {
             $logging->log("Unrecognised Build Step Type {$step["type"]} specified in Shell Module", $this->getModuleName()) ;
             return false ; }
