@@ -78,35 +78,43 @@ COMPLETION;
     }
 
     protected function executeAsShell($multiLineCommand, $message=null) {
-        $tempFile = $this->tempDir."/ptconfigure-temp-script-".mt_rand(100, 99999999999).".sh";
-        echo "Creating $tempFile\n";
+        $loggingFactory = new \Model\Logging();
+        $this->params["echo-log"] = true ;
+        $logging = $loggingFactory->getModel($this->params);
+        $tempFile = $this->tempDir.DS."ptconfigure-temp-script-".mt_rand(100, 99999999999).".sh";
+        $logging->log("Creating $tempFile", $this->getModuleName());
         $fileVar = "";
         $multiLineCommand = str_replace("\r", "", $multiLineCommand) ;
         $multiLineCommand = explode("\r\n", $multiLineCommand) ;
         foreach ($multiLineCommand as $command) { $fileVar .= $command."\n" ; }
         file_put_contents($tempFile, $fileVar) ;
         //@note these chmods are required to make bash run scripts
-        echo "chmod 755 $tempFile 2>/dev/null\n";
-        shell_exec("chmod 755 $tempFile 2>/dev/null");
-        echo "chmod +x $tempFile 2>/dev/null\n";
-        shell_exec("chmod +x $tempFile 2>/dev/null");
-        echo "Changing $tempFile Permissions\n";
-        echo "Executing $tempFile\n";
+        // echo "chmod 755 $tempFile 2>/dev/null\n";
+        if (!is_executable($tempFile)) {
+            // @todo this wont work on windows
+            shell_exec("chmod 755 $tempFile 2>/dev/null");
+            // echo "chmod +x $tempFile 2>/dev/null\n";
+            shell_exec("chmod +x $tempFile 2>/dev/null"); }
+        $logging->log("Changing $tempFile Permissions", $this->getModuleName());
+        $logging->log("Executing $tempFile", $this->getModuleName());
         // @todo this should refer to the actual shell we are running
-        $outy = shell_exec("bash {$tempFile} 2>&1");
-        echo $outy;
-        $rc = $this->executeAndLoad("echo $?") ;
+        $commy = "{$tempFile}" ;
+        $rc = $this->executeAndGetReturnCode($commy, true) ;
         if ($message !== null) { echo $message."\n"; }
         shell_exec("rm $tempFile");
-        echo "Temp File $tempFile Removed\n";
-        return $rc ;
+        $logging->log("Temp File $tempFile Removed", $this->getModuleName());
+        return $rc["rc"] ;
     }
 
     protected function executeAndOutput($command, $message=null) {
+        $loggingFactory = new \Model\Logging();
+        $this->params["echo-log"] = true ;
+        $logging = $loggingFactory->getModel($this->params);
         $outputText = shell_exec($command);
-        if ($message !== null) {
-          $outputText .= "$message\n"; }
         print $outputText;
+        if ($message !== null) {
+            $outputText .= "$message\n";
+            $logging->log("", $this->getModuleName());}
         return $outputText;
     }
 
@@ -115,11 +123,32 @@ COMPLETION;
         return $outputText;
     }
 
-    public static function executeAndGetReturnCode($command) {
-        $output = '';
-        $retVal = null;
-        exec($command, $output, $retVal);
-        return $retVal;
+    public static function executeAndGetReturnCode($command, $show_output = null, $get_output = null) {
+        $proc = proc_open($command,[
+            1 => ['pipe','w'],
+            2 => ['pipe','w'],
+        ],$pipes);
+        $stdout = stream_get_contents($pipes[1]);
+        fclose($pipes[1]);
+        $stderr = stream_get_contents($pipes[2]);
+        fclose($pipes[2]);
+        $retVal = proc_close($proc);
+        $output = (isset($stderr)) ? $stdout.$stderr : $stdout ;
+        $output = explode("\n", $output) ;
+        if ($show_output == true) {
+            $stdout = explode("\n", $stdout) ;
+            foreach ($stdout as $stdoutline) {
+                echo $stdoutline."\n" ; }
+            if (strlen($stderr)>0) {
+                echo "ERRORS:\n";
+                $stderr = explode("\n", $stderr) ;
+                foreach ($stderr as $stderrline) {
+                    echo $stderrline."\n" ; } }
+            return array("rc"=>$retVal, "output"=>$output) ; }
+        if ($get_output == true) {
+            return array("rc"=>$retVal, "output"=>$output) ;}
+        else {
+            return $retVal; }
     }
 
     protected function setCmdLineParams($params = array()) {
@@ -152,6 +181,7 @@ COMPLETION;
         print "$question (Y/N) \n";
         $fp = fopen('php://stdin', 'r');
         $last_line = false;
+        $yesOrNo = "" ;
         while (!$last_line) {
             $inputChar = fgetc($fp);
             $yesOrNo = ($inputChar=="y"||$inputChar=="Y") ? true : false;
@@ -163,6 +193,7 @@ COMPLETION;
         print "!! Sure? $question (Y/N) !!\n";
         $fp = fopen('php://stdin', 'r');
         $last_line = false;
+        $yesOrNo = "" ;
         while (!$last_line) {
             $inputChar = fgetc($fp);
             $yesOrNo = ($inputChar=="y"||$inputChar=="Y") ? true : false;
@@ -174,6 +205,7 @@ COMPLETION;
         $fp = fopen('php://stdin', 'r');
         $last_line = false;
         $i = 0;
+        $inputChar = "" ;
         while ($last_line == false ) {
             print "$question\n";
             $inputChar = fgetc($fp);
@@ -186,6 +218,7 @@ COMPLETION;
     protected function askForInput($question, $required=null) {
         $fp = fopen('php://stdin', 'r');
         $last_line = false;
+        $inputLine = "" ;
         while (!$last_line) {
             print "$question\n";
             $inputLine = fgets($fp, 1024);
@@ -199,6 +232,7 @@ COMPLETION;
     protected function askForArrayOption($question, $options, $required=null) {
         $fp = fopen('php://stdin', 'r');
         $last_line = false;
+        $inputLine = "" ;
         while ($last_line == false) {
             print "$question\n";
             for ( $i=0 ; $i<count($options) ; $i++) { print "($i) $options[$i] \n"; }
