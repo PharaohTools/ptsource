@@ -119,7 +119,7 @@ class PipeRunnerAllOS extends Base {
     private function runPipeForkCommand($run) {
         $switch = $this->getSwitchUser() ;
         $cmd = "" ;
-        if ($switch != false) { $cmd .= 'sudo su '.$switch.' -c '."'" ; }
+        if ($switch != false) { $cmd .= 'sudo -u '.$switch.' -c '."'" ; }
         // this should be a phrank piperunner@cli and it should save the log to a named history
         $cmd .= PHRCOMM.' piperunner child --pipe-dir="'.$this->params["pipe-dir"].'" ' ;
         if (isset($this->params["build-request-source"])) {
