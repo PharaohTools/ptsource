@@ -257,9 +257,8 @@ class PipeRunnerAllOS extends Base {
         $buildOut = $this->getExecutionOutput() ;
         $top = "THIS IS A PLACEHOLDER TO SHOW A STARTED OUTPUT FILE\n\n" ;
 		file_put_contents($file, "$top.$buildOut");
-		if (file_exists($file)) {
-			return $run;
-		}
+//        chmod($file, 0777) ;
+		if (file_exists($file)) { return $run; }
 		return false;
 	}
 
@@ -274,8 +273,7 @@ class PipeRunnerAllOS extends Base {
 			$f = PIPEDIR . DS . $this -> params["item"] . DS . $this -> params["run-id"];
 			$logging -> log("Removing temp log file", $this -> getModuleName());
 			self::executeAndOutput("rm -f $f");
-			return $this -> params["run-id"];
-		}
+			return $this -> params["run-id"]; }
 		return false;
 	}
 
