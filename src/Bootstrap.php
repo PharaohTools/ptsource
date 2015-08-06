@@ -2,6 +2,8 @@
 
 Namespace Core;
 
+
+date_default_timezone_set('Europe/London');
 $bootStrap = new BootStrap();
 
 $argv_or_null = (isset($argv)) ? $argv : null ;
