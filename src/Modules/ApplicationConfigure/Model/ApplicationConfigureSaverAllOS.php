@@ -34,4 +34,16 @@ class ApplicationConfigureSaverAllOS extends Base {
         return true ;
     }
 
+    public function saveOneConfig() {
+
+        $appConfigVar = $_REQUEST["mod_config"] ;
+        $appConfig = new \Model\AppConfig();
+        $appConfig->setAppVariable("mod_config", $appConfigVar);
+
+
+        $r1 = $this->saveModConfigs();
+        return ($r1 == true) ? true : false ;
+    }
+
+
 }
