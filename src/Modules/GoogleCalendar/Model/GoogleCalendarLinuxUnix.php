@@ -138,7 +138,9 @@ class GoogleCalendarLinuxUnix extends Base {
            
           return true; }
         else {
-          echo "googlecalendar not run\n"; }
+// @todo this should do something at max level debugging
+//          echo "googlecalendar not run\n";
+        }
 	}
 
     private function getPipeline() {

@@ -98,7 +98,8 @@ class IronmqLinuxUnix extends Base {
 }
    else
   {
-echo "ironmq not run";
+// @todo this should do something at max level debugging
+//echo "ironmq not run";
 }
 
 	}

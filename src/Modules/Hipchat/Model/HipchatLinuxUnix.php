@@ -114,7 +114,8 @@ class HipchatLinuxUnix extends Base {
 }
    else
   {
-echo "hipchat not run";
+// @todo this should do something at max level debugging
+//echo "hipchat not run";
 }
 
 }

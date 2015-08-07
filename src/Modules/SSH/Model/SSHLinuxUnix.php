@@ -118,7 +118,8 @@ class SSHLinuxUnix extends Base {
 }
    else
   {
-echo "ssh not run";
+// @todo this should do something at max level debugging
+//echo "ssh not run";
 }
 	
   }
