@@ -57,7 +57,7 @@ class XVFBLinuxUnix extends Base {
             else { $logging->log ("XVFB start error", $this->getModuleName() ) ; }
             return $result; }
         else {
-            $logging->log ("XVFB Not enabled for build, ignoring...", $this->getModuleName() ) ;
+//            $logging->log ("XVFB Not enabled for build, ignoring...", $this->getModuleName() ) ;
             return true ; }
     }
 
@@ -75,7 +75,7 @@ class XVFBLinuxUnix extends Base {
             else { $logging->log ("XVFB stop error", $this->getModuleName() ) ; }
             return $result; }
         else {
-            $logging->log ("XVFB Not enabled for build, ignoring...", $this->getModuleName() ) ;
+//            $logging->log ("XVFB Not enabled for build, ignoring...", $this->getModuleName() ) ;
             return true ; }
     }
 

@@ -48,7 +48,8 @@ class PipelineCollaterAllOS extends Base {
         $allRuns = scandir(PIPEDIR.DS.$this->params["item"].DS.'history') ;
         foreach($allRuns as $i=>$run) {
             if (is_numeric($allRuns[$i])) { intval($allRuns[$i]) ; } else { unset($allRuns[$i]) ; } }
-     	$runId = max($allRuns) ;
+        $isRay = (is_array($allRuns) && count($allRuns)>0 ) ;
+     	$runId = ($isRay) ? max($allRuns) : 0 ;
         return $this->getRunOutput($runId) ;
     }
 

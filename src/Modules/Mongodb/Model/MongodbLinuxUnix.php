@@ -112,6 +112,7 @@ class MongodbLinuxUnix extends Base {
   {
 // @todo this should do something at max level debugging
 //echo "Mongodb not run";
+       return true ;
 }
 
 	}

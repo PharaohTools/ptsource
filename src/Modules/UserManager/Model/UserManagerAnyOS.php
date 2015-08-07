@@ -47,7 +47,9 @@ class UserManagerAnyOS extends BasePHPApp {
     public function checkRole(){
         $oldData=$this->getUserDetails();
         foreach($oldData as $data){
-            if($data->username==$_SESSION["username"]){
+            // @todo make sure the guest username is handled correctly
+            $sess_un = (isset($_SESSION["username"])) ? $_SESSION["username"] : "guest" ;
+            if($data->username==$sess_un) {
                 if($data->role=1)
                     return TRUE; } }
     }
@@ -55,7 +57,9 @@ class UserManagerAnyOS extends BasePHPApp {
     public function getMyUserRoleId() {
         $oldData=$this->getUserDetails();
         foreach($oldData as $data) {
-            if($data->username==$_SESSION["username"]) {
+            // @todo make sure the guest username is handled correctly
+            $sess_un = (isset($_SESSION["username"])) ? $_SESSION["username"] : "guest" ;
+            if($data->username==$sess_un) {
                 return $data->role; } }
         return false ;
     }
@@ -63,13 +67,17 @@ class UserManagerAnyOS extends BasePHPApp {
     public function getMyUserSlug() {
         $oldData=$this->getUserDetails();
         foreach($oldData as $data) {
-            if($data->username==$_SESSION["username"]) {
-                return $_SESSION["username"]; } }
+            // @todo make sure the guest username is handled correctly
+            $sess_un = (isset($_SESSION["username"])) ? $_SESSION["username"] : "guest" ;
+            if($data->username==$sess_un) {
+                return $sess_un; } }
         return false ;
     }
 
     public function getRestrictionStatus($oneUser = null) {
-        if (is_null($oneUser)) { $oneUser = $_SESSION["username"] ; }
+        if (is_null($oneUser)) {
+            $sess_un = (isset($_SESSION["username"])) ? $_SESSION["username"] : "guest" ;
+            $oneUser = $sess_un ; }
         $oldData = $this->getUserDetails();
         foreach($oldData as $data) {
             if ($data->username == $oneUser) {

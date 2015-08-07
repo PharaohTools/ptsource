@@ -28,7 +28,7 @@ class EventAllOS extends Base {
                 if ($event == $availableEventName) { // if the module provides an event for this
                     foreach ($availableEventMethods as $oneMethod) {
                         if (method_exists($eventModel, $oneMethod)) {
-                            $logging->log("Running ".get_class($eventModel)." with method $oneMethod", $this->getModuleName()) ;
+                            // $logging->log("Running ".get_class($eventModel)." with method $oneMethod", $this->getModuleName()) ;
                             $oneres = $eventModel->$oneMethod() ;
                             $res[] = $oneres ; }
                         else {

@@ -100,6 +100,7 @@ class IronmqLinuxUnix extends Base {
   {
 // @todo this should do something at max level debugging
 //echo "ironmq not run";
+       return true ;
 }
 
 	}

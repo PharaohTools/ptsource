@@ -55,7 +55,7 @@ class XVNCLinuxUnix extends Base {
             else { $logging->log ("XVNC start error", $this->getModuleName() ) ; }
             return $result;
         }  else {
-            $logging->log ("XVNC Not enabled for build, ignoring...", $this->getModuleName() ) ;
+//            $logging->log ("XVNC Not enabled for build, ignoring...", $this->getModuleName() ) ;
             return true ;
         }
     }
@@ -74,7 +74,7 @@ class XVNCLinuxUnix extends Base {
             else { $logging->log ("XVNC stop error", $this->getModuleName() ) ; }
             return $result;
         }  else {
-            $logging->log ("XVNC Not enabled for build, ignoring...", $this->getModuleName() ) ;
+//            $logging->log ("XVNC Not enabled for build, ignoring...", $this->getModuleName() ) ;
             return true ;
         }
     }

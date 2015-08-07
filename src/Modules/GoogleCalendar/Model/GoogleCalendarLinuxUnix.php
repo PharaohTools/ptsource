@@ -140,6 +140,7 @@ class GoogleCalendarLinuxUnix extends Base {
         else {
 // @todo this should do something at max level debugging
 //          echo "googlecalendar not run\n";
+            return true ;
         }
 	}
 
