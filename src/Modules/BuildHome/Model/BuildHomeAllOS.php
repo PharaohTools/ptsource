@@ -16,6 +16,7 @@ class BuildHomeAllOS extends Base {
 
     public function getData() {
         $ret["pipeline"] = $this->getPipeline();
+        $ret["features"] = $this->getPipelineFeatures();
         return $ret ;
     }
 
@@ -28,6 +29,13 @@ class BuildHomeAllOS extends Base {
         $pipelineFactory = new \Model\Pipeline() ;
         $pipeline = $pipelineFactory->getModel($this->params);
         $r = $pipeline->getPipeline($this->params["item"]);
+        return $r ;
+    }
+
+    public function getPipelineFeatures() {
+        $pipelineFactory = new \Model\Pipeline() ;
+        $pipeline = $pipelineFactory->getModel($this->params);
+        $r = $pipeline->getPipelineFeatures($this->params["item"]);
         return $r ;
     }
 
