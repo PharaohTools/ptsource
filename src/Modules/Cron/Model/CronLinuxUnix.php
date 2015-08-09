@@ -40,7 +40,7 @@ class CronLinuxUnix extends Base {
             $cmd .= PHRCOMM.' Cron set-crontab --yes --guess --frequency="'.$this->params["app-settings"][$mn]["cron_frequency"].
                 '"';
             if ($switch != false) { $cmd .= "'" ; }
-            error_log($cmd) ;
+            // error_log($cmd) ;
 
             $cmd2 = "echo $?" ;
             $result = self::executeAndLoad($cmd2) ;

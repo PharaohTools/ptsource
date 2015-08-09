@@ -130,7 +130,7 @@ class PipeRunnerAllOS extends Base {
         $cmd .= 'tmpfile &';
         if ($switch != false) { $cmd .= "'" ; }
 
-        error_log($cmd);
+        //error_log($cmd);
         $descr = array(
             0 => array(
                 'pipe',
