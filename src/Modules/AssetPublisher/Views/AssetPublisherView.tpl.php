@@ -1,4 +1,4 @@
-PTTrack - Pharaoh Tools
+<?php echo PHARAOH_APP ; ?> - Pharaoh Tools
 -------------------
 
 Attempting to publish available assets
