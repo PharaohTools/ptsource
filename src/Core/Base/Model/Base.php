@@ -128,6 +128,16 @@ COMPLETION;
             1 => ['pipe','w'],
             2 => ['pipe','w'],
         ],$pipes);
+
+
+
+        if ($show_output==true) {
+            stream_set_blocking($pipes[1], true);
+            $data = "";
+            while ($buf = fread($pipes[1], 4096)) {
+                $data .= $buf;
+                echo $buf ; } }
+
         $stdout = stream_get_contents($pipes[1]);
         fclose($pipes[1]);
         $stderr = stream_get_contents($pipes[2]);
@@ -136,9 +146,9 @@ COMPLETION;
         $output = (isset($stderr)) ? $stdout.$stderr : $stdout ;
         $output = explode("\n", $output) ;
         if ($show_output == true) {
-            $stdout = explode("\n", $stdout) ;
-            foreach ($stdout as $stdoutline) {
-                echo $stdoutline."\n" ; }
+//            $stdout = explode("\n", $stdout) ;
+//            foreach ($stdout as $stdoutline) {
+//                echo $stdoutline."\n" ; }
             if (strlen($stderr)>0) {
                 echo "ERRORS:\n";
                 $stderr = explode("\n", $stderr) ;
