@@ -182,7 +182,8 @@ require('".$this->programDataFolder.DIRECTORY_SEPARATOR.$this->programExecutorTa
 
     protected function deleteProgramDataFolderAsRootIfExists(){
         if ( is_dir($this->programDataFolder)) {
-          $command = 'sudo su golden -c"rm -rf '.$this->programDataFolder.'"';
+            $app_config = \Model\AppConfig::getAppVariable("app_config");
+            $command = 'sudo su '.$app_config["UserSwitching"]["switching_user"].' -c"rm -rf '.$this->programDataFolder.'"';
           self::executeAndOutput($command, "Program Data Folder $this->programDataFolder Deleted if existed"); }
         return true;
     }
@@ -203,7 +204,7 @@ require('".$this->programDataFolder.DIRECTORY_SEPARATOR.$this->programExecutorTa
         $app_config = \Model\AppConfig::getAppVariable("app_config");
         $command = 'sudo su '.$app_config["UserSwitching"]["switching_user"].' -c"cp -r '.$this->tempDir.DIRECTORY_SEPARATOR.$this->programNameMachine.
             $name.DIRECTORY_SEPARATOR.'* '.$this->programDataFolder.'"';
-        error_log($command);
+        // error_log($command);
         return self::executeAndOutput($command, "Program Data folder populated");
     }
 

@@ -80,7 +80,15 @@
                 <p>Build Monitors:</p>
                 <div class="pipe-monitor-block pipe-block"></div>
                 <p>Build Plugins/Features:</p>
-                <div class="pipe-features-block pipe-block"></div>
+                <div class="pipe-features-block pipe-block">
+                    <?php
+                    if (isset($pageVars["data"]["pipeline"]["build_features"]) &&
+                        count($pageVars["data"]["pipeline"]["build_features"])>0 ) {
+                        foreach ($pageVars["data"]["pipeline"]["build_features"] as $build_feature) {
+                            if ($build_feature["hidden"] != true) {
+                                echo $build_feature["name"]."\n" ;
+                                echo $build_feature["link"]."\n" ; } } }
+                    ?></div>
                 <p>Build History:</p>
                 <div class="pipe-history-block pipe-block">
                 <?php
