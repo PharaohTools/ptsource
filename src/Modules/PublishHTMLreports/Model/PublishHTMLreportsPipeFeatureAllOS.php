@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class PublishHTMLreportsAllOS extends Base {
+class PublishHTMLreportsPipeFeatureAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -12,7 +12,7 @@ class PublishHTMLreportsAllOS extends Base {
     public $architectures = array("any") ;
 
     // Model Group
-    public $modelGroup = array("Default") ;
+    public $modelGroup = array("PipeFeature") ;
 
     public function getSettingTypes() {
         return array_keys($this->getSettingFormFields());
