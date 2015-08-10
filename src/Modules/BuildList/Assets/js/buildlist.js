@@ -1,14 +1,27 @@
 done = false ;
 max = 0 ;
-window.outUpdater = setInterval(function () { updatePage() }, 4000);
+window.updateRunning = false ;
+window.outUpdater = setInterval(function () {
+    if (window.updateRunning==false) {
+        console.log("calling update page js method, updateRunning variable is set to false");
+        updatePage() ; }
+    else {
+        console.log("not calling update page js method, updateRunning variable is set to true"); }
+}, 4000);
 
 function updatePage() {
     console.log("running update page js method");
+    window.updateRunning = true ;
+    console.log("setting update running to true");
     item = window.pipeitem ;
     url = "/index.php?control=PipeRunner&action=findrunning&output-format=JSON";
     $.ajax({
         url: url,
-        success: function(data) { setRunningBuildList(data) ; }
+        success: function(data) {
+            setRunningBuildList(data) ;
+            window.updateRunning = false ; } ,
+        complete: function(data) {
+            window.updateRunning = false ; }
     });
 }
 

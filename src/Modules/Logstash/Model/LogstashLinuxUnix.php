@@ -89,6 +89,7 @@ class LogstashLinuxUnix extends Base {
 }
    else
   {
+// @todo this should do something at max level debugging
 //echo "logstash not run";
        return true;
 }

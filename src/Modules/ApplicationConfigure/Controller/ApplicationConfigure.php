@@ -12,6 +12,9 @@ class ApplicationConfigure extends Base {
         if (in_array($pageVars["route"]["action"], array("save"))) {
             $saveModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars, "ApplicationConfigureSaver") ;
             $this->content["data"]["saveState"] = $saveModel->saveAllConfigs();  }
+        if (in_array($pageVars["route"]["action"], array("set"))) {
+            $saveModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars, "ApplicationConfigureSaver") ;
+            $this->content["data"]["saveState"] = $saveModel->saveOneConfig();  }
         $this->content["data"] = $thisModel->getData();
         return array ("type"=>"view", "view"=>"applicationConfigure", "pageVars"=>$this->content);
     }
