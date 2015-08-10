@@ -129,10 +129,8 @@ COMPLETION;
             2 => ['pipe','w'],
         ],$pipes);
 
-
-
         if ($show_output==true) {
-            stream_set_blocking($pipes[1], true);
+            stream_set_blocking($pipes[1], false);
             $data = "";
             while ($buf = fread($pipes[1], 4096)) {
                 $data .= $buf;
