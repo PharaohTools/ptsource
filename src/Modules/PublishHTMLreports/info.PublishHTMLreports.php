@@ -21,7 +21,11 @@ class PublishHTMLreportsInfo extends PTConfigureBase {
     }
 
     public function events() {
-        return array("afterBuildComplete");
+        return array("afterBuildComplete", "getBuildFeatures");
+    }
+
+    public function pipeFeatures() {
+        return array("htmlReports");
     }
 
     public function helpDefinition() {
