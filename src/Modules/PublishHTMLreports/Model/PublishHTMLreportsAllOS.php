@@ -20,24 +20,24 @@ class PublishHTMLreportsAllOS extends Base {
 
     public function getSettingFormFields() {
         $ff = array(
-           "Publish_Report" =>
+            "Publish_Report" =>
             	array(
                 	"type" => "boolean",
                 	"optional" => true,
                 	"name" => "Publish HTML reports on Build Completion?"
             ),
-	   "Report_Directory" => 
-		array(   "type" => "text",
-			 "name" => "HTML Directory to archieve",
-			 "slug" => "htmlreportdirectory"),
-	   "Index_Page" =>            	
-		array(   "type" => "text",
-                         "name" => "Index Page",
-                         "slug" => "indexpage"),
-	    "Report_Title" =>	
-		array(   "type" => "text",
-                         "name" => "Report Title",
-                         "slug" => "reporttitle"));
+		    "Report_Directory" =>
+				array(   "type" => "text",
+					 "name" => "HTML Directory to archive",
+					 "slug" => "htmlreportdirectory"),
+		    "Index_Page" =>
+				array("type" => "text",
+					 "name" => "Index Page",
+					 "slug" => "indexpage"),
+			"Report_Title" =>
+				array("type" => "text",
+					 "name" => "Report Title",
+					 "slug" => "reporttitle"));
           return $ff ;}
    
     public function getEventNames() {
