@@ -130,7 +130,7 @@ COMPLETION;
         ],$pipes);
 
         if ($show_output==true) {
-            stream_set_blocking($pipes[1], false);
+            stream_set_blocking($pipes[1], true);
             $data = "";
             while ($buf = fread($pipes[1], 4096)) {
                 $data .= $buf;
