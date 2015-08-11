@@ -44,6 +44,12 @@ class PipelineAllOS extends Base {
         return (isset($names) && is_array($names)) ? $names : false ;
     }
 
+    public function getPipelineFeatures() {
+        $pipelines = $this->getPipelines() ;
+        $names = array_keys($pipelines) ;
+        return (isset($names) && is_array($names)) ? $names : false ;
+    }
+
     public function deletePipeline($name) {
         $loggingFactory = new \Model\Logging();
         $logging = $loggingFactory->getModel($this->params);
