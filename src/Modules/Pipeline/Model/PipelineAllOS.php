@@ -45,9 +45,26 @@ class PipelineAllOS extends Base {
     }
 
     public function getPipelineFeatures() {
-        $pipelines = $this->getPipelines() ;
-        $names = array_keys($pipelines) ;
-        return (isset($names) && is_array($names)) ? $names : false ;
+        $pipeFeatureFactory = new \Model\PipeFeature();
+        $pipeFeatureRepository = $pipeFeatureFactory->getModel($this->params, "PipeFeatureRepository") ;
+        $names = $pipeFeatureRepository->getPipeFeatureNames();
+        $pipeline = $this->getPipeline($this->params["item"]);
+        $this->params["build-settings"] = $pipeline["settings"];
+        $enabledFeatures = array() ;
+        $i = 0;
+        foreach ($pipeline["settings"] as $key => $values) {
+            if (in_array($key, $names) && $values["enabled"] =="on") {
+                $cname = '\Model\\'.$key ;
+                $moduleFactory = new $cname();
+                $modulePipeFeature = $moduleFactory->getModel($this->params, "PipeFeature");
+                // @ todo maybe an interface check? is object something?
+                $modulePipeFeature->setValues($values) ;
+                $collated = $modulePipeFeature->collate();
+                $enabledFeatures[$i]["module"] = $key  ;
+                $enabledFeatures[$i]["values"] = $values  ;
+                $enabledFeatures[$i]["model"] = $collated  ; }
+            $i++; }
+        return $enabledFeatures ;
     }
 
     public function deletePipeline($name) {
@@ -70,6 +87,7 @@ class PipelineAllOS extends Base {
             return false ; }
         else  {
             $logging->log("Attempting to create directory ".PIPEDIR.DS."$name ", $this->getModuleName()) ;
+            // @todo cross os
             $rc = self::executeAndGetReturnCode('mkdir -p '.PIPEDIR.DS.$name);
             self::executeAndGetReturnCode('mkdir -p '.PIPEDIR.DS.$name.DS.'history');
             self::executeAndGetReturnCode('mkdir -p '.PIPEDIR.DS.$name.DS.'workspace');
