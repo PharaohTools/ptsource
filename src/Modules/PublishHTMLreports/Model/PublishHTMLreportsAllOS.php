@@ -20,7 +20,7 @@ class PublishHTMLreportsAllOS extends Base {
 
     public function getSettingFormFields() {
         $ff = array(
-            "Publish_Report" =>
+            "enabled" =>
             	array(
                 	"type" => "boolean",
                 	"optional" => true,
@@ -58,7 +58,7 @@ class PublishHTMLreportsAllOS extends Base {
         $steps = json_decode($steps, true);
 	
 	$mn = $this->getModuleName() ;
-	if ($steps[$mn]["Publish_Report"] == "on") {
+	if ($steps[$mn]["enabled"] == "on") {
 	$dir = $steps[$mn]["Report_Directory"];
 	if (substr($dir, -1) != '/') { $dir = $dir . '/';}
 		
