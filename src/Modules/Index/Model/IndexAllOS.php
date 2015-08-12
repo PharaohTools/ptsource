@@ -28,13 +28,12 @@ class IndexAllOS extends Base {
 				$newPipeDetailHistory = $newPipeDetail['history'];
 				foreach ($newPipeDetailHistory as &$status)
 					foreach ($status as $key => $value)
-						$buildHistory[] = $status;
-			}
+						$buildHistory[] = $status; }
 			$total++;
-            if ($value['last_status'])
-				$success++;
-			else if ($value['last_fail'])
-				$fail++;
+            if ($value=="FAIL") { $fail++; }
+            else { $success++; }
+//            if ($value['last_status']) $success++;
+//			else if ($value['last_fail']) $fail++;
         }
 		return array( 'total' => $total, 'success' => $success, 'fail' => $fail, 'unstable' => 'N/A', 'buildHistory' => $buildHistory );
     }
