@@ -76,19 +76,43 @@
                 <h3><a class="lg-anchor text-light" href="/index.php?control=BuildConfigure&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
                     Configure Pipeline: <?php echo $pageVars["data"]["pipeline"]["project-name"] ; ?>- <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
                 <p>Build Status Currently:</p>
-                <div class="pipe-now-status-block pipe-block"></div>
+                <div class="pipe-now-status-block pipe-block">
+
+                    <?php
+                    if ($pageVars["data"]["pipeline"]["last_status"]===true) { $sclass = "good" ;}
+                    else if ($pageVars["data"]["pipeline"]["last_status"]===false) { $sclass =  "bad" ; }
+                    else { $sclass = "unknown" ; } ?>
+                    </h3>
+
+                    <div class="current_status current_status_<?php echo $sclass ; ?>">
+                        <h3>
+                            Status:
+                        <?php
+                            echo ucfirst($sclass) ; ?>
+                        </h3>
+                    </div>
+
+
+                </div>
                 <p>Build Monitors:</p>
                 <div class="pipe-monitor-block pipe-block"></div>
-                <p>Build Plugins/Features:</p>
+                <p>Build Features:</p>
                 <div class="pipe-features-block pipe-block">
                     <?php
-                    if (isset($pageVars["data"]["pipeline"]["build_features"]) &&
-                        count($pageVars["data"]["pipeline"]["build_features"])>0 ) {
-                        foreach ($pageVars["data"]["pipeline"]["build_features"] as $build_feature) {
-                            if ($build_feature["hidden"] != true) {
-                                echo $build_feature["name"]."\n" ;
-                                echo $build_feature["link"]."\n" ; } } }
-                    ?></div>
+                    if (isset($pageVars["data"]["features"]) &&
+                        count($pageVars["data"]["features"])>0 ) {
+                        foreach ($pageVars["data"]["features"] as $build_feature) {
+//                            var_dump($build_feature);
+                            if (isset($build_feature["hidden"]) && $build_feature["hidden"] != true
+                                || !isset($build_feature["hidden"]) ) {
+                                echo '<div class="build-feature">' ;
+                                echo '<a target="_blank" href="'.$build_feature["model"]["link"].'">' ;
+                                echo  '<h3>'.$build_feature["model"]["title"].'</h3>' ;
+                                echo  '<img src="'.$build_feature["model"]["image"].'" />' ;
+                                echo "</a>" ;
+                                echo '</div>' ; } } }
+                    ?>
+                </div>
                 <p>Build History:</p>
                 <div class="pipe-history-block pipe-block">
                 <?php
@@ -111,3 +135,4 @@
 
     </div>
 </div>
+<link rel="stylesheet" type="text/css" href="/Assets/Modules/BuildHome/css/buildhome.css">
