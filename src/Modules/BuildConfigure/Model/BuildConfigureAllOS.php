@@ -15,7 +15,8 @@ class BuildConfigureAllOS extends Base {
     public $modelGroup = array("Default") ;
 
     public function getData() {
-        $ret["pipeline"] = $this->getPipeline();
+        if (isset($this->params["item"])) {
+            $ret["pipeline"] = $this->getPipeline(); }
         $ret["builders"] = $this->getBuilders();
         $ret["settings"] = $this->getBuilderSettings();
         $ret["fields"] = $this->getBuilderFormFields();
