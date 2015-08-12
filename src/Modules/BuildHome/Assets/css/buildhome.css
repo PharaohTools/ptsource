@@ -1,0 +1,27 @@
+.build-feature {
+    width : 18%;
+    margin: 5px 1% ;
+    border: 1px;
+    border-color: darkgray;
+    background-color: lightgrey;
+}
+
+.current_status {
+    width: 90%;
+    padding: 10px 0px;
+    color: white;
+    display: block;
+    margin: 0 auto;
+}
+
+.current_status_good {
+    background-color: greenyellow;
+}
+
+.current_status_bad {
+    background-color: red;
+}
+
+.current_status_unknown {
+    background-color: darkgray;
+}
