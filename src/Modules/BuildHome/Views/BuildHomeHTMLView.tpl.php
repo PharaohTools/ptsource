@@ -1,6 +1,6 @@
 <div class="container" id="wrapper">
        
-       <div class="navbar-default col-sm-2 sidebar" role="navigation">
+        <div class="navbar-default col-sm-2 sidebar" role="navigation">
 		<div class="sidebar-nav navbar-collapse">
 			<ul class="nav in" id="side-menu">
 				<li class="sidebar-search">
@@ -57,10 +57,11 @@
                 </li>
             </ul>
         </div>
-       </div>
+        </div>
     
         <div class="col-lg-9">
-                    <div class="well well-lg ">
+
+            <div class="well well-lg ">
            
             <div class="row clearfix no-margin">
             	 <h3 class="text-uppercase text-light ">Pipeline</h3>
@@ -72,12 +73,12 @@
                 <p> Project Desc: <?php echo $pageVars["data"]["pipeline"]["project-description"] ; ?></p>
             </div>
             <hr>
-            <div class="row clearfix no-margin">
+            <div class="row clearfix no-margin build-home-properties">
                 <h3><a class="lg-anchor text-light" href="/index.php?control=BuildConfigure&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
                     Configure Pipeline: <?php echo $pageVars["data"]["pipeline"]["project-name"] ; ?>- <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
-                <p>Build Status Currently:</p>
-                <div class="pipe-now-status-block pipe-block">
 
+                <div class="pipe-now-status-block pipe-block">
+                    <h4 class="propertyTitle">Build Status Currently:</h4>
                     <?php
                     if ($pageVars["data"]["pipeline"]["last_status"]===true) { $sclass = "good" ;}
                     else if ($pageVars["data"]["pipeline"]["last_status"]===false) { $sclass =  "bad" ; }
@@ -92,12 +93,13 @@
                         </h3>
                     </div>
 
-
                 </div>
+                <!--
                 <p>Build Monitors:</p>
                 <div class="pipe-monitor-block pipe-block"></div>
-                <p>Build Features:</p>
+                -->
                 <div class="pipe-features-block pipe-block">
+                    <h4 class="propertyTitle">Build Features:</h4>
                     <?php
                     if (isset($pageVars["data"]["features"]) &&
                         count($pageVars["data"]["features"])>0 ) {
@@ -113,16 +115,16 @@
                                 echo '</div>' ; } } }
                     ?>
                 </div>
-                <p>Build History:</p>
                 <div class="pipe-history-block pipe-block">
-                <?php
-                    if (isset($pageVars["data"]["pipeline"]["build_history"]) &&
-                        count($pageVars["data"]["pipeline"]["build_history"])>0 ) {
-                        foreach ($pageVars["data"]["pipeline"]["build_history"] as $build_history) {
-                            if ($moduleInfo["hidden"] != true) {
-                                echo '<p><a href="/index.php?control=BuildConfigure&action=show&item=">'.$build_history["count"].
-                                    ' - '.$build_history["status"].' - '.$build_history["message"]."</p>"; } } }
-                ?>
+                    <h4 class="propertyTitle">Build History:</h4>
+                    <?php
+                        if (isset($pageVars["data"]["pipeline"]["build_history"]) &&
+                            count($pageVars["data"]["pipeline"]["build_history"])>0 ) {
+                            foreach ($pageVars["data"]["pipeline"]["build_history"] as $build_history) {
+                                if ($moduleInfo["hidden"] != true) {
+                                    echo '<p><a href="/index.php?control=BuildConfigure&action=show&item=">'.$build_history["count"].
+                                        ' - '.$build_history["status"].' - '.$build_history["message"]."</p>"; } } }
+                    ?>
                 </div>
 
                <hr>
