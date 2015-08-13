@@ -59,6 +59,7 @@ class PipelineAllOS extends Base {
                 $modulePipeFeature = $moduleFactory->getModel($this->params, "PipeFeature");
                 // @ todo maybe an interface check? is object something?
                 $modulePipeFeature->setValues($values) ;
+                $modulePipeFeature->setPipeline($pipeline) ;
                 $collated = $modulePipeFeature->collate();
                 $enabledFeatures[$i]["module"] = $key  ;
                 $enabledFeatures[$i]["values"] = $values  ;
