@@ -15,6 +15,7 @@ class PublishHTMLreportsPipeFeatureAllOS extends Base {
     public $modelGroup = array("PipeFeature") ;
 
 	public $pipeFeatureValues;
+	public $pipeline;
 
 	public function collate() {
 		$collated = array() ;
@@ -23,19 +24,22 @@ class PublishHTMLreportsPipeFeatureAllOS extends Base {
 		$collated = array_merge($collated, $this->getImage()) ;
 		return $collated ;
 	}
-   
-    public function setValues($vals) {
-        $this->pipeFeatureValues = $vals ;
+
+	public function setValues($vals) {
+		$this->pipeFeatureValues = $vals ;
+	}
+
+	public function setPipeline($pipe) {
+		$this->pipeline = $pipe ;
 	}
 
 	public function getLink() {
-		$this->pipeFeatureValues["pipeline"] ;
-		$ff = array("link" => "http://www.google.com");
+		$link = 'index.php?control=PublishHTMLreports&action=report&item='.$this->pipeline["project-slug"];
+		$ff = array("link" => "$link");
 		return $ff ;
 	}
 
 	public function getTitle() {
-		$this->pipeFeatureValues["pipeline"] ;
 		$ff = array("title" => $this->pipeFeatureValues["Report_Title"]);
 		return $ff ;
 	}
