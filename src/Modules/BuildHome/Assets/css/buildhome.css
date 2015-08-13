@@ -1,3 +1,15 @@
+.build-home-properties {
+
+}
+
+.build-home-properties h4.propertyTitle {
+    text-align: center;
+}
+
+.build-home-properties .pipe-block {
+    margin: 0 0 20px 0;
+}
+
 .build-feature {
     width : 18%;
     margin: 5px 1% ;
@@ -6,12 +18,20 @@
     background-color: lightgrey;
 }
 
+.build-feature:hover {
+    background-color: darkgray;
+}
+
 .current_status {
     width: 90%;
     padding: 10px 0px;
     color: white;
     display: block;
     margin: 0 auto;
+}
+
+.current_status h3 {
+    text-align: center;
 }
 
 .current_status_good {
