@@ -42,12 +42,25 @@ class PublishHTMLreportsAllOS extends Base {
    
     public function getEventNames() {
         return array_keys($this->getEvents());   }
-    
-    public function getEvents() {
-        $ff = array("afterBuildComplete" => array("PublishHTMLreports"));
-        return $ff ; } 
-    
-    public function PublishHTMLreports() {
+
+	public function getEvents() {
+		$ff = array("afterBuildComplete" => array("PublishHTMLreports"));
+		return $ff ; }
+
+	public function getReportData() {
+		$pipeFactory = new \Model\Pipeline();
+		$pipeline = $pipeFactory->getModel($this->params);
+		$thisPipe = $pipeline->getPipeline($this->params["item"]);
+		$settings = $thisPipe["settings"];
+		$mn = $this->getModuleName() ;
+		$dir = $settings[$mn]["Report_Directory"];
+		$indexFile = $settings[$mn]["Index_Page"];
+		if (file_exists($dir.$indexFile)) { $root = "" ; }
+		else { $root = PIPEDIR.DS.$this->params["item"].DS.'workspace'.DS ; }
+		$ff = array("report" => file_get_contents($root.$dir.$indexFile));
+		return $ff ; }
+
+	public function PublishHTMLreports() {
         $loggingFactory = new \Model\Logging();
         $this->params["echo-log"] = true ;
         $logging = $loggingFactory->getModel($this->params);
@@ -60,7 +73,7 @@ class PublishHTMLreportsAllOS extends Base {
 	$mn = $this->getModuleName() ;
 	if ($steps[$mn]["enabled"] == "on") {
 	$dir = $steps[$mn]["Report_Directory"];
-	if (substr($dir, -1) != '/') { $dir = $dir . '/';}
+	if (substr($dir, -1) != DS) { $dir = $dir . DS ;}
 		
 	$indexFile = $steps[$mn]["Index_Page"];
 	$ReportTitle = $steps[$mn]["Report_Title"];
