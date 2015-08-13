@@ -13,7 +13,7 @@ class PublishHTMLreportsInfo extends PTConfigureBase {
     }
 
     public function routesAvailable() {
-        return array( "PublishHTMLreports" => array_merge(parent::routesAvailable(), array("help") ) );
+        return array( "PublishHTMLreports" => array_merge(parent::routesAvailable(), array("help", "report") ) );
     }
 
     public function routeAliases() {
