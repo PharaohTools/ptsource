@@ -29,6 +29,11 @@ class PipelineCollaterAllOS extends Base {
         return $collated ;
     }
 
+    public function getItem() {
+        $item = array("item" => $this->params["item"]);
+        return $item ;
+    }
+
     private function getStatuses() {
 		$successStatus = $this->getLastSuccess();
 		$failStatus = $this->getLastFail();
