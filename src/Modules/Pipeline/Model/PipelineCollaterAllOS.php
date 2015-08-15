@@ -54,7 +54,7 @@ class PipelineCollaterAllOS extends Base {
         foreach($allRuns as $i=>$run) {
             if (is_numeric($allRuns[$i])) { intval($allRuns[$i]) ; } else { unset($allRuns[$i]) ; } }
         $isRay = (is_array($allRuns) && count($allRuns)>0 ) ;
-     	$runId = ($isRay) ? max($allRuns) : 0 ;
+     	$runId = ($isRay) ? max($allRuns) : 1 ;
         return $this->getRunOutput($runId) ;
     }
 
@@ -104,7 +104,7 @@ class PipelineCollaterAllOS extends Base {
 
     private function getRunOutput($runId) {
         $outFile = PIPEDIR.DS.$this->params["item"].DS.'history'.DS.$runId ;
-        $out = file_get_contents($outFile) ;
+        $out = (file_exists($outFile)) ? file_get_contents($outFile) : "" ;
         $lastStatus = strpos($out, "SUCCESSFUL EXECUTION") ;
         return ($lastStatus) ? true : false ;
     }
