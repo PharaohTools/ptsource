@@ -93,6 +93,7 @@ class PipelineAllOS extends Base {
             self::executeAndGetReturnCode('mkdir -p '.PIPEDIR.DS.$name.DS.'history');
             self::executeAndGetReturnCode('mkdir -p '.PIPEDIR.DS.$name.DS.'workspace');
             self::executeAndGetReturnCode('mkdir -p '.PIPEDIR.DS.$name.DS.'stepsHistory');
+            self::executeAndGetReturnCode('touch '.PIPEDIR.DS.$name.DS.'tmpfile');
             return $rc ; }
     }
 
