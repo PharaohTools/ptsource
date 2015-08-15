@@ -86,8 +86,10 @@ class PollSCMLinuxUnix extends Base {
         $this->params["app-settings"]["mod_config"] = \Model\AppConfig::getAppVariable("mod_config");
         $this->lm = $loggingFactory->getModel($this->params);
         if ($this->checkBuildSCMPollingEnabled()) {
+            var_dump("cbs 1");
             return $this->doBuildSCMPollingEnabled() ; }
         else {
+            var_dump("cbs 2");
             return $this->doBuildSCMPollingDisabled() ; }
     }
 
@@ -97,14 +99,15 @@ class PollSCMLinuxUnix extends Base {
     }
 
     private function doBuildSCMPollingDisabled() {
-        $this->lm->log ("SCM Polling Disabled, ignoring...", $this->getModuleName() ) ;
+//        $this->lm->log ("SCM Polling Disabled, ignoring...", $this->getModuleName() ) ;
         return true ;
     }
 
     private function doBuildSCMPollingEnabled() {
         $mn = $this->getModuleName() ;
         $this->lm->log ("SCM Polling Enabled for {$this->pipeline["project-name"]}, attempting...", $this->getModuleName() ) ;
-        $enoughTime = $this->pollIfEnoughTimePassed() ;
+        if ($this->isWebAndSetAllowed()) { return true ; }
+        else { $enoughTime = $this->pollIfEnoughTimePassed() ; }
         if ($enoughTime == true) {
             try {
                 // @todo other scm types @kevellcorp do svn
@@ -117,6 +120,15 @@ class PollSCMLinuxUnix extends Base {
                 return false; } }
         else {
             return $enoughTime ; }
+    }
+    protected function isWebAndSetAllowed() {
+        $mn = $this->getModuleName() ;
+        if ($this->isWebSapi() &&
+            isset($this->params["build-settings"][$mn]["scm_always_allow_web"]) &&
+            $this->params["build-settings"][$mn]["scm_always_allow_web"]=="on") {
+            $this->lm->log ("SCM Polling ignored for next build for {$this->pipeline["project-name"]}, as its from a Web Request", $this->getModuleName() ) ;
+            return true ; }
+        return false ;
     }
 
     private function pollIfEnoughTimePassed() {
