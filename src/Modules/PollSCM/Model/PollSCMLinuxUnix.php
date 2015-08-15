@@ -86,10 +86,8 @@ class PollSCMLinuxUnix extends Base {
         $this->params["app-settings"]["mod_config"] = \Model\AppConfig::getAppVariable("mod_config");
         $this->lm = $loggingFactory->getModel($this->params);
         if ($this->checkBuildSCMPollingEnabled()) {
-            var_dump("cbs 1");
             return $this->doBuildSCMPollingEnabled() ; }
         else {
-            var_dump("cbs 2");
             return $this->doBuildSCMPollingDisabled() ; }
     }
 
