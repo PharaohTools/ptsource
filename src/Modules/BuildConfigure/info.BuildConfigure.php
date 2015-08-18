@@ -13,7 +13,7 @@ class BuildConfigureInfo extends PTConfigureBase {
     }
 
     public function routesAvailable() {
-      return array( "BuildConfigure" => array("show", "save", "new") );
+      return array("BuildConfigure" => array("show", "save", "new", "template", "copy"));
     }
 
     public function routeAliases() {
