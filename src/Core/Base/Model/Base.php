@@ -125,17 +125,16 @@ COMPLETION;
 
     public static function executeAndGetReturnCode($command, $show_output = null, $get_output = null) {
         $proc = proc_open($command,[
-            1 => ['pipe','w'],
-            2 => ['pipe','w'],
+            0 => array("pipe","r"),
+            1 => array("pipe",'w'),
+            2 => array("pipe",'w'),
         ],$pipes);
-
         if ($show_output==true) {
             stream_set_blocking($pipes[1], true);
             $data = "";
             while ($buf = fread($pipes[1], 4096)) {
                 $data .= $buf;
                 echo $buf ; } }
-
         $stdout = stream_get_contents($pipes[1]);
         fclose($pipes[1]);
         $stderr = stream_get_contents($pipes[2]);
@@ -148,10 +147,12 @@ COMPLETION;
 //            foreach ($stdout as $stdoutline) {
 //                echo $stdoutline."\n" ; }
             if (strlen($stderr)>0) {
-                echo "ERRORS:\n";
+//                echo "ERRORS:\n";
                 $stderr = explode("\n", $stderr) ;
                 foreach ($stderr as $stderrline) {
-                    echo $stderrline."\n" ; } }
+//                    echo $stderrline."\n" ;
+                }
+            }
             return array("rc"=>$retVal, "output"=>$output) ; }
         if ($get_output == true) {
             return array("rc"=>$retVal, "output"=>$output) ;}
