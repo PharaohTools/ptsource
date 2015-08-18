@@ -24,6 +24,14 @@ class BuildConfigureAllOS extends Base {
         return $ret ;
     }
 
+    public function getCopyData() {
+        if (isset($this->params["item"])) { $ret["pipeline"] = $this->getPipeline(); }
+        $pipelineFactory = new \Model\Pipeline() ;
+        $pipeline = $pipelineFactory->getModel($this->params, "PipelineRepository");
+        $ret["pipe_names"] = $pipeline->getPipelineNames() ;
+        return $ret ;
+    }
+
     public function saveState() {
         return $this->savePipeline();
     }
@@ -120,19 +128,15 @@ class BuildConfigureAllOS extends Base {
     public function getInstalledPluginData($plugin) {
         $file = PIPEDIR . DS . $this->params["item"] . DS . 'pluginData';
         if ($pluginData = file_get_contents($file)) {
-            $pluginData = json_decode($pluginData, true);
-        }
+            $pluginData = json_decode($pluginData, true); }
         $defaultsFile = PLUGININS.DS.$plugin.DS.'data' ;
         if (file_exists($defaultsFile)) {
             $defaultsFileData =  file_get_contents($defaultsFile) ;
-            $defaults = json_decode($defaultsFileData, true) ; 
-        }
+            $defaults = json_decode($defaultsFileData, true) ;  }
         foreach ($defaults['buildconf'] as $key=>$val) {
             if (isset ($pluginData[$plugin][$val['name']]) ) {
                 $value = $pluginData[$plugin][$val['name']];
-                $defaults['buildconf'][$key]['value'] = $value;
-            }
-        }
+                $defaults['buildconf'][$key]['value'] = $value; } }
         return  (isset($defaults) && is_array($defaults)) ? $defaults : array() ;
     }
 
