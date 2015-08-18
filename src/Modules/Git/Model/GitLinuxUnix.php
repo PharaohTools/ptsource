@@ -61,8 +61,6 @@ class GitLinuxUnix extends Base {
 
 //            self::executeAndOutput($cmd) ;
             $rc = self::executeAndGetReturnCode($cmd, true, true) ;
-            echo "rc {$rc["rc"]}" ;
-
             return ($rc["rc"]==0) ? true : false; }
         else {
             $logging->log("Unrecognised Build Step Type {$step["type"]} specified in Git Module", $this->getModuleName()) ;
