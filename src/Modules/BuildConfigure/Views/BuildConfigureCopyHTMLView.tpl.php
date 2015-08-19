@@ -73,7 +73,7 @@
     <div class="well well-lg">
 
         <?php
-        $act = '/index.php?control=BuildConfigure&item='.$pageVars["data"]["pipeline"]["project-slug"].'&action=save' ;
+        $act = '/index.php?control=BuildConfigure&action=copy' ;
         ?>
 
             <h2 class="text-uppercase text-light"><a href="/"> Build - Pharaoh Tools </a></h2>
