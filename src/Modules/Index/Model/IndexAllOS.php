@@ -52,7 +52,7 @@ class IndexAllOS extends Base {
         foreach ($allInfoObjects as $infoObject) {
             $array_keys = array_keys($infoObject->routesAvailable()) ;
             $miniRay = array() ;
-            $miniRay["command"] = $array_keys[0] ;
+            $miniRay["command"] = (isset($array_keys[0])) ? $array_keys[0] : null ;
             $miniRay["name"] = $infoObject->name ;
             $miniRay["hidden"] = $infoObject->hidden ;
             $moduleNames[] = $miniRay ; }
