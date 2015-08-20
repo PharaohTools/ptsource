@@ -86,7 +86,13 @@ class SystemDetectionAllOS extends Base {
             "10.10" => "Yosemite",
         );
         $majorVersion = substr($this->version, 0, 4) ;
-        return $distros[$majorVersion];
+        if (isset($distros[$majorVersion])) {
+            return $distros[$majorVersion]; }
+        else {
+            $keys = array_keys($distros);
+            $count = count($keys) ;
+            $v = $distros[$keys[$count]] ;
+            return $v ; }
     }
 
     private function setVersion() {
