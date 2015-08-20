@@ -71,6 +71,7 @@ class SystemDetectionAllOS extends Base {
 
 
     private function getMacDistro() {
+        // @todo maybe we should set no distro if we cant find one? guessing this might mess up
         //declare Mac distros(extensible list).
         $distros = array(
             "10.0" => "Cheetah",
