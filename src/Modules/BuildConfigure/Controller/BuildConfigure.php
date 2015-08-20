@@ -19,7 +19,7 @@ class BuildConfigure extends Base {
             return array ("type"=>"view", "view"=>"buildConfigureCopy", "pageVars"=>$this->content); }
         if (in_array($pageVars["route"]["action"], array("save"))) {
             $this->content["data"]["saveState"] = $thisModel->savePipeline();  }
-        if (in_array($pageVars["route"]["action"], array("new", "show"))) {
+        if (in_array($pageVars["route"]["action"], array("new", "show", "save"))) {
             $this->content["data"] = $thisModel->getData(); }
         return array ("type"=>"view", "view"=>"buildConfigure", "pageVars"=>$this->content);
     }
