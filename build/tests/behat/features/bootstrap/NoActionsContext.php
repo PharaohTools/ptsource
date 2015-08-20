@@ -19,7 +19,7 @@ class NoActionsContext extends BehatContext {
      */
     public function iRunTheApplicationCommandInTheShell()
     {
-        $command = PTCCOMM ;
+        $command = PHRCOMM ;
         exec($command, $output);
         $this->output = trim(implode("\n", $output));
     }
@@ -60,7 +60,7 @@ class NoActionsContext extends BehatContext {
      */
     public function iRunTheApplicationCommandInTheShellWithParameterString($str)
     {
-        $command = PTCCOMM." $str" ;
+        $command = PHRCOMM." $str" ;
         exec($command, $output);
         $this->output = trim(implode("\n", $output));
     }
