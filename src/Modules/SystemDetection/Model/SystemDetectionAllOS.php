@@ -83,6 +83,7 @@ class SystemDetectionAllOS extends Base {
             "10.7" => "Lion",
             "10.8" => "Mountain Lion",
             "10.9" => "Mavericks",
+            "10.10" => "Yosemite",
         );
         $majorVersion = substr($this->version, 0, 4) ;
         return $distros[$majorVersion];
