@@ -76,14 +76,12 @@ class BuildConfigureAllOS extends Base {
             "project-slug" => $this->params["project-slug"],
             "project-description" => $this->params["project-description"],
             "default-scm-url" => $this->params["default-scm-url"],
-			"email-id" => $this->params["email-id"],
-			"parameter-status" => $this->params["parameter-status"],
-			"parameter-name" => $this->params["parameter-name"],
-			"parameter-dvalue" => $this->params["parameter-dvalue"],
-			"parameter-input" => "",
-			"parameter-description" => $this->params["parameter-description"]) ;
-			
-		
+            "email-id" => $this->params["email-id"],
+            "parameter-status" => $this->params["parameter-status"],
+            "parameter-name" => $this->params["parameter-name"],
+            "parameter-dvalue" => $this->params["parameter-dvalue"],
+            "parameter-input" => "",
+            "parameter-description" => $this->params["parameter-description"]) ;
         if ($this->params["creation"] == "yes") {
             $pipelineDefault = $pipelineFactory->getModel($this->params);
             $pipelineDefault->createPipeline($this->params["project-slug"]) ; }
@@ -96,9 +94,70 @@ class BuildConfigureAllOS extends Base {
         return true ;
     }
 
-    private function getFormattedSlug() {
+    protected function guessPipeName($orig) {
+        $pipelineFactory = new \Model\Pipeline() ;
+        $pipeline = $pipelineFactory->getModel($this->params, "PipelineRepository");
+        $pipe_names = $pipeline->getPipelineNames() ;
+        $req = (isset($this->params["project-name"])) ? $this->params["project-name"] : $orig ;
+        if (!in_array($req, $pipe_names)) { return $req ; }
+        $guess = $req." PIPE" ;
+        for ($i=1 ; $i<5001; $i++) {
+            $guess = "Copied Pipeline $orig $i" ;
+            if (!in_array($guess, $pipe_names)) {
+                break ; } }
+        return $guess ;
+    }
+
+    public function saveCopiedPipeline() {
+        if (!isset($this->params["source_pipeline"])) {
+            // we dont need to save anything if we have no source
+            return false ; }
+
+        $pipelineFactory = new \Model\Pipeline() ;
+        $pipelineDefault = $pipelineFactory->getModel($this->params);
+        $sourcePipe = $pipelineDefault->getPipeline($this->params["source_pipeline"]) ;
+
+        $pname = $this->guessPipeName($sourcePipe["project-slug"]);
+        $this->params["item"] = $this->getFormattedSlug($pname);
+
+        $tempParams = $this->params ;
+        $tempParams["item"]  = $this->params["source_pipeline"] ;
+        $pipelineDefault = $pipelineFactory->getModel($tempParams);
+        $sourcePipe = $pipelineDefault->getPipeline($this->params["source_pipeline"]) ;
+
+        $useParam = isset($this->params["project-description"]) && strlen($this->params["project-description"])>0 ;
+        $pdesc = ($useParam) ?
+            $this->params["project-description"] :
+            $sourcePipe["project-description"] ;
+
+        // @todo we need to put all of this into modules, as build settings.
+        $data = array(
+            "project-name" => $pname,
+            "project-slug" => $this->params["item"],
+            "project-description" => $pdesc,
+//            "default-scm-url" => $this->params["default-scm-url"],
+//            "email-id" => $this->params["email-id"],
+//            "parameter-status" => $this->params["parameter-status"],
+//            "parameter-name" => $this->params["parameter-name"],
+//            "parameter-dvalue" => $this->params["parameter-dvalue"],
+//            "parameter-input" => "",
+//            "parameter-description" => $this->params["parameter-description"]
+        ) ;
+
+        $pipelineDefault->createPipeline($this->params["item"]) ;
+        $pipelineSaver = $pipelineFactory->getModel($this->params, "PipelineSaver");
+        // @todo dunno y i have to force this param
+        $pipelineSaver->params["item"] = $this->params["item"];
+        $pipelineSaver->savePipeline(array("type" => "Defaults", "data" => $data ));
+        $pipelineSaver->savePipeline(array("type" => "Steps", "data" => $sourcePipe["steps"] ));
+        $pipelineSaver->savePipeline(array("type" => "Settings", "data" => $sourcePipe["settings"] ));
+        return $this->params["item"] ;
+    }
+
+    private function getFormattedSlug($name = null) {
+        $tpn = (!is_null($name)) ? $name : $this->params["project-name"] ;
         if ($this->params["project-slug"] == "") {
-            $this->params["project-slug"] = str_replace(" ", "_", $this->params["project-name"]);
+            $this->params["project-slug"] = str_replace(" ", "_", $tpn);
             $this->params["project-slug"] = str_replace("'", "", $this->params["project-slug"]);
             $this->params["project-slug"] = str_replace('"', "", $this->params["project-slug"]);
             $this->params["project-slug"] = str_replace("/", "", $this->params["project-slug"]);
