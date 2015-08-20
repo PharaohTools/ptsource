@@ -91,7 +91,7 @@ class SystemDetectionAllOS extends Base {
             return $distros[$majorVersion]; }
         else {
             $keys = array_keys($distros);
-            $count = count($keys) ;
+            $count = count($keys)-1 ;
             $v = $distros[$keys[$count]] ;
             return $v ; }
     }
