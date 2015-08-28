@@ -13,6 +13,19 @@ class UserPermissionAllOS extends Base {
 
     // Model Group
     public $modelGroup = array("Default") ;
+
+	public function getEventNames() {
+		return array_keys($this->getEvents());
+	}
+
+	public function getEvents() {
+		$ff = array(
+			"authenticate" => array(
+				"authenticateUser",
+			),
+		);
+		return $ff ;
+	}
 	
 	public function checkForAccess($route)
 	{
@@ -41,10 +54,16 @@ class UserPermissionAllOS extends Base {
 	{
 		foreach ($actions as $value) {
 			if (strtolower($value) == strtolower($action)) {
-				return FALSE; 
+				return FALSE;
 			}
 		}
-		return TRUE;	
+		return TRUE;
+	}
+
+	public function authenticateUser() {
+
+
+		return TRUE;
 	}
 
 }
