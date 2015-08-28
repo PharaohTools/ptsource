@@ -10,34 +10,28 @@ function submit_login() {
     if ($('#login_username').val() == '') {
         $('#login_username_alert').html('&nbsp;&nbsp;Please enter your User Name');
         $('#login_username').focus();
-        return;
-    }
+        return; }
 
     if ($('#login_password').val() == '') {
         $('#login_password_alert').html('&nbsp;&nbsp;Please enter your Password');
         $('#login_password').focus();
-        return;
-    }
+        return; }
+
     $.ajax({
         type: 'POST',
         url: $('#base_url').val() + '/index.php?control=Signup&action=login-submit',
         data: {
-            username:$('#login_username').val(),
-            password:$('#login_password').val()
-        },
+            username: $('#login_username').val(),
+            password: $('#login_password').val() } ,
         dataType: "json",
-        success: function(result)
-        {
+        success: function(result) {
+            alert("somthin");
             if(result.status == true){
-                window.location.assign($('#base_url').val() + '/index.php?control=Index&action=show');
-            }
+                window.location.assign($('#base_url').val() + '/index.php?control=Index&action=show'); }
             else{
                 $('#login_error_msg').html('&nbsp;&nbsp;'+result.msg);
                 $('#login_username').focus();
-                return;
-            }
-
-        }
+                return; } }
     });
 
 }
@@ -97,13 +91,9 @@ function submit_registration() {
             password:$('#login_password').val()
         },
         dataType: "json",
-        success: function(result)
-        {
-
+        success: function(result) {
                 $('#'+result.id).html('&nbsp;&nbsp;'+result.msg);
                 $('#'+result.id).focus();
-
-
         }
     });
 
