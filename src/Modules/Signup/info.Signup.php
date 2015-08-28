@@ -6,7 +6,7 @@ class SignupInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "Signup/Home Page";
+    public $name = "Signup and Login Functionality";
 
     public function _construct() {
       parent::__construct();
@@ -18,6 +18,12 @@ class SignupInfo extends PTConfigureBase {
 
     public function routeAliases() {
       return array("signup"=>"Signup");
+    }
+
+    public function configuration() {
+        return array(
+            "signup_enabled"=> array("type" => "boolean", "default" => "off", "label" => "Signups Enabled?", ),
+        );
     }
 
     public function helpDefinition() {
