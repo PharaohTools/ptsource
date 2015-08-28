@@ -15,6 +15,7 @@ class SignupAllOS extends Base {
     public $modelGroup = array("Default") ;
 
     public function getlogin() {
+        // @todo this looks like high quality code. What's it for?
         $ret="get Login";
         return $ret ;
     }
