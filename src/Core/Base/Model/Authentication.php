@@ -13,7 +13,7 @@ class Authentication {
         if (!isset($mod_config["Signup"]["signup_enabled"]) || $mod_config["Signup"]["signup_enabled"]=="off") {
             return $handled  ; }
         // if we have failed authentication, we will have a false
-        var_dump($ev) ;
+//        var_dump($ev) ;
         if (in_array(false, $ev)) {
             error_log("failed authentication, forcing back to signup module") ;
             $handled["control"] = "Signup";

@@ -24,6 +24,7 @@ class SignupAllOS extends Base {
     }
 
     private function getSalt() {
+        // @todo this is a security risk
         // @todo a proper salt
         $salt = "12345678" ;
         return $salt ;
@@ -116,7 +117,7 @@ class SignupAllOS extends Base {
             fwrite($myfile, json_encode(array_merge($oldData, array($registrationData))));
             // @todo dont hardcode url?
             $message = 'Hi <br /> <a href="/index.php?control=Signup&action=verify&verificationCode=verify">Click here to activate account</a>';
-            mail($_POST['email'], 'Verifiation mail from PTTrack', $message); }
+            mail($_POST['email'], 'Verifiation mail from '.PHARAOH_APP, $message); }
         // print_r(array_merge($oldData, array($registrationData)));
         fclose($myfile);
         // @todo dont output from model?
@@ -156,6 +157,7 @@ class SignupAllOS extends Base {
             $_SESSION["userrole"] = 3; }
         header("Location: /index.php?control=Index&action=index");
     }
+
     public function loginByLDAP($name, $email, $user){
         $_SESSION["login-status"] = true ;
         $_SESSION["username"] = $email ;
@@ -177,8 +179,7 @@ class SignupAllOS extends Base {
             $_SESSION["userrole"] = 3; }
     }
 
-    public function getUsersData()
-    {
+    public function getUsersData() {
         $myfile = fopen($this->getUserFileLocation(), "r") ;
         if (!$myfile) {
             echo json_encode(array(
