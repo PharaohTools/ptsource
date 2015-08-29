@@ -103,7 +103,7 @@
                             <button type="submit" class="btn btn-success hvr-float-shadow">Save Configuration</button>
                             <button type="button" class="btn btn-primary hvr-float-shadow" onclick="$('input').val('')">Clear</button>
                           
-                            <a href="/"> <button type="button" class="btn btn-warning hvr-float-shadow">Cancle</button></a>
+                            <a href="/"> <button type="button" class="btn btn-warning hvr-float-shadow">Cancel</button></a>
                         </div>
                     </div>
 
