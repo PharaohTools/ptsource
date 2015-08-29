@@ -13,7 +13,11 @@ class SignupInfo extends PTConfigureBase {
     }
 
     public function routesAvailable() {
-      return array( "Signup" => array("login","logout","login-submit","login-status","registration","registration-submit") );
+        return array( "Signup" => array("login","logout","login-submit","login-status","registration","registration-submit") );
+    }
+
+    public function ignoredAuthenticationRoutes() {
+        return array( "Signup" => array("login","logout","login-submit","login-status","registration-submit") );
     }
 
     public function routeAliases() {
