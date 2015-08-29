@@ -20,12 +20,14 @@ class UserPermissionInfo extends PTConfigureBase {
         return array("userpermission"=>"UserPermission", "user-permission"=>"UserPermission");
     }
 
+    public function events() {
+        return array("authenticate");
+    }
+
     public function helpDefinition() {
        $help = <<<"HELPDATA"
     This extension provides User Permission Configuration It provides code
     functionality, but no extra CLI commands.
-
-    UserSwitching
 
 HELPDATA;
       return $help ;
