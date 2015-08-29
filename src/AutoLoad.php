@@ -18,35 +18,35 @@ class AutoLoader{
         // also finally looks in Core, but only Base should be in there
         $allModuleParentDirectories = array("Extensions", "Modules", "Core");
         foreach ($allModuleParentDirectories as $oneModuleParentDirectory) {
-          $currentModulesParentDir = dirname(__FILE__) . DIRECTORY_SEPARATOR . $oneModuleParentDirectory ;
-          $modulesIndividualDirectories = scandir($currentModulesParentDir);
-          foreach ($modulesIndividualDirectories as $singleModuleDir) {
-            if (!in_array($singleModuleDir, array(".", ".."))) { // if not dot or double dot
-              if ( is_dir($currentModulesParentDir.DIRECTORY_SEPARATOR.$singleModuleDir)) { // if is a dir
-                $classNameForLoad = str_replace('\\' , DIRECTORY_SEPARATOR, $className);
-                $filename =
-                  $currentModulesParentDir . DIRECTORY_SEPARATOR . $singleModuleDir .
-                  DIRECTORY_SEPARATOR . $classNameForLoad.'.php';
-                if (is_readable($filename)) {
-                  require_once $filename;
-                  return; } } } } }
+            $currentModulesParentDir = dirname(__FILE__) . DIRECTORY_SEPARATOR . $oneModuleParentDirectory ;
+            $enabledModuleDirectories = self::enabledModuleDirectories($currentModulesParentDir) ;
+            foreach ($enabledModuleDirectories as $singleModuleDir) {
+                if (!in_array($singleModuleDir, array(".", ".."))) { // if not dot or double dot
+                  if ( is_dir($currentModulesParentDir.DIRECTORY_SEPARATOR.$singleModuleDir)) { // if is a dir
+                    $classNameForLoad = str_replace('\\' , DIRECTORY_SEPARATOR, $className);
+                    $filename =
+                      $currentModulesParentDir . DIRECTORY_SEPARATOR . $singleModuleDir .
+                      DIRECTORY_SEPARATOR . $classNameForLoad.'.php';
+                    if (is_readable($filename)) {
+                      require_once $filename;
+                      return; } } } } }
     }
 
     public static function getInfoObjects() {
       $allInfoObjects = array();
       $allModuleParentDirectories = array("Extensions", "Modules", "Core");
       foreach ($allModuleParentDirectories as $oneModuleParentDirectory) {
-        $currentModulesParentDir = dirname(__FILE__) . DIRECTORY_SEPARATOR . $oneModuleParentDirectory ;
-        $modulesIndividualDirectories = scandir($currentModulesParentDir);
-        foreach ($modulesIndividualDirectories as $singleModuleDir) {
-          if (!in_array($singleModuleDir, array(".", ".."))) { // if not dot or double dot
-            if ( is_dir($currentModulesParentDir.DIRECTORY_SEPARATOR.$singleModuleDir)) { // if is a dir
-              $filesInModuleDirectory = scandir($currentModulesParentDir.DIRECTORY_SEPARATOR.$singleModuleDir);
-              foreach ($filesInModuleDirectory as $fileInModuleDirectory) {
-                if (substr($fileInModuleDirectory, 0, 5) == "info.") {
-                  require_once $currentModulesParentDir.DIRECTORY_SEPARATOR.$singleModuleDir.DIRECTORY_SEPARATOR.$fileInModuleDirectory;
-                  $className = '\Info\\'.$singleModuleDir.'Info' ;
-                  $allInfoObjects[] = new $className(); } } } } } }
+          $currentModulesParentDir = dirname(__FILE__) . DIRECTORY_SEPARATOR . $oneModuleParentDirectory ;
+          $enabledModuleDirectories = self::enabledModuleDirectories($currentModulesParentDir) ;
+          foreach ($enabledModuleDirectories as $singleModuleDir) {
+              if (!in_array($singleModuleDir, array(".", ".."))) { // if not dot or double dot
+                if ( is_dir($currentModulesParentDir.DIRECTORY_SEPARATOR.$singleModuleDir)) { // if is a dir
+                  $filesInModuleDirectory = scandir($currentModulesParentDir.DIRECTORY_SEPARATOR.$singleModuleDir);
+                  foreach ($filesInModuleDirectory as $fileInModuleDirectory) {
+                    if (substr($fileInModuleDirectory, 0, 5) == "info.") {
+                      require_once $currentModulesParentDir.DIRECTORY_SEPARATOR.$singleModuleDir.DIRECTORY_SEPARATOR.$fileInModuleDirectory;
+                      $className = '\Info\\'.$singleModuleDir.'Info' ;
+                      $allInfoObjects[] = new $className(); } } } } } }
       return $allInfoObjects;
     }
 
@@ -54,8 +54,8 @@ class AutoLoader{
         $allModuleParentDirectories = array("Extensions", "Modules", "Core");
         foreach ($allModuleParentDirectories as $oneModuleParentDirectory) {
             $currentModulesParentDir = dirname(__FILE__) . DIRECTORY_SEPARATOR . $oneModuleParentDirectory ;
-            $modulesIndividualDirectories = scandir($currentModulesParentDir);
-            foreach ($modulesIndividualDirectories as $singleModuleDir) {
+            $enabledModuleDirectories = self::enabledModuleDirectories($currentModulesParentDir) ;
+            foreach ($enabledModuleDirectories as $singleModuleDir) {
                 if (!in_array($singleModuleDir, array(".", ".."))) { // if not dot or double dot
                     if ( is_dir($currentModulesParentDir.DIRECTORY_SEPARATOR.$singleModuleDir)) { // if is a dir
                         if ($singleModuleDir == $module) {
@@ -72,8 +72,8 @@ class AutoLoader{
         $allModuleParentDirectories = array("Extensions", "Modules", "Core");
         foreach ($allModuleParentDirectories as $oneModuleParentDirectory) {
             $currentModulesParentDir = dirname(__FILE__) . DIRECTORY_SEPARATOR . $oneModuleParentDirectory ;
-            $modulesIndividualDirectories = scandir($currentModulesParentDir);
-            foreach ($modulesIndividualDirectories as $singleModuleDir) {
+            $enabledModuleDirectories = self::enabledModuleDirectories($currentModulesParentDir) ;
+            foreach ($enabledModuleDirectories as $singleModuleDir) {
                 if (!in_array($singleModuleDir, array(".", ".."))) { // if not dot or double dot
                     if ( is_dir($currentModulesParentDir.DIRECTORY_SEPARATOR.$singleModuleDir)) { // if is a dir
                         if ( is_dir($currentModulesParentDir.DIRECTORY_SEPARATOR.$singleModuleDir.DIRECTORY_SEPARATOR.'Controller')) { // if is a dir
@@ -92,8 +92,8 @@ class AutoLoader{
         $allModuleParentDirectories = array("Extensions", "Modules", "Core");
         foreach ($allModuleParentDirectories as $oneModuleParentDirectory) {
             $currentModulesParentDir = dirname(__FILE__) . DIRECTORY_SEPARATOR . $oneModuleParentDirectory ;
-            $modulesIndividualDirectories = scandir($currentModulesParentDir);
-            foreach ($modulesIndividualDirectories as $singleModuleDir) {
+            $enabledModuleDirectories = self::enabledModuleDirectories($currentModulesParentDir) ;
+            foreach ($enabledModuleDirectories as $singleModuleDir) {
                 if (!in_array($singleModuleDir, array(".", ".."))) { // if not dot or double dot
                     if ( is_dir($currentModulesParentDir.DIRECTORY_SEPARATOR.$singleModuleDir) &&
                         $singleModuleDir == $module ) { // if dirname is module were looking for
@@ -110,8 +110,8 @@ class AutoLoader{
         $modelsToReturn = array();
         foreach ($allModuleParentDirectories as $oneModuleParentDirectory) {
             $currentModulesParentDir = dirname(__FILE__) . DIRECTORY_SEPARATOR . $oneModuleParentDirectory ;
-            $modulesIndividualDirectories = scandir($currentModulesParentDir);
-            foreach ($modulesIndividualDirectories as $singleModuleDir) {
+            $enabledModuleDirectories = self::enabledModuleDirectories($currentModulesParentDir) ;
+            foreach ($enabledModuleDirectories as $singleModuleDir) {
                 if (!in_array($singleModuleDir, array(".", ".."))) { // if not dot or double dot
                     if ( is_dir($currentModulesParentDir.DIRECTORY_SEPARATOR.$singleModuleDir) && $singleModuleDir == $module ) { // if dirname is module were looking for
                         $filesInModelDirectory = scandir($currentModulesParentDir.DIRECTORY_SEPARATOR.$singleModuleDir
@@ -142,11 +142,22 @@ class AutoLoader{
         $allModuleParentDirectories = array("Extensions", "Modules", "Core");
         foreach ($allModuleParentDirectories as $oneModuleParentDirectory) {
             $currentModulesParentDir = dirname(__FILE__) . DIRECTORY_SEPARATOR . $oneModuleParentDirectory ;
-            $modulesIndividualDirectories = scandir($currentModulesParentDir);
-            foreach ($modulesIndividualDirectories as $singleModuleDir) {
+            $enabledModuleDirectories = self::enabledModuleDirectories($currentModulesParentDir) ;
+            foreach ($enabledModuleDirectories as $singleModuleDir) {
                 if ($singleModuleDir == $module) {
                     return $currentModulesParentDir.DIRECTORY_SEPARATOR.$singleModuleDir.DIRECTORY_SEPARATOR; } } }
         return false ;
+    }
+
+    public static function enabledModuleDirectories($oneModuleParentDirectory) {
+        $modulesIndividualDirectories = scandir($oneModuleParentDirectory);
+        require_once('Modules/PTConfigureRequired/Model/AppConfig.php') ;
+        $appConfig = new \Model\AppConfig() ;
+        $disabled_modules = $appConfig->getAppVariable("disabled_modules") ;
+        if (!isset($disabled_modules) || $disabled_modules==null ) {
+//            error_log("disabled defaults") ;
+            $disabled_modules = array() ; }
+        return array_diff($modulesIndividualDirectories, $disabled_modules) ;
     }
 
 }
