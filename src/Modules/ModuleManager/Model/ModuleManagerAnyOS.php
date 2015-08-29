@@ -54,4 +54,20 @@ class ModuleManagerAnyOS extends BasePHPApp {
         // return self::askForInput($question, true);
     }
 
+    public function disableModule() {
+        $appConfig = new \Model\AppConfig() ;
+        $disabled_modules = $appConfig->getAppVariable("disabled_modules") ;
+        if (!in_array($this->params['module-disable'], $disabled_modules)) {
+            $appConfig->setAppVariable("disabled_modules", $this->params['module-disable'], true) ; }
+        return true ;
+    }
+
+    public function enableModule() {
+        $appConfig = new \Model\AppConfig() ;
+        $disabled_modules = $appConfig->getAppVariable("disabled_modules") ;
+        $new_disabled_modules = array_diff($disabled_modules, array($this->params['module-enable'])) ;
+        $appConfig->setAppVariable("disabled_modules", $new_disabled_modules) ;
+        return true ;
+    }
+
 }
