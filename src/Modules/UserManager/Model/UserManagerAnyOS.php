@@ -81,7 +81,7 @@ class UserManagerAnyOS extends BasePHPApp {
         $oldData = $this->getUserDetails();
         foreach($oldData as $data) {
             if ($data->username == $oneUser) {
-                if ($data->restrict == 1) {
+                if (isset($data->restrict) && $data->restrict == 1) {
                     return true; } } }
         return false ;
     }
