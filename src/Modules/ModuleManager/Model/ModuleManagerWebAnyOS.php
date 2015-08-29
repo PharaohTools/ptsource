@@ -19,6 +19,7 @@ class ModuleManagerWebAnyOS extends BasePHPApp {
         $ret["compatible_modules"] = $this->findOnlyCompatibleModuleNames();
         $ret["incompatible_modules"] = $this->findOnlyIncompatibleModuleNames();
         $ret["available_modules"] = $this->getAvailableModules();
+        $ret["disabled_modules"] = $this->getDisabledModules();
         return $ret ;
     }
 
@@ -93,6 +94,12 @@ class ModuleManagerWebAnyOS extends BasePHPApp {
             ),
         );
         return $ray ;
+    }
+
+    protected function getDisabledModules() {
+        $appConfig = new \Model\AppConfig() ;
+        $disabled_modules = $appConfig->getAppVariable("disabled_modules") ;
+        return $disabled_modules;
     }
 
 }
