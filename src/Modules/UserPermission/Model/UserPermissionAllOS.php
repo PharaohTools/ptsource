@@ -27,8 +27,7 @@ class UserPermissionAllOS extends Base {
 		return $ff ;
 	}
 	
-	public function checkForAccess($route)
-	{
+	public function checkForAccess($route) {
 		$control = $route['control'];
 		$action = $route['action'];
 		// 1 is top prority admin
