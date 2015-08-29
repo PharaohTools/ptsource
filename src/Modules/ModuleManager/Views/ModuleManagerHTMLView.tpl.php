@@ -39,46 +39,66 @@
 
     <div class="col-lg-9">
                     <div class="well well-lg">
-            <?php
-            $act = '/index.php?control=ModuleManager&item='.$pageVars["data"]["pipeline"]["project-slug"].'&action=save' ;
-            ?>
 
             <h2 class="text-uppercase text-light"><a href="/">PTBuild - Pharaoh Tools </a></h2>
             <div class="row clearfix no-margin">
 
+                <div class="form-group">
+
+                    <?php
+
+                    $message_suffixes = array("installed", "disabled", "enabled") ;
+                    foreach ($message_suffixes as $message_suffix ) {
+                        if ($pageVars["data"]["webAction"]["$message_suffix-status"] == true ) {
+
+                            if ($message_suffix == "installed") {
+                                $ms2 = "install" ;
+                                $modName = $pageVars["module-{$ms2}"] ; }
+                            else if (in_array($message_suffix, array("disabled", "enabled"))) {
+                                $ms2 = substr($message_suffix, 0, strlen($message_suffix)-1) ;
+                                $modName = $pageVars["module-{$ms2}"] ; }
+                            var_dump($pageVars) ;
+                            ?>
+
+                            <div class="col-sm-12 btn btn-success">
+                                Successfully <?php echo ucfirst($message_suffix) ; ?> Module : <?php echo ucfirst($modName) ; ?>
+                            </div>
+
+                        <?php
+                        } }
+                    ?>
+
+
+                </div>
+
                 <h3>Module and Extension Manager</h3>
 
-                    <div class="form-group">
+                <div class="form-group">
 
-                        <form class="form-horizontal custom-form" action="<?php echo '/index.php?control=ModuleManager&action=webaction' ; ?>" method="POST">
+                    <form class="form-horizontal custom-form" action="<?php echo '/index.php?control=ModuleManager&action=webaction' ; ?>" method="POST">
 
-                            <div class="col-sm-3">
-                                <label for="project-name" class="control-label text-left">Git Repository</label>
-                            </div>
-
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" name="module-source" id="module-source" placeholder="Git Repository"  />
-                            </div>
-
-                            <div class="col-sm-3">
-                                <button type="submit" class="btn btn-success">Download Module</button>
-                            </div>
-
-                        </form>
-
-                        <div class="form-group">
-                            <input type="hidden" name="item" id="item" value="<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" />
+                        <div class="col-sm-3">
+                            <label for="project-name" class="control-label text-left">Git Repository</label>
                         </div>
 
-                    </div>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="module-source" id="module-source" placeholder="Git Repository"  />
+                        </div>
+
+                        <div class="col-sm-3">
+                            <button type="submit" class="btn btn-success">Download Module</button>
+                        </div>
+
+                    </form>
+
+                </div>
 
                     <div class="form-group">
 
                         <div class="col-sm-12">
-
+                            <hr />
                             <div class="col-sm-12">
                                 <h3>Available Modules: <i style="font-size: 18px;" class="fa fa-chevron-down"></i> <a class="text-center" href="/index.php?control=ModuleManager&action=webcacheupdate">Update Cache</a></h3>
-                                <hr />
                             </div>
 
                             <div class="col-sm-12" style="height: 150px; overflow-y: scroll; resize:both;">
@@ -126,16 +146,16 @@
 
                     <div class="form-group">
 
+                        <div class="col-sm-12">
+                            <hr />
                             <div class="col-sm-12">
-                                <div class="col-sm-12">
-                                    <h3> Installed Modules: <i style="font-size: 18px;" class="fa fa-chevron-down"></i></h3>
-                                    <hr />
-                                </div>
-                                <div class="col-sm-12" style="height: 150px; overflow-y: scroll; resize:both;">
+                                <h3> Enabled Modules: <i style="font-size: 18px;" class="fa fa-chevron-down"></i></h3>
+                            </div>
                                 <?php
 
+                                if (count($pageVars["data"]["installed_modules"]) > 0) {
+                                    echo '<div class="col-sm-12" style="height: 150px; overflow-y: scroll; resize:both;">' ;
                                     $oddeven = "Odd" ;
-
                                     foreach ($pageVars["data"]["installed_modules"] as $instModuleInfo) {
                                         $oddeven = ($oddeven == "Odd") ? "Even" : "Odd" ;
                                         echo '<div class="col-sm-12 moduleEntry moduleEntry'.$oddeven.'">';
@@ -144,36 +164,68 @@
                                         echo '    <p>'.$instModuleInfo["name"]."</p>";
                                         echo '  </div>';
                                         echo '  <div class="col-sm-4">';
-                                        echo '    <a class="btn btn-success text-center" onclick="uninstallModule('.$instModuleInfo["command"].')">Uninstall</a>';
-
-                                        if ($instModuleInfo["enabled"]==true) {
-                                            echo '    <a class="btn btn-warning text-center" onclick="uninstallModule('.$instModuleInfo["command"].')">Disable</a>'; }
-                                        else {
-                                            echo '    <a class="btn btn-info text-center" onclick="uninstallModule('.$instModuleInfo["command"].')">Enable</a>'; }
-
+                                        echo '    <a class="btn btn-success text-center" href="/index.php?control=ModuleManager&action=webaction&uninstall='.$instModuleInfo["command"].'">Uninstall</a>';
+                                        echo '    <a class="btn btn-warning text-center" href="/index.php?control=ModuleManager&action=webaction&module-disable='.$instModuleInfo["command"].'">Disable</a>';
                                         echo '  </div>';
-                                        echo '</div>'; }
+                                        echo '</div>'; } }
+                                else {
+                                    echo '<div class="col-sm-12" style="height: 40px;">' ;
+                                    echo '<p>No Enabled modules found</p>' ; }
                                 ?>
-                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <hr />
+                            <div class="col-sm-12">
+                                <h3> Disabled Modules: <i style="font-size: 18px;" class="fa fa-chevron-down"></i></h3>
                             </div>
 
-                            <div class="col-sm-12">
-                                <div class="col-sm-12">
-                                    <h3> Incompatible Modules: <i style="font-size: 18px;" class="fa fa-chevron-down"></i></h3>
-                                    <hr />
-                                </div>
-                                <div class="col-sm-12" style="height: 50px; overflow-y: scroll; resize:both;">
                                 <?php
-                                    if (count($pageVars["data"]["incompatible_modules"]) > 0) {
-                                        foreach ($pageVars["data"]["incompatible_modules"] as $compatModuleInfo) {
-                                            echo '<div class="col-sm-6">';
-                                            echo '  <p class="moduleListText"><strong>'.$compatModuleInfo["command"].'</strong> - '.$compatModuleInfo["name"]."</p>";
-                                            echo '</div>'; } }
-                                    else {
-                                        echo '<p>No incompatible modules found</p>' ; }
+
+                                if (count($pageVars["data"]["disabled_modules"]) > 0) {
+                                    echo '<div class="col-sm-12" style="height: 150px; overflow-y: scroll; resize:both;">' ;
+                                    $oddeven = "Odd" ;
+                                    foreach ($pageVars["data"]["disabled_modules"] as $instModuleInfo) {
+                                        $oddeven = ($oddeven == "Odd") ? "Even" : "Odd" ;
+                                        echo '<div class="col-sm-12 moduleEntry moduleEntry'.$oddeven.'">';
+                                        echo '  <div class="col-sm-8">';
+                                        echo '    <p class="moduleListText"><strong>'.$instModuleInfo.'</strong></p>';
+                                        echo '  </div>';
+                                        echo '  <div class="col-sm-4">';
+                                        echo '    <a class="btn btn-success text-center" href="/index.php?control=ModuleManager&action=webaction&uninstall='.$instModuleInfo.'">Uninstall</a>';
+                                        echo '    <a class="btn btn-info text-center" href="/index.php?control=ModuleManager&action=webaction&module-enable='.$instModuleInfo.'">Enable</a>';
+                                        echo '  </div>';
+                                        echo '</div>'; } }
+                                else {
+                                    echo '<div class="col-sm-12" style="height: 40px;">' ;
+                                    echo '<p>No Disabled modules found</p>' ; }
                                 ?>
-                                </div>
                             </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <hr />
+                            <div class="col-sm-12">
+                                <h3> Incompatible Modules: <i style="font-size: 18px;" class="fa fa-chevron-down"></i></h3>
+                            </div>
+                            <?php
+                                if (count($pageVars["data"]["incompatible_modules"]) > 0) {
+                                    echo '<div class="col-sm-12" style="height: 50px; overflow-y: scroll; resize:both;">' ;
+                                    $oddeven = "Odd" ;
+                                    foreach ($pageVars["data"]["incompatible_modules"] as $compatModuleInfo) {
+                                        $oddeven = ($oddeven == "Odd") ? "Even" : "Odd" ;
+                                        echo '<div class="col-sm-12 moduleEntry moduleEntry'.$oddeven.'">';
+                                        echo '  <div class="col-sm-8">';
+                                        echo '    <p class="moduleListText"><strong>'.$compatModuleInfo["command"].'</strong> - '.$compatModuleInfo["name"]."</p>";
+                                        echo '  </div>';
+                                        echo '</div>'; } }
+                                else {
+                                    echo '<div class="col-sm-12" style="height: 40px;">' ;
+                                    echo '<p>No Incompatible modules found</p>' ; }
+                            ?>
+                            </div>
+                        </div>
 
                     </div>
 
