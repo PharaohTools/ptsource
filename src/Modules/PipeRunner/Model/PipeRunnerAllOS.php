@@ -17,7 +17,8 @@ class PipeRunnerAllOS extends Base {
 	public function getData() {
 		$this -> setPipeDir();
 		$ret["historic_builds"] = $this -> getOldBuilds();
-		$ret["historic_build"] = $this -> getOneBuild($this -> params["run-id"]);
+        $run_id = (isset($this -> params["run-id"])) ? $this -> params["run-id"] : null ;
+		$ret["historic_build"] = $this -> getOneBuild($run_id);
 		$ret["pipeline"] = $this -> getPipeline();
 		$ret["item"] = $this -> params["item"];
 		$ret["history_count"] = $this -> getBuildNumber("last");
