@@ -35,7 +35,8 @@ class SignupAllOS extends Base {
     public function checkLogin() {
         $username = $_POST['username'];
         $password = $_POST['password'];
-        return $this->checkLoginInfo($username, $password);
+        $res = $this->checkLoginInfo($username, $password);
+        return $res ;
     }
 
     //check login status
@@ -51,11 +52,14 @@ class SignupAllOS extends Base {
         $accountsJson = file_get_contents($file);
         $accounts = json_decode($accountsJson);
         $verified = false;
-        foreach($accounts as $index=>$account) {
+        foreach($accounts as $account) {
             // @todo SECURITY if acccount group is restricted, refuse the login
-            if ($account->username == $usr && $account->password == md5($this->getSalt().$pass) && $account->removestatus == 0) {
+            if ($account->username == $usr &&
+                $account->password == md5($this->getSalt().$pass) &&
+                $account->status == 1) {
                 $verified = true; } }
         if ($verified === true) {
+            session_start() ;
             $_SESSION["login-status"]=true;
             $_SESSION["username"] = $usr;
             return array("status" => true); }
@@ -84,12 +88,16 @@ class SignupAllOS extends Base {
             return $this->checkLoginSession();
     }
 
-    //@todo we can do autoload.php file before load a controller
     public function checkLoginSession() {
-        if(isset($_SESSION["login-status"]) && $_SESSION["login-status"] == true){
-            return array("status" => true); }
-        else{
-            return array("status" => false); }
+        if ( isset($_SESSION) && is_array($_SESSION) && (count($_SESSION)==0) ) {
+            $res = array("status" => false); }
+        else {
+            session_start() ;
+            if(isset($_SESSION) && $_SESSION["login-status"] == true){
+                $res = array("status" => true); }
+            else{
+                $res = array("status" => false); } }
+        return $res ;
     }
 
     public function registrationSubmit() {
