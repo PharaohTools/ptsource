@@ -22,10 +22,10 @@ function submit_login() {
         url: $('#base_url').val() + '/index.php?control=Signup&action=login-submit',
         data: {
             username: $('#login_username').val(),
-            password: $('#login_password').val() } ,
+            password: $('#login_password').val()
+        } ,
         dataType: "json",
         success: function(result) {
-            alert("somthin");
             if(result.status == true){
                 window.location.assign($('#base_url').val() + '/index.php?control=Index&action=show'); }
             else{
