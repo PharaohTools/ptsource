@@ -1,6 +1,16 @@
 done = false ;
 max = 0 ;
 
+function disableModule(element) {
+
+}
+
+function enableModule(element) {
+
+}
+
+
+
 function changeModule(element) {
     module = $("#new_step_module_selector").find(":selected").text() ;
     console.log("one") ;
