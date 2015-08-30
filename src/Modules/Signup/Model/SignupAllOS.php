@@ -55,7 +55,7 @@ class SignupAllOS extends Base {
         foreach($accounts as $account) {
             // @todo SECURITY if acccount group is restricted, refuse the login
             if ($account->username == $usr &&
-                $account->password == md5($this->getSalt().$pass) &&
+                $account->password == $this->getSaltWord($pass) &&
                 $account->status == 1) {
                 $verified = true; } }
         if ($verified === true) {
@@ -160,7 +160,7 @@ class SignupAllOS extends Base {
             header("Location: /index.php?control=Index&action=index");
             return; }
         else {
-            $newUser = array('name' => $name, 'username'=>$email, 'email'=>$email, 'password'=>md5($this->getSalt().mt_rand(5, 15)), 'verificationcode'=> hash('sha512', 'aDv@4gtm%7rfeEg4!gsFe'), 'data'=>$user,'role'=>3,'status'=> 1);
+            $newUser = array('name' => $name, 'username'=>$email, 'email'=>$email, 'password'=>$this->getSaltWord(mt_rand(5, 15)), 'verificationcode'=> hash('sha512', 'aDv@4gtm%7rfeEg4!gsFe'), 'data'=>$user,'role'=>3,'status'=> 1);
             $this->createNewUser($newUser);
             $_SESSION["userrole"] = 3; }
         header("Location: /index.php?control=Index&action=index");
@@ -178,7 +178,7 @@ class SignupAllOS extends Base {
                 'name' => $name,
                 'username'=>$email,
                 'email'=>$email,
-                'password'=>md5($this->getSalt().mt_rand(5, 15)),
+                'password'=> $this->getSaltWord(mt_rand(5, 15)),
                 'verificationcode'=> hash('sha512', 'aDv@4gtm%7rfeEg4!gsFe'),
                 'data'=>$user,'role'=>3,
                 'status'=> 1);
@@ -240,17 +240,23 @@ class SignupAllOS extends Base {
             foreach ($oldData as $one) {
                 if ($user->username == $one->username) {
                     $two = new \stdClass();
-                    $two->email = $user->email ;
+                    $two->email = $one->email ;
                     $two->username = $one->username ;
                     if (isset($user->password)) {
-                        $two->password = md5($this->getSalt().$user->password) ; }
+                        $two->password = $this->getSaltWord($user->password) ; }
                     else {
                         $two->password = $one->password ; }
+                    $two->role = $one->role ;
+                    $two->status = $one->status ;
                     $nray[] = $two ; }
                 else {
                     $nray[] = $one ; } }
             //@todo change the format of saved data.
             fwrite($myfile, json_encode($nray)); }
+    }
+
+    public function getSaltWord($word) {
+        return md5($this->getSalt().$word) ;
     }
 
     public function userExist($email) {
