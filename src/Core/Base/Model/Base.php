@@ -134,7 +134,10 @@ COMPLETION;
             $data = "";
             while ($buf = fread($pipes[1], 4096)) {
                 $data .= $buf;
-                echo $buf ; } }
+                echo $buf ;
+                $buf2 = "STDERR: ". fread($pipes[2], 4096);
+                if ($buf2) {
+                    echo $buf2 ; } } }
         $stdout = stream_get_contents($pipes[1]);
         fclose($pipes[1]);
         $stderr = stream_get_contents($pipes[2]);
