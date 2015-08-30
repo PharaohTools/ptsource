@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="03f6198e-7b92-4492-834b-a57d478943eb" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ptbuildvars" afterPath="$PROJECT_DIR$/ptbuildvars" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="phrankinsense.iws" />
@@ -98,10 +100,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Authentication.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Authentication.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Core/Base/Model/Authentication.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="45" selection-start="1880" selection-end="1880" vertical-scroll-proportion="-0.14285715">
+            <state line="41" column="45" selection-start="1880" selection-end="1880" vertical-scroll-proportion="0.8684211">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="workspace.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1107" column="0" selection-start="63645" selection-end="63645" vertical-scroll-proportion="0.74857146">
               <folding />
             </state>
           </provider>
@@ -127,15 +138,6 @@
       </file>
       <file leaf-file-name="Control.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Core/Control.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AssetPublisherLinuxUnix.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Modules/AssetPublisher/Model/AssetPublisherLinuxUnix.php">
           <provider selected="true" editor-type-id="text-editor">
             <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
               <folding />
@@ -217,7 +219,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/Modules/Signup/Controller/Signup.php" />
         <option value="$PROJECT_DIR$/src/Modules/Signup/info.Signup.php" />
         <option value="$PROJECT_DIR$/src/AutoLoad.php" />
         <option value="$PROJECT_DIR$/src/Modules/ModuleManager/Assets/js/modulemanager.js" />
@@ -233,6 +234,7 @@
         <option value="$PROJECT_DIR$/src/Modules/BuildList/Assets/js/buildlist.js" />
         <option value="$PROJECT_DIR$/src/Modules/Signup/Model/SignupAllOS.php" />
         <option value="$PROJECT_DIR$/src/Core/Base/Model/Authentication.php" />
+        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
       </list>
     </option>
   </component>
@@ -729,6 +731,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="phrankinsense" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ptbuild" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value=".idea" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
@@ -968,13 +984,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Modules/ModuleManager/Model/ModuleManagerWebAnyOS.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="98" column="45" selection-start="4015" selection-end="4015" vertical-scroll-proportion="-56.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Modules/ModuleManager/Views/ModuleManagerHTMLView.tpl.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="153" column="0" selection-start="7757" selection-end="7757" vertical-scroll-proportion="-10.285714">
@@ -1086,7 +1095,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Core/Base/Model/Authentication.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="45" selection-start="1880" selection-end="1880" vertical-scroll-proportion="-0.14285715">
+        <state line="41" column="45" selection-start="1880" selection-end="1880" vertical-scroll-proportion="0.8684211">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1107" column="0" selection-start="63645" selection-end="63645" vertical-scroll-proportion="0.74857146">
           <folding />
         </state>
       </provider>
