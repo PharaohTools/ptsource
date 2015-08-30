@@ -79,7 +79,7 @@ class IronmqLinuxUnix extends Base {
         //$buildsettings = $pipeline->getData();
 
         $mn = $this->getModuleName() ;
-	    if ($pipeline["settings"][$mn]["ironmq_enabled"] == "on") {
+	    if (isset($pipeline["settings"][$mn]["ironmq_enabled"]) && $pipeline["settings"][$mn]["ironmq_enabled"] == "on") {
               
         require __DIR__ . '/../Libraries/vendor/autoload.php';
 		
