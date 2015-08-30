@@ -93,7 +93,7 @@ class SignupAllOS extends Base {
             $res = array("status" => false); }
         else {
             session_start() ;
-            if(isset($_SESSION) && $_SESSION["login-status"] == true){
+            if(isset($_SESSION["login-status"]) && $_SESSION["login-status"] == true){
                 $res = array("status" => true); }
             else{
                 $res = array("status" => false); } }
