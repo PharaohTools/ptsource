@@ -136,22 +136,47 @@
 							
 							<td>
 							<?php
-							if ($pipelineDetails["last_success"] != false) {
-								echo date('Y-m-d \<\b\r\> h:i:s', $pipelineDetails["last_success"]);
-								echo ' #(' . $pipelineDetails["last_success_build"] . ')';
-							} else {
-								echo 'N/A';
-							}
+
+                            $today = new DateTime(); // This object represents current date/time
+                            $today->setTime( 0, 0, 0 ); // reset time part, to prevent partial comparison
+
+                            if ($pipelineDetails["last_success"] != false) {
+
+                                $match_date = new DateTime(date('d.m.Y H:i', $pipelineDetails["last_success"]));
+                                $diff = $today->diff( $match_date );
+                                $diffDays = (integer)$diff->format( "%R%a" ); // Extract days count in interval
+
+								$date = date($pipelineDetails["last_success"]);
+                                if( $diffDays == 0 ) {
+                                    echo date_format($match_date, 'g:ia')." Today"; }
+                                else if( $diffDays == -1 ) {
+                                    echo date_format($match_date, 'g:ia')." Yesterday"; }
+                                else {
+                                    echo date_format($match_date, 'g:ia \o\n l jS F Y'); }
+								echo ' #(' . $pipelineDetails["last_success_build"] . ')'; }
+                            else {
+								echo 'N/A'; }
 							?>
 							</td>
 							<td>
 							<?php
 							if ($pipelineDetails["last_fail"] != false) {
-								echo date('Y-m-d \<\b\r\> h:i:s', $pipelineDetails["last_fail"]);
-								echo ' #(' . $pipelineDetails["last_fail_build"] . ')';
-							} else {
-								echo 'N/A';
-							}
+
+                                $match_date = new DateTime(date('d.m.Y H:i', $pipelineDetails["last_fail"]));
+                                $diff = $today->diff( $match_date );
+                                $diffDays = (integer)$diff->format( "%R%a" ); // Extract days count in interval
+
+                                $date = date($pipelineDetails["last_fail"]);
+                                if( $diffDays == 0 ) {
+                                    echo date_format($match_date, 'g:ia')." Today"; }
+                                else if( $diffDays == -1 ) {
+                                    echo date_format($match_date, 'g:ia')." Yesterday"; }
+                                else {
+                                    echo date_format($match_date, 'g:ia \o\n l jS F Y'); }
+                                echo ' #(' . $pipelineDetails["last_fail_build"] . ')';}
+                            else {
+                                echo 'N/A'; }
+
 							?>
 							</td>
 							<td>
