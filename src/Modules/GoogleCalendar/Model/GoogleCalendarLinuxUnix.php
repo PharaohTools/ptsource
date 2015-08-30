@@ -83,7 +83,7 @@ class GoogleCalendarLinuxUnix extends Base {
         //$buildsettings = $pipeline->getData();
 
         $mn = $this->getModuleName() ;
-	    if ($pipeline["settings"][$mn]["googlecalendar_enabled"] == "on") {   
+	    if (isset($pipeline["settings"][$mn]["googlecalendar_enabled"]) && $pipeline["settings"][$mn]["googlecalendar_enabled"] == "on") {
         require __DIR__ . '/../Libraries/vendor/autoload.php';
 
 	       //require_once 'Google/Client.php';
