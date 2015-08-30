@@ -42,11 +42,6 @@
         <div class="row clearfix no-margin">
            <h4 class="text-uppercase text-primary"><i class="fa fa-users hvr-grow-rotate"></i>User Profile</h4>
 
-            <?php
-
-            var_dump($pageVars["data"]) ;
-            ?>
-
             <div class="row clearfix no-margin">
                 <h5 class="text-uppercase text-light" style="margin-top: 15px;margin-left: 51px;">  </h5>
                 <p style="color: #7CFC00; margin-left: 100px;" id="registration_error_msg"></p>
