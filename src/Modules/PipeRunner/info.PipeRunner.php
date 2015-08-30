@@ -14,7 +14,7 @@ class PipeRunnerInfo extends PTConfigureBase {
 
     public function routesAvailable() {
         return array( "PipeRunner" => array("start", "apistart", "service", "pipestatus", "show", "child", "history",
-          "summary", "findrunning") );
+          "summary", "findrunning", "terminate") );
     }
 
     public function ignoredAuthenticationRoutes() {
