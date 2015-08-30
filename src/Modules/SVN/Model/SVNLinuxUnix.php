@@ -53,7 +53,7 @@ class SVNLinuxUnix extends Base {
 
 		$mn = $this -> getModuleName();
 
-		if ($pipeline["settings"][$mn]["SVN_enabled"] == "on") {
+		if (isset($pipeline["settings"][$mn]["SVN_enabled"]) && $pipeline["settings"][$mn]["SVN_enabled"] == "on") {
 			if ($pipeline["settings"][$mn]["With_UNPWD"] == "on") {
 				$cmd = "svn checkout " . $pipeline["settings"][$mn]["Repository"] . " --username=" . $pipeline["settings"][$mn]["Username"] . " --password=" . $pipeline["settings"][$mn]["Password"] . "";
 				$svn = shell_exec($cmd);
