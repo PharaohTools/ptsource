@@ -71,7 +71,7 @@ class PublishHTMLreportsAllOS extends Base {
         $steps = json_decode($steps, true);
 	
 	$mn = $this->getModuleName() ;
-	if ($steps[$mn]["enabled"] == "on") {
+	if (isset($steps[$mn]["enabled"]) && $steps[$mn]["enabled"] == "on") {
 	$dir = $steps[$mn]["Report_Directory"];
 	if (substr($dir, -1) != DS) { $dir = $dir . DS ;}
 		
