@@ -47,7 +47,8 @@ class XVNCLinuxUnix extends Base {
         $logging = $loggingFactory->getModel($this->params);
 
         $mn = $this->getModuleName() ;
-        if ($this->params["build-settings"][$mn]["xvnc_during_build"] == "on") {
+        if (isset($this->params["build-settings"][$mn]["xvnc_during_build"]) &&
+            $this->params["build-settings"][$mn]["xvnc_during_build"] == "on") {
             $logging->log ("XVNC Enabled for build, starting...", $this->getModuleName() ) ;
             $xvncCommand = "echo 'pretend to start xvnc'" ;
             $result = self::executeAndOutput($xvncCommand) ;
@@ -66,7 +67,8 @@ class XVNCLinuxUnix extends Base {
         $logging = $loggingFactory->getModel($this->params);
 
         $mn = $this->getModuleName() ;
-        if ($this->params["build-settings"][$mn]["xvnc_during_build"] == "on") {
+        if (isset($this->params["build-settings"][$mn]["xvnc_during_build"]) &&
+            $this->params["build-settings"][$mn]["xvnc_during_build"] == "on") {
             $logging->log ("XVNC Enabled for build, stopping...", $this->getModuleName() ) ;
             $xvncCommand = "echo 'pretend to stop xvnc'" ;
             $result = self::executeAndOutput($xvncCommand) ;
