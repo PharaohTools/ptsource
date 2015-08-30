@@ -240,8 +240,8 @@ class SignupAllOS extends Base {
             foreach ($oldData as $one) {
                 if ($user->username == $one->username) {
                     $two = new \stdClass();
-                    $two->email = $one->email ;
                     $two->username = $one->username ;
+                    $two->email = $one->email ;
                     if (isset($user->password)) {
                         $two->password = $this->getSaltWord($user->password) ; }
                     else {
