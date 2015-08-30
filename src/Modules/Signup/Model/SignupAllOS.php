@@ -155,7 +155,6 @@ class SignupAllOS extends Base {
     public function loginByOAuth($name, $email, $user){
         $_SESSION["login-status"] = true;
         $_SESSION["username"] = $email;
-        $oldData = $this->getUsersData();
         if ($this->userExist($email) == true) {
             $_SESSION["userrole"] = $this->getUserRole($email);
             header("Location: /index.php?control=Index&action=index");
@@ -170,7 +169,6 @@ class SignupAllOS extends Base {
     public function loginByLDAP($name, $email, $user){
         $_SESSION["login-status"] = true ;
         $_SESSION["username"] = $email ;
-        $oldData = $this->getUsersData() ;
         if ($this->userExist($email) == true) {
             $_SESSION["userrole"] = $this->getUserRole($email);
             header("Location: /index.php?control=Index&action=index");
