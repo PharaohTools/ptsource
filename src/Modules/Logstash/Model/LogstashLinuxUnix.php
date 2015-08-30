@@ -70,7 +70,7 @@ class LogstashLinuxUnix extends Base {
         $pipeline = $this->getPipeline() ;
         
         $mn = $this->getModuleName() ;
-	    if ($pipeline["settings"][$mn]["logstash_enabled"] == "on") {	
+	    if (isset($pipeline["settings"][$mn]["logstash_enabled"]) && $pipeline["settings"][$mn]["logstash_enabled"] == "on") {
 		$errno  = 0;
 		$tmpfile = PIPEDIR.DS.$this->params["item"].DS."tmpfile";
 		$str = array( "log" => file_get_contents($tmpfile),
@@ -79,7 +79,7 @@ class LogstashLinuxUnix extends Base {
 		$str = json_encode($str);
 		$fp = stream_socket_client("tcp://".$pipeline["settings"][$mn]["ipaddress"].":".$pipeline["settings"][$mn]["port"], $errno, $str, 30);
 		if (!$fp) {
-		    $logging->log ("Faild: Push to logstash", $this->getModuleName() ) ;
+		    $logging->log ("Failed: Push to logstash", $this->getModuleName() ) ;
 			return FALSE;
 		}
 		{
