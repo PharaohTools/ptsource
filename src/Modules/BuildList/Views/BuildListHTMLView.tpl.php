@@ -152,7 +152,7 @@
                                 else if( $diffDays == -1 ) {
                                     echo date_format($match_date, 'g:ia')." Yesterday"; }
                                 else {
-                                    echo date_format($match_date, 'g:ia \o\n l jS F Y'); }
+                                    echo date_format($match_date, 'g:ia \o\n D jS F Y'); }
 								echo ' #(' . $pipelineDetails["last_success_build"] . ')'; }
                             else {
 								echo 'N/A'; }
@@ -172,7 +172,7 @@
                                 else if( $diffDays == -1 ) {
                                     echo date_format($match_date, 'g:ia')." Yesterday"; }
                                 else {
-                                    echo date_format($match_date, 'g:ia \o\n l jS F Y'); }
+                                    echo date_format($match_date, 'g:ia \o\n D jS F Y'); }
                                 echo ' #(' . $pipelineDetails["last_fail_build"] . ')';}
                             else {
                                 echo 'N/A'; }
