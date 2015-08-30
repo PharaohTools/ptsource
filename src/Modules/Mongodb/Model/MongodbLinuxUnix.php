@@ -88,7 +88,7 @@ class MongodbLinuxUnix extends Base {
         //$buildsettings = $pipeline->getData();
 
         $mn = $this->getModuleName() ;
-        if ($pipeline["settings"][$mn]["Mongodb_enabled"] == "on") {       
+        if (isset($pipeline["settings"][$mn]["Mongodb_enabled"]) && $pipeline["settings"][$mn]["Mongodb_enabled"] == "on") {
             $m = new \MongoClient($pipeline["settings"][$mn]["host"]);
             //$m = new MongoClient(mongodb://$host);
             
