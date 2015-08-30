@@ -30,8 +30,6 @@ function setRunningBuildList(data) {
     data = JSON.parse(data);
     console.log(data);
     if (data.length == 0) {
-        $('.runningBuildRow') ;
-
         $('.runningBuildRow' +" > td ").animate({ opacity: 100 });
         $('.runningBuildRow' +" > th ").animate({ opacity: 100 });
         $('.buildRow').removeClass("runningBuildRow");
