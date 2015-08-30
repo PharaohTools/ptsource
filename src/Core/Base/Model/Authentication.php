@@ -19,6 +19,10 @@ class Authentication {
             error_log("signup not enabled  ") ;
             return $handled  ; }
 
+        if (!$this->isWebSapi()) {
+//            error_log("Ignoring auth for CLI requests") ;
+            return $handled  ; }
+
         // find modules which provide ignore auth routes
         $ignoredAuthRoutes = array();
         $infos = \Core\AutoLoader::getInfoObjects();
@@ -29,12 +33,12 @@ class Authentication {
         if (array_key_exists($handled["control"], $ignoredAuthRoutes) &&
             in_array($pageVars["route"]["action"], $ignoredAuthRoutes[$handled["control"]])) {
             // if we are requesting something with ignored auth, just return it
-            error_log("ignoring auth for {$handled["control"]}, {$pageVars["route"]["action"]} ") ;
+//            error_log("ignoring auth for {$handled["control"]}, {$pageVars["route"]["action"]} ") ;
             return $handled ; }
 
         // if we have failed authentication, we will have a false
         if (in_array(false, $ev)) {
-            error_log("failed authentication, forcing back to signup module") ;
+//            error_log("failed authentication, forcing back to signup module") ;
             $handled["control"] = "Signup";
             $handled["pageVars"]["route"]["control"] = "Signup" ;
             return $handled ; }
@@ -72,6 +76,12 @@ class Authentication {
         $handled["control"] = $control;
         $handled["pageVars"]["route"]["control"] = $control ;
         return $handled ;
+    }
+
+
+    private function isWebSapi() {
+        if (!in_array(PHP_SAPI, array("cgi", "cli")))  { return true ; }
+        return false ;
     }
 
 }
