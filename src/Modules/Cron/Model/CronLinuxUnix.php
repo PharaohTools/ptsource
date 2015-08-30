@@ -37,7 +37,7 @@ class CronLinuxUnix extends Base {
             $switch = $this->getSwitchUser() ;
             $cmd = "" ;
             if ($switch != false) { $cmd .= 'sudo su '.$switch.' -c '."'" ; }
-            $cmd .= PHRCOMM.' Cron set-crontab --yes --guess --frequency="'.$this->params["app-settings"][$mn]["cron_frequency"].
+            $cmd .= PTBCOMM.' Cron set-crontab --yes --guess --frequency="'.$this->params["app-settings"][$mn]["cron_frequency"].
                 '"';
             if ($switch != false) { $cmd .= "'" ; }
             // error_log($cmd) ;
