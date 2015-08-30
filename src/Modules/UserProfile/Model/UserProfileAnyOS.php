@@ -36,14 +36,14 @@ class UserProfileAnyOS extends BasePHPApp {
         $this->saveUser($user);
     }
 
-    private function getUserDetails() {
+    public function getUserDetails() {
         $signupFactory = new \Model\Signup();
         $signup = $signupFactory->getModel($this->params);
         $oldData=$signup->getLoggedInUserData();
         return $oldData;
     }
 
-    private function getAllUserDetails() {
+    public function getAllUserDetails() {
         $signupFactory = new \Model\Signup();
         $signup = $signupFactory->getModel($this->params);
         $me = $signup->getLoggedInUserData() ;
@@ -59,6 +59,12 @@ class UserProfileAnyOS extends BasePHPApp {
         $signup = $signupFactory->getModel($this->params);
         $oldData=$signup->updateUser($user);
         return $oldData;
+    }
+
+    public function checkLoginSession() {
+        $signupFactory = new \Model\Signup();
+        $signup = $signupFactory->getModel($this->params);
+        return $signup->checkLoginSession();
     }
 
 }

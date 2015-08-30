@@ -38,7 +38,7 @@ function changePassword() {
         url: rurl,
         data: {
             oldPassword:$('#old_password').val(),
-            newPassword:$('#new_password').val(),
+            newPassword:$('#new_password').val()
         },
         dataType: "json",
         success: function(result) { console.log(result);

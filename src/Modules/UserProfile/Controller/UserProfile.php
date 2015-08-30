@@ -11,13 +11,23 @@ class UserProfile extends Base {
         if (is_array($thisModel)) { 
 			return $this->failDependencies($pageVars, $this->content, $thisModel) ;
 		}
+
+
         if (in_array($pageVars["route"]["action"], array("show"))) {
-            $this->content["data"] = $thisModel->getData();
-            return array ("type"=>"view", "view"=>"UserProfile", "pageVars"=>$this->content); }
+            if($thisModel->checkLoginSession() == TRUE){
+                $this->content["data"] = $thisModel->getData();
+                $this->content["userdata"] = $thisModel->getUserDetails();
+                return array ("type"=>"view", "view"=>"UserProfile", "pageVars"=>$this->content); }
+            return array ("type"=>"view", "view"=>"UserProfileAlert", "pageVars"=>$this->content); }
+
         if (in_array($pageVars["route"]["action"], array("save"))) {
-            $thisModel->saveData();
-            $this->content["data"] = $thisModel->getData();
-            return array ("type"=>"view", "view"=>"UserProfile", "pageVars"=>$this->content); }
+            if($thisModel->checkLoginSession() == TRUE){
+                $thisModel->saveData();
+                $this->content["data"] = $thisModel->getData();
+                $this->content["userdata"] = $thisModel->getUserDetails();
+                return array ("type"=>"view", "view"=>"UserProfile", "pageVars"=>$this->content); }
+            return array ("type"=>"view", "view"=>"UserProfileAlert", "pageVars"=>$this->content); }
+
         if (in_array($pageVars["route"]["action"], array("get-user"))) {
             // @todo output format change not being implemented
             $thisModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars, "GetUser") ;

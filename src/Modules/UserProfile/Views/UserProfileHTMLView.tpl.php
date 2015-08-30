@@ -42,6 +42,10 @@
         <div class="row clearfix no-margin">
            <h4 class="text-uppercase text-primary"><i class="fa fa-users hvr-grow-rotate"></i>User Profile</h4>
 
+            <?php
+
+            var_dump($pageVars["data"]) ;
+            ?>
 
             <div class="row clearfix no-margin">
                 <h5 class="text-uppercase text-light" style="margin-top: 15px;margin-left: 51px;">  </h5>
@@ -54,6 +58,7 @@
                             <label for="update_username" class="col-sm-4 control-label text-left" style="color:#757575">User Name</label>
                             <div class="col-sm-7">
                                 <?php
+
                                 if ($pageVars["data"]["allusers"] === false) {
                                     ?>
                                     <input type="text" readonly="readonly" class="form-control" id="update_username" name="update_username" placeholder="User Name" value="<?php echo $pageVars["data"]["user"]->username ; ?>">
