@@ -84,7 +84,7 @@ class SSHLinuxUnix extends Base {
 
 
         $mn = $this->getModuleName() ;
-	    if ($pipeline["settings"][$mn]["ssh_enabled"] == "on") {
+	    if (isset($pipeline["settings"][$mn]["ssh_enabled"]) && $pipeline["settings"][$mn]["ssh_enabled"] == "on") {
     
        if (!function_exists("ssh2_connect"))
 		{
