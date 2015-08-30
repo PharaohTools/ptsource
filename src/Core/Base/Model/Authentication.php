@@ -16,8 +16,8 @@ class Authentication {
         $handled["control"] = $control ;
         $handled["pageVars"] = $pageVars ;
         if (!isset($mod_config["Signup"]["signup_enabled"]) || $mod_config["Signup"]["signup_enabled"]=="off") {
+            error_log("signup not enabled  ") ;
             return $handled  ; }
-
 
         // find modules which provide ignore auth routes
         $ignoredAuthRoutes = array();
@@ -27,13 +27,12 @@ class Authentication {
             if (method_exists($info, "ignoredAuthenticationRoutes")) {
                 $ignoredAuthRoutes[$info->getModuleName()] = $info->ignoredAuthenticationRoutes() ; } }
         if (array_key_exists($handled["control"], $ignoredAuthRoutes) &&
-            in_array($handled["action"], $ignoredAuthRoutes[$handled["control"]])) {
+            in_array($pageVars["route"]["action"], $ignoredAuthRoutes[$handled["control"]])) {
             // if we are requesting something with ignored auth, just return it
-            error_log("ignoring auth for {$handled["control"]}, {$handled["action"]} ") ;
+            error_log("ignoring auth for {$handled["control"]}, {$pageVars["route"]["action"]} ") ;
             return $handled ; }
 
         // if we have failed authentication, we will have a false
-        // var_dump($ev) ;
         if (in_array(false, $ev)) {
             error_log("failed authentication, forcing back to signup module") ;
             $handled["control"] = "Signup";
