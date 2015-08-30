@@ -438,9 +438,9 @@ pre {
   display: block;
   padding: 9.5px;
   margin: 0 0 10px;
-  font-size: 13px;
-  font-weight:bold;
-  line-height: 1.42857143;
+  font-size: 11px;
+    /*font-weight:bold;*/
+    /*line-height: 1.42857143;*/
   color: #ffffff;
   word-break: break-all;
   word-wrap: break-word;
