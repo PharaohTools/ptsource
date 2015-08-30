@@ -122,7 +122,7 @@ class PipeRunnerAllOS extends Base {
         $cmd = "" ;
         if ($switch != false) { $cmd .= 'sudo -u '.$switch.' -c '."'" ; }
         // this should be a phrank piperunner@cli and it should save the log to a named history
-        $cmd .= PHRCOMM.' piperunner child --pipe-dir="'.$this->params["pipe-dir"].'" ' ;
+        $cmd .= PTBCOMM.' piperunner child --pipe-dir="'.$this->params["pipe-dir"].'" ' ;
         if (isset($this->params["build-request-source"])) {
             $cmd .= '--build-request-source="'.$this->params["build-request-source"].'" '; }
         else if ($this->isWebSapi()==true) {
@@ -158,7 +158,7 @@ class PipeRunnerAllOS extends Base {
         $cmd = "" ;
         if ($switch != false) { $cmd .= 'sudo -u '.$switch.' -c '."'" ; }
         // this should be a phrank piperunner@cli and it should save the log to a named history
-        $cmd .= PHRCOMM.' piperunner terminate-child --pipe-dir="'.$this->params["pipe-dir"].'" ' ;
+        $cmd .= PTBCOMM.' piperunner terminate-child --pipe-dir="'.$this->params["pipe-dir"].'" ' ;
         $cmd .= '--item="'.$this->params["item"].'" --run-id="'.$run.'" > '.PIPEDIR.DS.$this->params["item"].DS ;
         $cmd .= 'tmpfile_terminate &';
         if ($switch != false) { $cmd .= "'" ; }
@@ -236,64 +236,119 @@ class PipeRunnerAllOS extends Base {
 
     public function terminateChild() {
 
-        // get the run id
-        // get the pipe id
-        // if unable to get either, say unable to find parameters to terminate build
-        // find running pipes
-        // if the pipe we want is in in the list, echo that it is
-        // create the kill command
-        // echo the proposed kill command
-        // issue the kill command
-        // wait a specified number of seconds for it to die (initial_termination_wait)
-        // find running pipes
-        //   if its not in this list (killed)
-        //     echo SUCCESSFUL TERMINATION ;
-        //     return true ;
-        //   if it is in this list (still alive)
-        //     if we have a conf setting for termination_attempts
-        //         $iterations = (isset($conf->iterations)) ? isset($conf->iterations) : 3 ;
-        //         foreach ($iterations as $iteration) {
-        //             echo the proposed kill command
-        //             issue the kill command
-        //             wait a specified number of seconds for it to die (iterate_termination_wait)
-        //             find running pipes
-        //                if it is in this list }
-        //                   echo PENDING TERMINATION ;
-        //                   continue ; }
-        //
-        //                if it is not in this list {
-        //                   echo SUCCESSFUL TERMINATION ;
-        //                   return true ; } }
-        //     else
-        //       echo FAILED TERMINATION ;
-        //       return false ;
-
         $this->params["echo-log"] = true ;
+
+        $loggingFactory = new \Model\Logging();
+        $logging = $loggingFactory->getModel($this->params);
+
         $eventRunnerFactory = new \Model\EventRunner() ;
         $eventRunner = $eventRunnerFactory->getModel($this->params) ;
         $ev = $eventRunner->eventRunner("beforeTermination") ;
-        if ($ev == false) { return $this->failBuild() ; }
 
+        $run_id = $this->params["run-id"] ;// get the run id
+        $item = $this->params["item"] ;// get the pipe id
 
-        $pipeline = $this->getPipeline();
-        $this->params["build-settings"] = $pipeline["settings"];
-        $this->params["app-settings"]["app_config"] = \Model\AppConfig::getAppVariable("app_config");
-        $this->params["app-settings"]["mod_config"] = \Model\AppConfig::getAppVariable("mod_config");
+        // if unable to get either, say unable to find parameters to terminate build
+        if (!isset($item)) {
+            $logging->log("Unable to find Pipeline ID to terminate", $this->getModuleName());
+            \Core\BootStrap::setExitCode(1) ;
+            return false ; }
+        if (!isset($run_id)) {
+            $logging->log("Unable to find Run ID to terminate", $this->getModuleName());
+            \Core\BootStrap::setExitCode(1) ;
+            return false ; }
+
+        $pipeFactory = new \Model\PipeRunner();
+        $pipeFindRunning = $pipeFactory->getModel($this->params, "FindRunning");
+        $runningBuilds = $pipeFindRunning->getRunningBuilds() ; // find running pipes
+
+        $killRes = array() ;
+
+        foreach ($runningBuilds as $runningBuild) {
+            if ($runningBuild["item"] == $item &&
+                $runningBuild["runid"] == $run_id) {
+                $logging->log("Found running build: Pipeline {$item} and Run ID {$run_id}", $this->getModuleName()); // if the pipe we want is in in the list, echo that it is
+                $killCommands = $this->createChildTerminateCommand($item, $run_id); // create the kill command
+                foreach ($killCommands as $killCommand) {
+                    $logging->log("Executing $killCommand", $this->getModuleName()); // echo the proposed kill command
+                    $rc = $this->executeAndGetReturnCode($killCommand, true, true) ;
+                    $logging->log($rc["output"][0], $this->getModuleName()); } // issue the kill command
+                $mod_config = \Model\AppConfig::getAppVariable("mod_config");
+                $initial_termination_wait = 1 ; // @todo get this from the config
+                sleep($initial_termination_wait); // wait a specified number of seconds for it to die (initial_termination_wait)
+                $stillRunningBuilds = $pipeFindRunning->getRunningBuilds() ; // find running pipes
+                foreach ($stillRunningBuilds as $stillRunningBuild) {
+                    if ($stillRunningBuild["item"] == $item &&
+                        $stillRunningBuild["runid"] == $run_id) {
+                        $logging->log("PENDING TERMINATION", $this->getModuleName());    //     echo SUCCESSFUL TERMINATION ;
+                        $stillAlive = true ; } }
+                if (!isset($stillAlive)) { //   if its not in this list (killed)
+                    $logging->log("SUCCESSFUL TERMINATION", $this->getModuleName());    //     echo SUCCESSFUL TERMINATION ;
+                    $killRes[] = true ; }
+                else { //   if it is in this list (still alive)
+                    // if we have a conf setting for termination_attempts
+                    $iterations = (isset($mod_config["PipeRunner"]["termination_attempts"])) //         $iterations = (isset($conf->iterations)) ? isset($conf->iterations) : 3 ;
+                        ? $mod_config["PipeRunner"]["termination_attempts"]
+                        : 3 ;
+                    for ($iteration = 1; $iteration<=$iterations; $iteration++) {
+                        foreach ($killCommands as $killCommand) {
+                            $logging->log("Executing iteration {$iteration} of {$iterations}, $killCommand", $this->getModuleName()); // echo the proposed kill command
+                            $rc = $this->executeAndGetReturnCode($killCommand, true, true) ;
+                            $logging->log($rc["output"][0], $this->getModuleName()); } } // issue the kill command
+                        $mod_config = \Model\AppConfig::getAppVariable("mod_config");
+                        $iterate_termination_wait = 1 ; // @todo get this from the config
+                        sleep($iterate_termination_wait); // wait a specified number of seconds for it to die (initial_termination_wait)
+                        $stillIteratingRunningBuilds = $pipeFindRunning->getRunningBuilds() ; // find running pipes
+                        foreach ($stillIteratingRunningBuilds as $stillIteratingRunningBuild) {
+                            if ($stillIteratingRunningBuild["item"] == $item &&
+                                $stillIteratingRunningBuild["runid"] == $run_id) {
+                                $logging->log("PENDING TERMINATION", $this->getModuleName());    //     echo SUCCESSFUL TERMINATION ;
+                                $evenStillAlive = true ; } }
+                        if (!isset($evenStillAlive)) { //   if its not in this list (killed)
+                            $logging->log("SUCCESSFUL TERMINATION", $this->getModuleName());    //     echo SUCCESSFUL TERMINATION ;
+                            $killRes[] = true ; } }
+                    $killRes[] = false ; } }
+
 
         $eventRunnerFactory = new \Model\EventRunner() ;
         $eventRunner = $eventRunnerFactory->getModel($this->params) ;
         $ev = $eventRunner->eventRunner("afterTermination") ;
 
+        if (!in_array(false, $killRes)) {
+            $logging->log("COMPLETE SUCCESSFUL TERMINATION", $this->getModuleName());    //     echo SUCCESSFUL TERMINATION ;
+            return true ; }
+        $logging->log("COMPLETE FAILED TERMINATION", $this->getModuleName());    //     echo SUCCESSFUL TERMINATION ;
+        return false ;
 
-        $ev = $eventRunner->eventRunner("beforeBuildComplete") ;
-        if ($ev == false) { return $this->failBuild() ; }
-        $ret = (in_array(false, $ressys)) ? "FAILED EXECUTION\n" : "SUCCESSFUL EXECUTION\n" ;
-        $logging->log($ret, $this->getModuleName()) ;
-        $this->params["run-status"] = (in_array(false, $ressys)) ? "FAIL" : "SUCCESS" ;
-        $eventRunner->params = $this->params ;
-        $eventRunner->eventRunner("afterBuildComplete") ;
-        $this->setRunEndTime($this->params["run-status"]) ;
-        return $this->saveRunLog() ;
+    }
+
+
+    public function createChildTerminateCommand($item, $run_id) {
+        // create the kill command
+        $switch = $this->getSwitchUser() ;
+        $cmd = "" ;
+        if ($switch != false) { $cmd .= 'sudo su '.$switch.' -c '."'" ; }
+        $cmd .= 'ps aux | grep "piperunner child" ' ;
+        $cmd .= '| grep \''.PTBCOMM.'\' ' ;
+        $cmd .= '| grep \''.$item.'\' ' ;
+        $cmd .= '| grep \''.$run_id.'\' ' ;
+//        $cmd .= '| awk \'{print $2}\' ' ;
+        if ($switch != false) { $cmd .= "'" ; }
+        $all = $this->executeAndLoad($cmd) ;
+        $lines = explode("\n", $all) ;
+        $termcomms = array() ;
+        foreach($lines as &$line) {
+            if ($line == '') {
+                unset ($line);
+                continue ; }
+            else if (strpos($line, 'grep')!==false) {
+                unset ($line);
+                continue ; }
+            else {
+                $pieces = preg_split('/\s+/', $line);
+//                $pieces = array_diff($pieces, array("")) ;
+                $termcomms[] = "kill {$pieces[1]}" ; } }
+        return $termcomms  ;
     }
 
     private function failBuild() {

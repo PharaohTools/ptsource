@@ -27,7 +27,7 @@ class PipeRunnerFindRunningAllOS extends Base {
             return false ; }
     }
 
-    private function getRunningBuilds() {
+    public function getRunningBuilds() {
         $switch = $this->getSwitchUser() ;
         $cmd = "" ;
         if ($switch != false) { $cmd .= 'sudo su '.$switch.' -c '."'" ; }

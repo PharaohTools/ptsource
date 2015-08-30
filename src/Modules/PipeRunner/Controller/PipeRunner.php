@@ -30,7 +30,7 @@ class PipeRunner extends Base {
             $this->content["data"] = $thisModel->getChildData();
             $this->content["route"]["extraParams"]["output-format"] = "CLI";
             return array ("type"=>"view", "view"=>"pipeRunnerChild", "pageVars"=>$this->content); }
-        if (in_array($pageVars["route"]["action"], array("terminate"))) {
+        if (in_array($pageVars["route"]["action"], array("terminate-child"))) {
             $this->content["pid"] = $thisModel->terminateChild();
             $this->content["data"] = $thisModel->getChildData();
             $this->content["route"]["extraParams"]["output-format"] = "CLI";
