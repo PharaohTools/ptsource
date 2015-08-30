@@ -93,11 +93,23 @@ class SendEmailLinuxUnix extends Base {
             require_once dirname(dirname(__FILE__)).DS.'Libraries'.DS.'swift_required.php' ;
             // Create the Transport
             try {
+                $smtp = (isset($this->params["app-settings"]["mod_config"]["SendEmail"]["config_smtp_server"]))
+                    ? $this->params["app-settings"]["mod_config"]["SendEmail"]["config_smtp_server"]
+                    : null ;
+                $port = (isset($this->params["app-settings"]["mod_config"]["SendEmail"]["config_port"]))
+                    ? $this->params["app-settings"]["mod_config"]["SendEmail"]["config_port"]
+                    : null ;
+                $un = (isset($this->params["app-settings"]["mod_config"]["SendEmail"]["config_username"]))
+                    ? $this->params["app-settings"]["mod_config"]["SendEmail"]["config_username"]
+                    : null ;
+                $pw = (isset($this->params["app-settings"]["mod_config"]["SendEmail"]["config_password"]))
+                    ? $this->params["app-settings"]["mod_config"]["SendEmail"]["config_password"]
+                    : null ;
                 $transport = \Swift_SmtpTransport::newInstance(
-                    $this->params["app-settings"]["mod_config"]["SendEmail"]["config_smtp_server"],
-                    (int) $this->params["app-settings"]["mod_config"]["SendEmail"]["config_port"])
-                    ->setUsername($this->params["app-settings"]["mod_config"]["SendEmail"]["config_username"])
-                    ->setPassword($this->params["app-settings"]["mod_config"]["SendEmail"]["config_password"]) ;
+                    $smtp,
+                    (int) $port)
+                    ->setUsername($un)
+                    ->setPassword($pw) ;
                 // Create the Mailer using your created Transport
                 $mailer = \Swift_Mailer::newInstance($transport);
                 // Create the message
