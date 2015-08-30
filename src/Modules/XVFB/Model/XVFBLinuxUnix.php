@@ -49,7 +49,8 @@ class XVFBLinuxUnix extends Base {
         $logging = $loggingFactory->getModel($this->params);
 
         $mn = $this->getModuleName() ;
-        if ($this->params["build-settings"][$mn]["xvfb_during_build"] == "on") {
+        if (isset($this->params["build-settings"][$mn]["xvfb_during_build"]) &&
+            $this->params["build-settings"][$mn]["xvfb_during_build"] == "on") {
             $logging->log ("XVFB Enabled for build, starting...", $this->getModuleName() ) ;
             $xvfbCommand = "echo 'pretend to start xvfb'" ;
             $result = self::executeAndOutput($xvfbCommand) ;
@@ -67,7 +68,8 @@ class XVFBLinuxUnix extends Base {
         $logging = $loggingFactory->getModel($this->params);
 
         $mn = $this->getModuleName() ;
-        if ($this->params["build-settings"][$mn]["xvfb_during_build"] == "on") {
+        if (isset($this->params["build-settings"][$mn]["xvfb_during_build"]) &&
+            $this->params["build-settings"][$mn]["xvfb_during_build"] == "on") {
             $logging->log ("XVFB Enabled for build, stopping...", $this->getModuleName() ) ;
             $xvfbCommand = "echo 'pretend to stop xvfb'" ;
             $result = self::executeAndOutput($xvfbCommand) ;
