@@ -84,8 +84,12 @@ class View {
                   if ( is_dir($modulesParentDirFullPath.DIRECTORY_SEPARATOR.$singleModuleDir)) { // if is a dir
                       $fileNameAndPath = $modulesParentDirFullPath . DIRECTORY_SEPARATOR . $singleModuleDir . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . $viewFileName;
                       if (is_readable($fileNameAndPath)) {
-                          // @todo require in exception
-                          require $fileNameAndPath;
+                          try {
+                              require $fileNameAndPath; }
+                          catch (\Exception $e) {
+                              // @todo logging with this
+                              \Core\BootStrap::setExitCode(1);
+                              return false ; }
                           return true; } } } } }
         else {
             $modulesParentDirFullPath = dirname(__FILE__).DIRECTORY_SEPARATOR."Base".DIRECTORY_SEPARATOR."Views" ;
@@ -96,15 +100,23 @@ class View {
                 if (!in_array($coreViewFile, array(".", ".."))) { // if not dot or double dot
                     $fileNameAndPath = $modulesParentDirFullPath . DIRECTORY_SEPARATOR . $coreViewFile;
                     if (is_readable($fileNameAndPath) && $viewFileName == $coreViewFile) {
-                        // @todo require in exception
-                        require $fileNameAndPath;
+                        try {
+                            require $fileNameAndPath; }
+                        catch (\Exception $e) {
+                            // @todo logging with this
+                            \Core\BootStrap::setExitCode(1);
+                            return false ; }
                         return true; } } }
             foreach ($coreHelpViewFiles as $coreViewFile) {
                 if (!in_array($coreViewFile, array(".", ".."))) { // if not dot or double dot
                     $fileNameAndPath = $modulesParentHelpDirFullPath . DIRECTORY_SEPARATOR . $coreViewFile;
                     if (is_readable($fileNameAndPath) && $viewFileName == $coreViewFile) {
-                        // @todo require in exception
-                        require $fileNameAndPath;
+                        try {
+                            require $fileNameAndPath; }
+                        catch (\Exception $e) {
+                            // @todo logging with this
+                            \Core\BootStrap::setExitCode(1);
+                            return false ; }
                         return true; } } }
 
         }
