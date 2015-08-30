@@ -84,7 +84,7 @@ class HipchatLinuxUnix extends Base {
         //$buildsettings = $pipeline->getData();
 
         $mn = $this->getModuleName() ;
- if ($pipeline["settings"][$mn]["hipchat_enabled"] == "on") {       
+ if (isset($pipeline["settings"][$mn]["hipchat_enabled"]) && $pipeline["settings"][$mn]["hipchat_enabled"] == "on") {
         //require_once dirname(dirname(__FILE__)).DS.'vendor'.DS.'autoload.php';
         //require_once dirname(dirname(__FILE__)).DS.'vendor'.DS.'gorkalaucirica/hipchat-v2-api-client/GorkaLaucirica/HipchatAPIv2Client/Auth/OAuth2.
         require __DIR__ . '/../Libraries/vendor/autoload.php';
