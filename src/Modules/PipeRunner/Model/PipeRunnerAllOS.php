@@ -281,7 +281,8 @@ class PipeRunnerAllOS extends Base {
                 foreach ($killCommands as $killCommand) {
                     $logging->log("Executing $killCommand", $this->getModuleName()); // echo the proposed kill command
                     $rc = $this->executeAndGetReturnCode($killCommand, true, true) ;
-                    $logging->log($rc["output"][0], $this->getModuleName()); } // issue the kill command
+                    if (strlen($rc["output"][0])>0) {
+                        $logging->log($rc["output"][0], $this->getModuleName()); } } // issue the kill command
                 $mod_config = \Model\AppConfig::getAppVariable("mod_config");
                 $initial_termination_wait = 1 ; // @todo get this from the config
                 sleep($initial_termination_wait); // wait a specified number of seconds for it to die (initial_termination_wait)
@@ -303,7 +304,8 @@ class PipeRunnerAllOS extends Base {
                         foreach ($killCommands as $killCommand) {
                             $logging->log("Executing iteration {$iteration} of {$iterations}, $killCommand", $this->getModuleName()); // echo the proposed kill command
                             $rc = $this->executeAndGetReturnCode($killCommand, true, true) ;
-                            $logging->log($rc["output"][0], $this->getModuleName()); } } // issue the kill command
+                            if (strlen($rc["output"][0])>0) {
+                                $logging->log($rc["output"][0], $this->getModuleName()); }} } // issue the kill command
                         $mod_config = \Model\AppConfig::getAppVariable("mod_config");
                         $iterate_termination_wait = 1 ; // @todo get this from the config
                         sleep($iterate_termination_wait); // wait a specified number of seconds for it to die (initial_termination_wait)
