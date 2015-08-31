@@ -110,7 +110,7 @@
                             </a>
                         </li>
                     </ul>
-                    <!-- /.dropdown-alerts --
+                    <!-- /.dropdown-alerts -->
                 </li>
                 <!-- /.dropdown -->
                 <li class="dropdown  hvr-hang">
