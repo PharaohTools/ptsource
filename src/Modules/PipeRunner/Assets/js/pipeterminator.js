@@ -14,7 +14,7 @@ function updatePage() {
     window.updateRunning = true ;
     console.log("setting update running to true");
     item = window.pipeitem ;
-    url = "/index.php?control=PipeRunner&action=service&item=" + item + "&output-format=SERVICE";
+    url = "/index.php?control=PipeRunner&action=termservice&item=" + item + "&run-id=" + runid + "&output-format=SERVICE";
     $.ajax({
         url: url,
         success: function(data) {
@@ -32,8 +32,8 @@ function updatePage() {
 
 function setStatus() {
     item = window.pipeitem ;
-    pid = window.runid ;
-    url = "/index.php?control=PipeRunner&action=pipestatus&item=" + item + "&pid=" + pid + "&output-format=PIPESTATUS";
+    runid = window.runid ;
+    url = "/index.php?control=PipeRunner&action=termstatus&item=" + item + "&run-id=" + runid + "&output-format=TERMSTATUS";
     console.log(url);
     $.ajax({
         url: url,
@@ -57,7 +57,7 @@ function removeWaitImage() {
 function changeSubButton() {
     subhtml  = '<div class="col-sm-offset-2 col-sm-8">';
     subhtml += '  <div class="text-center">';
-    subhtml += '    <button type="submit" class="btn btn-primary" id="close-complete">Close Execution Screen</button>';
+    subhtml += '    <button type="submit" class="btn btn-primary" id="close-complete">Close Termination Screen</button>';
     subhtml += '  </div>';
     subhtml += '</div>' ;
     $("#submit-holder").html(subhtml) ;

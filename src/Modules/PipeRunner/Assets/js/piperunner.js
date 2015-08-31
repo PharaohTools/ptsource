@@ -14,7 +14,8 @@ function updatePage() {
     window.updateRunning = true ;
     console.log("setting update running to true");
     item = window.pipeitem ;
-    url = "/index.php?control=PipeRunner&action=service&item=" + item + "&output-format=SERVICE";
+    runid = window.runid ;
+    url = "/index.php?control=PipeRunner&action=service&item=" + item + "&run-id=" + runid + "&output-format=SERVICE";
     $.ajax({
         url: url,
         success: function(data) {
@@ -32,8 +33,8 @@ function updatePage() {
 
 function setStatus() {
     item = window.pipeitem ;
-    pid = window.runid ;
-    url = "/index.php?control=PipeRunner&action=pipestatus&item=" + item + "&pid=" + pid + "&output-format=PIPESTATUS";
+    runid = window.runid ;
+    url = "/index.php?control=PipeRunner&action=pipestatus&item=" + item + "&run-id=" + runid + "&output-format=PIPESTATUS";
     console.log(url);
     $.ajax({
         url: url,
