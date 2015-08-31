@@ -164,16 +164,6 @@
 
                             </div>
                         </div>
-                        <div class="form-group" id="submit-holder">
-                            <div class="col-sm-offset-2 col-sm-8">
-                                <div class="text-center">
-
-
-                                    <button type="submit" class="btn btn-danger hvr-float-shadow" id="end-now">End Now</button>
-                                </div>
-
-                            </div>
-                        </div>
                     <?php
                        }
                     ?>

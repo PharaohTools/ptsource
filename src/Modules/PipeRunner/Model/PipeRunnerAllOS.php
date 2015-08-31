@@ -167,7 +167,7 @@ class PipeRunnerAllOS extends Base {
         $cmd .= PTBCOMM.' piperunner terminate-child ' ;
         $cmd .= '--item="'.$this->params["item"].'" --run-id="'.$this->params["run-id"].'" > ' ;
         $cmd .= PIPEDIR.DS.$this->params["item"].DS.'tmp'.DS ;
-        $cmd .= 'tmpfile_terminate_'.$this->params["run-id"].' 2&>1';
+        $cmd .= 'tmpfile_terminate_'.$this->params["run-id"] ;
         if ($switch != false) { $cmd .= "'" ; }
 
         error_log("terminate: " . $cmd);
@@ -247,9 +247,9 @@ class PipeRunnerAllOS extends Base {
 
     public function terminateChild() {
 
+        $this->params["echo-log"] = true ;
         $loggingFactory = new \Model\Logging();
         $logging = $loggingFactory->getModel($this->params);
-
         $eventRunnerFactory = new \Model\EventRunner() ;
         $eventRunner = $eventRunnerFactory->getModel($this->params) ;
         $ev = $eventRunner->eventRunner("beforeTermination") ;
@@ -374,12 +374,12 @@ class PipeRunnerAllOS extends Base {
         return $o ;
     }
 
-    private function getExecutionStatus($o = null) {
-        $o = ($o==null) ? $this->getExecutionOutput() : $o ;
-        if (strpos($o, "SUCCESSFUL EXECUTION") !== false ||
-            (strpos($o, "FAILED EXECUTION") !== false || strpos($o, "ABORTED EXECUTION" )))
-        { return true ; }
-        return false ;
+    private function getExecutionStatus() {
+        $ts = $this->getTerminationStatus() ;
+//        $reverse_ts = ($ts==true) ? false : true ;
+//        var_dump($reverse_ts) ;
+//        return $reverse_ts ;
+        return $ts ;
     }
 
 
