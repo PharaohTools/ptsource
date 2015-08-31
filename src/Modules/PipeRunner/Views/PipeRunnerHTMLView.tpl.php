@@ -148,9 +148,20 @@
                             <div class="col-sm-offset-2 col-sm-8">
                                 <div class="text-center">
                                     <img src="Assets/startbootstrap-sb-admin-2-1.0.5/dist/image/712.GIF" style="width:100px;">
-
-
                                 </div>
+                            </div>
+                        </div>
+                        <div class="form-group" id="submit-holder">
+                            <div class="col-sm-offset-2 col-sm-8">
+                                <div class="text-center">
+                                    <?php
+                                    $termLink = '/index.php?control=PipeRunner&action=terminate&run-id='.$pageVars["pipex"].'&item='.$pageVars["data"]["pipeline"]["project-slug"] ;
+                                    ?>
+                                    <a href="<?php echo $termLink ; ?>" type="submit" class="btn btn-danger hvr-float-shadow" id="terminate-build">
+                                        Terminate Build
+                                    </a>
+                                </div>
+
                             </div>
                         </div>
                         <div class="form-group" id="submit-holder">
