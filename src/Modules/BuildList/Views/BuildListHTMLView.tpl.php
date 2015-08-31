@@ -113,7 +113,10 @@
 							<?php
 
 							$i = 1;
-							foreach ($pageVars["data"]["pipelines"] as $pipelineSlug => $pipelineDetails) { ?>
+							foreach ($pageVars["data"]["pipelines"] as $pipelineSlug => $pipelineDetails) {
+
+                                ?>
+
 							<tr class="buildRow " id="blRow_<?php echo $pipelineSlug; ?>" >
 							<th scope="row"><?php echo $i; ?> </th>
 							<td><a style="font-weight: bold;font-size:16px;"; href="/index.php?control=BuildHome&action=show&item=<?php echo $pipelineSlug; ?>"><?php echo $pipelineDetails["project-name"]; ?>  </a> </td>
@@ -124,14 +127,30 @@
 							echo '<i class="fa fa-play fa-2x hvr-grow-shadow" style="color:rgb(13, 193, 42);"></i></a>';
 							?>
 							</td>
-							<td>
+							<td
+                                <?php
+
+                                if ($pipelineDetails["last_status"] === true) {
+                                    echo ' style="background-color:rgb(13, 193, 42);" '; }
+                                else if ($pipelineDetails["last_status"] == false) {
+                                    echo ' style="background-color:#D32B2B" '; }
+                                else {
+                                    echo ' style="background-color:gray" '; }
+                                ?> >
 							<?php
+
+                            echo '<p> #'.$pipelineDetails["last_run_build"].'</p>' ;
+
 							if ($pipelineDetails["last_status"] === true) {
-								echo '<i class="fa fa-circle fa-2x " style="color:rgb(13, 193, 42);"></i>';
-							} else {
-								echo ' <i class="fa fa-circle fa-2x " style="color:#D32B2B"></i>';
-							}
+								echo '<i class="fa fa-circle fa-2x " style="color:rgb(13, 193, 42);"></i>'; }
+                            else if ($pipelineDetails["last_status"] == false) {
+                                echo ' <i class="fa fa-circle fa-2x " style="color:#D32B2B"></i>'; }
+                            else {
+                                echo ' <i class="fa fa-circle fa-2x " style="color:gray"></i>'; }
 							?>
+
+
+
 							</td>
 							
 							<td>
