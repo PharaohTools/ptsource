@@ -108,35 +108,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group" id="submit-holder">
-                        <div class="col-sm-offset-2 col-sm-8">
-                            <div class="text-center">
-                                <?php
-                                $termLink = '/index.php?control=PipeRunner&action=terminate&run-id='.$pageVars["pipex"].'&item='.$pageVars["data"]["pipeline"]["project-slug"] ;
-                                ?>
-                                <a href="<?php echo $termLink ; ?>" type="submit" class="btn btn-danger hvr-float-shadow" id="terminate-build">
-                                    Terminate Build
-                                </a>
-                            </div>
 
-                        </div>
-                    </div>
-                    <div class="form-group" id="submit-holder">
-                        <div class="col-sm-offset-2 col-sm-8">
-                            <div class="text-center">
-
-
-                                <button type="submit" class="btn btn-danger hvr-float-shadow" id="end-now">End Now</button>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <input type="hidden" id="item" value="<?= $pageVars["data"]["pipeline"]["project-slug"] ;?>" />
-                    <input type="hidden" id="pid" value="<?= $pageVars["pipex"] ;?>" />
-                    <?php
-                        echo '<input type="hidden" id="run-id" value="'.$pageVars["data"]["historic_build"]["run-id"].'" />' ;
-                    ?>
+                    <input type="hidden" id="item" value="<?= $pageVars["data"]["pipeline"]["project-slug"] ; ?>" />
+                    <input type="hidden" id="pid" value="<?= $pageVars["pipex"] ; ?>" />
+                    <input type="hidden" id="run-id" value="<?= $pageVars["data"]["historic_build"]["run-id"] ; ?>" />
 
                 </form>
             </div>
