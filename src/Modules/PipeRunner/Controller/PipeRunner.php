@@ -15,6 +15,13 @@ class PipeRunner extends Base {
             $this->content["route"]["extraParams"]["output-format"] = strtoupper($pageVars["route"]["action"]);
             $this->content["data"] = $thisModel->getServiceData();
             return array ("type"=>"view", "view"=>"pipeRunner", "pageVars"=>$this->content); }
+
+        if (in_array($pageVars["route"]["action"], array("termstatus", "termservice"))) {
+            $this->content["params"]["output-format"] = strtoupper($pageVars["route"]["action"]);
+            $this->content["route"]["extraParams"]["output-format"] = strtoupper($pageVars["route"]["action"]);
+            $this->content["data"] = $thisModel->getTermServiceData();
+            return array ("type"=>"view", "view"=>"pipeRunner", "pageVars"=>$this->content); }
+
         if (in_array($pageVars["route"]["action"], array("findrunning"))) {
             // @todo output format change not being implemented
             $thisModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars, "FindRunning") ;
@@ -22,19 +29,28 @@ class PipeRunner extends Base {
             $this->content["route"]["extraParams"]["output-format"] = "JSON";
             $this->content["data"] = $thisModel->getData();
             return array ("type"=>"view", "view"=>"pipeRunnerFindRunning", "pageVars"=>$this->content); }
+
         if (in_array($pageVars["route"]["action"], array("history", "summary"))) {
             $this->content["data"] = $thisModel->getData();
             return array ("type"=>"view", "view"=>"pipeRunner", "pageVars"=>$this->content); }
+
         if (in_array($pageVars["route"]["action"], array("child"))) {
             $this->content["pid"] = $thisModel->runChild();
             $this->content["data"] = $thisModel->getChildData();
             $this->content["route"]["extraParams"]["output-format"] = "CLI";
             return array ("type"=>"view", "view"=>"pipeRunnerChild", "pageVars"=>$this->content); }
+
+        if (in_array($pageVars["route"]["action"], array("terminate"))) {
+            $this->content["pid"] = $thisModel->runPipeTerminateCommand();
+            $this->content["data"] = $thisModel->getData();
+            return array ("type"=>"view", "view"=>"pipeRunnerTerminator", "pageVars"=>$this->content); }
+
         if (in_array($pageVars["route"]["action"], array("terminate-child"))) {
             $this->content["pid"] = $thisModel->terminateChild();
             $this->content["data"] = $thisModel->getChildData();
             $this->content["route"]["extraParams"]["output-format"] = "CLI";
             return array ("type"=>"view", "view"=>"pipeRunnerChild", "pageVars"=>$this->content); }
+
         if (in_array($pageVars["route"]["action"], array("start"))) {
            	$result=$thisModel->runPipe();
 			$this->content["pipex"] = $result; 
