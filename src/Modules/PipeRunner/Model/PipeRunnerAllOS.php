@@ -27,15 +27,21 @@ class PipeRunnerAllOS extends Base {
 
 	public function getChildData() {
 		$this -> setPipeDir();
-		$ret["tempfile"] = PIPEDIR . DS . $this -> params["item"] . DS . 'tmpfile';
+		$ret["tempfile"] = PIPEDIR . DS . $this -> params["item"] . DS .'tmp'.DS. 'tmpfile_'.$this -> params["run-id"];
 		return $ret;
 	}
 
-	public function getServiceData() {
-		$ret["output"] = $this -> getExecutionOutput();
-		$ret["status"] = $this -> getExecutionStatus();
-		return $ret;
-	}
+    public function getServiceData() {
+        $ret["output"] = $this -> getExecutionOutput();
+        $ret["status"] = $this -> getExecutionStatus();
+        return $ret;
+    }
+
+    public function getTermServiceData() {
+        $ret["output"] = $this -> getTerminationOutput();
+        $ret["status"] = $this -> getTerminationStatus();
+        return $ret;
+    }
 
 	public function getPipeline() {
 		$pipelineFactory = new \Model\Pipeline();
@@ -128,7 +134,7 @@ class PipeRunnerAllOS extends Base {
         else if ($this->isWebSapi()==true) {
             $cmd .= '--build-request-source="web" '; }
         $cmd .= '--item="'.$this->params["item"].'" --run-id="'.$run.'" > '.PIPEDIR.DS.$this->params["item"].DS ;
-        $cmd .= 'tmpfile &';
+        $cmd .= 'tmp'.DS.'tmpfile_'.$run.' &';
         if ($switch != false) { $cmd .= "'" ; }
 
         //error_log($cmd);
@@ -153,17 +159,18 @@ class PipeRunnerAllOS extends Base {
         return $stat["pid"]  ;
     }
 
-    private function runPipeTerminateCommand($run) {
+    public function runPipeTerminateCommand() {
         $switch = $this->getSwitchUser() ;
         $cmd = "" ;
         if ($switch != false) { $cmd .= 'sudo -u '.$switch.' -c '."'" ; }
         // this should be a phrank piperunner@cli and it should save the log to a named history
-        $cmd .= PTBCOMM.' piperunner terminate-child --pipe-dir="'.$this->params["pipe-dir"].'" ' ;
-        $cmd .= '--item="'.$this->params["item"].'" --run-id="'.$run.'" > '.PIPEDIR.DS.$this->params["item"].DS ;
-        $cmd .= 'tmpfile_terminate &';
+        $cmd .= PTBCOMM.' piperunner terminate-child ' ;
+        $cmd .= '--item="'.$this->params["item"].'" --run-id="'.$this->params["run-id"].'" > ' ;
+        $cmd .= PIPEDIR.DS.$this->params["item"].DS.'tmp'.DS ;
+        $cmd .= 'tmpfile_terminate_'.$this->params["run-id"].' 2&>1';
         if ($switch != false) { $cmd .= "'" ; }
 
-        //error_log($cmd);
+        error_log("terminate: " . $cmd);
         $descr = array(
             0 => array(
                 'pipe',
@@ -204,7 +211,11 @@ class PipeRunnerAllOS extends Base {
         $logging = $loggingFactory->getModel($this->params);
         $stepRunnerFactory = new \Model\StepRunner() ;
         $stepRunner = $stepRunnerFactory->getModel($this->params) ;
-        $logging->log("Writing to temp file ". PIPEDIR.DS.$this->params["item"].DS.'tmpfile', $this->getModuleName()) ;
+        $tmpfile = PIPEDIR.DS.$this->params["item"].DS.'tmp'.DS.'tmpfile_'.$this->params["run-id"] ;
+        if (!is_writable(dirname($tmpfile))) {
+            $logging->log("Unable to write to temp file {$tmpfile}", $this->getModuleName()) ;
+            return false ; }
+        $logging->log("Writing to temp file ".$tmpfile , $this->getModuleName()) ;
         $logging->log("Executing as ".self::executeAndLoad("whoami"), $this->getModuleName()) ;
         $workspace = $this->getWorkspace() ;
         $dir = $workspace->getWorkspaceDir()  ;
@@ -235,8 +246,6 @@ class PipeRunnerAllOS extends Base {
     }
 
     public function terminateChild() {
-
-        $this->params["echo-log"] = true ;
 
         $loggingFactory = new \Model\Logging();
         $logging = $loggingFactory->getModel($this->params);
@@ -306,19 +315,18 @@ class PipeRunnerAllOS extends Base {
                                 $evenStillAlive = true ; } }
                         if (!isset($evenStillAlive)) { //   if its not in this list (killed)
                             $logging->log("SUCCESSFUL TERMINATION", $this->getModuleName());    //     echo SUCCESSFUL TERMINATION ;
-                            $killRes[] = true ; } }
-                    $killRes[] = false ; } }
+                            $killRes[] = true ;  } } } }
 
 
         $eventRunnerFactory = new \Model\EventRunner() ;
         $eventRunner = $eventRunnerFactory->getModel($this->params) ;
         $ev = $eventRunner->eventRunner("afterTermination") ;
 
-        if (!in_array(false, $killRes)) {
-            $logging->log("COMPLETE SUCCESSFUL TERMINATION", $this->getModuleName());    //     echo SUCCESSFUL TERMINATION ;
-            return true ; }
-        $logging->log("COMPLETE FAILED TERMINATION", $this->getModuleName());    //     echo SUCCESSFUL TERMINATION ;
-        return false ;
+        if (in_array(false, $killRes)) {
+            $logging->log("COMPLETE FAILED TERMINATION", $this->getModuleName());    //     echo SUCCESSFUL TERMINATION ;
+            return false ; }
+        $logging->log("COMPLETE SUCCESSFUL TERMINATION", $this->getModuleName());    //     echo SUCCESSFUL TERMINATION ;
+        return true ;
 
     }
 
@@ -361,7 +369,7 @@ class PipeRunnerAllOS extends Base {
     }
 
     private function getExecutionOutput() {
-        $ofile = PIPEDIR.DS.$this->params["item"].DS.'tmpfile';
+        $ofile = PIPEDIR.DS.$this->params["item"].DS.'tmp'.DS.'tmpfile_'.$this->params["run-id"];
         $o = file_get_contents($ofile) ;
         return $o ;
     }
@@ -369,8 +377,28 @@ class PipeRunnerAllOS extends Base {
     private function getExecutionStatus($o = null) {
         $o = ($o==null) ? $this->getExecutionOutput() : $o ;
         if (strpos($o, "SUCCESSFUL EXECUTION") !== false ||
-           (strpos($o, "FAILED EXECUTION") !== false || strpos($o, "ABORTED EXECUTION" )))
+            (strpos($o, "FAILED EXECUTION") !== false || strpos($o, "ABORTED EXECUTION" )))
         { return true ; }
+        return false ;
+    }
+
+
+    private function getTerminationOutput() {
+        $ofile = PIPEDIR.DS.$this->params["item"].DS.'tmp'.DS.'tmpfile_terminate_'.$this->params["run-id"];
+        $o = file_get_contents($ofile) ;
+        return $o ;
+    }
+
+    private function getTerminationStatus() {
+        $pipeFactory = new \Model\PipeRunner();
+        $pipeFindRunning = $pipeFactory->getModel($this->params, "FindRunning");
+        $runningBuilds = $pipeFindRunning->getRunningBuilds() ; // find running pipes
+        $found = array();
+        foreach ($runningBuilds as $runningBuild) {
+            if ($runningBuild["item"]==$this->params["item"] &&
+                $runningBuild["runid"]==$this->params["run-id"]){
+                $found[] = $runningBuild ; } }
+        if (count($found)==0) { return true ; }
         return false ;
     }
 
