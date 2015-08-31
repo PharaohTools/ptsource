@@ -110,7 +110,6 @@
                     </div>
 
                     <input type="hidden" id="item" value="<?= $pageVars["data"]["pipeline"]["project-slug"] ; ?>" />
-                    <input type="hidden" id="pid" value="<?= $pageVars["pipex"] ; ?>" />
                     <input type="hidden" id="run-id" value="<?= $pageVars["data"]["historic_build"]["run-id"] ; ?>" />
 
                 </form>
