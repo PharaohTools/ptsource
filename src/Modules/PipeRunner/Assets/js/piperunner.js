@@ -52,7 +52,8 @@ function doCompletion() {
 }
 
 function removeWaitImage() {
-    $("#loading-holder").hide() ;
+    $("#loading-holder").remove() ;
+    $("#terminate-build").remove() ;
 }
 
 function changeSubButton() {
