@@ -131,7 +131,7 @@
                                 <select size="<?php echo $size ; ?>" class="col-sm-12" name="source_pipeline" id="source_pipeline">
                                     <?php
                                         foreach ($pageVars["data"]["pipe_names"] as $pipe_slug => $pipe_name) {
-                                            echo '  <option value="'.$pipe_slug.'">'.$pipe_name.'</option>'; } ?>
+                                            echo '  <option value="'.$pipe_name.'">'.$pipe_name.'</option>'; } ?>
                                 </select>
                             </div>
                         </div>
