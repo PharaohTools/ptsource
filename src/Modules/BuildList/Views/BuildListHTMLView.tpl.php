@@ -132,24 +132,14 @@
 
                                 if ($pipelineDetails["last_status"] === true) {
                                     echo ' style="background-color:rgb(13, 193, 42);" '; }
-                                else if ($pipelineDetails["last_status"] == false) {
+                                else if ($pipelineDetails["last_status"] === false) {
                                     echo ' style="background-color:#D32B2B" '; }
                                 else {
                                     echo ' style="background-color:gray" '; }
-                                ?> >
-							<?php
 
-                            echo '<p> #'.$pipelineDetails["last_run_build"].'</p>' ;
+                                echo '<p> #'.$pipelineDetails["last_run_build"].'</p>' ;
 
-							if ($pipelineDetails["last_status"] === true) {
-								echo '<i class="fa fa-circle fa-2x " style="color:rgb(13, 193, 42);"></i>'; }
-                            else if ($pipelineDetails["last_status"] == false) {
-                                echo ' <i class="fa fa-circle fa-2x " style="color:#D32B2B"></i>'; }
-                            else {
-                                echo ' <i class="fa fa-circle fa-2x " style="color:gray"></i>'; }
 							?>
-
-
 
 							</td>
 							
