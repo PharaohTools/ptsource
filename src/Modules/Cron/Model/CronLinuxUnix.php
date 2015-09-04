@@ -40,13 +40,12 @@ class CronLinuxUnix extends Base {
             $cmd .= PTBCOMM.' Cron set-crontab --yes --guess --frequency="'.$this->params["app-settings"][$mn]["cron_frequency"].
                 '"';
             if ($switch != false) { $cmd .= "'" ; }
-            // error_log($cmd) ;
 
-            $cmd2 = "echo $?" ;
-            $result = self::executeAndLoad($cmd2) ;
-            if ($result == true) { $logging->log ("Cron job installed successfully", $this->getModuleName() ) ; }
+            $rc = self::executeAndGetReturnCode($cmd, false, false) ;
+            $res = ($rc["rc"] === 0) ? true : false ;
+            if ($res === true) { $logging->log ("Cron job installed successfully", $this->getModuleName() ) ; }
             else { $logging->log ("Cron job install error", $this->getModuleName() ) ; }
-            return $result; }
+            return $res; }
         else {
             $logging->log ("Cron disabled, deleting current crontab...", $this->getModuleName() ) ;
             $this->removeCrontab() ;
