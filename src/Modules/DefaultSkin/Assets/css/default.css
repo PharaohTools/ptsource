@@ -9,3 +9,7 @@ body {
 #page-wrapper {
     margin-left: 0;
 }
+
+div.well h2.text-uppercase {
+    text-align: center;
+}
