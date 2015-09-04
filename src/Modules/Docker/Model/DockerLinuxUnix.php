@@ -58,7 +58,7 @@ class DockerLinuxUnix extends Base {
 //			$logging->log("Docker Not enabled for build, ignoring...");
 			return TRUE;
 		}
-		if (!$this->ensureInstalled() == 'not installed')
+		if (!$this->ensureInstalled() == false)
 		{
 			$logging->log("Docker Not installed", $this->getModuleName());
 			return false;
@@ -72,22 +72,21 @@ class DockerLinuxUnix extends Base {
 			sleep(10);
 			$container_id = $this->executeAndLoad("docker ps | grep ".$this->params["build-settings"][$mn]["repository"]." | awk '{print $1}'");
 			echo $container_id;
-			$logging->log("Running command inside ".$this->params["build-settings"][$mn]["repository"]. ' container');
+//			$logging->log("Running command inside ".$this->params["build-settings"][$mn]["repository"]. ' container');
 			$container_id = str_replace(PHP_EOL, '', $container_id);
 			$this->executeAndGetReturnCode('docker exec '.$container_id.' '.$this->params["build-settings"][$mn]["commandToRun"]);
 			
-			$logging->log('Stoping container');
+			$logging->log('Stopping container');
 			//$this->executeAndGetReturnCode('docker stop '.$container_id);
 			return TRUE;
 		}
 	}
 	
-	protected function ensureInstalled()
-	{
-		if ($this->executeAndGetReturnCode('sudo docker version') == 0 )
-			return 'installed';
-		else{
-			return 'not installed';	
-		}
+	protected function ensureInstalled() {
+        $rc = $this->executeAndGetReturnCode('sudo docker version') ;
+		if ($rc["rc"] === 0)
+			return true ;
+		else {
+			return false ; }
 	}
 }
