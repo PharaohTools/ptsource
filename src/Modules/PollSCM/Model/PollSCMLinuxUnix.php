@@ -165,13 +165,13 @@ class PollSCMLinuxUnix extends Base {
         $lsCommand = $gitc.' '.$iString.' ls-remote -h '.$repo.' '.$branch ;
         $all = self::executeAndOutput($lsCommand) ;
         $curSha = substr($all, 0, strpos($all, "refs")-1);
-        $this->savePollSHAAndTimestamp($curSha);
         $this->lm->log ("Current remote commit is $curSha $all, $lsCommand, $curSha", $this->getModuleName() ) ;
         if ($lastSha == $curSha ) {
             if (isset($this->params["build-settings"][$mn]["scm_always_allow_web"]) &&
                 $this->params["build-settings"][$mn]["scm_always_allow_web"] =="on") {
                 if (isset($this->params["build-request-source"]) && $this->params["build-request-source"]=="web" ) {
                     $this->lm->log ("Always allowing builds executed from web", $this->getModuleName() ) ;
+                    $this->savePollSHAAndTimestamp($curSha);
                     $result = true ; }
                 else {
                     $this->lm->log ("No remote changes", $this->getModuleName() ) ;
@@ -181,6 +181,7 @@ class PollSCMLinuxUnix extends Base {
                 $result = false; } }
         else {
             $this->lm->log ("Remote changes available", $this->getModuleName() ) ;
+            $this->savePollSHAAndTimestamp($curSha);
             $result = true ; }
         return $result ;
     }
