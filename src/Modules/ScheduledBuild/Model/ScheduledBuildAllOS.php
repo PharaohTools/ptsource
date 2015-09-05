@@ -53,7 +53,7 @@ class ScheduledBuildAllOS extends Base {
         $loggingFactory = new \Model\Logging();
         if (!$this->isWebSapi()) { $this->params["echo-log"] = true ; }
         $this->params["php-log"] = true ;
-        $this->pipeline = $this->getPipeline();
+        $this->pipeline = $this->getPipeline($this->params["item"]);
         $this->params["build-settings"] = $this->pipeline["settings"];
         $this->params["app-settings"]["app_config"] = \Model\AppConfig::getAppVariable("app_config");
         $this->params["app-settings"]["mod_config"] = \Model\AppConfig::getAppVariable("mod_config");
@@ -188,6 +188,11 @@ class ScheduledBuildAllOS extends Base {
         $pipelineFactory = new \Model\Pipeline() ;
         $pipeline = $pipelineFactory->getModel($this->params);
         return $pipeline->getPipelines();
+    }
+    public function getPipeline($item) {
+        $pipelineFactory = new \Model\Pipeline() ;
+        $pipeline = $pipelineFactory->getModel($this->params);
+        return $pipeline->getPipeline($item);
     }
 
     private function isWebSapi() {
