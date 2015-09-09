@@ -80,7 +80,7 @@ class Authentication {
 
 
     private function isWebSapi() {
-        if (!in_array(PHP_SAPI, array("cgi", "cli")))  { return true ; }
+        if (!in_array(PHP_SAPI, array("cli")))  { return true ; }
         return false ;
     }
 
