@@ -33,14 +33,11 @@ class CronLinuxUnix extends Base {
         $this->params["app-settings"] = \Model\AppConfig::getAppVariable("mod_config");
         if ($this->params["app-settings"][$mn]["cron_enable"] == "on") {
             $logging->log ("Cron Enabled as scheduled task driver, running cron create command...", $this->getModuleName() ) ;
-
             $switch = $this->getSwitchUser() ;
             $cmd = "" ;
             if ($switch != false) { $cmd .= 'sudo su '.$switch.' -c '."'" ; }
-            $cmd .= PTBCOMM.' Cron set-crontab --yes --guess --frequency="'.$this->params["app-settings"][$mn]["cron_frequency"].
-                '"';
+            $cmd .= PTBCOMM.' Cron set-crontab --yes --guess --frequency="'.$this->params["app-settings"][$mn]["cron_frequency"].'"';
             if ($switch != false) { $cmd .= "'" ; }
-
             $rc = self::executeAndGetReturnCode($cmd, false, false) ;
             $res = ($rc["rc"] === 0) ? true : false ;
             if ($res === true) { $logging->log ("Cron job installed successfully", $this->getModuleName() ) ; }

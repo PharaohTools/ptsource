@@ -110,7 +110,7 @@ class PollSCMLinuxUnix extends Base {
             try {
                 // @todo other scm types @kevellcorp do svn
                 $lastSha = (isset($this->params["build-settings"][$mn]["last_sha"])) ? $this->params["build-settings"][$mn]["last_sha"] : null ;
-                if (strlen($lastSha)>0) { $result = $this->doLastCommitStored() ; }
+                if ($lastSha!==null) { $result = $this->doLastCommitStored() ; }
                 else { $result = $this->doNoLastCommitStored() ; }
                 return $result; }
             catch (\Exception $e) {
@@ -236,7 +236,7 @@ class PollSCMLinuxUnix extends Base {
     }
 
     private function isWebSapi() {
-        if (!in_array(PHP_SAPI, array("cgi", "cli")))  { return true ; }
+        if (!in_array(PHP_SAPI, array("cli")))  { return true ; }
         return false ;
     }
 

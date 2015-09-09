@@ -5,11 +5,11 @@ Namespace Model;
 class ScheduledBuildAllOS extends Base {
 
 	// Compatibility
-	public $os = array("any");
-	public $linuxType = array("any");
-	public $distros = array("any");
-	public $versions = array("any");
-	public $architectures = array("any");
+	public $os = array("any") ;
+	public $linuxType = array("any") ;
+	public $distros = array("any") ;
+	public $versions = array("any") ;
+	public $architectures = array("any") ;
 
 	// Model Group
 	public $modelGroup = array("Default");
@@ -196,7 +196,7 @@ class ScheduledBuildAllOS extends Base {
     }
 
     private function isWebSapi() {
-        if (!in_array(PHP_SAPI, array("cgi", "cli")))  { return true ; }
+        if (!in_array(PHP_SAPI, array("cli")))  { return true ; }
         return false ;
     }
 
