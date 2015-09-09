@@ -131,6 +131,7 @@ COMPLETION;
         ),$pipes);
         if ($show_output==true) {
             stream_set_blocking($pipes[1], true);
+            stream_set_blocking($pipes[2], true);
             $data = "";
             while ($buf = fread($pipes[1], 4096) || $buf2 = fread($pipes[2], 4096)) {
                 if (isset($buf) ) {
@@ -138,7 +139,7 @@ COMPLETION;
                     echo $buf ; }
                 if (isset($buf2) ) {
                     $buf2 = " ---".$buf2;
-                    $data .= $buf;
+                    $data .= $buf2;
                     echo $buf2 ; } } }
         $stdout = stream_get_contents($pipes[1]);
         fclose($pipes[1]);
