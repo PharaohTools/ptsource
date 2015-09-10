@@ -133,11 +133,11 @@ COMPLETION;
             stream_set_blocking($pipes[1], true);
             stream_set_blocking($pipes[2], true);
             $data = "";
-            while ($buf = fread($pipes[1], 4096) || $buf2 = fread($pipes[2], 4096)) {
+            while ($buf = fread($pipes[1], 4096)) {
                 if (isset($buf) ) {
                     $data .= $buf;
                     echo $buf ; }
-                if (isset($buf2) ) {
+                if ( $buf2 = fread($pipes[2], 4096) ) {
                     $buf2 = " ---".$buf2;
                     $data .= $buf2;
                     echo $buf2 ; } } }
