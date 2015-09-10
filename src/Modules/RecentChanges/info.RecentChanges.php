@@ -6,7 +6,7 @@ class RecentChangesInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "Publish HTML reports for build";
+    public $name = "Recent Changes for a build";
 
     public function _construct() {
         parent::__construct();
@@ -17,20 +17,20 @@ class RecentChangesInfo extends PTConfigureBase {
     }
 
     public function routeAliases() {
-        return array("RecentChanges"=>"RecentChanges","RecentChanges"=>"RecentChanges");
+        return array("recentChanges"=>"RecentChanges","recentchanges"=>"RecentChanges","recent-changes"=>"RecentChanges");
     }
 
     public function events() {
-        return array("afterBuildComplete", "getBuildFeatures");
+        return array("getBuildFeatures");
     }
 
     public function pipeFeatures() {
-        return array("htmlReports");
+        return array("recentChanges");
     }
 
     public function helpDefinition() {
        $help = <<<"HELPDATA"
-    This extension publish HTML reports of a build. It provides code
+    This extension displays Recent Changes for a build. It provides code
     functionality, but no extra CLI commands.
 
     RecentChanges

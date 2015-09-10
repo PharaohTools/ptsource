@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class PublishHTMLreportsPipeFeatureAllOS extends Base {
+class RecentChangesPipeFeatureAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -34,7 +34,7 @@ class PublishHTMLreportsPipeFeatureAllOS extends Base {
 	}
 
 	public function getLink() {
-		$link = 'index.php?control=PublishHTMLreports&action=report&item='.$this->pipeline["project-slug"];
+		$link = 'index.php?control=RecentChanges&action=report&item='.$this->pipeline["project-slug"];
 		$ff = array("link" => "$link");
 		return $ff ;
 	}
