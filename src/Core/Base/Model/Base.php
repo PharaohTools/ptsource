@@ -138,7 +138,7 @@ COMPLETION;
                     $data .= $buf;
                     echo $buf ; }
                 if ( $buf2 = fread($pipes[2], 4096) ) {
-                    $buf2 = " ---".$buf2;
+                    $buf2 = "ERR: ".$buf2;
                     $data .= $buf2;
                     echo $buf2 ; } } }
         $stdout = stream_get_contents($pipes[1]);
