@@ -20,24 +20,12 @@ class RecentChangesAllOS extends Base {
 
     public function getSettingFormFields() {
         $ff = array(
-            "enabled" =>
+            "recent_changes_enabled" =>
             	array(
                 	"type" => "boolean",
                 	"optional" => true,
-                	"name" => "Enable "
-            ),
-		    "Report_Directory" =>
-				array(   "type" => "text",
-					 "name" => "HTML Directory to archive",
-					 "slug" => "htmlreportdirectory"),
-		    "Index_Page" =>
-				array("type" => "text",
-					 "name" => "Index Page",
-					 "slug" => "indexpage"),
-			"Report_Title" =>
-				array("type" => "text",
-					 "name" => "Report Title",
-					 "slug" => "reporttitle"));
+                	"name" => "Enable Recent Change Tracking" ),
+          );
           return $ff ;}
 
     public function getEventNames() {
