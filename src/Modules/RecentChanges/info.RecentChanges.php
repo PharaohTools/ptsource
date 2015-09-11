@@ -20,10 +20,6 @@ class RecentChangesInfo extends PTConfigureBase {
         return array("recentChanges"=>"RecentChanges","recentchanges"=>"RecentChanges","recent-changes"=>"RecentChanges");
     }
 
-    public function events() {
-        return array("getBuildFeatures");
-    }
-
     public function pipeFeatures() {
         return array("recentChanges");
     }

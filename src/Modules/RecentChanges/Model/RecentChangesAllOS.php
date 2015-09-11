@@ -40,6 +40,12 @@ class RecentChangesAllOS extends Base {
 					 "slug" => "reporttitle"));
           return $ff ;}
 
+    public function getEventNames() {
+        return array_keys($this->getEvents());   }
+
+    public function getEvents() {
+        $ff = array("recentChanges" => array("PublishHTMLreports"));
+        return $ff ; }
 
 	public function getReportData() {
 		$pipeFactory = new \Model\Pipeline();
