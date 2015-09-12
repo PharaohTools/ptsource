@@ -37,7 +37,7 @@ class GitLinuxUnix extends Base {
         $logging = $loggingFactory->getModel($this->params);
         if ( $step["steptype"] == "gitclonepoll") {
             $repo = $this->params["build-settings"]["PollSCM"]["git_repository_url"] ;
-            $branch = $this->params["build-settings"]["PollSCM"]["git_branch"] ;
+//            $branch = $this->params["build-settings"]["PollSCM"]["git_branch"] ;
             $targetDir = (isset($this->params["build-settings"]["PollSCM"]["target_dir"]))
                 ? $this->params["build-settings"]["PollSCM"]["target_dir"]
                 : getcwd() ;
@@ -49,13 +49,18 @@ class GitLinuxUnix extends Base {
             if (strlen($targetDir > 0)) {
                 $cmd .= ' --custom-clone-dir="'.$targetDir.'" ' ; }
 
-            if (strlen($branch > 0)) {
-                $cmd .= ' --custom-branch="'.$branch.'" ' ; }
+//            if (strlen($branch > 0)) {
+//                $cmd .= ' --custom-branch="'.$branch.'" ' ; }
 
             if (isset($this->params["build-settings"]["PollSCM"]["git_privkey_path"]) &&
                 $this->params["build-settings"]["PollSCM"]["git_privkey_path"] != "")  {
                 $logging->log("Adding Private Key for cloning Git", $this->getModuleName()) ;
                 $cmd .= ' --private-key="'.$this->params["build-settings"]["PollSCM"]["git_privkey_path"].'" ' ; }
+
+            if (isset($this->params["build-settings"]["PollSCM"]["git_branch"]) &&
+                $this->params["build-settings"]["PollSCM"]["git_branch"] != "")  {
+                $logging->log("Adding Custom Branch for cloning Git", $this->getModuleName()) ;
+                $cmd .= ' --custom-branch="'.$this->params["build-settings"]["PollSCM"]["git_branch"].'" ' ; }
 
             echo $cmd."\n" ;
 
