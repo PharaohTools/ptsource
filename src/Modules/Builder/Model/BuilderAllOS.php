@@ -27,6 +27,7 @@ class BuilderAllOS extends Base {
         // var_dump(1, $builders) ;
         $ret = array() ;
         foreach ($builders as $name => $builder) {
+//            var_dump("bn", $name) ;
             if (isset($builder["settings"]) && count($builder["settings"])>0) {
                 $ret[$name] = $builder ; } }
         // var_dump(2, $ret) ;
@@ -54,22 +55,23 @@ class BuilderAllOS extends Base {
         $names = array_keys($builders) ;
         return (isset($names) && is_array($names)) ? $names : false ;
     }
-    public function deleteBuilder($name) {
-        $builders = $this->getBuilders() ;
-        $path = dirname(dirname(__FILE__)).DS."Data".DS."demobuilders.php" ;
-        include($path) ;
-        unset($demobuilders[$name]);
 
+//    public function deleteBuilder($name) {
+//        $builders = $this->getBuilders() ;
+//        $path = dirname(dirname(__FILE__)).DS."Data".DS."demobuilders.php" ;
+//        include($path) ;
+//        unset($builders[$name]);
+//
 //        $builders = $this->getBuilders() ;
 //        $path = dirname(dirname(__FILE__)).DS."Data".DS."demobuilders.php" ;
 //
 //        $file = fopen($path,"w");
 //        fwrite($file,$builders);
 //        fclose($file);
-        $ret = $builders[$name] ;
-        $r = (isset($ret) && is_array($ret)) ? $ret : false ;
-        return $r ;
-        return ;
-    }
+//        $ret = $builders[$name] ;
+//        $r = (isset($ret) && is_array($ret)) ? $ret : false ;
+//        return $r ;
+//        return ;
+//    }
 
 }
