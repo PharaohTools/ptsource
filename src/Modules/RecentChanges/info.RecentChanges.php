@@ -24,6 +24,11 @@ class RecentChangesInfo extends PTConfigureBase {
         return array("recentChanges");
     }
 
+    public function buildSettings() {
+        return array("recent_changes_enabled");
+    }
+
+
     public function helpDefinition() {
        $help = <<<"HELPDATA"
     This extension displays Recent Changes for a build. It provides code
