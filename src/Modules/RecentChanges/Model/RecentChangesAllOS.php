@@ -26,27 +26,29 @@ class RecentChangesAllOS extends Base {
                 	"optional" => true,
                 	"name" => "Enable Recent Change Tracking" ),
           );
-          return $ff ;}
+          return $ff ; }
 
     public function getEventNames() {
         return array_keys($this->getEvents());   }
 
     public function getEvents() {
-        $ff = array("recentChanges" => array("PublishHTMLreports"));
+        $ff = array("recentChanges" => array("runRecentChanges"));
         return $ff ; }
 
-	public function getReportData() {
-		$pipeFactory = new \Model\Pipeline();
-		$pipeline = $pipeFactory->getModel($this->params);
-		$thisPipe = $pipeline->getPipeline($this->params["item"]);
-		$settings = $thisPipe["settings"];
-		$mn = $this->getModuleName() ;
-		$dir = $settings[$mn]["Report_Directory"];
-
+    public function getReportData() {
+        $pipeFactory = new \Model\Pipeline();
+        $pipeline = $pipeFactory->getModel($this->params);
+        $thisPipe = $pipeline->getPipeline($this->params["item"]);
+        $settings = $thisPipe["settings"];
+        $mn = $this->getModuleName() ;
+        $dir = $settings[$mn]["Report_Directory"];
         $data = 'Here\'s the report of recent changes' ;
+        $ff = array("report" => $data);
+        return $ff ;
+    }
 
-		$ff = array("report" => $data);
-		return $ff ;
+    public function runRecentChanges() {
+        return true ;
     }
 
 }
