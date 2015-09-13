@@ -136,6 +136,11 @@
                                     echo ' style="background-color:#D32B2B" '; }
                                 else {
                                     echo ' style="background-color:gray" '; }
+                                ?>
+
+                                >
+
+                                <?php
 
                                 echo '<p> #'.$pipelineDetails["last_run_build"].'</p>' ;
 
@@ -147,11 +152,15 @@
 							<?php
 
                             $today = new DateTime(); // This object represents current date/time
+                            $actualToday = $today; // copy original for display
                             $today->setTime( 0, 0, 0 ); // reset time part, to prevent partial comparison
 
                             if ($pipelineDetails["last_success"] != false) {
 
                                 $match_date = new DateTime(date('d.m.Y H:i', $pipelineDetails["last_success"]));
+
+                                var_dump($match_date) ;
+
                                 $diff = $today->diff( $match_date );
                                 $diffDays = (integer)$diff->format( "%R%a" ); // Extract days count in interval
 
