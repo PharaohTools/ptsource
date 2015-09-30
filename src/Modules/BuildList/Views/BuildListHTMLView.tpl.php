@@ -159,7 +159,7 @@
 
                                 $match_date = new DateTime(date('d.m.Y H:i', $pipelineDetails["last_success"]));
 
-                                var_dump($match_date) ;
+//                                var_dump($match_date) ;
 
                                 $diff = $today->diff( $match_date );
                                 $diffDays = (integer)$diff->format( "%R%a" ); // Extract days count in interval
