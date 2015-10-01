@@ -140,7 +140,8 @@ COMPLETION;
                 if ( (isset($buf2) && $buf2 !== false) || $buf2 = fread($pipes[2], 32768) ) {
 //                    $buf2 = "ERR: ".$buf2;
                     $data .= "ERR: ".$buf2;
-                    echo "ERR: ".$buf2 ; } } }
+                    echo "ERR: ".$buf2 ;
+                    unset($buf2) ;} } }
 
         $stdout = stream_get_contents($pipes[1]);
         fclose($pipes[1]);
