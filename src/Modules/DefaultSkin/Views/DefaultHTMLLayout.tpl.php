@@ -78,7 +78,7 @@
 					<a class="navbar-" href="/index.php?control=Index&action=show">
 						<figure class="rollover">
                         <img src="/Assets/Modules/DefaultSkin/image/5.png" class="navbar-img hvr-grow-shadow" style="height: 60px;padding: 5px;" />
-                        <span class="title hvr-grow-shadow">PTBuild</span>
+                        <span class="title hvr-grow-shadow">Pharaoh Build</span>
                     </a>
 				</div>
 				
