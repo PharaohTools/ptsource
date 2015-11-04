@@ -79,14 +79,15 @@ class PublishHTMLreportsAllOS extends Base {
 	$ReportTitle = $steps[$mn]["Report_Title"];
 	$tmpfile = PIPEDIR.DS.$this->params["item"].DS.'tmpfile';
 	$raw = file_get_contents($tmpfile); 	
-	if (!$raw) {	echo "Report not generated";	}
-		else {	
-			$slug = "Report of Pipeline ".$this->params["item"]." for run-id ".$this->params["run-id"];
-			$byline = "Ptbuild - Pharaoh Tools, Configuration, Infrastructure and Systems Automation Management in PHP. ";
-			$html = nl2br(htmlspecialchars($raw));
-			$html = str_replace("&lt;br /&gt;","<br />",$html);
-			$html = preg_replace('/\s\s+/', ' ', $html);
-			$html = preg_replace('/\s(\w+:\/\/)(\S+)/', ' <a href="\\1\\2" target="_blank">\\1\\2</a>', $html);
+	if (!$raw) {
+        $logging->log("Report not generated", $this->getModuleName());	}
+    else {
+        $slug = "Report of Pipeline ".$this->params["item"]." for run-id ".$this->params["run-id"];
+        $byline = "Ptbuild - Pharaoh Tools, Configuration, Infrastructure and Systems Automation Management in PHP. ";
+        $html = nl2br(htmlspecialchars($raw));
+        $html = str_replace("&lt;br /&gt;","<br />",$html);
+        $html = preg_replace('/\s\s+/', ' ', $html);
+        $html = preg_replace('/\s(\w+:\/\/)(\S+)/', ' <a href="\\1\\2" target="_blank">\\1\\2</a>', $html);
 
 $output =<<< HEADER
 <html>
