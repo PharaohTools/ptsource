@@ -211,3 +211,11 @@ function CONDaysOfWeekDays(hash) {
 	}
 	$("#CONDaysOfWeekDays"+hash).html(html);
 }
+
+function modsDown() {
+    $('.slideysWrapper').slideDown();
+}
+
+function modsUp() {
+    $('.slideysWrapper').slideUp();
+}

@@ -135,11 +135,12 @@
 
                         <div class="col-sm-12">
                             <div class="col-sm-12">
-                                <span class="scroll-mods-top-inner">
+                                <span class="scroll-mods-top-inner" onclick="modsUp()">
                                     <i class="fa fa-2x fa-arrow-circle-up"></i>
                                 </span>
                             </div>
                             <div class="col-sm-12 settingsScroller resizable">
+                                <div class="slideysWrapper">
 
                         <?php
 
@@ -204,9 +205,10 @@
                                 echo '  </div>';}
                             echo '  </div>';
                             echo '</div>'; } ?>
+                                </div>
                         </div>
                         <div class="col-sm-12">
-                            <span class="scroll-mods-bottom-inner">
+                            <span class="scroll-mods-bottom-inner" onclick="modsDown()" >
                                 <i class="fa fa-2x fa-arrow-circle-down"></i>
                             </span>
                         </div>
