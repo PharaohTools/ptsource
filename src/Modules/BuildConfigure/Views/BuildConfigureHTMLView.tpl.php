@@ -132,8 +132,12 @@
                     
                     <div class="form-group">
                         <label for="project-slug" class="col-sm-1 control-label"></label>
-                        <div class="col-sm-10 settingsScroller">
-                    
+                        <div class="col-sm-10">
+                            <span class="scroll-top-inner">
+                                <i class="fa fa-1x fa-arrow-circle-up"></i>
+                            </span>
+                        </div>
+                        <div class="col-sm-10 settingsScroller resizable">
 
                     <?php
 
@@ -199,6 +203,11 @@
                         echo '  </div>';
                         echo '</div>'; } ?>
                     </div>
+                        <div class="col-sm-10">
+                            <span class="scroll-top-inner">
+                                <i class="fa fa-1x fa-arrow-circle-down"></i>
+                            </span>
+                        </div>
                     <label for="project-slug" class="col-sm-1 control-label"></label>
                 </div>
 
