@@ -55,9 +55,14 @@ class WorkspaceAllOS extends Base {
             $logging->log("No Workspace directory exists " , $this->getModuleName()) ; }
         $logging->log("Rebuilding workspace " , $this->getModuleName()) ;
         $rc = array();
-        $rc[] = $this->executeAndGetReturnCode("rm -rf {$workspace_path}", true);
-        $rc[] = $this->executeAndGetReturnCode("mkdir -p {$workspace_path}");
-        return ($rc[0]==0 && $rc[1]==0) ? true : false ;
+        $rc[] = $this->executeAndGetReturnCode("rm -rf {$workspace_path}", true, true);
+        $rc[] = $this->executeAndGetReturnCode("mkdir -p {$workspace_path}", true, true);
+        $res = ($rc[0]["rc"]==0 && $rc[1]["rc"]==0) ;
+        if ($res == true) {
+            $logging->log("Workspace successfully rebuilt" , $this->getModuleName()) ; }
+        else {
+            $logging->log("Workspace failed rebuild" , $this->getModuleName()) ; }
+        return $res ;
     }
 
     public function setPipeDir() {
