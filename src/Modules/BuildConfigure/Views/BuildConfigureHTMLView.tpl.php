@@ -135,7 +135,7 @@
 
                         <div class="col-sm-12">
                             <div class="col-sm-12">
-                                <span class="scroll-top-inner">
+                                <span class="scroll-mods-top-inner">
                                     <i class="fa fa-2x fa-arrow-circle-up"></i>
                                 </span>
                             </div>
@@ -206,7 +206,7 @@
                             echo '</div>'; } ?>
                         </div>
                         <div class="col-sm-12">
-                            <span class="scroll-top-inner">
+                            <span class="scroll-mods-bottom-inner">
                                 <i class="fa fa-2x fa-arrow-circle-down"></i>
                             </span>
                         </div>

@@ -24,3 +24,9 @@
     overflow-y: scroll;
     max-height: 275px ;
 }
+
+.scroll-mods-top-inner,
+.scroll-mods-bottom-inner {
+    display: block;
+    margin: 0 auto;
+}
