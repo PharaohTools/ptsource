@@ -13,12 +13,15 @@
 
 .confSettingsSlideySection {
     margin-bottom: 0;
+    background-color: ;
 }
 
 .confSettingsHideSectionButton {
 }
 
 .settingsScroller {
+    overflow: -moz-scrollbars-vertical;
     overflow-y: scroll;
-    max-height: 350px ;
+    max-height: 275px ;
+    background-color: #86b6f5;
 }
