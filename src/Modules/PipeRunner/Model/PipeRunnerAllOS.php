@@ -217,10 +217,8 @@ class PipeRunnerAllOS extends Base {
             return false ; }
         $logging->log("Writing to temp file ".$tmpfile , $this->getModuleName()) ;
         $logging->log("Executing as ".self::executeAndLoad("whoami"), $this->getModuleName()) ;
-        $workspace = $this->getWorkspace() ;
-        $dir = $workspace->getWorkspaceDir()  ;
-        $logging->log("Changing to workspace directory $dir", $this->getModuleName()) ;
-        chdir($dir);
+        $ws_avail = $this->buildWorkspace();
+        if ($ws_avail == false) { return $this->failBuild() ; }
         $ressys = array() ;
         $ev = $eventRunner->eventRunner("beforeBuild") ;
         if ($ev == false) { return $this->failBuild() ; }
@@ -243,6 +241,18 @@ class PipeRunnerAllOS extends Base {
         $eventRunner->eventRunner("afterBuildComplete") ;
         $this->setRunEndTime($this->params["run-status"]) ;
         return $this->saveRunLog() ;
+    }
+
+    protected function buildWorkspace(){
+        $loggingFactory = new \Model\Logging();
+        $logging = $loggingFactory->getModel($this->params);
+        $workspace = $this->getWorkspace() ;
+        $res = array() ;
+        $res[] = $workspace->createWorkspaceIfNeeded();
+        $dir = $workspace->getWorkspaceDir()  ;
+        $logging->log("Changing to workspace directory $dir", $this->getModuleName()) ;
+        $res[] = chdir($dir);
+        return ($res[0]==true && $res[1]==true) ? true : false ;
     }
 
     public function terminateChild() {
