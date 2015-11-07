@@ -132,82 +132,85 @@
                     
                     <div class="form-group">
                         <label for="project-slug" class="col-sm-1 control-label"></label>
-                        <div class="col-sm-10">
-                            <span class="scroll-top-inner">
-                                <i class="fa fa-1x fa-arrow-circle-up"></i>
-                            </span>
-                        </div>
-                        <div class="col-sm-10 settingsScroller resizable">
 
-                    <?php
+                        <div class="col-sm-12">
+                            <div class="col-sm-12">
+                                <span class="scroll-top-inner">
+                                    <i class="fa fa-2x fa-arrow-circle-up"></i>
+                                </span>
+                            </div>
+                            <div class="col-sm-12 settingsScroller resizable">
 
-                    foreach ($pageVars["data"]["settings"] as $one_config_slug => $one_conf_tails) {
-                        echo '<div class="form-group confSettingsSlideySection" id="slidey'.$one_config_slug.'">' ;
-                        echo '  <div class="col-sm-12">' ;
-                        echo '    <label for="config_'.$one_config_slug.'" class="control-label text-left">'.$one_config_slug.':</label>' ;
-                        echo '    <i class="fa fa-1x fa-toggle-off hvr-grow" id="slideyToggleIcon'.$one_config_slug.'"' ;
-                        echo ' onclick="toggleConfSetting(this, \'slidey'.$one_config_slug.'\')"></i>' ;
-                        echo '    <a class="btn-info" id="slideyToggleIcon'.$one_config_slug.'"' ;
-                        echo ' onclick="hideConfSetting(\'slidey'.$one_config_slug.'\')"></a>' ;
-                        echo '  </div>' ;
-                        echo '  <div class="col-sm-12 sliderFields">' ;
-                        foreach ( $one_conf_tails["settings"] as $fieldSlug => $fieldInfo) {
+                        <?php
+
+                        foreach ($pageVars["data"]["settings"] as $one_config_slug => $one_conf_tails) {
+                            echo '<div class="form-group confSettingsSlideySection" id="slidey'.$one_config_slug.'">' ;
                             echo '  <div class="col-sm-12">' ;
+                            echo '    <label for="config_'.$one_config_slug.'" class="control-label text-left">'.$one_config_slug.':</label>' ;
+                            echo '    <i class="fa fa-1x fa-toggle-off hvr-grow" id="slideyToggleIcon'.$one_config_slug.'"' ;
+                            echo ' onclick="toggleConfSetting(this, \'slidey'.$one_config_slug.'\')"></i>' ;
+                            echo '    <a class="btn-info" id="slideyToggleIcon'.$one_config_slug.'"' ;
+                            echo ' onclick="hideConfSetting(\'slidey'.$one_config_slug.'\')"></a>' ;
+                            echo '  </div>' ;
+                            echo '  <div class="col-sm-12 sliderFields">' ;
+                            foreach ( $one_conf_tails["settings"] as $fieldSlug => $fieldInfo) {
+                                echo '  <div class="col-sm-12">' ;
 
-                            switch ($fieldInfo["type"]) {
+                                switch ($fieldInfo["type"]) {
 
-                                case "boolean" :
+                                    case "boolean" :
 
-                                    if ( (isset($pageVars["data"]["pipeline"]["settings"][$one_config_slug][$fieldSlug])) &&
-                                        $pageVars["data"]["pipeline"]["settings"][$one_config_slug][$fieldSlug] == "on" ) {
-                                        $onoff = "on" ; }
-                                    else if ( (isset($pageVars["data"]["pipeline"]["settings"][$one_config_slug][$fieldSlug])) &&
-                                        $pageVars["data"]["pipeline"]["settings"][$one_config_slug][$fieldSlug] != "on" ) {
-                                        $onoff = "off" ; }
-                                    else {
-                                        $onoff = (is_null($onoff))
-                                            ? $fieldInfo["default"]
-                                            : $onoff ; }
-                                    if ($onoff === "on") { $onoff = 'checked="checked"' ;}
-                                    else {$onoff = "" ;}
-                                    echo '  <div class="col-sm-12">' ;
-                                    echo '      <label for="settings['.$one_config_slug.']['.$fieldSlug.']" class="control-label text-left">'.$fieldInfo["name"].':</label>' ;
-                                    echo '      <input name="settings['.$one_config_slug.']['.$fieldSlug.']" id="settings['.$one_config_slg.']['.$fieldSlug.']" type="checkbox" '.$onoff.' />' ;
-                                    echo '  </div>' ;
-                                    break ;
-                                case "text" :
-                                    if (isset($pageVars["data"]["pipeline"]["settings"][$one_config_slug][$fieldSlug])) {
-                                        $val = $pageVars["data"]["pipeline"]["settings"][$one_config_slug][$fieldSlug];  }
-                                    if (!isset($val)) {
-                                        $val = $one_conf_tails["default"] ; }
-                                    echo '  <div class="col-sm-12">' ;
-                                    echo '      <label for="settings['.$one_config_slug.']['.$fieldSlug.']" class="control-label text-left">'.$fieldInfo["name"].':</label>' ;
-                                    echo '      <input name="settings['.$one_config_slug.']['.$fieldSlug.']" id="settings['.
-                                        $one_config_slug.']['.$fieldSlug.']" type="text" class="form-control" value="'.
-                                        $val.'" placeholder="'.$one_conf_tails["label"].'" />' ;
-                                    echo '  </div>' ;
-                                    break ;
-                                case "textarea" :
-                                    if (isset($pageVars["data"]["pipeline"]["settings"][$one_config_slug][$fieldSlug])) {
-                                        $val = $pageVars["data"]["pipeline"]["settings"][$one_config_slug][$fieldSlug];  }
-                                    if (!isset($val)) {
-                                        $val = $one_conf_tails["default"] ; }
-                                    echo '  <div class="col-sm-12">' ;
-                                    echo '      <label for="settings['.$one_config_slug.']['.$fieldSlug.']" class="control-label text-left">'.$fieldInfo["name"].':</label>' ;
-                                    echo '      <textarea name="settings['.$one_config_slug.']['.$fieldSlug.']" id="settings['.
-                                        $one_config_slug.']['.$fieldSlug.']" type="text" class="form-control" placeholder="'.
-                                        $one_conf_tails["label"].'" >'.$val.'</textarea>' ;
-                                    echo '  </div>' ;
-                                    break ; }
-                            echo '  </div>';}
-                        echo '  </div>';
-                        echo '</div>'; } ?>
-                    </div>
-                        <div class="col-sm-10">
+                                        if ( (isset($pageVars["data"]["pipeline"]["settings"][$one_config_slug][$fieldSlug])) &&
+                                            $pageVars["data"]["pipeline"]["settings"][$one_config_slug][$fieldSlug] == "on" ) {
+                                            $onoff = "on" ; }
+                                        else if ( (isset($pageVars["data"]["pipeline"]["settings"][$one_config_slug][$fieldSlug])) &&
+                                            $pageVars["data"]["pipeline"]["settings"][$one_config_slug][$fieldSlug] != "on" ) {
+                                            $onoff = "off" ; }
+                                        else {
+                                            $onoff = (is_null($onoff))
+                                                ? $fieldInfo["default"]
+                                                : $onoff ; }
+                                        if ($onoff === "on") { $onoff = 'checked="checked"' ;}
+                                        else {$onoff = "" ;}
+                                        echo '  <div class="col-sm-12">' ;
+                                        echo '      <label for="settings['.$one_config_slug.']['.$fieldSlug.']" class="control-label text-left">'.$fieldInfo["name"].':</label>' ;
+                                        echo '      <input name="settings['.$one_config_slug.']['.$fieldSlug.']" id="settings['.$one_config_slg.']['.$fieldSlug.']" type="checkbox" '.$onoff.' />' ;
+                                        echo '  </div>' ;
+                                        break ;
+                                    case "text" :
+                                        if (isset($pageVars["data"]["pipeline"]["settings"][$one_config_slug][$fieldSlug])) {
+                                            $val = $pageVars["data"]["pipeline"]["settings"][$one_config_slug][$fieldSlug];  }
+                                        if (!isset($val)) {
+                                            $val = $one_conf_tails["default"] ; }
+                                        echo '  <div class="col-sm-12">' ;
+                                        echo '      <label for="settings['.$one_config_slug.']['.$fieldSlug.']" class="control-label text-left">'.$fieldInfo["name"].':</label>' ;
+                                        echo '      <input name="settings['.$one_config_slug.']['.$fieldSlug.']" id="settings['.
+                                            $one_config_slug.']['.$fieldSlug.']" type="text" class="form-control" value="'.
+                                            $val.'" placeholder="'.$one_conf_tails["label"].'" />' ;
+                                        echo '  </div>' ;
+                                        break ;
+                                    case "textarea" :
+                                        if (isset($pageVars["data"]["pipeline"]["settings"][$one_config_slug][$fieldSlug])) {
+                                            $val = $pageVars["data"]["pipeline"]["settings"][$one_config_slug][$fieldSlug];  }
+                                        if (!isset($val)) {
+                                            $val = $one_conf_tails["default"] ; }
+                                        echo '  <div class="col-sm-12">' ;
+                                        echo '      <label for="settings['.$one_config_slug.']['.$fieldSlug.']" class="control-label text-left">'.$fieldInfo["name"].':</label>' ;
+                                        echo '      <textarea name="settings['.$one_config_slug.']['.$fieldSlug.']" id="settings['.
+                                            $one_config_slug.']['.$fieldSlug.']" type="text" class="form-control" placeholder="'.
+                                            $one_conf_tails["label"].'" >'.$val.'</textarea>' ;
+                                        echo '  </div>' ;
+                                        break ; }
+                                echo '  </div>';}
+                            echo '  </div>';
+                            echo '</div>'; } ?>
+                        </div>
+                        <div class="col-sm-12">
                             <span class="scroll-top-inner">
-                                <i class="fa fa-1x fa-arrow-circle-down"></i>
+                                <i class="fa fa-2x fa-arrow-circle-down"></i>
                             </span>
                         </div>
+                    </div>
                     <label for="project-slug" class="col-sm-1 control-label"></label>
                 </div>
 
