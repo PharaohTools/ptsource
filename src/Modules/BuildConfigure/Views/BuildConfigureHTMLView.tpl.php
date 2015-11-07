@@ -132,7 +132,7 @@
                     
                     <div class="form-group">
                         <label for="project-slug" class="col-sm-1 control-label"></label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-10 settingsScroller">
                     
 
                     <?php
