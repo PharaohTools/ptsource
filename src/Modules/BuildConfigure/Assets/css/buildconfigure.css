@@ -13,7 +13,7 @@
 
 .confSettingsSlideySection {
     margin-bottom: 0;
-    background-color: ;
+    background-color: #86b6f5;
 }
 
 .confSettingsHideSectionButton {
@@ -23,5 +23,4 @@
     overflow: -moz-scrollbars-vertical;
     overflow-y: scroll;
     max-height: 275px ;
-    background-color: #86b6f5;
 }
