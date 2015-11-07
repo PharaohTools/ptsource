@@ -28,5 +28,6 @@
 .scroll-mods-top-inner,
 .scroll-mods-bottom-inner {
     display: block;
-    margin: 0 auto;
+    position: relative;
+    left: 50%;
 }
