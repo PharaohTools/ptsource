@@ -63,22 +63,25 @@ class PipeRunnerAllOS extends Base {
 		return false;
 	}
 
-	public function runPipe() {
+	public function runPipe($start_execution = true) {
 		if ($this -> checkPipeVariables()) {
 			return "getParamValue"; }
         else {
 			// set build dir
-			$this -> setPipeDir();
-			// ensure build dir exists
-            $eventRunnerFactory = new \Model\EventRunner() ;
-            $eventRunner = $eventRunnerFactory->getModel($this->params) ;
-            $ev = $eventRunner->eventRunner("prepareBuild") ;
-            if ($ev == false) { return $this->failBuild() ; }
-			// run pipe fork command
-			$run = $this -> saveRunPlaceHolder();
-			$this -> setRunStartTime($run);
-			// save run
-			$this -> runPipeForkCommand($run);
+            if ($start_execution==true) {
+                $this -> setPipeDir();
+                // ensure build dir exists
+                $eventRunnerFactory = new \Model\EventRunner() ;
+                $eventRunner = $eventRunnerFactory->getModel($this->params) ;
+                $ev = $eventRunner->eventRunner("prepareBuild") ;
+                if ($ev == false) { return $this->failBuild() ; }
+                // run pipe fork command
+                $run = $this -> saveRunPlaceHolder();
+                $this -> setRunStartTime($run);
+                // save run
+                $this -> runPipeForkCommand($run); }
+            else {
+                $run = $this->getBuildNumber("last") ; }
 			return $run; }
 	}
 
