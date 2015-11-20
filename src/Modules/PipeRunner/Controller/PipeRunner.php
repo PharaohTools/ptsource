@@ -59,7 +59,7 @@ class PipeRunner extends Base {
                 return array ("type"=>"view", "view"=>"pipeRunnerGetValue", "pageVars"=>$this->content); } }
 
         if (in_array($pageVars["route"]["action"], array("show"))) {
-            $result=$thisModel->runPipe();
+            $result=$thisModel->runPipe(false);
             $this->content["pipex"] = $result; }
         else{
             return array ("type"=>"view", "view"=>"pipeRunner", "pageVars"=>$this->content); }
