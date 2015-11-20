@@ -81,7 +81,9 @@ class PipeRunnerAllOS extends Base {
                 // save run
                 $this -> runPipeForkCommand($run); }
             else {
-                $run = $this->getBuildNumber("last") ; }
+                $run = (isset($this->params["run-id"])) ?
+                    $this->params["run-id"] :
+                    $this->getBuildNumber("last") ; }
 			return $run; }
 	}
 
