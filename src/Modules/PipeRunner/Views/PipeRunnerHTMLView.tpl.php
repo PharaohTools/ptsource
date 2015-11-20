@@ -64,6 +64,9 @@
                         case "start" :
                             $stat = "Now Executing " ;
                             break ;
+                        case "show" :
+                            $stat = "Monitoring Already Executing Build " ;
+                            break ;
                         case "history" :
                             $stat = "Historic Builds of " ;
                             break ;
@@ -123,7 +126,7 @@
                         </div>
                     </div>
                     <?php
-                    if ($pageVars["route"]["action"] =="start") {
+                    if ($pageVars["route"]["action"] =="start" || $pageVars["route"]["action"] =="show") {
                         echo '
                           <script type="text/javascript">
                               window.pipeitem = "'.$pageVars["data"]["pipeline"]["project-slug"].'" ;
@@ -142,7 +145,7 @@
 
 
                     <?php
-                    if ($pageVars["route"]["action"] =="start") {
+                    if ($pageVars["route"]["action"] =="start" || $pageVars["route"]["action"] =="show") {
                     ?>
                         <div class="form-group" id="submit-holder">
                             <div class="col-sm-offset-2 col-sm-8">
@@ -171,7 +174,7 @@
                     <input type="hidden" id="item" value="<?= $pageVars["data"]["pipeline"]["project-slug"] ;?>" />
                     <input type="hidden" id="pid" value="<?= $pageVars["pipex"] ;?>" />
                     <?php
-                    if ($pageVars["route"]["action"] == "summary") {
+                    if ($pageVars["route"]["action"] =="start" || $pageVars["route"]["action"] =="show" || $pageVars["route"]["action"] == "summary") {
                         echo '<input type="hidden" id="run-id" value="'.$pageVars["data"]["historic_build"]["run-id"].'" />' ; }
                     ?>
 
