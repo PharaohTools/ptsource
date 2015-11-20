@@ -47,12 +47,12 @@ function setRunningBuildList(data) {
             ht += '<div class=" well well-sm">' ;
             ht += '  <img src="Assets/startbootstrap-sb-admin-2-1.0.5/dist/image/rt.GIF" style="width:150px;">' ;
             ht += '  <h5><strong>Pipeline:</strong> '+data[index].item+'</h5>' ;
-            ht += '  <h5><a href="index.php?control=PipeRunner&action=show&item='+data[index].item+'">' ;
+            ht += '  <h5><a href="index.php?control=PipeRunner&action=show&item='+data[index].item+'&run-id='+data[index].runid+'">' ;
             ht += '  <strong>Build start at:</strong> '+data[index].starttime+'</a></h5>' ;
             ht += '  <h5><strong>Pipedir:</strong> '+data[index].pipedir+'</h5>' ;
             ht += '  <h5><strong>PID:</strong> '+data[index].pid+'</h5>' ;
             ht += '  <h5><strong>Source:</strong> '+data[index].brs+'</h5>' ;
-            ht += '  <h5><a href="index.php?control=PipeRunner&action=show&item='+data[index].item+'"> ' ;
+            ht += '  <h5><a href="index.php?control=PipeRunner&action=show&item='+data[index].item+'&run-id='+data[index].runid+'"> ' ;
             ht += '  <strong>Run ID:</strong> '+data[index].runid+'</a></h5>' ;
             ht += '  <h5><strong>User:</strong> '+data[index].runuser+'</h5>' ;
             ht += '</div>' ;}
