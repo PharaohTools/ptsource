@@ -94,6 +94,16 @@
                     </div>
 
                 </div>
+
+                <div class="alert alert-info">
+                    <h4>Running Builds </h4>
+                    <div id="runningBuilds">
+                        <p>
+                            No builds of this pipeline currently being executed
+                        </p>
+                    </div>
+                </div>
+
                 <!--
                 <p>Build Monitors:</p>
                 <div class="pipe-monitor-block pipe-block"></div>
