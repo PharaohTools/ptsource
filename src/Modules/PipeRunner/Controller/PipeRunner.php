@@ -51,21 +51,24 @@ class PipeRunner extends Base {
             $this->content["route"]["extraParams"]["output-format"] = "CLI";
             return array ("type"=>"view", "view"=>"pipeRunnerChild", "pageVars"=>$this->content); }
 
-        if (in_array($pageVars["route"]["action"], array("start"))) {
-            $result=$thisModel->runPipe();
-            $this->content["pipex"] = $result;
-            if ($result == "getParamValue") {
-                $this->content["data"] = $thisModel->getData();
-                return array ("type"=>"view", "view"=>"pipeRunnerGetValue", "pageVars"=>$this->content); } }
-
         if (in_array($pageVars["route"]["action"], array("show"))) {
             $result=$thisModel->runPipe(false);
-            $this->content["pipex"] = $result; }
-        else{
+            $this->content["pipex"] = $result;
+            $this->content["data"] = $thisModel->getData();
             return array ("type"=>"view", "view"=>"pipeRunner", "pageVars"=>$this->content); }
 
-        $this->content["data"] = $thisModel->getData();
+        if (in_array($pageVars["route"]["action"], array("start"))) {
+            $result=$thisModel->runPipe();
+            if ($result == "getParamValue") {
+                $this->content["data"] = $thisModel->getData();
+                return array ("type"=>"view", "view"=>"pipeRunnerGetValue", "pageVars"=>$this->content); }
+            $this->content["pipex"] = $result;
+            $this->content["data"] = $thisModel->getData();
+            return array ("type"=>"view", "view"=>"pipeRunner", "pageVars"=>$this->content); }
+
+
         return array ("type"=>"view", "view"=>"pipeRunner", "pageVars"=>$this->content);
+
     }
 
 }
