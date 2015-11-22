@@ -148,3 +148,4 @@
     </div>
 </div>
 <link rel="stylesheet" type="text/css" href="/Assets/Modules/BuildHome/css/buildhome.css">
+<script type="text/javascript" src="/Assets/Modules/BuildHome/js/buildhome.js"></script>
