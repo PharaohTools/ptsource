@@ -28,6 +28,16 @@ class PipeRunnerFindRunningAllOS extends Base {
     }
 
     public function getRunningBuilds() {
+        $runningBuilds = $newRunningBuilds = getAllRunningBuilds() ;
+        if (isset($this->params["pipeline"])) {
+            $newRunningBuilds = array() ;
+            foreach ($runningBuilds as $runningBuild) {
+                if ($runningBuild["item"] == $this->params["pipeline"]) {
+                    $newRunningBuilds[] = $runningBuild ; } } }
+        return $newRunningBuilds  ;
+    }
+
+    public function getAllRunningBuilds() {
         $switch = $this->getSwitchUser() ;
         $cmd = "" ;
         if ($switch != false) { $cmd .= 'sudo su '.$switch.' -c '."'" ; }
