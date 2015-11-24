@@ -28,7 +28,7 @@ class PipeRunnerFindRunningAllOS extends Base {
     }
 
     public function getRunningBuilds() {
-        $runningBuilds = $newRunningBuilds = getAllRunningBuilds() ;
+        $runningBuilds = $newRunningBuilds = $this->getAllRunningBuilds() ;
         if (isset($this->params["pipeline"])) {
             $newRunningBuilds = array() ;
             foreach ($runningBuilds as $runningBuild) {
