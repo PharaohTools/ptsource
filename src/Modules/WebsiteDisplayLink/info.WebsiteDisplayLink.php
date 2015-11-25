@@ -13,7 +13,7 @@ class WebsiteDisplayLinkInfo extends PTConfigureBase {
     }
 
     public function routesAvailable() {
-        return array( "WebsiteDisplayLink" => array_merge(parent::routesAvailable(), array("help", "report") ) );
+        return array( "WebsiteDisplayLink" => array_merge(parent::routesAvailable(), array("help") ) );
     }
 
     public function routeAliases() {
@@ -21,11 +21,11 @@ class WebsiteDisplayLinkInfo extends PTConfigureBase {
     }
 
     public function events() {
-        return array("afterBuildComplete", "getBuildFeatures");
+        return array("getBuildFeatures");
     }
 
     public function pipeFeatures() {
-        return array("htmlReports");
+        return array("websiteDisplayLink");
     }
 
     public function helpDefinition() {
