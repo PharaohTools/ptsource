@@ -18,6 +18,13 @@
     background-color: lightgrey;
 }
 
+.build-feature img {
+    display: block;
+    margin: 0 auto;
+    width : 90%;
+    max-width : 90%;
+}
+
 .build-feature:hover {
     background-color: darkgray;
 }
