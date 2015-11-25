@@ -38,17 +38,20 @@ function setRunningBuildList(data) {
     else {
         ht = "" ;
         for (index = 0; index < data.length; index++) {
+
+            console.log(data[index]) ;
+
             $('#blRow_'+data[index].item).addClass("runningBuildRow");
             $('.runningBuildRow' +" > td ").animate({ opacity: 0 });
             $('.runningBuildRow' +" > th ").animate({ opacity: 0 });
             ht += '<div class=" well well-sm">' ;
             ht += '  <img src="Assets/startbootstrap-sb-admin-2-1.0.5/dist/image/rt.GIF" style="width:150px;">' ;
-            ht += '  <h5><strong>Pipeline:</strong> '+data[index].item+'</h5>' ;
+            ht += '  <h5><strong>Name:</strong> '+data[index].pipename+'</h5>' ;
+//            ht += '  <h5><strong>Pipeline:</strong> '+data[index].item+'</h5>' ;
             ht += '  <h5><a href="index.php?control=PipeRunner&action=show&item=' ;
             ht += data[index].item+'&run-id='+data[index].runid+'">' ;
             ht += '  <strong>Build start at:</strong> '+data[index].starttime+'</a></h5>' ;
-            ht += '  <h5><strong>Pipedir:</strong> '+data[index].pipedir+'</h5>' ;
-            ht += '  <h5><strong>PID:</strong> '+data[index].pid+'</h5>' ;
+//            ht += '  <h5><strong>Pipedir:</strong> '+data[index].pipedir+'</h5>' ;
             ht += '  <h5><strong>Source:</strong> '+data[index].brs+'</h5>' ;
             ht += '  <h5><a href="index.php?control=PipeRunner&action=show&item='+data[index].item ;
             ht += '&run-id='+data[index].runid+'"> ' ;
