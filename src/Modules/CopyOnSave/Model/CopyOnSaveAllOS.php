@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class PublishHTMLreportsAllOS extends Base {
+class CopyOnSaveAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -44,7 +44,7 @@ class PublishHTMLreportsAllOS extends Base {
         return array_keys($this->getEvents());   }
 
 	public function getEvents() {
-		$ff = array("afterBuildComplete" => array("PublishHTMLreports"));
+		$ff = array("afterBuildComplete" => array("CopyOnSave"));
 		return $ff ; }
 
 	public function getReportData() {
@@ -60,7 +60,7 @@ class PublishHTMLreportsAllOS extends Base {
 		$ff = array("report" => file_get_contents($root.$dir.$indexFile));
 		return $ff ; }
 
-	public function PublishHTMLreports() {
+	public function CopyOnSave() {
         $loggingFactory = new \Model\Logging();
         $this->params["echo-log"] = true ;
         $logging = $loggingFactory->getModel($this->params);

@@ -2,7 +2,7 @@
 
 Namespace Controller ;
 
-class PublishHTMLreports extends Base {
+class CopyOnSave extends Base {
 
      public function execute($pageVars) {
 
@@ -13,7 +13,7 @@ class PublishHTMLreports extends Base {
 
          if (in_array($pageVars["route"]["action"], array("report"))) {
              $this->content["data"] = $thisModel->getReportData();
-             return array ("type"=>"view", "view"=>"publishHTMLreports", "pageVars"=>$this->content); }
+             return array ("type"=>"view", "view"=>"copyOnSave", "pageVars"=>$this->content); }
 
         if ($action=="help") {
             $helpModel = new \Model\Help();

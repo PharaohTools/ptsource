@@ -2,7 +2,7 @@
 
 Namespace Info;
 
-class PublishHTMLreportsInfo extends PTConfigureBase {
+class CopyOnSaveInfo extends PTConfigureBase {
 
     public $hidden = false;
 
@@ -13,11 +13,11 @@ class PublishHTMLreportsInfo extends PTConfigureBase {
     }
 
     public function routesAvailable() {
-        return array( "PublishHTMLreports" => array_merge(parent::routesAvailable(), array("help", "report") ) );
+        return array( "CopyOnSave" => array_merge(parent::routesAvailable(), array("help", "report") ) );
     }
 
     public function routeAliases() {
-        return array("publishhtmlreports"=>"PublishHTMLreports","PublishHTMLreports"=>"PublishHTMLreports");
+        return array("copyonsave"=>"CopyOnSave","CopyOnSave"=>"CopyOnSave");
     }
 
     public function events() {
@@ -33,7 +33,7 @@ class PublishHTMLreportsInfo extends PTConfigureBase {
     This extension publish HTML reports of a build. It provides code
     functionality, but no extra CLI commands.
 
-    publishhtmlreports
+    copyonsave
 
 HELPDATA;
       return $help ;

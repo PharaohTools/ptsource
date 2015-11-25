@@ -2,6 +2,6 @@
 
 Namespace Model;
 
-class PublishHTMLreports extends BaseModelFactory {
+class CopyOnSave extends BaseModelFactory {
 
 }
