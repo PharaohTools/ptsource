@@ -82,6 +82,10 @@ class BuildConfigureAllOS extends Base {
             "parameter-dvalue" => $this->params["parameter-dvalue"],
             "parameter-input" => "",
             "parameter-description" => $this->params["parameter-description"]) ;
+
+        $ev = $this->runBCEvent("beforePipelineSave") ;
+        if ($ev == false) { return false ; }
+
         if ($this->params["creation"] == "yes") {
             $pipelineDefault = $pipelineFactory->getModel($this->params);
             $pipelineDefault->createPipeline($this->params["project-slug"]) ; }
@@ -91,6 +95,10 @@ class BuildConfigureAllOS extends Base {
         $pipelineSaver->savePipeline(array("type" => "Defaults", "data" => $data ));
         $pipelineSaver->savePipeline(array("type" => "Steps", "data" => $this->params["steps"] ));
         $pipelineSaver->savePipeline(array("type" => "Settings", "data" => $this->params["settings"] ));
+
+        $ev = $this->runBCEvent("afterPipelineSave") ;
+        if ($ev == false) { return false ; }
+
         return true ;
     }
 
@@ -144,6 +152,11 @@ class BuildConfigureAllOS extends Base {
 //            "parameter-description" => $this->params["parameter-description"]
         ) ;
 
+        $ev = $this->runBCEvent("beforePipelineSave") ;
+        if ($ev == false) { return false ; }
+        $ev = $this->runBCEvent("beforeCopiedPipelineSave") ;
+        if ($ev == false) { return false ; }
+
         $pipelineDefault->createPipeline($this->params["item"]) ;
         $pipelineSaver = $pipelineFactory->getModel($this->params, "PipelineSaver");
         // @todo dunno y i have to force this param
@@ -151,7 +164,22 @@ class BuildConfigureAllOS extends Base {
         $pipelineSaver->savePipeline(array("type" => "Defaults", "data" => $data ));
         $pipelineSaver->savePipeline(array("type" => "Steps", "data" => $sourcePipe["steps"] ));
         $pipelineSaver->savePipeline(array("type" => "Settings", "data" => $sourcePipe["settings"] ));
+
+        $ev = $this->runBCEvent("afterPipelineSave") ;
+        if ($ev == false) { return false ; }
+        $ev = $this->runBCEvent("afterCopiedPipelineSave") ;
+        if ($ev == false) { return false ; }
+
         return $this->params["item"] ;
+    }
+
+    private function runBCEvent($name) {
+        $this->params["echo-log"] = true ;
+        $eventRunnerFactory = new \Model\EventRunner() ;
+        $eventRunner = $eventRunnerFactory->getModel($this->params) ;
+        $ev = $eventRunner->eventRunner($name) ;
+        if ($ev == false) { return false ; }
+        return true ;
     }
 
     private function getFormattedSlug($name = null) {
