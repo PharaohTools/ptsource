@@ -72,9 +72,10 @@ class PipeRunnerFindRunningAllOS extends Base {
         $users = substr($line, $userstart, ($userend - $userstart));
 
         // @todo this logic is wrong
-        $pidstart = strpos($line, "--pipe-dir=")+11;
-        $pidend = strpos($line, " ", $pidstart);
-        $pids = substr($line, $pidstart, ($pidend - $pidstart));
+//        $pidstart = strpos($line, "--pipe-dir=")+11;
+//        $pidend = strpos($line, " ", $pidstart);
+//        $pids = substr($line, $pidstart, ($pidend - $pidstart));
+//        error_log(implode("\n\n", $thisPipe["settings"])) ;
 
         $ridstart = strpos($line, "--run-id=")+9;
         //$ridend = strpos($line, " ", $ridstart);
@@ -92,10 +93,15 @@ class PipeRunnerFindRunningAllOS extends Base {
         //$timeend = strpos($line, " /", $timestart);
         $time = substr($line, $timestart, 8);
 
+        $pipeFactory = new \Model\Pipeline() ;
+        $pipe = $pipeFactory->getModel($this->params) ;
+        $thisPipe = $pipe->getPipeline($items) ;
+        $thisPipeName =  $thisPipe["project-name"] ;
+
         return array(
             "runuser" => $users,
             "pipedir" => $pds,
-            "pid" => $pids,
+            "pipename" => $thisPipeName,
             "brs" => $brss,
             "item" => $items,
             "runid" => $rids,
