@@ -34,19 +34,19 @@ class WebsiteDisplayLinkPipeFeatureAllOS extends Base {
 	}
 
 	public function getLink() {
-		$link = 'index.php?control=WebsiteDisplayLink&action=report&item='.$this->pipeline["project-slug"];
+		$link = $this->pipeline["settings"]["WebsiteDisplayLink"]["url"];
 		$ff = array("link" => "$link");
 		return $ff ;
 	}
 
 	public function getTitle() {
-		$ff = array("title" => $this->pipeFeatureValues["Report_Title"]);
+		$ff = array("title" => $this->pipeFeatureValues["title"]);
 		return $ff ;
 	}
 
 	public function getImage() {
 		$this->pipeFeatureValues["pipeline"] ;
-		$ff = array("image" => 'http://www.pharaohtools.com/images/logo-pharaoh.png');
+		$ff = array("image" => '/Assets/Modules/WebsiteDisplayLink/images/visit_site.png');
 		return $ff ;
 	}
 

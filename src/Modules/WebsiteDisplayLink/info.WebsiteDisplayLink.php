@@ -6,7 +6,7 @@ class WebsiteDisplayLinkInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "Publish HTML reports for build";
+    public $name = "Website Display Link for build";
 
     public function _construct() {
         parent::__construct();
@@ -17,7 +17,7 @@ class WebsiteDisplayLinkInfo extends PTConfigureBase {
     }
 
     public function routeAliases() {
-        return array("publishhtmlreports"=>"WebsiteDisplayLink","WebsiteDisplayLink"=>"WebsiteDisplayLink");
+        return array("websitedisplaylink"=>"WebsiteDisplayLink","website-display-link"=>"WebsiteDisplayLink");
     }
 
     public function events() {
@@ -30,10 +30,10 @@ class WebsiteDisplayLinkInfo extends PTConfigureBase {
 
     public function helpDefinition() {
        $help = <<<"HELPDATA"
-    This extension publish HTML reports of a build. It provides code
+    This extension displays a Website Link for a pipeline. It provides code
     functionality, but no extra CLI commands.
 
-    publishhtmlreports
+    websitedisplaylink
 
 HELPDATA;
       return $help ;
