@@ -20,6 +20,10 @@ class BuildConfigureInfo extends PTConfigureBase {
       return array("buildConfigure"=>"BuildConfigure");
     }
 
+    public function events() {
+        return array("beforePipelineSave", "beforeCopiedPipelineSave", "afterPipelineSave", "afterCopiedPipelineSave");
+    }
+
     public function helpDefinition() {
       $help = <<<"HELPDATA"
   This command is part of Core - its the default route and only used for help and as an Intro really...
