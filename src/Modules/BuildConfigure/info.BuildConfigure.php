@@ -20,9 +20,9 @@ class BuildConfigureInfo extends PTConfigureBase {
       return array("buildConfigure"=>"BuildConfigure", "build-configure"=>"BuildConfigure", "buildconfigure"=>"BuildConfigure");
     }
 
-    public function events() {
-        return array("beforePipelineSave", "beforeCopiedPipelineSave", "afterPipelineSave", "afterCopiedPipelineSave");
-    }
+//    public function events() {
+//        return array("beforePipelineSave", "beforeCopiedPipelineSave", "afterPipelineSave", "afterCopiedPipelineSave");
+//    }
 
     public function helpDefinition() {
       $help = <<<"HELPDATA"
