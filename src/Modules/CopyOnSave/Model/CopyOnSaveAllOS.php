@@ -24,105 +24,75 @@ class CopyOnSaveAllOS extends Base {
             	array(
                 	"type" => "boolean",
                 	"optional" => true,
-                	"name" => "Publish HTML reports on Build Completion?"
+                	"name" => "Copy configuration on Pipeline save?"
             ),
-		    "Report_Directory" =>
-				array(   "type" => "text",
-					 "name" => "HTML Directory to archive",
-					 "slug" => "htmlreportdirectory"),
-		    "Index_Page" =>
+		    "target_directory" =>
 				array("type" => "text",
-					 "name" => "Index Page",
-					 "slug" => "indexpage"),
-			"Report_Title" =>
-				array("type" => "text",
-					 "name" => "Report Title",
-					 "slug" => "reporttitle"));
-          return $ff ;}
+					 "name" => "Directory to copy configuration to",
+					 "slug" => "target_directory"),
+//		    "Index_Page" =>
+//				array("type" => "text",
+//					 "name" => "Index Page",
+//					 "slug" => "indexpage"),
+//			"Report_Title" =>
+//				array("type" => "text",
+//					 "name" => "Report Title",
+//					 "slug" => "reporttitle")
+        );
+          return $ff ;
+    }
    
     public function getEventNames() {
-        return array_keys($this->getEvents());   }
+        return array_keys($this->getEvents());
+    }
 
 	public function getEvents() {
-		$ff = array("afterBuildComplete" => array("CopyOnSave"));
-		return $ff ; }
+		$ff = array("afterPipelineSave" => array("copyOnSave"));
+		return $ff ;
+    }
 
-	public function getReportData() {
-		$pipeFactory = new \Model\Pipeline();
-		$pipeline = $pipeFactory->getModel($this->params);
-		$thisPipe = $pipeline->getPipeline($this->params["item"]);
-		$settings = $thisPipe["settings"];
-		$mn = $this->getModuleName() ;
-		$dir = $settings[$mn]["Report_Directory"];
-		$indexFile = $settings[$mn]["Index_Page"];
-		if (file_exists($dir.$indexFile)) { $root = "" ; }
-		else { $root = PIPEDIR.DS.$this->params["item"].DS.'workspace'.DS ; }
-		$ff = array("report" => file_get_contents($root.$dir.$indexFile));
-		return $ff ; }
-
-	public function CopyOnSave() {
+	public function copyOnSave() {
         $loggingFactory = new \Model\Logging();
         $this->params["echo-log"] = true ;
         $logging = $loggingFactory->getModel($this->params);
-        
-	$run = $this->params["run-id"];
-        $file = PIPEDIR.DS.$this->params["item"].DS.'settings';
-        $steps = file_get_contents($file) ;
-        $steps = json_decode($steps, true);
-	
-	$mn = $this->getModuleName() ;
-	if (isset($steps[$mn]["enabled"]) && $steps[$mn]["enabled"] == "on") {
-	$dir = $steps[$mn]["Report_Directory"];
-	if (substr($dir, -1) != DS) { $dir = $dir . DS ;}
-		
-	$indexFile = $steps[$mn]["Index_Page"];
-	$ReportTitle = $steps[$mn]["Report_Title"];
-	$tmpfile = PIPEDIR.DS.$this->params["item"].DS.'tmpfile';
-	$raw = file_get_contents($tmpfile); 	
-	if (!$raw) {
-        $logging->log("Report not generated", $this->getModuleName());	}
-    else {
-        $slug = "Report of Pipeline ".$this->params["item"]." for run-id ".$this->params["run-id"];
-        $byline = "Ptbuild - Pharaoh Tools, Configuration, Infrastructure and Systems Automation Management in PHP. ";
-        $html = nl2br(htmlspecialchars($raw));
-        $html = str_replace("&lt;br /&gt;","<br />",$html);
-        $html = preg_replace('/\s\s+/', ' ', $html);
-        $html = preg_replace('/\s(\w+:\/\/)(\S+)/', ' <a href="\\1\\2" target="_blank">\\1\\2</a>', $html);
 
-$output =<<< HEADER
-<html>
-<head><title>"$ReportTitle"</title>
-<style>
-.slug {font-size: 15pt; font-weight: bold; font-style: italic}
-.byline { font-style: italic }
-</style>
-</head>
-<body>
-HEADER;
-$output .= "<div class='slug'>$slug</div>";
-$output .= "<div class='byline'>By $byline</div><p />";
-$output .= "<div>$html</div>";
-$output .=<<< FOOTER
-</body>
-</html>
-FOOTER;
-	//save reference	
-	$reportRef = PIPEDIR.DS.$this->params["item"].DS.'workspace'.DS.'HTMLreports'.DS; 
-	if (!file_exists($reportRef))
-			{
-			mkdir($reportRef, 0777);
-			}
-	file_put_contents($reportRef.$indexFile . '-' . date("l jS \of F Y h:i:s A"), $output);
+        $this->pipeline = $this->getPipeline();
+        $this->params["build-settings"] = $this->pipeline["settings"];
+        $this->params["app-settings"]["app_config"] = \Model\AppConfig::getAppVariable("app_config");
+        $this->params["app-settings"]["mod_config"] = \Model\AppConfig::getAppVariable("mod_config");
 
-	//save Html report to given directory
-	$source=$dir.$indexFile;
-	if(file_put_contents($source,$output))
-			{	return true;	}
-	else	{ 	return false;	}
-	}
-	}
-	else {
-//$logging->log ("Publish HTML reports ignoring...", $this->getModuleName() ) ;
-            	return true ; }      
-   }
+        $files_to_copy = array("settings", "steps", "defaults");
+        $mn = $this->getModuleName() ;
+
+        if (isset($this->params["build-settings"][$mn]["enabled"]) && $this->params["build-settings"][$mn]["enabled"] == "on") {
+            $logging->log("Copy on Save enabled for pipeline...", $this->getModuleName());
+            $dir = $this->params["build-settings"][$mn]["target_directory"];
+            if (substr($dir, -1) != DS) { $dir = $dir . DS ; }
+            $pipeline_path = PIPEDIR.DS.$this->params["item"].DS ;
+            $full_dir = $dir.DS.$this->params["item"].DS ;
+            if (!file_exists($full_dir)) {
+                $logging->log("Creating target directory {$full_dir}", $this->getModuleName());
+                $copy_command = "mkdir -p {$full_dir}" ;
+                $rc = $this->executeAndGetReturnCode($copy_command, true, true) ;
+                if ($rc["rc"] !== 0) {
+                    $logging->log("Creating target directory {$full_dir} unsuccessful", $this->getModuleName());
+                    return false ; } }
+            foreach ($files_to_copy as $file_to_copy) {
+                $source = $pipeline_path.$file_to_copy ;
+                $target = $dir.$this->params["item"].DS.$file_to_copy ;
+                $logging->log("Copying {$source} to {$target}", $this->getModuleName());
+                $copy_command = "cp -r {$source} {$target}" ;
+                $rc = $this->executeAndGetReturnCode($copy_command, true, true) ;
+                if ($rc["rc"] !== 0) {
+                    $logging->log("Copy unsuccessful", $this->getModuleName());
+                    return false ; } }
+            return true ; }
+    }
+
+    private function getPipeline() {
+        $pipelineFactory = new \Model\Pipeline() ;
+        $pipeline = $pipelineFactory->getModel($this->params);
+        return $pipeline->getPipeline($this->params["item"]);
+    }
+
 }
