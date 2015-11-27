@@ -42,6 +42,18 @@ class BuildConfigureAllOS extends Base {
         return $pipeline->getPipeline($this->params["item"]);
     }
 
+//    public function getEventNames() {
+//        return array_keys($this->getEvents());   }
+//
+//    public function getEvents() {
+//        $ff = array(
+//            "beforePipelineSave" => array(""),
+//            "beforeCopiedPipelineSave" => array(""),
+//            "afterPipelineSave" => array(""),
+//            "afterCopiedPipelineSave" => array(""),
+//        );
+//        return $ff ; }
+
     public function getBuilders() {
         $builderFactory = new \Model\Builder() ;
         $builder = $builderFactory->getModel($this->params);

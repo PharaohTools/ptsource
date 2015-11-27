@@ -6,7 +6,7 @@ class BuildConfigureInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "BuildConfigure/Home Page";
+    public $name = "Build Configuration Page";
 
     public function _construct() {
       parent::__construct();
@@ -17,7 +17,7 @@ class BuildConfigureInfo extends PTConfigureBase {
     }
 
     public function routeAliases() {
-      return array("buildConfigure"=>"BuildConfigure");
+      return array("buildConfigure"=>"BuildConfigure", "build-configure"=>"BuildConfigure", "buildconfigure"=>"BuildConfigure");
     }
 
     public function events() {
