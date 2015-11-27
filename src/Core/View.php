@@ -76,7 +76,7 @@ class View {
     private function renderLogs() {
         $registry_values = new \Model\RegistryStore();
         $logs = $registry_values::getValue("logs") ;
-        if (count($logs>0)) {
+        if (count($logs)>0) {
             $lmsg = '
             <div class="btn btn-info btn-sm pharaoh-message">
                 <a class="close" data-dismiss="alert">×</a> ';
