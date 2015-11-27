@@ -75,6 +75,21 @@
         $act = '/index.php?control=BuildConfigure&item='.$pageVars["data"]["pipeline"]["project-slug"].'&action=save' ;
         ?>
             <h2 class="text-uppercase text-light"><a href="/"> Build - Pharaoh Tools </a></h2>
+
+        <div class="success">
+            <?php
+
+                $registry_values = new \Model\RegistryStore();
+                $logs = $registry_values::getValue("logs") ;
+
+            foreach ($logs as $log) {
+                echo "<p>{$log}</p>" ;
+            }
+
+            ?>
+
+        </div>
+
             <div class="row clearfix no-margin">
 
                 <!--
@@ -324,7 +339,7 @@
 
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" id="bt" class=" btn btn-success hvr-float-shadow data-toggle="tooltip" data-placement="top" title="Save configure" data-original-title="Tooltip on right"">Save Configuration</button>
+                            <button type="submit" id="bt" class=" btn btn-success hvr-float-shadow data-toggle="tooltip" data-placement="top" title="Save configure" data-original-title="Tooltip on right">Save Configuration</button>
                         </div>
                     </div>
 
