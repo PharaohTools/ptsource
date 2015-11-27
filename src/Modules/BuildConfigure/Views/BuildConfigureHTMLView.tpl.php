@@ -76,19 +76,7 @@
         ?>
             <h2 class="text-uppercase text-light"><a href="/"> Build - Pharaoh Tools </a></h2>
 
-        <div class="success">
-            <?php
-
-                $registry_values = new \Model\RegistryStore();
-                $logs = $registry_values::getValue("logs") ;
-
-            foreach ($logs as $log) {
-                echo "<p>{$log}</p>" ;
-            }
-
-            ?>
-
-        </div>
+            <?php echo $this->renderLogs() ; ?>
 
             <div class="row clearfix no-margin">
 

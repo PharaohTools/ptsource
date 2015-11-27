@@ -5,7 +5,10 @@
 			<div class="login-panel panel panel-default">
 				<div class="col-md-12">
                 <h3 class="hero-unit"><strong>Sign Up</strong> </h3>
-                <hr>
+
+                    <?php echo $this->renderLogs() ; ?>
+
+                    <hr>
 				</div> 
 				
 					

@@ -39,7 +39,10 @@
   <div class="col-lg-9">
                     <div class="well well-lg">
         <h2 class="text-uppercase text-light"><a href="/"> PTBuild - Pharaoh Tools</a></h2>
-        <div class="row clearfix no-margin">
+
+                        <?php echo $this->renderLogs() ; ?>
+
+                        <div class="row clearfix no-margin">
            <h4 class="text-uppercase text-primary"><i class="fa fa-users hvr-grow-rotate"></i>  Users</h4>
             <!--
             <h3>

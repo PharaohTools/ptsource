@@ -46,7 +46,10 @@
 		</div>
 	</div>
     <div class="col-lg-9">
-                    <div class="well well-lg">
+
+    <?php echo $this->renderLogs() ; ?>
+
+    <div class="well well-lg">
         <div class="row clearfix no-margin">
             <div class="row">
             	 

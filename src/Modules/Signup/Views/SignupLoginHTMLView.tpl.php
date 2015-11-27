@@ -5,10 +5,13 @@
 			<div class="login-panel panel panel-default">
 				<div class="col-md-12">
 					<h3 class="hero-unit"><strong>Log in</strong> </h3>
-					<!--<div class="pull-right">
-					switch to
-					<a href="http://www.pttrack.tld/index.php?control=Signup&action=registration"> OpenID log in</a>
-					</div> -->
+
+                    <?php echo $this->renderLogs() ; ?>
+
+                    <!--<div class="pull-right">
+                    switch to
+                    <a href="http://www.pttrack.tld/index.php?control=Signup&action=registration"> OpenID log in</a>
+                    </div> -->
 					<hr>
 				</div>
 				

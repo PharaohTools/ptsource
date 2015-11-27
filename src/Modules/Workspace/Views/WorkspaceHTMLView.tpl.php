@@ -59,7 +59,10 @@
          <div class="col-lg-9">
                     <div class="well well-lg">
             <h2 class="text-uppercase text-light"><a href="/"> Build - Pharaoh Tools </a></h2>
-            <div class="row clearfix no-margin">
+
+                        <?php echo $this->renderLogs() ; ?>
+
+                        <div class="row clearfix no-margin">
                 <?php
                     switch ($pageVars["route"]["action"]) {
                         case "show" :
