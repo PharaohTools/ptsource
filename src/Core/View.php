@@ -73,6 +73,21 @@ class View {
     return $outVar;
   }
 
+    private function renderLogs() {
+        $registry_values = new \Model\RegistryStore();
+        $logs = $registry_values::getValue("logs") ;
+        if (count($logs>0)) {
+            $lmsg = '
+            <div class="btn btn-info btn-sm pharaoh-message">
+                <a class="close" data-dismiss="alert">×</a> ';
+            foreach ($logs as $log) {
+                $lmsg .= "{$log}<br/>" ; }
+            $lmsg .= ' </div> ' ; }
+        else {
+            $lmsg = "" ; }
+        return $lmsg ;
+    }
+
   public function loadViewFile($viewFileName, $pageVars, $templateData=null) {
     $allModuleParentDirectories = array("Extensions", "Modules", "Core");
     foreach ($allModuleParentDirectories as $oneModuleParentDirectory) {
