@@ -30,7 +30,7 @@ class EventRepositoryAllOS extends Base {
         $allEvents = $this->getAllEvents();
         $modulesWithEvent = array() ;
         foreach ($allEvents as $moduleName => $eventDetails) {
-            $eventsForModule = array_keys($eventDetails) ;
+            $eventsForModule = $eventDetails ; // array_keys($eventDetails) ;
             if (in_array($wantedEvent, $eventsForModule)) {
                 $modulesWithEvent[] = $moduleName ; } }
         return $modulesWithEvent ;
