@@ -13,3 +13,12 @@ body {
 div.well h2.text-uppercase {
     text-align: center;
 }
+
+.pharaoh-message {
+    text-align: left;
+    width: 100%;
+}
+
+.pharaoh-message:hover {
+    cursor: default;
+}
