@@ -51,7 +51,24 @@ class LoggingAll extends BaseLinuxApp {
         if ((isset($options["php-log"]) && $options["php-log"] == true) || (isset($this->params["php-log"]) && $this->params["php-log"] == true) ) {
             error_log($fullMessage) ; }
         if ((isset($options["echo-log"]) && $options["echo-log"] == true) || (isset($this->params["echo-log"]) && $this->params["echo-log"] == true) ) {
-            echo $fullMessage."\n" ; }
+            if ($this->isWebSapi()) {
+                $registry_values = new \Model\RegistryStore();
+                $logs = $registry_values::getValue("logs") ;
+                $logs[] = $fullMessage ;
+                $registry_values::setValue("logs", $logs) ;
+
+            } else {
+                echo $fullMessage."\n" ;
+
+            }}
+
+
+    }
+
+
+    private function isWebSapi() {
+        if (!in_array(PHP_SAPI, array("cli")))  { return true ; }
+        return false ;
     }
 
 }
