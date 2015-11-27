@@ -2,19 +2,26 @@
 
 namespace Model;
 
-class RegExp {
+class RegistryStore {
 
-    public $regexp;
+    // Compatibility
+    public $os = array("any") ;
+    public $linuxType = array("any") ;
+    public $distros = array("any") ;
+    public $versions = array("any") ;
+    public $architectures = array("any") ;
 
-    function __construct($regexp)
-    {
-        $this->regexp = $regexp;
+    // Model Group
+    public $modelGroup = array("RegistryStore") ;
+
+    public static $store ;
+
+    public static function setValue($variable, $value) {
+        self::$store[$variable] = $value;
     }
 
-    function __toString()
-    {
-        return "RegExp({$this->regexp})";
+    public static function getValue($variable) {
+        return self::$store[$variable] ;
     }
-
 
 }
