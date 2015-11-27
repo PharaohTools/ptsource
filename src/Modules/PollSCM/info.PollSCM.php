@@ -21,7 +21,7 @@ class PollSCMInfo extends PTConfigureBase {
     }
 
     public function events() {
-        return array("afterBuildComplete");
+        return array("prepareBuild");
     }
 
     public function buildSettings() {
