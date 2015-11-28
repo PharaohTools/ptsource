@@ -24,23 +24,18 @@ class ApplicationConfigureSaverAllOS extends Base {
         $appConfigVar = $_REQUEST["mod_config"] ;
         $appConfig = new \Model\AppConfig();
         $appConfig->setAppVariable("mod_config", $appConfigVar);
-        $this->params["display-log"] = false ;
-        $this->params["echo-log"] = false ;
         $eventRunnerFactory = new \Model\EventRunner() ;
         $eventRunner = $eventRunnerFactory->getModel($this->params) ;
-        $ev = $eventRunner->eventRunner("afterApplicationConfigureSave") ;
+        $ev = $eventRunner->eventRunner("afterApplicationConfigurationSave") ;
         if ($ev == false) { return false ; }
         // @todo actually use logic here
         return true ;
     }
 
     public function saveOneConfig() {
-
         $appConfigVar = $_REQUEST["mod_config"] ;
         $appConfig = new \Model\AppConfig();
         $appConfig->setAppVariable("mod_config", $appConfigVar);
-
-
         $r1 = $this->saveModConfigs();
         return ($r1 == true) ? true : false ;
     }
