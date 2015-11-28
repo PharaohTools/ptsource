@@ -18,8 +18,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="index.php?control=BuildList&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="hvr-bounce-in">
-                        <i class="fa fa-home fa-fw hvr-bounce-in"></i>  Pipeline Home
+                    <a href="index.php?control=BuildHome&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="hvr-bounce-in">
+                        <i class="fa fa-home fa-fw hvr-bounce-in"></i> Pipeline Home
                     </a>
                 </li>
                 <li>
@@ -27,8 +27,6 @@
                         <i class="fa fa-bars fa-fw hvr-bounce-in"></i> All Pipelines
                     </a>
                 </li>
-                
-                
                 <li>
                     <a href="index.php?control=Workspace&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>"  class="hvr-bounce-in">
                         <i class="fa fa-folder-open-o hvr-bounce-in"></i> Workspace
@@ -52,8 +50,6 @@
             </ul>
         </div>
        </div>
-                
-               
 
          <div class="col-lg-9">
                     <div class="well well-lg">

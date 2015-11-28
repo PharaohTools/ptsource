@@ -8,8 +8,8 @@
 						<span class="input-group-btn">
 							<button class="btn btn-default" type="button">
 								<i class="fa fa-search"></i>
-							</button> </span>
-                        
+							</button>
+                        </span>
 					</div>
 					</li>
                 <li>
@@ -18,7 +18,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="index.php?control=BuildList&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="hvr-bounce-in">
+                    <a href="index.php?control=BuildHome&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" class="hvr-bounce-in">
                         <i class="fa fa-home fa-fw hvr-bounce-in"></i>  Pipeline Home
                     </a>
                 </li>
@@ -27,8 +27,6 @@
                         <i class="fa fa-bars fa-fw hvr-bounce-in"></i> All Pipelines
                     </a>
                 </li>
-                
-                
                 <li>
                     <a href="index.php?control=Workspace&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>"  class="hvr-bounce-in">
                         <i class="fa fa-folder-open-o hvr-bounce-in"></i> Workspace
@@ -58,6 +56,8 @@
          <div class="col-lg-9">
                     <div class="well well-lg">
             <h2 class="text-uppercase text-light"><a href="/"> PTBuild - Pharaoh Tools </a></h2>
+
+                        <?php echo $this->renderLogs() ; ?>
             <div class="row clearfix no-margin">
 
                 <h3>Now Terminating Pipeline <?php echo $pageVars["data"]["pipeline"]["project-name"] ; ?><?php
