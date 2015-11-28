@@ -20,6 +20,10 @@ class ApplicationInstanceInfo extends PTConfigureBase {
         return array("ApplicationInstance");
     }
 
+    public function events() {
+        return array("afterApplicationConfigurationSave");
+    }
+
     public function configuration() {
         return array(
             "instance_id"=> array("type" => "text", "default" => "Instance ID", "label" => "Application Instance ID?", ),
