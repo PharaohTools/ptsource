@@ -57,7 +57,8 @@
                     <div class="well well-lg">
             <h2 class="text-uppercase text-light"><a href="/"> PTBuild - Pharaoh Tools </a></h2>
 
-                        <?php echo $this->renderLogs() ; ?>
+            <?php echo $this->renderLogs() ; ?>
+
             <div class="row clearfix no-margin">
 
                 <h3>Now Terminating Pipeline <?php echo $pageVars["data"]["pipeline"]["project-name"] ; ?><?php
