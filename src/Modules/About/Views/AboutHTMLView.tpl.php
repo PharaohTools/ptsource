@@ -26,6 +26,9 @@
                 <h3><a class="lg-anchor text-light" href=""> PTBuild - The Builder, Pharaoh Tools
                         <i style="font-size: 18px;" class="fa fa-chevron-right"></i>
                     </a></h3>
+
+                <?php echo $this->renderLogs() ; ?>
+
                 <p> Pharaoh Tools: Build </p>
                 <p> Part of the Pharaoh Tools Package </p>
                 <p>
