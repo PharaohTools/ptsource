@@ -4,6 +4,13 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
 
+html {
+    max-width: auto;
+    width: auto;
+    /*width: 100%;*/
+    /*overflow-x: hidden ;*/
+}
+
 body {
 	background: #fff url(../image/stucco.png) repeat top left;
     background-color: #f8f8f8;
@@ -22,9 +29,6 @@ body {
 }
 #caret{
 	color:#F8F8F8;
-}
-#wrapper {
-    width: 100%;
 }
 
 #page-wrapper {
