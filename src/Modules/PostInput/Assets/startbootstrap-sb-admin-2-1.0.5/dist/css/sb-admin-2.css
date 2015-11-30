@@ -4,27 +4,33 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
 
+html {
+    /*max-width: auto;*/
+    width: 100%;
+    overflow-x: hidden ;
+}
+
 body {
-	background: #fff url(../image/stucco.png) repeat top left;
+    background: #fff url(../image/stucco.png) repeat top left;
     background-color: #f8f8f8;
     font-family: 'Roboto Condensed', Helvetica, Arial, sans-serif;
     font-size: 15px;
 }
 
 .title{
-	color:#F8F8F8;
-	font-family: 'Roboto Condensed', Helvetica, Arial, sans-serif;
+    color:#F8F8F8;
+    font-family: 'Roboto Condensed', Helvetica, Arial, sans-serif;
     font-size: 18px;
-	
+
 }
 #bell{
-	color:#F8F8F8;
+    color:#F8F8F8;
 }
 #caret{
-	color:#F8F8F8;
+    color:#F8F8F8;
 }
 #wrapper {
-    width: 100%;
+    /*max-width: 1280px;*/
 }
 
 #page-wrapper {
