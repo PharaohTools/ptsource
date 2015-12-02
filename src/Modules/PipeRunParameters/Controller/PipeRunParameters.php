@@ -2,7 +2,7 @@
 
 Namespace Controller ;
 
-class PrepareSteps extends Base {
+class PipeRunParameters extends Base {
 
     public function execute($pageVars) {
 
@@ -16,7 +16,7 @@ class PrepareSteps extends Base {
             $this->content["helpData"] = $helpModel->getHelpData($pageVars["route"]["control"]);
             return array ("type"=>"view", "view"=>"help", "pageVars"=>$this->content); }
 
-        $this->content["messages"][] = "Help is the only valid PrepareSteps Action";
+        $this->content["messages"][] = "Help is the only valid PipeRunParameters Action";
         return array ("type"=>"control", "control"=>"index", "pageVars"=>$this->content);
 
     }

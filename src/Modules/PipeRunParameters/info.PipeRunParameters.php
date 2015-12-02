@@ -2,7 +2,7 @@
 
 Namespace Info;
 
-class PrepareStepsInfo extends PTConfigureBase {
+class PipeRunParametersInfo extends PTConfigureBase {
 
     public $hidden = false;
 
@@ -13,11 +13,15 @@ class PrepareStepsInfo extends PTConfigureBase {
     }
 
     public function routesAvailable() {
-        return array( "PrepareSteps" => array_merge(parent::routesAvailable(), array("help") ) );
+        return array( "PipeRunParameters" => array_merge(parent::routesAvailable(), array("help") ) );
     }
 
     public function routeAliases() {
-        return array("preparesteps"=>"PrepareSteps");
+        return array("piperunparameters"=>"PipeRunParameters");
+    }
+
+    public function buildSettings() {
+        return array("piperun_parameters");
     }
 
     public function events() {
@@ -29,7 +33,7 @@ class PrepareStepsInfo extends PTConfigureBase {
     This extension prepares steps for a Build Step. It provides code
     functionality, but no extra commands.
 
-    PrepareSteps
+    PipeRunParameters
 
 HELPDATA;
       return $help ;
