@@ -6,7 +6,7 @@ class PipeRunParametersInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "Prepare steps for your build";
+    public $name = "Functionality to provide runtime parameters to your build";
 
     public function _construct() {
         parent::__construct();
@@ -21,7 +21,7 @@ class PipeRunParametersInfo extends PTConfigureBase {
     }
 
     public function buildSettings() {
-        return array("piperun_parameters");
+        return array("piperun_parameters_enabled");
     }
 
     public function events() {
@@ -30,8 +30,8 @@ class PipeRunParametersInfo extends PTConfigureBase {
     
     public function helpDefinition() {
        $help = <<<"HELPDATA"
-    This extension prepares steps for a Build Step. It provides code
-    functionality, but no extra commands.
+    This extension provides Functionality to provide runtime parameters to your build.
+    It provides code functionality, but no extra commands.
 
     PipeRunParameters
 

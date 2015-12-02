@@ -20,7 +20,7 @@ class PipeRunParametersAllOS extends Base {
 
     public function getSettingFormFields() {
         $ff = array(
-            "piperun_enabled" =>
+            "piperun_parameters_enabled" =>
             array(
                 "type" => "boolean",
                 "optional" => true,
