@@ -49,22 +49,44 @@ class PipeRunnerAllOS extends Base {
 		return $pipeline -> getPipeline($this -> params["item"]);
 	}
 
+
 	public function checkPipeVariables() {
-		$file = PIPEDIR . DS . $this -> params["item"] . DS . 'defaults';
-		if ($defaults = file_get_contents($file))
-			$defaults = json_decode($defaults, true);
-		if ($defaults["parameter-status"] == "on") {
-			if (!$_POST["parameter-input"]) {
-				return true; }
-            else {
-				$defaults["parameter-input"] = $_POST["parameter-input"];
-				file_put_contents($file, json_encode($defaults));
-				return false; } }
-		return false;
+
+        $pipeline = $this->getPipeline();
+
+        $eventRunnerFactory = new \Model\EventRunner() ;
+        $eventRunner = $eventRunnerFactory->getModel($this->params) ;
+        $ev = $eventRunner->eventRunner("parameterLoad") ;
+        if ($ev == false) { return $this->failBuild() ; }
+
+        if ($pipeline["settings"]["PipeRunParameters"]["piperun_enabled"] == "on") {
+
+            if (isset($run_parameters)) {
+
+            }
+
+            return true ;
+        }
+
+        return false ;
+//
+//        $file = PIPEDIR . DS . $this -> params["item"] . DS . 'defaults';
+//
+//		if ($defaults = file_get_contents($file)) {
+//			$defaults = json_decode($defaults, true); }
+//		if ($defaults["parameter-status"] == "on") {
+//			if (!$_POST["parameter-input"]) {
+//				return true; }
+//            else {
+//				$defaults["parameter-input"] = $_POST["parameter-input"];
+//				file_put_contents($file, json_encode($defaults));
+//				return false; } }
+//		return false;
 	}
 
+
 	public function runPipe($start_execution = true) {
-		if ($this -> checkPipeVariables()) {
+		if ($this -> checkPipeVariables()!==false) {
 			return "getParamValue"; }
         else {
 			// set build dir
