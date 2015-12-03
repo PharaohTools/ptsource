@@ -25,7 +25,7 @@ class PipeRunParametersInfo extends PTConfigureBase {
     }
 
     public function events() {
-        return array("beforeBuild");
+        return array("pipeRunParameterEnable", "pipeRunParameterLoad");
     } 
     
     public function helpDefinition() {
