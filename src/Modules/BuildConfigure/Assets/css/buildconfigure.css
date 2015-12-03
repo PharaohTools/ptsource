@@ -22,7 +22,9 @@
 .settingsScroller {
     overflow: -moz-scrollbars-vertical;
     overflow-y: scroll;
-    max-height: 275px ;
+    height: 60% ;
+    max-height: 80vh;
+    resize: both;
 }
 
 .scroll-mods-top-inner,
