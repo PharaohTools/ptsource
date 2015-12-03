@@ -35,7 +35,9 @@ class PipeRunParametersAllOS extends Base {
     }
 
     public function getEvents() {
-        $ff = array( "beforeBuild" => array( "stepPrepare", ), );
+        $ff = array(
+            "pipeRunParameterEnable" => array("checkEnableParametersForBuild", ),
+            "pipeRunParameterLoad" => array("checkFindParametersForBuild", ), );
         return $ff ;
     }
 
@@ -61,24 +63,61 @@ class PipeRunParametersAllOS extends Base {
             return true ; }
     }
 
+    public function checkEnableParametersForBuild() {
+        if ( $this->params["build-settings"]["PipeRunParameters"]["piperun_parameters_enabled"] == "on") {
+//            var_dump("Build settings are enabled") ;
+            return true ; }
+        return false ;
+    }
+
+    public function checkFindParametersForBuild() {
+        // implement some silent loading or default loading methods
+        // like for scheduled build or something
+        $loggingFactory = new \Model\Logging();
+        $this->params["echo-log"] = true ;
+        $logging = $loggingFactory->getModel($this->params);
+        if ( isset($this->params["build-parameters"])) {
+//            var_dump("object param") ;
+            $logging->log ("parameters set by object paramters", $this->getModuleName() ) ;
+            return true ; }
+        if ( isset($_REQUEST["build-parameters"])) {
+//            var_dump("req param") ;
+            $logging->log ("parameters set by request", $this->getModuleName() ) ;
+            return array("build-parameters"=>array("dave head")) ; }
+//        var_dump("no params found") ;
+        return false ;
+    }
+
     public function stepPrepare() {
         //get input data
         $parameterData = PIPEDIR.DS.$this->params["item"].DS.'defaults';
         $defaultsFile = file_get_contents($parameterData) ;
-        $defaultsFile = new \ArrayObject(json_decode($defaultsFile)); 
+        $defaultsFile = new \ArrayObject(json_decode($defaultsFile));
         $paraName = $defaultsFile["parameter-name"];
         $paraInput = $defaultsFile["parameter-input"];
         $paraDesc = $defaultsFile["parameter-description"];
 
         //get stepfile data
-        $stepFile = PIPEDIR.DS.$this->params["item"].DS.'steps';    
-        $stepFileData = file_get_contents($stepFile) ;       
+        $stepFile = PIPEDIR.DS.$this->params["item"].DS.'steps';
+        $stepFileData = file_get_contents($stepFile) ;
 
-        $result = str_replace('$'.$paraName, $paraInput, $stepFileData);
-        file_put_contents(PIPEDIR.DS.$this->params["item"].DS.'stepsHistory'.DS.$this->params["run-id"], $result);
-        $stepFileForRun = $stepFile.'ForRun';
-        file_put_contents($stepFileForRun, $result);
-        return $result;	                 
+        if ($this->params["build-settings"]["PipeRunParameters"]["piperun_parameters_enabled"] == "on") {
+
+            if (isset($run_parameters)) {
+
+            }
+
+            return true ;
+        }
+
+        return false ;
+
+        //@todo ask karthik what this does
+//        $result = str_replace('$'.$paraName, $paraInput, $stepFileData);
+//        file_put_contents(PIPEDIR.DS.$this->params["item"].DS.'stepsHistory'.DS.$this->params["run-id"], $result);
+//        $stepFileForRun = $stepFile.'ForRun';
+//        file_put_contents($stepFileForRun, $result);
+//        return $result;
     }
 
 }
