@@ -50,26 +50,15 @@ class PipeRunnerAllOS extends Base {
 	}
 
 
-	public function checkPipeVariables() {
-
-        $pipeline = $this->getPipeline();
+    public function enableBuildParameters() {
 
         $eventRunnerFactory = new \Model\EventRunner() ;
+        $pipeline = $this->getPipeline();
+        $this->params["build-settings"] = $pipeline["settings"];
         $eventRunner = $eventRunnerFactory->getModel($this->params) ;
-        $ev = $eventRunner->eventRunner("parameterLoad") ;
-        if ($ev == false) { return $this->failBuild() ; }
+        $ev = $eventRunner->eventRunner("pipeRunParameterEnable") ;
+        return $ev ;
 
-        if ($pipeline["settings"]["PipeRunParameters"]["piperun_enabled"] == "on") {
-
-            if (isset($run_parameters)) {
-
-            }
-
-            return true ;
-        }
-
-        return false ;
-//
 //        $file = PIPEDIR . DS . $this -> params["item"] . DS . 'defaults';
 //
 //		if ($defaults = file_get_contents($file)) {
@@ -82,31 +71,45 @@ class PipeRunnerAllOS extends Base {
 //				file_put_contents($file, json_encode($defaults));
 //				return false; } }
 //		return false;
-	}
+
+    }
+
+
+    public function findBuildParameters() {
+        $eventRunnerFactory = new \Model\EventRunner() ;
+        $pipeline = $this->getPipeline();
+        $this->params["build-settings"] = $pipeline["settings"];
+        $eventRunner = $eventRunnerFactory->getModel($this->params) ;
+        $ev = $eventRunner->eventRunner("pipeRunParameterLoad", true) ;
+        foreach ($ev as $eventOutput) {
+            if (is_array($eventOutput) && array_key_exists("build-parameters", $eventOutput)) {
+                return $eventOutput ; } }
+        return false  ;
+    }
 
 
 	public function runPipe($start_execution = true) {
-		if ($this -> checkPipeVariables()!==false) {
-			return "getParamValue"; }
+        if ($this->enableBuildParameters() == true) {
+            if ($this->findBuildParameters() == false) {
+                return "getParamValue"; } }
+        // set build dir
+        if ($start_execution==true) {
+            $this -> setPipeDir();
+            // ensure build dir exists
+            $eventRunnerFactory = new \Model\EventRunner() ;
+            $eventRunner = $eventRunnerFactory->getModel($this->params) ;
+            $ev = $eventRunner->eventRunner("prepareBuild") ;
+            if ($ev == false) { return $this->failBuild() ; }
+            // run pipe fork command
+            $run = $this -> saveRunPlaceHolder();
+            $this -> setRunStartTime($run);
+            // save run
+            $this -> runPipeForkCommand($run); }
         else {
-			// set build dir
-            if ($start_execution==true) {
-                $this -> setPipeDir();
-                // ensure build dir exists
-                $eventRunnerFactory = new \Model\EventRunner() ;
-                $eventRunner = $eventRunnerFactory->getModel($this->params) ;
-                $ev = $eventRunner->eventRunner("prepareBuild") ;
-                if ($ev == false) { return $this->failBuild() ; }
-                // run pipe fork command
-                $run = $this -> saveRunPlaceHolder();
-                $this -> setRunStartTime($run);
-                // save run
-                $this -> runPipeForkCommand($run); }
-            else {
-                $run = (isset($this->params["run-id"])) ?
-                    $this->params["run-id"] :
-                    $this->getBuildNumber("last") ; }
-			return $run; }
+            $run = (isset($this->params["run-id"])) ?
+                $this->params["run-id"] :
+                $this->getBuildNumber("last") ; }
+        return $run;
 	}
 
 	private function setRunStartTime($run) {
