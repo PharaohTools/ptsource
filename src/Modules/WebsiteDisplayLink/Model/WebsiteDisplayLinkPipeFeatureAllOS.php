@@ -34,13 +34,12 @@ class WebsiteDisplayLinkPipeFeatureAllOS extends Base {
 	}
 
 	public function getLink() {
-		$link = $this->pipeline["settings"]["WebsiteDisplayLink"]["url"];
-		$ff = array("link" => "$link");
+		$ff = array("link" => $this->pipeFeatureValues["url"]);
 		return $ff ;
 	}
 
 	public function getTitle() {
-		$ff = array("title" => $this->pipeFeatureValues["title"]);
+        $ff = array("title" => $this->pipeFeatureValues["title"]);
 		return $ff ;
 	}
 
