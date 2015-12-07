@@ -13,7 +13,7 @@
                     </div>
                 </li>
                 <li>
-                    <a href="/index.php?control=Index&amp;action=show" class="hvr-bounce-in">
+                    <a href="/index.php?control=Index&action=show" class="hvr-bounce-in">
                         <i class="fa fa-dashboard fa-fw hvr-bounce-in"></i> Dashboard
                     </a>
                 </li>
@@ -23,7 +23,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/index.php?control=BuildList&amp;action=show" class="hvr-bounce-in">
+                    <a href="/index.php?control=BuildList&action=show" class="hvr-bounce-in">
                         <i class="fa fa-bars fa-fw hvr-bounce-in"></i> All Pipelines
                     </a>
                 </li>
@@ -43,7 +43,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/index.php?control=PipeRunner&action=start&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>"  class="hvr-bounce-in">
+                    <a href="index.php?control=PipeRunner&action=start&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>"  class="hvr-bounce-in">
                         <i class="fa fa-sign-in fa-fw hvr-bounce-in"></i> Run Again
                     </a>
                 </li>
@@ -51,25 +51,77 @@
         </div>
     </div>
 
-    <form class="form-horizontal custom-form" action="<?= $act ; ?>" method="POST">
+    <?php $act= "index.php?control=PipeRunner&action=start&item={$pageVars["data"]["pipeline"]["project-slug"]}" ; ?>
 
-        <div class="col-sm-8 col-md-9 clearfix main-container">
+    <form class="form-horizontal custom-form" action="<?php echo $act ; ?>" method="POST">
+
+        <div class="col-sm-9 clearfix main-container">
                 <h2 class="text-uppercase text-light"><a href="/"> PTBuild - Pharaoh Tools </a></h2>
                 <div class="col-sm-10">
                     <div class="row clearfix no-margin">
 
-
                     <h3>Project  <?php echo $pageVars["data"]["pipeline"]["project-name"] ; ?></h3>
                     <h5>This build requires parameters</h5>
                     <h5 class="text-uppercase text-light" style="margin-top: 15px;">
-                        <a href="/index.php?control=BuildHome&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>"></a>
+                        <a href="index.php?control=BuildHome&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>"></a>
                     </h5>
                 </div>
 
                 <div class="form-group">
                     <div class="col-sm-10">
-                        <label for="project-slug" class="col-sm-2 control-label text-left"><?php echo $pageVars["data"]["pipeline"]["parameter-name"] ; ?></label>
-                        <input type="text" class="form-control" name="parameter-input" id="parameter-input" value="<?php echo $pageVars["data"]["pipeline"]["parameter-dvalue"] ; ?>" />
+
+                        <?php
+
+                        foreach ($pageVars["data"]["pipeline"]["settings"]["PipeRunParameters"]["parameters"] as $parameter) {
+
+                            if ($parameter["param_type"]=="text") {
+                                ?>
+
+                            <div class="col-sm-4">
+                                <label for="build-parameters[<?php echo $parameter["param_name"] ; ?>]" class="control-label text-left"><?php echo $parameter["param_name"] ; ?></label>
+                            </div>
+
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="build-parameters[<?php echo $parameter["param_name"] ; ?>]" id="build-parameters[<?php echo $parameter["param_name"] ; ?>]" value="<?php echo $parameter["param_type"] ; ?>" />
+                            </div>
+
+                                <?php
+                            }
+
+                            else if ($parameter["param_type"]=="textarea") {
+                                ?>
+
+                            <div class="col-sm-4">
+                                    <label for="build-parameters[<?php echo $parameter["param_name"] ; ?>]" class="col-sm-4 control-label text-left"><?php echo $parameter["param_name"] ; ?></label>
+                            </div>
+
+                            <div class="col-sm-8">
+                                    <textarea class="form-control col-sm-7" name="build-parameters[<?php echo $parameter["param_name"] ; ?>]" id="build-parameters[<?php echo $parameter["param_name"] ; ?>]"><?php echo $parameter["param_type"] ; ?>"</textarea>
+                            </div>
+
+                            <?php
+                            }
+
+                            else if ($parameter["param_type"]=="boolean") {
+                                ?>
+
+                                <div class="col-sm-4">
+                                    <label for="build-parameters[<?php echo $parameter["param_name"] ; ?>]" class="control-label text-right"><?php echo $parameter["param_name"] ; ?></label>
+                                </div>
+
+                                <div class="col-sm-8">
+                                    <input type="checkbox" class="text-left form-control" name="build-parameters[<?php echo $parameter["param_name"] ; ?>]" id="build-parameters[<?php echo $parameter["param_name"] ; ?>]" value="<?php echo $parameter["param_type"] ; ?>" />
+                                </div>
+
+
+                            <?php
+                            }
+
+                            ?>
+                            <?php
+                        }
+
+                        ?>
                     </div>
                 </div>
 
