@@ -78,18 +78,11 @@
 
             <?php echo $this->renderLogs() ; ?>
 
+            <script type="text/javascript">
+                build_settings_fieldsets = [] ;
+            </script>
+
             <div class="row clearfix no-margin">
-
-                <!--
-
-                <h3><a class="lg-anchor text-light" href="#">Build Configure <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
-
-                <h5 class="text-uppercase text-light" style="margin-top: 15px;">
-                    <a href="/index.php?control=BuildHome&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
-                        Pipeline Summary for <?php echo $pageVars["data"]["pipeline"]["project-name"] ; ?>-</a>
-                </h5>
-
-                -->
 
                 <form class="form-horizontal custom-form" action="<?= $act ; ?>" method="POST">
 
@@ -145,67 +138,42 @@
                             <div class="col-sm-12 settingsScroller resizable">
                                 <div class="slideysWrapper">
 
+
                         <?php
 
+
                         foreach ($pageVars["data"]["settings"] as $one_config_slug => $one_conf_tails) {
-                            echo '<div class="form-group confSettingsSlideySection" id="slidey'.$one_config_slug.'">' ;
-                            echo '  <div class="col-sm-12">' ;
-                            echo '    <label for="config_'.$one_config_slug.'" class="control-label text-left">'.$one_config_slug.':</label>' ;
-                            echo '    <i class="fa fa-1x fa-toggle-off hvr-grow" id="slideyToggleIcon'.$one_config_slug.'"' ;
-                            echo ' onclick="toggleConfSetting(this, \'slidey'.$one_config_slug.'\')"></i>' ;
-                            echo '    <a class="btn-info" id="slideyToggleIcon'.$one_config_slug.'"' ;
-                            echo ' onclick="hideConfSetting(\'slidey'.$one_config_slug.'\')"></a>' ;
-                            echo '  </div>' ;
-                            echo '  <div class="col-sm-12 sliderFields">' ;
+                            echo '<div class="form-group confSettingsSlideySection" id="slidey'.$one_config_slug.'">'."\n" ;
+                            echo '  <div class="col-sm-12">'."\n" ;
+                            echo '    <label for="config_'.$one_config_slug.'" class="control-label text-left">'.$one_config_slug.':</label>'."\n" ;
+                            echo '    <i class="fa fa-1x fa-toggle-off hvr-grow" id="slideyToggleIcon'.$one_config_slug.'"'."\n" ;
+                            echo ' onclick="toggleConfSetting(this, \'slidey'.$one_config_slug.'\')"></i>'."\n" ;
+                            echo '    <a class="btn-info" id="slideyToggleIcon'.$one_config_slug.'"'."\n" ;
+                            echo ' onclick="hideConfSetting(\'slidey'.$one_config_slug.'\')"></a>'."\n" ;
+                            echo '  </div>'."\n" ;
+                            echo '  <div class="col-sm-12 sliderFields">'."\n" ;
+
                             foreach ( $one_conf_tails["settings"] as $fieldSlug => $fieldInfo) {
-                                echo '  <div class="col-sm-12">' ;
 
-                                switch ($fieldInfo["type"]) {
+                                if ($fieldSlug=="fieldsets") {
 
-                                    case "boolean" :
+                                    foreach ( $fieldInfo as $singleFieldSlug => $singleFieldInfo) {
 
-                                        if ( (isset($pageVars["data"]["pipeline"]["settings"][$one_config_slug][$fieldSlug])) &&
-                                            $pageVars["data"]["pipeline"]["settings"][$one_config_slug][$fieldSlug] == "on" ) {
-                                            $onoff = "on" ; }
-                                        else if ( (isset($pageVars["data"]["pipeline"]["settings"][$one_config_slug][$fieldSlug])) &&
-                                            $pageVars["data"]["pipeline"]["settings"][$one_config_slug][$fieldSlug] != "on" ) {
-                                            $onoff = "off" ; }
-                                        else {
-                                            $onoff = (is_null($onoff))
-                                                ? $fieldInfo["default"]
-                                                : $onoff ; }
-                                        if ($onoff === "on") { $onoff = 'checked="checked"' ;}
-                                        else {$onoff = "" ;}
-                                        echo '  <div class="col-sm-12">' ;
-                                        echo '      <label for="settings['.$one_config_slug.']['.$fieldSlug.']" class="control-label text-left">'.$fieldInfo["name"].':</label>' ;
-                                        echo '      <input name="settings['.$one_config_slug.']['.$fieldSlug.']" id="settings['.$one_config_slg.']['.$fieldSlug.']" type="checkbox" '.$onoff.' />' ;
-                                        echo '  </div>' ;
-                                        break ;
-                                    case "text" :
-                                        if (isset($pageVars["data"]["pipeline"]["settings"][$one_config_slug][$fieldSlug])) {
-                                            $val = $pageVars["data"]["pipeline"]["settings"][$one_config_slug][$fieldSlug];  }
-                                        if (!isset($val)) {
-                                            $val = $one_conf_tails["default"] ; }
-                                        echo '  <div class="col-sm-12">' ;
-                                        echo '      <label for="settings['.$one_config_slug.']['.$fieldSlug.']" class="control-label text-left">'.$fieldInfo["name"].':</label>' ;
-                                        echo '      <input name="settings['.$one_config_slug.']['.$fieldSlug.']" id="settings['.
-                                            $one_config_slug.']['.$fieldSlug.']" type="text" class="form-control" value="'.
-                                            $val.'" placeholder="'.$one_conf_tails["label"].'" />' ;
-                                        echo '  </div>' ;
-                                        break ;
-                                    case "textarea" :
-                                        if (isset($pageVars["data"]["pipeline"]["settings"][$one_config_slug][$fieldSlug])) {
-                                            $val = $pageVars["data"]["pipeline"]["settings"][$one_config_slug][$fieldSlug];  }
-                                        if (!isset($val)) {
-                                            $val = $one_conf_tails["default"] ; }
-                                        echo '  <div class="col-sm-12">' ;
-                                        echo '      <label for="settings['.$one_config_slug.']['.$fieldSlug.']" class="control-label text-left">'.$fieldInfo["name"].':</label>' ;
-                                        echo '      <textarea name="settings['.$one_config_slug.']['.$fieldSlug.']" id="settings['.
-                                            $one_config_slug.']['.$fieldSlug.']" type="text" class="form-control" placeholder="'.
-                                            $one_conf_tails["label"].'" >'.$val.'</textarea>' ;
-                                        echo '  </div>' ;
-                                        break ; }
-                                echo '  </div>';}
+                                    displaySingleFieldSet($one_config_slug, $one_conf_tails, $fieldSlug, $fieldInfo, $pageVars["data"]["pipeline"]["settings"], $singleFieldSlug) ;
+
+                            ?>
+                                        <div class="btn btn-success" onclick='displayBuildConfigureSettingsFieldset("<?php echo $one_config_slug ; ?>", "<?php echo $singleFieldSlug ; ?>")'>
+                                            Add Fieldset: <strong><?php echo "$one_config_slug, {$singleFieldSlug}" ; ?></strong></div>
+                                    <?php
+
+                                    }
+
+                                    }
+                                else {
+                                    displaySingleField($one_config_slug, $one_conf_tails, $fieldSlug, $fieldInfo, $pageVars["data"]["pipeline"]["settings"]) ; }
+
+                            }
+
                             echo '  </div>';
                             echo '</div>'; } ?>
                                 </div>
@@ -219,7 +187,7 @@
                     <label for="project-slug" class="col-sm-1 control-label"></label>
                 </div>
 
-                               <hr>
+                               <hr />
                     <div class="form-group">
                         <div class="col-sm-10">
                             <h3>Build Steps</h3>
@@ -232,19 +200,19 @@
                         if (is_array($pageVars["data"]["pipeline"]["steps"]) && count($pageVars["data"]["pipeline"]["steps"])>0) {
 
                             foreach ($pageVars["data"]["pipeline"]["steps"] as $hash => $one_build_step) {
-                                echo '<li class="form-group  bg-primary " id="step'.$hash.'">' ;
-                                echo '  <div class=" col-sm-2 hvr-grow">' ;
-                                echo '    <span class="fa fa-arrows-v fa-1x"></span>' ;
+                                echo '<li class="form-group  bg-primary " id="step'.$hash.'">'."\n" ;
+                                echo '  <div class=" col-sm-2 hvr-grow">'."\n" ;
+                                echo '    <span class="fa fa-arrows-v fa-1x"></span>'."\n" ;
                                 echo '  </div><h3>'.$one_build_step["module"].'</h3>';
-                                echo '  <div class="col-sm-10">' ;
-                                echo '   <div class="form-group col-sm-12">' ;
-                                echo '    <!--<label for="steps['.$hash.'][data]" class="control-label text-left">'.$one_build_step["title"].'</label>' ;
+                                echo '  <div class="col-sm-10">'."\n" ;
+                                echo '   <div class="form-group col-sm-12">'."\n" ;
+                                echo '    <!--<label for="steps['.$hash.'][data]" class="control-label text-left">'.$one_build_step["title"].'</label>'."\n" ;
                                 echo '      <p><strong>Hash: </strong>'.$hash.'</p>';
                                 echo '      <p><strong>Module: </strong>'.$one_build_step["module"].'</p>';
                                 echo '      <p><strong>Step Type: </strong>'.$one_build_step["steptype"].'</p>-->';
                                 echo '      <input type="hidden" id="steps['.$hash.'][module]" name="steps['.$hash.'][module]" value="'.$one_build_step["module"].'" />';
                                 echo '      <input type="hidden" id="steps['.$hash.'][steptype]" name="steps['.$hash.'][steptype]" value="'.$one_build_step["steptype"].'" />';
-                                echo '  	<div>' ;
+                                echo '  	<div>'."\n" ;
                                 echo ' 		<label for="'.$one_build_step["steptype"].'" class="col-sm-2 control-label text-left">'.$one_build_step["steptype"].'</label>';
                                 echo '		<div class="col-sm-10">';
                                 if ($one_build_step["module"] == "ConditionalStepRunner" || $one_build_step["module"] == "Plugin") {
@@ -284,7 +252,7 @@
                                                     $(document).ready(function() {
                                                         window.onload = CONDaysOfWeekDays(\''.$hash.'\');
                                                     });
-                                                </script>';
+                                                  </script>';
                                     }
                                 }
                                 else {
@@ -293,10 +261,10 @@
                                 echo '  </div>';
                                 echo '  </div>';
                                 echo '  </div>';
-                                echo '  <div class="form-group">' ;
+                                echo '  <div class="form-group">'."\n" ;
                                 echo ' 		<label for="delete" class="col-sm-2 control-label text-left"></label>';
                                 echo '   <div class="col-sm-10">'  ;
-                                echo '  <a class="btn btn-info" onclick="deleteStepField(\''.$hash.'\')">Delete Step</a>' ;
+                                echo '  <a class="btn btn-info" onclick="deleteStepField(\''.$hash.'\')">Delete Step</a>'."\n" ;
                                 echo '  </div>';
                                 echo '  </div>';
                                 echo '  </div>';
@@ -334,7 +302,7 @@
                     <?php
 
                     if ($pageVars["route"]["action"] == "new") {
-                        echo '<input type="hidden" name="creation" id="creation" value="yes" />' ; }
+                        echo '<input type="hidden" name="creation" id="creation" value="yes" />'."\n" ; }
 
                     ?>
 
@@ -361,6 +329,7 @@
     steps = <?php echo json_encode($pageVars["data"]["fields"]) ; ?> ;
 </script>
 <script type="text/javascript" src="/Assets/Modules/BuildConfigure/js/buildconfigure.js"></script>
+<script type="text/javascript" src="/Assets/Modules/BuildConfigure/js/buildconfigure_settings.js"></script>
 <script type="text/javascript">
 
     $(function() {
@@ -368,3 +337,114 @@
        // $( "#sortableSteps" ).disableSelection();
     });
 </script>
+
+
+<?php
+
+function displaySingleField($one_config_slug, $one_conf_tails, $fieldSlug, $fieldInfo, $settings=null, $val=null, $field_hash=null, $fieldset=null) {
+
+    if ($field_hash==null) {
+        $fieldset_id = "" ;
+        $field_slug_hash_string = "" ; }
+    else {
+        $fieldset_id = "[$fieldset][$field_hash]" ;
+        $field_slug_hash_string = "[$fieldset][$field_hash]" ; }
+
+    switch ($fieldInfo["type"]) {
+
+        case "boolean" :
+
+            if ( (isset($settings[$one_config_slug][$fieldSlug])) &&
+                $settings[$one_config_slug][$fieldSlug] == "on" ) {
+                $onoff = "on" ; }
+            else if ( (isset($settings[$one_config_slug][$fieldSlug])) &&
+                $settings[$one_config_slug][$fieldSlug] != "on" ) {
+                $onoff = "off" ; }
+            else {
+                if ($val==null) {
+                $onoff = (!isset($onoff))
+                    ? $fieldInfo["default"]
+                    : $onoff ; } }
+            if ($onoff === "on") { $onoff = 'checked="checked"'."\n" ;}
+            else {$onoff = "" ;}
+            echo '  <div class="col-sm-12">'."\n" ;
+            echo '      <label for="settings['.$one_config_slug.']'.$field_slug_hash_string.'['.$fieldSlug.']" class="control-label text-left">'.$fieldInfo["name"].':</label>'."\n" ;
+            echo '      <input name="settings['.$one_config_slug.']'.$field_slug_hash_string.'['.$fieldSlug.']" id="settings['.$one_config_slug.']'.$field_slug_hash_string.'['.$fieldSlug.']" type="checkbox" '.$onoff.' />'."\n" ;
+            echo '  </div>'."\n" ;
+            break ;
+        case "text" :
+            if ($val==null) {
+                if (isset($settings[$one_config_slug][$fieldSlug])) {
+                    $val = $settings[$one_config_slug][$fieldSlug];  }
+                if (!isset($val)) {
+                    $val = $one_conf_tails["default"] ; } }
+            echo '  <div class="col-sm-12">'."\n" ;
+            echo '      <label for="settings['.$one_config_slug.']'.$field_slug_hash_string.'['.$fieldSlug.']" class="control-label text-left">'.$fieldInfo["name"].':</label>'."\n" ;
+            echo '      <input name="settings['.$one_config_slug.']'.$field_slug_hash_string.'['.$fieldSlug.']" id="settings['.$one_config_slug.']'.$field_slug_hash_string.'['.$fieldSlug.']" type="text" class="form-control" value="'.
+                $val.'" placeholder="'.$one_conf_tails["label"].'" />'."\n" ;
+            echo '  </div>'."\n" ;
+            break ;
+        case "textarea" :
+            if ($val==null) {
+                if (isset($settings[$one_config_slug][$fieldSlug])) {
+                    $val = $settings[$one_config_slug][$fieldSlug];  }
+                if (!isset($val)) {
+                    $val = $one_conf_tails["default"] ; } }
+            echo '  <div class="col-sm-12">'."\n" ;
+            echo '      <label for="settings['.$one_config_slug.']'.$field_slug_hash_string.'['.$fieldSlug.']" class="control-label text-left">'.$fieldInfo["name"].':</label>'."\n" ;
+            echo '      <textarea name="settings['.$one_config_slug.']'.$field_slug_hash_string.'['.$fieldSlug.']" id="settings['.$one_config_slug.']'.$field_slug_hash_string.'['.$fieldSlug.']" type="text" class="form-control" placeholder="'.
+                $one_conf_tails["label"].'" >'.$val.'</textarea>'."\n" ;
+            echo '  </div>'."\n" ;
+            break ; }
+}
+
+
+function displaySingleFieldSet( $one_config_slug, $one_conf_tails, $fieldSlug, $fieldInfo, $settings ) {
+
+        echo '<script type="text/javascript">'."\n" ;
+        echo '  build_settings_fieldsets["'.$one_config_slug.'"] = [] ; '."\n" ;
+        echo '</script>'."\n" ;
+
+        foreach ($fieldInfo as $fieldSetSlug => $fieldSetDetails) {
+
+            echo '<div class="form-group" id="fieldsets_'.$one_config_slug.'_'.$fieldSetSlug.'">' ;
+
+            echo '<script type="text/javascript">'."\n" ;
+            $json_fieldset =
+                '  build_settings_fieldsets["'.$one_config_slug.'"]["'.$fieldSetSlug.'"] = ' .
+                json_encode($fieldInfo)." ;" ;
+            echo $json_fieldset ;
+            echo '</script>'."\n" ;
+
+            $hashes = array_keys($settings[$one_config_slug][$fieldSetSlug]) ;
+
+            foreach($hashes as $field_hash) {
+
+                echo '  <div class="col-sm-12" id="fieldset_'.$one_config_slug.'_'.$fieldSetSlug.'_'.$field_hash.'">'."\n" ;
+                foreach ($fieldSetDetails as $singleFieldSlug => $fieldDetail) {
+
+                    displaySingleField(
+                        $one_config_slug,
+                        $one_conf_tails,
+                        $singleFieldSlug,
+                        $fieldDetail,
+                        $settings,
+                        $settings[$one_config_slug][$fieldSetSlug][$field_hash][$singleFieldSlug],
+                        $field_hash,
+                        $fieldSetSlug
+                    ) ;
+
+                }
+                echo '    <div class="col-sm-12">' ;
+                echo '        <a class="btn btn-warning" onclick="deleteFieldsetField(\''.$one_config_slug.'\', \''.$fieldSetSlug.'\', \''.$field_hash.'\')">Delete Fieldset</a>' ;
+                echo '    </div>' ;
+                echo '  </div>';
+            }
+
+            echo '</div>' ;
+
+        }
+
+}
+
+?>
