@@ -54,9 +54,9 @@ class PHPScriptLinuxUnix extends Base {
             $loggingFactory = new \Model\Logging();
             $logging = $loggingFactory->getModel($this->params);
             $logging->log("PHP Extracting Environment Variables...", $this->getModuleName()) ;
-            $ext_vars = $this->params["env-vars"] ;
+            $ext_vars = implode(", ", array_keys($this->params["env-vars"])) ;
             $count = extract($this->params["env-vars"]) ;
-            $logging->log("PHP Successfully Extacted {$count} Environment Variables into PHP Variables {$ext_vars}...", $this->getModuleName()) ; }
+            $logging->log("PHP Successfully Extracted {$count} Environment Variables into PHP Variables {$ext_vars}...", $this->getModuleName()) ; }
         eval($data) ;
     }
 
