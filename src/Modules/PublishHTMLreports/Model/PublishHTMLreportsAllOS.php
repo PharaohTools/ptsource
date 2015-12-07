@@ -26,18 +26,22 @@ class PublishHTMLreportsAllOS extends Base {
                 	"optional" => true,
                 	"name" => "Publish HTML reports on Build Completion?"
             ),
-		    "Report_Directory" =>
-				array(   "type" => "text",
-					 "name" => "HTML Directory to archive",
-					 "slug" => "htmlreportdirectory"),
-		    "Index_Page" =>
-				array("type" => "text",
-					 "name" => "Index Page",
-					 "slug" => "indexpage"),
-			"Report_Title" =>
-				array("type" => "text",
-					 "name" => "Report Title",
-					 "slug" => "reporttitle"));
+            "fieldsets" => array(
+                "reports" => array(
+                    "Report_Directory" =>
+                    array(
+                        "type" => "text",
+                        "name" => "HTML Directory to archive",
+                        "slug" => "htmlreportdirectory"),
+                    "Index_Page" =>
+                    array("type" => "text",
+                        "name" => "Index Page",
+                        "slug" => "indexpage"),
+                    "Report_Title" =>
+                    array("type" => "text",
+                        "name" => "Report Title",
+                        "slug" => "reporttitle"))))
+		    ;
           return $ff ;}
    
     public function getEventNames() {
@@ -72,11 +76,14 @@ class PublishHTMLreportsAllOS extends Base {
 	
 	$mn = $this->getModuleName() ;
 	if (isset($steps[$mn]["enabled"]) && $steps[$mn]["enabled"] == "on") {
-	$dir = $steps[$mn]["Report_Directory"];
+
+        foreach ($steps[$mn]["reports"] as $reportHash => $reportDetail) {
+
+	$dir = $reportDetail["Report_Directory"];
 	if (substr($dir, -1) != DS) { $dir = $dir . DS ;}
 		
-	$indexFile = $steps[$mn]["Index_Page"];
-	$ReportTitle = $steps[$mn]["Report_Title"];
+	$indexFile = $reportDetail["Index_Page"];
+	$ReportTitle = $reportDetail["Report_Title"];
 	$tmpfile = PIPEDIR.DS.$this->params["item"].DS.'tmpfile';
 	$raw = file_get_contents($tmpfile); 	
 	if (!$raw) {
@@ -108,21 +115,15 @@ $output .=<<< FOOTER
 FOOTER;
 	//save reference	
 	$reportRef = PIPEDIR.DS.$this->params["item"].DS.'workspace'.DS.'HTMLreports'.DS; 
-	if (!file_exists($reportRef))
-			{
-			mkdir($reportRef, 0777);
-			}
+	if (!file_exists($reportRef)) { mkdir($reportRef, 0777); }
 	file_put_contents($reportRef.$indexFile . '-' . date("l jS \of F Y h:i:s A"), $output);
-
-	//save Html report to given directory
 	$source=$dir.$indexFile;
-	if(file_put_contents($source,$output))
-			{	return true;	}
-	else	{ 	return false;	}
-	}
-	}
-	else {
+	if(file_put_contents($source,$output)) {	return true;	}
+	else { return false; } } } }
+   else {
 //$logging->log ("Publish HTML reports ignoring...", $this->getModuleName() ) ;
-            	return true ; }      
+//            	return true ;
    }
+}
+
 }
