@@ -16,6 +16,7 @@
     border: 1px;
     border-color: darkgray;
     background-color: lightgrey;
+    float: left;
 }
 
 .build-feature img {
