@@ -54,10 +54,9 @@ function displayStepField() {
     field = window.steps[module][steptype] ;
     console.log("field is");
     console.log(field);
-    hash = "1234567890" ;
-    hash = Math.random() ;
-    hash = hash * 10000000000 ;
-    hash = hash.toString().replace(".", "") ;
+
+    hash = getHash();
+
     html = "" ;
 
    if (module == "ConditionalStepRunner" || module == "Plugin") {
@@ -218,4 +217,12 @@ function modsDown() {
 
 function modsUp() {
     $('.slideysWrapper').slideUp();
+}
+
+function getNewHash() {
+    hash = "1234567890" ;
+    hash = Math.random() ;
+    hash = hash * 10000000000 ;
+    hash = hash.toString().replace(".", "") ;
+    return hash ;
 }
