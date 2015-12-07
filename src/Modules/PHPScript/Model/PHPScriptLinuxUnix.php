@@ -38,12 +38,12 @@ class PHPScriptLinuxUnix extends Base {
         $logging = $loggingFactory->getModel($this->params);
         if ( $step["steptype"] == "phpscriptdata") {
             $logging->log("Running PHPScript from Data...", $this->getModuleName()) ;
-            $this->executeAsPHPData($step["data"]) ;
-            return true ; }
+            $res = $this->executeAsPHPData($step["data"]) ;
+            return $res ; }
         else if ($step["steptype"] == "phpscriptfile") {
             $logging->log("Running PHPScript from Script...", $this->getModuleName()) ;
-            $this->executeAsPHPScript($step["data"]) ;
-            return true ; }
+            $res = $this->executeAsPHPScript($step["data"]) ;
+            return $res ; }
         else {
             $logging->log("Unrecognised Build Step Type {$step["type"]} specified in PHPScript Module", $this->getModuleName()) ;
             return false ; }
@@ -57,18 +57,23 @@ class PHPScriptLinuxUnix extends Base {
             $ext_vars = implode(", ", array_keys($this->params["env-vars"])) ;
             $count = extract($this->params["env-vars"]) ;
             $logging->log("PHP Successfully Extracted {$count} Environment Variables into PHP Variables {$ext_vars}...", $this->getModuleName()) ; }
-        eval($data) ;
+        return eval($data) ;
     }
 
-    private function executeAsPHPScript($data) {
+    private function executeAsPHPScript($scr_loc) {
         $loggingFactory = new \Model\Logging();
         $logging = $loggingFactory->getModel($this->params);
-        if (file_exists($data)) {
-            $logging->log("File found, executing...", $this->getModuleName()) ;
-            self::executeAndOutput("php $data") ; }
+        if (file_exists($scr_loc)) {
+            $logging->log("File found, loading...", $this->getModuleName()) ;
+            $data = file_get_contents($scr_loc) ;
+            if (!$data) {
+                $logging->log("Unable to load file...", $this->getModuleName()) ;
+                return false ; }
+            return $this->executeAsPHPData($data) ; }
         else {
             $logging->log("File not found, ignoring...", $this->getModuleName()) ;
-            \Core\BootStrap::setExitCode(1);}
+            \Core\BootStrap::setExitCode(1);
+            return false ;}
     }
 
 }
