@@ -45,7 +45,10 @@ class PipeRunParametersAllOS extends Base {
     public function getEvents() {
         $ff = array(
             "pipeRunParameterEnable" => array("checkEnableParametersForBuild", ),
-            "pipeRunParameterLoad" => array("checkFindParametersForBuild", ), );
+            "pipeRunParameterLoad" => array("checkFindParametersForBuild", ),
+            "beforeBuild" => array("addParametersToEnvVars"),
+            "prepareBuild" => array("prepareBuildEnvVars")
+        );
         return $ff ;
     }
 
@@ -62,6 +65,7 @@ class PipeRunParametersAllOS extends Base {
         $loggingFactory = new \Model\Logging();
         $this->params["echo-log"] = true ;
         $logging = $loggingFactory->getModel($this->params);
+
         if ( isset($this->params["build-parameters"])) {
 //            $logging->log ("parameters set by object parameters", $this->getModuleName() ) ;
             return array("build-parameters"=>$this->params["build-parameters"]) ;  }
@@ -70,6 +74,37 @@ class PipeRunParametersAllOS extends Base {
 //            $logging->log ("parameters set by request", $this->getModuleName() ) ;
 //            return array("build-parameters"=>$_REQUEST["build-parameters"]) ; }
         return false ;
+    }
+
+
+    public function addParametersToEnvVars() {
+        $loggingFactory = new \Model\Logging();
+        $logging = $loggingFactory->getModel($this->params);
+
+        if (isset($this->params["build-parameter-location"])) {
+            $logging->log ("overwriting build params with location", $this->getModuleName() ) ;
+            $json_data = file_get_contents($this->params["build-parameter-location"]);
+            $this->params["build-parameters"] = json_decode($json_data, true) ; }
+
+        if ( isset($this->params["build-parameters"])) {
+            $logging->log ("adding parameters to environment variables", $this->getModuleName() ) ;
+            return array("params"=>array("env-vars"=>$this->params["build-parameters"])) ;  }
+//        if ( isset($_REQUEST["build-parameters"])) {
+//            var_dump($_REQUEST["build-parameters"]) ;
+//            $logging->log ("parameters set by request", $this->getModuleName() ) ;
+//            return array("build-parameters"=>$_REQUEST["build-parameters"]) ; }
+        return true ;
+    }
+
+    public  function prepareBuildEnvVars() {
+        $loggingFactory = new \Model\Logging();
+        $logging = $loggingFactory->getModel($this->params);
+        $tmpfile = PIPEDIR . DS . $this -> params["item"] . DS .'tmp'.DS. 'tmpparams_'.$this -> params["run-id"] ;
+        $logging->log ("Writing build params to location {$tmpfile}", $this->getModuleName() ) ;
+        $data = json_encode($this->params["build-parameters"]) ;
+        $chars = file_put_contents($tmpfile, $data) ;
+        $logging->log ("Written {$chars} characters", $this->getModuleName() ) ;
+        return array("build-parameter-location" => $tmpfile) ;
     }
 
     public function stepPrepare() {
