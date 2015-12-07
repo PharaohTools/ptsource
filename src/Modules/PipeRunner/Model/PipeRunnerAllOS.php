@@ -81,15 +81,19 @@ class PipeRunnerAllOS extends Base {
         if ($start_execution==true) {
             $this -> setPipeDir();
             // ensure build dir exists
+            $run = $this -> saveRunPlaceHolder();
+            $this->params["run-id"] = $run ;
             $eventRunnerFactory = new \Model\EventRunner() ;
             $eventRunner = $eventRunnerFactory->getModel($this->params) ;
-            $ev = $eventRunner->eventRunner("prepareBuild") ;
-            if ($ev == false) { return $this->failBuild() ; }
-            // run pipe fork command
-            $run = $this -> saveRunPlaceHolder();
+            $ev = $eventRunner->eventRunner("prepareBuild", true) ;
+            $bpl = null ;
+            if (count($ev)>0) {
+                foreach($ev as $one_ev) {
+                    if (is_array($one_ev) && isset($one_ev["build-parameter-location"])) {
+                        $bpl = $one_ev["build-parameter-location"] ; } } }
+            if (in_array(false, $ev)) { return $this->failBuild() ; }
             $this -> setRunStartTime($run);
-            // save run
-            $this -> runPipeForkCommand($run); }
+            $this -> runPipeForkCommand($run, $bpl); }
         else {
             $run = (isset($this->params["run-id"])) ?
                 $this->params["run-id"] :
@@ -138,21 +142,24 @@ class PipeRunnerAllOS extends Base {
         return false ;
     }
 
-    private function runPipeForkCommand($run) {
+    private function runPipeForkCommand($run, $param_loc=null) {
         $switch = $this->getSwitchUser() ;
         $cmd = "" ;
         if ($switch != false) { $cmd .= 'sudo -u '.$switch.' -c '."'" ; }
-        // this should be a phrank piperunner@cli and it should save the log to a named history
         $cmd .= PTBCOMM.' piperunner child --pipe-dir="'.$this->params["pipe-dir"].'" ' ;
         if (isset($this->params["build-request-source"])) {
             $cmd .= '--build-request-source="'.$this->params["build-request-source"].'" '; }
         else if ($this->isWebSapi()==true) {
             $cmd .= '--build-request-source="web" '; }
-        $cmd .= '--item="'.$this->params["item"].'" --run-id="'.$run.'" > '.PIPEDIR.DS.$this->params["item"].DS ;
+
+        $str = "" ;
+        if ($param_loc !=null) {
+            $str .= " --build-parameter-location=$param_loc" ; }
+
+        $cmd .= '--item="'.$this->params["item"].'" '.$str.' --run-id="'.$run.'" > '.PIPEDIR.DS.$this->params["item"].DS ;
         $cmd .= 'tmp'.DS.'tmpfile_'.$run.' &';
         if ($switch != false) { $cmd .= "'" ; }
 
-        //error_log($cmd);
         $descr = array(
             0 => array(
                 'pipe',
@@ -234,7 +241,6 @@ class PipeRunnerAllOS extends Base {
         if ($ws_avail == false) { return $this->failBuild() ; }
         $ressys = array() ;
         $ev = $eventRunner->eventRunner("beforeBuild", true) ;
-//            var_dump($ev) ;
         if (count($ev)>0) {
             foreach($ev as $one_ev) {
                 if (is_array($one_ev) && isset($one_ev["params"])) {
