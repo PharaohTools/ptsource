@@ -51,34 +51,19 @@ class PipeRunnerAllOS extends Base {
 
 
     public function enableBuildParameters() {
-
         $eventRunnerFactory = new \Model\EventRunner() ;
         $pipeline = $this->getPipeline();
         $this->params["build-settings"] = $pipeline["settings"];
         $eventRunner = $eventRunnerFactory->getModel($this->params) ;
         $ev = $eventRunner->eventRunner("pipeRunParameterEnable") ;
         return $ev ;
-
-//        $file = PIPEDIR . DS . $this -> params["item"] . DS . 'defaults';
-//
-//		if ($defaults = file_get_contents($file)) {
-//			$defaults = json_decode($defaults, true); }
-//		if ($defaults["parameter-status"] == "on") {
-//			if (!$_POST["parameter-input"]) {
-//				return true; }
-//            else {
-//				$defaults["parameter-input"] = $_POST["parameter-input"];
-//				file_put_contents($file, json_encode($defaults));
-//				return false; } }
-//		return false;
-
     }
 
 
     public function findBuildParameters() {
         $eventRunnerFactory = new \Model\EventRunner() ;
         $pipeline = $this->getPipeline();
-        $this->params["build-settings"] = $pipeline["settings"];
+//        $this->params["build-settings"] = $pipeline["settings"];
         $eventRunner = $eventRunnerFactory->getModel($this->params) ;
         $ev = $eventRunner->eventRunner("pipeRunParameterLoad", true) ;
         foreach ($ev as $eventOutput) {
@@ -239,8 +224,6 @@ class PipeRunnerAllOS extends Base {
         if ($ev == false) { return $this->failBuild() ; }
         $loggingFactory = new \Model\Logging();
         $logging = $loggingFactory->getModel($this->params);
-        $stepRunnerFactory = new \Model\StepRunner() ;
-        $stepRunner = $stepRunnerFactory->getModel($this->params) ;
         $tmpfile = PIPEDIR.DS.$this->params["item"].DS.'tmp'.DS.'tmpfile_'.$this->params["run-id"] ;
         if (!is_writable(dirname($tmpfile))) {
             $logging->log("Unable to write to temp file {$tmpfile}", $this->getModuleName()) ;
@@ -250,9 +233,23 @@ class PipeRunnerAllOS extends Base {
         $ws_avail = $this->buildWorkspace();
         if ($ws_avail == false) { return $this->failBuild() ; }
         $ressys = array() ;
-        $ev = $eventRunner->eventRunner("beforeBuild") ;
-        if ($ev == false) { return $this->failBuild() ; }
+        $ev = $eventRunner->eventRunner("beforeBuild", true) ;
+//            var_dump($ev) ;
+        if (count($ev)>0) {
+            foreach($ev as $one_ev) {
+                if (is_array($one_ev) && isset($one_ev["params"])) {
+                    $this->params = array_merge($this->params, $one_ev["params"]) ; } } }
+        if (in_array(false, $ev)) { return $this->failBuild() ; }
         foreach ($pipeline["steps"] as $hash => $stepDetails) {
+            $ev = $eventRunner->eventRunner("beforeStep", true) ;
+//            var_dump($ev) ;
+            if (count($ev)>0) {
+                foreach($ev as $one_ev) {
+                    if (is_array($one_ev) && isset($one_ev["params"])) {
+                        $this->params = array_merge($this->params, $one_ev["params"]) ; } } }
+            if (in_array(false, $ev)) { return $this->failBuild() ; }
+            $stepRunnerFactory = new \Model\StepRunner() ;
+            $stepRunner = $stepRunnerFactory->getModel($this->params) ;
             $logging->log("Executing step id $hash", $this->getModuleName()) ;
             $res = $stepRunner->stepRunner($stepDetails, $this->params["item"]) ;
             $evar  = "Step execution " ;
@@ -261,6 +258,8 @@ class PipeRunnerAllOS extends Base {
             $logging->log($evar, $this->getModuleName()) ;
             echo "\n" ;
             $ressys[] = $res ;
+            $ev = $eventRunner->eventRunner("afterStep") ;
+            if ($ev == false) { return $this->failBuild() ; }
             if ($res==false) break ; }
         $ev = $eventRunner->eventRunner("beforeBuildComplete") ;
         if ($ev == false) { return $this->failBuild() ; }
