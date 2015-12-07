@@ -20,12 +20,20 @@ class PipeRunParametersAllOS extends Base {
 
     public function getSettingFormFields() {
         $ff = array(
-            "piperun_parameters_enabled" =>
-            array(
+            "piperun_parameters_enabled" => array(
                 "type" => "boolean",
                 "optional" => true,
-                "name" => "Enable Run-time Parameters for this pipeline?"
-            ),
+                "name" => "Enable Run-time Parameters for this pipeline?" ),
+            "fieldsets" => array(
+                "parameters" => array(
+                    "param_type" => array(
+                        "type" => "text",
+                        "optional" => true,
+                        "name" => "Parameter Type" ),
+                    "param_name" => array(
+                        "type" => "text",
+                        "optional" => true,
+                        "name" => "Parameter Name (Alphanumeric)?" ), ), )
         );
         return $ff ;
     }
@@ -39,28 +47,6 @@ class PipeRunParametersAllOS extends Base {
             "pipeRunParameterEnable" => array("checkEnableParametersForBuild", ),
             "pipeRunParameterLoad" => array("checkFindParametersForBuild", ), );
         return $ff ;
-    }
-
-
-    public function startXvnc() {
-        $run = $this->params["run-id"];
-
-        $loggingFactory = new \Model\Logging();
-        $this->params["echo-log"] = true ;
-        $logging = $loggingFactory->getModel($this->params);
-
-        $mn = $this->getModuleName() ;
-        if (isset($this->params["build-settings"][$mn]["xvfb_during_build"]) &&
-            $this->params["build-settings"][$mn]["xvfb_during_build"] == "on") {
-            $logging->log ("XVFB Enabled for build, starting...", $this->getModuleName() ) ;
-            $xvfbCommand = "echo 'pretend to start xvfb'" ;
-            $result = self::executeAndOutput($xvfbCommand) ;
-            if ($result == true) { $logging->log ("XVFB started successfully", $this->getModuleName() ) ; }
-            else { $logging->log ("XVFB start error", $this->getModuleName() ) ; }
-            return $result; }
-        else {
-//            $logging->log ("XVFB Not enabled for build, ignoring...", $this->getModuleName() ) ;
-            return true ; }
     }
 
     public function checkEnableParametersForBuild() {
@@ -77,14 +63,12 @@ class PipeRunParametersAllOS extends Base {
         $this->params["echo-log"] = true ;
         $logging = $loggingFactory->getModel($this->params);
         if ( isset($this->params["build-parameters"])) {
-//            var_dump("object param") ;
-            $logging->log ("parameters set by object paramters", $this->getModuleName() ) ;
-            return true ; }
-        if ( isset($_REQUEST["build-parameters"])) {
-//            var_dump("req param") ;
-            $logging->log ("parameters set by request", $this->getModuleName() ) ;
-            return array("build-parameters"=>array("dave head")) ; }
-//        var_dump("no params found") ;
+//            $logging->log ("parameters set by object parameters", $this->getModuleName() ) ;
+            return array("build-parameters"=>$this->params["build-parameters"]) ;  }
+//        if ( isset($_REQUEST["build-parameters"])) {
+//            var_dump($_REQUEST["build-parameters"]) ;
+//            $logging->log ("parameters set by request", $this->getModuleName() ) ;
+//            return array("build-parameters"=>$_REQUEST["build-parameters"]) ; }
         return false ;
     }
 
