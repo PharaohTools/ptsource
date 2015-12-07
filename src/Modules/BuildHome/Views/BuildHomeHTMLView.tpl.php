@@ -110,6 +110,7 @@
                 -->
                 <div class="pipe-features-block pipe-block">
                     <h4 class="propertyTitle">Build Features:</h4>
+                    <div class="col-sm-12">
                     <?php
                     if (isset($pageVars["data"]["features"]) &&
                         count($pageVars["data"]["features"])>0 ) {
@@ -124,6 +125,7 @@
                                 echo "</a>" ;
                                 echo '</div>' ; } } }
                     ?>
+                    </div>
                 </div>
                 <div class="pipe-history-block pipe-block">
                     <h4 class="propertyTitle">Build History:</h4>
