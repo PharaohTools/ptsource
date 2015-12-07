@@ -50,6 +50,13 @@ class PHPScriptLinuxUnix extends Base {
     }
 
     private function executeAsPHPData($data) {
+        if (isset($this->params["env-vars"]) && is_array($this->params["env-vars"])) {
+            $loggingFactory = new \Model\Logging();
+            $logging = $loggingFactory->getModel($this->params);
+            $logging->log("PHP Extracting Environment Variables...", $this->getModuleName()) ;
+            $ext_vars = $this->params["env-vars"] ;
+            $count = extract($this->params["env-vars"]) ;
+            $logging->log("PHP Successfully Extacted {$count} Environment Variables into PHP Variables {$ext_vars}...", $this->getModuleName()) ; }
         eval($data) ;
     }
 
