@@ -55,7 +55,7 @@ function displayStepField() {
     console.log("field is");
     console.log(field);
 
-    hash = getHash();
+    hash = getNewHash();
 
     html = "" ;
 
