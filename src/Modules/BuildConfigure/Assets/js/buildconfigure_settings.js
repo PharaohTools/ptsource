@@ -68,3 +68,55 @@ function deleteFieldsetField(targetmod, fieldset, hash) {
     console.log("deleting field "+delete_field)
     $(delete_field).remove();
 }
+
+
+
+function changePipeRunParameterType(hash, newParamType) {
+    console.log("starting method") ;
+    css = "#fieldset_PipeRunParameters_parameters_"+hash ;
+    current = jQuery(css);
+    console.log(current) ;
+//    typeSelectCss = 'settings[PipeRunParameters][parameters]['+hash+'][param_type]' ;
+
+    typeSelectCss =
+        'div#slideyPipeRunParameters.form-group.confSettingsSlideySection ' +
+        'div#fieldsets_PipeRunParameters_parameters.form-group '+
+        'div#fieldset_PipeRunParameters_parameters_'+hash ;
+
+    chosenElementCss = typeSelectCss + ' input.param_type' ;
+    chosenElement = jQuery(chosenElementCss).val(newParamType) ;
+
+    console.log("type select css set") ;
+//    newParamType = jQuery(typeSelectCss+' select option:selected').val() ;
+    console.log("new param type value is: "+newParamType+" , css is : " +typeSelectCss) ;
+    if (newParamType=="text") {
+        console.log("changing to text") ;
+//        jQuery(typeSelectCss+' input.field_boolean').hide() ;
+        console.log("dump textarea") ;
+        jQuery(typeSelectCss+' div.field_textarea_param_options').hide() ;
+        jQuery(typeSelectCss+' div.field_text_param_name').show() ;
+        jQuery(typeSelectCss+' div.field_text_param_type').show() ;
+        jQuery(typeSelectCss+' div.field_text_param_text').show() ; }
+    else if (newParamType=="boolean") {
+        console.log("changing to boolean") ;
+        jQuery(typeSelectCss+' div.field_textarea_param_options').hide() ;
+        jQuery(typeSelectCss+' div.field_text_param_name').show() ;
+        jQuery(typeSelectCss+' div.field_text_param_type').show() ;
+        jQuery(typeSelectCss+' div.field_text_param_default').show() ;
+        console.log("hides done") ; }
+    else if (newParamType=="textarea") {
+        console.log("changing to textarea") ;
+        jQuery(typeSelectCss+' div.field_textarea_param_options').show() ;
+        jQuery(typeSelectCss+' div.field_text_param_name').show() ;
+        jQuery(typeSelectCss+' div.field_text_param_type').show() ;
+        jQuery(typeSelectCss+' div.field_text_param_default').hide() ;
+        console.log("hides done") ; }
+    else if (newParamType=="options") {
+        console.log("changing to options") ;
+        jQuery(typeSelectCss+' div.field_textarea_param_options').show() ;
+        jQuery(typeSelectCss+' div.field_text_param_name').show() ;
+        jQuery(typeSelectCss+' div.field_text_param_type').show() ;
+        jQuery(typeSelectCss+' div.field_text_param_default').show() ;
+        console.log("hides done") ; }
+    console.log("end method") ;
+}
