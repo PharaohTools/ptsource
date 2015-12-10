@@ -27,13 +27,23 @@ class PipeRunParametersAllOS extends Base {
             "fieldsets" => array(
                 "parameters" => array(
                     "param_type" => array(
-                        "type" => "text",
-                        "optional" => true,
+                        "type" => "options",
+                        "options" => array("text", "boolean", "textarea", "options"),
+                        "optional" => false,
                         "name" => "Parameter Type" ),
                     "param_name" => array(
                         "type" => "text",
+                        "optional" => false,
+                        "name" => "Parameter Name (Alphanumeric)?" ),
+                    "param_default" => array(
+                        "type" => "text",
                         "optional" => true,
-                        "name" => "Parameter Name (Alphanumeric)?" ), ), )
+                        "name" => "Default Value?" ),
+                    "param_options" => array(
+                        "type" => "textarea",
+                        "optional" => true,
+                        "name" => "Parameter Options (One Per Line)?" ),
+                ), )
         );
         return $ff ;
     }
