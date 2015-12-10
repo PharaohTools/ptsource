@@ -74,6 +74,8 @@
 
                         foreach ($pageVars["data"]["pipeline"]["settings"]["PipeRunParameters"]["parameters"] as $parameter) {
 
+//                            var_dump($parameter) ;
+
                             if ($parameter["param_type"]=="text") {
                                 ?>
 
@@ -82,7 +84,7 @@
                             </div>
 
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" name="build-parameters[<?php echo $parameter["param_name"] ; ?>]" id="build-parameters[<?php echo $parameter["param_name"] ; ?>]" value="<?php echo $parameter["param_type"] ; ?>" />
+                                <input type="text" class="form-control" name="build-parameters[<?php echo $parameter["param_name"] ; ?>]" id="build-parameters[<?php echo $parameter["param_name"] ; ?>]" value="<?php echo $parameter["param_default"] ; ?>" />
                             </div>
 
                                 <?php
@@ -91,13 +93,43 @@
                             else if ($parameter["param_type"]=="textarea") {
                                 ?>
 
-                            <div class="col-sm-4">
+                                <div class="col-sm-4">
                                     <label for="build-parameters[<?php echo $parameter["param_name"] ; ?>]" class="col-sm-4 control-label text-left"><?php echo $parameter["param_name"] ; ?></label>
-                            </div>
+                                </div>
 
-                            <div class="col-sm-8">
-                                    <textarea class="form-control col-sm-7" name="build-parameters[<?php echo $parameter["param_name"] ; ?>]" id="build-parameters[<?php echo $parameter["param_name"] ; ?>]"><?php echo $parameter["param_type"] ; ?>"</textarea>
-                            </div>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control col-sm-7" name="build-parameters[<?php echo $parameter["param_name"] ; ?>]" id="build-parameters[<?php echo $parameter["param_name"] ; ?>]"><?php echo $parameter["param_default"] ; ?></textarea>
+                                </div>
+
+                            <?php
+                            }
+
+                            else if ($parameter["param_type"]=="options") {
+
+//                              var_dump("parameter", $parameter) ;
+
+                                ?>
+
+                                <div class="col-sm-4">
+                                    <label for="build-parameters[<?php echo $parameter["param_name"] ; ?>]" class="col-sm-4 control-label text-left"><?php echo $parameter["param_name"] ; ?></label>
+                                </div>
+
+                                <div class="col-sm-8">
+
+                                    <select name="build-parameters[<?php echo $parameter["param_name"] ; ?>]" id="build-parameters[<?php echo $parameter["param_name"] ; ?>]">
+                                        <option value="">None</option>
+                                        <?php
+                                            $original_options = explode("\n", $parameter["param_options"]) ;
+                                            foreach ($original_options as $option_value) {
+                                                $option_value = rtrim($option_value) ;
+//                                                var_dump($option_value, $parameter["param_default"]) ;
+                                                if ($option_value == $parameter["param_default"]) { $selstring = " selected='selected' " ; }
+                                                else { $selstring = "" ; }
+                                                echo '<option '.$selstring.' value="'.$option_value.'">'.$option_value.'</option>' ; }
+                                        ?>
+                                    </select>
+
+                                </div>
 
                             <?php
                             }
