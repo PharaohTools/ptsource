@@ -30,7 +30,8 @@ class PipeRunParametersAllOS extends Base {
                         "type" => "options",
                         "options" => array("text", "boolean", "textarea", "options"),
                         "optional" => false,
-                        "name" => "Parameter Type" ),
+                        "name" => "Parameter Type",
+                        "js_change_function" => "changePipeRunParameterType"),
                     "param_name" => array(
                         "type" => "text",
                         "optional" => false,
@@ -39,10 +40,22 @@ class PipeRunParametersAllOS extends Base {
                         "type" => "text",
                         "optional" => true,
                         "name" => "Default Value?" ),
+                    "param_textarea_default" => array(
+                        "type" => "textarea",
+                        "optional" => true,
+                        "name" => "Default for Parameter Text Area (Multi Line Parameter)" ),
+                    "param_boolean_default" => array(
+                        "type" => "boolean",
+                        "optional" => true,
+                        "name" => "Default setting for boolean value?" ),
                     "param_options" => array(
                         "type" => "textarea",
                         "optional" => true,
                         "name" => "Parameter Options (One Per Line)?" ),
+                    "param_description" => array(
+                        "type" => "textarea",
+                        "optional" => true,
+                        "name" => "Parameter Text Area (Multi Line Parameter)" ),
                 ), )
         );
         return $ff ;
