@@ -94,7 +94,7 @@
                                 ?>
 
                                 <div class="col-sm-4">
-                                    <label for="build-parameters[<?php echo $parameter["param_name"] ; ?>]" class="col-sm-4 control-label text-left"><?php echo $parameter["param_name"] ; ?></label>
+                                    <label for="build-parameters[<?php echo $parameter["param_name"] ; ?>]" class="control-label text-left"><?php echo $parameter["param_name"] ; ?></label>
                                 </div>
 
                                 <div class="col-sm-8">
@@ -111,13 +111,12 @@
                                 ?>
 
                                 <div class="col-sm-4">
-                                    <label for="build-parameters[<?php echo $parameter["param_name"] ; ?>]" class="col-sm-4 control-label text-left"><?php echo $parameter["param_name"] ; ?></label>
+                                    <label for="build-parameters[<?php echo $parameter["param_name"] ; ?>]" class="control-label text-left"><?php echo $parameter["param_name"] ; ?></label>
                                 </div>
 
                                 <div class="col-sm-8">
 
                                     <select name="build-parameters[<?php echo $parameter["param_name"] ; ?>]" id="build-parameters[<?php echo $parameter["param_name"] ; ?>]">
-                                        <option value="">None</option>
                                         <?php
                                             $original_options = explode("\n", $parameter["param_options"]) ;
                                             foreach ($original_options as $option_value) {
