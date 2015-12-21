@@ -36,12 +36,35 @@ class ShellLinuxUnix extends Base {
         $logging = $loggingFactory->getModel($this->params);
         if ( $step["steptype"] == "shelldata") {
             $logging->log("Running Shell from Data...", $this->getModuleName()) ;
-            $rc = $this->executeAsShell($step["data"]);
+            $env_var_string = "" ;
+            if (isset($this->params["env-vars"]) && is_array($this->params["env-vars"])) {
+                $logging->log("Shell Extracting Environment Variables...", $this->getModuleName()) ;
+                $ext_vars = implode(", ", array_keys($this->params["env-vars"])) ;
+                $count = 0 ;
+                foreach ($this->params["env-vars"] as $env_var_key => $env_var_val) {
+                    $env_var_string .= "$env_var_key=$env_var_val\n" ;
+                    $count++ ; }
+                $logging->log("Successfully Extracted {$count} Environment Variables into Shell Variables {$ext_vars}...", $this->getModuleName()) ; }
+
+            $data = $env_var_string.$step["data"] ;
+            $rc = $this->executeAsShell($data);
             $res = ($rc == 0) ? true : false ;
             return $res ; }
         else if ( $step["steptype"] == "shellscript") {
             $logging->log("Running Shell from Script...", $this->getModuleName()) ;
-            $rc = $this->executeAsShell("bash {$step["data"]}") ;
+
+            $env_var_string = "" ;
+            if (isset($this->params["env-vars"]) && is_array($this->params["env-vars"])) {
+                $logging->log("Shell Extracting Environment Variables...", $this->getModuleName()) ;
+                $ext_vars = implode(", ", array_keys($this->params["env-vars"])) ;
+                $count = 0 ;
+                foreach ($this->params["env-vars"] as $env_var_key => $env_var_val) {
+                    $env_var_string .= "$env_var_key=$env_var_val\n" ;
+                    $count++ ; }
+                $logging->log("Successfully Extracted {$count} Environment Variables into Shell Variables {$ext_vars}...", $this->getModuleName()) ; }
+
+            $data = $env_var_string.$step["data"] ;
+            $rc = $this->executeAsShell("bash {$data}") ;
             $res = ($rc == 0) ? true : false ;
             return $res ; }
         else {
