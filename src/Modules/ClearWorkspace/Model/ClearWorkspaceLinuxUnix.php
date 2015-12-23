@@ -26,6 +26,12 @@ class ClearWorkspaceLinuxUnix extends Base {
                 "optional" => true,
                 "name" => "Clear Workspace Before Build"
             ),
+            "enable_clear_workspace_after_build" =>
+            array(
+                "type" => "boolean",
+                "optional" => true,
+                "name" => "Clear Workspace After Build"
+            ),
         );
         return $ff ;
     }
@@ -35,7 +41,10 @@ class ClearWorkspaceLinuxUnix extends Base {
     }
 
     public function getEvents() {
-        $ff = array("beforeBuild" => array("clearWorkspaceBeforeBuild"),);
+        $ff = array(
+            "beforeBuild" => array("clearWorkspaceBeforeBuild"),
+            "afterBuild" => array("clearWorkspaceAfterBuild"),
+        );
         return $ff ;
     }
 
@@ -75,9 +84,22 @@ class ClearWorkspaceLinuxUnix extends Base {
         $mn = $this->getModuleName() ;
         if ($this->params["build-settings"][$mn]["enable_clear_workspace_before_build"]=="on") {
             $logging->log("Clear Workspace Before build Execution flag is on, executing...", $this->getModuleName()) ;
-            $this->clearTheWorkspaceForItem($item); }
-        else {
+            $this->clearTheWorkspaceForItem($item);
             return true ; }
+        return true ;
+    }
+
+    public function clearWorkspaceAfterBuild() {
+        $item = $this->params["item"] ;
+        $loggingFactory = new \Model\Logging();
+        $this->params["echo-log"] = true ;
+        $logging = $loggingFactory->getModel($this->params);
+        $mn = $this->getModuleName() ;
+        if ($this->params["build-settings"][$mn]["enable_clear_workspace_after_build"]=="on") {
+            $logging->log("Clear Workspace After build Execution flag is on, executing...", $this->getModuleName()) ;
+            $this->clearTheWorkspaceForItem($item);
+            return true ; }
+        return true ;
     }
 
     private function executeClearWorkspaceForStep($step, $item) {
