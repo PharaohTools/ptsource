@@ -45,14 +45,15 @@ class ShellLinuxUnix extends Base {
                     $env_var_string .= "$env_var_key=$env_var_val\n" ;
                     $count++ ; }
                 $logging->log("Successfully Extracted {$count} Environment Variables into Shell Variables {$ext_vars}...", $this->getModuleName()) ; }
-
-            $data = $env_var_string.$step["data"] ;
+            $data = $step["data"] ;
+            $data = $this->addSetter($data) ;
+            $data = $env_var_string.$data ;
             $rc = $this->executeAsShell($data);
             $res = ($rc == 0) ? true : false ;
+//            var_dump("rc dump in shell is: ", $rc, $res) ;
             return $res ; }
         else if ( $step["steptype"] == "shellscript") {
             $logging->log("Running Shell from Script...", $this->getModuleName()) ;
-
             $env_var_string = "" ;
             if (isset($this->params["env-vars"]) && is_array($this->params["env-vars"])) {
                 $logging->log("Shell Extracting Environment Variables...", $this->getModuleName()) ;
@@ -62,14 +63,20 @@ class ShellLinuxUnix extends Base {
                     $env_var_string .= "$env_var_key=$env_var_val\n" ;
                     $count++ ; }
                 $logging->log("Successfully Extracted {$count} Environment Variables into Shell Variables {$ext_vars}...", $this->getModuleName()) ; }
-
-            $data = $env_var_string.$step["data"] ;
+            $data = $step["data"] ;
+            $data = $this->addSetter($data) ;
+            $data = $env_var_string.$data ;
             $rc = $this->executeAsShell("bash {$data}") ;
             $res = ($rc == 0) ? true : false ;
             return $res ; }
         else {
             $logging->log("Unrecognised Build Step Type {$step["type"]} specified in Shell Module", $this->getModuleName()) ;
             return false ; }
+    }
+
+    private function addSetter($data) {
+        $data = "set -e"."\n".$data ;
+        return $data ;
     }
 
 }
