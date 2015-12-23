@@ -24,6 +24,14 @@ class ClearWorkspaceInfo extends PTConfigureBase {
         return array("clearworkspace");
     }
 
+    public function buildSettings() {
+        return array("enable_clear_workspace_before_build", "enable_clear_workspace_after_build");
+    }
+
+    public function events() {
+        return array("beforeBuild", "afterBuild");
+    }
+
     public function helpDefinition() {
        $help = <<<"HELPDATA"
     This extension provides integration with ClearWorkspace as a Build Step. It provides code
