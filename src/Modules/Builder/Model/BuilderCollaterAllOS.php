@@ -15,22 +15,27 @@ class BuilderCollaterAllOS extends Base {
     public $modelGroup = array("BuilderCollater") ;
 
     public function getBuilder($module) {
-        $r = $this->collate($module);
+        $stepModel = $this->getStepModel($module) ;
+        $r = $this->collate($stepModel);
         return $r ;
     }
 
-    private function collate($module) {
-        $collated = array() ;
-        $collated["fields"] =  $this->getFormFields($module) ;
-        $collated["step-types"] = $this->getStepTypes($module) ;
-        $collated["settings"] = $this->getSettings($module) ;
-        return $collated ;
-    }
-
-    private function getFormFields($module) {
+    private function getStepModel($module) {
         $stepFactoryClass = '\Model\\'.$module;
         $stepFactory = new $stepFactoryClass() ;
         $stepModel = $stepFactory->getModel($this->params);
+        return $stepModel ;
+    }
+
+    private function collate($stepModel) {
+        $collated = array() ;
+        $collated["fields"] =  $this->getFormFields($stepModel) ;
+        $collated["step-types"] = $this->getStepTypes($stepModel) ;
+        $collated["settings"] = $this->getSettings($stepModel) ;
+        return $collated ;
+    }
+
+    private function getFormFields($stepModel) {
         if (method_exists($stepModel, "getFormFields")) {
             $modFormFields = $stepModel->getFormFields() ; }
         else {
@@ -38,10 +43,7 @@ class BuilderCollaterAllOS extends Base {
         return $modFormFields ;
     }
 
-    private function getStepTypes($module) {
-        $stepFactoryClass = '\Model\\'.$module;
-        $stepFactory = new $stepFactoryClass() ;
-        $stepModel = $stepFactory->getModel($this->params);
+    private function getStepTypes($stepModel) {
         if (method_exists($stepModel, "getFormFields")) {
             $modStepTypes = $stepModel->getStepTypes() ; }
         else {
@@ -49,10 +51,7 @@ class BuilderCollaterAllOS extends Base {
         return $modStepTypes ;
     }
 
-    private function getSettings($module) {
-        $stepFactoryClass = '\Model\\'.$module;
-        $stepFactory = new $stepFactoryClass() ;
-        $stepModel = $stepFactory->getModel($this->params);
+    private function getSettings($stepModel) {
         if (method_exists($stepModel, "getSettingFormFields")) {
             $modStepTypes = $stepModel->getSettingFormFields() ; }
         else {

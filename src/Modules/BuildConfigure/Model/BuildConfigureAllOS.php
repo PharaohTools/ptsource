@@ -14,13 +14,41 @@ class BuildConfigureAllOS extends Base {
     // Model Group
     public $modelGroup = array("Default") ;
 
+    private $builder ;
+    private $builderRepository ;
+
+    public function __construct($params) {
+        parent::__construct($params) ;
+    }
+
     public function getData() {
-        if (isset($this->params["item"])) {
-            $ret["pipeline"] = $this->getPipeline(); }
+
+        file_put_contents("/tmp/mylog.txt", "before pipeline is added: ".microtime()."\n", FILE_APPEND);
+
+        if (isset($this->params["item"])) { $ret["pipeline"] = $this->getPipeline(); }
+
+        file_put_contents("/tmp/mylog.txt", "after pipeline is added: ".microtime()."\n", FILE_APPEND);
+        file_put_contents("/tmp/mylog.txt", "before builders are added: ".microtime()."\n", FILE_APPEND);
+
         $ret["builders"] = $this->getBuilders();
+
+        file_put_contents("/tmp/mylog.txt", "after builders are added: ".microtime()."\n", FILE_APPEND);
+        file_put_contents("/tmp/mylog.txt", "before builder settings are added: ".microtime()."\n", FILE_APPEND);
+
         $ret["settings"] = $this->getBuilderSettings();
+
+        file_put_contents("/tmp/mylog.txt", "after builder settings are added: ".microtime()."\n", FILE_APPEND);
+        file_put_contents("/tmp/mylog.txt", "before builder form fields are added: ".microtime()."\n", FILE_APPEND);
+
         $ret["fields"] = $this->getBuilderFormFields();
+
+        file_put_contents("/tmp/mylog.txt", "after builder form fields are added: ".microtime()."\n", FILE_APPEND);
+        file_put_contents("/tmp/mylog.txt", "before step builder form fields are added: ".microtime()."\n", FILE_APPEND);
+
         $ret["stepFields"] = $this->getStepBuildersFormFields();
+
+        file_put_contents("/tmp/mylog.txt", "after step builder form fields are added: ".microtime()."\n", FILE_APPEND);
+
         return $ret ;
     }
 
@@ -54,28 +82,51 @@ class BuildConfigureAllOS extends Base {
 //        );
 //        return $ff ; }
 
-    public function getBuilders() {
+
+    private function getBuilder() {
+        if (isset($this->builder) && is_object($this->builder)) {
+            return $this->builder ;  }
+        $builder = RegistryStore::getValue("builderObject") ;
+        if (isset($builder) && is_object($builder)) {
+            $this->builder = $builder ;
+            return $this->builder ;  }
         $builderFactory = new \Model\Builder() ;
-        $builder = $builderFactory->getModel($this->params);
-        return $builder->getBuilders();
+        $this->builder = $builderFactory->getModel($this->params);
+        RegistryStore::setValue("builderObject", $this->builder) ;
+        return $this->builder ;
+    }
+
+    private function getBuilderRepository() {
+        if (isset($this->builderRepository) && is_object($this->builderRepository)) {
+            return $this->builderRepository ;  }
+        $builderRepository = RegistryStore::getValue("builderRepositoryObject") ;
+        if (isset($builderRepository) && is_object($builderRepository)) {
+            $this->builderRepository = $builderRepository ;
+            return $this->builderRepository ;  }
+        $builderRepositoryFactory = new \Model\Builder() ;
+        $this->builderRepository = $builderRepositoryFactory->getModel($this->params, "BuilderRepository");
+        RegistryStore::setValue("builderRepositoryObject", $this->builderRepository) ;
+        return $this->builderRepository ;
+    }
+
+    public function getBuilders() {
+        $this->getBuilder() ;
+        return $this->builder->getBuilders();
     }
 
     public function getBuilderSettings() {
-        $builderFactory = new \Model\Builder() ;
-        $builder = $builderFactory->getModel($this->params);
-        return $builder->getBuilderSettings();
+        $this->getBuilder() ;
+        return $this->builder->getBuilderSettings();
     }
 
     public function getBuilderFormFields() {
-        $builderFactory = new \Model\Builder() ;
-        $builder = $builderFactory->getModel($this->params, "BuilderRepository");
-        return $builder->getAllBuildersFormFields();
+        $this->getBuilderRepository() ;
+        return $this->builderRepository->getAllBuildersFormFields();
     }
 
     public function getStepBuildersFormFields() {
-        $builderFactory = new \Model\Builder() ;
-        $builder = $builderFactory->getModel($this->params, "BuilderRepository");
-        return $builder->getStepBuildersFormFields();
+        $this->getBuilderRepository() ;
+        return $this->builderRepository->getStepBuildersFormFields();
     }
 
     public function savePipeline() {
@@ -89,13 +140,11 @@ class BuildConfigureAllOS extends Base {
             "project-description" => $this->params["project-description"],
             "default-scm-url" => $this->params["default-scm-url"],
             "email-id" => $this->params["email-id"],
-
             "parameter-status" => $this->params["parameter-status"],
             "parameter-name" => $this->params["parameter-name"],
             "parameter-dvalue" => $this->params["parameter-dvalue"],
             "parameter-input" => "",
             "parameter-description" => $this->params["parameter-description"]
-
         ) ;
 
         $ev = $this->runBCEvent("beforePipelineSave") ;
