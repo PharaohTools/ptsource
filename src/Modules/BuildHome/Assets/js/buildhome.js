@@ -7,14 +7,14 @@ window.updateRunning = false ;
 window.outUpdater = setInterval(function () {
     if (window.updateRunning==false) {
         console.log("calling update page js method, updateRunning variable is set to false");
-        updatePage() ; }
+        if (document.hasFocus()!==false) {
+            updatePage() ; }}
     else {
         console.log("not calling update page js method, updateRunning variable is set to true"); }
 }, 4000);
 
 function updatePage() {
     console.log("running update page js method");
-    if (document.hasFocus()==true) {
         window.updateRunning = true ;
         console.log("setting update running to true");
         item = getQueryParam("item") ;
@@ -27,8 +27,6 @@ function updatePage() {
             complete: function(data) {
                 window.updateRunning = false ; }
         });
-
-    }
 }
 
 var row;
