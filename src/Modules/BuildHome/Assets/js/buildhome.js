@@ -1,6 +1,9 @@
 done = false ;
 max = 0 ;
 window.updateRunning = false ;
+
+
+
 window.outUpdater = setInterval(function () {
     if (window.updateRunning==false) {
         console.log("calling update page js method, updateRunning variable is set to false");
@@ -11,18 +14,21 @@ window.outUpdater = setInterval(function () {
 
 function updatePage() {
     console.log("running update page js method");
-    window.updateRunning = true ;
-    console.log("setting update running to true");
-    item = getQueryParam("item") ;
-    url = "/index.php?control=PipeRunner&action=findrunning&pipeline="+item+"&output-format=JSON";
-    $.ajax({
-        url: url,
-        success: function(data) {
-            setRunningBuildList(data) ;
-            window.updateRunning = false ; } ,
-        complete: function(data) {
-            window.updateRunning = false ; }
-    });
+    if (document.hasFocus()==true) {
+        window.updateRunning = true ;
+        console.log("setting update running to true");
+        item = getQueryParam("item") ;
+        url = "/index.php?control=PipeRunner&action=findrunning&pipeline="+item+"&output-format=JSON";
+        $.ajax({
+            url: url,
+            success: function(data) {
+                setRunningBuildList(data) ;
+                window.updateRunning = false ; } ,
+            complete: function(data) {
+                window.updateRunning = false ; }
+        });
+
+    }
 }
 
 var row;

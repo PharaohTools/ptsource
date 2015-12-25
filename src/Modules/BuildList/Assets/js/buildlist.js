@@ -11,18 +11,20 @@ window.outUpdater = setInterval(function () {
 
 function updatePage() {
     console.log("running update page js method");
-    window.updateRunning = true ;
-    console.log("setting update running to true");
-    item = window.pipeitem ;
-    url = "/index.php?control=PipeRunner&action=findrunning&output-format=JSON";
-    $.ajax({
-        url: url,
-        success: function(data) {
-            setRunningBuildList(data) ;
-            window.updateRunning = false ; } ,
-        complete: function(data) {
-            window.updateRunning = false ; }
-    });
+    if (document.hasFocus()==true) {
+        window.updateRunning = true ;
+        console.log("setting update running to true");
+        item = window.pipeitem ;
+        url = "/index.php?control=PipeRunner&action=findrunning&output-format=JSON";
+        $.ajax({
+            url: url,
+            success: function(data) {
+                setRunningBuildList(data) ;
+                window.updateRunning = false ; } ,
+            complete: function(data) {
+                window.updateRunning = false ; }
+        });
+    }
 }
 
 var row;
