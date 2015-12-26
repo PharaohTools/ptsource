@@ -107,7 +107,7 @@ class ClearWorkspaceLinuxUnix extends Base {
         $this->params["echo-log"] = true ;
         $logging = $loggingFactory->getModel($this->params);
         if ($step["data"]=="on") {
-            $this->clearTheWorkspaceForItem($item); }
+            return $this->clearTheWorkspaceForItem($item); }
         else {
             $logging->log("Execution flag is set to off, so not executing...", $this->getModuleName()) ;
             return true ; }
