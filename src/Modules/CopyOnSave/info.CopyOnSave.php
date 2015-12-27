@@ -20,6 +20,10 @@ class CopyOnSaveInfo extends PTConfigureBase {
         return array("copyonsave"=>"CopyOnSave","copy-on-save"=>"CopyOnSave");
     }
 
+    public function buildSettings() {
+        return array("enabled", "target_directory");
+    }
+
     public function events() {
         return array("afterPipelineSave", "afterCopiedPipelineSave");
     }
