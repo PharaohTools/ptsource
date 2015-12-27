@@ -114,7 +114,6 @@ class ClearWorkspaceLinuxUnix extends Base {
     }
 
     private function clearTheWorkspaceForItem($item) {
-
         $loggingFactory = new \Model\Logging();
         $this->params["echo-log"] = true ;
         $logging = $loggingFactory->getModel($this->params);
