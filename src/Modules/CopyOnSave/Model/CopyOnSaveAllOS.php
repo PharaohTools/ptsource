@@ -66,7 +66,10 @@ class CopyOnSaveAllOS extends Base {
 
         if (isset($this->params["build-settings"][$mn]["enabled"]) && $this->params["build-settings"][$mn]["enabled"] == "on") {
             $logging->log("Copy on Save enabled for pipeline...", $this->getModuleName());
-            $dir = $this->params["build-settings"][$mn]["target_directory"];
+            $dir = $this->params["build-settings"][$mn]["target_directory"] ;
+            if ($dir == "") {
+                $logging->log("Copy on Save enabled, but no directory has been specified.", $this->getModuleName());
+                return false ; }
             if (substr($dir, -1) != DS) { $dir = $dir . DS ; }
             $pipeline_path = PIPEDIR.DS.$this->params["item"].DS ;
             $full_dir = $dir.DS.$this->params["item"].DS ;
