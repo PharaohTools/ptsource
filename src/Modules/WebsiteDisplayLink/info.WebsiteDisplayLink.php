@@ -28,6 +28,10 @@ class WebsiteDisplayLinkInfo extends PTConfigureBase {
         return array("websiteDisplayLink");
     }
 
+    public function buildSettings() {
+        return array("website_display_link");
+    }
+
     public function helpDefinition() {
        $help = <<<"HELPDATA"
     This extension displays a Website Link for a pipeline. It provides code
