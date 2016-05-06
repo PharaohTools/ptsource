@@ -17,6 +17,8 @@
     border-color: darkgray;
     background-color: lightgrey;
     float: left;
+    padding: 0 5px;
+    text-align: center;
 }
 
 .build-feature img {
