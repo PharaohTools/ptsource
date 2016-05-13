@@ -38,7 +38,7 @@
 
     <div class="col-lg-9">
                     <div class="well well-lg">         
-                    	<h2 class="text-uppercase text-light"><a href="/">PTBuild - Pharaoh Tools</a></h2>
+<!--                    	<h2 class="text-uppercase text-light"><a href="/">PTBuild - Pharaoh Tools</a></h2>-->
 
                         <?php echo $this->renderLogs() ; ?>
 

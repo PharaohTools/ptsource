@@ -56,7 +56,7 @@
     <form class="form-horizontal custom-form" action="<?php echo $act ; ?>" method="POST">
 
         <div class="col-sm-9 clearfix main-container">
-                <h2 class="text-uppercase text-light"><a href="/"> PTBuild - Pharaoh Tools </a></h2>
+<!--                <h2 class="text-uppercase text-light"><a href="/"> PTBuild - Pharaoh Tools </a></h2>-->
                 <div class="col-sm-10">
                     <div class="row clearfix no-margin">
 

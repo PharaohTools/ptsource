@@ -11,7 +11,7 @@
 				<div class="panel-heading">
 					<h3 class="panel-title"><center><b>LDAP</b></center> </h3> 
 				</div>
-					<h4 class="text-uppercase text-light"><a href="/"> <center>PTBuild - Pharaoh Tools <center></a></h4>
+<!--					<h4 class="text-uppercase text-light"><a href="/"> <center>PTBuild - Pharaoh Tools <center></a></h4>-->
 					<a href="#"><img src="/Assets/Modules/DefaultSkin/image/5.png" class="navbar-img" style="height: 50px;margin-left: auto;margin-right: auto;display: block" /></a>
 					<div class="row clearfix no-margin">
 						<h5 class="text-uppercase text-light" style="margin-top: 15px;margin-left: 51px;">  </h5> 
