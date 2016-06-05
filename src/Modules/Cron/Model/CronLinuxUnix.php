@@ -20,7 +20,7 @@ class CronLinuxUnix extends Base {
 
     public function getEvents() {
         $ff = array(
-            "afterApplicationConfigureSave" => array("crontabParent",),
+            "afterApplicationConfigurationSave" => array("crontabParent",),
         );
         return $ff ;
     }
