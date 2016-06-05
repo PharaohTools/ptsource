@@ -39,6 +39,7 @@ class PHPScriptLinuxUnix extends Base {
         if ( $step["steptype"] == "phpscriptdata") {
             $logging->log("Running PHPScript from Data...", $this->getModuleName()) ;
             $res = $this->executeAsPHPData($step["data"]) ;
+//            var_dump("res", $res) ;
             return $res ; }
         else if ($step["steptype"] == "phpscriptfile") {
             $logging->log("Running PHPScript from Script...", $this->getModuleName()) ;
@@ -57,7 +58,10 @@ class PHPScriptLinuxUnix extends Base {
             $ext_vars = implode(", ", array_keys($this->params["env-vars"])) ;
             $count = extract($this->params["env-vars"]) ;
             $logging->log("PHP Successfully Extracted {$count} Environment Variables into PHP Variables {$ext_vars}...", $this->getModuleName()) ; }
-        return eval($data) ;
+        $ressy = eval($data) ;
+//        var_dump('ressy', $ressy) ;
+        // @todo need to return actual status
+        return true ;
     }
 
     private function executeAsPHPScript($scr_loc) {
