@@ -61,3 +61,23 @@
         max-width: 1280px;
     }
 }
+
+.bg-secondary {
+    background-color: #337ab7 ;
+}
+
+#sortableSteps h3 {
+    text-align: center;
+}
+
+#sortableSteps .step_subtitle {
+    text-align: center;
+}
+
+.singleBuildStep {
+    border: 1px solid black ;
+}
+
+.buildStepTextArea {
+    min-height: 100px;
+}
