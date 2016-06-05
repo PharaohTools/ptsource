@@ -76,7 +76,7 @@
         $act = '/index.php?control=BuildConfigure&action=copy' ;
         ?>
 
-            <h2 class="text-uppercase text-light"><a href="/"> Build - Pharaoh Tools </a></h2>
+<!--            <h2 class="text-uppercase text-light"><a href="/"> Build - Pharaoh Tools </a></h2>-->
             <div class="row clearfix no-margin">
 
                 <form class="form-horizontal custom-form" action="<?= $act ; ?>" method="POST">

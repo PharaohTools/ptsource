@@ -77,7 +77,7 @@
         <?php
         $act = '/index.php?control=BuildConfigure&item='.$pageVars["data"]["pipeline"]["project-slug"].'&action=save' ;
         ?>
-            <h2 class="text-uppercase text-light"><a href="/"> Build - Pharaoh Tools </a></h2>
+<!--            <h2 class="text-uppercase text-light"><a href="/"> Build - Pharaoh Tools </a></h2>-->
 
             <?php echo $this->renderLogs() ; ?>
 
