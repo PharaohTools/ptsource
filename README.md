@@ -4,13 +4,13 @@
 
 ## About:
 
-Build and Monitoring in PHP. Integrate Builds for your application.
+Build and Monitoring in PHP. Integrate Builds for your application. Build Automation and Process Automation in PHP.
 
-This is part of the Pharaoh Tools suite, which covers Configuration Management, Test Automation Management, Automated
-Deployment, Build and Release Management and more, all implemented in code, and all in PHP.
+A Web Interface for your your automated build processes, flexible to be distributed from Development through
+Enterprise Production.
 
-Its easy to write modules for any Operating System but we've begun with Ubuntu and adding more as soon as possible.
-Currently, all of the Modules work on Ubuntu 12-14, most on Centos and Windows.
+Smooth Integration with all other Pharaoh Tools; seamlessly and simply being able to hooking into your Development
+Environments, Configuration, Deployments, Tests, Tracked Processes and Managed Orchestration.
 
     
 ## Installation
