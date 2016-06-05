@@ -15,7 +15,7 @@ function displayBuildConfigureSettingsFieldset(targetmod, fieldset) {
             html += '    <h4>'+field+'</h4>' ;
             html += '  </div>' ;
             html += '  <div class="col-sm-9">';
-            html += '    <textarea class="'+field+'" id="settings['+targetmod+']['+fieldset+']['+field_hash+']['+field+']" name="settings['+targetmod+']['+fieldset+']['+field_hash+']['+field+']" class="form-control" ></textarea>' ;
+            html += '    <textarea class="form-control" id="settings['+targetmod+']['+fieldset+']['+field_hash+']['+field+']" name="settings['+targetmod+']['+fieldset+']['+field_hash+']['+field+']" class="form-control" ></textarea>' ;
             html += '  </div>' ;
             html += '</div>' ; }
 
@@ -25,7 +25,7 @@ function displayBuildConfigureSettingsFieldset(targetmod, fieldset) {
             html += '    <h4>'+field+'</h4>' ;
             html += '  </div>' ;
             html += '  <div class="col-sm-9">';
-            html += '    <input class="'+field+'" type="text" id="settings['+targetmod+']['+fieldset+']['+field_hash+']['+field+']" name="settings['+targetmod+']['+fieldset+']['+field_hash+']['+field+']" class="form-control" />' ;
+            html += '    <input class="form-control" type="text" id="settings['+targetmod+']['+fieldset+']['+field_hash+']['+field+']" name="settings['+targetmod+']['+fieldset+']['+field_hash+']['+field+']"  />' ;
             html += '  </div>' ;
             html += '</div>' ; }
 
@@ -68,7 +68,7 @@ function displayBuildConfigureSettingsFieldset(targetmod, fieldset) {
             html += '  <h4>'+field+'</h4>' ;
             html += ' </div>' ;
             html += ' <div class="col-sm-9">';
-            html += '  <input class="'+field+'" type="checkbox" id="settings['+targetmod+']['+fieldset+']['+field_hash+']['+field+']" name="settings['+targetmod+']['+fieldset+']['+field_hash+']['+field+']" class="form-control" />' ;
+            html += '  <input class="form-control" type="checkbox" id="settings['+targetmod+']['+fieldset+']['+field_hash+']['+field+']" name="settings['+targetmod+']['+fieldset+']['+field_hash+']['+field+']" />' ;
             html += ' </div>' ;
             html += '</div>' ; } }
 

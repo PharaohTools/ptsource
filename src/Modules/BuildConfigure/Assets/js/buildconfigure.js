@@ -60,13 +60,13 @@ function displayStepField() {
     html = "" ;
 
    if (module == "ConditionalStepRunner" || module == "Plugin") {
-        html  = '<li class="form-group ui-state-default ui-sortable-handle" id="step'+hash+'">' ;
+        html  = '<li class="form-group ui-state-default bg-primary ui-sortable-handle" id="step'+hash+'">' ;
         html += '  <div class="col-sm-2">' ;
         html += '    <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' ;
         html += '  </div><h3>'+module+'</h3>';
         html += '  <div class="col-sm-10">' ;
         html += '   <div class="form-group col-sm-12">' ;
-        html += '    <h4>'+steptype+'</h4>' ;
+        html += '    <h3>'+steptype+'</h3>' ;
         html += '    <input type="hidden" id="steps['+hash+'][module]" name="steps['+hash+'][module]" value="'+module+'" />' ;
         html += '    <input type="hidden" id="steps['+hash+'][steptype]" name="steps['+hash+'][steptype]" value="'+steptype+'" />' ;
         html += '   <div>' ;
@@ -121,74 +121,65 @@ function displayStepField() {
         }
 
    if (field.type == "textarea") {
-        html  = '<li class="form-group ui-state-default ui-sortable-handle" id="step'+hash+'">' ;
-        html += '  <div class="col-sm-2">' ;
-        html += '    <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' ;
-        html += '  </div>';
-        html += '  <div class="col-sm-10">' ;
+        html  = '<li class="form-group ui-state-default bg-primary singleBuildStep buildStepTextArea ui-sortable-handle" id="step'+hash+'">' ;
+//        html += '  <div class="col-sm-2">' ;
+//        html += '    <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' ;
+//        html += '  </div>';
+       html += '    <h3>New Step: '+field.name+'</h3>' ;
         html += '   <div class="col-sm-12">' ;
-        html += '    <h4>'+field.name+'</h4>' ;
         html += '    <input type="hidden" id="steps['+hash+'][module]" name="steps['+hash+'][module]" value="'+module+'" />' ;
         html += '    <input type="hidden" id="steps['+hash+'][steptype]" name="steps['+hash+'][steptype]" value="'+steptype+'" />' ;
         html += '    <textarea id="steps['+hash+']['+field.slug+']"' ;
         html += ' name="steps['+hash+']['+field.slug+']" class="form-control" >' ;
         html += '    </textarea>' ;
         html += '  </div>' ;
-        html += '  </div>';
-        html += ' 	<label for="delete" class="col-sm-2 control-label text-left"></label>';	
+        html += ' 	<label for="delete" class="col-sm-2 control-label text-left"></label>';
         html += '   <div class="col-sm-12">' ;
         html += '    <a class="btn btn-warning" onclick="deleteStepField(\''+hash+'\')">Delete Step</a>' ;
-        html += '  </div>' ;
         html += '  </div>' ;
         html += ' </li>'; }
 
     else if (field.type == "text") {
-        html  = '<li class="form-group ui-state-default ui-sortable-handle" id="step'+hash+'">' ;
-        html += '  <div class="col-sm-2">' ;
-        html += '    <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' ;
-        html += '  </div>';
-        html += '<div class="col-sm-10">' ;
+        html  = '<li class="form-group ui-state-default bg-primary singleBuildStep ui-sortable-handle" id="step'+hash+'">' ;
+//        html += '  <div class="col-sm-2">' ;
+//        html += '    <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' ;
+//        html += '  </div>';
+       html += '  <h3>New Step: '+field.name+'</h3>' ;
         html += '   <div class="col-sm-12">' ;
-        html += '  <h4>'+field.name+'</h4>' ;
         html += '  <input type="hidden" id="steps['+hash+'][module]" name="steps['+hash+'][module]" value="'+module+'" />' ;
         html += '  <input type="hidden" id="steps['+hash+'][steptype]" name="steps['+hash+'][steptype]" value="'+steptype+'" />' ;
         html += '  <input type="text" id="steps[' +'"'+hash+'"'+ ']['+field.slug+']'+'" name="steps[' +'"'+hash+'"'+ ']['+field.slug+']'+'"  class="form-control"/>' ;
       
         html += '  </div>' ;
-        html += '  </div>';
-        html += ' 	<label for="delete" class="col-sm-2 control-label text-left"></label>';	
         html += '   <div class="col-sm-12">' ;
         html += '    <a class="btn btn-warning" onclick="deleteStepField(\''+hash+'\')">Delete Step</a>' ;
-        html += '  </div>' ;
         html += '  </div>' ;
         html += ' </li>'; }
 
     else if (field.type == "boolean") {
-        html  = '<li class="form-group ui-state-default ui-sortable-handle" id="step'+hash+'">' ;
-        html += '  <div class="col-sm-2">' ;
-        html += '    <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' ;
-        html += '  </div>';
-        html += '<div class="col-sm-10">' ;
+        html  = '<li class="form-group ui-state-default bg-primary singleBuildStep ui-sortable-handle" id="step'+hash+'">' ;
+//        html += '  <div class="col-sm-2">' ;
+//        html += '    <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' ;
+//        html += '  </div>';
+       html += '    <h3>New Step: '+field.name+'</h3>' ;
         html += '   <div class="col-sm-12">' ;
-        html += '  <h4>'+field.name+'</h4>' ;
-        html += '  <input type="hidden" id="steps['+hash+'][module]" name="steps['+hash+'][module]" value="'+module+'" />' ;
-        html += '  <input type="hidden" id="steps['+hash+'][steptype]" name="steps['+hash+'][steptype]" value="'+steptype+'" />' ;
-        html += '  <input type="checkbox" id="steps['+hash+'][data]" name="steps['+hash+'][data]" />' ;
+        html += '    <input type="hidden" id="steps['+hash+'][module]" name="steps['+hash+'][module]" value="'+module+'" />' ;
+        html += '    <input type="hidden" id="steps['+hash+'][steptype]" name="steps['+hash+'][steptype]" value="'+steptype+'" />' ;
+        html += '    <input type="checkbox" id="steps['+hash+'][data]" name="steps['+hash+'][data]" />' ;
+        html += '   </div>' ;
+        html += '  <div class="col-sm-12">' ;
+        html += '   <a class="btn btn-warning" onclick="deleteStepField(\''+hash+'\')">Delete Step</a>' ;
         html += '  </div>' ;
-        html += '  </div>';
-        html += ' 	<label for="delete" class="col-sm-2 control-label text-left"></label>';	
-        html += '   <div class="col-sm-12">' ;
-        html += '    <a class="btn btn-warning" onclick="deleteStepField(\''+hash+'\')">Delete Step</a>' ;
-        html += '  </div>' ;
-        html += '  </div>' ;
-        html += ' </li>'; }
+        html += '</li>'; }
 
     $("#sortableSteps").append(html);
     // $('#new_step_wrap').html(html);
 }
 
 function deleteStepField(hash) {
-    $('#step'+hash).remove();
+    res = confirm("Are you sure you want to do this?") ;
+    if (res == true) { $('#step'+hash).remove(); }
+    return false ;
 }
 
 function CONDaysOfWeekDays(hash) {
