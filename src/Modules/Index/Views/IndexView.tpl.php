@@ -1,14 +1,17 @@
-PTConfigure - Pharaoh Tools
+Build - Pharaoh Tools
 -------------------
 
-Configuration, Infrastructure and Systems Automation Management in PHP.
+Build Automation and Process Automation in PHP.
 
-Can be used to set up a Development Client, Development Server, Testing Servers, SCM Servers or Production
-Application Servers in minutes, out of the box, with Zero configuration across multiple Operating Systems.
+A Web Interface for your your automated build processes, flexible to be distributed from Development through
+Enterprise Production.
 
-You can quickly create simple or complex systems completely configured by code across platforms.
+Build Automation, Build Configuration as Code.
 
-Using Convention over Configuration, a lot of common Configuration Management tasks can be completed with little or
+Smooth Integration with all other Pharaoh Tools; seamlessly and simply being able to hooking into your Development
+Environments, Configuration, Deployments, Tests, Tracked Processes and Managed Orchestration.
+
+Using Convention over Configuration, a lot of common Build Automatin tasks can be completed with little or
 no extra implementation work.
 
 -------------------------------------------------------------
