@@ -165,15 +165,16 @@ class PipelineCollaterAllOS extends Base {
         else {
             $loggingFactory = new \Model\Logging() ;
             $logging = $loggingFactory->getModel($this->params) ;
-            $logging->log("No steps For Run file available in build ".$this->params["item"], $this->getModuleName()) ; }
-        $stepsFile = PIPEDIR.DS.$this->params["item"].DS.'steps' ;
+//            $logging->log("No steps For Run file available in build ".$this->params["item"], $this->getModuleName()) ;
+            }
+            $stepsFile = PIPEDIR.DS.$this->params["item"].DS.'steps' ;
         if (file_exists($stepsFile)) {
             $stepsFileData =  file_get_contents($stepsFile) ;
             $steps = json_decode($stepsFileData, true) ; }
         else {
             $loggingFactory = new \Model\Logging() ;
             $logging = $loggingFactory->getModel($this->params) ;
-            $logging->log("No steps file available in build ".$this->params["item"], $this->getModuleName()) ; }
+            $logging->log("No steps file available in build ".$this->params["item"], $this->getModuleName()) ;}
         return array("steps" => $steps, "steps-for-run" => $stepsForRun ) ;
     }
 
