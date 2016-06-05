@@ -290,7 +290,7 @@
 
 //                                        foreach ($data['data'] as $key => $value) {
                                         $selected = ($one_build_step["data"] == "on")? 'checked="checked"' : '';
-                                        echo ' <input type="checkbox" id="steps['.$hash.'][data]" name="steps['.$hash.'][data]" value="'.$key.'" '.$selected.' class="form-control">'.$value;
+                                        echo ' <input type="checkbox" id="steps['.$hash.'][data]" name="steps['.$hash.'][data]" '.$selected.' class="form-control">'.$value;
 //                                        }
                                     }
 
