@@ -203,21 +203,21 @@
                         if (is_array($pageVars["data"]["pipeline"]["steps"]) && count($pageVars["data"]["pipeline"]["steps"])>0) {
 
                             foreach ($pageVars["data"]["pipeline"]["steps"] as $hash => $one_build_step) {
-                                echo '<li class="form-group  bg-primary " id="step'.$hash.'">'."\n" ;
-                                echo '  <div class=" col-sm-2 hvr-grow">'."\n" ;
-                                echo '    <span class="fa fa-arrows-v fa-1x"></span>'."\n" ;
-                                echo '  </div><h3>'.$one_build_step["module"].'</h3>';
-                                echo '  <div class="col-sm-10">'."\n" ;
-                                echo '   <div class="form-group col-sm-12">'."\n" ;
-                                echo '    <!--<label for="steps['.$hash.'][data]" class="control-label text-left">'.$one_build_step["title"].'</label>'."\n" ;
-                                echo '      <p><strong>Hash: </strong>'.$hash.'</p>';
-                                echo '      <p><strong>Module: </strong>'.$one_build_step["module"].'</p>';
-                                echo '      <p><strong>Step Type: </strong>'.$one_build_step["steptype"].'</p>-->';
+                                echo '<li class="form-group  bg-primary singleBuildStep" id="step'.$hash.'">'."\n" ;
+                                echo '  <h3>'.$one_build_step["module"].'</h3>'."\n" ;
+//                                echo '  <div class="col-sm-12">'."\n" ;
+                                echo '  <div class="form-group col-sm-12">'."\n" ;
+//                                echo '    <label for="steps['.$hash.'][data]" class="control-label step_subtitle">'.$one_build_step["title"].'</label>'."\n" ;
+//                                echo '  	<div>'."\n" ;
+
+                                echo '       <p><strong>Hash: </strong>'.$hash.'</p>';
+//                                echo '      <p><strong>Module: </strong>'.$one_build_step["module"].'</p>';
+                                echo '      <p><strong>Step Type: </strong>'.$one_build_step["steptype"].'</p>';
                                 echo '      <input type="hidden" id="steps['.$hash.'][module]" name="steps['.$hash.'][module]" value="'.$one_build_step["module"].'" />';
                                 echo '      <input type="hidden" id="steps['.$hash.'][steptype]" name="steps['.$hash.'][steptype]" value="'.$one_build_step["steptype"].'" />';
-                                echo '  	<div>'."\n" ;
-                                echo ' 		<label for="'.$one_build_step["steptype"].'" class="col-sm-2 control-label text-left">'.$one_build_step["steptype"].'</label>';
-                                echo '		<div class="col-sm-10">';
+                                echo '  <div>'."\n" ;
+//                                echo ' 		<label for="'.$one_build_step["steptype"].'" class="col-sm-2 control-label text-left">'.$one_build_step["steptype"].'</label>';
+                                echo '		<div class="col-sm-14">';
                                 if ($one_build_step["module"] == "ConditionalStepRunner" || $one_build_step["module"] == "Plugin") {
                                     foreach ($pageVars['data']['builders'][$one_build_step["module"]]['fields'][$one_build_step["steptype"]] as $data ) {
                                         echo '      <label for="'.$data['name'].'">'.$data['name'].'</label>';
@@ -259,18 +259,50 @@
                                     }
                                 }
                                 else {
-                                    echo '      <textarea id="steps['.$hash.'][data]" name="steps['.$hash.'][data]" class="form-control">'.$one_build_step["data"].'</textarea>';
+//                                    var_dump($pageVars['data']['builders'][$one_build_step["module"]]['fields'][$one_build_step["steptype"]]["type"] ) ;
+                                    $data = $pageVars['data']['builders'][$one_build_step["module"]]['fields'][$one_build_step["steptype"]] ;
+
+
+                                    if ($data['type'] == 'text' || $data['type'] == 'time' || $data['type'] == 'number') {
+                                        echo '      <input id="steps['.$hash.'][data]" name="steps['.$hash.'][data]" value="'.$one_build_step["data"].'" class="form-control" type="'.$data['type'].'" />';
+                                    }
+
+                                    if ($data['type'] == 'textarea') {
+//                                        echo '      <textarea id="steps['.$hash.']['.$data['slug'].']" name="steps['.$hash.']['.$data['slug'].']" class="form-control">'.$one_build_step[$data['slug']].'</textarea>';
+                                        echo '      <textarea id="steps['.$hash.'][data]" name="steps['.$hash.'][data]" class="form-control buildStepTextArea">'.$one_build_step["data"].'</textarea>';
+                                    }
+                                    if ($data["type"] == "dropdown") {
+                                        echo '<select id="steps['.$hash.'][data]" name="steps['.$hash.'][data]" '.$action.' class="form-control">';
+                                        foreach ($data['data'] as $key => $value) {
+                                            $selected = ($one_build_step["data"] == $key)? 'selected' : '';
+                                            echo '<option '.$selected.' value="'.$key.'">'.$value.'</option>';
+                                        }
+                                        echo '</select>';
+                                    }
+                                    if ($data["type"] == "radio") {
+
+//                                        foreach ($data['data'] as $key => $value) {
+                                        $selected = ($one_build_step["data"] == "on")? 'checked="checked"' : '';
+                                        echo ' <input type="'.$data["type"].'" id="steps['.$hash.'][data]" name="steps['.$hash.'][data]" value="'.$key.'" '.$selected.' class="form-control">'.$value;
+//                                        }
+                                    }
+                                    if ($data["type"] == "boolean" || $data["type"] == "checkbox") {
+
+//                                        foreach ($data['data'] as $key => $value) {
+                                        $selected = ($one_build_step["data"] == "on")? 'checked="checked"' : '';
+                                        echo ' <input type="checkbox" id="steps['.$hash.'][data]" name="steps['.$hash.'][data]" value="'.$key.'" '.$selected.' class="form-control">'.$value;
+//                                        }
+                                    }
+
+
                                 }
                                 echo '  </div>';
+//                                echo '  </div>';
+                                echo '  <div class="col-sm-12">'  ;
+                                echo '    <a class="btn btn-info" onclick="deleteStepField(\''.$hash.'\')">Delete Step</a>'."\n" ;
                                 echo '  </div>';
-                                echo '  </div>';
-                                echo '  <div class="form-group">'."\n" ;
-                                echo ' 		<label for="delete" class="col-sm-2 control-label text-left"></label>';
-                                echo '   <div class="col-sm-10">'  ;
-                                echo '  <a class="btn btn-info" onclick="deleteStepField(\''.$hash.'\')">Delete Step</a>'."\n" ;
-                                echo '  </div>';
-                                echo '  </div>';
-                                echo '  </div>';
+//                                echo '  </div>';
+//                                echo '  </div>';
                                 echo '</li>'; } } ?>
                                     
                     </ul> <!-- sortable end -->
@@ -298,7 +330,7 @@
 
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" id="bt" class=" btn btn-success hvr-float-shadow data-toggle="tooltip" data-placement="top" title="Save configure" data-original-title="Tooltip on right">Save Configuration</button>
+                            <button type="submit" id="bt" class=" btn btn-success hvr-float-shadow" data-toggle="tooltip" data-placement="top" title="Save configure" data-original-title="Tooltip on right">Save Configuration</button>
                         </div>
                     </div>
 
