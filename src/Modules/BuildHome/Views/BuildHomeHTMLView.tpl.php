@@ -74,8 +74,8 @@
             </div>
             <hr>
             <div class="row clearfix no-margin build-home-properties">
-                <h3><a class="lg-anchor text-light" href="/index.php?control=BuildConfigure&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>">
-                    Configure Pipeline: <?php echo $pageVars["data"]["pipeline"]["project-name"] ; ?>- <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
+<!--                <h3><a class="lg-anchor text-light" href="/index.php?control=BuildConfigure&action=show&item=--><?php //echo $pageVars["data"]["pipeline"]["project-slug"] ; ?><!--">-->
+<!--                    Configure Pipeline: --><?php //echo $pageVars["data"]["pipeline"]["project-name"] ; ?><!--- <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>-->
 
                 <div class="pipe-now-status-block pipe-block">
                     <h4 class="propertyTitle">Build Status Currently:</h4>
