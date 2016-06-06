@@ -2,6 +2,6 @@
 
 Namespace Model;
 
-class CopyOnSave extends BaseModelFactory {
+class SCMPublishOnSave extends BaseModelFactory {
 
 }

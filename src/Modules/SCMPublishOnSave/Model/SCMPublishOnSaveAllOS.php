@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class CopyOnSaveAllOS extends Base {
+class SCMPublishOnSaveAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -24,12 +24,11 @@ class CopyOnSaveAllOS extends Base {
             	array(
                 	"type" => "boolean",
                 	"optional" => true,
-                	"name" => "Copy configuration on Pipeline save?"
-            ),
-		    "target_directory" =>
+                	"name" => "Copy configuration on Pipeline save?" ),
+		    "target_repository" =>
 				array("type" => "text",
-					 "name" => "Directory to copy configuration to",
-					 "slug" => "target_directory"),
+					 "name" => "Target Repository",
+					 "slug" => "target_repository") ,
 //		    "Index_Page" =>
 //				array("type" => "text",
 //					 "name" => "Index Page",
@@ -47,11 +46,11 @@ class CopyOnSaveAllOS extends Base {
     }
 
 	public function getEvents() {
-		$ff = array("afterPipelineSave" => array("copyOnSave"));
+		$ff = array("afterPipelineSave" => array("scmPublishOnSave"));
 		return $ff ;
     }
 
-	public function copyOnSave() {
+	public function scmPublishOnSave() {
         $loggingFactory = new \Model\Logging();
         $this->params["echo-log"] = true ;
         $logging = $loggingFactory->getModel($this->params);
@@ -65,10 +64,10 @@ class CopyOnSaveAllOS extends Base {
         $mn = $this->getModuleName() ;
 
         if (isset($this->params["build-settings"][$mn]["enabled"]) && $this->params["build-settings"][$mn]["enabled"] == "on") {
-            $logging->log("Copy on Save enabled for pipeline...", $this->getModuleName());
+            $logging->log("SCM Publish On Save enabled for pipeline...", $this->getModuleName());
             $dir = $this->params["build-settings"][$mn]["target_directory"] ;
             if ($dir == "") {
-                $logging->log("Copy on Save enabled, but no directory has been specified.", $this->getModuleName());
+                $logging->log("SCM Publish On Save enabled, but no directory has been specified.", $this->getModuleName());
                 return false ; }
             if (substr($dir, -1) != DS) { $dir = $dir . DS ; }
             $pipeline_path = PIPEDIR.DS.$this->params["item"].DS ;
@@ -87,7 +86,7 @@ class CopyOnSaveAllOS extends Base {
                 $copy_command = "cp -r {$source} {$target}" ;
                 $rc = $this->executeAndGetReturnCode($copy_command, true, true) ;
                 if ($rc["rc"] !== 0) {
-                    $logging->log("Copy unsuccessful", $this->getModuleName());
+                    $logging->log("SCM Publish unsuccessful", $this->getModuleName());
                     return false ; } }
             return true ; }
     }

@@ -2,7 +2,7 @@
 
 Namespace Info;
 
-class CopyOnSaveInfo extends PTConfigureBase {
+class SCMPublishOnSaveInfo extends PTConfigureBase {
 
     public $hidden = false;
 
@@ -13,11 +13,11 @@ class CopyOnSaveInfo extends PTConfigureBase {
     }
 
     public function routesAvailable() {
-        return array( "CopyOnSave" => array_merge(parent::routesAvailable(), array() ) );
+        return array( "SCMPublishOnSave" => array_merge(parent::routesAvailable(), array() ) );
     }
 
     public function routeAliases() {
-        return array("copyonsave"=>"CopyOnSave","copy-on-save"=>"CopyOnSave");
+        return array("copyonsave"=>"SCMPublishOnSave","copy-on-save"=>"SCMPublishOnSave");
     }
 
     public function buildSettings() {

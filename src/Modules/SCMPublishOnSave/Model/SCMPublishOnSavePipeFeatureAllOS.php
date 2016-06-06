@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class CopyOnSavePipeFeatureAllOS extends Base {
+class SCMPublishOnSavePipeFeatureAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -34,7 +34,7 @@ class CopyOnSavePipeFeatureAllOS extends Base {
 	}
 
 	public function getLink() {
-		$link = 'index.php?control=CopyOnSave&action=report&item='.$this->pipeline["project-slug"];
+		$link = 'index.php?control=SCMPublishOnSave&action=report&item='.$this->pipeline["project-slug"];
 		$ff = array("link" => "$link");
 		return $ff ;
 	}
