@@ -541,11 +541,11 @@ function displaySingleFieldSet( $one_config_slug, $one_conf_tails, $fieldSlug, $
                     $fieldSetSlug ) ;
                 // @todo this should be an event or something
                 if ($one_config_slug == "PipeRunParameters") {
-                    echo '  <script type="text/javascript">' ;
-                    echo '      $( document ).ready(function() {' ;
-                    echo '          changePipeRunParameterType("'.$one_config_slug.'", "'.$fieldDetail["type"].'", "'.$field_hash.'") ;' ;
-                    echo '      });' ;
-                    echo '  </script>' ; } }
+                    echo '  <script type="text/javascript">'."\n" ;
+                    echo '      $( document ).ready(function() {'."\n" ;
+                    echo '          changePipeRunParameterType("'.$one_config_slug.'", "'.$fieldDetail["type"].'", "'.$field_hash.'") ;'."\n" ;
+                    echo '      });'."\n" ;
+                    echo '  </script>'."\n" ; } }
 //            echo '    <script type="text/javascript">'."\n" ;
 //            echo '      changePipeRunParameterType("'.$field_hash.'", "'.$fieldSetSlug.'") ;'."\n" ;
 //            echo '    </script>'."\n" ;
