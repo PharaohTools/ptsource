@@ -1,7 +1,10 @@
-function displayBuildConfigureSettingsFieldset(targetmod, fieldset) {
+function displayBuildConfigureSettingsFieldset(targetmod, fieldset, current_hash = null) {
 
     fields = build_settings_fieldsets[targetmod][fieldset]  ;
-    field_hash = getNewHash() ;
+
+    if (current_hash === null) { field_hash = getNewHash() ;  }
+    else { field_hash = current_hash ;  }
+
     html = "" ;
     fieldset_fields = fields[fieldset] ;
 
@@ -95,6 +98,7 @@ function displayBuildConfigureSettingsFieldset(targetmod, fieldset) {
 
 function deleteFieldsetField(targetmod, fieldset, hash) {
     delete_field = '#fieldset_'+targetmod+'_'+fieldset+'_'+hash ;
+
     console.log("deleting field "+delete_field)
     $(delete_field).remove();
 }
@@ -119,59 +123,65 @@ function changePipeRunParameterType(hash, newParamType) {
 //    newParamType = jQuery(typeSelectCss+' select option:selected').val() ;
     console.log("new param type value is: "+newParamType+" , css is : " +typeSelectCss) ;
     if (newParamType=="text") {
-        console.log("changing to text") ;
-        jQuery(typeSelectCss+' div.wrap_param_boolean_default_'+hash).hide() ;
-        jQuery(typeSelectCss+' div.wrap_param_textarea_default_'+hash).hide() ;
-        jQuery(typeSelectCss+' div.wrap_param_options_'+hash).hide() ;
-        jQuery(typeSelectCss+' div.wrap_param_default_'+hash).show() ;
-        jQuery(typeSelectCss+' div.wrap_param_name_'+hash).show() ;
-        jQuery(typeSelectCss+' div.wrap_param_type_'+hash).show() ;
-        jQuery(typeSelectCss+' div.wrap_param_text_'+hash).show() ;
-        jQuery(typeSelectCss+' div.wrap_param_description_'+hash).show() ; }
+        console.log("changing to text, hide "+typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' div.field_boolean_param_boolean_default') ;
+        // col-sm-12 field_text_param_name  ##
+        // col-sm-12 field_text_param_default
+        // col-sm-12 field_textarea_param_textarea_default
+        // col-sm-12 field_boolean_param_boolean_default
+        // col-sm-12 field_textarea_param_options
+        // col-sm-12 field_textarea_param_description
+        jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' div.field_boolean_param_boolean_default').hide() ;
+        jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' div.field_textarea_param_textarea_default').hide() ;
+        jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' div.field_textarea_param_options').hide() ;
+        jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' div.field_text_param_default').show() ;
+        jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' div.field_text_param_name').show() ;
+        jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' div.wrap_param_type_'+hash).show() ;
+        jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' div.wrap_param_text_'+hash).show() ;
+        jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' div.field_textarea_param_description').show() ; }
     else if (newParamType=="boolean") {
         console.log("changing to boolean") ;
-        jQuery(typeSelectCss+' div.wrap_param_default_'+hash).hide() ;
-        jQuery(typeSelectCss+' div.wrap_param_textarea_default_'+hash).hide() ;
-        jQuery(typeSelectCss+' div.wrap_param_options_'+hash).hide() ;
-        jQuery(typeSelectCss+' div.wrap_param_name_'+hash).show() ;
-        jQuery(typeSelectCss+' div.wrap_param_type_'+hash).show() ;
-        jQuery(typeSelectCss+' div.wrap_param_boolean_default_'+hash).show() ;
-        jQuery(typeSelectCss+' div.wrap_param_description_'+hash).show() ;
+        jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' div.field_text_param_default').hide() ;
+        jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' div.field_textarea_param_textarea_default').hide() ;
+        jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' div.field_textarea_param_options').hide() ;
+        jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' div.field_text_param_name').show() ;
+        jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' div.wrap_param_type_'+hash).show() ;
+        jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' div.field_boolean_param_boolean_default').show() ;
+        jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' div.field_textarea_param_description').show() ;
         console.log("hides done") ; }
     else if (newParamType=="textarea") {
         console.log("changing to textarea") ;
-        jQuery(typeSelectCss+' div.wrap_param_default_'+hash).hide() ;
-        jQuery(typeSelectCss+' div.wrap_param_options_'+hash).hide() ;
-        jQuery(typeSelectCss+' div.wrap_param_boolean_default_'+hash).hide() ;
-        jQuery(typeSelectCss+' div.wrap_param_textarea_default_'+hash).show() ;
-        jQuery(typeSelectCss+' div.wrap_param_name_'+hash).show() ;
-        jQuery(typeSelectCss+' div.wrap_param_type_'+hash).show() ;
-        jQuery(typeSelectCss+' div.wrap_param_description_'+hash).show() ;
+        jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' div.field_text_param_default').hide() ;
+        jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' div.field_textarea_param_options').hide() ;
+        jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' div.field_boolean_param_boolean_default').hide() ;
+        jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' div.field_textarea_param_textarea_default').show() ;
+        jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' div.field_text_param_name').show() ;
+        jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' div.wrap_param_type_'+hash).show() ;
+        jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' div.field_textarea_param_description').show() ;
         console.log("hides done") ; }
     else if (newParamType=="options") {
         console.log("changing to options") ;
-        jQuery(typeSelectCss+' div.wrap_param_boolean_default_'+hash).hide() ;
-        jQuery(typeSelectCss+' div.wrap_param_textarea_default_'+hash).hide() ;
-        jQuery(typeSelectCss+' div.wrap_param_options_'+hash).show() ;
-        jQuery(typeSelectCss+' div.wrap_param_name_'+hash).show() ;
-        jQuery(typeSelectCss+' div.wrap_param_type_'+hash).show() ;
-        jQuery(typeSelectCss+' div.wrap_param_default_'+hash).show() ;
-        jQuery(typeSelectCss+' div.wrap_param_description_'+hash).show() ;
+        jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' div.field_boolean_param_boolean_default').hide() ;
+        jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' div.field_textarea_param_textarea_default').hide() ;
+        jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' div.field_textarea_param_options').show() ;
+        jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' div.field_text_param_name').show() ;
+        jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' div.wrap_param_type_'+hash).show() ;
+        jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' div.field_text_param_default').show() ;
+        jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' div.field_textarea_param_description').show() ;
         console.log("hides done") ; }
     else {
         console.log("no option set, hiding all but type") ;
-        jQuery(typeSelectCss+' div.wrap_param_boolean_default_'+hash).hide() ;
-        jQuery(typeSelectCss+' div.wrap_param_textarea_default_'+hash).hide() ;
-        jQuery(typeSelectCss+' div.wrap_param_options_'+hash).hide() ;
-        jQuery(typeSelectCss+' div.wrap_param_name_'+hash).hide() ;
-        jQuery(typeSelectCss+' div.wrap_param_default_'+hash).hide() ;
-        jQuery(typeSelectCss+' div.wrap_param_description_'+hash).hide() ;
-        jQuery(typeSelectCss+' div.wrap_param_type_'+hash).show() ;
+        jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' div.field_boolean_param_boolean_default').hide() ;
+        jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' div.field_textarea_param_textarea_default').hide() ;
+        jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' div.field_textarea_param_options').hide() ;
+        jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' div.field_text_param_name').hide() ;
+        jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' div.field_text_param_default').hide() ;
+        jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' div.field_textarea_param_description').hide() ;
+        jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' div.wrap_param_type_'+hash).show() ;
         console.log("hides done") ;
 
     }
 
-    jQuery(typeSelectCss+'fieldset_PipeRunParameters_parameters_'+hash+' .options_display').val(newParamType) ;
-    jQuery(typeSelectCss+'fieldset_PipeRunParameters_parameters_'+hash+' .options_display').show() ;
+    jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' .options_display').val(newParamType) ;
+    jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' .options_display').show() ;
     console.log("end method") ;
 }
