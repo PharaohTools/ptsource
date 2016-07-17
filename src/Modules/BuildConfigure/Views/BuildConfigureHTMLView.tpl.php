@@ -472,7 +472,7 @@ function displaySingleField($one_config_slug, $one_conf_tails, $fieldSlug, $fiel
 //            html += '</div>'+"\n" ;
 //            html += '  </div>'+"\n" ;
 
-            echo ' <div class="col-sm-12 wrap_'.$fieldInfo["name"].'_'.$field_hash.'">'."\n" ;
+            echo ' <div class="col-sm-12 wrap_'.$fieldSlug.'_'.$field_hash.'">'."\n" ;
             echo ' <div class="col-sm-4">'."\n" ;
             echo '   <h4>'.$fieldInfo["name"].'</h4>'."\n" ;
             echo ' </div>'."\n" ;
@@ -538,13 +538,24 @@ function displaySingleFieldSet( $one_config_slug, $one_conf_tails, $fieldSlug, $
                     $settings,
                     $settings[$one_config_slug][$fieldSetSlug][$field_hash][$singleFieldSlug],
                     $field_hash,
-                    $fieldSetSlug ) ; }
+                    $fieldSetSlug ) ;
+                // @todo this should be an event or something
+                if ($one_config_slug == "PipeRunParameters") {
+                    echo '  <script type="text/javascript">' ;
+                    echo '      $( document ).ready(function() {' ;
+                    echo '          changePipeRunParameterType("'.$one_config_slug.'", "'.$fieldDetail["type"].'", "'.$field_hash.'") ;' ;
+                    echo '      });' ;
+                    echo '  </script>' ; } }
 //            echo '    <script type="text/javascript">'."\n" ;
 //            echo '      changePipeRunParameterType("'.$field_hash.'", "'.$fieldSetSlug.'") ;'."\n" ;
 //            echo '    </script>'."\n" ;
             echo '    <div class="col-sm-12">' ;
             echo '        <a class="btn btn-warning" onclick="deleteFieldsetField(\''.$one_config_slug.'\', \''.$fieldSetSlug.'\', \''.$field_hash.'\')">Delete Fieldset</a>' ;
             echo '    </div>' ;
+
+
+
+
             echo '  </div>'; }
 
 
