@@ -118,9 +118,8 @@ function changePipeRunParameterType(hash, newParamType) {
     console.log("type select css set") ;
 //    newParamType = jQuery(typeSelectCss+' select option:selected').val() ;
     console.log("new param type value is: "+newParamType+" , css is : " +typeSelectCss) ;
-    console.log("changing to text") ;
     if (newParamType=="text") {
-        console.log("dump textarea") ;
+        console.log("changing to text") ;
         jQuery(typeSelectCss+' div.wrap_param_boolean_default_'+hash).hide() ;
         jQuery(typeSelectCss+' div.wrap_param_textarea_default_'+hash).hide() ;
         jQuery(typeSelectCss+' div.wrap_param_options_'+hash).hide() ;
@@ -172,7 +171,7 @@ function changePipeRunParameterType(hash, newParamType) {
 
     }
 
-    jQuery(typeSelectCss+' .options_display').val(newParamType) ;
-    jQuery(typeSelectCss+' .options_display').show() ;
+    jQuery(typeSelectCss+'fieldset_PipeRunParameters_parameters_'+hash+' .options_display').val(newParamType) ;
+    jQuery(typeSelectCss+'fieldset_PipeRunParameters_parameters_'+hash+' .options_display').show() ;
     console.log("end method") ;
 }
