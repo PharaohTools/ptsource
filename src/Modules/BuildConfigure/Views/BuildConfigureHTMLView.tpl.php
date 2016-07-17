@@ -552,16 +552,8 @@ function displaySingleFieldSet( $one_config_slug, $one_conf_tails, $fieldSlug, $
             echo '    <div class="col-sm-12">' ;
             echo '        <a class="btn btn-warning" onclick="deleteFieldsetField(\''.$one_config_slug.'\', \''.$fieldSetSlug.'\', \''.$field_hash.'\')">Delete Fieldset</a>' ;
             echo '    </div>' ;
-
-
-
-
             echo '  </div>'; }
-
-
         echo '</div>' ;
-
-
     }
 }
 
