@@ -1,11 +1,8 @@
-function displayBuildConfigureSettingsFieldset(targetmod, fieldset, current_hash = null) {
+function displayBuildConfigureSettingsFieldset(targetmod, fieldset) {
 
     fields = build_settings_fieldsets[targetmod][fieldset]  ;
-
-    if (current_hash === null) { field_hash = getNewHash() ;  }
-    else { field_hash = current_hash ;  }
-
     html = "" ;
+    field_hash = getNewHash() ;
     fieldset_fields = fields[fieldset] ;
 
     html += '<div class="col-sm-12" class="fieldset" id="fieldset_'+targetmod+'_'+fieldset+'_'+field_hash+'">' ;
@@ -181,6 +178,10 @@ function changePipeRunParameterType(hash, newParamType) {
 
     }
 
+    // ptype_css = 'input#settings[PipeRunParameters][parameters]['+hash+'][param_type]';
+    ptype_css = 'div#fieldset_PipeRunParameters_parameters_'+hash+' div.wrap_param_type_'+hash+' div.col-sm-3 input.param_type';
+
+    jQuery(ptype_css).val(newParamType) ;
     jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' .options_display').val(newParamType) ;
     jQuery(typeSelectCss+' div#fieldset_PipeRunParameters_parameters_'+hash+' .options_display').show() ;
     console.log("end method") ;
