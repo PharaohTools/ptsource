@@ -59,3 +59,52 @@ function setRunningBuildList(data) {
             
         $('#runningBuilds').html(ht); }
 }
+
+function showFilteredRows(rowType) {
+    console.log("showing rows filtered by: "+rowType) ;
+    if (rowType == "success") {
+        $('.failureRow').hide() ;
+        $('.successRow').show() ;
+        $('.unstableRow').hide() ; }
+
+    else if (rowType == "failure") {
+        $('.failureRow').show() ;
+        $('.successRow').hide() ;
+        $('.unstableRow').hide() ; }
+
+    else if (rowType == "unstable") {
+        $('.failureRow').hide() ;
+        $('.successRow').hide() ;
+        $('.unstableRow').show() ; }
+
+}
+
+function showFailureRows() {
+    console.log("showing failure rows") ;
+//    $grid.isotope({ filter: '.failureRow' });
+    $('.failureRow').show() ;
+    $('.successRow').hide() ;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
