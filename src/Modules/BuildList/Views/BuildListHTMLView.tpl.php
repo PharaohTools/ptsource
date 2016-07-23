@@ -246,4 +246,5 @@
 	</div>
 </div><!-- /.container -->
 <link rel="stylesheet" type="text/css" href="/Assets/Modules/BuildList/css/buildlist.css">
+<script type="text/javascript" src="/Assets/Modules/BuildList/js/isotope.pkgd.js"></script>
 <script type="text/javascript" src="/Assets/Modules/BuildList/js/buildlist.js"></script>
