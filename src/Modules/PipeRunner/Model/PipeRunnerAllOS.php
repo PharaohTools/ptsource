@@ -275,6 +275,9 @@ class PipeRunnerAllOS extends Base {
         $eventRunner->params = $this->params ;
         $eventRunner->eventRunner("afterBuildComplete") ;
         $this->setRunEndTime($this->params["run-status"]) ;
+        $ret = "BUILD COMPLETE\n" ;
+        $logging->log("", $this->getModuleName()) ;
+        $logging->log($ret, $this->getModuleName()) ;
         return $this->saveRunLog() ;
     }
 
