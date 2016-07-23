@@ -63,71 +63,72 @@
 <!--			<h2 class="text-uppercase text-light"><a href="/"> PTBuild - Pharaoh Tools</a></h2>-->
 
 			<div class="row clearfix no-margin">
-				<h4 class="text-uppercase text-light">A list of builds in a page</h4>
+				<h4 class="text-uppercase text-light">All Pipelines</h4>
 				<!--
 				<h3>
 				<a class="lg-anchor text-light" href="/index.php?control=BuildList&action=show">
 				Build List <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a>
 				</h3>
 				-->
-				<div role="tabpanel">
+				<div role="tabpanel grid">
 
-					<!-- Nav tabs -->
-					<ul class="nav nav-tabs" role="tablist">
-						<li role="presentation" class="active">
-							<a href="#all" aria-controls="all" role="tab" data-toggle="tab">All</a>
-						</li>
-						<li role="presentation">
-							<a href="#success" aria-controls="success" role="tab" data-toggle="tab">All Success</a>
-						</li>
-						<li role="presentation">
-							<a href="#failed" aria-controls="failed" role="tab" data-toggle="tab">All Failed</a>
-						</li>
-						<li role="presentation">
-							<a href="#unstable" aria-controls="unstable" role="tab" data-toggle="tab">All Unstable</a>
-						</li>
-					</ul>
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#all" aria-controls="all" role="tab" data-toggle="tab">All</a>
+                        </li>
+                        <li role="presentation">
+                            <a onclick="showFilteredRows('success'); return false ;">All Success</a>
+                        </li>
+                        <li role="presentation">
+                            <a onclick="showFilteredRows('failure'); return false ;">All Failed</a>
+                        </li>
+                        <li role="presentation">
+                            <a onclick="showFilteredRows('unstable'); return false ;">All Unstable</a>
+                        </li>
+                    </ul>
 
 					<!-- Tab panes -->
 					<div class="tab-content">
 						<div role="tabpanel" class="tab-pane active" id="all">
 							<div class="table-responsive" ">
-							<table class="table table-striped table-bordered table-condensed">
-							<thead>
-							<tr style="background-color: fff">
-							<th>#</th>
-							<th>Pipeline</th>
-							<th>Run Now</th>
-							<th>Status</th>
-							<th>Success</th>
-							<th>Failure</th>
-							<th>Duration</th>
-							<!--
-							<th>Parent</th>
-							<th>Child</th>
-							-->
-							</tr>
-							</thead>
-							<tbody class="table-hover">
+							<div class="table table-striped table-bordered table-condensed">
+                                <div>
+                                    <div class="blCell cellRowIndex">#</div>
+                                    <div class="blCell cellRowName">Pipeline</div>
+                                    <div class="blCell cellRowRun">Run Now</div>
+                                    <div class="blCell cellRowStatus">Status</div>
+                                    <div class="blCell cellRowSuccess">Success</div>
+                                    <div class="blCell cellRowFailure">Failure</div>
+                                    <div class="blCell cellRowDuration">Duration</div>
+                                    <!--
+                                    <div>Parent</div>
+                                    <div>Child</div>
+                                    -->
+                                </div>
+							<div class="allBuildRows table-hover">
 
 							<?php
 
 							$i = 1;
 							foreach ($pageVars["data"]["pipelines"] as $pipelineSlug => $pipelineDetails) {
 
+                                $successFailureClass = ($pipelineDetails["last_status"] == true) ? "successRow" : "failureRow" ;
+
+
                                 ?>
 
-							<tr class="buildRow " id="blRow_<?php echo $pipelineSlug; ?>" >
-							<th scope="row"><?php echo $i; ?> </th>
-							<td><a href="/index.php?control=BuildHome&action=show&item=<?php echo $pipelineSlug; ?>"><?php echo $pipelineDetails["project-name"]; ?>  </a> </td>
+							<div class="buildRow <?php echo $successFailureClass ?>" id="blRow_<?php echo $pipelineSlug; ?>" >
+							<div class="blCell cellRowIndex" scope="row"><?php echo $i; ?> </div>
+							<div class="blCell cellRowName"><a href="/index.php?control=BuildHome&action=show&item=<?php echo $pipelineSlug; ?>" class="pipeName"><?php echo $pipelineDetails["project-name"]; ?>  </a> </div>
 							
-							<td>
+							<div class="blCell cellRowRun">
 							<?php
 							echo '<a href="/index.php?control=PipeRunner&action=start&item=' . $pipelineDetails["project-slug"] . '">';
 							echo '<i class="fa fa-play fa-2x hvr-grow-shadow" style="color:rgb(13, 193, 42);"></i></a>';
 							?>
-							</td>
-							<td
+							</div>
+							<div  class="blCell cellRowStatus"
                                 <?php
 
                                 if ($pipelineDetails["last_status"] === true) {
@@ -146,9 +147,9 @@
 
 							?>
 
-							</td>
+							</div>
 							
-							<td>
+							<div class="blCell cellRowSuccess">
 							<?php
 
                             $today = new DateTime(); // This object represents current date/time
@@ -175,8 +176,8 @@
                             else {
 								echo 'N/A'; }
 							?>
-							</td>
-							<td>
+							</div>
+							<div class="blCell cellRowFailure">
 							<?php
 							if ($pipelineDetails["last_fail"] != false) {
 
@@ -198,8 +199,8 @@
                                 echo 'N/A'; }
 
 							?>
-							</td>
-							<td>
+							</div>
+							<div class="blCell cellRowDuration">
 							<?php
 							if ($pipelineDetails["duration"] != false) {
 								echo $pipelineDetails["duration"] . ' seconds';
@@ -207,33 +208,33 @@
 								echo 'N/A';
 							}
 							?>
-							</td>
+							</div>
 							<!--
-							<td>
+							<div>
 							<?php
 							if ($pipelineDetails["has_parents"] === true) {
 							echo '<img class="listImage" src="/Assets/Modules/BuildList/image/tick.png" />' ; }
 							else {
 							echo '<img class="listImage" src="/Assets/Modules/BuildList/image/cross.png" />' ; }
 							?>
-							</td>
-							<td>
+							</div>
+							<div>
 							<?php
 							if ($pipelineDetails["has_children"] === true) {
 							echo '<img class="listImage" src="/Assets/Modules/BuildList/image/tick.png" />' ; }
 							else {
 							echo '<img class="listImage" src="/Assets/Modules/BuildList/image/cross.png" />' ; }
 							?>
-							</td>
+							</div>
 							-->
-							</tr>
+							</div>
 							<?php
 							$i++;
 							}
 							?>
 
-							</tbody>
-							</table>
+							</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -246,5 +247,4 @@
 	</div>
 </div><!-- /.container -->
 <link rel="stylesheet" type="text/css" href="/Assets/Modules/BuildList/css/buildlist.css">
-<script type="text/javascript" src="/Assets/Modules/BuildList/js/isotope.pkgd.js"></script>
 <script type="text/javascript" src="/Assets/Modules/BuildList/js/buildlist.js"></script>
