@@ -101,10 +101,6 @@
                                     <div class="blCell cellRowSuccess">Success</div>
                                     <div class="blCell cellRowFailure">Failure</div>
                                     <div class="blCell cellRowDuration">Duration</div>
-                                    <!--
-                                    <div>Parent</div>
-                                    <div>Child</div>
-                                    -->
                                 </div>
 							<div class="allBuildRows table-hover">
 
@@ -112,10 +108,7 @@
 
 							$i = 1;
 							foreach ($pageVars["data"]["pipelines"] as $pipelineSlug => $pipelineDetails) {
-
                                 $successFailureClass = ($pipelineDetails["last_status"] == true) ? "successRow" : "failureRow" ;
-
-
                                 ?>
 
 							<div class="buildRow <?php echo $successFailureClass ?>" id="blRow_<?php echo $pipelineSlug; ?>" >
