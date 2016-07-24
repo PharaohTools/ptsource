@@ -62,7 +62,13 @@ function setRunningBuildList(data) {
 
 function showFilteredRows(rowType) {
     console.log("showing rows filtered by: "+rowType) ;
-    if (rowType == "success") {
+
+    if (rowType == "all") {
+        $('.failureRow').show() ;
+        $('.successRow').show() ;
+        $('.unstableRow').show() ; }
+
+    else if (rowType == "success") {
         $('.failureRow').hide() ;
         $('.successRow').show() ;
         $('.unstableRow').hide() ; }
@@ -78,33 +84,3 @@ function showFilteredRows(rowType) {
         $('.unstableRow').show() ; }
 
 }
-
-function showFailureRows() {
-    console.log("showing failure rows") ;
-//    $grid.isotope({ filter: '.failureRow' });
-    $('.failureRow').show() ;
-    $('.successRow').hide() ;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
