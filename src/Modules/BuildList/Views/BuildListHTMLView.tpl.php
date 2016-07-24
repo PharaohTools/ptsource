@@ -75,7 +75,7 @@
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
                         <li role="presentation" class="active">
-                            <a href="#all" aria-controls="all" role="tab" data-toggle="tab">All</a>
+                            <a onclick="showFilteredRows('all'); return false ;">All</a>
                         </li>
                         <li role="presentation">
                             <a onclick="showFilteredRows('success'); return false ;">All Success</a>
@@ -108,7 +108,15 @@
 
 							$i = 1;
 							foreach ($pageVars["data"]["pipelines"] as $pipelineSlug => $pipelineDetails) {
-                                $successFailureClass = ($pipelineDetails["last_status"] == true) ? "successRow" : "failureRow" ;
+
+
+                                if ($pipelineDetails["last_status"] === true) {
+                                    $successFailureClass = "successRow"  ; }
+                                else if ($pipelineDetails["last_status"] === false) {
+                                    $successFailureClass = "failureRow" ; }
+                                else {
+                                    $successFailureClass = "unstableRow" ; }
+
                                 ?>
 
 							<div class="buildRow <?php echo $successFailureClass ?>" id="blRow_<?php echo $pipelineSlug; ?>" >
