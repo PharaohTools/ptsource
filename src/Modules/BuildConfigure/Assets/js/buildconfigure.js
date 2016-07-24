@@ -88,8 +88,7 @@ function displayStepField() {
             }
             if (field[i]["type"] == "textarea") { 
       			html += '<textarea id="steps['+hash+']['+field[i].slug+']"' ;
-       			html += ' name="steps['+hash+']['+field[i].slug+']"  class="form-control">' ;
-       			html += '</textarea>' ;
+       			html += ' name="steps['+hash+']['+field[i].slug+']"  class="form-control"></textarea>' ;
             }
             if (field[i]["type"] == "dropdown") { 
             	html += '<select id="steps['+hash+']['+field[i].slug+']" name="steps['+hash+']['+field[i].slug+']" '+action+' class="form-control">';
