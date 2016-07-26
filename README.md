@@ -6,7 +6,7 @@
 
 Source Control Management in PHP.
 
-A Web Interface for your your automated build processes, flexible to be distributed from Development through
+A Web Interface for your your automated source processes, flexible to be distributed from Development through
 Enterprise Production.
 
 Smooth Integration with all other Pharaoh Tools; seamlessly and simply being able to hooking into your Development
@@ -16,15 +16,15 @@ Environments, Configuration, Deployments, Tests, Tracked Processes and Managed O
 ## Installation
 
 First you'll need to install Git and PHP5. If you don't have either, google them - they're easy to install. To install
-ptbuild cli on your On your Mac, Linux or  Unix Machine silently do the following:
+ptsource cli on your On your Mac, Linux or  Unix Machine silently do the following:
 
-git clone https://github.com/PharaohTools/ptbuild.git && sudo php ptbuild/install-silent
+git clone https://github.com/PharaohTools/ptsource.git && sudo php ptsource/install-silent
 
 or on Windows, open a terminal with the "Run as Administrator" option...
 
-git clone https://github.com/PharaohTools/ptbuild.git && php ptbuild\install-silent
+git clone https://github.com/PharaohTools/ptsource.git && php ptsource\install-silent
 
-... that's it, now the ptbuild command should be available at the command line for you.
+... that's it, now the ptsource command should be available at the command line for you.
 
 
 ## Usage:
@@ -33,13 +33,13 @@ So, there are a few simple commands...
 
 First, you can just use
 
-ptbuild
+ptsource
 
 ...This will give you a list of the available modules...
 
 Then you can use
 
-ptbuild *ModuleName* help
+ptsource *ModuleName* help
 
 ...This will display the help for that module, and tell you a list of available alias for the module command, and the
 available actions too.
