@@ -1,1 +1,0 @@
-<?php echo json_encode($pageVars["data"]["running_builds"]) ; ?>
