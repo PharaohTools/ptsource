@@ -1,10 +1,10 @@
-![alt text](http://www.pharaohtools.com/images/logo-pharaoh.png "Pharaoh Tools Build Server")
+![alt text](http://www.pharaohtools.com/images/logo-pharaoh.png "Pharaoh Tools Source Server")
 
-# PTBuild, Pharaoh Tools
+# PTSource, Pharaoh Tools
 
 ## About:
 
-Build and Monitoring in PHP. Integrate Builds for your application. Build Automation and Process Automation in PHP.
+Source Control Management in PHP.
 
 A Web Interface for your your automated build processes, flexible to be distributed from Development through
 Enterprise Production.
