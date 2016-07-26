@@ -8,7 +8,7 @@
 		<meta name="author" content="">
 		<link rel="icon" href="/Assets/Modules/DefaultSkin/image/favicon.ico">
 		
-		<title>Build - Pharaoh Tools</title>
+		<title>Source - Pharaoh Tools</title>
 
         <script src="/Assets/Modules/DefaultSkin/js/jquery.min.js"></script>
         <script src="/Assets/Modules/DefaultSkin/js/jquery-ui.min.js"></script>
@@ -77,8 +77,8 @@
 					</button>
 					<a class="navbar-" href="/index.php?control=Index&action=show">
 						<figure class="rollover">
-                        <img src="/Assets/Modules/DefaultSkin/image/5.png" class="navbar-img hvr-grow-shadow" style="height: 60px;padding: 5px;" />
-                        <span class="title hvr-grow-shadow">Pharaoh Build</span>
+                        <img src="/Assets/Modules/DefaultSkin/image/source-logo.png" class="navbar-img hvr-grow-shadow" style="height: 60px;padding: 5px;" />
+                        <span class="title hvr-grow-shadow">Pharaoh Source</span>
                     </a>
 				</div>
 				
