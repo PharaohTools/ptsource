@@ -7,7 +7,7 @@ date_default_timezone_set('Europe/London');
 $bootStrap = new BootStrap();
 
 $argv_or_null = (isset($argv)) ? $argv : null ;
-$bootStrapParams = (isset($_ENV['ptbuild_bootstrap'])) ? unserialize($_ENV['ptbuild_bootstrap']) : $argv_or_null ;
+$bootStrapParams = (isset($_ENV['ptsource_bootstrap'])) ? unserialize($_ENV['ptsource_bootstrap']) : $argv_or_null ;
 $bootStrap->main($bootStrapParams);
 
 class BootStrap {
