@@ -13,30 +13,6 @@ class IndexAllOS extends Base {
 
     // Model Group
     public $modelGroup = array("Default") ;
-
-    public function pipesDetail() {
-        $pipelineFactory = new \Model\Pipeline() ;
-        $pipeline = $pipelineFactory->getModel($this->params);
-		$buildMonitorClass = new \Model\BuildMonitor() ;
-        $total = $success = $fail = $unstable = 0;
-		$buildHistory = array();
-        foreach ($pipeline->getPipelines() as $key => $value) {
-        	$this->params['item'] = $key;
-        	$buildMonitor = $buildMonitorClass->getModel($this->params);
-			$newPipeDetail = $buildMonitor->getPipelinesDetails();
-			if ( isset($newPipeDetail['history']) ) {
-				$newPipeDetailHistory = $newPipeDetail['history'];
-				foreach ($newPipeDetailHistory as &$status)
-					foreach ($status as $key => $value)
-						$buildHistory[] = $status; }
-			$total++;
-            if ($value=="FAIL") { $fail++; }
-            else { $success++; }
-//            if ($value['last_status']) $success++;
-//			else if ($value['last_fail']) $fail++;
-        }
-		return array( 'total' => $total, 'success' => $success, 'fail' => $fail, 'unstable' => 'N/A', 'buildHistory' => $buildHistory );
-    }
     
     public function findModuleNames($params) {
         if (isset($this->params["compatible-only"]) && $this->params["compatible-only"]=="true") {
