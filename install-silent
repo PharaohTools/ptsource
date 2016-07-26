@@ -12,8 +12,8 @@ class Installer {
     private $bootStrapData;
     private $programDataFolder;
     private $programExecutorFolder;
-    private $programNameMachine = "ptbuild";
-    private $programNameFriendly = "PTBuild! "; // 12 chars
+    private $programNameMachine = "ptsource";
+    private $programNameFriendly = "PTSource! "; // 12 chars
 
     public function __construct() {
         require ("src".DIRECTORY_SEPARATOR."Constants.php") ;
