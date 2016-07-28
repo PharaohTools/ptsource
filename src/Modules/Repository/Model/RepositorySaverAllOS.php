@@ -46,7 +46,8 @@ class RepositorySaverAllOS extends Base {
             $defaultsFile = REPODIR.DS.$this->params["item"].DS.'defaults' ;
             $logging->log("Storing defaults file in Repository at $defaultsFile", $this->getModuleName()) ;
             $defaults = json_encode($save["data"], JSON_PRETTY_PRINT) ;
-            return file_put_contents($defaultsFile, $defaults) ; }
+            $res = file_put_contents($defaultsFile, $defaults) ;
+            return ($res === false) ? false : true ; }
         return false ;
     }
 
@@ -57,7 +58,8 @@ class RepositorySaverAllOS extends Base {
             $stepsFile = REPODIR.DS.$this->params["item"].DS.'steps' ;
             $logging->log("Storing steps file in Repository at $stepsFile", $this->getModuleName()) ;
             $steps = json_encode($save["data"], JSON_PRETTY_PRINT) ;
-            return file_put_contents($stepsFile, $steps) ; }
+            $res = file_put_contents($stepsFile, $steps) ;
+            return ($res === false) ? false : true ; }
         $statuses = array() ;
         return $statuses ;
     }
@@ -69,7 +71,8 @@ class RepositorySaverAllOS extends Base {
             $stepsFile = REPODIR.DS.$this->params["item"].DS.'settings' ;
             $logging->log("Storing settings file in Repository at $stepsFile", $this->getModuleName()) ;
             $steps = json_encode($save["data"], JSON_PRETTY_PRINT) ;
-            return file_put_contents($stepsFile, $steps) ; }
+            $res = file_put_contents($stepsFile, $steps) ;
+            return ($res === false) ? false : true ; }
         $statuses = array() ;
         return $statuses ;
     }
