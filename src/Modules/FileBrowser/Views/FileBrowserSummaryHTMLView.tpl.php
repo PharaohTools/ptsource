@@ -45,7 +45,7 @@
                 ?>
                 <h3><?= $stat; ?> Pipeline <?php echo $pageVars["data"]["pipeline"]["project_title"]["value"] ; ?> <i style="font-size: 18px;" class="fa fa-chevron-right"></i></h3>
                 <h5 class="text-uppercase text-light" style="margin-top: 15px;">
-                    <a href="/index.php?control=BuildHome&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project_slug"]["value"] ; ?>"></a>
+                    <a href="/index.php?control=RepositoryHome&action=show&item=<?php echo $pageVars["data"]["pipeline"]["project_slug"]["value"] ; ?>"></a>
                 </h5>
                 <form class="form-horizontal custom-form" action="/index.php?control=FileBrowser&action=show" method="POST">
 
