@@ -25,6 +25,7 @@ if (in_array(PHP_OS, array("Windows", "WINNT"))) {
     define('PTSCOMM',  PFILESDIR."ptsource.cmd") ;
     define('BOXDIR', $sd.'\\PharaohTools\boxes') ;
     define('PIPEDIR', $sd.'\\PharaohTools\pipes'.'\\') ;
+    define('REPODIR', $sd.'\\PharaohTools\repositories'.'\\') ;
 	define('PLUGININS', $sd.'\\PharaohTools\plugins\installed'.'\\') ;
     define("DS", "\\");
     define("BASE_TEMP_DIR", getenv("SystemDrive").'\Temp\\'); }
@@ -46,4 +47,5 @@ else if (in_array(PHP_OS, array("Linux", "Solaris", "FreeBSD", "OpenBSD", "Darwi
     define("BASE_TEMP_DIR", '/tmp/');
     define('BOXDIR', '/opt/ptvirtualize/boxes') ;
     define('PIPEDIR', '/opt/ptbuild/pipes') ;
+    define('REPODIR', '/opt/ptsource/repositories') ;
     define('PLUGININS', '/opt/ptbuild/plugins/installed') ; }
