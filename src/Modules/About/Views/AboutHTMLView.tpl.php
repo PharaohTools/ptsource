@@ -23,7 +23,7 @@
     <div class="col-lg-9">
                     <div class="well well-lg">
             <div class="row clearfix no-margin">
-                <h3><a class="lg-anchor text-light" href=""> PTBuild - The Builder, Pharaoh Tools
+                <h3><a class="lg-anchor text-light" href=""> PTSource - Holding Your Code, Pharaoh Tools
                         <i style="font-size: 18px;" class="fa fa-chevron-right"></i>
                     </a></h3>
 
