@@ -11,7 +11,7 @@ class FileBrowser extends Base {
         if (is_array($thisModel)) { return $this->failDependencies($pageVars, $this->content, $thisModel) ; }
         if (in_array($pageVars["route"]["action"], array("show"))) {
             $this->content["data"] = $thisModel->getData();}
-        return array ("type"=>"view", "view"=>"filebrowser", "pageVars"=>$this->content);
+        return array ("type"=>"view", "view"=>"fileBrowser", "pageVars"=>$this->content);
     }
 
 }
