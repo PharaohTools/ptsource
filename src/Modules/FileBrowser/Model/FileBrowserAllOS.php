@@ -17,17 +17,17 @@ class FileBrowserAllOS extends Base {
     public function getData() {
         $this->setPipeDir();
         $ret["directory"] = $this->getCurrentDirectory();
-        $ret["pipeline"] = $this->getPipeline();
+        $ret["repository"] = $this->getRepository();
         $ret["item"] = $this->params["item"];
         $ret["wsdir"] = $this->getFileBrowserDir();
         $ret["relpath"] = $this->getRelPath();
         return $ret ;
     }
 
-    public function getPipeline() {
-        $pipelineFactory = new \Model\Pipeline() ;
-        $pipeline = $pipelineFactory->getModel($this->params);
-        return $pipeline->getPipeline($this->params["item"]);
+    public function getRepository() {
+        $repositoryFactory = new \Model\Repository() ;
+        $repository = $repositoryFactory->getModel($this->params);
+        return $repository->getRepository($this->params["item"]);
     }
 
     public function getRelPath() {
@@ -37,7 +37,7 @@ class FileBrowserAllOS extends Base {
 
     public function getFileBrowserDir() {
         $relPath = $this->getRelPath() ;
-        return $this->params["pipe-dir"].DS.$this->params["item"].DS.'filebrowser'.DS.$relPath;
+        return $this->params["repo-dir"].DS.$this->params["item"].DS.'filebrowser'.DS.$relPath;
     }
 
     public function createFileBrowserIfNeeded() {
@@ -67,10 +67,10 @@ class FileBrowserAllOS extends Base {
 
     public function setPipeDir() {
         if (isset($this->params["guess"]) && $this->params["guess"]==true) {
-            $this->params["pipe-dir"] = PIPEDIR ; }
+            $this->params["repo-dir"] = PIPEDIR ; }
         else {
             // @todo should probably ask a question here
-            $this->params["pipe-dir"] = PIPEDIR ; }
+            $this->params["repo-dir"] = PIPEDIR ; }
     }
 
     private function getCurrentDirectory() {
