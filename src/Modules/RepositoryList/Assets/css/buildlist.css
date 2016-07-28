@@ -1,0 +1,63 @@
+.listImage {
+    max-width:40px;
+    max-height:40px;
+}
+
+.listImageWide {
+    max-width:50%;
+}
+
+.runningBuild {
+    background-color: #dee;
+    margin: 0 0 10px 0;
+    overflow-x: hidden;
+}
+
+.runningBuildRow {
+    background-color: #dee;
+}
+
+.runningBuild p {
+    margin: 0 0 0 0;
+}
+
+.repositoryRow {
+    width: 100%;
+    display: block ;
+    float:left ;
+}
+
+.blCell {
+    float: left ;
+    display: inline-block ;
+    text-align: center;
+}
+
+.cellRowIndex {
+    width: 5% ;
+}
+
+.cellRowName{
+    width: 20% ;
+    text-align: left;
+}
+
+.cellRowRun {
+    width: 10% ;
+}
+
+.cellRowStatus {
+    width: 10% ;
+}
+
+.cellRowSuccess {
+    width: 20% ;
+}
+
+.cellRowFailure {
+    width: 20% ;
+}
+
+.cellRowDuration {
+    width: 15% ;
+}
