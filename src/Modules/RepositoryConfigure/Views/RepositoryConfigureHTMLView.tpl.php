@@ -41,8 +41,8 @@
                 if ($pageVars["route"]["action"] !== "new") {
                 ?>
                 <li>
-                    <a href="/index.php?control=Workspace&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
-                        <i class="fa fa-folder-open-o hvr-bounce-in"></i> Workspace
+                    <a href="/index.php?control=FileBrowser&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
+                        <i class="fa fa-folder-open-o hvr-bounce-in"></i> File Browser
                     </a>
                 </li>
                 <li>
