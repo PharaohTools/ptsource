@@ -22,7 +22,7 @@ class AboutInfo extends PTConfigureBase {
 
     public function helpDefinition() {
       $help = <<<"HELPDATA"
-  This is the Build Home page module for a single build...
+  This is the Repository Home page module for a single build...
 HELPDATA;
       return $help ;
     }
