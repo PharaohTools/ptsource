@@ -21,7 +21,7 @@
 				</li>
 				<li>
 					<a href="/index.php?control=ApplicationConfigure&action=show" class=" hvr-bounce-in">
-                        <i class="fa fa-cogs fa-fw"></i> Configure PTBuild<span class="fa arrow"></span>
+                        <i class="fa fa-cogs fa-fw"></i> Configure PTSource<span class="fa arrow"></span>
                     </a>
 					<ul class="nav nav-second-level collapse">
                         <li>
@@ -37,10 +37,10 @@
 					<!-- /.nav-second-level -->
 				</li>
 				<li>
-					<a href="/index.php?control=BuildConfigure&action=new" class=" hvr-bounce-in"><i class="fa fa-edit fa-fw hvr-bounce-in"></i> New Pipeline</a>
+					<a href="/index.php?control=RepositoryConfigure&action=new" class=" hvr-bounce-in"><i class="fa fa-edit fa-fw hvr-bounce-in"></i> New Repository</a>
 				</li>
 				<li>
-					<a href="/index.php?control=BuildList&action=show" class=" hvr-bounce-in"><i class="fa fa-bars fa-fw hvr-bounce-in"></i> All Pipelines</a>
+					<a href="/index.php?control=RepositoryList&action=show" class=" hvr-bounce-in"><i class="fa fa-bars fa-fw hvr-bounce-in"></i> All Repositories</a>
 				</li>
 			</ul>
 		</div>
@@ -62,7 +62,7 @@
                                         <i class="fa fa-database   fa-4x hvr-buzz-out"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge hvr-grow-rotate" ><?php echo $pageVars['pipesDetail']['total']; ?></div>
+                                        <div class="huge hvr-grow-rotate" ><?php echo $pageVars['repositoriesDetail']['total']; ?></div>
                                         <div>All!</div>
                                     </div>
                                 </div>
@@ -84,7 +84,7 @@
                                         <i class="fa fa-check-circle fa-4x hvr-buzz-out"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge  hvr-grow-rotate"><?php echo $pageVars['pipesDetail']['success']; ?></div>
+                                        <div class="huge  hvr-grow-rotate"><?php echo $pageVars['repositoriesDetail']['success']; ?></div>
                                         <div>All sucess!</div>
                                     </div>
                                 </div>
@@ -106,7 +106,7 @@
                                         <i class="fa fa-times-circle fa-4x hvr-buzz-out"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge  hvr-grow-rotate"><?php echo $pageVars['pipesDetail']['fail']; ?></div>
+                                        <div class="huge  hvr-grow-rotate"><?php echo $pageVars['repositoriesDetail']['fail']; ?></div>
                                         <div>All Failed!</div>
                                     </div>
                                 </div>
@@ -128,7 +128,7 @@
                                         <i class="fa fa-chain-broken fa-4x hvr-buzz-out"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge hvr-grow-rotate"><?php echo $pageVars['pipesDetail']['unstable']; ?></div>
+                                        <div class="huge hvr-grow-rotate"><?php echo $pageVars['repositoriesDetail']['unstable']; ?></div>
                                         <div>All Unstable!</div>
                                     </div>
                                 </div>
@@ -145,7 +145,7 @@
                 </div>
                 <?php
                 $graphData = array();
-                foreach ($pageVars['pipesDetail']['buildHistory'] as $key => $value) {
+                foreach ($pageVars['repositoriesDetail']['repositoryHistory'] as $key => $value) {
 					$day = date('j', $value->start);
                 	if(date('m', $value->start) == date('m', time())) {
                 		if (in_array($day, array_keys($graphData))) { 
@@ -180,7 +180,7 @@
 	                <div class="col-lg-12">
 	                    <div class="panel panel-default">
 	                        <div class="panel-heading">
-	                            <i class="fa fa-bar-chart-o fa-fw"></i> All Pipes Build Status
+	                            <i class="fa fa-bar-chart-o fa-fw"></i> All Pipes Repository Status
 	                            <div class="pull-right">
 	                                <!--<div class="btn-group">
 	                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
@@ -203,7 +203,7 @@
 	                        </div>
 	                        <!-- /.panel-heading -->
 	                        <div class="panel-body">
-	                            <div id="pipes-build-chart"></div>
+	                            <div id="repositories-repository-chart"></div>
 	                        </div>
 	                        <!-- /.panel-body -->	                    
 	                	</div>
@@ -212,7 +212,7 @@
 			<script>
 				$(function() {
 				    Morris.Area({
-				        element: 'pipes-build-chart',
+				        element: 'repositories-repository-chart',
 				        data: <?php echo json_encode($data); ?>,
 				        xkey: 'day',
 				        ykeys: ['success', 'fail', 'unstable'],
