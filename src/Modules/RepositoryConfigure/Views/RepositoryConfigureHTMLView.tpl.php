@@ -25,7 +25,7 @@
                 if ($pageVars["route"]["action"] !== "new") {
                 ?>
                 <li>
-                    <a href="/index.php?control=BuildHome&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
+                    <a href="/index.php?control=RepositoryHome&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
                         <i class="fa fa-home hvr-bounce-in"></i> Repository Home
                     </a>
                 </li>
@@ -56,7 +56,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/index.php?control=BuildHome&action=delete&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
+                    <a href="/index.php?control=RepositoryHome&action=delete&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
                         <i class="fa fa-trash fa-fw hvr-bounce-in"></i> Delete
                     </a>
                 </li>

@@ -121,7 +121,7 @@
 
 							<div class="repositoryRow <?php echo $successFailureClass ?>" id="blRow_<?php echo $repositorySlug; ?>" >
 							<div class="blCell cellRowIndex" scope="row"><?php echo $i; ?> </div>
-							<div class="blCell cellRowName"><a href="/index.php?control=BuildHome&action=show&item=<?php echo $repositorySlug; ?>" class="pipeName"><?php echo $repositoryDetails["project-name"]; ?>  </a> </div>
+							<div class="blCell cellRowName"><a href="/index.php?control=RepositoryHome&action=show&item=<?php echo $repositorySlug; ?>" class="pipeName"><?php echo $repositoryDetails["project-name"]; ?>  </a> </div>
 							
 							<div class="blCell cellRowRun">
 							<?php
