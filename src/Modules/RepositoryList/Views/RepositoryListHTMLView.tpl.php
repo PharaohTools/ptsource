@@ -46,15 +46,15 @@
 		</div>
 		<br />
 
-		<div class="alert alert-info">
-			<h4>Running Builds </h4>
-			<div id="runningBuilds">
-				<p>
-					No repositorys currently being executed
-				</p>
-				
-			</div>
-		</div>
+<!--		<div class="alert alert-info">-->
+<!--			<h4>Running Builds </h4>-->
+<!--			<div id="runningBuilds">-->
+<!--				<p>-->
+<!--					No repositorys currently being executed-->
+<!--				</p>-->
+<!--				-->
+<!--			</div>-->
+<!--		</div>-->
 
 	</div>
 
@@ -214,17 +214,17 @@
 							<div>
 							<?php
 							if ($repositoryDetails["has_parents"] === true) {
-							echo '<img class="listImage" src="/Assets/Modules/RepositoryList/image/tick.png" />' ; }
+							    echo '<img class="listImage" src="/Assets/Modules/RepositoryList/image/tick.png" />' ; }
 							else {
-							echo '<img class="listImage" src="/Assets/Modules/RepositoryList/image/cross.png" />' ; }
+							    echo '<img class="listImage" src="/Assets/Modules/RepositoryList/image/cross.png" />' ; }
 							?>
 							</div>
 							<div>
 							<?php
 							if ($repositoryDetails["has_children"] === true) {
-							echo '<img class="listImage" src="/Assets/Modules/RepositoryList/image/tick.png" />' ; }
+							    echo '<img class="listImage" src="/Assets/Modules/RepositoryList/image/tick.png" />' ; }
 							else {
-							echo '<img class="listImage" src="/Assets/Modules/RepositoryList/image/cross.png" />' ; }
+							    echo '<img class="listImage" src="/Assets/Modules/RepositoryList/image/cross.png" />' ; }
 							?>
 							</div>
 							-->
