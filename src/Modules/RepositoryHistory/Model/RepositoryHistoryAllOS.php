@@ -21,8 +21,8 @@ class RepositoryHistoryAllOS extends Base {
 
     public function getCommitHistory() {
         $repositoryFactory = new \Model\Repository() ;
-        $repository = $repositoryFactory->getModel($this->params);
-        return $repository->getCommitHistory();
+        $repository = $repositoryFactory->getModel($this->params, "RepositoryCommits");
+        return $repository->getCommits();
     }
 
 }
