@@ -12,7 +12,7 @@ class RepositoryCollaterAllOS extends Base {
     public $architectures = array("any") ;
 
     // Model Group
-    public $modelGroup = array("repositoryCollater") ;
+    public $modelGroup = array("RepositoryCollater") ;
 
     public function getRepository($pipe = null) {
         if ($pipe != null) { $this->params["item"] = $pipe ; }
