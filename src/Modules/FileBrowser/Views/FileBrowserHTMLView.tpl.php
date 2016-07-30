@@ -18,12 +18,12 @@
                     </a>
                 </li>
                 <li>
-                    <a href="index.php?control=BuildList&action=show"class="hvr-bounce-in">
+                    <a href="index.php?control=RepositoryList&action=show"class="hvr-bounce-in">
                         <i class="fa fa-home hvr-bounce-in"></i>  Repository Home
                     </a>
                 </li>
                 <li>
-                    <a href="/index.php?control=BuildList&amp;action=show"class="hvr-bounce-in">
+                    <a href="/index.php?control=RepositoryList&amp;action=show"class="hvr-bounce-in">
                         <i class="fa fa-bars hvr-bounce-in"></i> All Repositories
                     </a>
                 </li>
@@ -35,19 +35,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="index.php?control=BuildMonitor&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>"class="hvr-bounce-in">
+                    <a href="index.php?control=RepositoryMonitor&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>"class="hvr-bounce-in">
                         <i class="fa fa-bar-chart-o hvr-bounce-in"></i> Monitors
                     </a>
                 </li>
                 <li>
-                    <a href="index.php?control=PipeRunner&action=history&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>"class="hvr-bounce-in">
+                    <a href="index.php?control=RepositoryHistory&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>"class="hvr-bounce-in">
                         <i class="fa fa-history hvr-bounce-in"></i> History <span class="badge"></span>
-                    </a>
-                </li>
-                
-                <li>
-                    <a href="/index.php?control=FileBrowser&action=start&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>"class="hvr-bounce-in">
-                        <i class="fa fa-sign-in fa-fw hvr-bounce-in"></i> Run Again
                     </a>
                 </li>
             </ul>
@@ -58,7 +52,7 @@
 
          <div class="col-lg-9">
                     <div class="well well-lg">
-<!--            <h2 class="text-uppercase text-light"><a href="/"> Build - Pharaoh Tools </a></h2>-->
+<!--            <h2 class="text-uppercase text-light"><a href="/"> Repository - Pharaoh Tools </a></h2>-->
 
                         <?php echo $this->renderLogs() ; ?>
 
