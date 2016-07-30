@@ -41,18 +41,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="index.php?control=PipeRunner&action=history&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>"class="hvr-bounce-in">
+                    <a href="index.php?control=RepositoryHistory&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>"class="hvr-bounce-in">
                         <i class="fa fa-history fa-fw hvr-bounce-in""></i> History <span class="badge"></span>
                     </a>
                 </li>
                 <li>
                     <a href="index.php?control=RepositoryHome&action=delete&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
                         <i class="fa fa-trash fa-fw hvr-bounce-in""></i> Delete
-                    </a>
-                </li>
-                <li>
-                    <a href="index.php?control=PipeRunner&action=start&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
-                        <i class="fa fa-sign-in fa-fw hvr-bounce-in""></i> Run Now
                     </a>
                 </li>
             </ul>
@@ -79,35 +74,8 @@
 
                 <div class="pipe-now-status-block pipe-block">
                     <h4 class="propertyTitle">Repository Status Currently:</h4>
-                    <?php
-                    if ($pageVars["data"]["repository"]["last_status"]===true) { $sclass = "good" ;}
-                    else if ($pageVars["data"]["repository"]["last_status"]===false) { $sclass =  "bad" ; }
-                    else { $sclass = "unknown" ; } ?>
-                    </h3>
-
-                    <div class="current_status current_status_<?php echo $sclass ; ?>">
-                        <h3>
-                            Status:
-                        <?php
-                            echo ucfirst($sclass) ; ?>
-                        </h3>
-                    </div>
-
                 </div>
 
-                <div class="alert alert-info">
-                    <h4>Running Repositories </h4>
-                    <div id="runningRepositories">
-                        <p>
-                            No builds of this repository currently being executed
-                        </p>
-                    </div>
-                </div>
-
-                <!--
-                <p>Repository Monitors:</p>
-                <div class="pipe-monitor-block pipe-block"></div>
-                -->
                 <div class="pipe-features-block pipe-block">
                     <h4 class="propertyTitle">Repository Features:</h4>
                     <div class="col-sm-12">
