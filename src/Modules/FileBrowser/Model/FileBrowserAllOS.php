@@ -78,10 +78,10 @@ class FileBrowserAllOS extends Base {
         $all_files = $scanned_files[0] ;
         $subdirectories = $scanned_files[1] ;
         $filesRay = array();
+        $keys = array_keys($all_files) ;
         for ($i=0; $i<count($all_files); $i++) {
-            if (!in_array($all_files[$i], array(".", ".."))){
-                $filesRay[$all_files[$i]] = in_array($all_files[$i], $subdirectories) ; } }
-        $keys = array_keys($filesRay) ;
+            if (!in_array($keys[$i], array(".", ".."))){
+                $filesRay[$keys[$i]] = $all_files[$keys[$i]] ; } }
         ksort($filesRay, SORT_NATURAL | SORT_FLAG_CASE ) ;
         return $filesRay ;
     }
@@ -91,34 +91,53 @@ class FileBrowserAllOS extends Base {
         $fileBrowserRelativePath = $this->getRelPath() ;
 
         $lastChar = substr($fileBrowserRelativePath, strlen($fileBrowserRelativePath)-1) ;
+//
+//        if ($lastChar == DS) {
+//            $fileBrowserRelativePath = substr($fileBrowserRelativePath, 0, strlen($fileBrowserRelativePath)-1) ; }
 
-        if ($lastChar == DS) {
-            $fileBrowserRelativePath = substr($fileBrowserRelativePath, 0, strlen($fileBrowserRelativePath)-1) ; }
-
-        var_dump("last char", $lastChar, $fileBrowserRelativePath) ;
+//        var_dump("last char", $lastChar, $fileBrowserRelativePath) ;
 
         if (is_null($identifier)) { $identifier = "master" ; }
         $command = "cd {$fileBrowserRootDir} && git ls-tree -t --name-only {$identifier} . {$fileBrowserRelativePath}" ;
-        var_dump($command) ;
+//        var_dump($command) ;
         $all_files = $this->executeAndLoad($command) ;
         $all_files_ray = explode("\n", $all_files) ;
         $new_ray=array() ;
 
-        if ($fileBrowserRelativePath !== "") {
-            var_dump("dirst davey");
-            $prefix_len = strlen($fileBrowserRelativePath) ;
-            for ($i=0; $i<count($all_files_ray); $i++) {
-                if (substr($all_files_ray[$i], 0, $prefix_len) == $fileBrowserRelativePath) {
-                    $new_ray[$i] = in_array($all_files[$i], $subdirectories) ; } } }
-        else {
-            var_dump("second dacey");
-            for ($i=0; $i<count($all_files_ray); $i++) {
-                $new_ray[$i] = in_array($all_files[$i], $subdirectories) ; } }
-
-        $command = "cd {$fileBrowserRootDir} && git ls-tree -d -t --name-only {$identifier} . {$fileBrowserRelativePath}" ;
+        $command = "cd {$fileBrowserRootDir} && git ls-tree -d -t --name-only {$identifier} . {$fileBrowserRelativePath}/" ;
         $dirs = $this->executeAndLoad($command) ;
         $dirs_ray = explode("\n", $dirs) ;
-        return array ($all_files_ray, $dirs_ray) ;
+//        var_dump("dirst davey", $command, "<br/>");
+
+        if ($fileBrowserRelativePath !== "") {
+
+            $prefix_len = strlen($fileBrowserRelativePath) ;
+
+            $new_dirs_ray = array() ;
+            foreach ($dirs_ray as $one_dir) {
+                $cur_prefix = substr($one_dir, 0, $prefix_len) ;
+//                var_dump("dirst davey", "subs", $cur_prefix, "fb", $fileBrowserRelativePath, "<br/>");
+                if ($cur_prefix == $fileBrowserRelativePath) {
+                    $cur_suffix = substr($one_dir, $prefix_len) ;
+                    $new_dirs_ray[] = $cur_suffix ; } }
+
+//            var_dump("ndr", $new_dirs_ray, "<br/>");
+
+            foreach ($all_files_ray as $one_file) {
+                $cur_prefix = substr($one_file, 0, $prefix_len) ;
+//                var_dump("dirst davey", "subs", $cur_prefix, "fb", $fileBrowserRelativePath, "<br/>");
+                if ($cur_prefix == $fileBrowserRelativePath) {
+
+                    $one_file = substr($one_file, $prefix_len) ;
+                    $is_dir = (in_array($one_file, $new_dirs_ray)==true) ? true : false ;
+                    $new_ray[$one_file] = $is_dir ; } } }
+        else {
+            foreach ($all_files_ray as $one_file) {
+                $is_dir = (in_array($one_file, $dirs_ray)==true) ? true : false ;
+//                var_dump("second dacey", $one_file, $is_dir, "<br/>");
+                $new_ray[$one_file] = $is_dir ; } }
+//        var_dump("nr", $new_ray, $dirs_ray, "<br/>");
+        return array ($new_ray, $dirs_ray) ;
     }
 
 }
