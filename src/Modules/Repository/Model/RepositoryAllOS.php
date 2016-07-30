@@ -24,7 +24,7 @@ class RepositoryAllOS extends Base {
 
     public function getRepository($line) {
         $repositoryFactory = new Repository();
-        $repositoryCollater = $repositoryFactory->getModel($this->params, "repositoryCollater") ;
+        $repositoryCollater = $repositoryFactory->getModel($this->params, "RepositoryCollater") ;
         $repository = $repositoryCollater->getRepository($line);
         $ret = $repository ;
         return $ret ;
@@ -32,7 +32,7 @@ class RepositoryAllOS extends Base {
 
     public function saveRepository($line) {
         $repositoryFactory = new Repository();
-        $repositorySaver = $repositoryFactory->getModel($this->params, "repositorySaver") ;
+        $repositorySaver = $repositoryFactory->getModel($this->params, "RepositorySaver") ;
         $repository = $repositorySaver->getRepository($line);
         $ret = $repository ;
         return $ret ;
