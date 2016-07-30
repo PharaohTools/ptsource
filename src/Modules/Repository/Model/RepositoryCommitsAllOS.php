@@ -61,22 +61,19 @@ class RepositoryCommitsAllOS extends Base {
 
     private function getCommitsData() {
 
+//        $command = "cd {$fileBrowserRootDir} && gitjson ls-tree -d -t --name-only {$identifier} . {$fileBrowserRelativePath}/" ;
+//        $dirs = $this->executeAndLoad($command) ;
+//        $dirs_ray = explode("\n", $dirs) ;
 
-
-
-        $command = "cd {$fileBrowserRootDir} && git ls-tree -d -t --name-only {$identifier} . {$fileBrowserRelativePath}/" ;
-        $dirs = $this->executeAndLoad($command) ;
-        $dirs_ray = explode("\n", $dirs) ;
-
-        $settings = array();
-        $settingsFile = REPODIR.DS.$this->params["item"].DS.'settings' ;
-        if (file_exists($settingsFile)) {
-            $settingsFileData =  file_get_contents($settingsFile) ;
-            $settings = json_decode($settingsFileData, true) ; }
+        $commits = array();
+        $commits_available = true ;
+        if ( $commits_available == true ) {
+            $commits_json = file_get_contents($commits_file) ;
+            $commits = json_decode($settingsFileData, true) ; }
         else {
             $loggingFactory = new \Model\Logging() ;
             $logging = $loggingFactory->getModel($this->params) ;
-            $logging->log("No settings file available in repository ".$this->params["item"], $this->getModuleName()) ; }
+            $logging->log("No commits available in repository ".$this->params["item"], $this->getModuleName()) ; }
         return array("commits" => $commits) ;
     }
 
