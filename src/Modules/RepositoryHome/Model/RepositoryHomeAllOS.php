@@ -18,6 +18,7 @@ class RepositoryHomeAllOS extends Base {
         $ret["repository"] = $this->getRepository();
         $ret["features"] = $this->getRepositoryFeatures();
         $ret["history"] = $this->getCommitHistory();
+        $ret = array_merge($ret, $this->getIdentifier()) ;
         return $ret ;
     }
 
@@ -31,6 +32,13 @@ class RepositoryHomeAllOS extends Base {
         $repository = $repositoryFactory->getModel($this->params);
         $r = $repository->getRepository($this->params["item"]);
         return $r ;
+    }
+
+    public function getIdentifier() {
+        // @todo get default branch if there is one
+        if (!isset($this->params["identifier"])) { $this->params["identifier"] = "master" ; }
+        $identifier = array("identifier" => $this->params["identifier"]);
+        return $identifier ;
     }
 
     public function getRepositoryFeatures() {
