@@ -2,7 +2,7 @@
 
 Namespace Info;
 
-class PollSCMInfo extends PTConfigureBase {
+class MirrorRepositoryInfo extends PTConfigureBase {
 
     public $hidden = false;
 
@@ -13,11 +13,11 @@ class PollSCMInfo extends PTConfigureBase {
     }
 
     public function routesAvailable() {
-        return array( "PollSCM" => array_merge(parent::routesAvailable(), array("help") ) );
+        return array( "MirrorRepository" => array_merge(parent::routesAvailable(), array("help") ) );
     }
 
     public function routeAliases() {
-        return array("pollscm"=>"PollSCM");
+        return array("mirrorepository"=>"MirrorRepository");
     }
 
     public function events() {
@@ -25,22 +25,24 @@ class PollSCMInfo extends PTConfigureBase {
     }
 
     public function repositorySettings() {
-        return array("poll_scm_enabled", "scm_always_allow_web", "git_repository_url", "git_branch", "git_privkey_path",
-            "cron_string");
+        return array("enabled", "git_repository_url", "git_branch", "git_privkey_path", "cron_string");
     }
 
     public function configuration() {
         return array(
-            "exec_delay"=> array( "type" => "text", "default" => "180", "label" => "Minimum execution delay between SCM Poll runs", ),
+            "exec_delay"=> array(
+                "type" => "text",
+                "default" => "180",
+                "label" => "Minimum execution delay between Repository Mirroring Polling runs", ),
         );
     }
 
     public function helpDefinition() {
        $help = <<<"HELPDATA"
-    This extension provides integration with PollSCM as a Build Step. It provides code
+    This extension provides integration with MirrorRepository as a Build Step. It provides code
     functionality, but no extra CLI commands.
 
-    PollSCM
+    MirrorRepository
 
 HELPDATA;
       return $help ;

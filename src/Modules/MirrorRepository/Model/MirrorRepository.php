@@ -2,6 +2,6 @@
 
 Namespace Model;
 
-class PollSCM extends BaseModelFactory {
+class MirrorRepository extends BaseModelFactory {
 
 }
