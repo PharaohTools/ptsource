@@ -23,17 +23,11 @@ class MirrorRepositoryLinuxUnix extends Base {
 
     public function getSettingFormFields() {
         $ff = array(
-            "poll_scm_enabled" =>
+            "enabled" =>
             array(
                 "type" => "boolean",
                 "optional" => true,
-                "name" => "Enable Polling of SCM Server?"
-            ),
-            "scm_always_allow_web" =>
-            array(
-                "type" => "boolean",
-                "optional" => true,
-                "name" => "Always allow builds from web interface, even without remote changes?"
+                "name" => "Enable Mirroring of another Repository?"
             ),
             "git_repository_url" =>
             array(
@@ -67,6 +61,7 @@ class MirrorRepositoryLinuxUnix extends Base {
         return array_keys($this->getEvents());
     }
 
+    // @todo need thee cron execution event to do this
     public function getEvents() {
         $ff = array(
             "prepareBuild" => array(
