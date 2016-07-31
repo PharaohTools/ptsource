@@ -21,7 +21,7 @@ class RegistryStore {
     }
 
     public static function getValue($variable) {
-        return self::$store[$variable] ;
+        return isset(self::$store[$variable]) ? self::$store[$variable] : null ;
     }
 
 }
