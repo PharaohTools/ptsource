@@ -14,10 +14,11 @@ class RepositoryCommitsAllOS extends Base {
     // Model Group
     public $modelGroup = array("RepositoryCommits") ;
 
-    public function getCommits($repository=null, $amount=null, $page=null) {
+    public function getCommits($repository=null, $amount=null, $page=null, $identifier=null) {
         if ($repository != null) { $this->params["item"] = $repository ; }
         if ($amount != null) { $this->params["amount"] = $amount ; }
         if ($page != null) { $this->params["page"] = $page ; }
+        if ($identifier != null) { $this->params["identifier"] = $identifier ; }
         $r = $this->collate();
         return $r ;
     }
@@ -27,6 +28,7 @@ class RepositoryCommitsAllOS extends Base {
         $collated = array_merge($collated, $this->getItem()) ;
         $collated = array_merge($collated, $this->getAmount()) ;
         $collated = array_merge($collated, $this->getPage()) ;
+        $collated = array_merge($collated, $this->getIdentifier()) ;
         $collated = array_merge($collated, $this->getCommitsData()) ;
         return $collated ;
     }
@@ -37,44 +39,34 @@ class RepositoryCommitsAllOS extends Base {
     }
 
     public function getAmount() {
-        if (!isset($this->params["amount"])) { $this->params["amount"] = 1 ; }
+        if (!isset($this->params["amount"])) { $this->params["amount"] = 100 ; }
         $amount = array("amount" => $this->params["amount"]);
         return $amount ;
     }
 
     public function getPage() {
-        if (!isset($this->params["page"])) { $this->params["page"] = 1 ; }
+        if (!isset($this->params["page"])) { $this->params["page"] = 0 ; }
         $page = array("page" => $this->params["page"]);
         return $page ;
     }
 
-    private function getLastRun() {
-        $file = REPODIR.DS.$this->params["item"].DS.'historyIndex';
-        if ($historyIndex = file_get_contents($file)) {
-            $historyIndex = json_decode($historyIndex, true);
-            krsort($historyIndex);
-            // @todo this foreach doesn't make sense, kinda, but is it actually any quicker to change, it loops once anyway
-            foreach ($historyIndex as $run=>$val) {
-                return array('time' => $historyIndex[$run]['start'], 'repository' => $run) ; } }
-        return array('time' => false, 'repository' => 0) ;
+    public function getIdentifier() {
+        // @todo get default branch if there is one
+        if (!isset($this->params["identifier"])) { $this->params["identifier"] = "master" ; }
+        $identifier = array("identifier" => $this->params["identifier"]);
+        return $identifier ;
     }
 
     private function getCommitsData() {
-
-//        $command = "cd {$fileBrowserRootDir} && gitjson ls-tree -d -t --name-only {$identifier} . {$fileBrowserRelativePath}/" ;
-//        $dirs = $this->executeAndLoad($command) ;
-//        $dirs_ray = explode("\n", $dirs) ;
-
-        $commits = array();
-        $commits_available = true ;
-        if ( $commits_available == true ) {
-            $commits_json = file_get_contents($commits_file) ;
-            $commits = json_decode($settingsFileData, true) ; }
-        else {
-            $loggingFactory = new \Model\Logging() ;
-            $logging = $loggingFactory->getModel($this->params) ;
-            $logging->log("No commits available in repository ".$this->params["item"], $this->getModuleName()) ; }
-        return array("commits" => $commits) ;
+        $skip_num = $this->params["page"] * $this->params["amount"] ;
+        $command  = "cd '".REPODIR.DS.$this->params["item"].DS."' && git log {$this->params["identifier"]} " ;
+        $command .= "-n {$this->params["amount"]} " ;
+        $command .= "--skip={$skip_num} " ;
+        $command .= "--pretty=format:'{%n  \"commit\": \"%H\",%n  \"author\": \"%an <%ae>\",%n  \"date\": \"%ad\",%n  \"message\": \"%f\"%n},' " ;
+        $command .= "$@ | perl -pe 'BEGIN{print \"[\"}; END{print \"]\\n\"}' | perl -pe 's/},]/}]/' " ;
+        $commits = $this->executeAndLoad($command) ;
+        $dirs_json = json_decode($commits, TRUE) ;
+        return array("commits" => $dirs_json) ;
     }
 
 }
