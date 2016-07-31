@@ -88,19 +88,18 @@ class View {
         return $lmsg ;
     }
 
-    private function renderWidgetPosition() {
+    private function renderWidgetPosition($widget, $position) {
         $registry_values = new \Model\RegistryStore();
-        $logs = $registry_values::getValue("logs") ;
-        if (count($logs)>0) {
-            $lmsg = '
-            <div class="btn btn-info btn-sm pharaoh-message">
-                <a class="close" data-dismiss="alert">×</a> ';
-            foreach ($logs as $log) {
-                $lmsg .= "{$log}<br/>" ; }
-            $lmsg .= ' </div> ' ; }
+        $widgets = $registry_values::getValue("widgets") ;
+//        var_dump("w", $widgets, "p", $position) ;
+        if (isset($widgets[$position]) && count($widgets[$position])>0) {
+            $full_widget_position  = '<div class="'.$widget.' '.$position.' '.$widget.'_'.$position.'">';
+            foreach ($widgets[$position] as $widget_in_position) {
+                $full_widget_position .= $widget_in_position ; }
+            $full_widget_position .= '</div> ' ; }
         else {
-            $lmsg = "" ; }
-        return $lmsg ;
+            $full_widget_position = "" ; }
+        return $full_widget_position ;
     }
 
   public function loadViewFile($viewFileName, $pageVars, $templateData=null) {
