@@ -22,7 +22,7 @@ class StandardFeaturesLinuxUnix extends Base {
 
     public function getSettingFormFields() {
         $ff = array(
-            "stadard_features_enabled" =>
+            "enabled" =>
             array(
                 "type" => "boolean",
                 "optional" => true,
