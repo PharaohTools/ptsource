@@ -46,6 +46,16 @@
     width: 30% ;
 }
 
+.cellRowFeatures .repository-feature {
+    max-width: 20% ;
+    float: left ;
+    display: inline-block ;
+}
+
+.cellRowFeatures .repository-feature img {
+    max-width: 100% ;
+}
+
 .cellRowGraphs {
     width: 15% ;
 }
