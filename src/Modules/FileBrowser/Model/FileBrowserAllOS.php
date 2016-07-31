@@ -89,25 +89,18 @@ class FileBrowserAllOS extends Base {
     private function gitScanDir($fileBrowserRootDir, $identifier=null) {
 
         $fileBrowserRelativePath = $this->getRelPath() ;
-
         $lastChar = substr($fileBrowserRelativePath, strlen($fileBrowserRelativePath)-1) ;
-//
-//        if ($lastChar == DS) {
-//            $fileBrowserRelativePath = substr($fileBrowserRelativePath, 0, strlen($fileBrowserRelativePath)-1) ; }
-
-//        var_dump("last char", $lastChar, $fileBrowserRelativePath) ;
 
         if (is_null($identifier)) { $identifier = "master" ; }
         $command = "cd {$fileBrowserRootDir} && git ls-tree -t --name-only {$identifier} . {$fileBrowserRelativePath}" ;
-//        var_dump($command) ;
         $all_files = $this->executeAndLoad($command) ;
         $all_files_ray = explode("\n", $all_files) ;
         $new_ray=array() ;
 
-        $command = "cd {$fileBrowserRootDir} && git ls-tree -d -t --name-only {$identifier} . {$fileBrowserRelativePath}/" ;
+        $command = "cd {$fileBrowserRootDir} && git ls-tree -d -t --name-only {$identifier} . {$fileBrowserRelativePath}" ;
         $dirs = $this->executeAndLoad($command) ;
         $dirs_ray = explode("\n", $dirs) ;
-//        var_dump("dirst davey", $command, "<br/>");
+//        $dirs_ray = array_unique($dirs_ray, array("")) ;
 
         if ($fileBrowserRelativePath !== "") {
 
@@ -116,27 +109,24 @@ class FileBrowserAllOS extends Base {
             $new_dirs_ray = array() ;
             foreach ($dirs_ray as $one_dir) {
                 $cur_prefix = substr($one_dir, 0, $prefix_len) ;
-//                var_dump("dirst davey", "subs", $cur_prefix, "fb", $fileBrowserRelativePath, "<br/>");
-                if ($cur_prefix == $fileBrowserRelativePath) {
-                    $cur_suffix = substr($one_dir, $prefix_len) ;
-                    $new_dirs_ray[] = $cur_suffix ; } }
-
-//            var_dump("ndr", $new_dirs_ray, "<br/>");
+                if ($one_dir !== "") {
+                    if ($cur_prefix == $fileBrowserRelativePath) {
+                        $cur_suffix = substr($one_dir, $prefix_len) ;
+                        $new_dirs_ray[] = $cur_suffix ; } } }
 
             foreach ($all_files_ray as $one_file) {
                 $cur_prefix = substr($one_file, 0, $prefix_len) ;
-//                var_dump("dirst davey", "subs", $cur_prefix, "fb", $fileBrowserRelativePath, "<br/>");
-                if ($cur_prefix == $fileBrowserRelativePath) {
-
+                if ($cur_prefix == $fileBrowserRelativePath && $one_file !== "") {
                     $one_file = substr($one_file, $prefix_len) ;
                     $is_dir = (in_array($one_file, $new_dirs_ray)==true) ? true : false ;
                     $new_ray[$one_file] = $is_dir ; } } }
         else {
             foreach ($all_files_ray as $one_file) {
                 $is_dir = (in_array($one_file, $dirs_ray)==true) ? true : false ;
-//                var_dump("second dacey", $one_file, $is_dir, "<br/>");
-                $new_ray[$one_file] = $is_dir ; } }
-//        var_dump("nr", $new_ray, $dirs_ray, "<br/>");
+//                var_dump("<pre> second dacey", $one_file, $is_dir, "<br/> </pre>");
+                if ($one_file !== "") {
+                    $new_ray[$one_file] = $is_dir ; } } }
+//        var_dump("<pre> nr", $new_ray, $dirs_ray, $command, "<br/> </pre>");
         return array ($new_ray, $dirs_ray) ;
     }
 
