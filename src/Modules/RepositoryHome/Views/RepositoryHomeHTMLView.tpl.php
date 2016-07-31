@@ -87,12 +87,10 @@
                 <div class="pipe-history-block pipe-block">
                     <h4 class="propertyTitle">Repository History:</h4>
                     <?php
-//                    var_dump("<pre>", $pageVars["data"]["history"], "</pre>") ;
                     if (isset($pageVars["data"]["history"]) && count($pageVars["data"]["history"])>0 ) {
                     $i = 1;
 
                     foreach ($pageVars["data"]["history"]["commits"] as $commitDetails) {
-
 //                    var_dump("cd", $commitDetails) ;
 
                                 ?>
