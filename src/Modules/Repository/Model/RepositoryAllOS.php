@@ -58,16 +58,23 @@ class RepositoryAllOS extends Base {
                 $moduleFactory = new $cname();
                 $moduleRepositoryFeature = $moduleFactory->getModel($this->params, "RepositoryFeature");
                 // @ todo maybe an interface check? is object something?
-                if (!is_array($values)) {
-                    $values=array("default_fieldset" =>array(0 => array($values))) ; }
-                    if ($hash !== 0) { $valueset["hash"] = $hash ; }
-                    $moduleRepositoryFeature->setValues($valueset) ;
-                    $moduleRepositoryFeature->setRepository($repository) ;
-                    $collated = $moduleRepositoryFeature->collate();
+//                $values=array("default_fieldset" =>array(0 => array($values))) ; }
+                if (!isset($values["hash"])) { $values["hash"] = "12345" ; }
+                $moduleRepositoryFeature->setValues($values) ;
+                $moduleRepositoryFeature->setRepository($repository) ;
+                $collated = $moduleRepositoryFeature->collate();
+                if (array_key_exists(0, $collated)==true) {
+                    foreach ($collated as $one_collated) {
+                        $enabledFeatures[$i]["module"] = $key  ;
+                        $enabledFeatures[$i]["values"] = $values  ;
+                        $enabledFeatures[$i]["model"] = $one_collated ;
+                        $i++; } }
+                else {
                     $enabledFeatures[$i]["module"] = $key  ;
-                    $enabledFeatures[$i]["values"] = $valueset  ;
+                    $enabledFeatures[$i]["values"] = $values  ;
                     $enabledFeatures[$i]["model"] = $collated  ;
-                    $i++; } }
+                    $i++; } } }
+
         return $enabledFeatures ;
     }
 
