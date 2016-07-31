@@ -52,7 +52,7 @@
                 </li>
                 <li>
                     <a href="/index.php?control=RepositoryHistory&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
-                        <i class="fa fa-history fa-fw hvr-bounce-in"></i> History <span class="badge"><?php echo $pageVars["data"]["history_count"] ; ?></span>
+                        <i class="fa fa-history fa-fw hvr-bounce-in"></i> History
                     </a>
                 </li>
                 <li>
@@ -186,142 +186,6 @@
                 </div>
 
                                <hr />
-                    <div class="form-group">
-                        <div class="col-sm-10">
-                            <h3>Build Steps</h3>
-                        </div>
-                    </div>
-
-                    <ul class="form-group ui-sortable" id="sortableSteps">
-
-                    <?php
-                        if (is_array($pageVars["data"]["repository"]["steps"]) && count($pageVars["data"]["repository"]["steps"])>0) {
-
-                            foreach ($pageVars["data"]["repository"]["steps"] as $hash => $one_build_step) {
-                                echo '<li class="form-group  bg-primary singleBuildStep" id="step'.$hash.'">'."\n" ;
-                                echo '  <h3>'.$one_build_step["module"].'</h3>'."\n" ;
-//                                echo '  <div class="col-sm-12">'."\n" ;
-                                echo '  <div class="form-group col-sm-12">'."\n" ;
-//                                echo '    <label for="steps['.$hash.'][data]" class="control-label step_subtitle">'.$one_build_step["title"].'</label>'."\n" ;
-//                                echo '  	<div>'."\n" ;
-
-                                echo '       <p><strong>Hash: </strong>'.$hash.'</p>';
-//                                echo '      <p><strong>Module: </strong>'.$one_build_step["module"].'</p>';
-                                echo '      <p><strong>Step Type: </strong>'.$one_build_step["steptype"].'</p>';
-                                echo '      <input type="hidden" id="steps['.$hash.'][module]" name="steps['.$hash.'][module]" value="'.$one_build_step["module"].'" />';
-                                echo '      <input type="hidden" id="steps['.$hash.'][steptype]" name="steps['.$hash.'][steptype]" value="'.$one_build_step["steptype"].'" />';
-                                echo '  <div>'."\n" ;
-//                                echo ' 		<label for="'.$one_build_step["steptype"].'" class="col-sm-2 control-label text-left">'.$one_build_step["steptype"].'</label>';
-                                echo '		<div class="col-sm-14">';
-                                if ($one_build_step["module"] == "ConditionalStepRunner" || $one_build_step["module"] == "Plugin") {
-                                    foreach ($pageVars['data']['builders'][$one_build_step["module"]]['fields'][$one_build_step["steptype"]] as $data ) {
-                                        echo '      <label for="'.$data['name'].'">'.$data['name'].'</label>';
-                                        $action = "";
-                                        if (isset($data['action'])) { $action = $data['action'].'="'.$data['funName'].'(\''.$hash.'\')"'; }
-
-                                        if ($data['type'] == 'text' || $data['type'] == 'time' || $data['type'] == 'number') {
-                                            echo '      <input id="steps['.$hash.']['.$data['slug'].']" name="steps['.$hash.']['.$data['slug'].']" value="'.$one_build_step[$data['slug']].'" class="form-control" type="'.$data['type'].'" />';
-                                        }
-                                        if ($data['type'] == 'password') {
-                                            echo '      <input id="steps['.$hash.']['.$data['slug'].']" name="steps['.$hash.']['.$data['slug'].']" class="form-control" type="password" class="form-control"/>';
-                                        }
-                                        if ($data['type'] == 'textarea') {
-                                            echo '      <textarea id="steps['.$hash.']['.$data['slug'].']" name="steps['.$hash.']['.$data['slug'].']" class="form-control">'.$one_build_step[$data['slug']].'</textarea>';
-                                        }
-                                        if ($data["type"] == "dropdown") {
-                                            echo '<select id="steps['.$hash.']['.$data['slug'].']" name="steps['.$hash.']['.$data['slug'].']" '.$action.' class="form-control">';
-                                            foreach ($data['data'] as $key => $value) {
-                                                $selected = ($one_build_step[$data['slug']] == $key)? 'selected' : '';
-                                                echo '<option '.$selected.' value="'.$key.'">'.$value.'</option>';
-                                            }
-                                            echo '</select>';
-                                        }
-                                        if ($data["type"] == "radio" || $data["type"] == "checkbox") {
-                                            foreach ($data['data'] as $key => $value) {
-                                                $selected = ($one_build_step[$data['slug']] == $key)? 'checked="checked"' : '';
-                                                echo ' <input type="'.$data["type"].'" name="steps['.$hash.']['.$data["slug"].']" value="'.$key.'" '.$selected.' class="form-control">'.$value;
-                                            }
-                                        }
-                                        if ($data["type"] == "div") {
-                                            echo '<div id="'.$data["id"].$hash.'"></div>';
-                                        }
-                                        if (isset($data["funName"]))
-                                            echo '<script>
-                                                    $(document).ready(function() {
-                                                        window.onload = CONDaysOfWeekDays(\''.$hash.'\');
-                                                    });
-                                                  </script>';
-                                    }
-                                }
-                                else {
-//                                    var_dump($pageVars['data']['builders'][$one_build_step["module"]]['fields'][$one_build_step["steptype"]]["type"] ) ;
-                                    $data = $pageVars['data']['builders'][$one_build_step["module"]]['fields'][$one_build_step["steptype"]] ;
-
-
-                                    if ($data['type'] == 'text' || $data['type'] == 'time' || $data['type'] == 'number') {
-                                        echo '      <input id="steps['.$hash.'][data]" name="steps['.$hash.'][data]" value="'.$one_build_step["data"].'" class="form-control" type="'.$data['type'].'" />';
-                                    }
-
-                                    if ($data['type'] == 'textarea') {
-//                                        echo '      <textarea id="steps['.$hash.']['.$data['slug'].']" name="steps['.$hash.']['.$data['slug'].']" class="form-control">'.$one_build_step[$data['slug']].'</textarea>';
-                                        echo '      <textarea id="steps['.$hash.'][data]" name="steps['.$hash.'][data]" class="form-control buildStepTextArea">'.$one_build_step["data"].'</textarea>';
-                                    }
-                                    if ($data["type"] == "dropdown") {
-                                        echo '<select id="steps['.$hash.'][data]" name="steps['.$hash.'][data]" '.$action.' class="form-control">';
-                                        foreach ($data['data'] as $key => $value) {
-                                            $selected = ($one_build_step["data"] == $key)? 'selected' : '';
-                                            echo '<option '.$selected.' value="'.$key.'">'.$value.'</option>';
-                                        }
-                                        echo '</select>';
-                                    }
-                                    if ($data["type"] == "radio") {
-
-//                                        foreach ($data['data'] as $key => $value) {
-                                        $selected = ($one_build_step["data"] == "on")? 'checked="checked"' : '';
-                                        echo ' <input type="'.$data["type"].'" id="steps['.$hash.'][data]" name="steps['.$hash.'][data]" value="'.$key.'" '.$selected.' class="form-control">'.$value;
-//                                        }
-                                    }
-                                    if ($data["type"] == "boolean" || $data["type"] == "checkbox") {
-
-//                                        foreach ($data['data'] as $key => $value) {
-                                        $selected = ($one_build_step["data"] == "on")? 'checked="checked"' : '';
-                                        echo ' <input type="checkbox" id="steps['.$hash.'][data]" name="steps['.$hash.'][data]" '.$selected.' class="form-control">'.$value;
-//                                        }
-                                    }
-
-
-                                }
-                                echo '  </div>';
-//                                echo '  </div>';
-                                echo '  <div class="col-sm-12">'  ;
-                                echo '    <a class="btn btn-info" onclick="deleteStepField(\''.$hash.'\')">Delete Step</a>'."\n" ;
-                                echo '  </div>';
-//                                echo '  </div>';
-//                                echo '  </div>';
-                                echo '</li>'; } } ?>
-                                    
-                    </ul> <!-- sortable end -->
-
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <h5>Add New Step</h5>
-                            <div class="selectorWrap" id="new_step_module_selector_wrap">
-                                <select name="new_step_module_selector" id="new_step_module_selector" onchange="changeModule(this)">
-                                    <option value="nomoduleselected" selected="selected">-- Select Module --</option>
-                                    <?php
-                                        foreach ($pageVars["data"]["stepFields"] as $builderName => $builderBits) {
-                                            echo '  <option value="'.strtolower($builderName).'">'.$builderName.'</option>'; }
-                                    ?>
-                                </select>
-                            </div>
-                            <div class="selectorWrap" id="new_step_type_selector_wrap">
-                            </div>
-                            <div class="buttonWrap" id="new_step_button_wrap">
-                            </div>
-                            <div class="selectorWrap" id="new_step_wrap">
-                            </div>
-                        </div>
-                    </div>
 
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
@@ -354,18 +218,6 @@
 
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
 <link rel="stylesheet" type="text/css" href="/Assets/Modules/RepositoryConfigure/css/repositoryconfigure.css">
-<script type="text/javascript">
-	savedSteps = <?php echo json_encode($pageVars["data"]["repository"]["steps"]) ; ?> ;
-    steps = <?php echo json_encode($pageVars["data"]["fields"]) ; ?> ;
-</script>
-<script type="text/javascript">
-
-    $(function() {
-        $( "#sortableSteps" ).sortable();
-       // $( "#sortableSteps" ).disableSelection();
-    });
-</script>
-
 
 <?php
 
@@ -390,9 +242,12 @@ function displaySingleField($one_config_slug, $one_conf_tails, $fieldSlug, $fiel
                 $onoff = "off" ; }
             else {
                 if ($val==null) {
-                $onoff = (!isset($onoff))
-                    ? $fieldInfo["default"]
-                    : $onoff ; } }
+                    if (isset($fieldInfo["default"])) {
+                        $onoff = (!isset($onoff))
+                            ? $fieldInfo["default"]
+                            : $onoff ; }
+                    else {
+                        $onoff = "off" ; } } }
             if ($onoff === "on") { $onoff = 'checked="checked"'."\n" ;}
             else {$onoff = "" ;}
             echo '  <div class="col-sm-12 field_boolean'.$hash_score_string.'">'."\n" ;
@@ -406,10 +261,11 @@ function displaySingleField($one_config_slug, $one_conf_tails, $fieldSlug, $fiel
                     $val = $settings[$one_config_slug][$fieldSlug];  }
                 if (!isset($val)) {
                     $val = $one_conf_tails["default"] ; } }
+            $label = (isset($one_conf_tails["label"])) ? $one_conf_tails["label"] : "" ;
             echo '  <div class="col-sm-12 field_text'.$hash_score_string.'">'."\n" ;
             echo '      <label for="settings['.$one_config_slug.']'.$field_slug_hash_string.'['.$fieldSlug.']" class="control-label text-left">'.$fieldInfo["name"].':</label>'."\n" ;
             echo '      <input name="settings['.$one_config_slug.']'.$field_slug_hash_string.'['.$fieldSlug.']" id="settings['.$one_config_slug.']'.$field_slug_hash_string.'['.$fieldSlug.']" type="text" class="form-control '.$fieldSlug.'" value="'.
-                $val.'" placeholder="'.$one_conf_tails["label"].'" />'."\n" ;
+                $val.'" placeholder="'.$label.'" />'."\n" ;
             echo '  </div>'."\n" ;
             break ;
         case "textarea" :
@@ -418,10 +274,11 @@ function displaySingleField($one_config_slug, $one_conf_tails, $fieldSlug, $fiel
                     $val = $settings[$one_config_slug][$fieldSlug];  }
                 if (!isset($val)) {
                     $val = $one_conf_tails["default"] ; } }
+            $label = (isset($one_conf_tails["label"])) ? $one_conf_tails["label"] : "" ;
             echo '  <div class="col-sm-12 field_textarea'.$hash_score_string.'">'."\n" ;
             echo '      <label for="settings['.$one_config_slug.']'.$field_slug_hash_string.'['.$fieldSlug.']" class="control-label text-left">'.$fieldInfo["name"].':</label>'."\n" ;
             echo '      <textarea name="settings['.$one_config_slug.']'.$field_slug_hash_string.'['.$fieldSlug.']" id="settings['.$one_config_slug.']'.$field_slug_hash_string.'['.$fieldSlug.']" type="text" class="form-control '.$fieldSlug.'" placeholder="'.
-                $one_conf_tails["label"].'" >'.$val.'</textarea>'."\n" ;
+                $label.'" >'.$val.'</textarea>'."\n" ;
             echo '  </div>'."\n" ;
             break ;
         case "options" :
