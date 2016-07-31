@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class StandardFeaturesDisplayLinkRepositoryFeatureAllOS extends Base {
+class StandardFeaturesDisplayLinkAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
