@@ -123,7 +123,7 @@ class View {
         else {
             $modulesParentDirFullPath = dirname(__FILE__).DIRECTORY_SEPARATOR."Base".DIRECTORY_SEPARATOR."Views" ;
             $modulesParentHelpDirFullPath = dirname(__FILE__).DIRECTORY_SEPARATOR."Help".DIRECTORY_SEPARATOR."Views" ;
-            $coreBaseViewFiles = scandir($modulesParentDirFullPath);
+            $coreBaseViewFiles = (is_dir($modulesParentDirFullPath)) ? scandir($modulesParentDirFullPath) : array() ;
             $coreHelpViewFiles = scandir($modulesParentHelpDirFullPath);
             foreach ($coreBaseViewFiles as $coreViewFile) {
                 if (!in_array($coreViewFile, array(".", ".."))) { // if not dot or double dot
