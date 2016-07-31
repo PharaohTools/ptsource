@@ -45,18 +45,19 @@ class RepositoryAllOS extends Base {
     }
 
     public function getRepositoryFeatures() {
-        $pipeFeatureFactory = new \Model\PipeFeature();
-        $pipeFeatureRepository = $pipeFeatureFactory->getModel($this->params, "PipeFeatureRepository") ;
-        $names = $pipeFeatureRepository->getPipeFeatureNames();
+        $repositoryFeatureFactory = new \Model\RepositoryFeature();
+        $repositoryFeatureRepository = $repositoryFeatureFactory->getModel($this->params, "RepositoryFeatureRepository") ;
+        $names = $repositoryFeatureRepository->getRepositoryFeatureNames();
         $repository = $this->getRepository($this->params["item"]);
-        $this->params["build-settings"] = $repository["settings"];
+        $this->params["repository-settings"] = $repository["settings"];
         $enabledFeatures = array() ;
         $i = 0;
         foreach ($repository["settings"] as $key => $values) {
+
             if (in_array($key, $names) && $values["enabled"] =="on") {
                 $cname = '\Model\\'.$key ;
                 $moduleFactory = new $cname();
-                $modulePipeFeature = $moduleFactory->getModel($this->params, "PipeFeature");
+                $moduleRepositoryFeature = $moduleFactory->getModel($this->params, "RepositoryFeature");
                 // @ todo maybe an interface check? is object something?
                 if (!is_array($values)) {
                     $values=array("default_fieldset" =>array(0 => array($values))) ; }
@@ -64,16 +65,14 @@ class RepositoryAllOS extends Base {
                 foreach ($values as $fieldSetTitle => $fieldSets) {
                     foreach ($fieldSets as $hash => $valueset) {
                         if ($hash !== 0) { $valueset["hash"] = $hash ; }
-                        $modulePipeFeature->setValues($valueset) ;
-                        $modulePipeFeature->setRepository($repository) ;
-                        $collated = $modulePipeFeature->collate();
+                        $moduleRepositoryFeature->setValues($valueset) ;
+                        $moduleRepositoryFeature->setRepository($repository) ;
+                        $collated = $moduleRepositoryFeature->collate();
                         $enabledFeatures[$i]["module"] = $key  ;
                         $enabledFeatures[$i]["values"] = $valueset  ;
                         $enabledFeatures[$i]["model"] = $collated  ;
-                        $i++; }
-
-                }
-            }}
+                        $i++; } } }
+        }
         return $enabledFeatures ;
     }
 
