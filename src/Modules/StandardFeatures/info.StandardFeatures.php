@@ -2,45 +2,41 @@
 
 Namespace Info;
 
-class PollSCMInfo extends PTConfigureBase {
+class StandardFeaturesInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "Poll SCM for code changes Functionality";
+    public $name = "Standard Features for code changes Functionality";
 
     public function _construct() {
         parent::__construct();
     }
 
     public function routesAvailable() {
-        return array( "PollSCM" => array_merge(parent::routesAvailable(), array("help") ) );
+        return array( "StandardFeatures" => array_merge(parent::routesAvailable(), array("help") ) );
     }
 
     public function routeAliases() {
-        return array("pollscm"=>"PollSCM");
-    }
-
-    public function events() {
-        return array("prepareBuild");
+        return array("standardfeatures"=>"StandardFeatures");
     }
 
     public function repositorySettings() {
-        return array("poll_scm_enabled", "scm_always_allow_web", "git_repository_url", "git_branch", "git_privkey_path",
-            "cron_string");
+        return array("php_enabled", "html_enabled", "ptvirtualize_enabled", "ptconfigure_enabled",
+            "pttest_enabled", "pttrack_enabled", "ptbuild_enabled", "ptdeploy_enabled", "ptmanage_enabled");
     }
 
-    public function configuration() {
-        return array(
-            "exec_delay"=> array( "type" => "text", "default" => "180", "label" => "Minimum execution delay between SCM Poll runs", ),
-        );
-    }
+//    public function configuration() {
+//        return array(
+//            "exec_delay"=> array( "type" => "text", "default" => "180", "label" => "Minimum execution delay between SCM Poll runs", ),
+//        );
+//    }
 
     public function helpDefinition() {
        $help = <<<"HELPDATA"
-    This extension provides integration with PollSCM as a Build Step. It provides code
+    This extension provides integration with Standard Features for Projects. It provides code
     functionality, but no extra CLI commands.
 
-    PollSCM
+    StandardFeatures
 
 HELPDATA;
       return $help ;
