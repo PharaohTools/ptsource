@@ -116,7 +116,7 @@
 
                                 ?>
 
-							<div class="commitRow" id="blRow_<?php echo $repositorySlug; ?>" >
+							<div class="commitRow" id="blRow_<?php echo $commitDetails["commit"]; ?>" >
 							<div class="blCell cellRowIndex" scope="row"><?php echo $i; ?> </div>
                             <div class="blCell cellRowMessage"><a href="/index.php?control=CommitDetails&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"]; ?>&identifier=<?php echo $pageVars["data"]["identifier"] ; ?>" class="pipeName"><?php echo $commitDetails["message"]; ?>  </a> </div>
                             <div class="blCell cellRowAuthor"><a href="/index.php?control=CommitDetails&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"]; ?>&identifier=<?php echo $pageVars["data"]["identifier"] ; ?>" class="pipeName"><?php echo $commitDetails["author"]; ?>  </a> </div>
