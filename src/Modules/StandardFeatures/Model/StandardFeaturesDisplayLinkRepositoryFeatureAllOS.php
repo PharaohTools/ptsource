@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class WebsiteDisplayLinkPipeFeatureAllOS extends Base {
+class StandardFeaturesDisplayLinkRepositoryFeatureAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -12,10 +12,10 @@ class WebsiteDisplayLinkPipeFeatureAllOS extends Base {
     public $architectures = array("any") ;
 
     // Model Group
-    public $modelGroup = array("PipeFeature") ;
+    public $modelGroup = array("RepositoryFeature") ;
 
-	public $pipeFeatureValues;
-	public $pipeline;
+	public $repositoryFeatureValues;
+	public $repository;
 
 	public function collate() {
 		$collated = array() ;
@@ -26,25 +26,28 @@ class WebsiteDisplayLinkPipeFeatureAllOS extends Base {
 	}
 
 	public function setValues($vals) {
-		$this->pipeFeatureValues = $vals ;
+		$this->repositoryFeatureValues = $vals ;
 	}
 
-	public function setPipeline($pipe) {
-		$this->pipeline = $pipe ;
+	public function setRepository($repository) {
+		$this->repository = $repository ;
 	}
 
 	public function getLink() {
-		$ff = array("link" => $this->pipeFeatureValues["url"]);
+		$ff = array("link" => $this->repositoryFeatureValues["url"]);
 		return $ff ;
 	}
 
 	public function getTitle() {
-        $ff = array("title" => $this->pipeFeatureValues["title"]);
+        $ff = array("title" => $this->repositoryFeatureValues["title"]);
 		return $ff ;
 	}
 
 	public function getImage() {
-		$this->pipeFeatureValues["pipeline"] ;
+
+        var_dump("ivals:", $vals) ;
+//        if ($image == "") {}
+
 		$ff = array("image" => '/Assets/Modules/WebsiteDisplayLink/images/visit_site.png');
 		return $ff ;
 	}
