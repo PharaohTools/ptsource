@@ -16,7 +16,6 @@ class Authentication {
         $handled["control"] = $control ;
         $handled["pageVars"] = $pageVars ;
         if (!isset($mod_config["Signup"]["signup_enabled"]) || $mod_config["Signup"]["signup_enabled"]=="off") {
-            error_log("signup not enabled  ") ;
             return $handled  ; }
 
         if (!$this->isWebSapi()) {
