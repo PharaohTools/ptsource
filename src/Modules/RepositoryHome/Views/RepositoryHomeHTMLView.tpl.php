@@ -59,22 +59,12 @@
             <div class="well well-lg ">
            
             <div class="row clearfix no-margin">
-            	 <h3 class="text-uppercase text-light ">Repository</h3>
-                <!--
-                <h3><a class="lg-anchor text-light" href="">PTRepository - Pharaoh Tools <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
-                -->
-                <p> Project Name: <?php echo $pageVars["data"]["repository"]["project-name"] ; ?></p>
+            	<h3 class="text-uppercase text-light ">Repository: <strong><?php echo $pageVars["data"]["repository"]["project-name"] ; ?></strong> </h3>
                 <p> Project Slug: <?php echo $pageVars["data"]["repository"]["project-slug"] ; ?></p>
                 <p> Project Desc: <?php echo $pageVars["data"]["repository"]["project-description"] ; ?></p>
             </div>
             <hr>
             <div class="row clearfix no-margin build-home-properties">
-<!--                <h3><a class="lg-anchor text-light" href="/index.php?control=RepositoryConfigure&action=show&item=--><?php //echo $pageVars["data"]["repository"]["project-slug"] ; ?><!--">-->
-<!--                    Configure Repository: --><?php //echo $pageVars["data"]["repository"]["project-name"] ; ?><!--- <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>-->
-
-                <div class="pipe-now-status-block pipe-block">
-                    <h4 class="propertyTitle">Repository Status Currently:</h4>
-                </div>
 
                 <div class="pipe-features-block pipe-block">
                     <h4 class="propertyTitle">Repository Features:</h4>
@@ -82,14 +72,13 @@
                     <?php
                     if (isset($pageVars["data"]["features"]) &&
                         count($pageVars["data"]["features"])>0 ) {
-                        foreach ($pageVars["data"]["features"] as $build_feature) {
-//                            var_dump($build_feature);
-                            if (isset($build_feature["hidden"]) && $build_feature["hidden"] != true
-                                || !isset($build_feature["hidden"]) ) {
-                                echo '<div class="build-feature">' ;
-                                echo '<a target="_blank" href="'.$build_feature["model"]["link"].'">' ;
-                                echo  '<h3>'.$build_feature["model"]["title"].'</h3>' ;
-                                echo  '<img src="'.$build_feature["model"]["image"].'" />' ;
+                        foreach ($pageVars["data"]["features"] as $repository_feature) {
+                            if (isset($repository_feature["hidden"]) && $repository_feature["hidden"] != true
+                                || !isset($repository_feature["hidden"]) ) {
+                                echo '<div class="repository-feature">' ;
+                                echo '<a target="_blank" href="'.$repository_feature["model"]["link"].'">' ;
+                                echo  '<h3>'.$repository_feature["model"]["title"].'</h3>' ;
+                                echo  '<img src="'.$repository_feature["model"]["image"].'" />' ;
                                 echo "</a>" ;
                                 echo '</div>' ; } } }
                     ?>
@@ -98,12 +87,45 @@
                 <div class="pipe-history-block pipe-block">
                     <h4 class="propertyTitle">Repository History:</h4>
                     <?php
-                        if (isset($pageVars["data"]["repository"]["build_history"]) &&
-                            count($pageVars["data"]["repository"]["build_history"])>0 ) {
-                            foreach ($pageVars["data"]["repository"]["build_history"] as $build_history) {
-                                if ($moduleInfo["hidden"] != true) {
-                                    echo '<p><a href="/index.php?control=RepositoryConfigure&action=show&item=">'.$build_history["count"].
-                                        ' - '.$build_history["status"].' - '.$build_history["message"]."</p>"; } } }
+//                    var_dump("<pre>", $pageVars["data"]["history"], "</pre>") ;
+                    if (isset($pageVars["data"]["history"]) && count($pageVars["data"]["history"])>0 ) {
+                    $i = 1;
+
+                    foreach ($pageVars["data"]["history"]["commits"] as $commitDetails) {
+
+//                    var_dump("cd", $commitDetails) ;
+
+                                ?>
+
+                    <div class="commitRow" id="blRow_<?php echo $repositorySlug; ?>" >
+                        <div class="blCell cellRowIndex" scope="row"><?php echo $i; ?> </div>
+                        <div class="blCell cellRowMessage"><a href="/index.php?control=CommitDetails&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"]; ?>&identifier=<?php echo $pageVars["data"]["identifier"] ; ?>" class="pipeName"><?php echo $commitDetails["message"]; ?>  </a> </div>
+                        <div class="blCell cellRowAuthor"><a href="/index.php?control=CommitDetails&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"]; ?>&identifier=<?php echo $pageVars["data"]["identifier"] ; ?>" class="pipeName"><?php echo $commitDetails["author"]; ?>  </a> </div>
+                        <div class="blCell cellRowDate"><a href="/index.php?control=CommitDetails&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"]; ?>&identifier=<?php echo $pageVars["data"]["identifier"] ; ?>" class="pipeName"><?php echo $commitDetails["date"]; ?>  </a> </div>
+                        <div class="blCell cellRowHash"><a href="/index.php?control=CommitDetails&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"]; ?>&identifier=<?php echo $pageVars["data"]["identifier"] ; ?>" class="pipeName"><?php echo substr($commitDetails["commit"], 0, 6); ?>  </a> </div>
+                        <?php
+
+                        $i++ ;
+                        }
+                    }
+                    ?>
+                </div>
+                <div class="pipe-history-block pipe-block">
+                    <?php
+
+                    if (isset($pageVars["data"]["readme"]["exists"]) && $pageVars["data"]["readme"]["exists"] == true) {
+                        ?>
+
+                        <h4 class="propertyTitle">Readme:</h4>
+
+                        <?php
+                        if (isset($pageVars["data"]["readme"]["md"])) { echo $pageVars["data"]["readme"]["md"] ; }
+                        else if (isset($pageVars["data"]["readme"]["raw"])) { echo $pageVars["data"]["readme"]["raw"] ; }
+                        else { echo "Readme Reports that it exists but left no data." ;  }
+                        ?>
+
+                        <?php
+                    }
                     ?>
                 </div>
 
@@ -118,4 +140,5 @@
     </div>
 </div>
 <link rel="stylesheet" type="text/css" href="/Assets/Modules/RepositoryHome/css/repositoryhome.css">
+<link rel="stylesheet" type="text/css" href="/Assets/Modules/RepositoryHistory/css/repositoryhistory.css">
 <script type="text/javascript" src="/Assets/Modules/RepositoryHome/js/repositoryhome.js"></script>
