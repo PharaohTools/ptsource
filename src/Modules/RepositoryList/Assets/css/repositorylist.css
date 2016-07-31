@@ -42,22 +42,18 @@
     text-align: left;
 }
 
-.cellRowRun {
-    width: 10% ;
+.cellRowFeatures {
+    width: 30% ;
 }
 
-.cellRowStatus {
-    width: 10% ;
+.cellRowGraphs {
+    width: 15% ;
 }
 
-.cellRowSuccess {
-    width: 20% ;
+.cellRowContributors {
+    width: 15% ;
 }
 
-.cellRowFailure {
-    width: 20% ;
-}
-
-.cellRowDuration {
+.cellRowHistory {
     width: 15% ;
 }
