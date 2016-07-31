@@ -57,11 +57,27 @@
         <div class="col-lg-9">
 
             <div class="well well-lg ">
+                <?php
+
+
+                if (isset($repositoryDetails["project-name"])) {
+                    $slugOrName = $repositoryDetails["project-name"] ; }
+                else if (isset($pageVars["data"]["repository"]["project-slug"])) {
+                    $slugOrName = $pageVars["data"]["repository"]["project-slug"] ; }
+                else {
+                    $slugOrName = "Unnamed Project" ; }
+
+                if (isset($repositoryDetails["project-description"])) {
+                    $slugOrDescription = $repositoryDetails["project-description"] ; }
+                else {
+                    $slugOrDescription = "No Description configured for Project" ; }
+
+                ?>
            
             <div class="row clearfix no-margin">
-            	<h3 class="text-uppercase text-light ">Repository: <strong><?php echo $pageVars["data"]["repository"]["project-name"] ; ?></strong> </h3>
+            	<h3 class="text-uppercase text-light ">Repository: <strong><?php echo $slugOrName ; ?></strong> </h3>
                 <p> Project Slug: <?php echo $pageVars["data"]["repository"]["project-slug"] ; ?></p>
-                <p> Project Desc: <?php echo $pageVars["data"]["repository"]["project-description"] ; ?></p>
+                <p> Project Desc: <?php echo $slugOrDescription ; ?></p>
             </div>
             <hr>
             <div class="row clearfix no-margin build-home-properties">
