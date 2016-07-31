@@ -22,33 +22,11 @@ class RepositoryConfigureAllOS extends Base {
     }
 
     public function getData() {
-
-        file_put_contents("/tmp/mylog.txt", "before repository is added: ".microtime()."\n", FILE_APPEND);
-
         if (isset($this->params["item"])) { $ret["repository"] = $this->getRepository(); }
-
-        file_put_contents("/tmp/mylog.txt", "after repository is added: ".microtime()."\n", FILE_APPEND);
-        file_put_contents("/tmp/mylog.txt", "before builders are added: ".microtime()."\n", FILE_APPEND);
-
         $ret["builders"] = $this->getBuilders();
-
-        file_put_contents("/tmp/mylog.txt", "after builders are added: ".microtime()."\n", FILE_APPEND);
-        file_put_contents("/tmp/mylog.txt", "before builder settings are added: ".microtime()."\n", FILE_APPEND);
-
         $ret["settings"] = $this->getBuilderSettings();
-
-        file_put_contents("/tmp/mylog.txt", "after builder settings are added: ".microtime()."\n", FILE_APPEND);
-        file_put_contents("/tmp/mylog.txt", "before builder form fields are added: ".microtime()."\n", FILE_APPEND);
-
         $ret["fields"] = $this->getBuilderFormFields();
-
-        file_put_contents("/tmp/mylog.txt", "after builder form fields are added: ".microtime()."\n", FILE_APPEND);
-        file_put_contents("/tmp/mylog.txt", "before step builder form fields are added: ".microtime()."\n", FILE_APPEND);
-
         $ret["stepFields"] = $this->getStepBuildersFormFields();
-
-        file_put_contents("/tmp/mylog.txt", "after step builder form fields are added: ".microtime()."\n", FILE_APPEND);
-
         return $ret ;
     }
 
@@ -133,18 +111,10 @@ class RepositoryConfigureAllOS extends Base {
         $this->params["project-slug"] = $this->getFormattedSlug() ;
         $this->params["item"] = $this->params["project-slug"] ;
         $repositoryFactory = new \Model\Repository() ;
-        // @todo we need to put all of this into modules, as build settings.
         $data = array(
             "project-name" => $this->params["project-name"],
             "project-slug" => $this->params["project-slug"],
-            "project-description" => $this->params["project-description"],
-            "default-scm-url" => $this->params["default-scm-url"],
-            "email-id" => $this->params["email-id"],
-            "parameter-status" => $this->params["parameter-status"],
-            "parameter-name" => $this->params["parameter-name"],
-            "parameter-dvalue" => $this->params["parameter-dvalue"],
-            "parameter-input" => "",
-            "parameter-description" => $this->params["parameter-description"]
+            "project-description" => $this->params["project-description"]
         ) ;
 
         $ev = $this->runBCEvent("beforeRepositorySave") ;
@@ -172,7 +142,7 @@ class RepositoryConfigureAllOS extends Base {
         $pipe_names = $repository->getRepositoryNames() ;
         $req = (isset($this->params["project-name"])) ? $this->params["project-name"] : $orig ;
         if (!in_array($req, $pipe_names)) { return $req ; }
-        $guess = $req." PIPE" ;
+        $guess = $req." REPO" ;
         for ($i=1 ; $i<5001; $i++) {
             $guess = "Copied Repository $orig $i" ;
             if (!in_array($guess, $pipe_names)) {
@@ -207,13 +177,7 @@ class RepositoryConfigureAllOS extends Base {
             "project-name" => $pname,
             "project-slug" => $this->params["item"],
             "project-description" => $pdesc,
-//            "default-scm-url" => $this->params["default-scm-url"],
-//            "email-id" => $this->params["email-id"],
-//            "parameter-status" => $this->params["parameter-status"],
-//            "parameter-name" => $this->params["parameter-name"],
-//            "parameter-dvalue" => $this->params["parameter-dvalue"],
-//            "parameter-input" => "",
-//            "parameter-description" => $this->params["parameter-description"]
+
         ) ;
 
         $ev = $this->runBCEvent("beforeRepositorySave") ;
@@ -255,40 +219,6 @@ class RepositoryConfigureAllOS extends Base {
             $this->params["project-slug"] = str_replace("/", "", $this->params["project-slug"]);
             $this->params["project-slug"] = strtolower($this->params["project-slug"]); }
         return $this->params["project-slug"] ;
-    }
-    
-    public function getInstalledPlugins() {
-        $plugin = scandir(PLUGININS) ;
-        for ($i=0; $i<count($plugin); $i++) {
-            if (!in_array($plugin[$i], array(".", "..", "tmpfile"))){
-                if(is_dir(PLUGININS.DS.$plugin[$i])) {
-                    // @todo if this isnt definitely a build dir ignore maybe
-                    $detail['details'][$plugin[$i]] = $this->getInstalledPlugin($plugin[$i]);
-                    $detail['data'][$plugin[$i]] = $this->getInstalledPluginData($plugin[$i]); } } }
-        return (isset($detail) && is_array($detail)) ? $detail : array() ;
-    }
-
-    public function getInstalledPlugin($plugin) {
-	$defaultsFile = PLUGININS.DS.$plugin.DS.'details' ;
-        if (file_exists($defaultsFile)) {
-            $defaultsFileData =  file_get_contents($defaultsFile) ;
-            $defaults = json_decode($defaultsFileData, true) ; }
-        return  (isset($defaults) && is_array($defaults)) ? $defaults : array() ;
-    }
-
-    public function getInstalledPluginData($plugin) {
-        $file = PIPEDIR . DS . $this->params["item"] . DS . 'pluginData';
-        if ($pluginData = file_get_contents($file)) {
-            $pluginData = json_decode($pluginData, true); }
-        $defaultsFile = PLUGININS.DS.$plugin.DS.'data' ;
-        if (file_exists($defaultsFile)) {
-            $defaultsFileData =  file_get_contents($defaultsFile) ;
-            $defaults = json_decode($defaultsFileData, true) ;  }
-        foreach ($defaults['buildconf'] as $key=>$val) {
-            if (isset ($pluginData[$plugin][$val['name']]) ) {
-                $value = $pluginData[$plugin][$val['name']];
-                $defaults['buildconf'][$key]['value'] = $value; } }
-        return  (isset($defaults) && is_array($defaults)) ? $defaults : array() ;
     }
 
 }
