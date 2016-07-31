@@ -17,6 +17,7 @@ class RepositoryHomeAllOS extends Base {
     public function getData() {
         $ret["repository"] = $this->getRepository();
         $ret["features"] = $this->getRepositoryFeatures();
+        $ret["history"] = $this->getCommitHistory();
         return $ret ;
     }
 
@@ -37,6 +38,14 @@ class RepositoryHomeAllOS extends Base {
         $repository = $repositoryFactory->getModel($this->params);
         $r = $repository->getRepositoryFeatures($this->params["item"]);
         return $r ;
+    }
+
+    public function getCommitHistory() {
+        $repositoryFactory = new \Model\Repository() ;
+        $commitParams = $this->params ;
+        $commitParams["amount"] = 10 ;
+        $repository = $repositoryFactory->getModel($commitParams, "RepositoryCommits");
+        return $repository->getCommits();
     }
 
     public function deleteRepository() {
