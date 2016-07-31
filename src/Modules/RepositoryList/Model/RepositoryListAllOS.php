@@ -22,7 +22,8 @@ class RepositoryListAllOS extends Base {
     public function getRepositories() {
         $repositoryFactory = new \Model\Repository() ;
         $repository = $repositoryFactory->getModel($this->params);
-        return $repository->getRepositories();
+        $repos = $repository->getRepositories();
+        return $repos ;
     }
 
 }
