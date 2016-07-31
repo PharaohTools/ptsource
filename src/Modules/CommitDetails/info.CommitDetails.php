@@ -17,7 +17,7 @@ class CommitDetailsInfo extends PTConfigureBase {
     }
 
     public function routeAliases() {
-      return array("repositoryHome"=>"CommitDetails");
+      return array("commitDetails"=>"CommitDetails");
     }
 
     public function helpDefinition() {

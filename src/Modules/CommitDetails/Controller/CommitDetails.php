@@ -11,7 +11,7 @@ class CommitDetails extends Base {
       if (is_array($thisModel)) { return $this->failDependencies($pageVars, $this->content, $thisModel) ; }
       if($pageVars["route"]["action"] == "show"){ $this->content["data"] = $thisModel->getData(); }
       if($pageVars["route"]["action"] == "delete"){ $this->content["data"] = $thisModel->deleteData(); }
-      return array ("type"=>"view", "view"=>"repositoryHome", "pageVars"=>$this->content);
+      return array ("type"=>"view", "view"=>"commitDetails", "pageVars"=>$this->content);
     }
 
 }
