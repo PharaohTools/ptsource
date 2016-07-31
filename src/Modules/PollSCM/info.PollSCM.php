@@ -24,7 +24,7 @@ class PollSCMInfo extends PTConfigureBase {
         return array("prepareBuild");
     }
 
-    public function buildSettings() {
+    public function repositorySettings() {
         return array("poll_scm_enabled", "scm_always_allow_web", "git_repository_url", "git_branch", "git_privkey_path",
             "cron_string");
     }
