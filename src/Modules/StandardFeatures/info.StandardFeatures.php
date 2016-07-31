@@ -25,6 +25,14 @@ class StandardFeaturesInfo extends PTConfigureBase {
             "pttest_enabled", "pttrack_enabled", "ptbuild_enabled", "ptdeploy_enabled", "ptmanage_enabled");
     }
 
+    public function events() {
+        return array("getRepositoryFeatures");
+    }
+
+    public function repositoryFeatures() {
+        return array("standardFeatures");
+    }
+
 //    public function configuration() {
 //        return array(
 //            "exec_delay"=> array( "type" => "text", "default" => "180", "label" => "Minimum execution delay between SCM Poll runs", ),
