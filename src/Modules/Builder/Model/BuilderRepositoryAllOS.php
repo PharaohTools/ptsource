@@ -31,19 +31,9 @@ class BuilderRepositoryAllOS extends Base {
 
     public function getAllBuilders() {
         $builders = array();
-        file_put_contents("/tmp/mylog.txt", "before builder names are got: ".microtime()."\n", FILE_APPEND);
         $names = $this->getBuilderNames() ;
-        file_put_contents("/tmp/mylog.txt", "after builder names are got: ".microtime()."\n", FILE_APPEND);
-
-
         $this->getBuilder() ;
-
-        file_put_contents("/tmp/mylog.txt", "before all builders are got: ".microtime()."\n", FILE_APPEND);
-        foreach ($names as $name) {
-            file_put_contents("/tmp/mylog.txt", "before step builder $name is added: ".microtime()."\n", FILE_APPEND);
-            $builders[$name] = $this->builder->getBuilder($name);
-            file_put_contents("/tmp/mylog.txt", "after step builder $name is added: ".microtime()."\n", FILE_APPEND); }
-        file_put_contents("/tmp/mylog.txt", "after all builders are got: ".microtime()."\n", FILE_APPEND);
+        foreach ($names as $name) { $builders[$name] = $this->builder->getBuilder($name);}
         return $builders ;
     }
 
@@ -78,10 +68,7 @@ class BuilderRepositoryAllOS extends Base {
     public function getBuilderNames($includeTypes = array()) {
         $builderNames = array() ;
         $infos = \Core\AutoLoader::getInfoObjects() ;
-        $types = (count($includeTypes)>0) ? $includeTypes : array(
-            "buildSteps", "buildSettings"
-//            "buildSteps", "buildSettings", "events"
-        ) ;
+        $types = (count($includeTypes)>0) ? $includeTypes : array( "repositorySettings" ) ;
         foreach ($infos as $info) {
             foreach ($types as $type) {
                 if ( method_exists($info, $type)) {
