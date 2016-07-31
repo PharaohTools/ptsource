@@ -62,6 +62,9 @@
                                         <i class="fa fa-database   fa-4x hvr-buzz-out"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
+                                        <?php
+                                        echo $pageVars['repositoriesDetail']['total'];
+                                        ?>
                                         <div class="huge hvr-grow-rotate" ><?php echo $pageVars['repositoriesDetail']['total']; ?></div>
                                         <div>All!</div>
                                     </div>
