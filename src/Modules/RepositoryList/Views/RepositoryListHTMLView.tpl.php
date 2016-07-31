@@ -53,16 +53,16 @@
 
 					<div class="tab-content">
 						<div role="tabpanel" class="tab-pane active" id="all">
-							<div class="table-responsive" ">
+							<div class="table-responsive">
+
 							<div class="table table-striped table-bordered table-condensed">
-                                <div>
-                                    <div class="blCell cellRowIndex">#</div>
-                                    <div class="blCell cellRowName">Repository</div>
-                                    <div class="blCell cellRowFeatures">Features</div>
-                                    <div class="blCell cellRowGraphs">Graphs</div>
-                                    <div class="blCell cellRowContributors">Contributors</div>
-                                    <div class="blCell cellRowHistory">History</div>
-                                </div>
+                                <div class="blCell cellRowIndex">#</div>
+                                <div class="blCell cellRowName">Repository</div>
+                                <div class="blCell cellRowFeatures">Features</div>
+                                <div class="blCell cellRowGraphs">Graphs</div>
+                                <div class="blCell cellRowContributors">Contributors</div>
+                                <div class="blCell cellRowHistory">History</div>
+                            </div>
 							<div class="allBuildRows table-hover">
 
 							<?php
@@ -77,6 +77,13 @@
                                 else {
                                     $successFailureClass = "unstableRow" ; }
 
+                                if (isset($repositoryDetails["project-name"])) {
+                                    $slugOrName = $repositoryDetails["project-name"] ; }
+                                else if (isset($repositorySlug)) {
+                                    $slugOrName = $repositorySlug ; }
+                                else {
+                                    $slugOrName = "Unnamed Project" ; }
+
                                 ?>
 
 							<div class="repositoryRow <?php echo $successFailureClass ?>" id="blRow_<?php echo $repositorySlug; ?>" >
@@ -85,22 +92,22 @@
                                 </div>
                                 <div class="blCell cellRowName">
                                     <a href="/index.php?control=RepositoryHome&action=show&item=<?php echo $repositorySlug; ?>" class="pipeName">
-                                        <?php echo $repositoryDetails["project-name"]; ?>
+                                        <?php echo $slugOrName; ?>
                                     </a>
                                 </div>
                                 <div class="blCell cellRowFeatures">
                                     <?php
-                                    echo '<a href="/index.php?control=PipeRunner&action=start&item=' . $repositoryDetails["project-slug"] . '">';
-                                    echo '<i class="fa fa-play fa-2x hvr-grow-shadow" style="color:rgb(13, 193, 42);"></i>' ;
-                                    '</a>';
-                                    ?>
-                                    <?php
-                                    echo '<a href="/index.php?control=PipeRunner&action=start&item=' . $repositoryDetails["project-slug"] . '">';
-                                    echo '<i class="fa fa-play fa-2x hvr-grow-shadow" style="color:rgb(13, 193, 42);"></i></a>';
-                                    ?>
-                                    <?php
-                                    echo '<a href="/index.php?control=PipeRunner&action=start&item=' . $repositoryDetails["project-slug"] . '">';
-                                    echo '<i class="fa fa-play fa-2x hvr-grow-shadow" style="color:rgb(13, 193, 42);"></i></a>';
+
+                                    if (isset($repositoryDetails["features"]) &&
+                                        count($repositoryDetails["features"])>0 ) {
+                                        foreach ($repositoryDetails["features"] as $repository_feature) {
+                                            echo '<div class="repository-feature">' ;
+                                            echo '<a target="_blank" href="'.$repository_feature["model"]["link"].'">' ;
+//                                                echo  '<h3>'.$repository_feature["model"]["title"].'</h3>' ;
+                                            echo  '<img src="'.$repository_feature["model"]["image"].'" />' ;
+                                            echo "</a>" ;
+                                            echo '</div>' ; } }
+
                                     ?>
                                 </div>
                                 <div  class="blCell cellRowGraphs">
@@ -119,7 +126,6 @@
 							}
 							?>
 
-							</div>
 							</div>
 						</div>
 					</div>
