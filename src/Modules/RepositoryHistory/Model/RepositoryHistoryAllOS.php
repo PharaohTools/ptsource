@@ -15,8 +15,16 @@ class RepositoryHistoryAllOS extends Base {
     public $modelGroup = array("Default") ;
 
     public function getData() {
-        $ret["commits"] = $this->getCommitHistory();
+        $ret = $this->getCommitHistory();
+        $ret["repository"] = $this->getRepository();
         return $ret ;
+    }
+
+    public function getRepository() {
+        $repositoryFactory = new \Model\Repository() ;
+        $repository = $repositoryFactory->getModel($this->params);
+        $r = $repository->getRepository($this->params["item"]);
+        return $r ;
     }
 
     public function getCommitHistory() {
