@@ -53,7 +53,6 @@ class RepositoryAllOS extends Base {
         $enabledFeatures = array() ;
         $i = 0;
         foreach ($repository["settings"] as $key => $values) {
-
             if (in_array($key, $names) && $values["enabled"] =="on") {
                 $cname = '\Model\\'.$key ;
                 $moduleFactory = new $cname();
@@ -61,18 +60,14 @@ class RepositoryAllOS extends Base {
                 // @ todo maybe an interface check? is object something?
                 if (!is_array($values)) {
                     $values=array("default_fieldset" =>array(0 => array($values))) ; }
-
-                foreach ($values as $fieldSetTitle => $fieldSets) {
-                    foreach ($fieldSets as $hash => $valueset) {
-                        if ($hash !== 0) { $valueset["hash"] = $hash ; }
-                        $moduleRepositoryFeature->setValues($valueset) ;
-                        $moduleRepositoryFeature->setRepository($repository) ;
-                        $collated = $moduleRepositoryFeature->collate();
-                        $enabledFeatures[$i]["module"] = $key  ;
-                        $enabledFeatures[$i]["values"] = $valueset  ;
-                        $enabledFeatures[$i]["model"] = $collated  ;
-                        $i++; } } }
-        }
+                    if ($hash !== 0) { $valueset["hash"] = $hash ; }
+                    $moduleRepositoryFeature->setValues($valueset) ;
+                    $moduleRepositoryFeature->setRepository($repository) ;
+                    $collated = $moduleRepositoryFeature->collate();
+                    $enabledFeatures[$i]["module"] = $key  ;
+                    $enabledFeatures[$i]["values"] = $valueset  ;
+                    $enabledFeatures[$i]["model"] = $collated  ;
+                    $i++; } }
         return $enabledFeatures ;
     }
 
