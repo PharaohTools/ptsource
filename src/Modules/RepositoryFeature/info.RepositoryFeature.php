@@ -2,11 +2,11 @@
 
 Namespace Info;
 
-class PipeFeatureInfo extends PTConfigureBase {
+class RepositoryFeatureInfo extends PTConfigureBase {
 
     public $hidden = true;
 
-    public $name = "PipeFeature Functionality";
+    public $name = "RepositoryFeature Functionality";
 
     public function _construct() {
       parent::__construct();
@@ -22,7 +22,7 @@ class PipeFeatureInfo extends PTConfigureBase {
 
     public function helpDefinition() {
       $help = <<<"HELPDATA"
-  This module provides functionality for PipeFeatures. It provides no actions at the command line.
+  This module provides functionality for RepositoryFeatures. It provides no actions at the command line.
 HELPDATA;
       return $help ;
     }

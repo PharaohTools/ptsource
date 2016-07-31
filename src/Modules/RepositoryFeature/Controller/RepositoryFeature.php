@@ -2,7 +2,7 @@
 
 Namespace Controller ;
 
-class PipeFeature extends Base {
+class RepositoryFeature extends Base {
 
     public function execute($pageVars) {
         $thisModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars) ;

@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class PipeFeatureAllOS extends Base {
+class RepositoryFeatureAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -14,16 +14,16 @@ class PipeFeatureAllOS extends Base {
     // Model Group
     public $modelGroup = array("Default") ;
 
-    public function getPipeFeatures() {
-        $builderFactory = new PipeFeature();
-        $builderRepository = $builderFactory->getModel($this->params, "PipeFeatureRepository") ;
-        $builders = $builderRepository->getAllPipeFeatures();
+    public function getRepositoryFeatures() {
+        $builderFactory = new RepositoryFeature();
+        $builderRepository = $builderFactory->getModel($this->params, "RepositoryFeatureRepository") ;
+        $builders = $builderRepository->getAllRepositoryFeatures();
         $ret = $builders ;
         return $ret ;
     }
 
-    public function getPipeFeatureSettings() {
-        $builders = $this->getPipeFeatures();
+    public function getRepositoryFeatureSettings() {
+        $builders = $this->getRepositoryFeatures();
         // var_dump(1, $builders) ;
         $ret = array() ;
         foreach ($builders as $name => $builder) {
@@ -33,34 +33,34 @@ class PipeFeatureAllOS extends Base {
         return $ret ;
     }
 
-    public function getPipeFeature($module) {
-        $builderFactory = new PipeFeature();
-        $builderCollater = $builderFactory->getModel($this->params, "PipeFeatureCollater") ;
-        $builder = $builderCollater->getPipeFeature($module);
+    public function getRepositoryFeature($module) {
+        $builderFactory = new RepositoryFeature();
+        $builderCollater = $builderFactory->getModel($this->params, "RepositoryFeatureCollater") ;
+        $builder = $builderCollater->getRepositoryFeature($module);
         $ret = $builder ;
         return $ret ;
     }
 
-    public function savePipeFeature($line) {
-        $builderFactory = new PipeFeature();
-        $builderSaver = $builderFactory->getModel($this->params, "PipeFeatureSaver") ;
-        $builder = $builderSaver->getPipeFeature($line);
+    public function saveRepositoryFeature($line) {
+        $builderFactory = new RepositoryFeature();
+        $builderSaver = $builderFactory->getModel($this->params, "RepositoryFeatureSaver") ;
+        $builder = $builderSaver->getRepositoryFeature($line);
         $ret = $builder ;
         return $ret ;
     }
 
-    public function getPipeFeatureNames() {
-        $builders = $this->getPipeFeatures() ;
+    public function getRepositoryFeatureNames() {
+        $builders = $this->getRepositoryFeatures() ;
         $names = array_keys($builders) ;
         return (isset($names) && is_array($names)) ? $names : false ;
     }
-    public function deletePipeFeature($name) {
-        $builders = $this->getPipeFeatures() ;
+    public function deleteRepositoryFeature($name) {
+        $builders = $this->getRepositoryFeatures() ;
         $path = dirname(dirname(__FILE__)).DS."Data".DS."demobuilders.php" ;
         include($path) ;
         unset($builders[$name]);
 
-//        $builders = $this->getPipeFeatures() ;
+//        $builders = $this->getRepositoryFeatures() ;
 //        $path = dirname(dirname(__FILE__)).DS."Data".DS."demobuilders.php" ;
 //
 //        $file = fopen($path,"w");

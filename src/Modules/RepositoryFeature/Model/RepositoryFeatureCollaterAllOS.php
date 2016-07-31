@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class PipeFeatureCollaterAllOS extends Base {
+class RepositoryFeatureCollaterAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -12,9 +12,9 @@ class PipeFeatureCollaterAllOS extends Base {
     public $architectures = array("any") ;
 
     // Model Group
-    public $modelGroup = array("PipeFeatureCollater") ;
+    public $modelGroup = array("RepositoryFeatureCollater") ;
 
-    public function getPipeFeature($module) {
+    public function getRepositoryFeature($module) {
         $r = $this->collate($module);
         return $r ;
     }
