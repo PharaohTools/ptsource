@@ -21,7 +21,7 @@
     margin: 0 0 0 0;
 }
 
-.repositoryRow {
+.commitRow {
     width: 100%;
     display: block ;
     float:left ;
@@ -37,27 +37,22 @@
     width: 5% ;
 }
 
-.cellRowName{
+.cellRowMessage{
+    width: 25% ;
+    text-align: left;
+}
+
+.cellRowAuthor{
+    width: 25% ;
+    text-align: left;
+}
+
+.cellRowDate{
     width: 20% ;
     text-align: left;
 }
 
-.cellRowRun {
-    width: 10% ;
-}
-
-.cellRowStatus {
-    width: 10% ;
-}
-
-.cellRowSuccess {
-    width: 20% ;
-}
-
-.cellRowFailure {
-    width: 20% ;
-}
-
-.cellRowDuration {
-    width: 15% ;
+.cellRowHash{
+    width: 25% ;
+    text-align: left;
 }
