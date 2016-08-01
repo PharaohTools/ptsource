@@ -2,27 +2,27 @@
 
 Namespace Info;
 
-class RepositoryHomeInfo extends PTConfigureBase {
+class GitServerInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "RepositoryHome/Home Page";
+    public $name = "Git Server Implementation";
 
     public function _construct() {
       parent::__construct();
     }
 
     public function routesAvailable() {
-      return array( "RepositoryHome" => array("show", "delete") );
+      return array( "GitServer" => array("clone", "push", "pull") );
     }
 
     public function routeAliases() {
-      return array("repositoryHome"=>"RepositoryHome");
+      return array("gitServer"=>"GitServer");
     }
 
     public function helpDefinition() {
       $help = <<<"HELPDATA"
-  This is the Repository Home page module for a single build...
+  This is the Git Server Module
 HELPDATA;
       return $help ;
     }

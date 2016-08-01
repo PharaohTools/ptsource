@@ -79,7 +79,11 @@
                 <p> Project Slug: <?php echo $pageVars["data"]["repository"]["project-slug"] ; ?></p>
                 <p> Project Desc: <?php echo $slugOrDescription ; ?></p>
             </div>
-            <hr>
+                <hr />
+                <h3 class="propertyTitle">Clone Repository:</h3>
+                <h4 class="propertyTitle">HTTPS: <?php echo "http://{$_SERVER["SERVER_NAME"]}{$_SERVER["REQUEST_URI"]}/{$pageVars["data"]["repository"]["project-slug"]}" ; ?></h4>
+                <h4 class="propertyTitle">SSH: <?php echo "git://{$_SERVER["SERVER_NAME"]}{$_SERVER["REQUEST_URI"]}/{$pageVars["data"]["repository"]["project-slug"]}" ; ?></h4>
+                <hr />
             <div class="row clearfix no-margin build-home-properties">
 
                 <div class="pipe-features-block pipe-block">
@@ -97,6 +101,11 @@
                                 echo  '<img src="'.$repository_feature["model"]["image"].'" />' ;
                                 echo "</a>" ;
                                 echo '</div>' ; } } }
+                    else {
+                        ?>
+                            <h5>No Features configured for Repository</h5>
+                        <?php
+                    }
                     ?>
                     </div>
                 </div>

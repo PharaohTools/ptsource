@@ -46,7 +46,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="index.php?control=RepositoryHome&action=delete&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
+                    <a href="index.php?control=GitServer&action=delete&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
                         <i class="fa fa-trash fa-fw hvr-bounce-in""></i> Delete
                     </a>
                 </li>
@@ -73,8 +73,11 @@
                     $slugOrDescription = "No Description configured for Project" ; }
 
                 ?>
-           
-            <div class="row clearfix no-margin">
+
+                <h4 class="propertyTitle">this thing here</h4>
+
+
+                <div class="row clearfix no-margin">
             	<h3 class="text-uppercase text-light ">Repository: <strong><?php echo $slugOrName ; ?></strong> </h3>
                 <p> Project Slug: <?php echo $pageVars["data"]["repository"]["project-slug"] ; ?></p>
                 <p> Project Desc: <?php echo $slugOrDescription ; ?></p>
@@ -160,6 +163,6 @@
 
     </div>
 </div>
-<link rel="stylesheet" type="text/css" href="/Assets/Modules/RepositoryHome/css/repositoryhome.css">
+<link rel="stylesheet" type="text/css" href="/Assets/Modules/GitServer/css/repositoryhome.css">
 <link rel="stylesheet" type="text/css" href="/Assets/Modules/RepositoryHistory/css/repositoryhistory.css">
-<script type="text/javascript" src="/Assets/Modules/RepositoryHome/js/repositoryhome.js"></script>
+<script type="text/javascript" src="/Assets/Modules/GitServer/js/repositoryhome.js"></script>

@@ -2,6 +2,6 @@
 
 Namespace Model;
 
-class RepositoryHome extends BaseModelFactory {
+class GitServer extends BaseModelFactory {
 
 }
