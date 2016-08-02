@@ -1,30 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/src/Modules/StandardFeatures/Model/StandardFeaturesLinuxUnix.php" mnemonic="6" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="03f6198e-7b92-4492-834b-a57d478943eb" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Modules/UserProfile/Assets/image/loading.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Modules/UserProfile/Controller/UserProfile.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Modules/UserProfile/Model/UserProfile.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Modules/UserProfile/Views/UserProfileAlertHTMLView.tpl.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Modules/UserProfile/Model/UserProfileAnyOS.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Modules/UserProfile/Model/UserProfileGetUserAllOS.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Modules/UserProfile/Views/UserProfileGetUserJSONView.tpl.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Modules/UserProfile/Views/UserProfileHTMLView.tpl.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Modules/UserProfile/Views/UserProfileView.tpl.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Modules/UserProfile/info.UserProfile.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Modules/UserProfile/Assets/css/userprofile.css" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Modules/UserManager/Views/UserProfileHTMLView.tpl.php" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Modules/UserManager/Assets/js/userprofile.js" afterPath="$PROJECT_DIR$/src/Modules/UserProfile/Assets/js/userprofile.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Modules/UserManager/Views/ChangePasswordResultJSONView.tpl.php" afterPath="$PROJECT_DIR$/src/Modules/UserProfile/Views/ChangePasswordResultJSONView.tpl.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/Signup/Model/SignupAllOS.php" afterPath="$PROJECT_DIR$/src/Modules/Signup/Model/SignupAllOS.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/Signup/Data/users.txt" afterPath="$PROJECT_DIR$/src/Modules/Signup/Data/users.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="$PROJECT_DIR$/.idea/.name" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/GitServer/Views/GitServerGITView.tpl.php" afterPath="$PROJECT_DIR$/src/Modules/GitServer/Views/GitServerGITView.tpl.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/GitServer/Controller/GitServer.php" afterPath="$PROJECT_DIR$/src/Modules/GitServer/Controller/GitServer.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/GitServer/Model/GitServerAllOS.php" afterPath="$PROJECT_DIR$/src/Modules/GitServer/Model/GitServerAllOS.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ptsourcevars" afterPath="$PROJECT_DIR$/ptsourcevars" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modmaker.bash" afterPath="$PROJECT_DIR$/modmaker.bash" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Modules/PostInput/.htaccess" afterPath="$PROJECT_DIR$/src/Modules/PostInput/.htaccess" />
     </list>
     <ignored path="phrankinsense.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
-    <file path="/Dummy.txt" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1440902651165" ignored="false" />
-    <file path="/a.dummy" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1440906993416" ignored="false" />
+    <file path="/Dummy.txt" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1470077943531" ignored="false" />
+    <file path="/a.dummy" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1470019714422" ignored="false" />
     <file path="/UserPermissionAllOS.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1440786922517" ignored="false" />
     <file path="/ptbuildvars" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1440862953804" ignored="false" />
     <file path="/SignupAllOS.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1440908685528" ignored="false" />
@@ -37,20 +31,10 @@
     <file path="/ModuleManagerHTMLView.tpl.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1440887855092" ignored="false" />
     <file path="/modulemanager.js" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1440878979952" ignored="false" />
     <file path="/ModuleManagerWebActionAnyOS.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1440886028860" ignored="false" />
-    <file path="/AutoLoad.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1440882920952" ignored="false" />
+    <file path="/AutoLoad.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469983667890" ignored="false" />
     <file path="/ModuleManagerAnyOS.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1440884904754" ignored="false" />
     <file path="/ModuleManager.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1440885153223" ignored="false" />
     <file path="/ModuleManagerWebAnyOS.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1440886831149" ignored="false" />
-    <file path="$PROJECT_DIR$/src/Modules/DefaultSkin/Assets/css/bootstrap.css" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1440889535862" ignored="false" />
-    <file path="$PROJECT_DIR$/src/Modules/DefaultSkin/Assets/css/bootstrap.min.css" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1440889535862" ignored="false" />
-    <file path="$PROJECT_DIR$/src/Modules/BuildConfigure/Assets/js/buildconfigure.js" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1440889535862" ignored="false" />
-    <file path="$PROJECT_DIR$/src/Modules/PostInput/Assets/startbootstrap-sb-admin-2-1.0.5/bower_components/bootstrap/dist/css/bootstrap.css" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1440889535862" ignored="false" />
-    <file path="$PROJECT_DIR$/src/Modules/PostInput/Assets/startbootstrap-sb-admin-2-1.0.5/bower_components/bootstrap/dist/css/bootstrap.min.css" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1440889535862" ignored="false" />
-    <file path="$PROJECT_DIR$/src/Modules/DefaultSkin/Assets/startbootstrap-sb-admin-2-1.0.5/bower_components/bootstrap/dist/css/bootstrap.css" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1440889535864" ignored="false" />
-    <file path="$PROJECT_DIR$/src/Modules/DefaultSkin/Assets/startbootstrap-sb-admin-2-1.0.5/bower_components/bootstrap/dist/css/bootstrap.min.css" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1440889535864" ignored="false" />
-    <file path="$PROJECT_DIR$/src/Modules/PostInput/Assets/css/bootstrap.css" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1440889535864" ignored="false" />
-    <file path="$PROJECT_DIR$/src/Modules/PostInput/Assets/css/bootstrap.min.css" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1440889535864" ignored="false" />
-    <file path="$PROJECT_DIR$/src/Modules/PostInput/Assets/startbootstrap-sb-admin-2-1.0.5/dist/css/sb-admin-2.css" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1440889535864" ignored="false" />
     <file path="/PipeRunnerAllOS.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1440889889532" ignored="false" />
     <file path="/BuildListHTMLView.tpl.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1440895727124" ignored="false" />
     <file path="/buildlist.js" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1440896996492" ignored="false" />
@@ -60,6 +44,82 @@
     <file path="/UserProfile.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1440906335854" ignored="false" />
     <file path="$PROJECT_DIR$/../../pttrack/pttrack/src/Modules/UserProfile/Views/UserProfileHTMLView.tpl.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1440906879347" ignored="false" />
     <file path="/users.txt" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1440907555614" ignored="false" />
+    <file path="$PROJECT_DIR$/src/Modules/PostInput/Assets/Modules/DefaultSkin/startbootstrap-sb-admin-2-1.0.5/bower_components/datatables-responsive/examples/initialisation/index.xml" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469525059321" ignored="false" />
+    <file path="$PROJECT_DIR$/src/Modules/PostInput/Assets/Modules/DefaultSkin/startbootstrap-sb-admin-2-1.0.5/bower_components/datatables-responsive/examples/initialisation/option.xml" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469525059327" ignored="false" />
+    <file path="$PROJECT_DIR$/src/Modules/PostInput/Assets/Modules/DefaultSkin/startbootstrap-sb-admin-2-1.0.5/bower_components/datatables-responsive/examples/initialisation/ajax.xml" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469525059342" ignored="false" />
+    <file path="$PROJECT_DIR$/src/Modules/PostInput/Assets/Modules/DefaultSkin/startbootstrap-sb-admin-2-1.0.5/bower_components/datatables-responsive/docs/option/responsive.details.renderer.xml" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469525059362" ignored="false" />
+    <file path="$PROJECT_DIR$/src/Modules/PostInput/Assets/Modules/DefaultSkin/startbootstrap-sb-admin-2-1.0.5/bower_components/datatables-responsive/examples/child-rows/disable-child-rows.xml" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469525059525" ignored="false" />
+    <file path="$PROJECT_DIR$/src/Modules/PostInput/Assets/Modules/DefaultSkin/startbootstrap-sb-admin-2-1.0.5/bower_components/datatables-responsive/docs/api/responsive.recalc().xml" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469525059637" ignored="false" />
+    <file path="/modmaker.bash" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469562102223" ignored="false" />
+    <file path="$USER_HOME$/WebStuff/smhw/ansible.showmyhomework.co.uk/maintenance/jenkins-ssh-tunnel.bash" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469568978399" ignored="false" />
+    <file path="$USER_HOME$/WebStuff/smhw/ansible.showmyhomework.co.uk/maintenance/jenkins-web-tunnel.bash" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469568995017" ignored="false" />
+    <file path="/jenkins-web-tunnel.bash" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469568993444" ignored="false" />
+    <file path="$USER_HOME$/WebStuff/smhw/ansible.showmyhomework.co.uk/roles/base/tasks/main.yml" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469629916621" ignored="false" />
+    <file path="/main.yml" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469629654472" ignored="false" />
+    <file path="$USER_HOME$/WebStuff/smhw/ansible.showmyhomework.co.uk/roles/smhw_ci/tasks/main.yml" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469571170740" ignored="false" />
+    <file path="$USER_HOME$/WebStuff/smhw/ansible.showmyhomework.co.uk/roles/smhw_ci_jobs/tasks/main.yml" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469574983358" ignored="false" />
+    <file path="$USER_HOME$/WebStuff/smhw/ansible.showmyhomework.co.uk/group_vars/qa.yml" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469721243142" ignored="false" />
+    <file path="$USER_HOME$/WebStuff/smhw/ansible.showmyhomework.co.uk/maintenance/install-ansible.bash" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469575647150" ignored="false" />
+    <file path="/install-ansible.bash" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469575647150" ignored="false" />
+    <file path="$USER_HOME$/WebStuff/smhw/ansible.showmyhomework.co.uk/roles/base/meta/main.yml" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469613458529" ignored="false" />
+    <file path="$USER_HOME$/WebStuff/ansible.lendinvest.com/roles/lendinvest_ci/meta/main.yml" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469613407332" ignored="false" />
+    <file path="$USER_HOME$/WebStuff/smhw/ansible.showmyhomework.co.uk/playbooks/requirements.yml" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469616615100" ignored="false" />
+    <file path="/requirements.yml" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469613514753" ignored="false" />
+    <file path="$USER_HOME$/WebStuff/smhw/ansible.showmyhomework.co.uk/playbooks/deploy/api.yml" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469613890690" ignored="false" />
+    <file path="/api.yml" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469613890690" ignored="false" />
+    <file path="$USER_HOME$/WebStuff/smhw/ansible.showmyhomework.co.uk/roles/smhw_api_application/tasks/build_release.yml" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1470048467203" ignored="false" />
+    <file path="/build_release.yml" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469793451153" ignored="false" />
+    <file path="$USER_HOME$/WebStuff/smhw/ansible.showmyhomework.co.uk/vars/main.yml" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469721253469" ignored="false" />
+    <file path="$USER_HOME$/WebStuff/smhw/ansible.showmyhomework.co.uk/roles/smhw_api_application/meta/main.yml" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469630010467" ignored="false" />
+    <file path="/qa.yml" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469633914014" ignored="false" />
+    <file path="$USER_HOME$/WebStuff/smhw/ansible.showmyhomework.co.uk/group_vars/prod.yml" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469721263490" ignored="false" />
+    <file path="/prod.yml" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469633941147" ignored="false" />
+    <file path="$USER_HOME$/WebStuff/smhw/ansible.showmyhomework.co.uk/group_vars/qa-original.yml" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469633949755" ignored="false" />
+    <file path="$USER_HOME$/WebStuff/smhw/ansible.showmyhomework.co.uk/roles/smhw_api_application/templates/api-release-check.j2" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469712536674" ignored="false" />
+    <file path="/api-release-check.j2" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469711902540" ignored="false" />
+    <file path="/AboutHTMLView.tpl.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469662517473" ignored="false" />
+    <file path="/RepositoryRepositoryAllOS.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469666388841" ignored="false" />
+    <file path="$PROJECT_DIR$/../../ptconfigure/ptconfigure/src/Modules/PTSource/Model/PTSourceLinux.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1470049429582" ignored="false" />
+    <file path="$PROJECT_DIR$/../../ptconfigure/ptconfigure/src/Modules/PTSource/Model/PTSourceWindows.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469670400133" ignored="false" />
+    <file path="/RepositorySaverAllOS.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469671749046" ignored="false" />
+    <file path="$USER_HOME$/WebStuff/smhw/ansible.showmyhomework.co.uk/playbooks/config/ci/ci.yml" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469716348113" ignored="false" />
+    <file path="$USER_HOME$/WebStuff/smhw/ansible.showmyhomework.co.uk/group_vars/dev.yml" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469721257772" ignored="false" />
+    <file path="/FileBrowserAllOS.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469998297999" ignored="false" />
+    <file path="$USER_HOME$/WebStuff/smhw/ansible.showmyhomework.co.uk/README.md" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469789407622" ignored="false" />
+    <file path="/README.md" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469789406613" ignored="false" />
+    <file path="$USER_HOME$/WebStuff/smhw/ansible.showmyhomework.co.uk/roles/smhw_api_application/tasks/main.yml" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1470048193959" ignored="false" />
+    <file path="$USER_HOME$/WebStuff/smhw/ansible.showmyhomework.co.uk/roles/smhw_api_application/tasks/deploy_to_sidekiq.yml" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469813134106" ignored="false" />
+    <file path="/deploy_to_sidekiq.yml" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469813134421" ignored="false" />
+    <file path="/RepositoryCommitsAllOS.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469970986970" ignored="false" />
+    <file path="$PROJECT_DIR$/../../ptconfigure/ptconfigure/src/Extensions/Repository/Model/RepositoryCommitsAllOS.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469842487493" ignored="false" />
+    <file path="/RepositoryHistoryHTMLView.tpl.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469974598270" ignored="false" />
+    <file path="/repositoryhistory.css" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469971664650" ignored="false" />
+    <file path="/RepositoryListHTMLView.tpl.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1470007076180" ignored="false" />
+    <file path="/repositorylist.css" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1470007691179" ignored="false" />
+    <file path="/View.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469984671101" ignored="false" />
+    <file path="/RepositoryHomeHTMLView.tpl.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1470010963113" ignored="false" />
+    <file path="/RepositoryHomeAllOS.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469985537263" ignored="false" />
+    <file path="/BuilderRepositoryAllOS.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469979642729" ignored="false" />
+    <file path="/StandardFeaturesDisplayLinkRepositoryFeatureAllOS.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469983724616" ignored="false" />
+    <file path="/RepositoryAllOS.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469990328873" ignored="false" />
+    <file path="/RepositoryConfigureHTMLView.tpl.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469984887166" ignored="false" />
+    <file path="/RegistryStore.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469985065286" ignored="false" />
+    <file path="/info.StandardFeatures.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469986970419" ignored="false" />
+    <file path="/RepositoryFeatureRepositoryAllOS.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469987134621" ignored="false" />
+    <file path="/StandardFeaturesDisplayLinkAllOS.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469990600131" ignored="false" />
+    <file path="/repositoryhome.css" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1469990807958" ignored="false" />
+    <file path="/RepositoryCollaterAllOS.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1470007334965" ignored="false" />
+    <file path="/RepositoryListAllOS.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1470006412581" ignored="false" />
+    <file path="/GitServer.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1470099138226" ignored="false" />
+    <file path="/GitServerAllOS.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1470106281284" ignored="false" />
+    <file path="/.htaccess" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1470026942893" ignored="false" />
+    <file path="/GitServerHTMLView.tpl.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1470023866235" ignored="false" />
+    <file path="/app-conf.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1470049083431" ignored="false" />
+    <file path="$PROJECT_DIR$/../../ptconfigure/ptconfigure/src/Modules/PTSource/Autopilots/PTConfigure/app-conf.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1470049171468" ignored="false" />
+    <file path="$PROJECT_DIR$/../../ptconfigure/ptconfigure/src/Constants.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1470049128481" ignored="false" />
+    <file path="$PROJECT_DIR$/../../ptconfigure/ptconfigure/src/Modules/PTTrack/Model/PTTrackLinux.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1470049450984" ignored="false" />
+    <file path="$PROJECT_DIR$/../../ptconfigure/ptconfigure/src/Modules/PTBuild/Model/PTBuildLinux.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1470049471155" ignored="false" />
+    <file path="/GitServerGITView.tpl.php" changelist="03f6198e-7b92-4492-834b-a57d478943eb" time="1470077997325" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,8 +133,12 @@
   <component name="DaemonCodeAnalyzer">
     <disable_hints />
   </component>
+  <component name="DatabaseView">
+    <flatten value="false" />
+    <groupTables value="false" />
+    <sortChildren value="false" />
+  </component>
   <component name="DebuggerManager">
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -111,6 +175,7 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -120,102 +185,91 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="UserProfile.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Modules/UserProfile/Model/UserProfile.php">
+      <file leaf-file-name="GitServerAllOS.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Modules/GitServer/Model/GitServerAllOS.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
+            <state line="43" column="18" selection-start="1755" selection-end="1755" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserProfileHTMLView.tpl.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Modules/UserProfile/Views/UserProfileHTMLView.tpl.php">
+      <file leaf-file-name="View.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Core/View.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="61" column="68" selection-start="3064" selection-end="3072" vertical-scroll-proportion="-4.0">
-              <folding>
-                <element signature="n#style#0;n#h5#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#p#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#label#0;n#div#0;n#form#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#form#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#label#0;n#div#1;n#form#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#form#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#label#0;n#div#2;n#form#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#div#0;n#div#2;n#form#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#label#0;n#div#3;n#form#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#div#0;n#div#3;n#form#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="info.UserProfile.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Modules/UserProfile/info.UserProfile.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="22" selection-start="269" selection-end="280" vertical-scroll-proportion="-8.571428">
+            <state line="14" column="49" selection-start="593" selection-end="606" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserProfileAnyOS.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Modules/UserProfile/Model/UserProfileAnyOS.php">
+      <file leaf-file-name="Constants.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Constants.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="59" column="32" selection-start="1807" selection-end="1807" vertical-scroll-proportion="-18.285715">
+            <state line="48" column="54" selection-start="1943" selection-end="1997" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="users.txt" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Modules/Signup/Data/users.txt">
+      <file leaf-file-name="Bootstrap.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Bootstrap.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="47" selection-start="47" selection-end="47" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserProfile.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Modules/UserProfile/Controller/UserProfile.php">
+      <file leaf-file-name="GitServerGITView.tpl.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Modules/GitServer/Views/GitServerGITView.tpl.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="63" selection-start="612" selection-end="612" vertical-scroll-proportion="-9.714286">
+            <state line="2" column="52" selection-start="72" selection-end="72" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="userprofile.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Modules/UserProfile/Assets/js/userprofile.js">
+      <file leaf-file-name="GitServer.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Modules/GitServer/Controller/GitServer.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="48" selection-start="1445" selection-end="1445" vertical-scroll-proportion="0.0">
+            <state line="11" column="89" selection-start="494" selection-end="494" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserManager.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Modules/UserManager/Controller/UserManager.php">
+      <file leaf-file-name="Control.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Core/Control.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="69" selection-start="420" selection-end="809" vertical-scroll-proportion="-8.047619">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SignupAllOS.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Modules/Signup/Model/SignupAllOS.php">
+      <file leaf-file-name=".htaccess" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Modules/PostInput/.htaccess">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="245" column="65" selection-start="10198" selection-end="10198" vertical-scroll-proportion="-7.4042554">
+            <state line="7" column="65" selection-start="348" selection-end="348" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="workspace.xml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <file leaf-file-name="class.ExecCommand.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$USER_HOME$/WebStuff/git-php-backend/class.ExecCommand.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1400" column="0" selection-start="81348" selection-end="81348" vertical-scroll-proportion="-1.1485714">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/WebStuff/git-php-backend/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -246,22 +300,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/Modules/ModuleManager/Model/ModuleManagerWebActionAnyOS.php" />
-        <option value="$PROJECT_DIR$/src/Modules/ModuleManager/Model/ModuleManagerWebAnyOS.php" />
-        <option value="$PROJECT_DIR$/src/Modules/ModuleManager/Views/ModuleManagerHTMLView.tpl.php" />
-        <option value="$PROJECT_DIR$/src/Modules/PipeRunner/info.PipeRunner.php" />
-        <option value="$PROJECT_DIR$/src/Modules/PTConfigureRequired/Info/PTConfigureBase.php" />
-        <option value="$PROJECT_DIR$/src/Modules/PipeRunner/Model/PipeRunnerAllOS.php" />
-        <option value="$PROJECT_DIR$/src/Modules/BuildList/Views/BuildListHTMLView.tpl.php" />
-        <option value="$PROJECT_DIR$/src/Modules/BuildList/Assets/js/buildlist.js" />
-        <option value="$PROJECT_DIR$/src/Core/Base/Model/Authentication.php" />
-        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
-        <option value="$PROJECT_DIR$/src/Modules/UserProfile/Views/UserProfileHTMLView.tpl.php" />
-        <option value="$PROJECT_DIR$/src/Modules/UserProfile/Model/UserProfileAnyOS.php" />
-        <option value="$PROJECT_DIR$/src/Modules/UserProfile/Controller/UserProfile.php" />
-        <option value="$PROJECT_DIR$/src/Modules/UserProfile/Assets/js/userprofile.js" />
-        <option value="$PROJECT_DIR$/src/Modules/Signup/Data/users.txt" />
-        <option value="$PROJECT_DIR$/src/Modules/Signup/Model/SignupAllOS.php" />
+        <option value="$PROJECT_DIR$/src/Modules/RepositoryHistory/Views/RepositoryHistoryHTMLView.tpl.php" />
+        <option value="$PROJECT_DIR$/src/Modules/Repository/Model/RepositoryRepositoryAllOS.php" />
+        <option value="$PROJECT_DIR$/src/Modules/Index/Views/IndexHTMLView.tpl.php" />
+        <option value="$PROJECT_DIR$/src/Modules/Repository/Model/RepositoryCollaterAllOS.php" />
+        <option value="$PROJECT_DIR$/src/Modules/RepositoryList/Views/RepositoryListHTMLView.tpl.php" />
+        <option value="$PROJECT_DIR$/src/Modules/RepositoryList/Assets/css/repositorylist.css" />
+        <option value="$PROJECT_DIR$/src/Modules/RepositoryList/Model/RepositoryListAllOS.php" />
+        <option value="$PROJECT_DIR$/src/Modules/RepositoryHome/Views/RepositoryHomeHTMLView.tpl.php" />
+        <option value="$PROJECT_DIR$/src/Modules/GitServer/Model/GitServer.php" />
+        <option value="$PROJECT_DIR$/src/Modules/GitServer/info.GitServer.php" />
+        <option value="$PROJECT_DIR$/src/Modules/GitServer/Views/GitServerView.tpl.php" />
+        <option value="$PROJECT_DIR$/src/Modules/GitServer/Views/GitServerHTMLView.tpl.php" />
+        <option value="$PROJECT_DIR$/src/Modules/PostInput/.htaccess" />
+        <option value="$PROJECT_DIR$/src/Modules/GitServer/Controller/GitServer.php" />
+        <option value="$PROJECT_DIR$/src/Modules/GitServer/Model/GitServerAllOS.php" />
+        <option value="$PROJECT_DIR$/src/Modules/GitServer/Views/GitServerGITView.tpl.php" />
       </list>
     </option>
   </component>
@@ -269,14 +323,12 @@
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
   </component>
-  <component name="PhpServers">
-    <servers />
-  </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
-    <option name="width" value="1280" />
-    <option name="height" value="709" />
+    <option name="x" value="65" />
+    <option name="y" value="24" />
+    <option name="width" value="1215" />
+    <option name="height" value="776" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -304,33 +356,32 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="phrankinsense" />
+              <option name="myItemId" value="Pharaoh Source" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="phrankinsense" />
+              <option name="myItemId" value="Pharaoh Source" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ptbuild" />
+              <option name="myItemId" value="ptsource" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="phrankinsense" />
+              <option name="myItemId" value="Pharaoh Source" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ptbuild" />
+              <option name="myItemId" value="ptsource" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -340,29 +391,11 @@
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="phrankinsense" />
+              <option name="myItemId" value="Pharaoh Source" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ptbuild" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phrankinsense" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ptbuild" />
+              <option name="myItemId" value="ptsource" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -373,18 +406,14 @@
               <option name="myItemId" value="Modules" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="UserProfile" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="phrankinsense" />
+              <option name="myItemId" value="Pharaoh Source" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ptbuild" />
+              <option name="myItemId" value="ptsource" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -396,7 +425,51 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="UserProfile" />
+              <option name="myItemId" value="PostInput" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Pharaoh Source" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ptsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GitServer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Pharaoh Source" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ptsource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GitServer" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -406,11 +479,11 @@
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="phrankinsense" />
+              <option name="myItemId" value="Pharaoh Source" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ptbuild" />
+              <option name="myItemId" value="ptsource" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -422,7 +495,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="UserProfile" />
+              <option name="myItemId" value="GitServer" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -432,11 +505,11 @@
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="phrankinsense" />
+              <option name="myItemId" value="Pharaoh Source" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ptbuild" />
+              <option name="myItemId" value="ptsource" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -448,7 +521,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="UserProfile" />
+              <option name="myItemId" value="GitServer" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -458,11 +531,11 @@
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="phrankinsense" />
+              <option name="myItemId" value="Pharaoh Source" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ptbuild" />
+              <option name="myItemId" value="ptsource" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -474,7 +547,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="UserProfile" />
+              <option name="myItemId" value="GitServer" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -488,11 +561,11 @@
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="phrankinsense" />
+              <option name="myItemId" value="Pharaoh Source" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ptbuild" />
+              <option name="myItemId" value="ptsource" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -504,7 +577,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="UserProfile" />
+              <option name="myItemId" value="GitServer" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -512,525 +585,17 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="image" />
+              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="phrankinsense" />
+              <option name="myItemId" value="Pharaoh Source" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ptbuild" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="UserProfile" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phrankinsense" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ptbuild" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="UserManager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phrankinsense" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ptbuild" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="UserManager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phrankinsense" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ptbuild" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="UserManager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phrankinsense" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ptbuild" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="UserManager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controller" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phrankinsense" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ptbuild" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="UserManager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phrankinsense" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ptbuild" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="UserManager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phrankinsense" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ptbuild" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Signup" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phrankinsense" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ptbuild" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Signup" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phrankinsense" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ptbuild" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Signup" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phrankinsense" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ptbuild" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Signup" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Data" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phrankinsense" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ptbuild" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PipeRunner" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phrankinsense" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ptbuild" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PipeRunner" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phrankinsense" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ptbuild" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BuildList" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phrankinsense" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ptbuild" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BuildList" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phrankinsense" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ptbuild" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BuildList" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phrankinsense" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ptbuild" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BuildList" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phrankinsense" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ptbuild" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AssetPublisher" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phrankinsense" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ptbuild" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AssetPublisher" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phrankinsense" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ptbuild" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AssetPublisher" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controller" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phrankinsense" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ptbuild" />
+              <option name="myItemId" value="ptsource" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -1044,37 +609,11 @@
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="phrankinsense" />
+              <option name="myItemId" value="Pharaoh Source" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ptbuild" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Base" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phrankinsense" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ptbuild" />
+              <option name="myItemId" value="ptsource" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -1092,45 +631,46 @@
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="phrankinsense" />
+              <option name="myItemId" value="Pharaoh Source" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ptbuild" />
+              <option name="myItemId" value="ptsource" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="build" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phrankinsense" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ptbuild" />
+              <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value=".idea" />
+              <option name="myItemId" value="Core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Base" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Controller" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="project.structure.last.edited" value="Project" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="100" />
+    <property name="project.structure.proportion" value="0.0" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="116" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="111" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../pttrack/pttrack" />
+    <property name="last_opened_file_path" value="$USER_HOME$/WebStuff/git-php-backend/class.ExecCommand.php" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="120" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="914" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="910" />
@@ -1149,84 +689,43 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
+    <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.appearance" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/Modules/GitServer/Views" />
       <recent name="$PROJECT_DIR$/src/Modules" />
+      <recent name="$PROJECT_DIR$/src/Modules/StandardFeatures/Model" />
+      <recent name="$PROJECT_DIR$/src/Modules/Repository/Model" />
       <recent name="$PROJECT_DIR$/build/tests/behat/features" />
-      <recent name="$PROJECT_DIR$/build/tests/behat" />
-      <recent name="$PROJECT_DIR$/src/Modules/BuildConfigure/Views" />
-      <recent name="$PROJECT_DIR$/src/Modules/PublishHTMLreports/Views" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/Modules" />
+      <recent name="$PROJECT_DIR$/src/Extensions" />
       <recent name="$PROJECT_DIR$/src/Modules/UserProfile/Assets/js" />
       <recent name="$PROJECT_DIR$/src/Modules/UserProfile/Views" />
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
-      <module name="" />
-      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
-      <option name="PROGRAM_PARAMETERS" />
-      <method />
-    </configuration>
     <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner />
       <method />
     </configuration>
+    <configuration default="true" type="BashConfigurationType" factoryName="Bash">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="INTERPRETER_PATH" value="/bin/bash" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <module name="phrankinsense" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <method />
+    </configuration>
     <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
-      <method />
-    </configuration>
-    <configuration default="true" type="TestNG" factoryName="TestNG">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="JUnit" factoryName="JUnit">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
       <method />
     </configuration>
     <list size="0" />
@@ -1263,31 +762,31 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="709" extended-state="0" />
-    <editor active="true" />
+    <frame x="65" y="24" width="1215" height="776" extended-state="6" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.67232597" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32961375" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293718" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293718" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.48125" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.48125" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2917342" sideWeight="0.32767403" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14678112" sideWeight="0.32872504" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Amazon EC2" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.67127496" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Amazon EC2" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1361,6 +860,43 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/Modules/RepositoryHome/Views/RepositoryHomeHTMLView.tpl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="93" column="66" selection-start="4834" selection-end="4834" vertical-scroll-proportion="-13.75" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Modules/GitServer/Views/GitServerView.tpl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Modules/GitServer/Model/GitServer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="6" selection-start="31" selection-end="31" vertical-scroll-proportion="-2.5" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Modules/GitServer/Views/GitServerHTMLView.tpl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="76" column="57" selection-start="3644" selection-end="3644" vertical-scroll-proportion="-19.75" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Modules/GitServer/info.GitServer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="31" selection-start="524" selection-end="524" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Core/Base/Controller/Base.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Bootstrap.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Core/Control.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -1368,122 +904,136 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Modules/UserPermission/Model/UserPermissionAllOS.php">
+    <entry file="file://$PROJECT_DIR$/src/Core/View.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="15.380953">
+        <state line="14" column="49" selection-start="593" selection-end="606" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Modules/PipeRunner/Model/PipeRunnerAllOS.php">
+    <entry file="file://$PROJECT_DIR$/src/Modules/PostInput/.htaccess">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="117" column="21" selection-start="3742" selection-end="3880" vertical-scroll-proportion="-10.285714">
+        <state line="7" column="65" selection-start="348" selection-end="348" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Core/Base/Model/Authentication.php">
+    <entry file="file://$PROJECT_DIR$/src/Constants.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="45" selection-start="1880" selection-end="1880" vertical-scroll-proportion="0.8684211">
+        <state line="48" column="54" selection-start="1943" selection-end="1997" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Modules/UserProfile/Views/UserProfileAlertHTMLView.tpl.php">
+    <entry file="file://$PROJECT_DIR$/src/Modules/GitServer/Controller/GitServer.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.3970894">
+        <state line="11" column="89" selection-start="494" selection-end="494" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Modules/UserProfile/Views/UserProfileGetUserJSONView.tpl.php">
+    <entry file="file://$PROJECT_DIR$/src/Modules/GitServer/Views/GitServerGITView.tpl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="52" selection-start="72" selection-end="72" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Modules/GitServer/Model/GitServerAllOS.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="18" selection-start="1755" selection-end="1755" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/WebStuff/git-php-backend/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Modules/UserManager/Controller/UserManager.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="69" selection-start="420" selection-end="809" vertical-scroll-proportion="-8.047619">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Modules/UserProfile/info.UserProfile.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="22" selection-start="269" selection-end="280" vertical-scroll-proportion="-8.571428">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Modules/UserProfile/Views/UserProfileHTMLView.tpl.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="68" selection-start="3064" selection-end="3072" vertical-scroll-proportion="-4.0">
-          <folding>
-            <element signature="n#style#0;n#h5#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#label#0;n#div#0;n#form#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#form#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#label#0;n#div#1;n#form#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#form#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#label#0;n#div#2;n#form#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#div#0;n#div#2;n#form#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#label#0;n#div#3;n#form#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#div#0;n#div#3;n#form#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Modules/UserProfile/Model/UserProfile.php">
+    <entry file="file://$USER_HOME$/WebStuff/git-php-backend/class.ExecCommand.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Modules/UserProfile/Assets/js/userprofile.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="48" selection-start="1445" selection-end="1445" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Modules/UserProfile/Controller/UserProfile.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="63" selection-start="612" selection-end="612" vertical-scroll-proportion="-9.714286">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Modules/UserProfile/Model/UserProfileAnyOS.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="32" selection-start="1807" selection-end="1807" vertical-scroll-proportion="-18.285715">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Modules/Signup/Data/users.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="47" selection-start="47" selection-end="47" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Modules/Signup/Model/SignupAllOS.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="245" column="65" selection-start="10198" selection-end="10198" vertical-scroll-proportion="-7.4042554">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1400" column="0" selection-start="81348" selection-end="81348" vertical-scroll-proportion="-1.1485714">
-          <folding />
-        </state>
-      </provider>
-    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>phrankinsense</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.5" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>
 
