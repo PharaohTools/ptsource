@@ -9,9 +9,8 @@ class GitServer extends Base {
       // if we don't have an object, its an array of errors
       $this->content = $pageVars ;
       if (is_array($thisModel)) { return $this->failDependencies($pageVars, $this->content, $thisModel) ; }
-      if($pageVars["route"]["action"] == "clone"){ $this->content["data"] = $thisModel->cloneData(); }
-        if($pageVars["route"]["action"] == "push"){ $this->content["data"] = $thisModel->cloneData(); }
-        if($pageVars["route"]["action"] == "pull"){ $this->content["data"] = $thisModel->cloneData(); }
+      if(in_array($pageVars["route"]["action"], array("serve") ) ) {
+            $this->content["data"] = $thisModel->backendData(); }
 
         $this->content["route"]["extraParams"] ;
         $this->content["output-format"] = "git" ;
