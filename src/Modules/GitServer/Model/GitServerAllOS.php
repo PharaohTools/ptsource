@@ -55,7 +55,7 @@ class GitServerAllOS extends Base {
         (
             "GIT_PROJECT_ROOT"    => REPODIR ,
             "GIT_HTTP_EXPORT_ALL" => "1",
-            "GIT_HTTP_MAX_REQUEST_BUFFER" => "100M",
+            "GIT_HTTP_MAX_REQUEST_BUFFER" => "1000M",
 //            'PATH' => $_SERVER["PATH"],
 //            "REMOTE_USER"         => isset($_SERVER["REMOTE_USER"])          ? $_SERVER["REMOTE_USER"]          : REMOTE_USER,
             "REMOTE_USER"         => isset($_SERVER["REMOTE_USER"])          ? $_SERVER["REMOTE_USER"]          : "ptsource",
@@ -74,19 +74,20 @@ class GitServerAllOS extends Base {
 
 
 //        $qs = str_replace( "control=GitServer&action=clone&item=ptbuild&identifier=", "", $qs) ;
-        $qs = $_SERVER["QUERY_STRING"] ;
+        $qs = $qsx = $_SERVER["QUERY_STRING"] ;
         $qs = str_replace( "control=GitServer&", "", $qs) ;
         $qs = str_replace( "action=pull&", "", $qs) ;
         $qs = str_replace( "authTitle=phpengine&", "", $qs) ;
         $qs = str_replace( "item=", "", $qs) ;
 
         $parsed = parse_str($qs) ;
-        $env["QUERY_STRING"] = $parsed["item"]."/" ;
+        $env["QUERY_STRING"] = $this->params["item"]."/" ;
 
         ob_start();
-        var_dump($env) ;
+        var_dump($qsx, $env) ;
         $res = ob_get_clean();
-        error_log($res) ;
+       error_log($res) ;
+
 
         $settings = array
         (
@@ -100,13 +101,31 @@ class GitServerAllOS extends Base {
         $process = proc_open(GIT_HTTP_BACKEND , $settings, $pipes, null, $env);
         if(is_resource($process))
         {
-//            error_log("is proc:" ) ;
+            error_log("php in: $php_input" ) ;
             fwrite($pipes[0], $php_input);
             fclose($pipes[0]);
+
+//            $offset = 0 ;
+//            while ( $buf = stream_get_contents($pipes[1], 4096, $offset) ) {
+//                if (isset($buf) && $buf !== false) {
+//                    $data .= $buf;
+//                    echo $buf ;
+//                    $offset += 4096 ; }
+//                else {
+//                    break ;
+//                }
+////                if ( (isset($buf2) && $buf2 !== false) || $buf2 = fread($pipes[2], 32768) ) {
+////                    $buf2 = "ERR: ".$buf2;
+////                    $data .= "ERR: ".$buf2;
+////                    echo "ERR: ".$buf2 ;
+////                    unset($buf2) ;}
+//            }
+
+//            $return_output = $data ;
             $return_output = stream_get_contents($pipes[1]);
             fclose($pipes[1]);
             $return_code = proc_close($process);
-            error_log("rc: $return_code, stduot: $return_output" ) ;
+//            error_log("rc: $return_code, stduot: $return_output" ) ;
 
         }
         else {
@@ -155,6 +174,7 @@ class GitServerAllOS extends Base {
             $log .= PHP_EOL;
             if(isset($_GET["service"]) && $_GET["service"] == "git-receive-pack") file_put_contents(LOG_RESPONSE, "");
             file_put_contents(LOG_RESPONSE, $log, FILE_APPEND);
+            file_put_contents(LOG_RESPONSE, "service is: ".$_GET["service"], FILE_APPEND);
         }
 
     }
