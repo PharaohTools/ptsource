@@ -13,7 +13,7 @@ class GitServerInfo extends PTConfigureBase {
     }
 
     public function routesAvailable() {
-      return array( "GitServer" => array("clone", "push", "pull") );
+      return array( "GitServer" => array("serve") );
     }
 
     public function routeAliases() {
