@@ -21,7 +21,6 @@ class GitServerAllOS extends Base {
     }
 
     public function backendData() {
-//        error_log("one" ) ;
 
         define("DEBUG_LOG",        true);
         define("HTTP_AUTH",        false);
@@ -30,10 +29,11 @@ class GitServerAllOS extends Base {
         define("GIT_HTTP_BACKEND", "/usr/lib/git-core/git-http-backend");
         define("GIT_BIN",          "/usr/bin/git");
         define("REMOTE_USER",      "smart-http");
-        define("LOG_RESPONSE",     "response.log");
-        define("LOG_PROCESS",      "process.log");
+        define("LOG_RESPONSE",     "/tmp/response.log");
+        define("LOG_PROCESS",      "/tmp/process.log");
 
 //        error_log("three" ) ;
+
 
         if(isset($_SERVER["PATH_INFO"]))
         {
@@ -46,7 +46,6 @@ class GitServerAllOS extends Base {
             $git_project_path = "/";
             $path_info = "";
         }
-
         $path_info = "/".$this->params["item"] ;
         $request_headers = $this->getAllHeaders();
 
@@ -69,25 +68,17 @@ class GitServerAllOS extends Base {
         $env = array_merge( $env, array(
 //            "GIT_COMMITTER_NAME" => "Pharaoh King",
 //            "GIT_COMMITTER_EMAIL" => "phpengine@pharaohtools.com",
-        )) ;
+        ) ) ;
 
+        $pathStarts = array('/HEAD', '/info/', '/objects/') ;
 
-
-//        $qs = str_replace( "control=GitServer&action=clone&item=ptbuild&identifier=", "", $qs) ;
-        $qs = $qsx = $_SERVER["QUERY_STRING"] ;
-        $qs = str_replace( "control=GitServer&", "", $qs) ;
-        $qs = str_replace( "action=pull&", "", $qs) ;
-        $qs = str_replace( "authTitle=phpengine&", "", $qs) ;
-        $qs = str_replace( "item=", "", $qs) ;
-
-        $parsed = parse_str($qs) ;
-        $env["QUERY_STRING"] = $this->params["item"]."/" ;
-
-        ob_start();
-        var_dump($qsx, $env) ;
-        $res = ob_get_clean();
-       error_log($res) ;
-
+        $scm_synonyms = array("git", "scm") ;
+        $qs = $_SERVER["REQUEST_URI"] ;
+        foreach ($scm_synonyms as $scm_synonym) {
+//            $remove = "/{$scm_synonym}/{$this->params["user"]}/{$this->params["item"]}" ;
+            $remove = "/{$scm_synonym}/{$this->params["user"]}" ;
+            $qs = str_replace($remove, "", $qs) ; }
+        $env["QUERY_STRING"] = $qs ;
 
         $settings = array
         (
@@ -101,31 +92,13 @@ class GitServerAllOS extends Base {
         $process = proc_open(GIT_HTTP_BACKEND , $settings, $pipes, null, $env);
         if(is_resource($process))
         {
-            error_log("php in: $php_input" ) ;
+//            error_log("php in: $php_input" ) ;
             fwrite($pipes[0], $php_input);
             fclose($pipes[0]);
-
-//            $offset = 0 ;
-//            while ( $buf = stream_get_contents($pipes[1], 4096, $offset) ) {
-//                if (isset($buf) && $buf !== false) {
-//                    $data .= $buf;
-//                    echo $buf ;
-//                    $offset += 4096 ; }
-//                else {
-//                    break ;
-//                }
-////                if ( (isset($buf2) && $buf2 !== false) || $buf2 = fread($pipes[2], 32768) ) {
-////                    $buf2 = "ERR: ".$buf2;
-////                    $data .= "ERR: ".$buf2;
-////                    echo "ERR: ".$buf2 ;
-////                    unset($buf2) ;}
-//            }
-
-//            $return_output = $data ;
             $return_output = stream_get_contents($pipes[1]);
             fclose($pipes[1]);
             $return_code = proc_close($process);
-//            error_log("rc: $return_code, stduot: $return_output" ) ;
+            error_log("rc: $return_code, stduot: $return_output" ) ;
 
         }
         else {
@@ -137,8 +110,11 @@ class GitServerAllOS extends Base {
                 = $response
                 = preg_split("/\R\R/", $return_output, 2, PREG_SPLIT_NO_EMPTY);
 
+            ob_start() ;
+            var_dump("<pre>", "r1", $response_headers, "r2", $response_body, "r3", $response, "r4", $return_output, "</pre>") ;
+              $res = ob_get_clean() ;
+            error_log($res ) ;
 
-//            var_dump("<pre>", "r1", $response_headers, "r2", $response_body, "r3", $response, "r4", $return_output, "</pre>") ;
 
             foreach(preg_split("/\R/", $response_headers) as $response_header)
             {
@@ -167,14 +143,15 @@ class GitServerAllOS extends Base {
             //$log .= "\$_SERVER = " . print_r($_SERVER, true);
             $log .= "\$request_headers = " . print_r($request_headers, true);
             $log .= "\$env = " . print_r($env, true);
+            $log .= "\$server = " . print_r($_SERVER, true);
             $log .= "\$php_input = " . PHP_EOL . $php_input . PHP_EOL;
             //$log .= "\$return_output = " . PHP_EOL . $return_output . PHP_EOL;
             $log .= "\$response = " . print_r($response, true);
             $log .= str_repeat("-", 80) . PHP_EOL;
             $log .= PHP_EOL;
-            if(isset($_GET["service"]) && $_GET["service"] == "git-receive-pack") file_put_contents(LOG_RESPONSE, "");
+//            if(isset($_GET["service"]) && $_GET["service"] == "git-receive-pack") file_put_contents(LOG_RESPONSE, "");
             file_put_contents(LOG_RESPONSE, $log, FILE_APPEND);
-            file_put_contents(LOG_RESPONSE, "service is: ".$_GET["service"], FILE_APPEND);
+//            file_put_contents(LOG_RESPONSE, "service is: ".$_GET["service"], FILE_APPEND);
         }
 
     }
@@ -184,9 +161,24 @@ class GitServerAllOS extends Base {
         $headers = array();
         foreach ($_SERVER as $name => $value) {
             if (substr($name, 0, 5) == 'HTTP_') {
-                $headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
-            } }
+                $headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value; } }
         return $headers;
+    }
+
+    public function strPosX2($haystack, $needle, $number){
+        if ($number == 1) {
+            return strpos($haystack, $needle); }
+        else if ($number > 1){
+            return strpos($haystack, $needle, $this->strPosX($haystack, $needle, $number - 1) + strlen($needle)); }
+        else {
+            return error_log('Error: Value for parameter $number is out of range'); }
+    }
+
+    public function strPosX($haystack, $needle, $number){
+        $cur_sp = 0 ;
+        for ($i=1 ; $i<=$number; $i++) {
+            $cur_sp = strpos($haystack, $needle, $cur_sp) ; }
+        return  $cur_sp ;
     }
 
 }
