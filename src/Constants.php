@@ -49,3 +49,6 @@ else if (in_array(PHP_OS, array("Linux", "Solaris", "FreeBSD", "OpenBSD", "Darwi
     define('PIPEDIR', '/opt/ptbuild/pipes') ;
     define('REPODIR', '/opt/ptsource/repositories') ;
     define('PLUGININS', '/opt/ptbuild/plugins/installed') ; }
+
+// LOG LEVELS
+define('LOG_FAILURE_EXIT_CODE', 1) ;
