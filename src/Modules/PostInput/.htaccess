@@ -1,6 +1,2 @@
 RewriteEngine On
-RewriteRule ^(?:git|scm)/([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)/(.*)$ index.php?control=GitServer&action=serve&user=$1&item=$2&git_query=$3
-RewriteCond %{QUERY_STRING} service=(.*)
-#RewriteCond %{QUERY_STRING} ^(\w+)=(\w+)$
-#RewriteRule ^(?:git|scm)/([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)$ index.php?control=GitServer&action=serve&item=$1&user=$0&git_query=$2/$3?%1=%2
-RewriteRule ^(?:git|scm)/([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)/(.*)$ index.php?control=GitServer&action=serve&user=$1&item=$2&git_query=$3/$4?service=%1
+RewriteRule ^(?:git|scm)/([a-zA-Z0-9-]+)/([a-zA-Z0-9-]+)/(.*)$ index.php?control=GitServer&action=serve&user=$1&item=$2&git_query=$3?service=%2
