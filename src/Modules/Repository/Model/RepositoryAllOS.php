@@ -99,12 +99,14 @@ class RepositoryAllOS extends Base {
         else  {
             $logging->log("Attempting to create directory ".REPODIR.DS."$name ", $this->getModuleName()) ;
             // @todo cross os
-            $rc = self::executeAndGetReturnCode('mkdir -p '.REPODIR.DS.$name);
-            self::executeAndGetReturnCode('mkdir -p '.REPODIR.DS.$name.DS.'history');
-            self::executeAndGetReturnCode('mkdir -p '.REPODIR.DS.$name.DS.'workspace');
-            self::executeAndGetReturnCode('mkdir -p '.REPODIR.DS.$name.DS.'stepsHistory');
-            self::executeAndGetReturnCode('mkdir -p '.REPODIR.DS.$name.DS.'tmp');
-            self::executeAndGetReturnCode('touch '.REPODIR.DS.$name.DS.'historyIndex');
+            $comms = array(
+                'mkdir -p '.REPODIR.DS.$name,
+                'git init --bare '.REPODIR.DS.$name) ;
+            foreach ($comms as $comm) {
+                $rc = self::executeAndGetReturnCode($comm);
+                if ($rc["rc"] != 0) {
+                    $logging->log("Repository creation command failed".REPODIR.DS."$name ", $this->getModuleName(), LOG_FAILURE_EXIT_CODE) ;
+                    return false ; }}
             return $rc ; }
     }
 
