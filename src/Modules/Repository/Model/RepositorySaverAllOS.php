@@ -30,7 +30,7 @@ class RepositorySaverAllOS extends Base {
         $saveRes["statuses"] = $this->saveStatuses($save) ;
         $saveRes["defaults"] = $this->saveDefaults($save) ;
         $saveRes["settings"] = $this->saveSettings($save) ;
-        $saveRes["steps"] = $this->saveSteps($save) ;
+//        $saveRes["steps"] = $this->saveSteps($save) ;
         return $saveRes ;
     }
 
