@@ -53,7 +53,7 @@ class GitServerAllOS extends Base {
         $env = array
         (
             "GIT_PROJECT_ROOT"    => REPODIR ,
-            "GIT_HTTP_EXPORT_ALL" => "1",
+            "GIT_HTTP_EXPORT_ALL" => 1,
             "GIT_HTTP_MAX_REQUEST_BUFFER" => "1000M",
 //            'PATH' => $_SERVER["PATH"],
 //            "REMOTE_USER"         => isset($_SERVER["REMOTE_USER"])          ? $_SERVER["REMOTE_USER"]          : REMOTE_USER,
@@ -75,10 +75,30 @@ class GitServerAllOS extends Base {
         $scm_synonyms = array("git", "scm") ;
         $qs = $_SERVER["REQUEST_URI"] ;
         foreach ($scm_synonyms as $scm_synonym) {
+            $remove = "/{$scm_synonym}/" ;
 //            $remove = "/{$scm_synonym}/{$this->params["user"]}/{$this->params["item"]}" ;
-            $remove = "/{$scm_synonym}/{$this->params["user"]}" ;
             $qs = str_replace($remove, "", $qs) ; }
-        $env["QUERY_STRING"] = $qs ;
+
+
+
+        $query_data = $_GET;
+        foreach ($query_data as $key => $value) {
+            if (!strncmp($key, '__', 2)) {
+                unset($query_data[$key]);
+            }
+        }
+        $query_string = http_build_query($query_data, '', '&');
+
+
+        $qsmpos = strpos($qs, "?") ;
+        $newqsm = $qsmpos ;
+//        if ($qsmpos !== false) {
+//
+//            $newqsm = substr($qs, 0, $qsmpos);
+//        }
+
+        $env["QUERY_STRING"] = $qs ; //substr($qs, $qsmpos);  //;
+        $env["PATH_INFO"] = $path_info ;
 
         $settings = array
         (
@@ -109,12 +129,6 @@ class GitServerAllOS extends Base {
             list($response_headers, $response_body)
                 = $response
                 = preg_split("/\R\R/", $return_output, 2, PREG_SPLIT_NO_EMPTY);
-
-            ob_start() ;
-            var_dump("<pre>", "r1", $response_headers, "r2", $response_body, "r3", $response, "r4", $return_output, "</pre>") ;
-              $res = ob_get_clean() ;
-            error_log($res ) ;
-
 
             foreach(preg_split("/\R/", $response_headers) as $response_header)
             {
