@@ -31,10 +31,10 @@
 					<!-- /.nav-second-level -->
 				</li>
 				<li>
-					<a href="/index.php?control=BuildConfigure&action=new"class=" hvr-bounce-in"><i class="fa fa-edit fa-fw hvr-bounce-in"></i> New Repository</a>
+					<a href="/index.php?control=RepositoryConfigure&action=new"class=" hvr-bounce-in"><i class="fa fa-edit fa-fw hvr-bounce-in"></i> New Repository</a>
 				</li>
 				<li>
-					<a href="/index.php?control=BuildConfigure&action=copy"class=" hvr-bounce-in"><i class="fa fa-edit fa-fw hvr-bounce-in"></i> Copy Repository</a>
+					<a href="/index.php?control=RepositoryConfigure&action=copy"class=" hvr-bounce-in"><i class="fa fa-edit fa-fw hvr-bounce-in"></i> Copy Repository</a>
 				</li>
 			</ul>
 		</div>
