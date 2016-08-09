@@ -1,4 +1,4 @@
-	<link href="styles/ihover.css" rel="stylesheet">
+<link href="styles/ihover.css" rel="stylesheet">
 <div class="container" id="wrapper">
 
 	<div class="navbar-default col-sm-2 sidebar" role="navigation">
@@ -183,7 +183,7 @@
 	                <div class="col-lg-12">
 	                    <div class="panel panel-default">
 	                        <div class="panel-heading">
-	                            <i class="fa fa-bar-chart-o fa-fw"></i> All Pipes Repository Status
+	                            <i class="fa fa-bar-chart-o fa-fw"></i> All Repository Statistics
 	                            <div class="pull-right">
 	                                <!--<div class="btn-group">
 	                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
