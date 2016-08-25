@@ -107,7 +107,7 @@ class StandardFeaturesDisplayLinkAllOS extends Base {
         if ($oneStandardFeature== "php_enabled") {
             $ff = array("image" => "{$prefix}php-logo.gif"); }
         else if ($oneStandardFeature== "html_enabled") {
-            $ff = array("image" => "{$prefix}php-logo.gif"); }
+            $ff = array("image" => "{$prefix}html-logo.png"); }
         else if ($oneStandardFeature== "ptvirtualize_enabled") {
             $ff = array("image" => "{$prefix}virtualize-logo.png"); }
         else if ($oneStandardFeature== "ptconfigure_enabled") {
