@@ -21,7 +21,19 @@
 					
 					<div class="row clearfix no-margin">
 						<h5 class="text-uppercase text-light" style="margin-top: 15px;">  </h5>
-						<p style="color: #ff6312; margin-left: 46px;" id="login_error_msg"></p>
+                        <p id="login_error_msg">
+
+                            <?php
+
+                            if(isset($pageVars["registration_disabled"]) && $pageVars["registration_disabled"]==true) {
+                                echo "Registration has disabled by your administrator." ;
+                            }
+
+                            ?>
+
+
+                        </p>
+                        <p id="login_success_msg"></p>
 						<form class="form-horizontal custom-form">
 							<div class="form-group" >
 								
@@ -54,22 +66,80 @@
 									<div class="col-sm-offset-3 col-sm-12 ">
 									<br />	
 									<div>
-									<a href="/index.php?control=Signup&action=registration">  <b> Need an account ? Sign Up  </b> </a> 
-									</div>
+
+
+                                        <?php
+
+                                        if (isset($pageVars["data"]["settings"]["Signup"]["registration_enabled"]) && $pageVars["data"]["settings"]["Signup"]["registration_enabled"]=="on") {
+
+                                        ?>
+
+                                        <a href="/index.php?control=Signup&action=registration">  <b> Need an account ? Sign Up  </b> </a>
+
+
+                                        <?php
+
+                                        }
+
+                                        ?>
+
+                                    </div>
 								</div>
 							</div>
 					           
 								<div style="height: 1.5px; background-color: #eee; text-align: center">
-  <span style="background-color: white; position: relative; top: -0.7em;color:#337ab7"><b>or</b>
-   
-  </span>
 </div>
                                 
 							    <div class="text-center ">
-								<a href="/index.php?control=OAuth&action=githublogin" class="btn btn-github hvr-pop" title="Github"><i class="fa fa-github"></i> Github </a> | 
-								<a href="/index.php?control=OAuth&action=fblogin" class="btn btn-facebook hvr-pop" title="Facebook"><i class="fa fa-facebook"></i>  Facebook</a>  |
-								<a href="/index.php?control=OAuth&action=linkedinlogin" class="btn btn-linkedin hvr-pop" title="LinkedIn"><i class="fa fa-linkedin"></i> linkedin</a> |
-                                <a href="/index.php?control=ldap&action=ldaplogin" class="btn btn-social-icon hvr-pop" title="LDAP">LDAP</a>
+
+                                    <?php
+//
+//                                    var_dump($pageVars["data"]["settings"]["OAuth"]) ;
+
+                                    if (isset($pageVars["data"]["settings"]["OAuth"]["oauth_enabled"]) && $pageVars["data"]["settings"]["OAuth"]["oauth_enabled"]=="on") {
+
+                                        ?>
+
+                                        <span style="background-color: white; position: relative; top: -0.7em;color:#337ab7"><b>or</b> </span>
+
+                                        <?php
+
+                                        if (isset($pageVars["data"]["settings"]["OAuth"]["github_enabled"]) && $pageVars["data"]["settings"]["OAuth"]["github_enabled"]=="on") {
+                                            ?>
+                                            <button onclick="return submit_login('github');" class="btn btn-github hvr-pop" title="Github"><i class="fa fa-github"></i> Github </button> |
+                                        <?php
+                                        }
+
+                                        if (isset($pageVars["data"]["settings"]["OAuth"]["fb_enabled"]) && $pageVars["data"]["settings"]["OAuth"]["fb_enabled"]=="on") {
+                                            ?>
+                                            <a href="/index.php?control=OAuth&action=fblogin" class="btn btn-facebook hvr-pop" title="Facebook"><i class="fa fa-facebook"></i>  Facebook</a>  |
+                                        <?php
+                                        }
+
+                                        if (isset($pageVars["data"]["settings"]["OAuth"]["li_enabled"]) && $pageVars["data"]["settings"]["OAuth"]["li_enabled"]=="on") {
+                                            ?>
+                                            <a href="/index.php?control=OAuth&action=linkedinlogin" class="btn btn-linkedin hvr-pop" title="LinkedIn"><i class="fa fa-linkedin"></i> linkedin</a> |
+                                        <?php
+                                        }
+
+                                        if (isset($pageVars["data"]["settings"]["LDAP"]["ldap_enabled"]) && $pageVars["data"]["settings"]["LDAP"]["ldap_enabled"]=="on") {
+                                            ?>
+
+<!--                                            <div class="form-group">-->
+<!--                                                <div class="col-sm-offset-1 col-sm-10">-->
+<!--                                                    <button type="button" onclick="submit_ldap();" class="btn btn-lg btn-info btn-block">-->
+<!--                                                        Login-->
+<!--                                                    </button>-->
+<!---->
+<!--                                                </div>-->
+<!--                                            </div>-->
+
+                                            <a href="/index.php?control=ldap&action=ldaplogin" onclick="show_ldap_login_form();" class="btn btn-social-icon hvr-pop" title="LDAP">LDAP</a>
+                                        <?php
+                                        }
+                                    }
+
+                                    ?>
 
                                 </div>
                                 
@@ -90,4 +160,5 @@
     </div>
 </div>
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Palatino+Linotype">
+<link rel="stylesheet" type="text/css" href="/Assets/Modules/Signup/css/signup.css">
 <script type="text/javascript" src="/Assets/Modules/Signup/js/signup.js"></script>

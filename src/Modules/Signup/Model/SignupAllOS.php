@@ -15,8 +15,7 @@ class SignupAllOS extends Base {
     public $modelGroup = array("Default") ;
 
     public function getlogin() {
-        // @todo this looks like high quality code. What's it for?
-        $ret="get Login";
+        $ret["settings"] = $this->getSettings() ;
         return $ret ;
     }
 
@@ -126,7 +125,7 @@ class SignupAllOS extends Base {
             fwrite($myfile, json_encode(array_merge($oldData, array($registrationData))));
             // @todo dont hardcode url?
             $message = 'Hi <br /> <a href="/index.php?control=Signup&action=verify&verificationCode=verify">Click here to activate account</a>';
-            mail($_POST['email'], 'Verifiation mail from '.PHARAOH_APP, $message); }
+            mail($_POST['email'], 'Verification mail from '.PHARAOH_APP, $message); }
         // print_r(array_merge($oldData, array($registrationData)));
         fclose($myfile);
         // @todo dont output from model?
@@ -160,7 +159,7 @@ class SignupAllOS extends Base {
             header("Location: /index.php?control=Index&action=index");
             return; }
         else {
-            $newUser = array('name' => $name, 'username'=>$email, 'email'=>$email, 'password'=>$this->getSaltWord(mt_rand(5, 15)), 'verificationcode'=> hash('sha512', 'aDv@4gtm%7rfeEg4!gsFe'), 'data'=>$user,'role'=>3,'status'=> 1);
+            $newUser = array('name' => $name, 'username'=>$email, 'email'=>$email, 'password'=>mt_rand(5, 15), 'verificationcode'=> hash('sha512', 'aDv@4gtm%7rfeEg4!gsFe'), 'data'=>$user,'role'=>3,'status'=> 1);
             $this->createNewUser($newUser);
             $_SESSION["userrole"] = 3; }
         header("Location: /index.php?control=Index&action=index");
@@ -178,7 +177,7 @@ class SignupAllOS extends Base {
                 'name' => $name,
                 'username'=>$email,
                 'email'=>$email,
-                'password'=> $this->getSaltWord(mt_rand(5, 15)),
+                'password'=> mt_rand(5, 15),
                 'verificationcode'=> hash('sha512', 'aDv@4gtm%7rfeEg4!gsFe'),
                 'data'=>$user,'role'=>3,
                 'status'=> 1);
@@ -212,6 +211,10 @@ class SignupAllOS extends Base {
     }
 
     public function createNewUser($newUser) {
+
+        $passEncrypted = $this->getSaltWord($newUser["password"]) ;
+        $newUser["password"] = $passEncrypted ;
+
         if (!$this->userExist($newUser['email'])) {
             $oldData=$this->getUsersData();
             if ($myfile = fopen($this->getUserFileLocation(), "w")) { }
@@ -222,7 +225,11 @@ class SignupAllOS extends Base {
                 fwrite($myfile, json_encode(array($newUser))); }
             else {
                 //@todo change the format of saved data.
-                fwrite($myfile, json_encode(array_merge($oldData, array($newUser)))) ; }  }
+                fwrite($myfile, json_encode(array_merge($oldData, array($newUser)))) ; }
+            return true ; }
+        else {
+            return false ;
+        }
     }
 
     public function updateUser($user) {
@@ -253,6 +260,23 @@ class SignupAllOS extends Base {
                     $nray[] = $one ; } }
             //@todo change the format of saved data.
             fwrite($myfile, json_encode($nray)); }
+        return true ; // @todo this should be based on fwrite return value
+    }
+
+    public function deleteUser($username) {
+        $oldData = $this->getUsersData();
+        if ($myfile = fopen($this->getUserFileLocation(), "w")) { }
+        else {
+            echo json_encode(array("status" => false,
+                "id"=>"registration_error_msg",
+                "msg" => "Unable to write to users datastore. Contact Administrator.")); }
+        $nray = array();
+        foreach ($oldData as $one) {
+            if ($username !== $one->username) {
+                $nray[] = $one ; } }
+        //@todo change the format of saved data.
+        fwrite($myfile, json_encode($nray));
+        return true ;
     }
 
     public function getSaltWord($word) {
@@ -274,6 +298,38 @@ class SignupAllOS extends Base {
                 if ($user->email== $email)
                     return $user->role; } }
         return false;
+    }
+
+    public function getSettings() {
+        $settings = \Model\AppConfig::getAppVariable("mod_config");
+        return $settings ;
+    }
+
+    public function registrationEnabled() {
+        $mod_config = \Model\AppConfig::getAppVariable("mod_config");
+        $is_enabled = (isset($mod_config["Signup"]["registration_enabled"]) &&
+            $mod_config["Signup"]["registration_enabled"]==true ) ? true : false ;
+        return $is_enabled ;
+    }
+
+    public function settingEnabled($setting) {
+        $mod_config = \Model\AppConfig::getAppVariable("mod_config");
+
+        $providers = array("github", "fb", "li", "google") ;
+
+        foreach ($providers as $provider) {
+
+            if ($mod_config["OAuth"]["{$provider}_enabled"]) {
+
+            }
+
+        }
+
+        $github_client_id = "github_client_id";
+
+        $is_enabled = (isset($mod_config["Signup"]["registration_enabled"]) &&
+            $mod_config["Signup"]["registration_enabled"]==true ) ? true : false ;
+        return $is_enabled ;
     }
 
 }

@@ -2,7 +2,11 @@
  * Created by riyad on 1/21/15.
  */
 
-function submit_login() {
+function submit_login(oauth) {
+
+    if (oauth === undefined) {
+        oauth=false;
+    }
     $('#login_error_msg').html('');
     $('#login_username_alert').html('');
     $('#login_password_alert').html('');
@@ -17,9 +21,16 @@ function submit_login() {
         $('#login_password').focus();
         return; }
 
+    if (oauth === false) {
+        login_provide_url = $('#base_url').val() + '/index.php?control=Signup&action=login-submit' ;
+    }
+    else {
+        login_provide_url = $('#base_url').val() + '/index.php?control=OAuth&action=' + oauth +'login' ;
+    }
+
     $.ajax({
         type: 'POST',
-        url: $('#base_url').val() + '/index.php?control=Signup&action=login-submit',
+        url: login_provide_url,
         data: {
             username: $('#login_username').val(),
             password: $('#login_password').val()
@@ -27,6 +38,7 @@ function submit_login() {
         dataType: "json",
         success: function(result) {
             if(result.status == true){
+                $('#login_success_msg').html('&nbsp;&nbsp;'+"Success! Logging you in...");
                 window.location.assign($('#base_url').val() + '/index.php?control=Index&action=show'); }
             else{
                 $('#login_error_msg').html('&nbsp;&nbsp;'+result.msg);

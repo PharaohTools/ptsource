@@ -27,6 +27,7 @@ class SignupInfo extends PTConfigureBase {
     public function configuration() {
         return array(
             "signup_enabled"=> array("type" => "boolean", "default" => "off", "label" => "Signups Enabled?", ),
+            "registration_enabled"=> array("type" => "boolean", "default" => "off", "label" => "User Self Registration Enabled?", ),
         );
     }
 

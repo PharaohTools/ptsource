@@ -1,0 +1,11 @@
+#login_error_message{
+    color: #ff6312;
+    /*margin-left: 46px;*/
+    text-align: center;
+}
+
+#login_success_message{
+    color: #4aff44;
+    /*margin-left: 46px;*/
+    text-align: center;
+}

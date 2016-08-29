@@ -18,14 +18,22 @@ class Signup extends Base {
             $this->content["data"] = $thisModel->getlogin(); }
 
         if ($pageVars["route"]["action"] == "registration") {
-            // todo @karthik do we need the line below
-            // $this->content["data"] = "registration";
-            return array("type" => "view", "view" => "signupRegistration", "pageVars" => $this->content); }
+            if ($thisModel->registrationEnabled() == true) {
+                // todo @karthik do we need the line below
+                // $this->content["data"] = "registration";
+                return array("type" => "view", "view" => "signupRegistration", "pageVars" => $this->content); }
+            else {
+                $this->content["registration_disabled"] = true ;
+                return array("type" => "view", "view" => "signupLogin", "pageVars" => $this->content); } }
 
         if ($pageVars["route"]["action"] == "registration-submit") {
-            $this->content["data"] = $thisModel->registrationSubmit();
-            $this->content["output-format"] = "JSON" ;
-            return array("type" => "view", "view" => "signupRegistrationResult", "pageVars" => $this->content); }
+            if ($thisModel->registrationEnabled() == true) {
+                $this->content["data"] = $thisModel->registrationSubmit();
+                $this->content["output-format"] = "JSON" ;}
+            else {
+                $this->content["registration_disabled"] = true ;
+                return array("type" => "view", "view" => "signupLogin", "pageVars" => $this->content); }
+        }
 
         if ($pageVars["route"]["action"] == "login-status") {
             $this->content["data"] =  $thisModel->checkLoginStatus();
@@ -42,7 +50,8 @@ class Signup extends Base {
 		
 		if ($pageVars["route"]["action"] == "verify") {
             $thisModel->mailVerification(); }
-		
+
+        $this->content["data"] = $thisModel->getlogin();
         return array("type" => "view", "view" => "signupLogin", "pageVars" => $this->content);
 
     }
