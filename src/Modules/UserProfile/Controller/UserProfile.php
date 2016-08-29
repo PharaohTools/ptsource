@@ -13,6 +13,43 @@ class UserProfile extends Base {
 		}
 
 
+        if (in_array($pageVars["route"]["action"], array("new"))) {
+            if($thisModel->checkLoginSession() == TRUE){
+                $this->content["data"] = $thisModel->getData();
+//                $this->content["userdata"] = $thisModel->getUserDetails();
+                return array ("type"=>"view", "view"=>"UserProfile", "pageVars"=>$this->content); }
+            return array ("type"=>"view", "view"=>"UserProfileAlert", "pageVars"=>$this->content); }
+
+        if (in_array($pageVars["route"]["action"], array("create"))) {
+            if($thisModel->checkLoginSession() == TRUE){
+                // @todo output format change not being implemented
+                $thisModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars, "CreateUser") ;
+                $this->content["params"]["output-format"] = "JSON";
+                $this->content["route"]["extraParams"]["output-format"] = "JSON";
+                $this->content["data"] = $thisModel->getData();
+                return array ("type"=>"view", "view"=>"userProfileCreateUser", "pageVars"=>$this->content);  }
+            return array ("type"=>"view", "view"=>"UserProfileAlert", "pageVars"=>$this->content); }
+
+        if (in_array($pageVars["route"]["action"], array("update"))) {
+            if($thisModel->checkLoginSession() == TRUE){
+                // @todo output format change not being implemented
+                $thisModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars, "UpdateUser") ;
+                $this->content["params"]["output-format"] = "JSON";
+                $this->content["route"]["extraParams"]["output-format"] = "JSON";
+                $this->content["data"] = $thisModel->getData();
+                return array ("type"=>"view", "view"=>"userProfileUpdateUser", "pageVars"=>$this->content);  }
+            return array ("type"=>"view", "view"=>"UserProfileAlert", "pageVars"=>$this->content); }
+
+        if (in_array($pageVars["route"]["action"], array("delete"))) {
+            if($thisModel->checkLoginSession() == TRUE){
+                // @todo output format change not being implemented
+                $thisModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars, "DeleteUser") ;
+                $this->content["params"]["output-format"] = "JSON";
+                $this->content["route"]["extraParams"]["output-format"] = "JSON";
+                $this->content["data"] = $thisModel->getData();
+                return array ("type"=>"view", "view"=>"userProfileDeleteUser", "pageVars"=>$this->content);  }
+            return array ("type"=>"view", "view"=>"UserProfileAlert", "pageVars"=>$this->content); }
+
         if (in_array($pageVars["route"]["action"], array("show"))) {
             if($thisModel->checkLoginSession() == TRUE){
                 $this->content["data"] = $thisModel->getData();

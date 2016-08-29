@@ -13,7 +13,7 @@ class UserProfileInfo extends PTConfigureBase {
     }
 
     public function routesAvailable() {
-      return array( "UserProfile" =>  array("show", "save", "get-user"));
+      return array( "UserProfile" =>  array("show", "save", "new", "create", "delete", "get-user", "update"));
     }
 
     public function routeAliases() {

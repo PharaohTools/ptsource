@@ -24,7 +24,12 @@ class UserProfileGetUserAllOS extends Base {
         $allusers = $this->getAllUserDetails() ;
         foreach ($allusers as $oneuser) {
             if ($oneuser->username == $username) {
-                return $oneuser ; } }
+
+                $userMod = new \StdClass() ;
+                $userMod->username = $oneuser->username ;
+                $userMod->email = $oneuser->email ;
+
+                return $userMod ; } }
         return false ;
     }
 

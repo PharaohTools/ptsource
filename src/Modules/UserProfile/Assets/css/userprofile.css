@@ -31,3 +31,45 @@ p.moduleListText { margin: 0; }
 .list-group-submenu {
   margin-left:20px;
 }
+
+.successMessage {
+    color: green ;
+}
+
+.errorMessage {
+    color: red ;
+}
+
+.fullRow {
+    width: 100%;
+    display: block;
+    float: left;
+}
+
+#form_alert {
+    float: left;
+    display: block;
+    margin-left: 10%;
+}
+
+.rightAlignButton {
+    float: right;
+    display: block;
+    margin-right: 10%;
+}
+
+.dropdownUsers {
+    width: 50%;
+    display: block;
+    float: left;
+}
+
+.userShow {
+    width: 50%;
+    display: block;
+    float: left;
+}
+
+.actionButtonWrap {
+
+}
