@@ -86,7 +86,7 @@
 
                     <div class="form-group">
                         <div class="col-sm-10">
-                            <h3>Build Settings</h3>
+                            <h3>Repository Settings</h3>
                         </div>
                     </div>
 
