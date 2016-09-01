@@ -102,12 +102,15 @@ class RepositoryAllOS extends Base {
             $comms = array(
                 'mkdir -p '.REPODIR.DS.$name,
                 'git init --bare '.REPODIR.DS.$name) ;
+            $results = array() ;
             foreach ($comms as $comm) {
                 $rc = self::executeAndGetReturnCode($comm);
+                $results[] = ($rc["rc"] == 0) ? true : false ;
                 if ($rc["rc"] != 0) {
-                    $logging->log("Repository creation command failed".REPODIR.DS."$name ", $this->getModuleName(), LOG_FAILURE_EXIT_CODE) ;
-                    return false ; }}
-            return $rc ; }
+                    $logging->log("Repository creation command failed ".REPODIR.DS."$name ", $this->getModuleName(), LOG_FAILURE_EXIT_CODE) ;
+                    $logging->log("Failed command was {$comm}", $this->getModuleName()) ;
+                    return false ; } }
+            return (in_array(false, $results)) ? false : true ; }
     }
 
 }
