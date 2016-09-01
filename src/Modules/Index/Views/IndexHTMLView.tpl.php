@@ -236,27 +236,28 @@
         </div>
 
         <hr>
-        <div class="col-lg-13">
-                    <div class="well well-lg ">
-            <h3> Available Modules: <i style="font-size: 18px;" class="fa fa-chevron-right"></i></h3>
-            <p>
-                ---------------------------------------
-            </p>
-            <?php
 
-            foreach ($pageVars["modulesInfo"] as $moduleInfo) {
-                if ($moduleInfo["hidden"] != true) {
-                    echo '<p>' . $moduleInfo["command"] . ' - ' . $moduleInfo["name"] . "</p>";
-                }
-            }
-            ?>
-
-            
-                <hr>
-                <p class="text-center">
-                Visit <a href="http://www.pharaohtools.com">www.pharaohtools.com</a> for more
-            </p>
-        </div>
+<!--        <div class="col-lg-13">-->
+<!--                    <div class="well well-lg ">-->
+<!--            <h3> Available Modules: <i style="font-size: 18px;" class="fa fa-chevron-right"></i></h3>-->
+<!--            <p>-->
+<!--                ----------------------------------------->
+<!--            </p>-->
+<!--        --> <?php
+//
+////            foreach ($pageVars["modulesInfo"] as $moduleInfo) {
+////                if ($moduleInfo["hidden"] != true) {
+////                    echo '<p>' . $moduleInfo["command"] . ' - ' . $moduleInfo["name"] . "</p>";
+////                }
+////            }
+//            ?>
+<!---->
+<!--            -->
+<!--                <hr>-->
+<!--                <p class="text-center">-->
+<!--                Visit <a href="http://www.pharaohtools.com">www.pharaohtools.com</a> for more-->
+<!--            </p>-->
+<!--        </div>-->
 
     </div>
 
