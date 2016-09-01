@@ -83,7 +83,7 @@ class RepositoryConfigureAllOS extends Base {
             return $this->builderRepository ;  }
         $builderRepositoryFactory = new \Model\Builder() ;
         $this->builderRepository = $builderRepositoryFactory->getModel($this->params, "BuilderRepository");
-        RegistryStore::setValue("builderRepositoryObject", $this->builderRepository) ;
+        \Model\RegistryStore::setValue("builderRepositoryObject", $this->builderRepository) ;
         return $this->builderRepository ;
     }
 
@@ -127,7 +127,7 @@ class RepositoryConfigureAllOS extends Base {
         // @todo dunno why i have to force this param
         $repositorySaver->params["item"] = $this->params["item"];
         $repositorySaver->saveRepository(array("type" => "Defaults", "data" => $data ));
-        $repositorySaver->saveRepository(array("type" => "Steps", "data" => $this->params["steps"] ));
+        // $repositorySaver->saveRepository(array("type" => "Steps", "data" => $this->params["steps"] ));
         $repositorySaver->saveRepository(array("type" => "Settings", "data" => $this->params["settings"] ));
 
         $ev = $this->runBCEvent("afterRepositorySave") ;
