@@ -206,7 +206,25 @@
 	                        </div>
 	                        <!-- /.panel-heading -->
 	                        <div class="panel-body">
-	                            <div id="repositories-repository-chart"></div>
+                                <div>
+                                    Your Teams: XYZ <br />
+                                    Team Members: XYZ <br />
+                                    Total Contributors: XYZ <br />
+                                    <br />
+                                    Total Repositories: XYZ <br />
+                                    Total Clones: XYZ <br />
+                                    Total Contributors: XYZ <br />
+                                    <br />
+                                    Team Repositories: XYZ <br />
+                                    Team Clones: XYZ <br />
+                                    Team Contributors: XYZ <br />
+                                    <br />
+                                    Your Repositories: XYZ <br />
+                                    Your Clones: XYZ <br />
+                                    Your Contributors: XYZ <br />
+                                </div>
+	                            <div id="repositories-repository-chart">
+	                            </div>
 	                        </div>
 	                        <!-- /.panel-body -->	                    
 	                	</div>
@@ -215,7 +233,7 @@
 			<script>
 				$(function() {
 				    Morris.Area({
-				        element: 'repositories-repository-chart',
+				        // element: 'repositories-repository-chart',
 				        data: <?php echo json_encode($data); ?>,
 				        xkey: 'day',
 				        ykeys: ['success', 'fail', 'unstable'],
