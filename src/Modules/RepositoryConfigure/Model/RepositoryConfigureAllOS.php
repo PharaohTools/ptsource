@@ -190,7 +190,7 @@ class RepositoryConfigureAllOS extends Base {
         // @todo dunno y i have to force this param
         $repositorySaver->params["item"] = $this->params["item"];
         $repositorySaver->saveRepository(array("type" => "Defaults", "data" => $data ));
-        $repositorySaver->saveRepository(array("type" => "Steps", "data" => $sourcePipe["steps"] ));
+        // $repositorySaver->saveRepository(array("type" => "Steps", "data" => $sourcePipe["steps"] ));
         $repositorySaver->saveRepository(array("type" => "Settings", "data" => $sourcePipe["settings"] ));
 
         $ev = $this->runBCEvent("afterRepositorySave") ;
