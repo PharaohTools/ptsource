@@ -102,11 +102,13 @@
                                         count($repositoryDetails["features"])>0 ) {
                                         foreach ($repositoryDetails["features"] as $repository_feature) {
                                             echo '<div class="repository-feature">' ;
-                                            echo '<a target="_blank" href="'.$repository_feature["model"]["link"].'">' ;
+                                            echo ' <a target="_blank" href="'.$repository_feature["model"]["link"].'">' ;
 //                                                echo  '<h3>'.$repository_feature["model"]["title"].'</h3>' ;
-                                            echo  '<img src="'.$repository_feature["model"]["image"].'" />' ;
-                                            echo "</a>" ;
+                                            echo '  <img src="'.$repository_feature["model"]["image"].'" />' ;
+                                            echo " </a>" ;
                                             echo '</div>' ; } }
+                                    else {
+                                        echo '&nbsp;' ; }
 
                                     ?>
                                 </div>
