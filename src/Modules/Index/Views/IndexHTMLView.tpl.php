@@ -206,22 +206,27 @@
 	                        </div>
 	                        <!-- /.panel-heading -->
 	                        <div class="panel-body">
-                                <div>
-                                    Your Teams: XYZ <br />
-                                    Team Members: XYZ <br />
-                                    Total Contributors: XYZ <br />
-                                    <br />
-                                    Total Repositories: XYZ <br />
-                                    Total Clones: XYZ <br />
-                                    Total Contributors: XYZ <br />
-                                    <br />
-                                    Team Repositories: XYZ <br />
-                                    Team Clones: XYZ <br />
-                                    Team Contributors: XYZ <br />
-                                    <br />
-                                    Your Repositories: XYZ <br />
-                                    Your Clones: XYZ <br />
-                                    Your Contributors: XYZ <br />
+                                <div class="homeTable">
+                                    <div class="homeTableColumn">
+                                        Your Teams: XYZ <br />
+                                        Team Members: XYZ <br />
+                                        Total Contributors: XYZ <br />
+                                    </div>
+                                    <div class="homeTableColumn">
+                                        Total Repositories: XYZ <br />
+                                        Total Clones: XYZ <br />
+                                        Total Contributors: XYZ <br />
+                                    </div>
+                                    <div class="homeTableColumn">
+                                        Team Repositories: XYZ <br />
+                                        Team Clones: XYZ <br />
+                                        Team Contributors: XYZ <br />
+                                    </div>
+                                    <div class="homeTableColumn">
+                                        Your Repositories: XYZ <br />
+                                        Your Clones: XYZ <br />
+                                        Your Contributors: XYZ <br />
+                                    </div>
                                 </div>
 	                            <div id="repositories-repository-chart">
 	                            </div>
@@ -261,14 +266,14 @@
 <!--            <p>-->
 <!--                ----------------------------------------->
 <!--            </p>-->
-<!--        --> <?php
+<?php
 //
-////            foreach ($pageVars["modulesInfo"] as $moduleInfo) {
-////                if ($moduleInfo["hidden"] != true) {
-////                    echo '<p>' . $moduleInfo["command"] . ' - ' . $moduleInfo["name"] . "</p>";
-////                }
-////            }
-//            ?>
+//            foreach ($pageVars["modulesInfo"] as $moduleInfo) {
+//                if ($moduleInfo["hidden"] != true) {
+//                    echo '<p>' . $moduleInfo["command"] . ' - ' . $moduleInfo["name"] . "</p>";
+//                }
+//            }
+?>
 <!---->
 <!--            -->
 <!--                <hr>-->
@@ -280,3 +285,4 @@
     </div>
 
 </div>
+<link rel="stylesheet" type="text/css" href="/Assets/Modules/Index/css/index.css">
