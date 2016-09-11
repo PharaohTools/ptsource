@@ -20,7 +20,7 @@
                 </li>
                <li>
                     <a href="/index.php?control=ApplicationConfigure&action=show"class=" active hvr-bounce-in">
-                        <i class="fa fa-cogs fa-fw hvr-bounce-in"></i> Configure PTSource</a>
+                        <i class="fa fa-cogs fa-fw hvr-bounce-in"></i> Configure PTBuild</a>
                 </li>
                 <li>
                     <a href="/index.php?control=UserManager&action=show"class=" hvr-bounce-in">
@@ -38,7 +38,7 @@
 
     <div class="col-lg-9">
                     <div class="well well-lg">         
-<!--                    	<h2 class="text-uppercase text-light"><a href="/">PTSource - Pharaoh Tools</a></h2>-->
+                    	<h2 class="text-uppercase text-light"><a href="/">PTBuild - Pharaoh Tools</a></h2>
 
                         <?php echo $this->renderLogs() ; ?>
 
@@ -91,6 +91,14 @@
                                             if ($val == "" || is_null($val)) {
                                                 $placeholder = ' placeholder="'.$one_conf_tails["default"].'" ' ; }
                                             echo '<input name="mod_config['.$module_name.']['.$one_config_slug.']" id="mod_config['.$module_name.']['.$one_config_slug.']" type="text" class="form-control" '.$val.' '.$placeholder.' ></input>' ;
+                                            break ;
+                                        case "textarea" :
+                                            if (isset($pageVars["data"]["current_configs"]["mod_config"][$module_name][$one_config_slug]) &&
+                                                strlen($pageVars["data"]["current_configs"]["mod_config"][$module_name][$one_config_slug])>0) {
+                                                $val = $pageVars["data"]["current_configs"]["mod_config"][$module_name][$one_config_slug] ;  }
+                                            else {
+                                                $val = "" ; }
+                                            echo '<textarea name="mod_config['.$module_name.']['.$one_config_slug.']" id="mod_config['.$module_name.']['.$one_config_slug.']" class="form-control" >'.$val.'</textarea>' ;
                                             break ; }
                                     echo '  </div>';
                                     echo '</div>'; } } }
