@@ -19,13 +19,23 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/index.php?control=ApplicationConfigure&action=show" class="hvr-bounce-in">
-                        <i class="fa fa-cogs fa-fw hvr-bounce-in"></i> Configure PTBuild</a>
-                </li>
-                <li>
-                    <a href="/index.php?control=UserProfile&action=show" class="hvr-bounce-in">
-                        <i class="fa fa-user hvr-bounce-in"></i> User Manager
+                    <a href="/index.php?control=ApplicationConfigure&action=show" class=" hvr-bounce-in">
+                        <i class="fa fa-cogs fa-fw"></i> Configure PTBuild<span class="fa arrow"></span>
                     </a>
+                    <ul class="nav nav-second-level collapse">
+                        <li>
+                            <a href="/index.php?control=ApplicationConfigure&action=show" class=" hvr-curl-bottom-right">Application</a>
+                        </li>
+                        <li>
+                            <a href="/index.php?control=UserManager&action=show" class=" hvr-curl-bottom-right">User Manager</a>
+                        </li>
+                        <li>
+                            <a href="/index.php?control=UserProfile&action=show" class=" hvr-curl-bottom-right">User Profile</a>
+                        </li>
+                        <li>
+                            <a href="/index.php?control=ModuleManager&action=show" class=" hvr-curl-bottom-right">Modules</a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
                     <a href="/index.php?control=ModuleManager&action=show" class="hvr-bounce-in">
@@ -38,7 +48,7 @@
 
    <div class="col-lg-9">
      <div class="well well-lg">
-        <h2 class="text-uppercase text-light"><a href="/"> PTTrack - Pharaoh Tools</a></h2>
+<!--        <h2 class="text-uppercase text-light"><a href="/"> PTTrack - Pharaoh Tools</a></h2>-->
 		<div class="row clearfix no-margin">
 			<h4 class="alert alert-warning">You don't have permission to access this page</h4>
      	<p>

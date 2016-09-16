@@ -159,7 +159,7 @@
                         if ($pageVars["data"]["allusers"] === false) {
                             ?>
 
-                            <input type="text" readonly="readonly" class="form-control" id="update_username" name="update_username" placeholder="User Name" value="<?php echo $pageVars["data"]["user"]->username ; ?>">
+<!--                            <input type="text" readonly="readonly" class="form-control" id="update_username" name="update_username" placeholder="User Name" value="--><?php //echo $pageVars["data"]["user"]->username ; ?><!--">-->
                         <?php  }  ?>
 
                         <?php
