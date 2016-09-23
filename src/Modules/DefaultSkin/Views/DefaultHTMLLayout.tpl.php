@@ -67,75 +67,71 @@
    // @todo can we do HTML output with a blank template
 	 ?>
 		<div id="wrapper">
-			<nav class="navbar navbar-default navbar-static-top navbar-fixed-top" role="navigation" style="background-color: #242424;  border-color:#242424;">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" style="color:#FFFFFF" coldata-toggle="collapse" data-target=".">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-" href="/index.php?control=Index&action=show">
-						<figure class="rollover">
-                        <img src="/Assets/Modules/DefaultSkin/image/source-logo.png" class="navbar-img hvr-grow-shadow" style="height: 60px;padding: 5px;" />
-                        <span class="title hvr-grow-shadow">Pharaoh Source</span>
-                    </a>
-				</div>
-				
-				
-				<!-- /.navbar-header -->
-				<ul class="nav navbar-top-links navbar-right">
-					
-                <li class="dropdown hvr-hang ">
-                	
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    	
-                        <i class="fa fa-bell fa-fw " id="bell"></i>  <i class="fa fa-caret-down " id="caret"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-alerts hvr-grow-shadow ">
-                        <li>
-                            <a href="#">
-                                <div >
-                                    <i class="fa fa-comment fa-fw "></i> New Comment
-                                    <span class="pull-right text-muted small"> 4 minutes ago</span>
-                                </div>
+            <nav class="navbar navbar-default navbar-static-top navbar-fixed-top" role="navigation" style="background-color: #242424;  border-color:#242424;">
+                <div class="navbar-header">
+                    <!-- /.navbar-header -->
+                    <ul class="nav navbar-top-links navbar-right">
+
+                        <li class="dropdown hvr-hang ">
+
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+
+                                <i class="fa fa-bell fa-fw " id="bell"></i>  <i class="fa fa-caret-down " id="caret"></i>
                             </a>
+                            <ul class="dropdown-menu dropdown-alerts hvr-grow-shadow ">
+                                <li>
+                                    <a href="#">
+                                        <div >
+                                            <i class="fa fa-comment fa-fw "></i> New Comment
+                                            <span class="pull-right text-muted small"> 4 minutes ago</span>
+                                        </div>
+                                    </a>
+                                </li>
+
+                                <li class="divider"></li>
+                                <li>
+                                    <a class="text-center" href="#">
+                                        <strong>See All Alerts</strong>
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                            <!-- /.dropdown-alerts -->
                         </li>
-                       
-                        <li class="divider"></li>
-                        <li>
-                            <a class="text-center" href="#">
-                                <strong>See All Alerts</strong>
-                                <i class="fa fa-angle-right"></i>
+                        <!-- /.dropdown -->
+                        <li class="dropdown  hvr-hang">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-user fa-fw" id="bell"></i>  <i class="fa fa-caret-down" id="caret"></i>
                             </a>
+                            <ul class="dropdown-menu dropdown-user ">
+                                <li><a href="/index.php?control=UserProfile&action=show" class=" hvr-grow-shadow"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                                </li>
+                                <li><a href="/index.php?control=ApplicationConfigure&action=show" class=" hvr-grow-shadow"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                                </li>
+                                <li><a href="/index.php?control=About&action=show" class=" hvr-grow-shadow"><i class="fa fa-help fa-fw"></i> About</a>
+                                </li>
+                                <?php
+                                if($pageVars["route"]["action"] != "registration" && $pageVars["route"]["action"] != "login") { ?>
+                                    <li class="divider"></li>
+                                    <li><a href="/index.php?control=Signup&action=logout" class=" hvr-grow-shadow"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                                    </li><?php } ?>
+                            </ul>
+                            <!-- /.dropdown-user -->
                         </li>
+                        <!-- /.dropdown -->
                     </ul>
-                    <!-- /.dropdown-alerts -->
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown  hvr-hang">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw" id="bell"></i>  <i class="fa fa-caret-down" id="caret"></i>
+                    <a class="navbar-left" href="/index.php?control=Index&action=show">
+                        <figure class="rollover">
+                            <?php
+                            $app = PHARAOH_APP ;
+                            $app = str_replace("pt", "", $app) ;
+                            ?>
+                            <img src="/Assets/Modules/DefaultSkin/image/<?php echo $app ;?>-logo.png" class="navbar-img hvr-grow-shadow" style="height: 60px;padding: 5px;" />
+                            <span class="title hvr-grow-shadow">Pharaoh <?php echo ucfirst($app) ;?></span>
                     </a>
-                    <ul class="dropdown-menu dropdown-user ">
-                        <li><a href="/index.php?control=UserProfile&action=show" class=" hvr-grow-shadow"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="/index.php?control=ApplicationConfigure&action=show" class=" hvr-grow-shadow"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
-                        <li><a href="/index.php?control=About&action=show" class=" hvr-grow-shadow"><i class="fa fa-help fa-fw"></i> About</a>
-                        </li> 
-                        <?php 
-                        if($pageVars["route"]["action"] != "registration" && $pageVars["route"]["action"] != "login") { ?>
-                        <li class="divider"></li>
-                        <li><a href="/index.php?control=Signup&action=logout" class=" hvr-grow-shadow"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li><?php } ?>
-                    </ul>
-                    <!-- /.dropdown-user -->
-                </li>
-                <!-- /.dropdown -->
-            </ul>   
-            <!-- /.navbar-top-links -->
-			</nav>
+                </div>
+                <!-- /.navbar-top-links -->
+            </nav>
 			
 			<?php echo $this -> renderMessages($pageVars); ?>
 			<?php echo $templateData; ?>
