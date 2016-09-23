@@ -1,6 +1,6 @@
 <div class="container" id="wrapper">
     <div class="navbar-default col-sm-2 sidebar" role="navigation">
-        <div class="sidebar-nav navbar-collapse">
+        <div class="sidebar-nav ">
             <ul class="nav in" id="side-menu">
                 <li class="sidebar-search">
                     <div class="input-group custom-search-form hvr-bounce-in">

@@ -69,7 +69,7 @@
 		<div id="wrapper">
 			<nav class="navbar navbar-default navbar-static-top navbar-fixed-top" role="navigation" style="background-color: #242424;  border-color:#242424;">
 				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" style="color:#FFFFFF" coldata-toggle="collapse" data-target=".navbar-collapse">
+					<button type="button" class="navbar-toggle" style="color:#FFFFFF" coldata-toggle="collapse" data-target=".">
 						<span class="sr-only">Toggle navigation</span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
