@@ -11,6 +11,8 @@ class AssetLoader extends Base {
         if (is_array($thisModel)) { return $this->failDependencies($pageVars, $this->content, $thisModel) ; }
         if($pageVars["route"]["action"] == "show") {
             $this->content["data"] = $thisModel->getData();
+            $this->content["params"]["output-format"] = "FILE";
+            $this->content["route"]["extraParams"]["output-format"] = "FILE";
             $this->content["route"]["extraParams"] = $this->forceCliParam($this->content["route"]["extraParams"]) ; }
         return array ("type"=>"view", "view"=>"assetLoader", "pageVars"=>$this->content);
     }
