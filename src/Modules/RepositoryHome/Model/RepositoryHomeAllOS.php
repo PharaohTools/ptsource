@@ -18,6 +18,7 @@ class RepositoryHomeAllOS extends Base {
         $ret["repository"] = $this->getRepository();
         $ret["features"] = $this->getRepositoryFeatures();
         $ret["history"] = $this->getCommitHistory();
+        $ret["is_https"] = $this->isSecure();
         $ret = array_merge($ret, $this->getIdentifier()) ;
         return $ret ;
     }
@@ -27,7 +28,7 @@ class RepositoryHomeAllOS extends Base {
         return $ret ;
     }
 
-    public function getRepository() {
+    protected function getRepository() {
         $repositoryFactory = new \Model\Repository() ;
         $repository = $repositoryFactory->getModel($this->params);
         $r = $repository->getRepository($this->params["item"]);
@@ -41,19 +42,25 @@ class RepositoryHomeAllOS extends Base {
         return $identifier ;
     }
 
-    public function getRepositoryFeatures() {
+    protected function getRepositoryFeatures() {
         $repositoryFactory = new \Model\Repository() ;
         $repository = $repositoryFactory->getModel($this->params);
         $r = $repository->getRepositoryFeatures($this->params["item"]);
         return $r ;
     }
 
-    public function getCommitHistory() {
+    protected function getCommitHistory() {
         $repositoryFactory = new \Model\Repository() ;
         $commitParams = $this->params ;
         $commitParams["amount"] = 10 ;
         $repository = $repositoryFactory->getModel($commitParams, "RepositoryCommits");
         return $repository->getCommits();
+    }
+
+    protected function isSecure() {
+        return
+            (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+            || $_SERVER['SERVER_PORT'] == 443;
     }
 
     public function deleteRepository() {
