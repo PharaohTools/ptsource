@@ -159,6 +159,5 @@
         </div>
     </div>
 </div>
-<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Palatino+Linotype">
 <link rel="stylesheet" type="text/css" href="/Assets/Modules/Signup/css/signup.css">
 <script type="text/javascript" src="/Assets/Modules/Signup/js/signup.js"></script>
