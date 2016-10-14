@@ -78,3 +78,18 @@ div.well h2.text-uppercase {
 .navbar-right{
     float: right;
 }
+
+.panel-primary {
+    background-color: #337ab7;
+    color: #fff;
+}
+
+.panel-primary a,
+.panel-primary a:hover,
+.panel-primary a:focus{
+    color: #fff;
+}
+
+.panel-primary span.allJobsCalendarLink {
+    color: #337ab7;
+}

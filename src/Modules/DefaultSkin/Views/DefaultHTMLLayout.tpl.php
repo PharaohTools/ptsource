@@ -8,14 +8,15 @@
 		<meta name="author" content="">
 		<link rel="icon" href="/Assets/Modules/DefaultSkin/image/favicon.ico">
 		
-		<title>Source - Pharaoh Tools</title>
+		<title><?php echo ucfirst(PHARAOH_APP_FRIENDLY) ; ?> - Pharaoh Tools</title>
 
-        <script src="/Assets/Modules/DefaultSkin/js/jquery.min.js"></script>
+
+        <script src="/Assets/Modules/DefaultSkin/js/jquery-full.js"></script>
         <script src="/Assets/Modules/DefaultSkin/js/jquery-ui.min.js"></script>
         <script src="/Assets/Modules/DefaultSkin/js/bootstrap.min.js"></script>
 
         <link href="/Assets/Modules/DefaultSkin/Hover-master/css/hover.css" rel="stylesheet" media="all">
-		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" media="all">
+		<link href="/Assets/Modules/DefaultSkin/css/font-awesome.min.css" rel="stylesheet" media="all">
 
 		<!-- Bootstrap Core CSS -->
 		<link href="/Assets/Modules/DefaultSkin/css/bootstrap.min.css" rel="stylesheet">
@@ -49,15 +50,14 @@
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		<!--[if lt IE 9]>
-		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-
+		<script src="/Assets/Modules/DefaultSkin/js/html5shiv.min.js"></script>
+		<script src="/Assets/Modules/DefaultSkin/js/respond.min.js"></script>
 
 		<![endif]-->
 		<!--  sign up add -->
         <!-- Bootstrap Core CSS -->
         <link href="/Assets/Modules/DefaultSkin/css/default.css" rel="stylesheet">
-
+        <script type="text/javascript" src="/Assets/Modules/DefaultSkin/js/pharaoh_default.js"></script>
 	</head>
 
 	<body>
@@ -67,8 +67,15 @@
    // @todo can we do HTML output with a blank template
 	 ?>
 		<div id="wrapper">
-            <nav class="navbar navbar-default navbar-static-top navbar-fixed-top" role="navigation" style="background-color: #242424;  border-color:#242424;">
-                <div class="navbar-header">
+			<nav class="navbar navbar-default navbar-static-top navbar-fixed-top" role="navigation" style="background-color: #242424;  border-color:#242424;">
+				<div class="navbar-header">
+
+                    <?php
+
+                    if (isset($_SESSION) && $_SESSION["login-status"]==true) {
+
+                    ?>
+
                     <!-- /.navbar-header -->
                     <ul class="nav navbar-top-links navbar-right">
 
@@ -120,18 +127,17 @@
                         </li>
                         <!-- /.dropdown -->
                     </ul>
+
+                    <?php } ?>
+
                     <a class="navbar-left" href="/index.php?control=Index&action=show">
-                        <figure class="rollover">
-                            <?php
-                            $app = PHARAOH_APP ;
-                            $app = str_replace("pt", "", $app) ;
-                            ?>
-                            <img src="/Assets/Modules/DefaultSkin/image/<?php echo $app ;?>-logo.png" class="navbar-img hvr-grow-shadow" style="height: 60px;padding: 5px;" />
-                            <span class="title hvr-grow-shadow">Pharaoh <?php echo ucfirst($app) ;?></span>
+						<figure class="rollover">
+                        <img src="/Assets/Modules/DefaultSkin/image/<?php echo PHARAOH_APP_FRIENDLY ;?>-logo.png" class="navbar-img hvr-grow-shadow" style="height: 60px;padding: 5px;" />
+                        <span class="title hvr-grow-shadow">Pharaoh <?php echo ucfirst(PHARAOH_APP_FRIENDLY) ;?></span>
                     </a>
-                </div>
-                <!-- /.navbar-top-links -->
-            </nav>
+				</div>
+            <!-- /.navbar-top-links -->
+			</nav>
 			
 			<?php echo $this -> renderMessages($pageVars); ?>
 			<?php echo $templateData; ?>
