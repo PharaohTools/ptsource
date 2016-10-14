@@ -81,7 +81,8 @@
             </div>
                 <hr />
                 <h3 class="propertyTitle">Clone, Push or Pull:</h3>
-                <h4 class="propertyTitle">HTTPS: git clone <?php echo "http://{$_SERVER["SERVER_NAME"]}/git/public/{$pageVars["data"]["repository"]["project-slug"]} "  ; ?></h4>
+                <?php $ht_string = ($pageVars["is_https"] == true) ? 'HTTPS' : 'HTTP' ; ?>
+                <h4 class="propertyTitle"><?php echo $ht_string ; ?>: git clone <?php echo "http://{$_SERVER["SERVER_NAME"]}/git/public/{$pageVars["data"]["repository"]["project-slug"]} "  ; ?></h4>
 <!--                <h4 class="propertyTitle">SSH: --><?php //echo "git://{$_SERVER["SERVER_NAME"]}/index.php?control=GitServer&action=serve&item={$pageVars["data"]["repository"]["project-slug"]} {$pageVars["data"]["repository"]["project-slug"]}" ; ?><!--</h4>-->
                 <hr />
             <div class="row clearfix no-margin build-home-properties">
