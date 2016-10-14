@@ -21,9 +21,8 @@ class GitServerAllOS extends Base {
     }
 
     public function backendData() {
-
         define("DEBUG_LOG",        true);
-        define("HTTP_AUTH",        false);
+        define("HTTP_AUTH",        true);
         define("GZIP_SUPPORT",     false);
         define("GIT_ROOT",         REPODIR.DS );
         define("GIT_HTTP_BACKEND", "/usr/lib/git-core/git-http-backend");
@@ -31,44 +30,66 @@ class GitServerAllOS extends Base {
         define("REMOTE_USER",      "smart-http");
         define("LOG_RESPONSE",     "/tmp/response.log");
         define("LOG_PROCESS",      "/tmp/process.log");
-
 //        error_log("three" ) ;
 
-
-        if(isset($_SERVER["PATH_INFO"]))
-        {
+        if(isset($_SERVER["PATH_INFO"])) {
             list($git_project_path, $path_info) = $temp = preg_split("/\//", $_SERVER["PATH_INFO"], 2, PREG_SPLIT_NO_EMPTY);
             $git_project_path = "/" . $git_project_path . "/";
-            $path_info = "/" . $path_info;
-        }
-        else
-        {
+            $path_info = "/" . $path_info; }
+        else {
             $git_project_path = "/";
-            $path_info = "";
-        }
+            $path_info = ""; }
+
         $path_info = "/".$this->params["item"] ;
         $request_headers = $this->getAllHeaders();
 
         $php_input = file_get_contents("php://input");
-        $env = array
-        (
+
+        $env = array (
             "GIT_PROJECT_ROOT"    => REPODIR ,
             "GIT_HTTP_EXPORT_ALL" => 1,
             "GIT_HTTP_MAX_REQUEST_BUFFER" => "1000M",
 //            'PATH' => $_SERVER["PATH"],
-//            "REMOTE_USER"         => isset($_SERVER["REMOTE_USER"])          ? $_SERVER["REMOTE_USER"]          : REMOTE_USER,
-            "REMOTE_USER"         => isset($_SERVER["REMOTE_USER"])          ? $_SERVER["REMOTE_USER"]          : "ptsource",
-//            "REMOTE_ADDR"         => isset($_SERVER["REMOTE_ADDR"])          ? $_SERVER["REMOTE_ADDR"]          : "",
+            "REMOTE_USER"         => REMOTE_USER,
+//            "REMOTE_USER"         => isset($_SERVER["REMOTE_USER"])          ? $_SERVER["REMOTE_USER"]          : "ptsource",
             "REMOTE_ADDR"         => isset($_SERVER["REMOTE_ADDR"])          ? $_SERVER["REMOTE_ADDR"]          : "",
             "REQUEST_METHOD"      => isset($_SERVER["REQUEST_METHOD"])       ? $_SERVER["REQUEST_METHOD"]       : "",
             "PATH_INFO"           => $path_info,
             "QUERY_STRING"        => isset($_SERVER["QUERY_STRING"])         ? $_SERVER["QUERY_STRING"]         : "",
             "CONTENT_TYPE"        => isset($request_headers["Content-Type"]) ? $request_headers["Content-Type"] : "",
+            "HTTP_AUTH"           => true,
+            "GZIP_SUPPORT"        => true,
+            "Authorization" => 1,
+            "HTTP_AUTHORIZATION" => "",
+            "REDIRECT_HTTP_AUTHORIZATION" => "",
+//            "Authorization: Basic" => 1,
+
+//            "REMOTE_USER"         => $_SERVER["REDIRECT_REMOTE_USER"] ,
+//            HTTP_USER_AGENT 	The browser type of the visitor
+//            HTTPS 	"on" if the program is being called through a secure server
+//            REMOTE_ADDR 	The IP address of the visitor
+//REMOTE_HOST 	The hostname of the visitor (if your server has reverse-name-lookups on; otherwise this is the IP address again)
+//REMOTE_PORT 	The port the visitor is connected to on the web server
+//REMOTE_USER 	The visitor's username (for .htaccess-protected pages)
+//REQUEST_METHOD 	GET or POST
+//REQUEST_URI 	The interpreted pathname of the requested document or CGI (relative to the document root)
+//SCRIPT_FILENAME 	The full pathname of the current CGI
+//SCRIPT_NAME 	The interpreted pathname of the current CGI (relative to the document root)
+
+
         );
         $env = array_merge( $env, array(
 //            "GIT_COMMITTER_NAME" => "Pharaoh King",
 //            "GIT_COMMITTER_EMAIL" => "phpengine@pharaohtools.com",
         ) ) ;
+
+
+        $env = array_merge($_SERVER, $env) ;
+
+        ob_start();
+        var_dump("this env", $env) ;
+        $res = ob_get_clean();
+        file_put_contents('/var/log/pharaoh.log', $res, FILE_APPEND) ;
 
         $pathStarts = array('/HEAD', '/info/', '/objects/') ;
 
@@ -78,8 +99,6 @@ class GitServerAllOS extends Base {
             $remove = "/{$scm_synonym}/" ;
 //            $remove = "/{$scm_synonym}/{$this->params["user"]}/{$this->params["item"]}" ;
             $qs = str_replace($remove, "", $qs) ; }
-
-
 
         $query_data = $_GET;
         foreach ($query_data as $key => $value) {
@@ -110,20 +129,16 @@ class GitServerAllOS extends Base {
             $settings[2] = array("file", LOG_PROCESS, "a");
         }
         $process = proc_open(GIT_HTTP_BACKEND , $settings, $pipes, null, $env);
-        if(is_resource($process))
-        {
+        if (is_resource($process)) {
 //            error_log("php in: $php_input" ) ;
             fwrite($pipes[0], $php_input);
             fclose($pipes[0]);
             $return_output = stream_get_contents($pipes[1]);
             fclose($pipes[1]);
             $return_code = proc_close($process);
-            error_log("rc: $return_code, stduot: $return_output" ) ;
-
-        }
+            error_log("rc: $return_code, stduot: $return_output" ) ; }
         else {
-            error_log("is r:", is_resource($process) ) ;
-        }
+            error_log("is r:", is_resource($process) ) ; }
         if(!empty($return_output))
         {
             list($response_headers, $response_body)
