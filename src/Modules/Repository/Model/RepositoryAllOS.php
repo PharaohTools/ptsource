@@ -101,7 +101,8 @@ class RepositoryAllOS extends Base {
             // @todo cross os
             $comms = array(
                 'mkdir -p '.REPODIR.DS.$name,
-                'git init --bare '.REPODIR.DS.$name) ;
+                'git init --bare '.REPODIR.DS.$name,
+                'cd '.REPODIR.DS.$name.'; git config http.recievepack true ;') ;
             $results = array() ;
             foreach ($comms as $comm) {
                 $rc = self::executeAndGetReturnCode($comm);
