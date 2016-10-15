@@ -63,7 +63,7 @@
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <div class="huge hvr-grow-rotate" ><?php echo $pageVars['pipesDetail']['total']; ?></div>
-                                        <div>Total Jobs</div>
+                                        <div>Total Repositories</div>
                                     </div>
                                 </div>
                             </div>
@@ -85,7 +85,7 @@
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <div class="huge  hvr-grow-rotate"><?php echo $pageVars['pipesDetail']['success']; ?></div>
-                                        <div>Jobs Complete!</div>
+                                        <div>Your Repositories!</div>
                                     </div>
                                 </div>
                             </div>
@@ -107,7 +107,7 @@
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <div class="huge  hvr-grow-rotate"><?php echo $pageVars['pipesDetail']['fail']; ?></div>
-                                        <div>Jobs Failed!</div>
+                                        <div>Broken</div>
                                     </div>
                                 </div>
                             </div>
@@ -129,7 +129,7 @@
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <div class="huge hvr-grow-rotate"><?php echo $pageVars['pipesDetail']['unstable']; ?></div>
-                                        <div>Jobs Pending Action!</div>
+                                        <div>Passing</div>
                                     </div>
                                 </div>
                             </div>
@@ -154,83 +154,8 @@
 	                        <div class="panel-body">
 	                            <div id="pipes-build-chart"></div>
 
-
-
                                 <div class="row">
-                                    <div class="col-sm-12 text-center"><h2>Alerts</h2></div>
-                                </div>
-
-                                <div class="row text-center">
-                                    <div class="col-sm-6 text-center">
-                                        <?php
-                                        if (isset($pageVars["data"]["latest_system_alerts"]) && count($pageVars["data"]["latest_system_alerts"])>0 ) {
-                                            $i = 1;
-
-                                            foreach ($pageVars["data"]["latest_system_alerts"] as $latestAlert) {
-                                                ?>
-
-
-                                                <div class="alertRow" id="alertRow_<?php echo $latestAlert["alert-slug"]; ?>" >
-                                                    <div class="blCell cellRowSourceHome" scope="row"><?php echo $latestAlert["alert-slug"]; ?> </div>
-                                                    <div class="blCell cellRowName">
-                                                        <a href="/index.php?control=AlertHome&action=show&item=<?php echo $pageVars["data"]["job"]["job_slug"]; ?>&alert=<?php echo $latestAlert["alert-slug"] ; ?>" class="pipeName">
-                                                            <?php echo $latestAlert["alert-name"]; ?>
-                                                        </a>
-                                                    </div>
-                                                    <div class="blCell cellRowDescription"><?php
-                                                        if (strlen($latestAlert["alert-description"]) < 150) {
-                                                            echo $latestAlert["alert-description"]; }
-                                                        else {
-                                                            $trunc = substr($latestAlert["alert-description"], 0, 150) ;
-                                                            $trunc .= " ..." ;
-                                                            echo $trunc ; } ?>
-                                                    </div>
-                                                    <div class="blCell cellRowAssignee"><?php echo $latestAlert["alert-assignee"]; ?> </div>
-                                                    <div class="blCell cellRowPriority"><?php echo $latestAlert["alert-priority"]; ?> </div>
-                                                </div>
-                                                <?php
-
-                                                $i++ ;
-                                            } }
-                                        else { ?>
-                                            <h4>No User Alerts Found</h4>
-
-                                        <?php  }  ?>
-                                    </div>
-                                    <div class="col-sm-6 text-center">
-                                        <?php
-                                        if (isset($pageVars["data"]["latest_system_alerts"]) && count($pageVars["data"]["latest_system_alerts"])>0 ) {
-                                            $i = 1;
-                                            foreach ($pageVars["data"]["latest_system_alerts"] as $latestAlert) { ?>
-                                                <div class="systemAlertRow" id="systemAlertRow_<?php echo $latestAlert["system-alert-slug"]; ?>" >
-                                                    <div class="blCell cellRowSourceHome" scope="row"><?php echo $latestAlert["system-alert-slug"]; ?> </div>
-                                                    <div class="blCell cellRowName">
-                                                        <a href="/index.php?control=AlertHome&action=show&item=<?php echo $pageVars["data"]["job"]["job_slug"]; ?>&alert=<?php echo $latestAlert["alert-slug"] ; ?>" class="pipeName">
-                                                            <?php echo $latestAlert["alert-name"]; ?>
-                                                        </a>
-                                                    </div>
-                                                    <div class="blCell cellRowDescription"><?php
-                                                        if(strlen($latestAlert["system-alert-description"]) < 150) {
-                                                            echo $latestAlert["system-alert-description"]; }
-                                                        else {
-                                                            $trunc = substr($latestAlert["system-alert-description"], 0, 150) ;
-                                                            $trunc .= " ..." ;
-                                                            echo $trunc ; } ?>
-                                                    </div>
-                                                    <div class="blCell cellRowAssignee"><?php echo $latestAlert["system-alert-assignee"]; ?> </div>
-                                                    <div class="blCell cellRowPriority"><?php echo $latestAlert["system-alert-priority"]; ?> </div>
-                                                </div>
-                                                <?php
-                                                $i++ ;
-                                            } }
-                                        else { ?>
-                                            <h4>No System Alerts Found</h4>
-                                        <?php  }  ?>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-sm-12 text-center"><h2>Calendars</h2></div>
+                                    <div class="col-sm-12 text-center"><h2>Repositories</h2></div>
                                 </div>
 
                                 <div class="row">
@@ -238,7 +163,7 @@
                                     <div class="col-lg-4 col-md-6 hvr-pcreatoop">
 
                                         <div class="panel panel-primary">
-                                            <a href="/index.php?control=IssueCalendar&action=show">
+                                            <a href="/index.php?control=RepositoryList&action=show">
                                                 <div class="panel-heading">
                                                     <div class="row">
                                                         <div class="col-xs-12 huge hvr-grow-rotate text-center" >
@@ -261,7 +186,7 @@
 
                                     <div class="col-lg-4 col-md-6 hvr-pcreatoop">
                                         <div class="panel panel-green">
-                                            <a href="/index.php?control=IssueCalendar&action=show&filters[]=user::<?php echo $pageVars["data"]['user']->username ; ?>">
+                                            <a href="/index.php?control=RepositoryList&action=show&filters[]=user::<?php echo $pageVars["data"]['user']->username ; ?>">
                                                 <div class="panel-heading">
                                                     <div class="row">
                                                         <div class="col-xs-12 huge hvr-grow-rotate text-center">
@@ -284,7 +209,7 @@
 
                                     <div class="col-lg-4 col-md-6 hvr-pcreatoop">
                                         <div class="panel panel-yellow">
-                                            <a href="/index.php?control=IssueCalendar&action=show&userswitch=true">
+                                            <a href="/index.php?control=RepositoryList&action=show&userswitch=true">
                                                 <div class="panel-heading">
                                                     <div class="row">
                                                         <div class="col-xs-12 huge hvr-grow-rotate text-center">
@@ -302,7 +227,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                <div class="col-sm-12 text-center"><h2>Jobs</h2></div>
+                                <div class="col-sm-12 text-center"><h2>Teams</h2></div>
                                 </div>
 
                                 <div class="row">
@@ -399,109 +324,79 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-sm-12 text-center"><h2>Issues</h2></div>
+                                    <div class="col-sm-12 text-center"><h2>Latest</h2></div>
                                 </div>
 
-                                <div class="row">
+                                <div class="row text-center">
+                                    <div class="col-sm-6 text-center">
+                                        <?php
+                                        if (isset($pageVars["data"]["latest_commits"]) && count($pageVars["data"]["latest_commits"])>0 ) {
+                                            $i = 1;
 
-                                    <div class="col-lg-3 col-md-6 hvr-pcreatoop">
-                                        <div class="panel panel-primary">
-                                            <a href="/index.php?control=IssueList&action=show">
-                                                <div class="panel-heading">
-                                                    <div class="row">
-                                                        <div class="col-xs-12 text-center loading-ajax" id="total-holder-parent">
-                                                            <div class="huge hvr-grow-rotate" id="total-holder">
-                                                                &nbsp;
-                                                            </div>
-                                                            <div>Total</div>
-                                                        </div>
+                                            foreach ($pageVars["data"]["latest_commits"] as $latestAlert) {
+                                                ?>
+
+
+                                                <div class="alertRow" id="alertRow_<?php echo $latestAlert["alert-slug"]; ?>" >
+                                                    <div class="blCell cellRowSourceHome" scope="row"><?php echo $latestAlert["alert-slug"]; ?> </div>
+                                                    <div class="blCell cellRowName">
+                                                        <a href="/index.php?control=AlertHome&action=show&item=<?php echo $pageVars["data"]["job"]["job_slug"]; ?>&alert=<?php echo $latestAlert["alert-slug"] ; ?>" class="pipeName">
+                                                            <?php echo $latestAlert["alert-name"]; ?>
+                                                        </a>
                                                     </div>
-                                                </div>
-                                                <div class="panel-footer">
-                                                    <span class="allJobsCalendarLink pull-left">View Issues</span>
-                                                    <span class="allJobsCalendarLink pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                                    <div class="clearfix"></div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-
-                                    <?php
-                                    if (isset($pageVars["data"]['user']->username)) {
-                                    ?>
-
-                                    <div class="col-lg-3 col-md-6 hvr-pcreatoop">
-                                        <div class="panel panel-green">
-                                            <a href="/index.php?control=IssueList&action=show">
-                                                <div class="panel-heading">
-                                                    <div class="row">
-                                                        <div class="col-xs-12 text-center loading-ajax" id="watching-holder-parent">
-                                                            <div class="huge hvr-grow-rotate" id="watching-holder">
-                                                                &nbsp;
-                                                            </div>
-                                                            <div> Watching</div>
-                                                        </div>
+                                                    <div class="blCell cellRowDescription"><?php
+                                                        if (strlen($latestAlert["alert-description"]) < 150) {
+                                                            echo $latestAlert["alert-description"]; }
+                                                        else {
+                                                            $trunc = substr($latestAlert["alert-description"], 0, 150) ;
+                                                            $trunc .= " ..." ;
+                                                            echo $trunc ; } ?>
                                                     </div>
+                                                    <div class="blCell cellRowAssignee"><?php echo $latestAlert["alert-assignee"]; ?> </div>
+                                                    <div class="blCell cellRowPriority"><?php echo $latestAlert["alert-priority"]; ?> </div>
                                                 </div>
-                                                <div class="panel-footer">
-                                                    <span class="pull-left">View Issues</span>
-                                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                                    <div class="clearfix"></div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
+                                                <?php
 
-                                    <div class="col-lg-3 col-md-6 hvr-pcreatoop">
-                                        <div class="panel panel-green">
-                                            <a href="/index.php?control=IssueList&action=show">
-                                                <div class="panel-heading">
-                                                    <div class="row">
-                                                        <div class="col-xs-12 text-center loading-ajax" id="assigned-holder-parent">
-                                                            <div class="huge hvr-grow-rotate" id="assigned-holder">
-                                                                &nbsp;
-                                                            </div>
-                                                            <div> Assigned</div>
-                                                        </div>
+                                                $i++ ;
+                                            } }
+                                        else { ?>
+                                            <h4>No Latest Issues Found</h4>
+
+                                        <?php  }  ?>
+                                    </div>
+                                    <div class="col-sm-6 text-center">
+                                        <?php
+                                        if (isset($pageVars["data"]["latest_commits"]) && count($pageVars["data"]["latest_commits"])>0 ) {
+                                            $i = 1;
+                                            foreach ($pageVars["data"]["latest_commits"] as $latestCommit) { ?>
+                                                <div class="commitRow" id="commitRow_<?php echo $latestCommit["commit-slug"]; ?>" >
+                                                    <div class="blCell cellRowSourceHome" scope="row"><?php echo $latestCommit["commit-slug"]; ?> </div>
+                                                    <div class="blCell cellRowName">
+                                                        <a href="/index.php?control=AlertHome&action=show&item=<?php echo $pageVars["data"]["job"]["job_slug"]; ?>&alert=<?php echo $latestCommit["alert-slug"] ; ?>" class="pipeName">
+                                                            <?php echo $latestCommit["alert-name"]; ?>
+                                                        </a>
                                                     </div>
-                                                </div>
-                                                <div class="panel-footer">
-                                                    <span class="pull-left">View Issues</span>
-                                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                                    <div class="clearfix"></div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-3 col-md-6 hvr-pcreatoop">
-                                        <div class="panel panel-yellow">
-                                            <a href="/index.php?control=IssueList&action=show&filters[]=issue_assignee::<?php echo $pageVars["data"]['user']->username ; ?>">
-                                                <div class="panel-heading">
-                                                    <div class="row">
-                                                        <div class="col-xs-12 text-center loading-ajax" id="submitted-holder-parent">
-                                                            <div class="huge hvr-grow-rotate" id="submitted-holder">
-                                                                &nbsp;
-                                                            </div>
-                                                            <div> Submitted</div>
-                                                        </div>
+                                                    <div class="blCell cellRowDescription"><?php
+                                                        if(strlen($latestCommit["commit-description"]) < 150) {
+                                                            echo $latestCommit["commit-description"]; }
+                                                        else {
+                                                            $trunc = substr($latestCommit["commit-description"], 0, 150) ;
+                                                            $trunc .= " ..." ;
+                                                            echo $trunc ; } ?>
                                                     </div>
+                                                    <div class="blCell cellRowAssignee"><?php echo $latestCommit["commit-assignee"]; ?> </div>
+                                                    <div class="blCell cellRowPriority"><?php echo $latestCommit["commit-priority"]; ?> </div>
                                                 </div>
-                                                <div class="panel-footer">
-                                                    <span class="pull-left">View Issues</span>
-                                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                                    <div class="clearfix"></div>
-                                                </div>
-                                            </a>
-                                        </div>
+                                                <?php
+                                                $i++ ;
+                                            } }
+                                        else { ?>
+                                            <h4>No Latest Commits Found</h4>
+                                        <?php  }  ?>
                                     </div>
-
-
-                                    <?php
-                                    }
-                                    ?>
-
                                 </div>
+
+
                             </div>
 	                        <!-- /.panel-body -->	                    
 	                	</div>
