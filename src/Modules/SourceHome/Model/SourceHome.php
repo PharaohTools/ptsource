@@ -2,6 +2,6 @@
 
 Namespace Model;
 
-class QuickLinks extends BaseModelFactory {
+class SourceHome extends BaseModelFactory {
 
 }

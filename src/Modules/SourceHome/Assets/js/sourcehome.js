@@ -1,6 +1,6 @@
 function loadAllIssueCount() {
     console.log("running refresh submitter list js method");
-    url = "/index.php?control=QuickLinks&action=get-all-issue-counts&output-format=JSON";
+    url = "/index.php?control=SourceHome&action=get-all-issue-counts&output-format=JSON";
     $("#total-holder").show() ;
     $.ajax({
         async: true,
@@ -20,7 +20,7 @@ function loadAllIssueCount() {
 
 function loadSubmittedIssueCount() {
     console.log("running refresh submitter list js method");
-    url = "/index.php?control=QuickLinks&action=get-submitted-issue-counts&output-format=JSON";
+    url = "/index.php?control=SourceHome&action=get-submitted-issue-counts&output-format=JSON";
     $("#submitted-holder").show() ;
     $.ajax({
         async: true,
@@ -39,7 +39,7 @@ function loadSubmittedIssueCount() {
 }
 
 function loadWatchingIssueCount() {
-    url = "/index.php?control=QuickLinks&action=get-watching-issue-counts&output-format=JSON";
+    url = "/index.php?control=SourceHome&action=get-watching-issue-counts&output-format=JSON";
     $("#watching-holder").show() ;
     $.ajax({
         async: true,
@@ -58,7 +58,7 @@ function loadWatchingIssueCount() {
 }
 
 function loadAssignedIssueCount() {
-    url = "/index.php?control=QuickLinks&action=get-assigned-issue-counts&output-format=JSON";
+    url = "/index.php?control=SourceHome&action=get-assigned-issue-counts&output-format=JSON";
     $("#assigned-holder").show() ;
     $.ajax({
         async: true,

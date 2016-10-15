@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class QuickLinksAjaxDataAllOS extends Base {
+class SourceHomeAjaxDataAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;

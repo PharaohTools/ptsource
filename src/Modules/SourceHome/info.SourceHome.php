@@ -2,22 +2,22 @@
 
 Namespace Info;
 
-class QuickLinksInfo extends PTConfigureBase {
+class SourceHomeInfo extends PTConfigureBase {
 
     public $hidden = true;
 
-    public $name = "QuickLinks - an Improved Home Page";
+    public $name = "SourceHome - an Improved Home Page";
 
     public function _construct() {
       parent::__construct();
     }
 
     public function routesAvailable() {
-      return array( "QuickLinks" => array("show", "get-all-issue-counts", "get-submitted-issue-counts", "get-watching-issue-counts", "get-assigned-issue-counts") );
+      return array( "SourceHome" => array("show", "get-all-issue-counts", "get-submitted-issue-counts", "get-watching-issue-counts", "get-assigned-issue-counts") );
     }
 
     public function routeAliases() {
-        return array("quickLinks"=>"QuickLinks");
+        return array("sourceHome"=>"SourceHome");
     }
 
     public function configuration() {
@@ -25,7 +25,7 @@ class QuickLinksInfo extends PTConfigureBase {
             "index_override"=> array(
                 "type" => "boolean",
                 "default" => true,
-                "label" => "Override your default index page with Quick Links?",
+                "label" => "Override your default Index Module with this Improved Home Page?",
             ),
         );
     }

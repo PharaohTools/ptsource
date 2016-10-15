@@ -2,7 +2,7 @@
 
 Namespace Controller ;
 
-class QuickLinks extends Base {
+class SourceHome extends Base {
 
     public function execute($pageVars) {
       $thisModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars) ;
@@ -15,33 +15,33 @@ class QuickLinks extends Base {
             $this->content["route"]["extraParams"]["output-format"] = "JSON";
             $ajaxMod = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars, "AjaxData") ;
             $this->content["data"] = $ajaxMod->getData("all");
-            return array ("type"=>"view", "view"=>"quickLinksGetData", "pageVars"=>$this->content);
+            return array ("type"=>"view", "view"=>"sourceHomeGetData", "pageVars"=>$this->content);
         }
         if (in_array($pageVars["route"]["action"], array("get-watching-issue-counts"))) {
             $this->content["params"]["output-format"] = "JSON";
             $this->content["route"]["extraParams"]["output-format"] = "JSON";
             $ajaxMod = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars, "AjaxData") ;
             $this->content["data"] = $ajaxMod->getData("watching");
-            return array ("type"=>"view", "view"=>"quickLinksGetData", "pageVars"=>$this->content);
+            return array ("type"=>"view", "view"=>"sourceHomeGetData", "pageVars"=>$this->content);
         }
         if (in_array($pageVars["route"]["action"], array("get-submitted-issue-counts"))) {
             $this->content["params"]["output-format"] = "JSON";
             $this->content["route"]["extraParams"]["output-format"] = "JSON";
             $ajaxMod = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars, "AjaxData") ;
             $this->content["data"] = $ajaxMod->getData("submitted");
-            return array ("type"=>"view", "view"=>"quickLinksGetData", "pageVars"=>$this->content);
+            return array ("type"=>"view", "view"=>"sourceHomeGetData", "pageVars"=>$this->content);
         }
         if (in_array($pageVars["route"]["action"], array("get-assigned-issue-counts"))) {
             $this->content["params"]["output-format"] = "JSON";
             $this->content["route"]["extraParams"]["output-format"] = "JSON";
             $ajaxMod = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars, "AjaxData") ;
             $this->content["data"] = $ajaxMod->getData("assigned");
-            return array ("type"=>"view", "view"=>"quickLinksGetData", "pageVars"=>$this->content);
+            return array ("type"=>"view", "view"=>"sourceHomeGetData", "pageVars"=>$this->content);
         }
 
         // @todo output format change not being implemented
         $this->content["data"] = $thisModel->getData();
-        return array ("type"=>"view", "view"=>"quickLinks", "pageVars"=>$this->content);
+        return array ("type"=>"view", "view"=>"sourceHome", "pageVars"=>$this->content);
     }
 
 }

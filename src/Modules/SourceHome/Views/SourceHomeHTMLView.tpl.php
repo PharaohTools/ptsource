@@ -1,28 +1,28 @@
 <div class="container" id="wrapper">
 
-	<div class="navbar-default col-sm-2 sidebar" role="navigation">
-		<div class="sidebar-nav">
-			<ul class="nav in" id="side-menu">
-				<li class="sidebar-search">
-					<div class="input-group custom-search-form hvr-bounce-in">
-						<input type="text" class="form-control" placeholder="Search...">
-						<span class="input-group-btn">
-							<button class="btn btn-default" type="button">
-								<i class="fa fa-search hvr-"></i>
-							</button>
-                        </span>
-					</div>
-					<!-- /input-group -->
-				</li>
-				
-				<li>
-					<a href="/index.php?control=QuickLinks&action=show" class="active hvr-bounce-in"><i class="fa fa-dashboard fa-fw hvr-bounce-in"></i> Dashboard</a>
-				</li>
-				<li>
-					<a href="/index.php?control=ApplicationConfigure&action=show" class=" hvr-bounce-in">
-                        <i class="fa fa-cogs fa-fw"></i> Configure PTTrack<span class="fa arrow"></span>
+    <div class="navbar-default col-sm-2 sidebar" role="navigation">
+        <div class="sidebar-nav ">
+            <ul class="nav in" id="side-menu">
+                <li class="sidebar-search">
+                    <div class="input-group custom-search-form hvr-bounce-in">
+                        <input type="text" class="form-control" placeholder="Search...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search hvr-"></i>
+                                </button>
+                            </span>
+                    </div>
+                    <!-- /input-group -->
+                </li>
+
+                <li>
+                    <a href="/index.php?control=Index&action=show" class="active hvr-bounce-in" ><i class="fa fa-dashboard fa-fw hvr-bounce-in"></i> Dashboard</a>
+                </li>
+                <li>
+                    <a href="/index.php?control=ApplicationConfigure&action=show" class=" hvr-bounce-in">
+                        <i class="fa fa-cogs fa-fw"></i> Configure PTSource<span class="fa arrow"></span>
                     </a>
-					<ul class="nav nav-second-level collapse">
+                    <ul class="nav nav-second-level collapse">
                         <li>
                             <a href="/index.php?control=ApplicationConfigure&action=show" class=" hvr-curl-bottom-right">Application</a>
                         </li>
@@ -32,95 +32,123 @@
                         <li>
                             <a href="/index.php?control=ModuleManager&action=show" class=" hvr-curl-bottom-right">Modules</a>
                         </li>
-					</ul>
-					<!-- /.nav-second-level -->
-				</li>
-                <li>
-                    <a href="/index.php?control=JobConfigure&action=new" class=" hvr-bounce-in"><i class="fa fa-edit fa-fw hvr-bounce-in"></i> New Job</a>
+                    </ul>
+                    <!-- /.nav-second-level -->
                 </li>
                 <li>
-                    <a href="/index.php?control=ProcessConfigure&action=new" class=" hvr-bounce-in"><i class="fa fa-edit fa-fw hvr-bounce-in"></i> New Process</a>
+                    <a href="/index.php?control=RepositoryConfigure&action=new" class=" hvr-bounce-in"><i class="fa fa-edit fa-fw hvr-bounce-in"></i> New Repository</a>
                 </li>
                 <li>
-                    <a href="/index.php?control=JobList&action=show" class=" hvr-bounce-in"><i class="fa fa-bars fa-fw hvr-bounce-in"></i> All Jobs</a>
+                    <a href="/index.php?control=RepositoryList&action=show" class=" hvr-bounce-in"><i class="fa fa-bars fa-fw hvr-bounce-in"></i> All Repositories</a>
                 </li>
-                <li>
-                    <a href="/index.php?control=ClientList&action=show" class=" hvr-bounce-in"><i class="fa fa-bars fa-fw hvr-bounce-in"></i> All Clients</a>
-                </li>
-                <li>
-                    <a href="/index.php?control=ProcessList&action=show" class=" hvr-bounce-in"><i class="fa fa-bars fa-fw hvr-bounce-in"></i> All Processes</a>
-                </li>
-			</ul>
-		</div>
-	</div>
+            </ul>
+        </div>
+    </div>
     <div class="col-lg-9">
 
         <?php echo $this->renderLogs() ; ?>
 
         <div class="well well-lg">
-        <div class="row clearfix no-margin">
+            <div class="row clearfix no-margin">
 
-                <?php
-//                @todo maybe a graph of jobs?
-//                $graphData = array();
-//                foreach ($pageVars['pipesDetail']['buildHistory'] as $key => $value) {
-//					$day = date('j', $value->start);
-//                	if(date('m', $value->start) == date('m', time())) {
-//                		if (in_array($day, array_keys($graphData))) {
-//                			if (isset($value->status)) {
-//                				if ($value->status == 'SUCCESS')
-//									$graphData[$day]['success']++;
-//								if ($value->status == 'FAIL')
-//									$graphData[$day]['fail']++;
-//							}
-//							else
-//								$graphData[$day]['unstable']++;
-//                		} else {
-//							if (isset($value->status))
-//                				if ($value->status == 'SUCCESS')
-//									$graphData[$day] = array( 'success' => 1, 'fail' => 0, 'unstable' => 0 );
-//								if ($value->status == 'FAIL')
-//									$graphData[$day] = array( 'success' => 0, 'fail' => 1, 'unstable' => 0 );
-//							else
-//								$graphData[$day] = array( 'success' => 0, 'fail' => 0, 'unstable' => 1);
-//						}
-//					}
-//				}
-//				foreach ($graphData as $key => $value) {
-//					$data[] = array( 'day'  => $key,
-//									 'success' => $value['success'],
-//									 'fail'	=> $value['fail'],
-//									 'unstable' => $value['unstable']
-//									);
-//				}
+                <div class="row">
 
-                ?>
+                    <div class="col-lg-3 col-md-4 hvr-pop">
+
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-database   fa-4x hvr-buzz-out"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge hvr-grow-rotate" ><?php echo $pageVars['pipesDetail']['total']; ?></div>
+                                        <div>Total Jobs</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <a href="#">
+                                 <div class="panel-footer">
+                                     <span class="pull-left">View Details</span>
+                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                     <div class="clearfix"></div>
+                                 </div>-->
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 hvr-pop">
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-check-circle fa-4x hvr-buzz-out"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge  hvr-grow-rotate"><?php echo $pageVars['pipesDetail']['success']; ?></div>
+                                        <div>Jobs Complete!</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--    <a href="#">
+                                    <div class="panel-footer">
+                                        <span class="pull-left">View Details</span>
+                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                        <div class="clearfix"></div>
+                                    </div>-->
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 hvr-pop">
+                        <div class="panel panel-red">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-times-circle fa-4x hvr-buzz-out"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge  hvr-grow-rotate"><?php echo $pageVars['pipesDetail']['fail']; ?></div>
+                                        <div>Jobs Failed!</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--   <a href="#">
+                                   <div class="panel-footer">
+                                       <span class="pull-left">View Details</span>
+                                       <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                       <div class="clearfix"></div>
+                                   </div>-->
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 hvr-pop">
+                        <div class="panel panel-yellow">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-chain-broken fa-4x hvr-buzz-out"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge hvr-grow-rotate"><?php echo $pageVars['pipesDetail']['unstable']; ?></div>
+                                        <div>Jobs Pending Action!</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--  <a href="#">
+                                  <div class="panel-footer">
+                                      <span class="pull-left">View Details</span>
+                                      <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                      <div class="clearfix"></div>
+                                  </div>-->
+                            </a>
+                        </div>
+                    </div>
+                </div>
 				
                 <div class="row">
 	                <div class="col-lg-12">
 	                    <div class="panel panel-default">
 	                        <div class="panel-heading">
-	                            <i class="fa fa-bar-chart-o fa-fw"></i> Job, Issue and Process Status
-
-<!--	                            <div class="pull-right">-->
-<!--	                                <div class="btn-group">-->
-<!--	                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">-->
-<!--	                                        Actions-->
-<!--	                                        <span class="caret"></span>-->
-<!--	                                    </button>-->
-<!--	                                    <ul class="dropdown-menu pull-right" role="menu">-->
-<!--	                                        <li><a href="#">Action</a>-->
-<!--	                                        </li>-->
-<!--	                                        <li><a href="#">Another action</a>-->
-<!--	                                        </li>-->
-<!--	                                        <li><a href="#">Something else here</a>-->
-<!--	                                        </li>-->
-<!--	                                        <li class="divider"></li>-->
-<!--	                                        <li><a href="#">Separated link</a>-->
-<!--	                                        </li>-->
-<!--	                                    </ul>-->
-<!--	                                </div>-->
-<!--	                            </div>-->
+	                            <i class="fa fa-bar-chart-o fa-fw"></i> Repository Statuses
 	                        </div>
 	                        <!-- /.panel-heading -->
 	                        <div class="panel-body">
@@ -143,7 +171,7 @@
 
 
                                                 <div class="alertRow" id="alertRow_<?php echo $latestAlert["alert-slug"]; ?>" >
-                                                    <div class="blCell cellRowQuickLinks" scope="row"><?php echo $latestAlert["alert-slug"]; ?> </div>
+                                                    <div class="blCell cellRowSourceHome" scope="row"><?php echo $latestAlert["alert-slug"]; ?> </div>
                                                     <div class="blCell cellRowName">
                                                         <a href="/index.php?control=AlertHome&action=show&item=<?php echo $pageVars["data"]["job"]["job_slug"]; ?>&alert=<?php echo $latestAlert["alert-slug"] ; ?>" class="pipeName">
                                                             <?php echo $latestAlert["alert-name"]; ?>
@@ -175,7 +203,7 @@
                                             $i = 1;
                                             foreach ($pageVars["data"]["latest_system_alerts"] as $latestAlert) { ?>
                                                 <div class="systemAlertRow" id="systemAlertRow_<?php echo $latestAlert["system-alert-slug"]; ?>" >
-                                                    <div class="blCell cellRowQuickLinks" scope="row"><?php echo $latestAlert["system-alert-slug"]; ?> </div>
+                                                    <div class="blCell cellRowSourceHome" scope="row"><?php echo $latestAlert["system-alert-slug"]; ?> </div>
                                                     <div class="blCell cellRowName">
                                                         <a href="/index.php?control=AlertHome&action=show&item=<?php echo $pageVars["data"]["job"]["job_slug"]; ?>&alert=<?php echo $latestAlert["alert-slug"] ; ?>" class="pipeName">
                                                             <?php echo $latestAlert["alert-name"]; ?>
@@ -489,8 +517,8 @@
 
 </div>
 
-<script type="text/javascript" src="/Assets/Modules/QuickLinks/js/quicklinks.js"></script>
-<link rel="stylesheet" type="text/css" href="/Assets/Modules/QuickLinks/css/quicklinks.css">
+<script type="text/javascript" src="/Assets/Modules/SourceHome/js/sourcehome.js"></script>
+<link rel="stylesheet" type="text/css" href="/Assets/Modules/SourceHome/css/sourcehome.css">
 
 <script type="text/javascript">
     $( document ).ready(function() {
