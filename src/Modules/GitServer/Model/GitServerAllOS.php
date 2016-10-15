@@ -22,7 +22,7 @@ class GitServerAllOS extends Base {
 
     public function backendData() {
         define("DEBUG_LOG",        true);
-        define("HTTP_AUTH",        true);
+        define("HTTP_AUTH",        false);
         define("GZIP_SUPPORT",     false);
         define("GIT_ROOT",         REPODIR.DS );
         define("GIT_HTTP_BACKEND", "/usr/lib/git-core/git-http-backend");
@@ -50,75 +50,53 @@ class GitServerAllOS extends Base {
             "GIT_HTTP_EXPORT_ALL" => 1,
             "GIT_HTTP_MAX_REQUEST_BUFFER" => "1000M",
 //            'PATH' => $_SERVER["PATH"],
-            "REMOTE_USER"         => REMOTE_USER,
-//            "REMOTE_USER"         => isset($_SERVER["REMOTE_USER"])          ? $_SERVER["REMOTE_USER"]          : "ptsource",
+//            "REMOTE_USER"         => "ptsource",
+//            "REMOTE_USER"         => "smart-http",
+            "REMOTE_USER"         => isset($_SERVER["REMOTE_USER"])          ? $_SERVER["REMOTE_USER"]          : "ptsource",
             "REMOTE_ADDR"         => isset($_SERVER["REMOTE_ADDR"])          ? $_SERVER["REMOTE_ADDR"]          : "",
             "REQUEST_METHOD"      => isset($_SERVER["REQUEST_METHOD"])       ? $_SERVER["REQUEST_METHOD"]       : "",
             "PATH_INFO"           => $path_info,
             "QUERY_STRING"        => isset($_SERVER["QUERY_STRING"])         ? $_SERVER["QUERY_STRING"]         : "",
-            "CONTENT_TYPE"        => isset($request_headers["Content-Type"]) ? $request_headers["Content-Type"] : "",
-//            "HTTP_AUTH"           => true,
-//            "GZIP_SUPPORT"        => true,
-//            "Authorization" => 1,
-//            "HTTP_AUTHORIZATION" => "",
-//            "REDIRECT_HTTP_AUTHORIZATION" => "",
-//            "Authorization: Basic" => 1,
-
-//            "REMOTE_USER"         => $_SERVER["REDIRECT_REMOTE_USER"] ,
-//            HTTP_USER_AGENT 	The browser type of the visitor
-//            HTTPS 	"on" if the program is being called through a secure server
-//            REMOTE_ADDR 	The IP address of the visitor
-//REMOTE_HOST 	The hostname of the visitor (if your server has reverse-name-lookups on; otherwise this is the IP address again)
-//REMOTE_PORT 	The port the visitor is connected to on the web server
-//REMOTE_USER 	The visitor's username (for .htaccess-protected pages)
-//REQUEST_METHOD 	GET or POST
-//REQUEST_URI 	The interpreted pathname of the requested document or CGI (relative to the document root)
-//SCRIPT_FILENAME 	The full pathname of the current CGI
-//SCRIPT_NAME 	The interpreted pathname of the current CGI (relative to the document root)
-
+            "CONTENT_TYPE"        => isset($request_headers["Accept"]) ? $request_headers["Accept"] : "",
 
         );
-        $env = array_merge( $env, array(
-//            "GIT_COMMITTER_NAME" => "Pharaoh King",
-//            "GIT_COMMITTER_EMAIL" => "phpengine@pharaohtools.com",
-        ) ) ;
+        // THIS IS IMPORTANT!! THIS IS WHAT STOPS PUSH WORKING. THE GIT CLIENT
+        $env["CONTENT_TYPE"]= str_replace("result", "request",$env["CONTENT_TYPE"] );
+
+//        $env = array_merge($_SERVER, $env) ;
 
 
-        $env = array_merge($_SERVER, $env) ;
+        $gitRequestUser = $this->getGitRequestUser() ;
 
-        ob_start();
-        var_dump("this env", $env) ;
-        $res = ob_get_clean();
-        file_put_contents('/var/log/pharaoh.log', $res, FILE_APPEND) ;
-
-        $pathStarts = array('/HEAD', '/info/', '/objects/') ;
-
-        $scm_synonyms = array("git", "scm") ;
-        $qs = $_SERVER["REQUEST_URI"] ;
-        foreach ($scm_synonyms as $scm_synonym) {
-            $remove = "/{$scm_synonym}/" ;
-//            $remove = "/{$scm_synonym}/{$this->params["user"]}/{$this->params["item"]}" ;
-            $qs = str_replace($remove, "", $qs) ; }
-
-        $query_data = $_GET;
-        foreach ($query_data as $key => $value) {
-            if (!strncmp($key, '__', 2)) {
-                unset($query_data[$key]);
-            }
-        }
-        $query_string = http_build_query($query_data, '', '&');
-
-
-        $qsmpos = strpos($qs, "?") ;
-        $newqsm = $qsmpos ;
-//        if ($qsmpos !== false) {
-//
-//            $newqsm = substr($qs, 0, $qsmpos);
+//        if ($this->userIsAllowed($gitRequestUser)==false) {
+//            header('HTTP/1.0 401 Unauthorized');
+//            return false ;
 //        }
 
-        $env["QUERY_STRING"] = $qs ; //substr($qs, $qsmpos);  //;
-        $env["PATH_INFO"] = $path_info ;
+//        $pathStarts = array('/HEAD', '/info/', '/objects/') ;
+//        $scm_synonyms = array("git", "scm") ;
 
+        $qs = $_SERVER["REQUEST_URI"] ;
+
+
+//      THIS IS IMPORTANT! THIS STOPS PUSH FROM WORKING. IF THE QUERY STRING ENV VAR IS NOT SPECIFICALLY
+//      SET TO HAVE A STRING WITH ONE PARAMETER IN THE CLIENT ASSUMES A DUMB SERVER PROTOCOL
+        $qsmpos = strpos($qs, "?") ;
+        $newqsm = $env["REQUEST_URI"] ;
+        if ($qsmpos !== false) {
+            $newqsm = substr($qs, $qsmpos+1); }
+
+        $env["QUERY_STRING"] = $newqsm ;
+        $env["PATH_INFO"] = $path_info ;
+        $authvars =  array(
+            "AUTH_TYPE" => 'Basic' ,
+            "HTTP_AUTHORIZATION" => 'Basic ZGF2ZToxMjM0' ,
+            "REDIRECT_HTTP_AUTHORIZATION" => 'Basic ZGF2ZToxMjM0' ,
+            "USER" => $env["REMOTE_USER"] ,
+            "REDIRECT_REMOTE_USER" => $env["REMOTE_USER"] ,
+            "REDIRECT_QUERY_STRING" => $env["QUERY_STRING"],
+            "REDIRECT_URL" => $_SERVER["REDIRECT_URL"],
+        ) ;
         $settings = array
         (
             0 => array("pipe", "r"),
@@ -128,7 +106,19 @@ class GitServerAllOS extends Base {
         {
             $settings[2] = array("file", LOG_PROCESS, "a");
         }
-        $process = proc_open(GIT_HTTP_BACKEND , $settings, $pipes, null, $env);
+        $process = proc_open(GIT_HTTP_BACKEND , $settings, $pipes, REPODIR.$path_info, $env);
+
+
+
+        ob_start();
+//        var_dump("this env", phpinfo()) ;
+//        var_dump("srv", $_SERVER) ;
+        var_dump("grq:", $gitRequestUser, "srv", $env) ;
+//        var_dump("grq:", $gitRequestUser) ;
+//        var_dump("this env", $_SERVER['HTTP_AUTHORIZATION'], "user", $this->params["user"], "remote user", $_SERVER["REMOTE_USER"], "AUTH user", $_SERVER["PHP_AUTH_USER"], $_SERVER["PHP_AUTH_PW"], $_SERVER["HTTP_AUTHORIZATION"]) ;
+        $res = ob_get_clean();
+        file_put_contents('/var/log/pharaoh.log', $res, FILE_APPEND) ;
+
         if (is_resource($process)) {
 //            error_log("php in: $php_input" ) ;
             fwrite($pipes[0], $php_input);
@@ -141,12 +131,14 @@ class GitServerAllOS extends Base {
             error_log("is r:", is_resource($process) ) ; }
         if(!empty($return_output))
         {
+//            echo 'Pharaoh Source Git Server' ;
             list($response_headers, $response_body)
                 = $response
                 = preg_split("/\R\R/", $return_output, 2, PREG_SPLIT_NO_EMPTY);
 
             foreach(preg_split("/\R/", $response_headers) as $response_header)
             {
+                error_log("RH: $response_header" ) ;
                 header($response_header);
             }
             if(isset($request_headers["Accept-Encoding"]) && strpos($request_headers["Accept-Encoding"], "gzip") !== false && GZIP_SUPPORT)
@@ -162,14 +154,12 @@ class GitServerAllOS extends Base {
                 echo $response_body;
             }
         }
+//        echo 'Something went wrong' ;
 
         if(DEBUG_LOG)
         {
-            file_put_contents(LOG_RESPONSE, "");
+//            file_put_contents(LOG_RESPONSE, "");
             $log = "";
-            //$log .= "\$_GET = " . print_r($_GET, true);
-            //$log .= "\$_POST = " . print_r($_POST, true);
-            //$log .= "\$_SERVER = " . print_r($_SERVER, true);
             $log .= "\$request_headers = " . print_r($request_headers, true);
             $log .= "\$env = " . print_r($env, true);
             $log .= "\$server = " . print_r($_SERVER, true);
@@ -178,9 +168,7 @@ class GitServerAllOS extends Base {
             $log .= "\$response = " . print_r($response, true);
             $log .= str_repeat("-", 80) . PHP_EOL;
             $log .= PHP_EOL;
-//            if(isset($_GET["service"]) && $_GET["service"] == "git-receive-pack") file_put_contents(LOG_RESPONSE, "");
             file_put_contents(LOG_RESPONSE, $log, FILE_APPEND);
-//            file_put_contents(LOG_RESPONSE, "service is: ".$_GET["service"], FILE_APPEND);
         }
 
     }
@@ -192,6 +180,56 @@ class GitServerAllOS extends Base {
             if (substr($name, 0, 5) == 'HTTP_') {
                 $headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value; } }
         return $headers;
+    }
+
+    protected function userIsAllowed($gitRequestUser) {
+//        return true ;
+
+        $isWriteAction = $this->isWriteAction() ;
+        $publicReads = true ;
+        $publicWrites = true ;
+
+        if ($isWriteAction == false) {
+            if ($publicReads == true) {
+                return true ; }
+            else {
+                return $this->authUserToRead($gitRequestUser) ; } }
+        else {
+            if ($publicWrites == true) {
+                return true ; }
+            else {
+                return $this->authUserToWrite($gitRequestUser) ;} }
+
+    }
+
+    protected function getGitRequestUser() {
+        if (isset($_SERVER["REDIRECT_HTTP_AUTHORIZATION"])) {
+            $base64 = str_replace("Basic ", "", $_SERVER["REDIRECT_HTTP_AUTHORIZATION"]) ;
+            $string = base64_decode($base64) ;
+            $vals = explode(":", $string) ;
+            $req_user = array() ;
+            $req_user["user"] = $vals[0] ;
+            $req_user["pass"] = $vals[1] ;
+            return $req_user ; }
+        return array("user"=> null, "pass"=> null) ;
+    }
+
+    protected function authUserToRead($gitRequestUser) {
+        if ( $gitRequestUser["user"] == "dave" ) {
+            return true ; }
+        return false ;
+    }
+
+    protected function authUserToWrite($gitRequestUser) {
+        if ( $gitRequestUser["user"] == "dave" ) {
+            return true ; }
+        return false ;
+    }
+
+    protected function isWriteAction() {
+        if ( strpos($_SERVER["REQUEST_URI"], "git-receive-pack") !== false) {
+            return true ; }
+        return false ;
     }
 
     public function strPosX2($haystack, $needle, $number){
