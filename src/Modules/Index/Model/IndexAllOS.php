@@ -13,7 +13,25 @@ class IndexAllOS extends Base {
 
     // Model Group
     public $modelGroup = array("Default") ;
-    
+
+
+    public function getData() {
+//        $ret["issues"] = $this->getIssues();
+//        $ret["all-issue-counts"] = $this->getAllIssueCounts();
+        $ret["all-issue-counts"] = 10 ;
+//        $ret["my-issue-watching-count"] = $this->getMyIssueCount("watching");
+//        $ret["my-issue-submitted-count"] = $this->getMyIssueCount("submitted");
+//        $ret["my-issue-assigned-count"] = $this->getMyIssueCount("assigned");
+        // jobs
+//        $ret["job_count"] = $this->getJobCount();  // adds 0.5 secs, can stay
+//        $ret["my_job_created_count"] = $this->getJobCreatedCount();
+//        $ret["my_job_member_count"] = $this->getJobMemberCount();
+        // user
+//        $ret["user"] = $this->getLoggedInUser();
+        return $ret ;
+    }
+
+
     public function findModuleNames($params) {
         if (isset($this->params["compatible-only"]) && $this->params["compatible-only"]=="true") {
             return $this->findOnlyCompatibleModuleNames($params); }
@@ -28,7 +46,7 @@ class IndexAllOS extends Base {
         foreach ($allInfoObjects as $infoObject) {
             $array_keys = array_keys($infoObject->routesAvailable()) ;
             $miniRay = array() ;
-            $miniRay["command"] = (isset($array_keys[0])) ? $array_keys[0] : null ;
+            $miniRay["command"] = $array_keys[0] ;
             $miniRay["name"] = $infoObject->name ;
             $miniRay["hidden"] = $infoObject->hidden ;
             $moduleNames[] = $miniRay ; }
