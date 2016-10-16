@@ -21,7 +21,7 @@ class GitServerInfo extends PTConfigureBase {
     }
 
     public function ignoredAuthenticationRoutes() {
-        return array("GitServer"=>"serve");
+        return array("GitServer"=>array("serve"));
     }
 
     public function helpDefinition() {
