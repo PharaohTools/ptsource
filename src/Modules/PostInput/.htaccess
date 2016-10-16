@@ -1,19 +1,14 @@
-# DirectorySlash Off
 RewriteEngine On
-#RewriteRule ^(.*)$ index.php?control=GitServer&action=serve&user=$1&item=$2
 RewriteRule ^(?:git|scm)/([a-zA-Z0-9-]+)/(.*)$ index.php?control=GitServer&action=serve&user=$1&item=$2
-    AuthType Basic
-    AuthName "Git repositories"
-    AuthBasicProvider anon
-    Anonymous_NoUserID on
-    Anonymous_MustGiveEmail off
-    Anonymous *
 
-    <RequireAny>
-      Require ip 0.0.0.0/255.255.255.255
-      Require valid-user
-      Require local
-    </RequireAny>
-SetEnvIf Authorization .+ HTTP_AUTHORIZATION=$0
-#SetEnv Authorization HTTP_AUTHORIZATION=$0
-#SetEnv no-gzip 1
+<If "%{HTTP_USER_AGENT} =~ m#git/(.*)# ">
+    AuthType Basic
+    AuthName "Pharaoh Source Git Repositories"
+    AuthBasicProvider external
+    AuthExternal pharaoh_apache_auth
+    Require valid-user
+</If>
+<Else>
+    AuthType none
+    Require all granted
+</Else>
