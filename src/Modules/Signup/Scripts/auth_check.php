@@ -5,16 +5,29 @@ $handle = fopen ("php://stdin","r");
 $username = trim(fgets($handle));
 $password = trim(fgets($handle));
 
-// Check the username/password. Below is a very simple example, write your own!
-// Probably you want to create a query to some database, add salts, etc.
-if($username != 'dave' || $password != '1234'){
-    # Output to stdout/stderr will be included in the Apache log for debugging purposes
-    echo "wrong username or password for user $username\n";
-    # In case of a failure, sleep a few seconds to slowdown bruteforce attacks.
-    sleep (3);
-    exit (1);
-} else {
-    echo "username/password allowed for user $username\n";
-    exit (0);
+
+require_once(dirname(dirname(dirname(__DIR__))).DIRECTORY_SEPARATOR."Constants.php");
+require_once(dirname(dirname(dirname(__DIR__))).DIRECTORY_SEPARATOR."AutoLoad.php");
+
+
+$autoLoader = new \Core\autoLoader();
+$autoLoader->launch();
+
+if (userValid($username, $password)==false) {
+    exit (1) ; }
+
+echo "username/password allowed for user $username\n";
+exit (0);
+
+function userValid($username, $password) {
+    $signupFactory = new \Model\Signup() ;
+    $signup = $signupFactory->getModel(array(), "Default") ;
+    $res = $signup->checkLogin($username, $password, false) ;
+    if ($res["status"] == true) { return true ; }
+    return false ;
 }
+
+
+
+
 ?>
