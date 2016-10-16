@@ -29,7 +29,7 @@ class ApplicationInstanceInfo extends PTConfigureBase {
             "instance_id"=> array("type" => "text", "default" => "Instance ID", "label" => "Application Instance ID?", ),
             "instance_title"=> array("type" => "text", "default" => "Example Title", "label" => "Application Instance Title?", ),
             "organisation"=> array("type" => "text", "default" => "Example Organisation", "label" => "Organisation Name?", ),
-            "force_ssl"=> array("type" => "boolean", "default" => "on", "label" => "Force SSL?", ),
+            "force_ssl"=> array("type" => "boolean", "label" => "Force SSL?", ),
         );
     }
 
