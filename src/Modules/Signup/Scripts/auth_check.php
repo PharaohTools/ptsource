@@ -14,7 +14,7 @@ $autoLoader->launch();
 if (userValid($username, $password)==false) {
     exit (1) ; }
 
-echo "username/password allowed for user $username\n";
+//echo "username/password allowed for user $username\n";
 exit (0);
 
 function userValid($username, $password) {
