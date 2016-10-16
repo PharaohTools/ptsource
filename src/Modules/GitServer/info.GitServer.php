@@ -17,7 +17,11 @@ class GitServerInfo extends PTConfigureBase {
     }
 
     public function routeAliases() {
-      return array("gitServer"=>"GitServer");
+        return array("gitServer"=>"GitServer");
+    }
+
+    public function ignoredAuthenticationRoutes() {
+        return array("GitServer"=>"serve");
     }
 
     public function helpDefinition() {
