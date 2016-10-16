@@ -2,7 +2,7 @@
 
 Namespace Info;
 
-class MirrorRepositoryInfo extends PTConfigureBase {
+class RepositoryScopeInfo extends PTConfigureBase {
 
     public $hidden = false;
 
@@ -13,11 +13,11 @@ class MirrorRepositoryInfo extends PTConfigureBase {
     }
 
     public function routesAvailable() {
-        return array( "MirrorRepository" => array_merge(parent::routesAvailable(), array("help") ) );
+        return array( "RepositoryScope" => array_merge(parent::routesAvailable(), array("help") ) );
     }
 
     public function routeAliases() {
-        return array("mirrorepository"=>"MirrorRepository");
+        return array("repositoryscope"=>"RepositoryScope");
     }
 
     public function events() {
@@ -25,7 +25,7 @@ class MirrorRepositoryInfo extends PTConfigureBase {
     }
 
     public function repositorySettings() {
-        return array("enabled", "git_repository_url", "git_branch", "git_privkey_path", "cron_string");
+        return array("enabled", "public_pages", "public_read", "public_write");
     }
 
     public function configuration() {
@@ -39,10 +39,10 @@ class MirrorRepositoryInfo extends PTConfigureBase {
 
     public function helpDefinition() {
        $help = <<<"HELPDATA"
-    This extension provides integration with MirrorRepository as a Build Step. It provides code
+    This extension provides integration with RepositoryScope as a Build Step. It provides code
     functionality, but no extra CLI commands.
 
-    MirrorRepository
+    RepositoryScope
 
 HELPDATA;
       return $help ;
