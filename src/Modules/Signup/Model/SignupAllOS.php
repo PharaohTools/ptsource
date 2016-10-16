@@ -46,7 +46,7 @@ class SignupAllOS extends Base {
 
 
     // @todo need to check login credential from datastore or PAM/LDAP
-    public function checkLoginInfo($usr, $pass, $start_session=false) {
+    public function checkLoginInfo($usr, $pass, $start_session=true) {
         $file = $this->getUserFileLocation();
         $accountsJson = file_get_contents($file);
         $accounts = json_decode($accountsJson);
