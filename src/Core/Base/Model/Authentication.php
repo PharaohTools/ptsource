@@ -28,7 +28,18 @@ class Authentication {
 
         foreach ($infos as $info) {
             if (method_exists($info, "ignoredAuthenticationRoutes")) {
-                $ignoredAuthRoutes[$info->getModuleName()] = $info->ignoredAuthenticationRoutes() ; } }
+                $iar = $info->ignoredAuthenticationRoutes() ;
+                foreach ($iar as $module => $routes) {
+                    $isray = ($ignoredAuthRoutes[$module]) ? $ignoredAuthRoutes[$module] : array() ;
+                    $ignoredAuthRoutes[$module] = array_merge($isray, $routes) ; }}}
+
+//        var_dump("<pre>") ;
+//        var_dump("1", $ignoredAuthRoutes) ;
+//        var_dump("1", $handled["control"], $ignoredAuthRoutes) ;
+//        var_dump("2", $pageVars["route"]["action"], $ignoredAuthRoutes[$handled["control"]]) ;
+//        var_dump("</pre>") ;
+//        die() ;
+
         if (array_key_exists($handled["control"], $ignoredAuthRoutes) &&
             in_array($pageVars["route"]["action"], $ignoredAuthRoutes[$handled["control"]])) {
             // if we are requesting something with ignored auth, just return it
