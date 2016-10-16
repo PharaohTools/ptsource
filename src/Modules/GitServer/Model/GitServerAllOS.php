@@ -68,10 +68,10 @@ class GitServerAllOS extends Base {
 
         $gitRequestUser = $this->getGitRequestUser() ;
 
-//        if ($this->userIsAllowed($gitRequestUser)==false) {
-//            header('HTTP/1.0 401 Unauthorized');
-//            return false ;
-//        }
+        if ($this->userIsAllowed($gitRequestUser)==false) {
+            header('HTTP/1.0 403 Forbidden');
+            return false ;
+        }
 
 //        $pathStarts = array('/HEAD', '/info/', '/objects/') ;
 //        $scm_synonyms = array("git", "scm") ;
@@ -110,14 +110,14 @@ class GitServerAllOS extends Base {
 
 
 
-        ob_start();
+//        ob_start();
 //        var_dump("this env", phpinfo()) ;
 //        var_dump("srv", $_SERVER) ;
-        var_dump("grq:", $gitRequestUser, "srv", $env) ;
+//        var_dump("grq:", $gitRequestUser, "srv", $env) ;
 //        var_dump("grq:", $gitRequestUser) ;
 //        var_dump("this env", $_SERVER['HTTP_AUTHORIZATION'], "user", $this->params["user"], "remote user", $_SERVER["REMOTE_USER"], "AUTH user", $_SERVER["PHP_AUTH_USER"], $_SERVER["PHP_AUTH_PW"], $_SERVER["HTTP_AUTHORIZATION"]) ;
-        $res = ob_get_clean();
-        file_put_contents('/var/log/pharaoh.log', $res, FILE_APPEND) ;
+//        $res = ob_get_clean();
+//        file_put_contents('/var/log/pharaoh.log', $res, FILE_APPEND) ;
 
         if (is_resource($process)) {
 //            error_log("php in: $php_input" ) ;
@@ -183,23 +183,32 @@ class GitServerAllOS extends Base {
     }
 
     protected function userIsAllowed($gitRequestUser) {
-//        return true ;
-
         $isWriteAction = $this->isWriteAction() ;
-        $publicReads = true ;
-        $publicWrites = true ;
-
         if ($isWriteAction == false) {
+            $publicReads = $this->repoPublicAllowed("read") ;
             if ($publicReads == true) {
                 return true ; }
             else {
                 return $this->authUserToRead($gitRequestUser) ; } }
         else {
+            $publicWrites = $this->repoPublicAllowed("write") ;
             if ($publicWrites == true) {
                 return true ; }
             else {
                 return $this->authUserToWrite($gitRequestUser) ;} }
 
+    }
+
+    protected function repoPublicAllowed($type) {
+        $repoFactory = new \Model\Repository() ;
+        $repo = $repoFactory->getModel($this->params, "Default") ;
+        $thisRepo = $repo->getRepository($this->params["item"], false) ;
+        $public_enabled = (isset($thisRepo["settings"]["RepositoryScope"]["enabled"]) && $thisRepo["settings"]["RepositoryScope"]["enabled"]=="on") ? true : false ;
+        if ($public_enabled == false) { return false ; }
+        if ($type == "read" || $type == "write") {
+            $is_allowed = (isset($thisRepo["settings"]["RepositoryScope"]["public_{$type}"]) && $thisRepo["settings"]["RepositoryScope"]["public_{$type}"]=="on") ? true : false ;
+            return $is_allowed ; }
+        return false ;
     }
 
     protected function getGitRequestUser() {
@@ -211,19 +220,19 @@ class GitServerAllOS extends Base {
             $req_user["user"] = $vals[0] ;
             $req_user["pass"] = $vals[1] ;
             return $req_user ; }
+        else if (isset($_SERVER["REDIRECT_REMOTE_USER"])) {
+            return array("user"=> $_SERVER["REDIRECT_REMOTE_USER"]) ; }
         return array("user"=> null, "pass"=> null) ;
     }
 
     protected function authUserToRead($gitRequestUser) {
-        if ( $gitRequestUser["user"] == "dave" ) {
-            return true ; }
-        return false ;
+        if ( $gitRequestUser["user"] == "anon" ) { return false ; }
+        return true ;
     }
 
     protected function authUserToWrite($gitRequestUser) {
-        if ( $gitRequestUser["user"] == "dave" ) {
-            return true ; }
-        return false ;
+        if ( $gitRequestUser["user"] == "anon" ) { return false ; }
+        return true ;
     }
 
     protected function isWriteAction() {
