@@ -81,9 +81,9 @@ class RepositoryCollaterAllOS extends Base {
         $repository = array_merge($repository, $repositoryDefaults);
         $enabledFeatures = array() ;
         $i = 0;
-        error_log("collating 1") ;
+        // error_log("collating 1") ;
         foreach ($repositorySettings["settings"] as $key => $values) {
-            error_log("collating 2") ;
+            // error_log("collating 2") ;
             if (in_array($key, $names) && $values["enabled"] =="on") {
                 $cname = '\Model\\'.$key ;
                 $moduleFactory = new $cname();
@@ -94,7 +94,7 @@ class RepositoryCollaterAllOS extends Base {
                 $moduleRepositoryFeature->setValues($values) ;
                 $moduleRepositoryFeature->setRepository($repository) ;
                 $collated = $moduleRepositoryFeature->collate();
-                error_log("collating 3") ;
+                //  error_log("collating 3") ;
                 if (array_key_exists(0, $collated)==true) {
                     foreach ($collated as $one_collated) {
                         $enabledFeatures[$i]["module"] = $key  ;
