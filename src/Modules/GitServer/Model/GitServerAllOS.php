@@ -74,7 +74,7 @@ class GitServerAllOS extends Base {
 
         $gitRequestUser = $this->getGitRequestUser() ;
 
-        if ($this->userIsAllowed($gitRequestUser)==false) {
+        if ($this->userIsAllowed($gitRequestUser, $repo_name)==false) {
             header('HTTP/1.0 403 Forbidden');
             return false ;
         }
