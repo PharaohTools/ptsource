@@ -6,7 +6,7 @@ class Index extends Base {
 
     public function execute($pageVars) {
         $override = $this->getExecutorForOverride() ;
-        if (!is_null($override)) { return $override->execute() ; }
+        if (!is_null($override)) { return $override->execute($pageVars) ; }
         $thisModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars) ;
         // if we don't have an object, its an array of errors
         $this->content = $pageVars ;
