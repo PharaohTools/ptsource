@@ -191,22 +191,22 @@ class GitServerAllOS extends Base {
     protected function userIsAllowed($gitRequestUser, $repo_name) {
         $isWriteAction = $this->isWriteAction() ;
         if ($isWriteAction == false) {
-            error_log("is not a write") ;
+            //error_log("is not a write") ;
             $publicReads = $this->repoPublicAllowed("read", $repo_name) ;
             if ($publicReads == true) {
                 return true ; }
             else {
                 return $this->authUserToRead($gitRequestUser) ; } }
         else {
-            error_log("is a write") ;
+            //error_log("is a write") ;
             $publicWrites = $this->repoPublicAllowed("write", $repo_name) ;
             if ($publicWrites == true) {
-                error_log("public write allowed") ;
+                //error_log("public write allowed") ;
                 return true ; }
             else {
-                error_log("no public") ;
+                //error_log("no public") ;
                 $res = $this->authUserToWrite($gitRequestUser) ;
-                error_log("auth is: {$res}") ;
+                //error_log("auth is: {$res}") ;
                 return $res ; } }
     }
 
@@ -215,11 +215,10 @@ class GitServerAllOS extends Base {
         $repoFactory = new \Model\Repository() ;
         $repo = $repoFactory->getModel($this->params, "Default") ;
         $thisRepo = $repo->getRepository($repo_name) ;
-        ob_start();
-        var_dump($this->params["item"], $thisRepo);
-        $res = ob_get_clean();
-        error_log($res) ;
-
+//        ob_start();
+//        var_dump($repo_name, $thisRepo);
+//        $res = ob_get_clean();
+//        error_log($res) ;
         $public_enabled = (isset($thisRepo["settings"]["RepositoryScope"]["enabled"]) && $thisRepo["settings"]["RepositoryScope"]["enabled"]=="on") ? true : false ;
         if ($public_enabled == false) { return false ; }
         if ($type == "read" || $type == "write") {
