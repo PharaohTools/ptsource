@@ -23,8 +23,9 @@ class GitServerAllOS extends Base {
     public function backendData() {
 
         $pos = strpos($this->params["item"], '/') ;
+        $repo_name = $this->params["item"] ;
         if ($pos !== false) {
-            $this->params["item"] = substr($this->params["item"], 0, $pos) ; }
+            $repo_name = substr($this->params["item"], 0, $pos) ; }
 
         define("DEBUG_LOG",        true);
         define("HTTP_AUTH",        false);
@@ -187,27 +188,38 @@ class GitServerAllOS extends Base {
         return $headers;
     }
 
-    protected function userIsAllowed($gitRequestUser) {
+    protected function userIsAllowed($gitRequestUser, $repo_name) {
         $isWriteAction = $this->isWriteAction() ;
         if ($isWriteAction == false) {
-            $publicReads = $this->repoPublicAllowed("read") ;
+            error_log("is not a write") ;
+            $publicReads = $this->repoPublicAllowed("read", $repo_name) ;
             if ($publicReads == true) {
                 return true ; }
             else {
                 return $this->authUserToRead($gitRequestUser) ; } }
         else {
-            $publicWrites = $this->repoPublicAllowed("write") ;
+            error_log("is a write") ;
+            $publicWrites = $this->repoPublicAllowed("write", $repo_name) ;
             if ($publicWrites == true) {
+                error_log("public write allowed") ;
                 return true ; }
             else {
-                return $this->authUserToWrite($gitRequestUser) ;} }
-
+                error_log("no public") ;
+                $res = $this->authUserToWrite($gitRequestUser) ;
+                error_log("auth is: {$res}") ;
+                return $res ; } }
     }
 
-    protected function repoPublicAllowed($type) {
+
+    protected function repoPublicAllowed($type, $repo_name) {
         $repoFactory = new \Model\Repository() ;
         $repo = $repoFactory->getModel($this->params, "Default") ;
-        $thisRepo = $repo->getRepository($this->params["item"]) ;
+        $thisRepo = $repo->getRepository($repo_name) ;
+        ob_start();
+        var_dump($this->params["item"], $thisRepo);
+        $res = ob_get_clean();
+        error_log($res) ;
+
         $public_enabled = (isset($thisRepo["settings"]["RepositoryScope"]["enabled"]) && $thisRepo["settings"]["RepositoryScope"]["enabled"]=="on") ? true : false ;
         if ($public_enabled == false) { return false ; }
         if ($type == "read" || $type == "write") {
@@ -215,6 +227,7 @@ class GitServerAllOS extends Base {
             return $is_allowed ; }
         return false ;
     }
+
 
     protected function getGitRequestUser() {
         if (isset($_SERVER["REDIRECT_HTTP_AUTHORIZATION"])) {
