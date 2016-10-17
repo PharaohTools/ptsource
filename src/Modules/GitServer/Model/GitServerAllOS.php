@@ -82,7 +82,7 @@ class GitServerAllOS extends Base {
 //      THIS IS IMPORTANT! THIS STOPS PUSH FROM WORKING. IF THE QUERY STRING ENV VAR IS NOT SPECIFICALLY
 //      SET TO HAVE A STRING WITH ONE PARAMETER IN THE CLIENT ASSUMES A DUMB SERVER PROTOCOL
         $qsmpos = strpos($qs, "?") ;
-        $newqsm = $env["REQUEST_URI"] ;
+        $newqsm = $_SERVER["REQUEST_URI"] ;
         if ($qsmpos !== false) {
             $newqsm = substr($qs, $qsmpos+1); }
 
