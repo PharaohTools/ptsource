@@ -95,20 +95,14 @@ class GitServerAllOS extends Base {
 
         $env["QUERY_STRING"] = $qs ;
 
-        $path_info = str_replace($repo_name, "", $path_info) ;
-        if (substr($path_info, 0, 1) == '/') {
-            $env["PATH_INFO"] = substr($path_info, 1, strlen($path_info)-1) ; }
+        $env["PATH_INFO"] = $path_info ;
 
+        if (isset($service)) {
+            $path_info = str_replace($service, "", $path_info) ;
+//            if (substr($path_info, 0, 1) == '/') {
+//                $env["PATH_INFO"] = substr($path_info, 1, strlen($path_info)-1) ; }
+        }
 
-        $authvars =  array(
-            "AUTH_TYPE" => 'Basic' ,
-            "HTTP_AUTHORIZATION" => 'Basic ZGF2ZToxMjM0' ,
-            "REDIRECT_HTTP_AUTHORIZATION" => 'Basic ZGF2ZToxMjM0' ,
-            "USER" => $env["REMOTE_USER"] ,
-            "REDIRECT_REMOTE_USER" => $env["REMOTE_USER"] ,
-            "REDIRECT_QUERY_STRING" => $env["QUERY_STRING"],
-            "REDIRECT_URL" => $_SERVER["REDIRECT_URL"],
-        ) ;
         $settings = array
         (
             0 => array("pipe", "r"),
@@ -122,14 +116,13 @@ class GitServerAllOS extends Base {
 
 
 
-//        ob_start();
+        ob_start();
 //        var_dump("this env", phpinfo()) ;
-//        var_dump("srv", $_SERVER) ;
-//        var_dump("grq:", $gitRequestUser, "srv", $env) ;
+        var_dump("srv:", $_SERVER, "env:", $env) ;
 //        var_dump("grq:", $gitRequestUser) ;
 //        var_dump("this env", $_SERVER['HTTP_AUTHORIZATION'], "user", $this->params["user"], "remote user", $_SERVER["REMOTE_USER"], "AUTH user", $_SERVER["PHP_AUTH_USER"], $_SERVER["PHP_AUTH_PW"], $_SERVER["HTTP_AUTHORIZATION"]) ;
-//        $res = ob_get_clean();
-//        file_put_contents('/var/log/pharaoh.log', $res, FILE_APPEND) ;
+        $res = ob_get_clean();
+        file_put_contents('/var/log/pharaoh.log', $res, FILE_APPEND) ;
 
         if (is_resource($process)) {
 //            error_log("php in: $php_input" ) ;
