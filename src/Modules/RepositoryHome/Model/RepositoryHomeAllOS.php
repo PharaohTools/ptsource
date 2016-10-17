@@ -19,8 +19,16 @@ class RepositoryHomeAllOS extends Base {
         $ret["features"] = $this->getRepositoryFeatures();
         $ret["history"] = $this->getCommitHistory();
         $ret["is_https"] = $this->isSecure();
+        $ret["user"] = $this->getLoggedInUser();
         $ret = array_merge($ret, $this->getIdentifier()) ;
         return $ret ;
+    }
+
+    protected function getLoggedInUser() {
+        $signupFactory = new \Model\Signup() ;
+        $signup = $signupFactory->getModel($this->params);
+        $this->params["user"] = $signup->getLoggedInUserData() ;
+        return $this->params["user"] ;
     }
 
     public function deleteData() {

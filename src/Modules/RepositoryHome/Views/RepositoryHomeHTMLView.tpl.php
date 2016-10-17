@@ -81,9 +81,50 @@
             </div>
                 <hr />
                 <h3 class="propertyTitle">Clone, Push or Pull:</h3>
-                <?php $ht_string = ($pageVars["is_https"] == true) ? 'HTTPS' : 'HTTP' ; ?>
-                <h4 class="propertyTitle"><?php echo $ht_string ; ?>: git clone <?php echo "http://{$_SERVER["SERVER_NAME"]}/git/public/{$pageVars["data"]["repository"]["project-slug"]} "  ; ?></h4>
-<!--                <h4 class="propertyTitle">SSH: --><?php //echo "git://{$_SERVER["SERVER_NAME"]}/index.php?control=GitServer&action=serve&item={$pageVars["data"]["repository"]["project-slug"]} {$pageVars["data"]["repository"]["project-slug"]}" ; ?><!--</h4>-->
+                <?php
+
+                $ht_string = ($pageVars["data"]["is_https"] == true) ? 'HTTPS' : 'HTTP' ;
+                $ht_string_lower = strtolower($ht_string) ;
+                ?>
+                <div class="row">
+                    
+                    <?php
+                    if (isset($pageVars["data"]["user"]->username)) {
+                        ?>
+
+                        <div class="col-sm-10">
+                            <h4><?php echo $ht_string ; ?>: git clone <?php echo "{$ht_string_lower}://{$pageVars["data"]["user"]->username}:{password}@{$_SERVER["SERVER_NAME"]}/git/public/{$pageVars["data"]["repository"]["project-slug"]} "  ; ?></h4>
+                        </div>
+                        <div class="col-sm-2">
+                            <span class="btn btn-success">Write Enabled</span>
+                        </div>
+                    
+                    <?php                        
+                    }
+                    ?>
+                    
+                </div>
+                <div class="row">
+                    <?php
+
+                    if ($pageVars["data"]["repository"]["settings"]["RepositoryScope"]["enable"] == "on") {
+                        if ($pageVars["data"]["repository"]["settings"]["RepositoryScope"]["public_reads"] == "on") {?>
+
+                    <div class="col-sm-10">
+                        <h4><?php echo $ht_string ; ?>: git push <?php echo "{$ht_string_lower}://anon:any@{$_SERVER["SERVER_NAME"]}/git/public/{$pageVars["data"]["repository"]["project-slug"]} "  ; ?></h4>
+                    </div>
+
+                        <?php }
+                        if ($pageVars["data"]["repository"]["settings"]["RepositoryScope"]["public_writes"] == "on") {?>
+
+                            <div class="col-sm-3">
+                                <span class="btn btn-success">Write Enabled</span>
+                            </div>
+
+                        <?php }
+                    }
+                    ?></div>
+
                 <hr />
             <div class="row clearfix no-margin build-home-properties">
 
