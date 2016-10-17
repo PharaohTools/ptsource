@@ -93,7 +93,7 @@
                         ?>
 
                         <div class="col-sm-10">
-                            <h4><?php echo $ht_string ; ?>: git clone <?php echo "{$ht_string_lower}://{$pageVars["data"]["user"]->username}:{password}@{$_SERVER["SERVER_NAME"]}/git/public/{$pageVars["data"]["repository"]["project-slug"]} "  ; ?></h4>
+                            <h4><?php echo $ht_string ; ?>: <?php echo "{$ht_string_lower}://{$pageVars["data"]["user"]->username}:{password}@{$_SERVER["SERVER_NAME"]}/git/public/{$pageVars["data"]["repository"]["project-slug"]} "  ; ?></h4>
                         </div>
                         <div class="col-sm-2">
                             <span class="btn btn-success">Write Enabled</span>
@@ -111,7 +111,7 @@
                         if ($pageVars["data"]["repository"]["settings"]["RepositoryScope"]["public_reads"] == "on") {?>
 
                     <div class="col-sm-10">
-                        <h4><?php echo $ht_string ; ?>: git push <?php echo "{$ht_string_lower}://anon:any@{$_SERVER["SERVER_NAME"]}/git/public/{$pageVars["data"]["repository"]["project-slug"]} "  ; ?></h4>
+                        <h4><?php echo $ht_string ; ?>: <?php echo "{$ht_string_lower}://anon:any@{$_SERVER["SERVER_NAME"]}/git/public/{$pageVars["data"]["repository"]["project-slug"]} "  ; ?></h4>
                     </div>
 
                         <?php }
