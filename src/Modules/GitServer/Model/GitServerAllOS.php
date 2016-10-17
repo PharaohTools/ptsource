@@ -76,23 +76,24 @@ class GitServerAllOS extends Base {
 
         if ($this->userIsAllowed($gitRequestUser, $repo_name)==false) {
             header('HTTP/1.0 403 Forbidden');
-            return false ;
-        }
+            return false ;  }
 
 //        $pathStarts = array('/HEAD', '/info/', '/objects/') ;
 //        $scm_synonyms = array("git", "scm") ;
-
-        $qs = $_SERVER["REQUEST_URI"] ;
-
-
+//        $qs = $_SERVER["REQUEST_URI"] ;
 //      THIS IS IMPORTANT! THIS STOPS PUSH FROM WORKING. IF THE QUERY STRING ENV VAR IS NOT SPECIFICALLY
 //      SET TO HAVE A STRING WITH ONE PARAMETER IN THE CLIENT ASSUMES A DUMB SERVER PROTOCOL
-        $qsmpos = strpos($qs, "?") ;
-        $newqsm = $_SERVER["REQUEST_URI"] ;
-        if ($qsmpos !== false) {
-            $newqsm = substr($qs, $qsmpos+1); }
+        $qs = $_SERVER["REQUEST_URI"] ;
 
-        $env["QUERY_STRING"] = $newqsm ;
+        $qsmpos = strpos($qs, "?") ;
+        if ($qsmpos==false) {
+            $service = basename($qs) ;
+            $qs ="service={$service}" ; }
+        else {
+            if ($qsmpos !== false) {
+                $qs = substr($qs, $qsmpos+1); }}
+
+        $env["QUERY_STRING"] = $qs ;
         $env["PATH_INFO"] = $path_info ;
         $authvars =  array(
             "AUTH_TYPE" => 'Basic' ,
