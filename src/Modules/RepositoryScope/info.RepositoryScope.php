@@ -30,7 +30,7 @@ class RepositoryScopeInfo extends PTConfigureBase {
 
     public function configuration() {
         return array(
-            "disable_publix"=> array(
+            "disable_public"=> array(
                 "type" => "boolean",
                 "default" => "",
                 "label" => "Disable all Public Access for pages and Repositories?", ),
