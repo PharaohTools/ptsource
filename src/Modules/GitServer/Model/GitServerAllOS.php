@@ -21,6 +21,11 @@ class GitServerAllOS extends Base {
     }
 
     public function backendData() {
+
+        $pos = strpos($this->params["item"], '/') ;
+        if ($pos !== false) {
+            $this->params["item"] = substr($this->params["item"], 0, $pos) ; }
+
         define("DEBUG_LOG",        true);
         define("HTTP_AUTH",        false);
         define("GZIP_SUPPORT",     false);
@@ -202,7 +207,7 @@ class GitServerAllOS extends Base {
     protected function repoPublicAllowed($type) {
         $repoFactory = new \Model\Repository() ;
         $repo = $repoFactory->getModel($this->params, "Default") ;
-        $thisRepo = $repo->getRepository($this->params["item"], false) ;
+        $thisRepo = $repo->getRepository($this->params["item"]) ;
         $public_enabled = (isset($thisRepo["settings"]["RepositoryScope"]["enabled"]) && $thisRepo["settings"]["RepositoryScope"]["enabled"]=="on") ? true : false ;
         if ($public_enabled == false) { return false ; }
         if ($type == "read" || $type == "write") {
