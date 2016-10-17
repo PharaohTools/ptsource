@@ -30,7 +30,7 @@ class Authentication {
             if (method_exists($info, "ignoredAuthenticationRoutes")) {
                 $iar = $info->ignoredAuthenticationRoutes() ;
                 foreach ($iar as $module => $routes) {
-                    $isray = ($ignoredAuthRoutes[$module]) ? $ignoredAuthRoutes[$module] : array() ;
+                    $isray = (isset($ignoredAuthRoutes[$module])) ? $ignoredAuthRoutes[$module] : array() ;
                     $ignoredAuthRoutes[$module] = array_merge($isray, $routes) ; }}}
 
 //        var_dump("<pre>") ;
