@@ -30,10 +30,10 @@ class RepositoryScopeInfo extends PTConfigureBase {
 
     public function configuration() {
         return array(
-            "exec_delay"=> array(
-                "type" => "text",
-                "default" => "180",
-                "label" => "Minimum execution delay between Repository Mirroring Polling runs", ),
+            "disable_publix"=> array(
+                "type" => "boolean",
+                "default" => "",
+                "label" => "Disable all Public Access for pages and Repositories?", ),
         );
     }
 
