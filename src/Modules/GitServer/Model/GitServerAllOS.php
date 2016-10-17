@@ -94,7 +94,12 @@ class GitServerAllOS extends Base {
                 $qs = substr($qs, $qsmpos+1); }}
 
         $env["QUERY_STRING"] = $qs ;
-        $env["PATH_INFO"] = $path_info ;
+
+        $path_info = str_replace($repo_name, "", $path_info) ;
+        if (substr($path_info, 0, 1) == '/') {
+            $env["PATH_INFO"] = substr($path_info, 1, strlen($path_info)-1) ; }
+
+
         $authvars =  array(
             "AUTH_TYPE" => 'Basic' ,
             "HTTP_AUTHORIZATION" => 'Basic ZGF2ZToxMjM0' ,
@@ -150,6 +155,7 @@ class GitServerAllOS extends Base {
             }
             if(isset($request_headers["Accept-Encoding"]) && strpos($request_headers["Accept-Encoding"], "gzip") !== false && GZIP_SUPPORT)
             {
+                error_log("using gzip" ) ;
                 $gzipoutput = gzencode($response_body, 6);
                 ini_set("zlib.output_compression", "Off");
                 header("Content-Encoding: gzip");
@@ -158,6 +164,7 @@ class GitServerAllOS extends Base {
             }
             else
             {
+                error_log("using no gzip" ) ;
                 echo $response_body;
             }
         }
