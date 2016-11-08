@@ -1,27 +1,46 @@
 
 
-function jsAreYouSure(message, yesfunction) {
-    html  = '<div id="overlay_are_you_sure"> ';
-    html += '    <div class="overlay_inner"> ';
-    html += '        <div id="close_button_div"> ';
-    html += '            <a onclick="closeOverlay(\'are_you_sure\'); return false;"> ';
-    html += '                <img src="/Assets/Modules/IssueBulk/images/close-button.png" /> ';
-    html += '            </a> ';
-    html += '        </div> ';
-    html += '        <div class="overlay_content"> ';
-    html += '            <h3 class="progressTitle">'+message+'</h3> ';
-    html += '            <div class="fullWidth"> ';
-    html += '                <button id="are_you_sure_yes" class="btn btn-success hvr-float-shadow">Yes</button> ';
-    html += '                <button id="are_you_sure_no" onclick="closeOverlay(\'are_you_sure\') ;" class="btn btn-warning hvr-float-shadow">No</button> ';
-    html += '            </div> ';
-    html += '            <div class="fullWidth"> ';
-    html += '                <div id="overlay_data"></div>';
-    html += '            </div> ';
-    html += '        </div> ';
-    html += '    </div> ';
-    html += '</div> ';
+function jsAreYouSure(message, yesfunction, inject_fields, function_after_inject) {
+    inject_fields = inject_fields || false;
+    function_after_inject = function_after_inject || false;
+    htmlvar  = '<div id="overlay_are_you_sure"> ';
+    htmlvar += '    <div class="overlay_inner"> ';
+    htmlvar += '        <div id="close_button_div"> ';
+    htmlvar += '            <a onclick="closeOverlay(\'are_you_sure\'); return false;"> ';
+    htmlvar += '                <img src="/Assets/Modules/DataBulk/images/close-button.png" /> ';
+    htmlvar += '            </a> ';
+    htmlvar += '        </div> ';
+    htmlvar += '        <div class="overlay_content"> ';
+    htmlvar += '            <h3 class="progressTitle">'+message+'</h3> ';
+    htmlvar += '            <div class="fullWidth"> ';
+    htmlvar += '                <div id="inject_space">';
+    if (inject_fields !== false) {
+        inject_html = getInjectedFieldData(inject_fields) ;
+//        console.log("inj: ", inject_html) ;
+        htmlvar += inject_html ; }
+    htmlvar += '                </div>';
+    htmlvar += '            </div> ';
+    htmlvar += '            <div class="fullWidth"> ';
+    htmlvar += '                <button id="are_you_sure_yes" class="btn btn-success hvr-float-shadow">Yes</button> ';
+    htmlvar += '                <button id="are_you_sure_no" onclick="closeOverlay(\'are_you_sure\') ;" class="btn btn-warning hvr-float-shadow">No</button> ';
+    htmlvar += '            </div> ';
+    htmlvar += '            <div class="fullWidth"> ';
+    htmlvar += '                <div id="overlay_data"></div>';
+    htmlvar += '            </div> ';
+    htmlvar += '        </div> ';
+    htmlvar += '    </div> ';
+    htmlvar += '</div> ';
 
-    $('body').append(html) ;
+//    console.log("appending: ", htmlvar);
+
+    $('body').append(htmlvar) ;
+
+    if (function_after_inject !== false) {
+        if (typeof function_after_inject === "function") {
+            function_after_inject() ;
+        }
+        window[function_after_inject]();
+    }
 
     $('#are_you_sure_yes').off("click").click(function() {
         console.log("before yes function: " + yesfunction);
@@ -39,9 +58,21 @@ function jsAreYouSure(message, yesfunction) {
 
 }
 
+function getInjectedFieldData(ifstring) {
+//    ifstype = (typeOf ifstring) ;
+    console.log("ifs type", ifstring) ;
+    if (typeof ifstring === "function") {
+        ifsval = ifstring() ;
+        console.log("ifs val", ifsval) ;
+        return ifsval ;
+    }
+    return $('#'+ifstring).html();
+
+}
+
 
 function closeOverlay(type) {
-    $('#overlay_'+type).css('display', 'none') ;
+    $('#overlay_'+type).remove() ;
 }
 
 function getParameterByName(name, url) {
