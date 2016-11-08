@@ -26,13 +26,40 @@ class AssetPublisherLinuxUnix extends Base {
     }
 
     public function publishAssets() {
+        $r1 = $this->generatePHPToJS() ;
+        if ($r1 == false) { return false ; }
+        $r2 = $this->copyToPublicDirectory() ;
+        if ($r2 == false) { return false ; }
+        return true ;
+    }
+
+    public function generatePHPToJS() {
         $loggingFactory = new \Model\Logging();
         $this->params["echo-log"] = true ;
         $logging = $loggingFactory->getModel($this->params);
-        $modDir = "/opt/".PHARAOH_APP."/".PHARAOH_APP."/src/Modules/" ;
+        $logging->log("Checking if NPM Exists...", $this->getModuleName()) ;
+        $status = $this->executeAndGetReturnCode('npm -v', true, true);
+        if ($status["rc"] != 0) {
+            $logging->log("No NPM Found, will use current FileData and Bundle files...", $this->getModuleName()) ;
+            return true ; }
+        $npmDir = dirname(__DIR__).DS."Libraries".DS."npm".DS ;
+        $logging->log("Executing NPM Build command", $this->getModuleName()) ;
+        $comm = "cd {$npmDir} && npm run build" ;
+        $status = $this->executeAndGetReturnCode($comm, true, true);
+        if ($status["rc"] !== 0) {
+            $logging->log("Executing NPM Build command failed", $this->getModuleName()) ;
+            return false; }
+        return true ;
+    }
+
+    public function copyToPublicDirectory() {
+        $loggingFactory = new \Model\Logging();
+        $this->params["echo-log"] = true ;
+        $logging = $loggingFactory->getModel($this->params);
+        $modDir = PFILESDIR.PHARAOH_APP.DS.PHARAOH_APP.DS."src".DS."Modules".DS ;
         $mods = scandir($modDir) ;
         $mods = array_diff($mods, array(".", "..")) ;
-        $piDir = "/opt/".PHARAOH_APP."/".PHARAOH_APP."/src/Modules/PostInput/" ;
+        $piDir = PFILESDIR.PHARAOH_APP.DS.PHARAOH_APP.DS."src".DS."Modules".DS."PostInput".DS ;
         $statuses = array();
         foreach ($mods as $mod) {
             $modPath = $modDir.$mod ;
