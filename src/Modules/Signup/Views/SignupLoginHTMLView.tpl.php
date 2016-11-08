@@ -2,7 +2,9 @@
 	<div class="row">
 		
 		<div class=" col-md-7 col-md-offset-2 ">
+
 			<div class="login-panel panel panel-default">
+
 				<div class="col-md-12">
 					<h3 class="hero-unit"><strong>Log in</strong> </h3>
 
@@ -14,26 +16,23 @@
                     </div> -->
 					<hr>
 				</div>
-				
-				
-				
-            <div class="panel-body">
+
+                <div class="panel-body">
 					
 					<div class="row clearfix no-margin">
 						<h5 class="text-uppercase text-light" style="margin-top: 15px;">  </h5>
-                        <p id="login_error_msg">
+                        <div id="login_error_msg">
 
                             <?php
 
-                            if(isset($pageVars["registration_disabled"]) && $pageVars["registration_disabled"]==true) {
-                                echo "Registration has disabled by your administrator." ;
-                            }
+                                if(isset($pageVars["registration_disabled"]) && $pageVars["registration_disabled"]==true) {
+                                    echo "Registration has disabled by your administrator." ;
+                                }
 
                             ?>
 
-
-                        </p>
-                        <p id="login_success_msg"></p>
+                        </div>
+                        <div id="login_success_msg"></div>
 						<form class="form-horizontal custom-form">
 							<div class="form-group" >
 								
