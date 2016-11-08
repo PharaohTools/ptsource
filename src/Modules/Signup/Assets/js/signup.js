@@ -12,12 +12,12 @@ function submit_login(oauth) {
     $('#login_password_alert').html('');
 
     if ($('#login_username').val() == '') {
-        $('#login_username_alert').html('&nbsp;&nbsp;Please enter your User Name');
+        $('#login_username_alert').append('<p>Please enter your User Name</p>');
         $('#login_username').focus();
         return; }
 
     if ($('#login_password').val() == '') {
-        $('#login_password_alert').html('&nbsp;&nbsp;Please enter your Password');
+        $('#login_password_alert').append('<p>Please enter your Password</p>');
         $('#login_password').focus();
         return; }
 
@@ -38,10 +38,10 @@ function submit_login(oauth) {
         dataType: "json",
         success: function(result) {
             if(result.status == true){
-                $('#login_success_msg').html('&nbsp;&nbsp;'+"Success! Logging you in...");
+                $('#login_success_msg').html("<p>Success! Logging you in...</p>");
                 window.location.assign($('#base_url').val() + '/index.php?control=Index&action=show'); }
             else{
-                $('#login_error_msg').html('&nbsp;&nbsp;'+result.msg);
+                $('#login_error_msg').html("<p>"+result.msg+"</p>");
                 $('#login_username').focus();
                 return; } }
     });
