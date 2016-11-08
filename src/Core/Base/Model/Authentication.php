@@ -16,6 +16,7 @@ class Authentication {
         $handled["control"] = $control ;
         $handled["pageVars"] = $pageVars ;
         if (!isset($mod_config["Signup"]["signup_enabled"]) || $mod_config["Signup"]["signup_enabled"]=="off") {
+//            error_log("signup not enabled  ") ;
             return $handled  ; }
 
         if (!$this->isWebSapi()) {
@@ -28,18 +29,7 @@ class Authentication {
 
         foreach ($infos as $info) {
             if (method_exists($info, "ignoredAuthenticationRoutes")) {
-                $iar = $info->ignoredAuthenticationRoutes() ;
-                foreach ($iar as $module => $routes) {
-                    $isray = (isset($ignoredAuthRoutes[$module])) ? $ignoredAuthRoutes[$module] : array() ;
-                    $ignoredAuthRoutes[$module] = array_merge($isray, $routes) ; }}}
-
-//        var_dump("<pre>") ;
-//        var_dump("1", $ignoredAuthRoutes) ;
-//        var_dump("1", $handled["control"], $ignoredAuthRoutes) ;
-//        var_dump("2", $pageVars["route"]["action"], $ignoredAuthRoutes[$handled["control"]]) ;
-//        var_dump("</pre>") ;
-//        die() ;
-
+                $ignoredAuthRoutes = array_merge($ignoredAuthRoutes, $info->ignoredAuthenticationRoutes()) ; } }
         if (array_key_exists($handled["control"], $ignoredAuthRoutes) &&
             in_array($pageVars["route"]["action"], $ignoredAuthRoutes[$handled["control"]])) {
             // if we are requesting something with ignored auth, just return it
