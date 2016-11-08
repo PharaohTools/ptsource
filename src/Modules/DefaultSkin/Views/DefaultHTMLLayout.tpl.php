@@ -58,7 +58,7 @@
         <!-- Bootstrap Core CSS -->
         <link href="/Assets/Modules/DefaultSkin/css/default.css" rel="stylesheet">
         <script type="text/javascript" src="/Assets/Modules/DefaultSkin/js/pharaoh_default.js"></script>
-	</head>
+    </head>
 
 	<body>
 		<input type="hidden" id="base_url" value="">
@@ -66,8 +66,7 @@
    // @todo this doesn't seem right
    // @todo can we do HTML output with a blank template
 	 ?>
-		<div id="wrapper">
-			<nav class="navbar navbar-default navbar-static-top navbar-fixed-top" role="navigation" style="background-color: #242424;  border-color:#242424;">
+			<nav class="navbar navbar-default navbar-static-top navbar-fixed-top" style="background-color: #242424;  border-color:#242424;">
 				<div class="navbar-header">
 
                     <?php
@@ -83,7 +82,7 @@
 
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
 
-                                <i class="fa fa-bell fa-fw " id="bell"></i>  <i class="fa fa-caret-down " id="caret"></i>
+                                <i class="fa fa-bell fa-fw "></i>  <i class="fa fa-caret-down " ></i>
                             </a>
                             <ul class="dropdown-menu dropdown-alerts hvr-grow-shadow ">
                                 <li>
@@ -108,7 +107,7 @@
                         <!-- /.dropdown -->
                         <li class="dropdown  hvr-hang">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                <i class="fa fa-user fa-fw" id="bell"></i>  <i class="fa fa-caret-down" id="caret"></i>
+                                <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-user ">
                                 <li><a href="/index.php?control=UserProfile&action=show" class=" hvr-grow-shadow"><i class="fa fa-user fa-fw"></i> User Profile</a>
@@ -128,12 +127,17 @@
                         <!-- /.dropdown -->
                     </ul>
 
+                        <h3 class="nav navbar-top-links navbar-right title_username">
+                            Hello, <strong><?php echo $_SESSION["username"] ; ?></strong>
+                        </h3>
+
                     <?php } ?>
 
                     <a class="navbar-left" href="/index.php?control=Index&action=show">
 						<figure class="rollover">
-                        <img src="/Assets/Modules/DefaultSkin/image/<?php echo PHARAOH_APP_FRIENDLY ;?>-logo.png" class="navbar-img hvr-grow-shadow" style="height: 60px;padding: 5px;" />
-                        <span class="title hvr-grow-shadow">Pharaoh <?php echo ucfirst(PHARAOH_APP_FRIENDLY) ;?></span>
+                            <img src="/Assets/Modules/DefaultSkin/image/<?php echo PHARAOH_APP_FRIENDLY ;?>-logo.png" class="navbar-img hvr-grow-shadow" alt="Pharaoh <?php echo ucfirst(PHARAOH_APP_FRIENDLY) ;?>" style="height: 60px;padding: 5px;" />
+                            <span class="title hvr-grow-shadow">Pharaoh <?php echo ucfirst(PHARAOH_APP_FRIENDLY) ;?></span>
+                        </figure>
                     </a>
 				</div>
             <!-- /.navbar-top-links -->
@@ -147,9 +151,10 @@
 			<!-- Placed at the end of the document so the pages load faster -->
 	
 			<div class="scroll-top-wrapper ">
-           <span class="scroll-top-inner">
-           <i class="fa fa-2x fa-arrow-circle-up"></i>
-           </span>
-           </div>
+                <span class="scroll-top-inner">
+                    <i class="fa fa-2x fa-arrow-circle-up"></i>
+                </span>
+            </div>
+            <script type="text/javascript" src="/Assets/Modules/DefaultSkin/js/bundle.js"></script>
 	</body>
 </html>
