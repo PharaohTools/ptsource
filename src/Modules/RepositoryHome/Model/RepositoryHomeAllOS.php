@@ -20,6 +20,7 @@ class RepositoryHomeAllOS extends Base {
         $ret["history"] = $this->getCommitHistory();
         $ret["is_https"] = $this->isSecure();
         $ret["user"] = $this->getLoggedInUser();
+        $ret["current_user_role"] = $this->getCurrentUserRole($ret["user"]);
         $ret = array_merge($ret, $this->getIdentifier()) ;
         return $ret ;
     }
@@ -29,6 +30,13 @@ class RepositoryHomeAllOS extends Base {
         $signup = $signupFactory->getModel($this->params);
         $this->params["user"] = $signup->getLoggedInUserData() ;
         return $this->params["user"] ;
+    }
+
+
+    public function getCurrentUserRole($user = null) {
+        if ($user == null) { $user = $this->getLoggedInUser(); }
+        if ($user == false) { return false ; }
+        return $user->role ;
     }
 
     public function deleteData() {
