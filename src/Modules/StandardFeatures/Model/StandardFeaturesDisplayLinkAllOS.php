@@ -63,6 +63,8 @@ class StandardFeaturesDisplayLinkAllOS extends Base {
             $ff = array("link" => "http://www.pharaohtools.com/virtualize"); }
         else if ($oneStandardFeature== "ptconfigure_enabled") {
             $ff = array("link" => "http://www.pharaohtools.com/configure"); }
+        else if ($oneStandardFeature== "ptsource_enabled") {
+            $ff = array("link" => "http://www.pharaohtools.com/source"); }
         else if ($oneStandardFeature== "pttest_enabled") {
             $ff = array("link" => "http://www.pharaohtools.com/test"); }
         else if ($oneStandardFeature== "pttrack_enabled") {
@@ -87,6 +89,8 @@ class StandardFeaturesDisplayLinkAllOS extends Base {
             $ff = array("title" => "Pharaoh Virtualize"); }
         else if ($oneStandardFeature== "ptconfigure_enabled") {
             $ff = array("title" => "Pharaoh Configure"); }
+        else if ($oneStandardFeature== "ptsource_enabled") {
+            $ff = array("title" => "Pharaoh Source"); }
         else if ($oneStandardFeature== "pttest_enabled") {
             $ff = array("title" => "Pharaoh Test"); }
         else if ($oneStandardFeature== "pttrack_enabled") {
@@ -112,6 +116,8 @@ class StandardFeaturesDisplayLinkAllOS extends Base {
             $ff = array("image" => "{$prefix}virtualize-logo.png"); }
         else if ($oneStandardFeature== "ptconfigure_enabled") {
             $ff = array("image" => "{$prefix}configure-logo.png"); }
+        else if ($oneStandardFeature== "ptsource_enabled") {
+            $ff = array("image" => "{$prefix}source-logo.png"); }
         else if ($oneStandardFeature== "pttest_enabled") {
             $ff = array("image" => "{$prefix}test-logo.png"); }
         else if ($oneStandardFeature== "pttrack_enabled") {
