@@ -90,14 +90,15 @@ class RepositoryScopeLinuxUnix extends Base {
 
     public function getHTMLFromRepositories($public_repositories) {
         $html = "" ;
-        $html .= "<h3><strong>Public Repositories:</strong></h3>" ;
-        foreach ($public_repositories as $public_repository) {
-            $html .= "<div>" ;
-            $html .= "    <a target='_blank' href='index.php?control=RepositoryHome&action=show&item={$public_repository["project-slug"]}' > " ;
-            $html .= "        {$public_repository["project-name"]} " ;
-            $html .= "    </a>" ;
-            $html .= "</div>" ;
-        }
+        if (count($public_repositories)>0) {
+            $html .= "<h3><strong>Public Repositories:</strong></h3>" ;
+            foreach ($public_repositories as $public_repository) {
+                $html .= "<div>" ;
+                $html .= "    <a target='_blank' href='index.php?control=RepositoryHome&action=show&item={$public_repository["project-slug"]}' > " ;
+                $html .= "        {$public_repository["project-name"]} " ;
+                $html .= "    </a>" ;
+                $html .= "</div>" ; } }
         return $html ;
     }
+
 }
