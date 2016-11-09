@@ -16,6 +16,14 @@ class SignupAllOS extends Base {
 
     public function getlogin() {
         $ret["settings"] = $this->getSettings() ;
+
+        $eventRunnerFactory = new \Model\EventRunner() ;
+        $eventRunner = $eventRunnerFactory->getModel($this->params) ;
+        $ret["events"] = $eventRunner->eventRunner("getPublicLinks") ;
+        if ($ret["events"] == false) {
+         // should probably do sometihing here
+        }
+
         return $ret ;
     }
 
