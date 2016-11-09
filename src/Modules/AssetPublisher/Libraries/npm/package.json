@@ -1,0 +1,37 @@
+{
+  "name": "pharaoh-tools",
+  "version": "1.0.0",
+  "description": "Pharaoh Tools build to publish assets",
+  "main": "index.js",
+  "scripts": {
+    "build:fs": "node fs",
+    "build": "npm run build:fs && (browserify app --standalone=pharaohTrack | uglifyjs --mangle > ../../../PostInput/Assets/Modules/DefaultSkin/js/bundle.js) && cp ../../../PostInput/Assets/Modules/DefaultSkin/js/bundle.js ../../../DefaultSkin/Assets/js/bundle.js",
+    "webpack": "webpack"
+  },
+  "keywords": [
+    "php",
+    "uniter",
+    "browserify",
+    "fs"
+  ],
+  "author": "asmblah",
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "^2.1.4",
+    "json-loader": "^0.5.1",
+    "uglifyify": "^3.0.1",
+    "uniter": "^1.0"
+  },
+  "devDependencies": {
+    "browserify": "^10.2.0",
+    "globby": "^2.0.0",
+    "node-libs-browser": "^0.5.0",
+    "uglify-js": "^2.4.23",
+    "webpack": "^1.9.7"
+  },
+  "browserify": {
+    "transform": [
+      "uglifyify"
+    ]
+  }
+}
