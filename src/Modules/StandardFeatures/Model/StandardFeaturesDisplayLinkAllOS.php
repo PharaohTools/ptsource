@@ -66,11 +66,11 @@ class StandardFeaturesDisplayLinkAllOS extends Base {
         else if ($oneStandardFeature== "pttest_enabled") {
             $ff = array("link" => "http://www.pharaohtools.com/test"); }
         else if ($oneStandardFeature== "pttrack_enabled") {
-            $ff = array("link" => "Pharaoh Track"); }
+            $ff = array("link" => "http://www.pharaohtools.com/track"); }
         else if ($oneStandardFeature== "ptbuild_enabled") {
             $ff = array("link" => "http://www.pharaohtools.com/build"); }
         else if ($oneStandardFeature== "ptdeploy_enabled") {
-            $ff = array("link" => "Pharaoh Deploy"); }
+            $ff = array("link" => "http://www.pharaohtools.com/deploy"); }
         else if ($oneStandardFeature== "ptmanage_enabled") {
             $ff = array("link" => "http://www.pharaohtools.com/manage"); }
         else {
