@@ -75,7 +75,7 @@ class GitServerAllOS extends Base {
         $gitRequestUser = $this->getGitRequestUser() ;
 
         if ($this->userIsAllowed($gitRequestUser, $repo_name)==false) {
-            header('HTTP/1.0 403 Forbidden');
+            header('HTTP/1.1 403 Forbidden');
             return false ;  }
 
 //        $pathStarts = array('/HEAD', '/info/', '/objects/') ;
@@ -131,6 +131,7 @@ class GitServerAllOS extends Base {
             $return_output = stream_get_contents($pipes[1]);
             fclose($pipes[1]);
             $return_code = proc_close($process);
+            error_log("\n\n\nNew Request" ) ;
             error_log("rc: $return_code, stduot: $return_output" ) ; }
         else {
             error_log("is r:", is_resource($process) ) ; }
