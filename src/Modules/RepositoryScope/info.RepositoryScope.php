@@ -6,7 +6,7 @@ class RepositoryScopeInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "Poll SCM for code changes Functionality";
+    public $name = "Integrate functions for making Repositories Public";
 
     public function _construct() {
         parent::__construct();
@@ -21,7 +21,7 @@ class RepositoryScopeInfo extends PTConfigureBase {
     }
 
     public function events() {
-        return array("prepareBuild");
+        return array("getPublicLinks");
     }
 
     public function repositorySettings() {
@@ -30,10 +30,10 @@ class RepositoryScopeInfo extends PTConfigureBase {
 
     public function configuration() {
         return array(
-            "disable_public"=> array(
+            "enable_public"=> array(
                 "type" => "boolean",
                 "default" => "",
-                "label" => "Disable all Public Access for pages and Repositories?", ),
+                "label" => "Enable use of Public Access for Pages and Repositories?", ),
         );
     }
 
