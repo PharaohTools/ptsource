@@ -20,6 +20,10 @@ class RepositoryHomeInfo extends PTConfigureBase {
       return array("repositoryHome"=>"RepositoryHome");
     }
 
+    public function ignoredAuthenticationRoutes() {
+        return array( "RepositoryHome" => array("show") );
+    }
+
     public function helpDefinition() {
       $help = <<<"HELPDATA"
   This is the Repository Home page module for a single build...
