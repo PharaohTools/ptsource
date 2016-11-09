@@ -6,7 +6,7 @@ class CommitDetailsInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "CommitDetails/Home Page";
+    public $name = "Single Commit Details Page";
 
     public function _construct() {
       parent::__construct();

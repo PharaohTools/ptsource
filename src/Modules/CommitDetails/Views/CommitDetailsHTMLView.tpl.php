@@ -73,58 +73,21 @@
             <div class="well well-lg ">
            
             <div class="row clearfix no-margin">
-            	 <h3 class="text-uppercase text-light ">Repository</h3>
-                <!--
-                <h3><a class="lg-anchor text-light" href="">PTRepository - Pharaoh Tools <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>
-                -->
-                <p> Project Name: <?php echo $pageVars["data"]["repository"]["project-name"] ; ?></p>
-                <p> Project Slug: <?php echo $pageVars["data"]["repository"]["project-slug"] ; ?></p>
-                <p> Project Desc: <?php echo $pageVars["data"]["repository"]["project-description"] ; ?></p>
+            	<h3 class="text-uppercase text-light ">Commit</h3>
+
+                <p> Commit Message: </p>
+                <p> Committer Name: </p>
+                <p> Commit Hash: </p>
+                <p> Branch: </p>
+                <p> File Browser Link: </p>
+
             </div>
             <hr>
             <div class="row clearfix no-margin build-home-properties">
-<!--                <h3><a class="lg-anchor text-light" href="/index.php?control=RepositoryConfigure&action=show&item=--><?php //echo $pageVars["data"]["repository"]["project-slug"] ; ?><!--">-->
-<!--                    Configure Repository: --><?php //echo $pageVars["data"]["repository"]["project-name"] ; ?><!--- <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a></h3>-->
+                <p> Time since Commit: </p>
+                <p> There are x changed files with y addition/s and z deletion/s.</p>
+                <p> The diff of the files.. </p>
 
-                <div class="pipe-now-status-block pipe-block">
-                    <h4 class="propertyTitle">Repository Status Currently:</h4>
-                </div>
-
-                <div class="pipe-features-block pipe-block">
-                    <h4 class="propertyTitle">Repository Features:</h4>
-                    <div class="col-sm-12">
-                    <?php
-                    if (isset($pageVars["data"]["features"]) &&
-                        count($pageVars["data"]["features"])>0 ) {
-                        foreach ($pageVars["data"]["features"] as $build_feature) {
-//                            var_dump($build_feature);
-                            if (isset($build_feature["hidden"]) && $build_feature["hidden"] != true
-                                || !isset($build_feature["hidden"]) ) {
-                                echo '<div class="build-feature">' ;
-                                echo '<a target="_blank" href="'.$build_feature["model"]["link"].'">' ;
-                                echo  '<h3>'.$build_feature["model"]["title"].'</h3>' ;
-                                echo  '<img src="'.$build_feature["model"]["image"].'" />' ;
-                                echo "</a>" ;
-                                echo '</div>' ; } } }
-                    ?>
-                    </div>
-                </div>
-                <div class="pipe-history-block pipe-block">
-                    <h4 class="propertyTitle">Repository History:</h4>
-                    <?php
-                        if (isset($pageVars["data"]["repository"]["build_history"]) &&
-                            count($pageVars["data"]["repository"]["build_history"])>0 ) {
-                            foreach ($pageVars["data"]["repository"]["build_history"] as $build_history) {
-                                if ($moduleInfo["hidden"] != true) {
-                                    echo '<p><a href="/index.php?control=RepositoryConfigure&action=show&item=">'.$build_history["count"].
-                                        ' - '.$build_history["status"].' - '.$build_history["message"]."</p>"; } } }
-                    ?>
-                </div>
-
-               <hr>
-                <p class="text-center">
-                Visit <a href="http://www.pharaohtools.com">www.pharaohtools.com</a> for more
-            </p>
             </div>
 
         </div>

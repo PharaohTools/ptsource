@@ -54,10 +54,30 @@ class CommitDetailsAllOS extends Base {
         return $r ;
     }
 
-    public function deleteRepository() {
-        $repositoryFactory = new \Model\Repository() ;
-        $repository = $repositoryFactory->getModel($this->params);
-        return $repository->deleteRepository($this->params["item"]);
+    public function userIsAllowedAccess() {
+        $user = $this->getLoggedInUser() ;
+        $settings = $this->getSettings() ;
+        if (!isset($settings["RepositoryScope"]["enable_public"]) ||
+            ( isset($settings["RepositoryScope"]["enable_public"]) && $settings["RepositoryScope"]["enable_public"] != "on" )) {
+            // if enable public is set to off
+            if ($user == false) {
+                // and the user is not logged in
+                return false ; }
+            // if they are logged in continue on
+            return true ; }
+        else {
+            // if enable public is set to on
+            if ($user != false) {
+                // and the user is  logged in
+                return true ; }
+            else {
+                // and the user is not logged in
+                return true ; } }
+    }
+
+    protected function getSettings() {
+        $settings = \Model\AppConfig::getAppVariable("mod_config");
+        return $settings ;
     }
 
 }
