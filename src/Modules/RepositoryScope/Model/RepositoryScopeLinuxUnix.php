@@ -58,22 +58,46 @@ class RepositoryScopeLinuxUnix extends Base {
     // @todo need thee cron execution event to do this
     public function getEvents() {
         $ff = array(
-            "prepareBuild" => array(
-                "pollSCMChanges",
+            "getPublicLinks" => array(
+                "getPublicRepositories",
             ),
         );
         return $ff ;
     }
 
-    public function pollSCMChanges() {
-        $loggingFactory = new \Model\Logging();
+    public function getPublicRepositories() {
         $this->params["echo-log"] = true ;
         $this->params["php-log"] = true ;
-        $this->params["build-settings"] = $this->pipeline["settings"];
-        $this->params["app-settings"]["app_config"] = \Model\AppConfig::getAppVariable("app_config");
-        $this->params["app-settings"]["mod_config"] = \Model\AppConfig::getAppVariable("mod_config");
-        $this->lm = $loggingFactory->getModel($this->params);
+        $repositories = $this->getRepositories() ;
+        $public_repositories = array() ;
+//        var_dump("<pre>","reps:", $repositories, "</pre>") ;
+//        die() ;
+        foreach ($repositories as $repository_slug => $repository) {
+            if ($repository["settings"]["RepositoryScope"]["enabled"] == "on") {
+                if ($repository["settings"]["RepositoryScope"]["public_pages"] == "on") {
+                    $public_repositories[] = $repository ; } } }
+        $public_repositories_html = $this->getHTMLFromRepositories($public_repositories) ;
+        \Model\RegistryStore::setValue('public_links', $public_repositories_html) ;
+        return $public_repositories ;
     }
 
+    public function getRepositories() {
+        $repositoryFactory = new \Model\Repository() ;
+        $repository = $repositoryFactory->getModel($this->params);
+        $repos = $repository->getRepositories();
+        return $repos ;
+    }
 
+    public function getHTMLFromRepositories($public_repositories) {
+        $html = "" ;
+        $html .= "<h3>Public Repositories:</h3>" ;
+        foreach ($public_repositories as $public_repository) {
+            $html .= "<div>" ;
+            $html .= "    <a target='_blank' href='index.php?control=RepositoryHome&action=show&item={$public_repository["project-slug"]}' > " ;
+            $html .= "        {$public_repository["project-name"]} " ;
+            $html .= "    </a>" ;
+            $html .= "</div>" ;
+        }
+        return $html ;
+    }
 }
