@@ -86,7 +86,6 @@ class RepositoryHomeAllOS extends Base {
     }
 
     public function userIsAllowedAccess() {
-        $repository = $this->getRepository();
         $user = $this->getLoggedInUser() ;
         $settings = $this->getSettings() ;
         if (!isset($settings["RepositoryScope"]["enable_public"]) ||
