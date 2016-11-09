@@ -17,7 +17,22 @@ class CommitDetailsAllOS extends Base {
     public function getData() {
         $ret["repository"] = $this->getRepository();
         $ret["features"] = $this->getRepositoryFeatures();
+        $ret["user"] = $this->getLoggedInUser();
+        $ret["current_user_role"] = $this->getCurrentUserRole($ret["user"]);
         return $ret ;
+    }
+
+    protected function getLoggedInUser() {
+        $signupFactory = new \Model\Signup() ;
+        $signup = $signupFactory->getModel($this->params);
+        $this->params["user"] = $signup->getLoggedInUserData() ;
+        return $this->params["user"] ;
+    }
+
+    public function getCurrentUserRole($user = null) {
+        if ($user == null) { $user = $this->getLoggedInUser(); }
+        if ($user == false) { return false ; }
+        return $user->role ;
     }
 
     public function deleteData() {
