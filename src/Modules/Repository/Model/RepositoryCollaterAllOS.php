@@ -42,7 +42,9 @@ class RepositoryCollaterAllOS extends Base {
         else {
             $loggingFactory = new \Model\Logging() ;
             $logging = $loggingFactory->getModel($this->params) ;
-            $logging->log("No defaults file available in repository", $this->getModuleName()) ; }
+            // @todo this should be a warn log or something
+//            $logging->log("No defaults file available in repository", $this->getModuleName()) ;
+        }
         $defaults = $this->setDefaultSlugIfNeeded($defaults) ;
         return $defaults ;
     }
@@ -64,7 +66,9 @@ class RepositoryCollaterAllOS extends Base {
         else {
             $loggingFactory = new \Model\Logging() ;
             $logging = $loggingFactory->getModel($this->params) ;
-            $logging->log("No settings file available in repository ".$this->params["item"], $this->getModuleName()) ; }
+            // @todo this should be a warn log or something
+//            $logging->log("No settings file available in repository ".$this->params["item"], $this->getModuleName()) ;
+        }
         return array("settings" => $settings) ;
     }
 
