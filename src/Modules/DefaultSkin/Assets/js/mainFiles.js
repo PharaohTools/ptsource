@@ -1,0 +1,1 @@
+module.exports = ["/opt/ptsource/ptsource/src/Modules/DefaultSkin/Assets/php/main.phpfe","/opt/ptsource/ptsource/src/Modules/Signup/Assets/php/main.phpfe"];
