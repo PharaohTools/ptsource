@@ -87,6 +87,7 @@ class RepositoryHomeAllOS extends Base {
 
     public function userIsAllowedAccess() {
         $user = $this->getLoggedInUser() ;
+        $repository = $this->getRepository() ;
         $settings = $this->getSettings() ;
         if (!isset($settings["RepositoryScope"]["enable_public"]) ||
             ( isset($settings["RepositoryScope"]["enable_public"]) && $settings["RepositoryScope"]["enable_public"] != "on" )) {
@@ -98,12 +99,21 @@ class RepositoryHomeAllOS extends Base {
             return true ; }
         else {
             // if enable public is set to on
-            if ($user != false) {
-                // and the user is  logged in
-                return true ; }
-            else {
+            if ($user == false) {
                 // and the user is not logged in
-                return true ; } }
+                if ($repository["settings"]["RepositoryScope"]["enabled"] == "on" &&
+                    $repository["settings"]["RepositoryScope"]["public_pages"] == "on") {
+                    // if public pages are on
+                    return true ; }
+                else {
+                    // if no public pages are on
+                    return false ; } }
+            else {
+                // and the user is logged in
+                // @todo this is where repo specific perms go when ready
+                return true ;
+            }
+        }
     }
 
     protected function getSettings() {

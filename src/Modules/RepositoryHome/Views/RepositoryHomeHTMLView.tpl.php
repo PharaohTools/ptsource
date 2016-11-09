@@ -77,8 +77,8 @@
                 else {
                     $slugOrName = "Unnamed Project" ; }
 
-                if (isset($repositoryDetails["project-description"])) {
-                    $slugOrDescription = $repositoryDetails["project-description"] ; }
+                if (isset($pageVars["data"]["repository"]["project-description"])) {
+                    $slugOrDescription = $pageVars["data"]["repository"]["project-description"] ; }
                 else {
                     $slugOrDescription = "No Description configured for Project" ; }
 
@@ -129,7 +129,7 @@
                     </div>
 
                         <?php }
-                        if ($pageVars["data"]["repository"]["settings"]["RepositoryScope"]["public_writes"] == "on") {?>
+                        if ($pageVars["data"]["repository"]["settings"]["RepositoryScope"]["public_write"] == "on") {?>
                             <div class="col-sm-3">
                                 <span class="btn btn-success">Write Enabled</span>
                             </div>
