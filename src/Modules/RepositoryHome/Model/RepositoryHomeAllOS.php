@@ -77,4 +77,46 @@ class RepositoryHomeAllOS extends Base {
         return $repository->deleteRepository($this->params["item"]);
     }
 
+    public function userIsAllowedAccess() {
+        $repository = $this->getRepository();
+        $user = $this->getLoggedInUser() ;
+
+        $settings = $this->getSettings() ;
+        if (!isset($settings["RepositoryScope"]["enable_public"]) ||
+            ( isset($settings["RepositoryScope"]["enable_public"]) && $settings["RepositoryScope"]["enable_public"]=="off" )) {
+            // if enable public is set to off
+            if ($user == false) {
+                // and the user is not logged in
+                return false ; }
+            // if they are logged in continue on
+        }
+        else {
+            // if enable public is set to on
+            if ($user == false) {
+                // and the user is not logged in
+                if ($repository["repository_public_scope_enabled"] == "on" && $repository["repository_public_home_enabled"] == "on") {
+                    return true ; }
+                else {
+                    // and the user is not logged in
+                    return false ; } } }
+        if (isset($settings["Signup"]["signup_enabled"]) && $settings["Signup"]["signup_enabled"]=="on") {
+            if ($user==false) { return false; }
+            if ($user->role == 1) { return true ; }
+
+            // @todo anyone logged in can read or write currently, update this when adding repo based perms
+            return true ;
+//            if ($repository["repository_creator"] == $user->username) { return true ; }
+//            if (strpos($repository["repository_members"], $user->username.',') !== false) { return true ; }
+//            if (strpos($repository["repository_members"], ','.$user->username) !== false) { return true ; }
+//            return false ;
+        }
+        // should never get here i think but be safe
+        return false ;
+    }
+
+    protected function getSettings() {
+        $settings = \Model\AppConfig::getAppVariable("mod_config");
+        return $settings ;
+    }
+
 }
