@@ -412,15 +412,4 @@
 
 </div>
 
-<script type="text/javascript" src="/Assets/Modules/SourceHome/js/sourcehome.js"></script>
 <link rel="stylesheet" type="text/css" href="/Assets/Modules/SourceHome/css/sourcehome.css">
-
-<script type="text/javascript">
-    $( document ).ready(function() {
-        console.log( "ready!" );
-        loadAllIssueCount();
-        loadWatchingIssueCount();
-        loadAssignedIssueCount();
-        loadSubmittedIssueCount();
-    });
-</script>
