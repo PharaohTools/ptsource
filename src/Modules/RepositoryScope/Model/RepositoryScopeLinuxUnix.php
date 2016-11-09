@@ -90,7 +90,7 @@ class RepositoryScopeLinuxUnix extends Base {
 
     public function getHTMLFromRepositories($public_repositories) {
         $html = "" ;
-        $html .= "<h3>Public Repositories:</h3>" ;
+        $html .= "<h3><strong>Public Repositories:</strong></h3>" ;
         foreach ($public_repositories as $public_repository) {
             $html .= "<div>" ;
             $html .= "    <a target='_blank' href='index.php?control=RepositoryHome&action=show&item={$public_repository["project-slug"]}' > " ;
