@@ -89,8 +89,6 @@
                 <p> Project Slug: <?php echo $pageVars["data"]["repository"]["project-slug"] ; ?></p>
                 <p> Project Desc: <?php echo $slugOrDescription ; ?></p>
             </div>
-                <hr />
-                <h3 class="propertyTitle">Clone, Push or Pull:</h3>
                 <?php
 
                 $ht_string = ($pageVars["data"]["is_https"] == true) ? 'HTTPS' : 'HTTP' ;
@@ -102,6 +100,8 @@
                     if (isset($pageVars["data"]["user"]->username)) {
                         ?>
 
+                        <hr />
+                        <h3 class="propertyTitle">Clone, Push or Pull:</h3>
                         <div class="col-sm-10">
                             <h4><?php echo $ht_string ; ?>: <?php echo "{$ht_string_lower}://{$pageVars["data"]["user"]->username}:{password}@{$_SERVER["SERVER_NAME"]}/git/public/{$pageVars["data"]["repository"]["project-slug"]} "  ; ?></h4>
                         </div>
@@ -111,14 +111,18 @@
                     
                     <?php                        
                     }
+                    else {
                     ?>
                     
                 </div>
                 <div class="row">
                     <?php
 
-                    if ($pageVars["data"]["repository"]["settings"]["RepositoryScope"]["enable"] == "on") {
-                        if ($pageVars["data"]["repository"]["settings"]["RepositoryScope"]["public_reads"] == "on") {?>
+                    if ($pageVars["data"]["repository"]["settings"]["RepositoryScope"]["enabled"] == "on") {
+                        if ($pageVars["data"]["repository"]["settings"]["RepositoryScope"]["public_read"] == "on") {?>
+
+                    <hr />
+                    <h3 class="propertyTitle">Clone, Push or Pull:</h3>
 
                     <div class="col-sm-10">
                         <h4><?php echo $ht_string ; ?>: <?php echo "{$ht_string_lower}://anon:any@{$_SERVER["SERVER_NAME"]}/git/public/{$pageVars["data"]["repository"]["project-slug"]} "  ; ?></h4>
@@ -126,13 +130,15 @@
 
                         <?php }
                         if ($pageVars["data"]["repository"]["settings"]["RepositoryScope"]["public_writes"] == "on") {?>
-
                             <div class="col-sm-3">
                                 <span class="btn btn-success">Write Enabled</span>
                             </div>
-
-                        <?php }
-                    }
+                        <?php } else ?>
+                            <div class="col-sm-3">
+                                <span class="btn btn-danger">Write Disabled</span>
+                            </div>
+                        <?php
+                            } }
                     ?></div>
 
                 <hr />
