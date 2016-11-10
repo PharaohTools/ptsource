@@ -118,8 +118,8 @@
                 <div class="row">
                     <?php
 
-                    if ($pageVars["data"]["repository"]["settings"]["RepositoryScope"]["enabled"] == "on") {
-                        if ($pageVars["data"]["repository"]["settings"]["RepositoryScope"]["public_read"] == "on") {?>
+                    if ($pageVars["data"]["repository"]["settings"]["PublicScope"]["enabled"] == "on") {
+                        if ($pageVars["data"]["repository"]["settings"]["PublicScope"]["public_read"] == "on") {?>
 
                     <hr />
                     <h3 class="propertyTitle">Clone, Push or Pull:</h3>
@@ -129,7 +129,7 @@
                     </div>
 
                         <?php }
-                        if ($pageVars["data"]["repository"]["settings"]["RepositoryScope"]["public_write"] == "on") {?>
+                        if ($pageVars["data"]["repository"]["settings"]["PublicScope"]["public_write"] == "on") {?>
                             <div class="col-sm-3">
                                 <span class="btn btn-success">Write Enabled</span>
                             </div>

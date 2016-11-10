@@ -221,10 +221,10 @@ class GitServerAllOS extends Base {
 //        var_dump($repo_name, $thisRepo);
 //        $res = ob_get_clean();
 //        error_log($res) ;
-        $public_enabled = (isset($thisRepo["settings"]["RepositoryScope"]["enabled"]) && $thisRepo["settings"]["RepositoryScope"]["enabled"]=="on") ? true : false ;
+        $public_enabled = (isset($thisRepo["settings"]["PublicScope"]["enabled"]) && $thisRepo["settings"]["PublicScope"]["enabled"]=="on") ? true : false ;
         if ($public_enabled == false) { return false ; }
         if ($type == "read" || $type == "write") {
-            $is_allowed = (isset($thisRepo["settings"]["RepositoryScope"]["public_{$type}"]) && $thisRepo["settings"]["RepositoryScope"]["public_{$type}"]=="on") ? true : false ;
+            $is_allowed = (isset($thisRepo["settings"]["PublicScope"]["public_{$type}"]) && $thisRepo["settings"]["PublicScope"]["public_{$type}"]=="on") ? true : false ;
             return $is_allowed ; }
         return false ;
     }

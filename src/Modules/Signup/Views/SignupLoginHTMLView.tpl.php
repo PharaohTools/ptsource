@@ -137,9 +137,9 @@
 
 
                                 <?php
-                                    if (!isset($pageVars["data"]["settings"]["RepositoryScope"]["disable_public"]) ||
-                                        (isset($pageVars["data"]["settings"]["RepositoryScope"]["disable_public"]) &&
-                                        $pageVars["data"]["settings"]["RepositoryScope"]["disable_public"] != "on")) {
+                                    if (!isset($pageVars["data"]["settings"]["PublicScope"]["disable_public"]) ||
+                                        (isset($pageVars["data"]["settings"]["PublicScope"]["disable_public"]) &&
+                                        $pageVars["data"]["settings"]["PublicScope"]["disable_public"] != "on")) {
                                 ?>
                                     <div id="public_links" class="public_links">
                                         <?php

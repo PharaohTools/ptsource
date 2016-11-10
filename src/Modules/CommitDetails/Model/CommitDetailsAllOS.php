@@ -57,8 +57,8 @@ class CommitDetailsAllOS extends Base {
     public function userIsAllowedAccess() {
         $user = $this->getLoggedInUser() ;
         $settings = $this->getSettings() ;
-        if (!isset($settings["RepositoryScope"]["enable_public"]) ||
-            ( isset($settings["RepositoryScope"]["enable_public"]) && $settings["RepositoryScope"]["enable_public"] != "on" )) {
+        if (!isset($settings["PublicScope"]["enable_public"]) ||
+            ( isset($settings["PublicScope"]["enable_public"]) && $settings["PublicScope"]["enable_public"] != "on" )) {
             // if enable public is set to off
             if ($user == false) {
                 // and the user is not logged in

@@ -89,8 +89,8 @@ class RepositoryHomeAllOS extends Base {
         $user = $this->getLoggedInUser() ;
         $repository = $this->getRepository() ;
         $settings = $this->getSettings() ;
-        if (!isset($settings["RepositoryScope"]["enable_public"]) ||
-            ( isset($settings["RepositoryScope"]["enable_public"]) && $settings["RepositoryScope"]["enable_public"] != "on" )) {
+        if (!isset($settings["PublicScope"]["enable_public"]) ||
+            ( isset($settings["PublicScope"]["enable_public"]) && $settings["PublicScope"]["enable_public"] != "on" )) {
             // if enable public is set to off
             if ($user == false) {
                 // and the user is not logged in
@@ -101,8 +101,8 @@ class RepositoryHomeAllOS extends Base {
             // if enable public is set to on
             if ($user == false) {
                 // and the user is not logged in
-                if ($repository["settings"]["RepositoryScope"]["enabled"] == "on" &&
-                    $repository["settings"]["RepositoryScope"]["public_pages"] == "on") {
+                if ($repository["settings"]["PublicScope"]["enabled"] == "on" &&
+                    $repository["settings"]["PublicScope"]["public_pages"] == "on") {
                     // if public pages are on
                     return true ; }
                 else {
