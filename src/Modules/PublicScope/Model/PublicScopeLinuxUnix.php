@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class RepositoryScopeLinuxUnix extends Base {
+class PublicScopeLinuxUnix extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -14,9 +14,6 @@ class RepositoryScopeLinuxUnix extends Base {
     // Model Group
     public $modelGroup = array("Default") ;
 
-    private $lm ;
-    private $pipeline ;
-
     public function getSettingTypes() {
         return array_keys($this->getSettingFormFields());
     }
@@ -27,7 +24,7 @@ class RepositoryScopeLinuxUnix extends Base {
             array(
                 "type" => "boolean",
                 "optional" => true,
-                "name" => "Enable Public Scope for Repository?"
+                "name" => "Enable Public Scope for Repositories?"
             ),
             "public_pages" =>
             array(
@@ -73,8 +70,8 @@ class RepositoryScopeLinuxUnix extends Base {
 //        var_dump("<pre>","reps:", $repositories, "</pre>") ;
 //        die() ;
         foreach ($repositories as $repository_slug => $repository) {
-            if ($repository["settings"]["RepositoryScope"]["enabled"] == "on") {
-                if ($repository["settings"]["RepositoryScope"]["public_pages"] == "on") {
+            if ($repository["settings"]["PublicScope"]["enabled"] == "on") {
+                if ($repository["settings"]["PublicScope"]["public_pages"] == "on") {
                     $public_repositories[] = $repository ; } } }
         $public_repositories_html = $this->getHTMLFromRepositories($public_repositories) ;
         \Model\RegistryStore::setValue('public_links', $public_repositories_html) ;

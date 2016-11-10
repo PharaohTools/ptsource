@@ -2,7 +2,7 @@
 
 Namespace Controller ;
 
-class RepositoryScope extends Base {
+class PublicScope extends Base {
 
     public function execute($pageVars) {
 
@@ -16,7 +16,7 @@ class RepositoryScope extends Base {
             $this->content["helpData"] = $helpModel->getHelpData($pageVars["route"]["control"]);
             return array ("type"=>"view", "view"=>"help", "pageVars"=>$this->content); }
 
-        $this->content["messages"][] = "Help is the only valid RepositoryScope Action";
+        $this->content["messages"][] = "Help is the only valid PublicScope Action";
         return array ("type"=>"control", "control"=>"index", "pageVars"=>$this->content);
 
     }

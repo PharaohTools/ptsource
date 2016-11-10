@@ -2,6 +2,6 @@
 
 Namespace Model;
 
-class RepositoryScope extends BaseModelFactory {
+class PublicScope extends BaseModelFactory {
 
 }
