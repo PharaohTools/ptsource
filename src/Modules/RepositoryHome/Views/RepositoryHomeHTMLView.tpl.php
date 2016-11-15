@@ -119,27 +119,47 @@
                     <?php
 
                     if ($pageVars["data"]["repository"]["settings"]["PublicScope"]["enabled"] == "on") {
-                        if ($pageVars["data"]["repository"]["settings"]["PublicScope"]["public_read"] == "on") {?>
+                        if ($pageVars["data"]["repository"]["settings"]["PublicScope"]["public_read"] == "on") { ?>
 
                     <hr />
-                    <h3 class="propertyTitle">Clone, Push or Pull:</h3>
 
-                    <div class="col-sm-10">
-                        <h4><?php echo $ht_string ; ?>: <?php echo "{$ht_string_lower}://anon:any@{$_SERVER["SERVER_NAME"]}/git/public/{$pageVars["data"]["repository"]["project-slug"]} "  ; ?></h4>
+                    <?php
+
+                    if (in_array($pageVars["data"]["current_user_role"], array("1", "2")) ||
+                        $pageVars["data"]["repository"]["settings"]["PublicScope"]["public_write"] == "on") { ?>
+                    <div class="col-sm-12">
+                        <div class="col-sm-4">
+                            <span id="select_clone" class="centered_button select_git_command btn btn-success">Clone</span>
+                        </div>
+                        <div class="col-sm-4">
+                            <span id="select_push" class="centered_button select_git_command btn btn-warning">Push</span>
+                        </div>
+                        <div class="col-sm-4">
+                            <span id="select_pull" class="centered_button select_git_command btn btn-warning">Pull</span>
+                        </div>
                     </div>
 
-                        <?php }
-                        if ($pageVars["data"]["repository"]["settings"]["PublicScope"]["public_write"] == "on") {?>
-                            <div class="col-sm-3">
-                                <span class="btn btn-success">Write Enabled</span>
-                            </div>
-                        <?php } else ?>
-                            <div class="col-sm-3">
-                                <span class="btn btn-danger">Write Disabled</span>
-                            </div>
+                    <?php } ?>
+
+                    <div class="col-sm-12">
+                        <h2 class="git_command_text"><strong id="git_command_string">git clone</strong> <?php echo "{$ht_string_lower}://anon:any@{$_SERVER["SERVER_NAME"]}/git/public/{$pageVars["data"]["repository"]["project-slug"]} "  ; ?></h2>
+                    </div>
+
+                        <?php } ?>
+                    <div class="col-sm-12">
+
                         <?php
-                            } }
-                    ?></div>
+
+                        if (in_array($pageVars["data"]["current_user_role"], array("1", "2")) ||
+                            $pageVars["data"]["repository"]["settings"]["PublicScope"]["public_write"] == "on") {?>
+                                <span class="col-sm-3 centered_button btn btn-success">Write Enabled</span>
+                        <?php } else ?>
+                                <span class="col-sm-3 centered_button btn btn-danger">Write Disabled</span>
+                        <?php } } ?>
+                    </div>
+
+
+                </div>
 
                 <hr />
             <div class="row clearfix no-margin build-home-properties">
@@ -220,4 +240,3 @@
 </div>
 <link rel="stylesheet" type="text/css" href="/Assets/Modules/RepositoryHome/css/repositoryhome.css">
 <link rel="stylesheet" type="text/css" href="/Assets/Modules/RepositoryHistory/css/repositoryhistory.css">
-<script type="text/javascript" src="/Assets/Modules/RepositoryHome/js/repositoryhome.js"></script>
