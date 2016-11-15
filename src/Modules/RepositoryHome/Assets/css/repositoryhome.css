@@ -55,3 +55,14 @@
 .current_status_unknown {
     background-color: darkgray;
 }
+
+.git_command_text {
+    text-align: center ;
+    font-size: 180%;
+}
+
+.centered_button {
+    float: none;
+    display: block;
+    margin: 0 auto;
+}

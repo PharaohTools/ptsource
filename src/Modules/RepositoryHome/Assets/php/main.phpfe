@@ -1,37 +1,47 @@
 <?php
 
-js::jQuery("#select_clone").on("click", function() {
-    RepositoryHomeFE::activate_select_clone() ;
+$jq = \js_core::$jQuery ;
+$jq("#select_clone")->on("click", function() {
+    \RepositoryHomeFE::activate_select_clone() ;
 }) ;
 
-js::jQuery("#select_push").on("click", function() {
-    RepositoryHomeFE::activate_select_push() ;
+$jq("#select_push")->on("click", function() {
+    \RepositoryHomeFE::activate_select_push() ;
 }) ;
 
-js::jQuery("#select_pull").on("click", function() {
-    RepositoryHomeFE::activate_select_pull() ;
+$jq("#select_pull")->on("click", function() {
+    \RepositoryHomeFE::activate_select_pull() ;
 }) ;
 
 class RepositoryHomeFE {
 
     public static function activate_select_clone() {
-        js::jQuery(".select_git_command").css('background-colour', 'white') ;
-        js::jQuery("#select_clone").css('background-colour', 'green') ;
-        js::jQuery("#git_command_string").html('git clone') ;
-        return ;
+        $jq = \js_core::$jQuery ;
+        $jq(".select_git_command")->removeClass('btn-success') ;
+        $jq(".select_git_command")->addClass('btn-warning') ;
+        $jq("#select_clone")->removeClass('btn-warning') ;
+        $jq("#select_clone")->addClass('btn-success') ;
+        $jq("#git_command_string")->html('git clone') ;
+        return true;
     }
 
     public static function activate_select_push() {
-        js::jQuery(".select_git_command").css('background-colour', 'white') ;
-        js::jQuery("#select_push").css('background-colour', 'green') ;
-        js::jQuery("#git_command_string").html('git push') ;
+        $jq = \js_core::$jQuery ;
+        $jq(".select_git_command")->removeClass('btn-success') ;
+        $jq(".select_git_command")->addClass('btn-warning') ;
+        $jq("#select_push")->removeClass('btn-warning') ;
+        $jq("#select_push")->addClass('btn-success') ;
+        $jq("#git_command_string")->html('git push') ;
         return ;
     }
 
     public static function activate_select_pull() {
-        js::jQuery(".select_git_command").css('background-colour', 'white') ;
-        js::jQuery("#select_pull").css('background-colour', 'green') ;
-        js::jQuery("#git_command_string").html('git pull') ;
+        $jq = \js_core::$jQuery ;
+        $jq(".select_git_command")->removeClass('btn-success') ;
+        $jq(".select_git_command")->addClass('btn-warning') ;
+        $jq("#select_pull")->removeClass('btn-warning') ;
+        $jq("#select_pull")->addClass('btn-success') ;
+        $jq("#git_command_string")->html('git pull') ;
         return ;
     }
 

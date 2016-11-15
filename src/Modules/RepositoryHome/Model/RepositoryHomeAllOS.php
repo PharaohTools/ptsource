@@ -21,6 +21,7 @@ class RepositoryHomeAllOS extends Base {
         $ret["is_https"] = $this->isSecure();
         $ret["user"] = $this->getLoggedInUser();
         $ret["current_user_role"] = $this->getCurrentUserRole($ret["user"]);
+        $ret["readme"] = $this->getReadmeData() ;
         $ret = array_merge($ret, $this->getIdentifier()) ;
         return $ret ;
     }
@@ -45,6 +46,13 @@ class RepositoryHomeAllOS extends Base {
     }
 
     protected function getRepository() {
+        $repositoryFactory = new \Model\Repository() ;
+        $repository = $repositoryFactory->getModel($this->params);
+        $r = $repository->getRepository($this->params["item"]);
+        return $r ;
+    }
+
+    protected function getReadmeData() {
         $repositoryFactory = new \Model\Repository() ;
         $repository = $repositoryFactory->getModel($this->params);
         $r = $repository->getRepository($this->params["item"]);
