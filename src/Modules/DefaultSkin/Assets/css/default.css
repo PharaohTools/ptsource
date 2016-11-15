@@ -97,3 +97,9 @@ div.well h2.text-uppercase {
 h3.title_username {
     color: white ;
 }
+
+.fullRow {
+    display: block;
+    width: 100%;
+    float: left;
+}
