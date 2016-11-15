@@ -21,7 +21,7 @@ class RepositoryHomeAllOS extends Base {
         $ret["is_https"] = $this->isSecure();
         $ret["user"] = $this->getLoggedInUser();
         $ret["current_user_role"] = $this->getCurrentUserRole($ret["user"]);
-        $ret["readme"] = $this->getReadmeData() ;
+        $ret["readme"] = $this->getReadmeData($ret["repository"]) ;
         $ret = array_merge($ret, $this->getIdentifier()) ;
         return $ret ;
     }
@@ -52,11 +52,35 @@ class RepositoryHomeAllOS extends Base {
         return $r ;
     }
 
-    protected function getReadmeData() {
-        $repositoryFactory = new \Model\Repository() ;
-        $repository = $repositoryFactory->getModel($this->params);
-        $r = $repository->getRepository($this->params["item"]);
-        return $r ;
+    protected function getReadmeData($repository) {
+        $identifier = 'HEAD' ;
+        $cur_dir = getcwd() ;
+        chdir(REPODIR.DS.$repository["project-slug"]) ;
+        $command = 'git ls-tree --full-tree '.$identifier ;
+        exec($command, $output) ;
+        $files = $this->parseLSTree($output) ;
+        if (in_array("README.md", $files)) { $load_readme_res = true ; }
+        else { $load_readme_res = false ; }
+        if ($load_readme_res == false) {
+            $rd_res["exists"] = false ; }
+        else {
+            $rd_res["exists"] = true ;
+            $command = 'git show '.$identifier.':README.md ' ;
+            $rd_res["raw"] = shell_exec($command) ;
+            require_once(dirname(__DIR__).DS."Libraries".DS."parsedown".DS."Parsedown.php") ;
+            $Parsedown = new \Parsedown();
+            $rd_res["md"] = $Parsedown->text($rd_res["raw"]); }
+        chdir($cur_dir);
+        return $rd_res ;
+    }
+
+    protected function parseLSTree($output) {
+        $files = array() ;
+        foreach ($output as $line) {
+            $parts = explode(' ', $line) ;
+            $further_parts = explode("\t", $parts[2]) ;
+            $files[] = $further_parts[1] ; }
+        return $files ;
     }
 
     public function getIdentifier() {
