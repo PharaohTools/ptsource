@@ -26,10 +26,10 @@ class AssetPublisherLinuxUnix extends Base {
     }
 
     public function publishAssets() {
-        $r1 = $this->generatePHPToJS() ;
-        if ($r1 == false) { return false ; }
         $r2 = $this->copyToPublicDirectory() ;
         if ($r2 == false) { return false ; }
+        $r1 = $this->generatePHPToJS() ;
+        if ($r1 == false) { return false ; }
         return true ;
     }
 
@@ -81,7 +81,9 @@ class AssetPublisherLinuxUnix extends Base {
                 $logging->log("Copying Assets to Web server readable directory", $this->getModuleName()) ;
                 $comm = "cp -r $modAssets".DS."* $modPublicAssetDir" ;
                 $statuses[] = $this->executeAndGetReturnCode($comm); } }
-        if (in_array(false, $statuses)) { return false; }
+//        var_dump($statuses) ;
+        if (count(array_unique($statuses)) === 1 && in_array(0, $statuses) === 'true') {
+            return true ; }
         return true ;
     }
 
