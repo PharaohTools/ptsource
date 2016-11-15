@@ -24,24 +24,25 @@ class View {
     }
 
     private function outFormOverrideParam($viewVars) {
-        for ($i = 0; $i<count($viewVars["route"]["extraParams"]); $i++) {
-            if (isset($viewVars["route"]["extraParams"][$i])) {
-                $stp = strpos($viewVars["route"]["extraParams"][$i], '--output-format=') ;
-                if (is_int($stp) && isset($viewVars["output-format"])) {
-                    $viewVars["params"]["output-format"] = $viewVars["output-format"] ;
-                    $viewVars["route"]["extraParams"][$i] = '--output-format='.$viewVars["output-format"] ; } } }
+        if (isset($viewVars["route"])) {
+            for ($i = 0; $i<count($viewVars["route"]["extraParams"]); $i++) {
+                if (isset($viewVars["route"]["extraParams"][$i])) {
+                    $stp = strpos($viewVars["route"]["extraParams"][$i], '--output-format=') ;
+                    if (is_int($stp) && isset($viewVars["output-format"])) {
+                        $viewVars["params"]["output-format"] = $viewVars["output-format"] ;
+                        $viewVars["route"]["extraParams"][$i] = '--output-format='.$viewVars["output-format"] ; } } } }
         return $viewVars ;
     }
 
-  public function loadLayout ($layout, $templateData, Array $pageVars) {
-      ob_start();
-      $viewFileName = ucfirst($layout)."Layout.tpl.php";
-      if ($this->loadViewFile($viewFileName, $pageVars, $templateData) == true) {
-          return ob_get_clean(); }
-      else {
-          // @todo no! dont die
-          die ("View Layout Not Found\n"); }
-  }
+    public function loadLayout ($layout, $templateData, Array $pageVars) {
+        ob_start();
+        $viewFileName = ucfirst($layout)."Layout.tpl.php";
+        if ($this->loadViewFile($viewFileName, $pageVars, $templateData) == true) {
+            return ob_get_clean(); }
+        else {
+            // @todo no! dont die
+            die ("View Layout Not Found\n"); }
+    }
 
   public function loadTemplate ($view, Array $pageVars) {
     ob_start();
@@ -53,7 +54,7 @@ class View {
     $viewFileName = ucfirst($view).$outputFormat."View.tpl.php";
     if ($this->loadViewFile($viewFileName, $pageVars) == true) {
         return ob_get_clean(); }
-    else if (substr($viewFileName, strlen($viewFileName)-16, 16) =="AUTOView.tpl.php" && $this->loadViewFile("DefaultAUTOView.tpl.php", $pageVars) == true) {
+    else if (substr($viewFileName, strlen($viewFileName)-16, 16) == "AUTOView.tpl.php" && $this->loadViewFile("DefaultAUTOView.tpl.php", $pageVars) == true) {
         return ob_get_clean(); }
     else {
         // @todo no! dont die
@@ -146,10 +147,7 @@ class View {
                             // @todo logging with this
                             \Core\BootStrap::setExitCode(1);
                             return false ; }
-                        return true; } } }
-
-        }
-    }
+                        return true; } } } } }
     return false;
   }
 
