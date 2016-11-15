@@ -15,7 +15,7 @@ var $ = require('jquery'),
 
 var file_require_string = "" ;
 mainFiles.forEach(function (filePath) {
-    filePath = filePath.replace("/opt/pttrack/pttrack/src/Modules/", "../../");
+    filePath = filePath.replace("/opt/ptsource/ptsource/src/Modules/", "../../");
     file_require_string += 'require("'+filePath+'") ; ';
 });
 
