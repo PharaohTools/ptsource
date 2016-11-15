@@ -214,12 +214,14 @@
                         </div>
                 </div>
                 <div class="fullRow">
+                    <hr />
                     <div class="pipe-history-block pipe-block">
                         <?php
 
                         if (isset($pageVars["data"]["readme"]["exists"]) && $pageVars["data"]["readme"]["exists"] == true) {
                             ?>
 
+                            <h4 class="propertyTitle">Readme:</h4>
                             <?php
                                 if (isset($pageVars["data"]["readme"]["md"])) { echo $pageVars["data"]["readme"]["md"] ; }
                                 else if (isset($pageVars["data"]["readme"]["raw"])) { echo $pageVars["data"]["readme"]["raw"] ; }
