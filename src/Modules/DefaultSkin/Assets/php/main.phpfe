@@ -1,3 +1,17 @@
 <?php
 
 $console->log("PHPFE Started") ;
+$js::jQuery = $jQuery ;
+$js::console = $console ;
+$js::window = $window ;
+$js::Math = $Math ;
+$console->log("js class inititialized") ;
+
+class js {
+
+    public static $jQuery ;
+    public static $console ;
+    public static $window ;
+    public static $Math ;
+
+}
