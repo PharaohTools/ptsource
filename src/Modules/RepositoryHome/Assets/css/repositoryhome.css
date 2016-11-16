@@ -66,3 +66,7 @@
     display: block;
     margin: 0 auto;
 }
+
+.readme_display {
+    background-color: white;
+}
