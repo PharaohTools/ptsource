@@ -1,22 +1,8 @@
-# behat.yml
 default:
-    paths:
-        features: features
-        bootstrap: %behat.paths.features%/bootstrap
-    extensions:
-        Behat\MinkExtension\Extension:
-            default_session: selenium2
-            base_url:  'http://www.wordpress-phlagrant.vm'
-            selenium2:
-                browser: chrome
-                wd_host: 127.0.0.1:4444/wd/hub
-                capabilities: {"browser": "chrome"}
-firefox-local:
-    extensions:
-        Behat\MinkExtension\Extension:
-            default_session: selenium2
-            base_url:  'http://www.wordpress-phlagrant.vm'
-            selenium2:
-                browser: firefox
-                wd_host: 127.0.0.1:4444/wd/hub
-                capabilities: {"browser": "firefox"}
+    autoload:
+        '' : %paths.base%/bootstrap
+        '' : %paths.base%/../../../.../src/Modules/*/Tests/behat/bootstrap
+    suites:
+        core_features:
+            paths: [ %paths.base%/features,%paths.base%/../../../.../src/Modules/*/Tests/behat/features ]
+            contexts: [ FeatureContext,AnyModuleActionsContext,NoActionsContext ]
