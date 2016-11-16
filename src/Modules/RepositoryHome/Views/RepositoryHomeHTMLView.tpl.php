@@ -222,11 +222,13 @@
                             ?>
 
                             <h4 class="propertyTitle">Readme:</h4>
-                            <?php
+                            <div class="readme_display">
+                                <?php
                                 if (isset($pageVars["data"]["readme"]["md"])) { echo $pageVars["data"]["readme"]["md"] ; }
                                 else if (isset($pageVars["data"]["readme"]["raw"])) { echo $pageVars["data"]["readme"]["raw"] ; }
                                 else { echo "Readme Reports that it exists but left no data." ;  }
-                            ?>
+                                ?>
+                            </div>
 
                         <?php } else { ?>
                             <h4 class="propertyTitle">Readme:</h4>
