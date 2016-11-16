@@ -94,52 +94,61 @@
                 $ht_string = ($pageVars["data"]["is_https"] == true) ? 'HTTPS' : 'HTTP' ;
                 $ht_string_lower = strtolower($ht_string) ;
                 ?>
-                <div class="row">
                     
                     <?php
                     if (isset($pageVars["data"]["user"]->username)) {
-                        ?>
 
-                        <hr />
-                        <h3 class="propertyTitle">Clone, Push or Pull:</h3>
-                        <div class="col-sm-10">
-                            <h4><?php echo $ht_string ; ?>: <?php echo "{$ht_string_lower}://{$pageVars["data"]["user"]->username}:{password}@{$_SERVER["SERVER_NAME"]}/git/public/{$pageVars["data"]["repository"]["project-slug"]} "  ; ?></h4>
+                        ?>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <hr />
+                            <div class="col-sm-4">
+                                <span id="select_clone" class="centered_button select_git_command btn btn-success">Clone</span>
+                            </div>
+                            <div class="col-sm-4">
+                                <span id="select_push" class="centered_button select_git_command btn btn-warning">Push</span>
+                            </div>
+                            <div class="col-sm-4">
+                                <span id="select_pull" class="centered_button select_git_command btn btn-warning">Pull</span>
+                            </div>
                         </div>
-                        <div class="col-sm-2">
-                            <span class="btn btn-success">Write Enabled</span>
+                        <div class="col-sm-12">
+                            <h2 class="git_command_text"><strong id="git_command_string">git clone</strong> <?php echo "{$ht_string_lower}://{$pageVars["data"]["user"]->username}:{password}@{$_SERVER["SERVER_NAME"]}/git/public/{$pageVars["data"]["repository"]["project-slug"]} "  ; ?></h2>
                         </div>
-                    
+                        <div class="col-sm-12">
+                            <span class="col-sm-3 centered_button btn btn-success">Write Enabled</span>
+                        </div>
+                    </div>
                     <?php                        
                     }
                     else {
                     ?>
-                    
-                </div>
+
                 <div class="row">
-                    <?php
-
-                    if ($pageVars["data"]["repository"]["settings"]["PublicScope"]["enabled"] == "on") {
-                        if ($pageVars["data"]["repository"]["settings"]["PublicScope"]["public_read"] == "on") { ?>
-
-                    <hr />
-
-                    <?php
-
-                    if (in_array($pageVars["data"]["current_user_role"], array("1", "2")) ||
-                        $pageVars["data"]["repository"]["settings"]["PublicScope"]["public_write"] == "on") { ?>
                     <div class="col-sm-12">
+                        <hr />
+                        <?php
+
+                        if ($pageVars["data"]["repository"]["settings"]["PublicScope"]["enabled"] == "on") {
+                            if ($pageVars["data"]["repository"]["settings"]["PublicScope"]["public_read"] == "on") { ?>
+
                         <div class="col-sm-4">
                             <span id="select_clone" class="centered_button select_git_command btn btn-success">Clone</span>
                         </div>
-                        <div class="col-sm-4">
-                            <span id="select_push" class="centered_button select_git_command btn btn-warning">Push</span>
-                        </div>
-                        <div class="col-sm-4">
-                            <span id="select_pull" class="centered_button select_git_command btn btn-warning">Pull</span>
-                        </div>
-                    </div>
 
-                    <?php } ?>
+                        <?php
+
+                        if (in_array($pageVars["data"]["current_user_role"], array("1", "2")) ||
+                            $pageVars["data"]["repository"]["settings"]["PublicScope"]["public_write"] == "on") { ?>
+                            <div class="col-sm-4">
+                                <span id="select_push" class="centered_button select_git_command btn btn-warning">Push</span>
+                            </div>
+                            <div class="col-sm-4">
+                                <span id="select_pull" class="centered_button select_git_command btn btn-warning">Pull</span>
+                            </div>
+
+                        <?php } ?>
+                    </div>
 
                     <div class="col-sm-12">
                         <h2 class="git_command_text"><strong id="git_command_string">git clone</strong> <?php echo "{$ht_string_lower}://anon:any@{$_SERVER["SERVER_NAME"]}/git/public/{$pageVars["data"]["repository"]["project-slug"]} "  ; ?></h2>
@@ -155,11 +164,13 @@
                                 <span class="col-sm-3 centered_button btn btn-success">Write Enabled</span>
                         <?php } else ?>
                                 <span class="col-sm-3 centered_button btn btn-danger">Write Disabled</span>
-                        <?php } } ?>
+                        <?php }
+                        ?>
+
                     </div>
-
-
-                </div>
+                    </div>
+                        <?php
+                        } ?>
 
                 <hr />
             <div class="row clearfix no-margin build-home-properties">
@@ -209,7 +220,7 @@
 
                             $i++ ;
                             }
-                            }
+                        }
                             ?>
                         </div>
                 </div>
@@ -225,7 +236,7 @@
                             <div class="readme_display">
                                 <?php
                                     if (isset($pageVars["data"]["readme"]["md"])) { echo $pageVars["data"]["readme"]["md"] ; }
-                                    else if (isset($pageVars["data"]["readme"]["raw"])) { echo $pageVars["data"]["readme"]["raw"] ; }
+                                    else if (isset($pageVars["data"]["readme"]["raw"])) { echo '<pre>'.$pageVars["data"]["readme"]["raw"].'</pre>' ; }
                                     else { echo "Readme Reports that it exists but left no data." ;  }
                                 ?>
                             </div>
