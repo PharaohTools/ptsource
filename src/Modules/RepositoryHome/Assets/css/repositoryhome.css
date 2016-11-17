@@ -69,4 +69,13 @@
 
 .readme_display {
     background-color: white;
+    padding: 2px 10px;
+}
+.readme_display td,
+.readme_display th {
+     padding: 2px 4px;
+ }
+
+.readme_display img {
+    max-width: 100%;
 }
