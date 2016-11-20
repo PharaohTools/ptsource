@@ -59,9 +59,7 @@
                                 <div class="blCell cellRowIndex">#</div>
                                 <div class="blCell cellRowName">Repository</div>
                                 <div class="blCell cellRowFeatures">Features</div>
-                                <div class="blCell cellRowGraphs">Graphs</div>
-                                <div class="blCell cellRowContributors">Contributors</div>
-                                <div class="blCell cellRowHistory">History</div>
+                                <div class="blCell cellRowMore">More</div>
                             </div>
 							<div class="allBuildRows table-hover">
 
@@ -112,14 +110,16 @@
 
                                     ?>
                                 </div>
-                                <div  class="blCell cellRowGraphs">
-                                    Graphs
-                                </div>
-                                <div class="blCell cellRowContributors">
-                                    Contributors
-                                </div>
-                                <div class="blCell cellRowHistory">
-                                    History
+                                <div  class="blCell cellRowMore">
+                                    <span class="fullRow">
+                                        <a href="/index.php?control=RepositoryMonitors&action=show&item=<?php echo $repositorySlug; ?>">Graphs</a>
+                                    </span>
+                                    <span class="fullRow">
+                                        <a href="/index.php?control=RepositoryMonitors&action=contributors&item=<?php echo $repositorySlug; ?>">Contributors</a>
+                                    </span>
+                                    <span class="fullRow">
+                                        <a href="/index.php?control=RepositoryHistory&action=show&item=<?php echo $repositorySlug; ?>">History</a>
+                                    </span>
                                 </div>
 							</div>
 
