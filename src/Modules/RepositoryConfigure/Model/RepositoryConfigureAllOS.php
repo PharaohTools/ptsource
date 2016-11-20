@@ -27,7 +27,16 @@ class RepositoryConfigureAllOS extends Base {
         $ret["settings"] = $this->getBuilderSettings();
         $ret["fields"] = $this->getBuilderFormFields();
         $ret["stepFields"] = $this->getStepBuildersFormFields();
+        $ret["current_user_data"] = $this->getCurrentUserData();
         return $ret ;
+    }
+
+    public function getCurrentUserData() {
+        $signupFactory = new \Model\Signup() ;
+        $signup = $signupFactory->getModel($this->params);
+        $user = $signup->getLoggedInUserData();
+        if ($user == false) { return false ; }
+        return $user ;
     }
 
     public function getCopyData() {
@@ -121,6 +130,7 @@ class RepositoryConfigureAllOS extends Base {
         if ($ev == false) { return false ; }
 
         if ($this->params["creation"] == "yes") {
+            $data["project-creator"] = $this->params["project-creator"] ;
             $repositoryDefault = $repositoryFactory->getModel($this->params);
             $repositoryDefault->createRepository($this->params["project-slug"]) ; }
         $repositorySaver = $repositoryFactory->getModel($this->params, "RepositorySaver");
