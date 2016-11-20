@@ -70,8 +70,8 @@
                 <?php
 
 
-                if (isset($repositoryDetails["project-name"])) {
-                    $slugOrName = $repositoryDetails["project-name"] ; }
+                if (isset($pageVars["data"]["repository"]["project-name"])) {
+                    $slugOrName = $pageVars["data"]["repository"]["project-name"] ; }
                 else if (isset($pageVars["data"]["repository"]["project-slug"])) {
                     $slugOrName = $pageVars["data"]["repository"]["project-slug"] ; }
                 else {
@@ -82,12 +82,18 @@
                 else {
                     $slugOrDescription = "No Description configured for Project" ; }
 
+                if (isset($pageVars["data"]["repository"]["project-owner"])) {
+                    $ownerOrDescription = $pageVars["data"]["repository"]["project-ownere"] ; }
+                else {
+                    $ownerOrDescription = "No Owner configured for Project" ; }
+
                 ?>
            
             <div class="row clearfix no-margin">
             	<h3 class="text-uppercase text-light ">Repository: <strong><?php echo $slugOrName ; ?></strong> </h3>
-                <p> Project Slug: <?php echo $pageVars["data"]["repository"]["project-slug"] ; ?></p>
-                <p> Project Desc: <?php echo $slugOrDescription ; ?></p>
+                <p> Slug: <?php echo $pageVars["data"]["repository"]["project-slug"] ; ?></p>
+                <p> Description: <?php echo $slugOrDescription ; ?></p>
+                <p> Owner: <?php echo $ownerOrDescription ; ?></p>
             </div>
                 <?php
 
