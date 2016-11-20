@@ -21,14 +21,18 @@
     margin: 0 0 0 0;
 }
 
-.repositoryRow {
+div.repositoryRow {
     width: 100%;
     display: block ;
     float:left ;
 }
 
+div.repositoryRow:hover {
+    background-color: white;
+}
+
 .blCell {
-    float: left ;
+    float: left ;                                                                                                    /
     display: inline-block ;
     text-align: center;
 }
@@ -42,8 +46,12 @@
     text-align: left;
 }
 
+.cellRowName a {
+    font-size: 125%;
+}
+
 .cellRowFeatures {
-    width: 30% ;
+    width: 55% ;
 }
 
 .cellRowFeatures .repository-feature {
@@ -53,18 +61,11 @@
 }
 
 .cellRowFeatures .repository-feature img {
-    max-width: 100% ;
+    max-width: 60px ;
     max-height: 48px ;
+    margin: auto 2px;
 }
 
-.cellRowGraphs {
-    width: 15% ;
-}
-
-.cellRowContributors {
-    width: 15% ;
-}
-
-.cellRowHistory {
-    width: 15% ;
+.cellRowMore {
+    width: 20% ;
 }
