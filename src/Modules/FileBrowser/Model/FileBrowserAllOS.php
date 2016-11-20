@@ -16,12 +16,24 @@ class FileBrowserAllOS extends Base {
 
     public function getData() {
         $this->setRepoDir();
-        $ret["directory"] = $this->getCurrentDirectory();
+        $ret["branches"] = $this->getAvailableBranches() ;
+        $ret["identifier"] = $this->getCurrentIdentifier($ret["branches"]);
+        $ret["directory"] = $this->getCurrentDirectory($ret["identifier"]);
+        $ret["current_branch"] = (isset($this->params["branch"])) ? $this->params["branch"] : null;
         $ret["repository"] = $this->getRepository();
         $ret["item"] = $this->params["item"];
         $ret["wsdir"] = $this->getFileBrowserDir();
         $ret["relpath"] = $this->getRelPath();
+        $ret["current_user_data"] = $this->getCurrentUserData();
         return $ret ;
+    }
+
+    public function getCurrentUserData() {
+        $signupFactory = new \Model\Signup() ;
+        $signup = $signupFactory->getModel($this->params);
+        $user = $signup->getLoggedInUserData();
+        if ($user == false) { return false ; }
+        return $user ;
     }
 
     public function getRepository() {
@@ -39,31 +51,6 @@ class FileBrowserAllOS extends Base {
         return $this->params["repo-dir"].DS.$this->params["item"].DS;
     }
 
-    public function createFileBrowserIfNeeded() {
-        $filebrowser_path = $this->getFileBrowserDir() ;
-        $loggingFactory = new \Model\Logging();
-        $logging = $loggingFactory->getModel($this->params);
-        if (is_dir($filebrowser_path)) {
-            $logging->log("FileBrowser directory exists... " , $this->getModuleName()) ;
-            if(is_writable($filebrowser_path)) {
-                $logging->log("FileBrowser is writable " , $this->getModuleName()) ;
-                return true ; }
-            else {
-                $logging->log("FileBrowser is not writable " , $this->getModuleName()) ; } }
-        else {
-            $logging->log("No FileBrowser directory exists " , $this->getModuleName()) ; }
-        $logging->log("Rebuilding filebrowser " , $this->getModuleName()) ;
-        $rc = array();
-        $rc[] = $this->executeAndGetReturnCode("rm -rf {$filebrowser_path}", true, true);
-        $rc[] = $this->executeAndGetReturnCode("mkdir -p {$filebrowser_path}", true, true);
-        $res = ($rc[0]["rc"]==0 && $rc[1]["rc"]==0) ;
-        if ($res == true) {
-            $logging->log("FileBrowser successfully rebuilt" , $this->getModuleName()) ; }
-        else {
-            $logging->log("FileBrowser failed rebuild" , $this->getModuleName()) ; }
-        return $res ;
-    }
-
     public function setRepoDir() {
         if (isset($this->params["guess"]) && $this->params["guess"]==true) {
             $this->params["repo-dir"] = REPODIR ; }
@@ -72,7 +59,38 @@ class FileBrowserAllOS extends Base {
             $this->params["repo-dir"] = REPODIR ; }
     }
 
-    private function getCurrentDirectory() {
+    private function getCurrentIdentifier($branches) {
+        if (isset($this->params["identifier"])) {
+            if (in_array($this->params["identifier"], $branches)) {
+                $this->params["branch"] = $this->params["identifier"] ; }
+            return $this->params["identifier"] ; }
+        if (isset($this->params["branch"])) {
+            $this->params["identifier"] = $this->params["branch"] ; }
+        else if (isset($this->params["commit"])) {
+            $this->params["identifier"] = $this->params["commit"] ; }
+        else {
+            if (in_array("master", $branches)) {
+                $this->params["identifier"] = "master" ;
+                $this->params["branch"] = $this->params["identifier"] ;  }
+            else {
+                $this->params["identifier"] = $branches[0] ;
+                $this->params["branch"] = $this->params["identifier"] ;  } }
+        return $this->params["identifier"] ;
+    }
+
+    private function getAvailableBranches() {
+        $filebrowserDir = $this->getFileBrowserDir() ;
+        $command = "cd {$filebrowserDir} && git branch" ;
+        $all_branches_string = $this->executeAndLoad($command) ;
+//        var_dump("<pre>", $all_branches_string, "</pre>") ;
+//            die() ;
+        $all_branches_string = str_replace('* ', "", $all_branches_string) ;
+//        var_dump("<pre>", $all_branches_string, "</pre>") ;
+        $all_branches_ray = explode("\n", $all_branches_string) ;
+        return $all_branches_ray ;
+    }
+
+    private function getCurrentDirectory($identifier) {
         $filebrowserDir = $this->getFileBrowserDir() ;
         $scanned_files = $this->gitScanDir($filebrowserDir, $identifier) ;
         $all_files = $scanned_files[0] ;
