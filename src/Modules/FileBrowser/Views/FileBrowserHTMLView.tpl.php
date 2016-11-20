@@ -18,7 +18,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="index.php?control=RepositoryList&action=show"class="hvr-bounce-in">
+                    <a href="index.php?control=RepositoryHome&action=show"class="hvr-bounce-in">
                         <i class="fa fa-home hvr-bounce-in"></i>  Repository Home
                     </a>
                 </li>
@@ -52,7 +52,6 @@
 
          <div class="col-lg-9">
                     <div class="well well-lg">
-<!--            <h2 class="text-uppercase text-light"><a href="/"> Repository - Pharaoh Tools </a></h2>-->
 
                         <?php echo $this->renderLogs() ; ?>
 
@@ -74,8 +73,39 @@
 
                 <form class="form-horizontal custom-form" action="<?= $act ; ?>" method="POST">
 
-                    <div class="form-group">
-                        <div class="col-sm-10">
+                    <div class="form-group col-sm-12">
+                        <div class="form-group col-sm-3">
+                            <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                                Select Branch
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" id="assigneelist" role="menu" aria-labelledby="dropdownMenu1">
+                                <?php
+                                foreach($pageVars["data"]["branches"] as $branch_name) {
+                                    ?>
+                                    <li role="presentation">
+                                        <a role="menuitem" tabindex="-1" href="<?php echo $act ; ?>&identifier=<?php echo $branch_name ; ?>">
+                                            <?= $branch_name ?>
+                                        </a>
+                                    </li>
+                                <?php
+                                }
+                                ?>
+                            </ul>
+                        </div>
+                        <div class="form-group col-sm-9">
+                            <?php
+                            if (isset($pageVars["data"]["current_branch"]) && $pageVars["data"]["current_branch"] != null) {
+                                ?>
+                                <h4> Current Branch : <strong><?php echo $pageVars["data"]["current_branch"] ; ?></strong></h4>
+                            <?php
+                            }
+                            ?>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-12">
+                        <div class="">
                             <div id="updatable">
                                  <?php
                                 if ($pageVars["route"]["action"]=="show") {
