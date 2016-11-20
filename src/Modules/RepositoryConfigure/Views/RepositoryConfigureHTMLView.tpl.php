@@ -72,7 +72,6 @@
         <?php
         $act = '/index.php?control=RepositoryConfigure&item='.$pageVars["data"]["repository"]["project-slug"].'&action=save' ;
         ?>
-<!--            <h2 class="text-uppercase text-light"><a href="/"> Build - Pharaoh Tools </a></h2>-->
 
             <?php echo $this->renderLogs() ; ?>
 
@@ -107,6 +106,26 @@
                         <label for="project-slug" class="col-sm-2 control-label text-left">Project Slug</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="project-slug" id="project-slug" placeholder="<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" value="<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="project-slug" class="col-sm-2 control-label text-left">Project Owner</label>
+
+                        <div class="col-sm-10">
+                            <?php
+                                if ($pageVars["route"]["action"] == "new") {
+                            ?>
+                                 <h5 id="project-owner"><?php echo $pageVars["data"]["current_user_data"]->username ; ?></h5>
+
+                            <?php
+
+                                } else {
+                            ?>
+                                 <p id="project-owner"><?php echo $pageVars["data"]["repository"]["project-owner"] ; ?></p>
+                            <?php
+                                }
+                            ?>
                         </div>
                     </div>
 
