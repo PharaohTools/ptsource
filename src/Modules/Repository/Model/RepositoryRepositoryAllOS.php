@@ -19,7 +19,25 @@ class RepositoryRepositoryAllOS extends Base {
         $names = $this->getRepositoryNames() ;
         $repositoryFactory = new \Model\Repository() ;
         $repository = $repositoryFactory->getModel($this->params);
-        foreach ($names as $name) { $repositories[$name] = $repository->getRepository($name); }
+        foreach ($names as $name) {
+            $user = $this->getLoggedInUser() ;
+            $repo = $repository->getRepository($name);
+            $hidden = (isset($repo["settings"]["HiddenScope"]["enabled"]) &&
+                $repo["settings"]["HiddenScope"]["enabled"]=="on") ? true : false ;
+            $hidden_from_members = (isset($repo["settings"]["HiddenScope"]["hidden_from_members"]) &&
+                $repo["settings"]["HiddenScope"]["hidden_from_members"]=="on") ? true : false ;
+            if ($hidden == true) {
+                // @todo here
+                // if logged in user is owner
+                if ($user !== false && $user->usrname==$repo["project-owner"]) { $repositories[$name] = $repo ; }
+                // if settings say hide from members return false
+                if ($hidden_from_members==true) { continue ; }
+                // if logged in user is member return true
+                $pm = explode(",", $repo["project-members"]) ;
+                if ($user !== false && in_array($user->usrname, $pm)) { $repositories[$name] = $repo ; }
+                continue ; }
+            else {
+                $repositories[$name] = $repo ; } }
         return $repositories ;
     }
 
@@ -31,6 +49,13 @@ class RepositoryRepositoryAllOS extends Base {
                     // @todo if this isnt definitely a build dir ignore maybe
                     $names[] = $repositories[$i] ; } } }
         return (isset($names) && is_array($names)) ? $names : array() ;
+    }
+
+    protected function getLoggedInUser() {
+        $signupFactory = new \Model\Signup() ;
+        $signup = $signupFactory->getModel($this->params);
+        $this->params["user"] = $signup->getLoggedInUserData() ;
+        return $this->params["user"] ;
     }
 
 }
