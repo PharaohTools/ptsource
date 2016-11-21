@@ -86,5 +86,12 @@ class StandardFeaturesLinuxUnix extends Base {
         return $ff ;
     }
 
+    public function getEventNames() {
+        return array_keys($this->getEvents());   }
+
+    public function getEvents() {
+        $ff = array();
+        return $ff ; }
+
 
 }
