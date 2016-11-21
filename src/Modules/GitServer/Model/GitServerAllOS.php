@@ -116,13 +116,13 @@ class GitServerAllOS extends Base {
 
 
 
-        ob_start();
-//        var_dump("this env", phpinfo()) ;
-        var_dump("srv:", $_SERVER, "env:", $env) ;
-//        var_dump("grq:", $gitRequestUser) ;
-//        var_dump("this env", $_SERVER['HTTP_AUTHORIZATION'], "user", $this->params["user"], "remote user", $_SERVER["REMOTE_USER"], "AUTH user", $_SERVER["PHP_AUTH_USER"], $_SERVER["PHP_AUTH_PW"], $_SERVER["HTTP_AUTHORIZATION"]) ;
-        $res = ob_get_clean();
-        file_put_contents('/var/log/pharaoh.log', $res, FILE_APPEND) ;
+//        ob_start();
+////        var_dump("this env", phpinfo()) ;
+//        var_dump("srv:", $_SERVER, "env:", $env) ;
+////        var_dump("grq:", $gitRequestUser) ;
+////        var_dump("this env", $_SERVER['HTTP_AUTHORIZATION'], "user", $this->params["user"], "remote user", $_SERVER["REMOTE_USER"], "AUTH user", $_SERVER["PHP_AUTH_USER"], $_SERVER["PHP_AUTH_PW"], $_SERVER["HTTP_AUTHORIZATION"]) ;
+//        $res = ob_get_clean();
+//        file_put_contents('/var/log/pharaoh.log', $res, FILE_APPEND) ;
 
         if (is_resource($process)) {
 //            error_log("php in: $php_input" ) ;
@@ -131,10 +131,12 @@ class GitServerAllOS extends Base {
             $return_output = stream_get_contents($pipes[1]);
             fclose($pipes[1]);
             $return_code = proc_close($process);
-            error_log("\n\n\nNew Request" ) ;
-            error_log("rc: $return_code, stduot: $return_output" ) ; }
+//            error_log("\n\n\nNew Request" ) ;
+//            error_log("rc: $return_code, stduot: $return_output" ) ;
+        }
         else {
-            error_log("is r:", is_resource($process) ) ; }
+//            error_log("is r:", is_resource($process) ) ;
+        }
         if(!empty($return_output))
         {
 //            echo 'Pharaoh Source Git Server' ;
@@ -198,7 +200,7 @@ class GitServerAllOS extends Base {
             if ($publicReads == true) {
                 return true ; }
             else {
-                return $this->authUserToRead($gitRequestUser) ; } }
+                return $this->authUserToRead($gitRequestUser, $repo_name) ; } }
         else {
             //error_log("is a write") ;
             $publicWrites = $this->repoPublicAllowed("write", $repo_name) ;
@@ -207,7 +209,7 @@ class GitServerAllOS extends Base {
                 return true ; }
             else {
                 //error_log("no public") ;
-                $res = $this->authUserToWrite($gitRequestUser) ;
+                $res = $this->authUserToWrite($gitRequestUser, $repo_name) ;
                 //error_log("auth is: {$res}") ;
                 return $res ; } }
     }
@@ -244,15 +246,46 @@ class GitServerAllOS extends Base {
         return array("user"=> null, "pass"=> null) ;
     }
 
-    protected function authUserToRead($gitRequestUser) {
+    protected function authUserToRead($gitRequestUser, $repo_name) {
         if ( $gitRequestUser["user"] == "anon" ) { return false ; }
-        return true ;
+        $repoFactory = new \Model\Repository() ;
+        $repo = $repoFactory->getModel($this->params, "Default") ;
+        $thisRepo = $repo->getRepository($repo_name) ;
+        $hidden = (isset($thisRepo["settings"]["HiddenScope"]["enabled"]) && $thisRepo["settings"]["HiddenScope"]["enabled"]=="on") ? true : false ;
+        $hidden_from_members = (isset($thisRepo["settings"]["HiddenScope"]["hidden_from_members"]) && $thisRepo["settings"]["HiddenScope"]["hidden_from_members"]=="on") ? true : false ;
+        if ($hidden == true) {
+            // @todo here
+            // if logged in user is owner
+            if ($gitRequestUser["user"]==$thisRepo["project-owner"]) { return true ; }
+            // if settings say hide from members return false
+            if ($hidden_from_members==true) { return false ; }
+            // if logged in user is member return true
+            $pm = explode(",", $thisRepo["project-members"]) ;
+            if (in_array($gitRequestUser["user"], $pm)) { return true ; }
+            return false ;
+        } else {
+            return true ; }
     }
 
-    protected function authUserToWrite($gitRequestUser) {
+    protected function authUserToWrite($gitRequestUser, $repo_name) {
         if ( $gitRequestUser["user"] == "anon" ) { return false ; }
-        return true ;
-    }
+        $repoFactory = new \Model\Repository() ;
+        $repo = $repoFactory->getModel($this->params, "Default") ;
+        $thisRepo = $repo->getRepository($repo_name) ;
+        $hidden = (isset($thisRepo["settings"]["HiddenScope"]["enabled"]) && $thisRepo["settings"]["HiddenScope"]["enabled"]=="on") ? true : false ;
+        $hidden_from_members = (isset($thisRepo["settings"]["HiddenScope"]["hidden_from_members"]) && $thisRepo["settings"]["HiddenScope"]["hidden_from_members"]=="on") ? true : false ;
+        if ($hidden == true) {
+            // @todo here
+            // if logged in user is owner
+            if ($gitRequestUser["user"]==$thisRepo["project-owner"]) { return true ; }
+            // if settings say hide from members return false
+            if ($hidden_from_members==true) { return false ; }
+            // if logged in user is member return true
+            $pm = explode(",", $thisRepo["project-members"]) ;
+            if (in_array($gitRequestUser["user"], $pm)) { return true ; }
+            return false ;
+        } else {
+            return true ; }    }
 
     protected function isWriteAction() {
         if ( strpos($_SERVER["REQUEST_URI"], "git-receive-pack") !== false) {
