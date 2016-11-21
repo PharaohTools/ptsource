@@ -28,7 +28,17 @@ class RepositoryConfigureAllOS extends Base {
         $ret["fields"] = $this->getBuilderFormFields();
         $ret["stepFields"] = $this->getStepBuildersFormFields();
         $ret["current_user_data"] = $this->getCurrentUserData();
+        $ret["available_users"] = $this->getUserNamesData();
         return $ret ;
+    }
+
+    public function getUserNamesData() {
+        $usernames =array() ;
+        $signupFactory = new \Model\Signup() ;
+        $signup = $signupFactory->getModel($this->params);
+        $users = $signup->getUsersData() ;
+        foreach ($users as $user) { $usernames[] = $user->username ; }
+        return $usernames ;
     }
 
     public function getCurrentUserData() {
