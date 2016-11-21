@@ -40,7 +40,7 @@ class WebsiteDisplayLinkAllOS extends Base {
             )
         );
           return $ff ;}
-   
+
     public function getEventNames() {
         return array_keys($this->getEvents());   }
 

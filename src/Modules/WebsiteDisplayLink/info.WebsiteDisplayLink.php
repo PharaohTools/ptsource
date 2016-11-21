@@ -21,20 +21,20 @@ class WebsiteDisplayLinkInfo extends PTConfigureBase {
     }
 
     public function events() {
-        return array("getBuildFeatures");
+        return array("getRepositoryFeatures");
     }
 
-    public function pipeFeatures() {
-        return array("websiteDisplayLink");
+    public function repositoryFeatures() {
+        return array("standardFeatures");
     }
 
-    public function buildSettings() {
+    public function repositorySettings() {
         return array("website_display_link");
     }
 
     public function helpDefinition() {
        $help = <<<"HELPDATA"
-    This extension displays a Website Link for a pipeline. It provides code
+    This extension displays a Website Link for a repository. It provides code
     functionality, but no extra CLI commands.
 
     websitedisplaylink
