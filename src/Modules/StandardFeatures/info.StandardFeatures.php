@@ -33,12 +33,6 @@ class StandardFeaturesInfo extends PTConfigureBase {
         return array("standardFeatures");
     }
 
-//    public function configuration() {
-//        return array(
-//            "exec_delay"=> array( "type" => "text", "default" => "180", "label" => "Minimum execution delay between SCM Poll runs", ),
-//        );
-//    }
-
     public function helpDefinition() {
        $help = <<<"HELPDATA"
     This extension provides integration with Standard Features for Projects. It provides code
