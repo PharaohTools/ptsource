@@ -29,14 +29,29 @@ class RepositoryRepositoryAllOS extends Base {
             if ($hidden == true) {
                 // @todo here
                 // if logged in user is owner
-                if ($user !== false && $user->usrname==$repo["project-owner"]) { $repositories[$name] = $repo ; }
+                if ($user !== false && $user->role==1) {
+                    $repositories[$name] = $repo ;
+                    continue ; }
+                if ($user !== false && $user->username==$repo["project-owner"]) {
+//                    var_dump("one") ;
+//                    die() ;
+                    $repositories[$name] = $repo ;
+                    continue ; }
                 // if settings say hide from members return false
-                if ($hidden_from_members==true) { continue ; }
+                if ($hidden_from_members==true) {
+//                    var_dump("two") ;
+//                    die() ;
+                    continue ; }
                 // if logged in user is member return true
                 $pm = explode(",", $repo["project-members"]) ;
-                if ($user !== false && in_array($user->usrname, $pm)) { $repositories[$name] = $repo ; }
-                continue ; }
+                if ($user !== false && in_array($user->username, $pm)) {
+//                    var_dump("three") ;
+//                    die() ;
+                    $repositories[$name] = $repo ;
+                    continue ; } }
             else {
+//                var_dump("four") ;
+//                die() ;
                 $repositories[$name] = $repo ; } }
         return $repositories ;
     }
