@@ -141,4 +141,3 @@
 	</div>
 </div><!-- /.container -->
 <link rel="stylesheet" type="text/css" href="/Assets/Modules/RepositoryList/css/repositorylist.css">
-<script type="text/javascript" src="/Assets/Modules/RepositoryList/js/repositorylist.js"></script>
