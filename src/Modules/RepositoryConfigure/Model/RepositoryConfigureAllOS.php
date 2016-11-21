@@ -49,6 +49,13 @@ class RepositoryConfigureAllOS extends Base {
         return $user ;
     }
 
+    public function isAdmin() {
+        $user = $this->getCurrentUserData() ;
+        if ($user == false) { return false ; }
+        if ($user->role == 1) { return true ; }
+        return false ;
+    }
+
     public function getCopyData() {
         if (isset($this->params["item"])) { $ret["repository"] = $this->getRepository(); }
         $repositoryFactory = new \Model\Repository() ;
@@ -135,12 +142,17 @@ class RepositoryConfigureAllOS extends Base {
             "project-slug" => $this->params["project-slug"],
             "project-description" => $this->params["project-description"]
         ) ;
+        if ($this->isAdmin()==true){
+            $data["project-owner"] = $this->params["project-owner"] ;
+        }
 
         $ev = $this->runBCEvent("beforeRepositorySave") ;
         if ($ev == false) { return false ; }
 
+
         if ($this->params["creation"] == "yes") {
             $data["project-creator"] = $this->params["project-creator"] ;
+            $data["project-owner"] = $this->params["project-creator"] ;
             $repositoryDefault = $repositoryFactory->getModel($this->params);
             $repositoryDefault->createRepository($this->params["project-slug"]) ; }
         $repositorySaver = $repositoryFactory->getModel($this->params, "RepositorySaver");

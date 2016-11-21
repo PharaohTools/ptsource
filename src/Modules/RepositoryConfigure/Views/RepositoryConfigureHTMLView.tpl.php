@@ -114,17 +114,83 @@
 
                         <div class="col-sm-10">
                             <?php
-                                if ($pageVars["route"]["action"] == "new") {
-                            ?>
-                                 <h5 id="project-owner"><?php echo $pageVars["data"]["current_user_data"]->username ; ?></h5>
 
-                            <?php
+                            if ($pageVars["data"]["current_user_data"] !== false && ($pageVars["data"]["current_user_data"]->role == 1)) {
+                                ?>
+
+
+                                <div class="col-sm-3">
+                                    <div class="dropdown">
+                                        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                                            Select Owner
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" id="ownerlist" role="menu" aria-labelledby="dropdownMenu1">
+                                            <?php
+
+                                            foreach($pageVars["data"]["available_users"] as $ownerSlug) {
+                                                ?>
+                                                <li role="presentation">
+                                                    <a role="menuitem" tabindex="-1" onclick="switchOwnerButton('<?php echo $ownerSlug ; ?>'); return false;">
+                                                        <?= $ownerSlug ; ?>
+                                                    </a>
+                                                </li>
+                                            <?php
+                                            }
+                                            ?>
+                                        </ul>
+
+                                        <?php
+                                        echo '<script type="text/javascript">'."\n";
+                                        echo '  window.avOwners = []; '."\n";
+                                        foreach($pageVars["data"]["available_users"] as $ownerSlug) {
+                                            echo '  window.avOwners["'.$ownerSlug.'"] = "'.$ownerSlug.'" ;'."\n"; }
+                                        echo '  console.log(window.avOwners)'."\n";
+                                        echo '</script>'."\n";;
+
+                                        ?>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-3" id="newOwnerDiv">
+
+                                    <?php
+                                    $allOwners = $pageVars["data"]["available_users"] ;
+                                    foreach ($allOwners as $oneOwner) {
+                                        if ($oneOwner == $pageVars["data"]["repository"]["project-owner"]) {
+                                            $owner = $oneOwner ; } }
+
+                                    if (isset($owner)) {
+                                        ?>
+
+                                        <div class="btn btn-success" value="<?php echo $owner ; ?>"><?php echo $owner ; ?></div>
+                                        <input type="hidden" name="project-owner" id="project-owner" value="<?php echo $pageVars["data"]["repository"]["project-owner"] ; ?>" />
+                                        <!--                                    <p>Owner Currently: </p>-->
+
+                                    <?php
+                                    }
+                                    ?>
+
+                                </div>
+
+
+                                <?php
+                            }
+
+                            else {
+                                if ($pageVars["route"]["action"] == "new") {
+                                    ?>
+                                    <h5 id="project-owner"><?php echo $pageVars["data"]["current_user_data"]->username ; ?></h5>
+
+                                <?php
 
                                 } else {
-                            ?>
-                                 <p id="project-owner"><?php echo $pageVars["data"]["repository"]["project-owner"] ; ?></p>
-                            <?php
+                                    ?>
+                                    <p id="project-owner"><?php echo $pageVars["data"]["repository"]["project-owner"] ; ?></p>
+                                <?php
                                 }
+
+                            }
                             ?>
                         </div>
                     </div>
