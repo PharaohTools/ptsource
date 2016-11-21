@@ -104,6 +104,9 @@
                     <?php
                     if (isset($pageVars["data"]["user"]->username)) {
 
+                        $ownerOrPublic = (isset($pageVars["data"]["repository"]["project-owner"]) &&
+                            strlen($pageVars["data"]["repository"]["project-owner"])>0) ?
+                            $pageVars["data"]["repository"]["project-owner"] : "public" ;
                         ?>
                     <div class="row">
                         <div class="col-sm-12">
@@ -119,7 +122,7 @@
                             </div>
                         </div>
                         <div class="col-sm-12">
-                            <h2 class="git_command_text"><strong id="git_command_string">git clone</strong> <?php echo "{$ht_string_lower}://{$pageVars["data"]["user"]->username}:{password}@{$_SERVER["SERVER_NAME"]}/git/public/{$pageVars["data"]["repository"]["project-slug"]} "  ; ?></h2>
+                            <h2 class="git_command_text"><strong id="git_command_string">git clone</strong> <?php echo "{$ht_string_lower}://{$pageVars["data"]["user"]->username}:{password}@{$_SERVER["SERVER_NAME"]}/git/{$ownerOrPublic}/{$pageVars["data"]["repository"]["project-slug"]} "  ; ?></h2>
                         </div>
                         <div class="col-sm-12">
                             <span class="col-sm-3 centered_button btn btn-success">Write Enabled</span>
