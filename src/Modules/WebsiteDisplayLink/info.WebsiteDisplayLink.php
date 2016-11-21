@@ -25,7 +25,7 @@ class WebsiteDisplayLinkInfo extends PTConfigureBase {
     }
 
     public function repositoryFeatures() {
-        return array("standardFeatures");
+        return array("websiteDisplayLink");
     }
 
     public function repositorySettings() {

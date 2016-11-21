@@ -18,11 +18,15 @@ class WebsiteDisplayLinkRepositoryFeatureAllOS extends Base {
 	public $repository;
 
 	public function collate() {
-		$collated = array() ;
-		$collated = array_merge($collated, $this->getLink()) ;
-		$collated = array_merge($collated, $this->getTitle()) ;
-		$collated = array_merge($collated, $this->getImage()) ;
-		return array($collated );
+        $collated = array() ;
+        $collated_one = array() ;
+        foreach ($this->getWebsites() as $oneStandardFeature => $details) {
+            $collated_one = array_merge($collated_one, $this->getLink($details)) ;
+            $collated_one = array_merge($collated_one, $this->getTitle($details)) ;
+            $collated_one = array_merge($collated_one, $this->getImage()) ;
+            $collated[] = $collated_one ;
+            $collated_one = array() ; }
+		return $collated;
 	}
 
 	public function setValues($vals) {
@@ -33,18 +37,21 @@ class WebsiteDisplayLinkRepositoryFeatureAllOS extends Base {
 		$this->repository = $repository ;
 	}
 
-	public function getLink() {
-		$ff = array("link" => $this->repositoryFeatureValues["url"]);
+    protected function getWebsites() {
+        return $this->repositoryFeatureValues["websites"] ;
+    }
+
+	public function getLink($details) {
+		$ff = array("link" => $details["url"]);
 		return $ff ;
 	}
 
-	public function getTitle() {
-        $ff = array("title" => $this->repositoryFeatureValues["title"]);
+	public function getTitle($details) {
+        $ff = array("title" => $details["title"]);
 		return $ff ;
 	}
 
 	public function getImage() {
-		$this->repositoryFeatureValues["repository"] ;
 		$ff = array("image" => '/Assets/Modules/WebsiteDisplayLink/images/visit_site.png');
 		return $ff ;
 	}
