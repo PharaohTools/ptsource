@@ -83,7 +83,7 @@
                     $slugOrDescription = "No Description configured for Project" ; }
 
                 if (isset($pageVars["data"]["repository"]["project-owner"])) {
-                    $ownerOrDescription = $pageVars["data"]["repository"]["project-ownere"] ; }
+                    $ownerOrDescription = $pageVars["data"]["repository"]["project-owner"] ; }
                 else {
                     $ownerOrDescription = "No Owner configured for Project" ; }
 
