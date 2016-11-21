@@ -26,12 +26,12 @@ class HiddenScopeAnyOS extends Base {
                 "optional" => true,
                 "name" => "Hide this Repo?"
             ),
-//            "hidden_to_all" =>
-//            array(
-//                "type" => "boolean",
-//                "optional" => true,
-//                "name" => "Hide from members also?"
-//            ),
+            "hidden_from_members" =>
+            array(
+                "type" => "boolean",
+                "optional" => true,
+                "name" => "Hide from members also?"
+            ),
         );
         return $ff ;
     }
