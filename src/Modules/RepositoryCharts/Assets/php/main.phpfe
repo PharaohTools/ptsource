@@ -2,18 +2,18 @@
 
 $jq = \js_core::$jQuery ;
 $jq("#select_clone")->on("click", function() {
-    \RepositoryHomeFE::activate_select_clone() ;
+    \RepositoryChartsFE::activate_select_clone() ;
 }) ;
 
 $jq("#select_push")->on("click", function() {
-    \RepositoryHomeFE::activate_select_push() ;
+    \RepositoryChartsFE::activate_select_push() ;
 }) ;
 
 $jq("#select_pull")->on("click", function() {
-    \RepositoryHomeFE::activate_select_pull() ;
+    \RepositoryChartsFE::activate_select_pull() ;
 }) ;
 
-class RepositoryHomeFE {
+class RepositoryChartsFE {
 
     public static function activate_select_clone() {
         $jq = \js_core::$jQuery ;

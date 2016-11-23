@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class RepositoryHomeAllOS extends Base {
+class RepositoryChartsAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;

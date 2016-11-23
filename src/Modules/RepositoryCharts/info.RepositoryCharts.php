@@ -2,31 +2,31 @@
 
 Namespace Info;
 
-class RepositoryHomeInfo extends PTConfigureBase {
+class RepositoryChartsInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "RepositoryHome/Home Page";
+    public $name = "Repository Charts Section";
 
     public function _construct() {
       parent::__construct();
     }
 
     public function routesAvailable() {
-      return array( "RepositoryHome" => array("show", "delete") );
+      return array( "RepositoryCharts" => array("show", "delete") );
     }
 
     public function routeAliases() {
-      return array("repositoryHome"=>"RepositoryHome");
+      return array("repositoryCharts"=>"RepositoryCharts");
     }
 
     public function ignoredAuthenticationRoutes() {
-        return array( "RepositoryHome" => array("show") );
+        return array( "RepositoryCharts" => array("show") );
     }
 
     public function helpDefinition() {
       $help = <<<"HELPDATA"
-  This is the Repository Home page module for a single build...
+  This is the Repository Charts page module for a single build...
 HELPDATA;
       return $help ;
     }
