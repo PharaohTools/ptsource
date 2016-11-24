@@ -36,8 +36,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="index.php?control=BuildMonitor&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
-                        <i class="fa fa-bar-chart-o hvr-bounce-in"></i> Monitors
+                    <a href="index.php?control=RepositoryCharts&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
+                        <i class="fa fa-bar-chart-o hvr-bounce-in"></i> Charts
                     </a>
                 </li>
                 <li>
