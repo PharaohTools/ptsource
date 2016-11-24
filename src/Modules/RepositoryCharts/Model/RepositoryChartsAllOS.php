@@ -65,15 +65,11 @@ class RepositoryChartsAllOS extends Base {
     }
 
     protected function getRepositoryCharts($repo) {
-
         $client = new \Gitter\Client;
-
         $loc = REPODIR.DS.$this->params["item"] ;
         $repository = $client->getRepository($loc);
 //        $gpc = new \GitPrettyStats\Repository($loc, $client) ;
-
 //        var_dump($gpc) ;
-
         $repository->addStatistics(array(
             new \Gitter\Statistics\Contributors,
             new \Gitter\Statistics\Date,
@@ -83,13 +79,12 @@ class RepositoryChartsAllOS extends Base {
 //        print_r($gpc->getStatistics());
 //        $stats = $repository->getStatistics() ;
         $stats2 = $repository->statistics() ;
-//
 //        ob_start();
 //        var_dump( $stats2) ;
 //        $res = ob_get_clean() ;
-//
 //        file_put_contents("/tmp/log", $res) ;
         $fc = $repository->getFirstCommitDate();
+        $lc = $repository->getLastCommitDate();
         return $stats2 ;
     }
 
