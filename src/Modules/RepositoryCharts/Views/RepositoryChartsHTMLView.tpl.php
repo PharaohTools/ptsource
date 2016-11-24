@@ -107,7 +107,16 @@
                         Contributors: <strong><?php echo count($pageVars["data"]["repository_charts"]["contributors"]) ; ?></strong>
                     </div>
                     <div class="col-sm-6">
-                        <?php # var_dump($pageVars["data"]["repository_charts"]["date"]) ; ?>
+<!--                        <h5>data</h5>-->
+                        <?php # var_dump($pageVars["data"]) ; ?>
+                        <h5>contributors</h5>
+                        <?php  var_dump($pageVars["data"]["repository_charts"]["statistics"]["contributors"]) ; ?>
+                        <h5>date</h5>
+                        <?php  var_dump($pageVars["data"]["repository_charts"]["date"]) ; ?>
+                        <h5>day</h5>
+                        <?php  var_dump($pageVars["data"]["repository_charts"]["day"]) ; ?>
+                        <h5>hour</h5>
+                        <?php  var_dump($pageVars["data"]["repository_charts"]["hour"]) ; ?>
                     </div>
                 </div>
                 <div class="col-sm-12">
