@@ -64,7 +64,7 @@ class RepositoryFactory
 
         if (!$this->paths)
         {
-            $repositoriesPath = Config::get('git-pretty-stats.repositoriesPath');
+            $repositoriesPath = array(REPODIR);
 
             // Repositories are specified as array in config
             if (is_array($repositoriesPath))

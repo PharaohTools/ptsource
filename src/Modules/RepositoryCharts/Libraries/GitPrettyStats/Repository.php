@@ -7,8 +7,8 @@ use GitPrettyStats\Charts\CommitsByDateChart;
 use GitPrettyStats\Charts\CommitsByDayChart;
 use GitPrettyStats\Charts\CommitsByHourChart;
 use Gitter\Client;
-use Config;
-use Cache;
+use Illuminate\Config;
+use Illuminate\Cache;
 use Gitter\Repository as GitterRepository;
 
 /**
@@ -35,8 +35,9 @@ class Repository extends GitterRepository
     {
         $this->statisticsFormatter = $statisticsFormatter ?: new StatisticsFormatter($this);
 
-        $emailAliases       = Config::get('git-pretty-stats.emailAliases');
-        $this->emailAliases = ($emailAliases && is_array($emailAliases)) ? $emailAliases : null;
+//        $emailAliases       = Config::get('git-pretty-stats.emailAliases');
+//        $this->emailAliases = ($emailAliases && is_array($emailAliases)) ? $emailAliases : null;
+        $this->emailAliases = null;
 
         $client = ($client) ? $client : new Client;
         parent::__construct($path, $client);

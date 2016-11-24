@@ -57,7 +57,7 @@ class Client
             throw new \RuntimeException('There is no GIT repository at ' . $path);
         }
 
-        return new Repository($path, $this);
+        return new \GitPrettyStats\Repository($path, $this);
     }
 
     public function run($repository, $command)
