@@ -112,10 +112,10 @@
                                 </div>
                                 <div  class="blCell cellRowMore">
                                     <span class="fullRow">
-                                        <a href="/index.php?control=RepositoryMonitors&action=show&item=<?php echo $repositorySlug; ?>">Graphs</a>
+                                        <a href="/index.php?control=RepositoryCharts&action=show&item=<?php echo $repositorySlug; ?>">Graphs</a>
                                     </span>
                                     <span class="fullRow">
-                                        <a href="/index.php?control=RepositoryMonitors&action=contributors&item=<?php echo $repositorySlug; ?>">Contributors</a>
+                                        <a href="/index.php?control=RepositoryCharts&action=contributors&item=<?php echo $repositorySlug; ?>">Contributors</a>
                                     </span>
                                     <span class="fullRow">
                                         <a href="/index.php?control=RepositoryHistory&action=show&item=<?php echo $repositorySlug; ?>">History</a>
