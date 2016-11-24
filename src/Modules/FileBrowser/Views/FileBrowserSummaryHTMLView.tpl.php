@@ -26,7 +26,7 @@
                     <i class="fa fa-folder-open-o"></i> FileBrowser
                 </a>
                 <a href="#" class="list-group-item">
-                    <i class="fa fa-bar-chart-o"></i> Monitors <span class="badge">6</span>
+                    <i class="fa fa-bar-chart-o"></i> Charts <span class="badge">6</span>
                 </a>
                 <a href="#" class="list-group-item">
                     <i class="fa fa-bar-chart-o"></i> History <span class="badge">3</span>
