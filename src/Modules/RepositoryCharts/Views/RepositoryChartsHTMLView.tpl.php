@@ -94,10 +94,117 @@
                 <p> Slug: <?php echo $pageVars["data"]["repository"]["project-slug"] ; ?></p>
                 <p> Description: <?php echo $slugOrDescription ; ?></p>
             </div>
-            <?php
-                $ht_string = ($pageVars["data"]["is_https"] == true) ? 'HTTPS' : 'HTTP' ;
-                $ht_string_lower = strtolower($ht_string) ;
-            ?>
+
+            <div class="row">
+
+                <div class="col-lg-3 col-md-4 hvr-pop">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-database fa-4x hvr-buzz-out"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="chart_feature_text huge hvr-grow-rotate" >
+                                        <?php echo $pageVars["data"]["repository_charts"]["statistics"]["Total contributors"]; ?>
+                                    </div>
+                                    <div>Contributors</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 hvr-pop">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-check-circle fa-4x hvr-buzz-out"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="chart_feature_text huge hvr-grow-rotate">
+                                        <?php echo $pageVars["data"]["repository_charts"]["statistics"]["Total commits"]; ?>
+                                    </div>
+                                    <div>Commits</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 hvr-pop">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-check-circle fa-4x hvr-buzz-out"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="chart_feature_text huge hvr-grow-rotate">
+                                        <?php echo $pageVars["data"]["repository_charts"]["statistics"]["Average commits per day"]; ?>
+                                    </div>
+                                    <div>Daily</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 hvr-pop">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-check-circle fa-4x hvr-buzz-out"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="chart_feature_text huge hvr-grow-rotate">
+                                        <?php echo str_replace(" days", "", $pageVars["data"]["repository_charts"]["statistics"]["Active for"]) ; ?>
+                                    </div>
+                                    <div>Days Active</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6 col-md-6 hvr-pop">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-check-circle fa-4x hvr-buzz-out"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge hvr-grow-rotate">
+                                        <?php echo $pageVars["data"]["repository_charts"]["statistics"]["First commit date"]; ?>
+                                    </div>
+                                    <div>First commit date</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 hvr-pop">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-check-circle fa-4x hvr-buzz-out"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge hvr-grow-rotate">
+                                        <?php echo $pageVars["data"]["repository_charts"]["statistics"]["Latest commit date"] ; ?>
+                                    </div>
+                                    <div>Latest commit date</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-sm-12">
                     <hr />
