@@ -79,3 +79,8 @@
 .readme_display img {
     max-width: 100%;
 }
+
+div.chart_feature_text {
+    max-width: 80%;
+    display: block;
+}
