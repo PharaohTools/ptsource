@@ -93,38 +93,57 @@
             	<h3 class="text-uppercase text-light ">Repository: <strong><?php echo $slugOrName ; ?></strong> </h3>
                 <p> Slug: <?php echo $pageVars["data"]["repository"]["project-slug"] ; ?></p>
                 <p> Description: <?php echo $slugOrDescription ; ?></p>
-                <p> Owner: <?php echo $ownerOrDescription ; ?></p>
             </div>
-                <?php
-
+            <?php
                 $ht_string = ($pageVars["data"]["is_https"] == true) ? 'HTTPS' : 'HTTP' ;
                 $ht_string_lower = strtolower($ht_string) ;
-                ?>
+            ?>
             <div class="row">
                 <div class="col-sm-12">
                     <hr />
-                    <div class="col-sm-6">
-                        Contributors: <strong><?php echo count($pageVars["data"]["repository_charts"]["contributors"]) ; ?></strong>
+                    <div class="col-sm-4">
+                        <h5>Total Contributors:</h5>
+                        <strong>
+                            <?php
+//                            var_dump($pageVars["data"]["repository_charts"]) ;
+
+                            echo $pageVars["data"]["repository_charts"]["statistics"]["Total contributors"] ; ?>
+                        </strong>
                     </div>
-                    <div class="col-sm-6">
-<!--                        <h5>data</h5>-->
-                        <?php # var_dump($pageVars["data"]) ; ?>
-                        <h5>contributors</h5>
-                        <?php  var_dump($pageVars["data"]["repository_charts"]["statistics"]["contributors"]) ; ?>
-                        <h5>date</h5>
-                        <?php  var_dump($pageVars["data"]["repository_charts"]["date"]) ; ?>
-                        <h5>day</h5>
-                        <?php  var_dump($pageVars["data"]["repository_charts"]["day"]) ; ?>
-                        <h5>hour</h5>
-                        <?php  var_dump($pageVars["data"]["repository_charts"]["hour"]) ; ?>
+                    <div class="col-sm-4">
+                        <h5>Total commits:</h5>
+                        <strong>
+                            <?php echo $pageVars["data"]["repository_charts"]["statistics"]["Total commits"] ; ?>
+                        </strong>
                     </div>
+                    <div class="col-sm-4">
+                        <h5>Average commits per day:</h5>
+                        <strong>
+                            <?php echo $pageVars["data"]["repository_charts"]["statistics"]["Average commits per day"] ; ?>
+                        </strong>
+                    </div>
+                    <hr />
+                    <div class="col-sm-4">
+                        <h5>Active for:</h5>
+                        <strong>
+                            <?php echo $pageVars["data"]["repository_charts"]["statistics"]["Active for"] ; ?>
+                        </strong>
+                    </div>
+                    <div class="col-sm-4">
+                        <h5>First commit date:</h5>
+                        <strong>
+                            <?php echo $pageVars["data"]["repository_charts"]["statistics"]["First commit date"] ; ?>
+                        </strong>
+                    </div>
+                    <div class="col-sm-4">
+                        <h5>Latest commit date:</h5>
+                        <strong>
+                            <?php echo $pageVars["data"]["repository_charts"]["statistics"]["Latest commit date"] ; ?>
+                        </strong>
+                    </div>
+
                 </div>
-                <div class="col-sm-12">
-                    <h2 class="git_command_text"><strong id="git_command_string">git clone</strong> <?php echo "{$ht_string_lower}://{$pageVars["data"]["user"]->username}:{password}@{$_SERVER["SERVER_NAME"]}/git/{$ownerOrPublic}/{$pageVars["data"]["repository"]["project-slug"]} "  ; ?></h2>
-                </div>
-                <div class="col-sm-12">
-                    <span class="col-sm-3 centered_button btn btn-success">Write Enabled</span>
-                </div>
+
             </div>
 
             <div class="row clearfix no-margin build-home-properties">
