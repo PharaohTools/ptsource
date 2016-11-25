@@ -73,7 +73,7 @@
                                      <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                      <div class="clearfix"></div>
                                  </div>-->
-                            </a>
+<!--                            </a>-->
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 hvr-pop">
@@ -95,7 +95,7 @@
                                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                         <div class="clearfix"></div>
                                     </div>-->
-                            </a>
+<!--                            </a>-->
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 hvr-pop">
@@ -117,7 +117,7 @@
                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                        <div class="clearfix"></div>
                                    </div>-->
-                            </a>
+<!--                            </a>-->
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 hvr-pop">
@@ -139,7 +139,7 @@
                                       <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                       <div class="clearfix"></div>
                                   </div>-->
-                            </a>
+<!--                            </a>-->
                         </div>
                     </div>
                 </div>
