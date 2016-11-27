@@ -14,11 +14,17 @@ class CommitDetailsAllOS extends Base {
     // Model Group
     public $modelGroup = array("Default") ;
 
+    public function __construct($params) {
+        parent::__construct($params) ;
+        $this->getLibraries() ;
+    }
+
     public function getData() {
         $ret["repository"] = $this->getRepository();
         $ret["features"] = $this->getRepositoryFeatures();
         $ret["user"] = $this->getLoggedInUser();
         $ret["current_user_role"] = $this->getCurrentUserRole($ret["user"]);
+        $ret["commit"] = $this->getCommit();
         return $ret ;
     }
 
@@ -35,9 +41,15 @@ class CommitDetailsAllOS extends Base {
         return $user->role ;
     }
 
-    public function deleteData() {
-        $ret["repository"] = $this->deleteRepository();
-        return $ret ;
+    protected function getLibraries() {
+        $libDir = dirname(dirname(__DIR__)).DS."RepositoryCharts".DS."Libraries".DS ;
+        require_once $libDir."gitter".DS."vendor".DS."autoload.php" ;
+        foreach (glob("{$libDir}GitPrettyStats".DS."Charts".DS."*.php") as $filename) {
+            require_once $filename; }
+        foreach (glob("{$libDir}GitPrettyStats".DS."Providers".DS."*.php") as $filename) {
+            require_once $filename; }
+        foreach (glob("{$libDir}GitPrettyStats".DS."*.php") as $filename) {
+            require_once $filename; }
     }
 
     public function getRepository() {
@@ -45,6 +57,14 @@ class CommitDetailsAllOS extends Base {
         $repository = $repositoryFactory->getModel($this->params);
         $r = $repository->getRepository($this->params["item"]);
         return $r ;
+    }
+
+    public function getCommit() {
+        $client = new \Gitter\Client;
+        $loc = REPODIR.DS.$this->params["item"] ;
+        $repository = $client->getRepository($loc);
+        $commit = $repository->getCommit($this->params["commit"]);
+        return $commit ;
     }
 
     public function getRepositoryFeatures() {

@@ -75,24 +75,51 @@
             <div class="row clearfix no-margin">
             	<h3 class="text-uppercase text-light ">Commit</h3>
 
-                <p> Commit Message: </p>
-                <p> Committer Name: </p>
-                <p> Commit Hash: </p>
-                <p> Branch: </p>
-                <p> File Browser Link: </p>
+                <p><strong>Commit Message: </strong><?php echo $pageVars["data"]["commit"]->getMessage() ; ?></p>
+                <p><strong>Committer: </strong><?php echo $pageVars["data"]["commit"]->getAuthor()->getName() ; ?></p>
+                <p><strong>Hash: </strong><?php echo $pageVars["data"]["commit"]->getShortHash() ; ?></p>
+                <p><strong>Date: </strong><?php echo $pageVars["data"]["commit"]->getDate()->format('H:i d/m/Y') ; ?></p>
+                <hr />
+                <p><strong>Diffs: </strong></p>
+                <?php
+                    $diffs = $pageVars["data"]["commit"]->getDiffs() ;
+                    $count = count($diffs) ;
+                    if ($count==1) {
+                        $sinpluris = "is" ;
+                        $sinplur = "file" ; }
+                    else {
+                        $sinpluris = "are" ;
+                        $sinplur = "files" ; }
+                    echo "<p> There {$sinpluris} {$count} changed {$sinplur}</p>" ;
 
-            </div>
-            <hr>
-            <div class="row clearfix no-margin build-home-properties">
-                <p> Time since Commit: </p>
-                <p> There are x changed files with y addition/s and z deletion/s.</p>
-                <p> The diff of the files.. </p>
+//                var_dump('<pre>', $diffs, '</pre>') ;
 
+                    foreach ($diffs as $diff) {
+                        echo '<div class="commitDiff">' ;
+                        $file = $diff->getFile() ;
+                        echo '<p class="diff_file_name">'.$file.'</p>' ;
+                        echo '<p class="old_diff_line">'.$diff->getOld() .'</p>' ;
+                        echo '<p class="new_diff_line">'.$diff->getNew() .'</p>' ;
+                        $difflines = $diff->getLines() ;
+                        foreach ($difflines as $diffline) {
+                            $type = $diffline->getType() ;
+                            if ($type == "old") {
+                                echo '<p class="old_diff_line">' . $diffline->getLine() . "</p>" ; }
+                            else if ($type == "new") {
+                                echo '<p class="new_diff_line">' . $diffline->getLine() . "</p>" ; }
+                            else {
+                                echo "<p>" . $diffline->getLine() . "</p>" ; }
+                        }
+                        echo '</div>' ;
+                    }
+
+                ?>
+                <p><strong>Changed Files: </strong><?php echo $pageVars["data"]["commit"]->getChangedFiles() ; ?></p>
+                <p><strong>File Browser Link: </p>
             </div>
 
         </div>
 
     </div>
 </div>
-<link rel="stylesheet" type="text/css" href="/Assets/Modules/CommitDetails/css/repositoryhome.css">
-<script type="text/javascript" src="/Assets/Modules/CommitDetails/js/repositoryhome.js"></script>
+<link rel="stylesheet" type="text/css" href="/Assets/Modules/CommitDetails/css/commitdetails.css">
