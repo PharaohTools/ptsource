@@ -1,23 +1,7 @@
-.commitDiff {
-    background-color: white;
-    padding: 2px 10px;
-    margin-bottom: 10px;
-}
-.commitDiff td,
-.commitDiff th {
-    padding: 2px 4px;
-}
+#editor {
+    display: none;
+    font-size: 75%; }
 
-.commitDiff img {
-    max-width: 100%;
-}
-
-.old_diff_line {
-    font-weight: bold;
-    color: orangered;
-}
-
-.new_diff_line {
-    font-weight: bold;
-    color: darkgreen;
+.CodeMirror-line span {
+    font-size: 70%;
 }

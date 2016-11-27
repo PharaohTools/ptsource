@@ -24,6 +24,13 @@ class FileBrowserAllOS extends Base {
         $ret["item"] = $this->params["item"];
         $ret["wsdir"] = $this->getFileBrowserDir();
         $ret["relpath"] = $this->getRelPath();
+        $ret["is_file"] = $this->isFileNotDirectory();
+        if ($ret["is_file"] == true) {
+            $ret["file"] = $this->loadFileContents() ;
+            $ret["file_extension"] = $this->findExtension() ;
+            $ret["file_mode"] = $this->findMode($ret["file_extension"]) ;
+        }
+        $ret["relpath"] = $this->getRelPath();
         $ret["current_user_data"] = $this->getCurrentUserData();
         return $ret ;
     }
@@ -146,6 +153,59 @@ class FileBrowserAllOS extends Base {
                     $new_ray[$one_file] = $is_dir ; } } }
 //        var_dump("<pre> nr", $new_ray, $dirs_ray, $command, "<br/> </pre>");
         return array ($new_ray, $dirs_ray) ;
+    }
+
+    private function isFileNotDirectory($identifier=null) {
+        $fileBrowserRootDir = $this->getFileBrowserDir() ;
+        $filePath = $this->getRelPath() ;
+        if (is_null($identifier)) { $identifier = "master" ; }
+        $command = "cd {$fileBrowserRootDir} && git ls-tree -r --name-only {$identifier} . {$filePath}" ;
+        $all_files = $this->executeAndLoad($command) ;
+        $all_files_ray = explode("\n", $all_files) ;
+        if (in_array($filePath, $all_files_ray)) { return true ;}
+        return false;
+    }
+
+    private function loadFileContents($identifier=null) {
+        $fileBrowserRootDir = $this->getFileBrowserDir() ;
+        $filePath = $this->getRelPath() ;
+        if (is_null($identifier)) { $identifier = "master" ; }
+        $command = "cd {$fileBrowserRootDir} && git show {$identifier}:$filePath" ;
+        $fc = $this->executeAndLoad($command) ;
+        return $fc ;
+    }
+
+    private function findExtension($identifier=null) {
+        $filePath = $this->getRelPath() ;
+        $basename = basename($filePath) ;
+        if (substr($basename, strlen($basename)-7)=="dsl.php") {
+            // @todo need a pharaoh dsl specific editor set
+            $extension = pathinfo($basename, PATHINFO_EXTENSION); }
+        else {
+            $extension = pathinfo($basename, PATHINFO_EXTENSION); }
+
+        $allowed_extensions = array("php", "js", "html") ;
+        if (in_array($extension, $allowed_extensions)) {
+            return $extension ;
+        }
+
+
+        return null ;
+    }
+
+    private function findMode($ext) {
+        $modes = array (
+            "js" => "javascript",
+            "html" => "htmlmixed",
+            "xhtml" => "htmlmixed",
+            "php" => "php",
+            "rb" => "ruby",
+        ) ;
+        if (isset($modes[$ext])) {
+            return $modes[$ext] ;
+        }
+
+        return null ;
     }
 
 }
