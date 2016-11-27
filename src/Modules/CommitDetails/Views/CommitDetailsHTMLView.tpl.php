@@ -83,7 +83,7 @@
                 <p><strong>Diffs: </strong></p>
                 <?php
                     $diffs = $pageVars["data"]["commit"]->getDiffs() ;
-                    $count = count($diffs) ;
+                    $count = $pageVars["data"]["commit"]->getChangedFiles() ;
                     if ($count==1) {
                         $sinpluris = "is" ;
                         $sinplur = "file" ; }
@@ -97,7 +97,8 @@
                     foreach ($diffs as $diff) {
                         echo '<div class="commitDiff">' ;
                         $file = $diff->getFile() ;
-                        echo '<p class="diff_file_name">'.$file.'</p>' ;
+                        echo '<p class="diff_file_name"><a href="">' ;
+                        echo $file.'</a></p>' ;
                         echo '<p class="old_diff_line">'.$diff->getOld() .'</p>' ;
                         echo '<p class="new_diff_line">'.$diff->getNew() .'</p>' ;
                         $difflines = $diff->getLines() ;
@@ -114,8 +115,7 @@
                     }
 
                 ?>
-                <p><strong>Changed Files: </strong><?php echo $pageVars["data"]["commit"]->getChangedFiles() ; ?></p>
-                <p><strong>File Browser Link: </p>
+                <p><strong>File Browser Link: </strong></p>
             </div>
 
         </div>
