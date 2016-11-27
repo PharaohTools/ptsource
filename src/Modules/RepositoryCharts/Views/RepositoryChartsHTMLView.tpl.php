@@ -266,5 +266,5 @@
 
     </div>
 </div>
-<link rel="stylesheet" type="text/css" href="/Assets/Modules/RepositoryCharts/css/repositoryhome.css">
+<link rel="stylesheet" type="text/css" href="/Assets/Modules/RepositoryCharts/css/repositorycharts.css">
 <link rel="stylesheet" type="text/css" href="/Assets/Modules/RepositoryHistory/css/repositoryhistory.css">

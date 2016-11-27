@@ -21,8 +21,12 @@ class RepositoryChartsAllOS extends Base {
 
     public function getData() {
         $ret["repository"] = $this->getRepository();
-        $ret["repository_charts"] = $this->getRepositoryCharts($ret["repository"]);
-        $ret["history"] = $this->getCommitHistory();
+        if ($ret["repository"]["is_bare_empty"] == true) {
+
+        }
+        else {
+            $ret["repository_charts"] = $this->getRepositoryCharts($ret["repository"]);
+            $ret["history"] = $this->getCommitHistory(); }
         $ret["user"] = $this->getLoggedInUser();
         $ret["current_user_role"] = $this->getCurrentUserRole($ret["user"]);
         return $ret ;
@@ -65,11 +69,13 @@ class RepositoryChartsAllOS extends Base {
     }
 
     protected function getRepositoryCharts($repo) {
-        $client = new \Gitter\Client;
+        $client = new \Gitter\Client();
         $loc = REPODIR.DS.$this->params["item"] ;
         $repository = $client->getRepository($loc);
+//        var_dump($repository) ;
+//        die() ;
         $repository->addStatistics(array(
-            new \Gitter\Statistics\Contributors,
+            new \Gitter\Statistics\Contributors(),
             new \Gitter\Statistics\Date,
             new \Gitter\Statistics\Day,
             new \Gitter\Statistics\Hour
