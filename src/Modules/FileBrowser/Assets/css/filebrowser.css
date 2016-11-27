@@ -1,6 +1,53 @@
 #editor {
     display: none; }
 
+#loader {
+    background-color: white; }
+
+#loader img {
+    display: block;
+    margin: 0 auto;
+}
+
+.CodeMirror{
+    height: auto
+}
+
+.CodeMirror-lines {
+    margin-top: 0;
+}
+
+.CodeMirror-sizer .CodeMirror-lines {
+    padding-top: 0 !important;
+}
+
+.CodeMirror-gutter-elt{
+    /*padding-top: 2px;*/
+    top: 4px ;
+}
+
+.CodeMirror-linenumber,
 .CodeMirror-line span span {
-    font-size: 70%;
+    /*font-size: 70%;*/
+}
+
+.CodeMirror-code div {
+    margin: 0 ;
+}
+
+#hide_menu_button {
+
+}
+
+#hide_menu_button:hover {
+    background-color: white;
+    color: #5bc0de;
+}
+
+#show_menu_wrapper {
+    display: none ;
+}
+
+.thin_padding {
+    padding-bottom: 0;
 }
