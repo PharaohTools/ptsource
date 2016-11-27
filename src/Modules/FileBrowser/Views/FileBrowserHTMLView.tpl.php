@@ -143,7 +143,7 @@
                 <div id="editor_wrapper">
                      <?php
                     if ($pageVars["route"]["action"]=="show") {
-                        if ($pageVars["data"]["is_file"] == true) {
+                        if ($pageVars["data"]["is_file"] === true) {
                             echo '<div id="loader"><img alt="Loading" src="/Assets/Modules/FileBrowser/images/loading.gif" /></div>' ;
                             echo '<textarea id="editor">' ;
                             echo $pageVars["data"]["file"] ;
