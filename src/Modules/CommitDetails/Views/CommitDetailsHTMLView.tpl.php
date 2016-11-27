@@ -97,8 +97,12 @@
                     foreach ($diffs as $diff) {
                         echo '<div class="commitDiff">' ;
                         $file = $diff->getFile() ;
-                        echo '<p class="diff_file_name"><a href="">' ;
-                        echo $file.'</a></p>' ;
+                        echo '<p class="diff_file_name">';
+                        echo '<a href="index.php?control=FileBrowser&action=show&item=' ;
+                        echo $pageVars["data"]["repository"]["project-slug"] ;
+                        echo '&relpath=' ;
+                        echo $file ;
+                        echo '/">View in File Browser</a></p>' ;
                         echo '<p class="old_diff_line">'.$diff->getOld() .'</p>' ;
                         echo '<p class="new_diff_line">'.$diff->getNew() .'</p>' ;
                         $difflines = $diff->getLines() ;
@@ -115,7 +119,7 @@
                     }
 
                 ?>
-                <p><strong>File Browser Link: </strong></p>
+                <p><strong>File Browser: </strong><a href="http://source.pharaoh.tld/"></a></p>
             </div>
 
         </div>
