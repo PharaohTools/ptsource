@@ -77,7 +77,7 @@
 
 div.chart_feature_text {
     max-width: 80%;
-    font-size: 90% ;
+    /*font-size: 90% ;*/
     display: block;
     text-align: right;
 }
