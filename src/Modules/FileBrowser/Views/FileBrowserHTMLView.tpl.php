@@ -213,9 +213,9 @@ if ($pageVars["route"]["action"]=="show") {
                 sh = cm[0].offsetHeight ;
                 console.log(sh) ;
                 if (sh > 1500) {
-                    cms.css('height', 1500) ; }
+                    cms.height(1500) ; }
                 else {
-                    cms.css('height', sh) ; }
+                    cms.height(sh) ; }
             });
         </script>
 
