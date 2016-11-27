@@ -101,8 +101,8 @@
                         echo '<a href="index.php?control=FileBrowser&action=show&item=' ;
                         echo $pageVars["data"]["repository"]["project-slug"] ;
                         echo '&relpath=' ;
-                        echo $file ;
-                        echo '/">View in File Browser</a></p>' ;
+                        echo htmlentities($file);
+                        echo '" />View in File Browser</a></p>' ;
                         echo '<p class="old_diff_line">'.$diff->getOld() .'</p>' ;
                         echo '<p class="new_diff_line">'.$diff->getNew() .'</p>' ;
                         $difflines = $diff->getLines() ;
