@@ -162,6 +162,8 @@ class FileBrowserAllOS extends Base {
         $command = "cd {$fileBrowserRootDir} && git ls-tree -r --name-only {$identifier} . {$filePath}" ;
         $all_files = $this->executeAndLoad($command) ;
         $all_files_ray = explode("\n", $all_files) ;
+//        var_dump('<pre>', $all_files_ray, '</pre>') ;
+        if ($filePath == "") { return false ;}
         if (in_array($filePath, $all_files_ray)) { return true ;}
         return false;
     }
