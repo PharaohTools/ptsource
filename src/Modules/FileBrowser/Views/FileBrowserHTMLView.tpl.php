@@ -196,6 +196,9 @@ if ($pageVars["route"]["action"]=="show") {
             if (isset($pageVars["data"]["file_mode"]) && $pageVars["data"]["file_mode"] != null) {
                 $jsmode = "mode: '{$pageVars["data"]["file_mode"]}'," ;
             }
+//            if (isset($pageVars["data"]["file_mode"]) && $pageVars["data"]["file_mode"] != null) {
+                $readonlystring = "readOnly: true," ;
+//            }
         ?>
 
         <script type="text/javascript">
@@ -204,7 +207,8 @@ if ($pageVars["route"]["action"]=="show") {
                 $('#editor').show();
                 var eob = document.getElementById("editor") ;
                 var editor = CodeMirror.fromTextArea(eob, {
-                    <?php echo $jsmode ; ?>
+                    <?php echo $readonlystring."\n" ; ?>
+                    <?php echo $jsmode."\n" ; ?>
                     lineNumbers: true
                 });
                 cm = document.getElementsByClassName("CodeMirror-code");

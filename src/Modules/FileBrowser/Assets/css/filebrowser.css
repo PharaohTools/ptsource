@@ -1,7 +1,6 @@
 #editor {
-    display: none;
-    font-size: 75%; }
+    display: none; }
 
-.CodeMirror-line span {
+.CodeMirror-line span span {
     font-size: 70%;
 }
