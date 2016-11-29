@@ -15,55 +15,32 @@ class TeamRepositoryAllOS extends Base {
     public $modelGroup = array("TeamRepository") ;
 
     public function getAllTeams() {
-        $repositories = array();
-        $names = $this->getTeamNames() ;
-        $teamFactory = new \Model\Team() ;
-        $team = $teamFactory->getModel($this->params);
-        foreach ($names as $name) {
-            $user = $this->getLoggedInUser() ;
-            $repo = $team->getTeam($name);
-            $hidden = (isset($repo["settings"]["HiddenScope"]["enabled"]) &&
-                $repo["settings"]["HiddenScope"]["enabled"]=="on") ? true : false ;
-            $hidden_from_members = (isset($repo["settings"]["HiddenScope"]["hidden_from_members"]) &&
-                $repo["settings"]["HiddenScope"]["hidden_from_members"]=="on") ? true : false ;
-            if ($hidden == true) {
-                // @todo here
-                // if logged in user is owner
-                if ($user !== false && $user->role==1) {
-                    $repositories[$name] = $repo ;
-                    continue ; }
-                if ($user !== false && $user->username==$repo["project-owner"]) {
-//                    var_dump("one") ;
-//                    die() ;
-                    $repositories[$name] = $repo ;
-                    continue ; }
-                // if settings say hide from members return false
-                if ($hidden_from_members==true) {
-//                    var_dump("two") ;
-//                    die() ;
-                    continue ; }
-                // if logged in user is member return true
-                $pm = explode(",", $repo["project-members"]) ;
-                if ($user !== false && in_array($user->username, $pm)) {
-//                    var_dump("three") ;
-//                    die() ;
-                    $repositories[$name] = $repo ;
-                    continue ; } }
-            else {
-//                var_dump("four") ;
-//                die() ;
-                $repositories[$name] = $repo ; } }
-        return $repositories ;
+        $datastoreFactory = new \Model\Datastore() ;
+        $datastore = $datastoreFactory->getModel($this->params) ;
+        $teams = array() ;
+        if ($datastore->collectionExists('teams')){
+            $teams = $datastore->findAll('teams') ; }
+        return $teams ;
     }
 
     public function getTeamNames() {
-        $repositories = scandir(REPODIR) ;
-        for ($i=0; $i<count($repositories); $i++) {
-            if (!in_array($repositories[$i], array(".", "..", "tmpfile"))){
-                if(is_dir(REPODIR.DS.$repositories[$i])) {
-                    // @todo if this isnt definitely a build dir ignore maybe
-                    $names[] = $repositories[$i] ; } } }
+        $teams = $this->getAllTeams() ;
+        $names = array() ;
+        for ($i=0; $i<count($teams); $i++) { $names[] = $teams[$i]["team_name"] ; }
         return (isset($names) && is_array($names)) ? $names : array() ;
+    }
+
+    public function getTeamIDs() {
+        $teams = $this->getAllTeams() ;
+        $slugs = array() ;
+        for ($i=0; $i<count($teams); $i++) { $slugs[] = $teams[$i]["team_slug"] ; }
+        return (isset($slugs) && is_array($slugs)) ? $slugs : array() ;
+    }
+
+    public function getTeamCount() {
+        $names = $this->getTeamNames() ;
+        $team_count = count($names) ;
+        return array("team_count" => $team_count) ;
     }
 
     protected function getLoggedInUser() {

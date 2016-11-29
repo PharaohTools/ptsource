@@ -81,37 +81,52 @@ class TeamAllOS extends Base {
     public function deleteTeam($name) {
         $loggingFactory = new \Model\Logging();
         $logging = $loggingFactory->getModel($this->params);
-        if (file_exists(REPODIR.DS.$name)) {
-            $logging->log("Directory exists at ".REPODIR.DS."{$name}. Attempting removal.", $this->getModuleName()) ;
-            $rc = self::executeAndGetReturnCode('rm -rf '.REPODIR.DS.$name);
-            return $rc ; }
-        else  {
-            $logging->log("No directory exists at ".REPODIR.DS."$name to delete", $this->getModuleName()) ;
-            return true ; }
+        $datastoreFactory = new \Model\Datastore() ;
+        $datastore = $datastoreFactory->getModel($this->params) ;
+        if ($datastore->collectionExists('teams') == false) {
+            $logging->log("Unable to delete team from non existent collection teams", $this->getModuleName()) ;
+            return false ; }
+        $res = $datastore->delete('teams', array("where", "team_slug", '=', $name)) ;
+        return ($res==false) ? false : true ;
     }
 
     public function createTeam($name) {
-        $loggingFactory = new \Model\Logging();
-        $logging = $loggingFactory->getModel($this->params);
-        if (file_exists(REPODIR.DS.$name)) {
-            $logging->log("Directory already exists at ".REPODIR.DS."{$name}. Exiting with failure.", $this->getModuleName()) ;
-            return false ; }
-        else  {
-            $logging->log("Attempting to create directory ".REPODIR.DS."$name ", $this->getModuleName()) ;
-            // @todo cross os
-            $comms = array(
-                'mkdir -p '.REPODIR.DS.$name,
-                'git init --bare '.REPODIR.DS.$name,
-                'cd '.REPODIR.DS.$name.'; git config http.recievepack true ;' ) ;
-            $results = array() ;
-            foreach ($comms as $comm) {
-                $rc = self::executeAndGetReturnCode($comm);
-                $results[] = ($rc["rc"] == 0) ? true : false ;
-                if ($rc["rc"] != 0) {
-                    $logging->log("Team creation command failed ".REPODIR.DS."$name ", $this->getModuleName(), LOG_FAILURE_EXIT_CODE) ;
-                    $logging->log("Failed command was {$comm}", $this->getModuleName()) ;
-                    return false ; } }
-            return (in_array(false, $results)) ? false : true ; }
+        $datastoreFactory = new \Model\Datastore() ;
+        $datastore = $datastoreFactory->getModel($this->params) ;
+        $loggingFactory = new \Model\Logging() ;
+        $this->params["echo-log"] = true ;
+        $this->params["app-log"] = true ;
+        $logging = $loggingFactory->getModel($this->params) ;
+
+        if ($datastore->collectionExists('teams') == false) {
+            $column_defines = array(
+                'team_slug' => 'string',
+                'team_name' => 'string',
+                'team_description' => 'string',
+                'team_client' => 'string',
+                'team_creator' => 'string',
+                'team_members' => 'string',
+                'milestones' => 'string',
+                'team_source' => 'string',
+                'current_state' => 'string',
+                'team_public_scope_enabled' => 'string',
+                'team_public_home_enabled' => 'string',
+                'team_public_issue_enabled' => 'string',
+                'team_public_comments_enabled' => 'string',
+            );
+            $logging->log("Creating Jobs Collection in Datastore", $this->getModuleName()) ;
+
+            $datastore->createCollection('teams', $column_defines) ; }
+
+        $logging->log("Creating New Job {$name} in Collection ".'teams', $this->getModuleName()) ;
+
+        $res = $datastore->insert('teams', array(
+            "team_slug"=>$name
+        )) ;
+
+        return ($res==false) ? false : true ;
+
     }
+
 
 }
