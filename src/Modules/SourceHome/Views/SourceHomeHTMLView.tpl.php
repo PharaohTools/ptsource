@@ -59,10 +59,10 @@
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-3">
-                                        <i class="fa fa-database   fa-4x hvr-buzz-out"></i>
+                                        <i class="fa fa-database fa-4x hvr-buzz-out"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge hvr-grow-rotate" ><?php echo $pageVars['pipesDetail']['total']; ?></div>
+                                        <div class="huge hvr-grow-rotate" ><?php echo count($pageVars['data']['all_repositories']); ?></div>
                                         <div>Total Repositories</div>
                                     </div>
                                 </div>
@@ -84,8 +84,8 @@
                                         <i class="fa fa-check-circle fa-4x hvr-buzz-out"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge  hvr-grow-rotate"><?php echo $pageVars['pipesDetail']['success']; ?></div>
-                                        <div>Your Repositories!</div>
+                                        <div class="huge  hvr-grow-rotate"><?php echo $pageVars['data']['my_owned_repositories']; ?></div>
+                                        <div>Your Repositories</div>
                                     </div>
                                 </div>
                             </div>
@@ -106,7 +106,7 @@
                                         <i class="fa fa-times-circle fa-4x hvr-buzz-out"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge  hvr-grow-rotate"><?php echo $pageVars['pipesDetail']['fail']; ?></div>
+                                        <div class="huge  hvr-grow-rotate"><?php echo $pageVars['data']['my_member_repositories']; ?></div>
                                         <div>Broken</div>
                                     </div>
                                 </div>
@@ -128,8 +128,8 @@
                                         <i class="fa fa-chain-broken fa-4x hvr-buzz-out"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge hvr-grow-rotate"><?php echo $pageVars['pipesDetail']['unstable']; ?></div>
-                                        <div>Passing</div>
+                                        <div class="huge hvr-grow-rotate">?</div>
+                                        <div>Issues</div>
                                     </div>
                                 </div>
                             </div>
@@ -172,8 +172,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="panel-footer">
-                                                    <span class="allJobsCalendarLink pull-left">View Calendar</span>
-                                                    <span class="pull-right allJobsCalendarLink"><i class="fa fa-arrow-circle-right"></i></span>
+                                                    <span class="pull-left">View Repositories</span>
+                                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                                     <div class="clearfix"></div>
                                                 </div>
                                             </a>
@@ -195,7 +195,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="panel-footer">
-                                                    <span class="pull-left">View Calendar</span>
+                                                    <span class="pull-left">View Repositories</span>
                                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                                     <div class="clearfix"></div>
                                                 </div>
@@ -213,12 +213,12 @@
                                                 <div class="panel-heading">
                                                     <div class="row">
                                                         <div class="col-xs-12 huge hvr-grow-rotate text-center">
-                                                            By User
+                                                            Member
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="panel-footer">
-                                                    <span class="pull-left">View Details</span>
+                                                    <span class="pull-left">View Repositories</span>
                                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                                     <div class="clearfix"></div>
                                                 </div>
@@ -238,20 +238,17 @@
                                             <a href="/index.php?control=JobList&action=show">
                                                 <div class="panel-heading">
                                                     <div class="row">
-    <!--                                                    <div class="col-xs-3">-->
-    <!--                                                        <i class="fa fa-database   fa-4x hvr-buzz-out"></i>-->
-    <!--                                                    </div>-->
                                                         <div class="col-xs-12 text-center">
                                                             <div class="huge hvr-grow-rotate" ><?php
-                                                                $jc = (isset( $pageVars["data"]['job_count'])) ?  $pageVars["data"]['job_count'] : "?" ;
+                                                                $jc = (isset( $pageVars["data"]['all_teams'])) ?  count($pageVars["data"]['all_teams']) : "?" ;
                                                                 echo $jc; ?></div>
-                                                            <div> Total</div>
+                                                            <div>All</div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="panel-footer">
-                                                    <span class="allJobsCalendarLink pull-left">View Jobs</span>
-                                                    <span class="allJobsCalendarLink pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                                    <span class="pull-left">View Teams</span>
+                                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                                     <div class="clearfix"></div>
                                                 </div>
                                             </a>
@@ -265,19 +262,16 @@
                                                 <a href="/index.php?control=JobList&action=show&filters[]=job_creator::<?php echo $pageVars["data"]['user']->username ; ?>">
                                                     <div class="panel-heading">
                                                         <div class="row">
-                                                            <!--                                                    <div class="col-xs-3">-->
-                                                            <!--                                                        <i class="fa fa-check-circle fa-4x hvr-buzz-out"></i>-->
-                                                            <!--                                                    </div>-->
                                                             <div class="col-xs-12 text-center">
                                                                 <div class="huge  hvr-grow-rotate"><?php
-                                                                    $jc = (isset( $pageVars["data"]['my_job_created_count'])) ?  $pageVars["data"]['my_job_created_count'] : "?" ;
+                                                                    $jc = (isset( $pageVars["data"]['my_team_created_count'])) ?  $pageVars["data"]['my_job_created_count'] : "?" ;
                                                                     echo $jc; ?></div>
-                                                                <div> Yours</div>
+                                                                <div>Yours</div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="panel-footer">
-                                                        <span class="pull-left">View Jobs</span>
+                                                        <span class="pull-left">View Teams</span>
                                                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                                         <div class="clearfix"></div>
                                                     </div>
@@ -297,19 +291,16 @@
                                                 <a href="/index.php?control=JobList&action=show&filters[]=job_members[~]::<?php echo $pageVars["data"]['user']->username ; ?>">
                                                     <div class="panel-heading">
                                                         <div class="row">
-                                                            <!--                                                    <div class="col-xs-3">-->
-                                                            <!--                                                        <i class="fa fa-check-circle fa-4x hvr-buzz-out"></i>-->
-                                                            <!--                                                    </div>-->
                                                             <div class="col-xs-12 text-center">
                                                                 <div class="huge  hvr-grow-rotate"><?php
-                                                                    $jc = (isset( $pageVars["data"]['my_job_member_count'])) ?  $pageVars["data"]['my_job_member_count'] : "?" ;
+                                                                    $jc = (isset( $pageVars["data"]['my_team_member_count'])) ?  $pageVars["data"]['my_job_member_count'] : "?" ;
                                                                     echo $jc; ?></div>
-                                                                <div> Member</div>
+                                                                <div>Member</div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="panel-footer">
-                                                        <span class="pull-left">View Jobs</span>
+                                                        <span class="pull-left">View Teams</span>
                                                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                                         <div class="clearfix"></div>
                                                     </div>
