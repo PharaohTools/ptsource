@@ -84,7 +84,9 @@
                                         <i class="fa fa-check-circle fa-4x hvr-buzz-out"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge  hvr-grow-rotate"><?php echo $pageVars['data']['my_owned_repositories']; ?></div>
+                                        <div class="huge  hvr-grow-rotate">
+                                            <?php echo $pageVars['data']['my_owned_repositories']; ?>
+                                        </div>
                                         <div>Your Repositories</div>
                                     </div>
                                 </div>
@@ -167,7 +169,7 @@
                                                 <div class="panel-heading">
                                                     <div class="row">
                                                         <div class="col-xs-12 huge hvr-grow-rotate text-center" >
-                                                            All
+                                                            All - <?php echo count($pageVars['data']['all_repositories']); ?>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -190,7 +192,7 @@
                                                 <div class="panel-heading">
                                                     <div class="row">
                                                         <div class="col-xs-12 huge hvr-grow-rotate text-center">
-                                                            Yours
+                                                            Yours - <?php echo $pageVars['data']['my_owned_repositories']; ?>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -213,7 +215,7 @@
                                                 <div class="panel-heading">
                                                     <div class="row">
                                                         <div class="col-xs-12 huge hvr-grow-rotate text-center">
-                                                            Member
+                                                            Member - <?php echo $pageVars['data']['my_member_repositories']; ?>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -235,7 +237,7 @@
                                     <div class="col-lg-4 col-md-6 hvr-pcreatoop">
 
                                         <div class="panel panel-primary">
-                                            <a href="/index.php?control=JobList&action=show">
+                                            <a href="/index.php?control=TeamList&action=show">
                                                 <div class="panel-heading">
                                                     <div class="row">
                                                         <div class="col-xs-12 text-center">
@@ -259,7 +261,7 @@
                                         ?>
                                         <div class="col-lg-4 col-md-6 hvr-pcreatoop">
                                             <div class="panel panel-green">
-                                                <a href="/index.php?control=JobList&action=show&filters[]=job_creator::<?php echo $pageVars["data"]['user']->username ; ?>">
+                                                <a href="/index.php?control=TeamList&action=show&filters[]=team_creator::<?php echo $pageVars["data"]['user']->username ; ?>">
                                                     <div class="panel-heading">
                                                         <div class="row">
                                                             <div class="col-xs-12 text-center">
@@ -288,7 +290,7 @@
                                         ?>
                                         <div class="col-lg-4 col-md-6 hvr-pcreatoop">
                                             <div class="panel panel-green">
-                                                <a href="/index.php?control=JobList&action=show&filters[]=job_members[~]::<?php echo $pageVars["data"]['user']->username ; ?>">
+                                                <a href="/index.php?control=TeamList&action=show&filters[]=team_members[~]::<?php echo $pageVars["data"]['user']->username ; ?>">
                                                     <div class="panel-heading">
                                                         <div class="row">
                                                             <div class="col-xs-12 text-center">
@@ -321,10 +323,10 @@
                                 <div class="row text-center">
                                     <div class="col-sm-6 text-center">
                                         <?php
-                                        if (isset($pageVars["data"]["latest_commits"]) && count($pageVars["data"]["latest_commits"])>0 ) {
+                                        if (isset($pageVars["data"]["latest_issues"]) && count($pageVars["data"]["latest_issues"])>0 ) {
                                             $i = 1;
 
-                                            foreach ($pageVars["data"]["latest_commits"] as $latestAlert) {
+                                            foreach ($pageVars["data"]["latest_issues"] as $latestAlert) {
                                                 ?>
 
 
