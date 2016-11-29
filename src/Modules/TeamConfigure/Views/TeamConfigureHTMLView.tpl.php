@@ -1,6 +1,6 @@
 
-<script type="text/javascript" src="/Assets/Modules/RepositoryConfigure/js/repositoryconfigure.js"></script>
-<script type="text/javascript" src="/Assets/Modules/RepositoryConfigure/js/repositoryconfigure_settings.js"></script>
+<script type="text/javascript" src="/Assets/Modules/TeamConfigure/js/teamconfigure.js"></script>
+<script type="text/javascript" src="/Assets/Modules/TeamConfigure/js/teamconfigure_settings.js"></script>
 <div class="container" id="wrapper">
     <div class="navbar-default col-sm-2 sidebar" role="navigation">
         <div class="sidebar-nav ">
@@ -25,8 +25,8 @@
                 if ($pageVars["route"]["action"] !== "new") {
                 ?>
                 <li>
-                    <a href="/index.php?control=RepositoryHome&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
-                        <i class="fa fa-home hvr-bounce-in"></i> Repository Home
+                    <a href="/index.php?control=TeamHome&action=show&item=<?php echo $pageVars["data"]["team"]["project-slug"] ; ?>" class="hvr-bounce-in">
+                        <i class="fa fa-home hvr-bounce-in"></i> Team Home
                     </a>
                 </li>
                 <?php
@@ -34,29 +34,29 @@
                 ?>
                 <li>
                     <a href="/index.php?control=BuildList&action=show" class="hvr-bounce-in">
-                        <i class="fa fa-bars fa-fw hvr-bounce-in"></i> All Repositories
+                        <i class="fa fa-bars fa-fw hvr-bounce-in"></i> All Teams
                     </a>
                 </li>
                 <?php
                 if ($pageVars["route"]["action"] !== "new") {
                 ?>
                 <li>
-                    <a href="/index.php?control=FileBrowser&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
+                    <a href="/index.php?control=FileBrowser&action=show&item=<?php echo $pageVars["data"]["team"]["project-slug"] ; ?>" class="hvr-bounce-in">
                         <i class="fa fa-folder-open-o hvr-bounce-in"></i> File Browser
                     </a>
                 </li>
                 <li>
-                    <a href="index.php?control=RepositoryCharts&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
+                    <a href="index.php?control=TeamCharts&action=show&item=<?php echo $pageVars["data"]["team"]["project-slug"] ; ?>" class="hvr-bounce-in">
                         <i class="fa fa-bar-chart-o hvr-bounce-in"></i> Charts
                     </a>
                 </li>
                 <li>
-                    <a href="/index.php?control=RepositoryHistory&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
+                    <a href="/index.php?control=TeamHistory&action=show&item=<?php echo $pageVars["data"]["team"]["project-slug"] ; ?>" class="hvr-bounce-in">
                         <i class="fa fa-history fa-fw hvr-bounce-in"></i> History
                     </a>
                 </li>
                 <li>
-                    <a href="/index.php?control=RepositoryHome&action=delete&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
+                    <a href="/index.php?control=TeamHome&action=delete&item=<?php echo $pageVars["data"]["team"]["project-slug"] ; ?>" class="hvr-bounce-in">
                         <i class="fa fa-trash fa-fw hvr-bounce-in"></i> Delete
                     </a>
                 </li>
@@ -70,7 +70,7 @@
                     <div class="well well-lg">
 
         <?php
-        $act = '/index.php?control=RepositoryConfigure&item='.$pageVars["data"]["repository"]["project-slug"].'&action=save' ;
+        $act = '/index.php?control=TeamConfigure&item='.$pageVars["data"]["team"]["project-slug"].'&action=save' ;
         ?>
 
             <?php echo $this->renderLogs() ; ?>
@@ -85,7 +85,7 @@
 
                     <div class="form-group">
                         <div class="col-sm-10">
-                            <h3>Repository Settings</h3>
+                            <h3>Team Settings</h3>
                         </div>
                     </div>
 
@@ -98,14 +98,14 @@
                     <div class="form-group">
                         <label for="project-name" class="col-sm-2 control-label text-left">Project Name</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="project-name" id="project-name" placeholder="Project Name" value="<?php echo $pageVars["data"]["repository"]["project-name"] ; ?>" />
+                            <input type="text" class="form-control" name="project-name" id="project-name" placeholder="Project Name" value="<?php echo $pageVars["data"]["team"]["project-name"] ; ?>" />
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="project-slug" class="col-sm-2 control-label text-left">Project Slug</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="project-slug" id="project-slug" placeholder="<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" value="<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" />
+                            <input type="text" class="form-control" name="project-slug" id="project-slug" placeholder="<?php echo $pageVars["data"]["team"]["project-slug"] ; ?>" value="<?php echo $pageVars["data"]["team"]["project-slug"] ; ?>" />
                         </div>
                     </div>
 
@@ -157,14 +157,14 @@
                                     <?php
                                     $allOwners = $pageVars["data"]["available_users"] ;
                                     foreach ($allOwners as $oneOwner) {
-                                        if ($oneOwner == $pageVars["data"]["repository"]["project-owner"]) {
+                                        if ($oneOwner == $pageVars["data"]["team"]["project-owner"]) {
                                             $owner = $oneOwner ; } }
 
                                     if (isset($owner)) {
                                         ?>
 
                                         <div class="btn btn-success" value="<?php echo $owner ; ?>"><?php echo $owner ; ?></div>
-                                        <input type="hidden" name="project-owner" id="project-owner" value="<?php echo $pageVars["data"]["repository"]["project-owner"] ; ?>" />
+                                        <input type="hidden" name="project-owner" id="project-owner" value="<?php echo $pageVars["data"]["team"]["project-owner"] ; ?>" />
                                         <!--                                    <p>Owner Currently: </p>-->
 
                                     <?php
@@ -186,7 +186,7 @@
 
                                 } else {
                                     ?>
-                                    <p id="project-owner"><?php echo $pageVars["data"]["repository"]["project-owner"] ; ?></p>
+                                    <p id="project-owner"><?php echo $pageVars["data"]["team"]["project-owner"] ; ?></p>
                                 <?php
                                 }
 
@@ -198,7 +198,7 @@
                     <div class="form-group">
                         <label for="project-description" class="col-sm-2 control-label text-left">Description</label>
                         <div class="col-sm-10">
-                            <textarea id="project-description" name="project-description" class="form-control"><?php echo $pageVars["data"]["repository"]["project-description"] ; ?></textarea>
+                            <textarea id="project-description" name="project-description" class="form-control"><?php echo $pageVars["data"]["team"]["project-description"] ; ?></textarea>
                         </div>
                     </div>
                     <hr>
@@ -242,10 +242,10 @@
 
                                     foreach ( $fieldInfo as $singleFieldSlug => $singleFieldInfo) {
 
-                                    displaySingleFieldSet($one_config_slug, $one_conf_tails, $fieldSlug, $fieldInfo, $pageVars["data"]["repository"]["settings"], $singleFieldSlug) ;
+                                    displaySingleFieldSet($one_config_slug, $one_conf_tails, $fieldSlug, $fieldInfo, $pageVars["data"]["team"]["settings"], $singleFieldSlug) ;
 
                                     ?>
-                                        <div class="btn btn-success" onclick='displayRepositoryConfigureSettingsFieldset("<?php echo $one_config_slug ; ?>", "<?php echo $singleFieldSlug ; ?>")'>
+                                        <div class="btn btn-success" onclick='displayTeamConfigureSettingsFieldset("<?php echo $one_config_slug ; ?>", "<?php echo $singleFieldSlug ; ?>")'>
                                             Add Fieldset: <strong><?php echo "$one_config_slug, {$singleFieldSlug}" ; ?></strong></div>
                                     <?php
 
@@ -253,7 +253,7 @@
 
                                     }
                                 else {
-                                    displaySingleField($one_config_slug, $one_conf_tails, $fieldSlug, $fieldInfo, $pageVars["data"]["repository"]["settings"]) ; }
+                                    displaySingleField($one_config_slug, $one_conf_tails, $fieldSlug, $fieldInfo, $pageVars["data"]["team"]["settings"]) ; }
 
                             }
 
@@ -285,7 +285,7 @@
 
                     ?>
 
-                    <input type="hidden" name="item" id="item" value="<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" />
+                    <input type="hidden" name="item" id="item" value="<?php echo $pageVars["data"]["team"]["project-slug"] ; ?>" />
 
                 </form>
             </div>
@@ -302,7 +302,7 @@
 
 
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
-<link rel="stylesheet" type="text/css" href="/Assets/Modules/RepositoryConfigure/css/repositoryconfigure.css">
+<link rel="stylesheet" type="text/css" href="/Assets/Modules/TeamConfigure/css/teamconfigure.css">
 
 <?php
 

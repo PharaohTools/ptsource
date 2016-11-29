@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class RepositoryHomeAllOS extends Base {
+class TeamHomeAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -15,13 +15,13 @@ class RepositoryHomeAllOS extends Base {
     public $modelGroup = array("Default") ;
 
     public function getData() {
-        $ret["repository"] = $this->getRepository();
-        $ret["features"] = $this->getRepositoryFeatures();
+        $ret["team"] = $this->getTeam();
+        $ret["features"] = $this->getTeamFeatures();
         $ret["history"] = $this->getCommitHistory();
         $ret["is_https"] = $this->isSecure();
         $ret["user"] = $this->getLoggedInUser();
         $ret["current_user_role"] = $this->getCurrentUserRole($ret["user"]);
-        $ret["readme"] = $this->getReadmeData($ret["repository"]) ;
+        $ret["readme"] = $this->getReadmeData($ret["team"]) ;
         $ret = array_merge($ret, $this->getIdentifier()) ;
         return $ret ;
     }
@@ -41,21 +41,21 @@ class RepositoryHomeAllOS extends Base {
     }
 
     public function deleteData() {
-        $ret["repository"] = $this->deleteRepository();
+        $ret["team"] = $this->deleteTeam();
         return $ret ;
     }
 
-    protected function getRepository() {
-        $repositoryFactory = new \Model\Repository() ;
-        $repository = $repositoryFactory->getModel($this->params);
-        $r = $repository->getRepository($this->params["item"]);
+    protected function getTeam() {
+        $teamFactory = new \Model\Team() ;
+        $team = $teamFactory->getModel($this->params);
+        $r = $team->getTeam($this->params["item"]);
         return $r ;
     }
 
-    protected function getReadmeData($repository) {
+    protected function getReadmeData($team) {
         $identifier = 'HEAD' ;
         $cur_dir = getcwd() ;
-        chdir(REPODIR.DS.$repository["project-slug"]) ;
+        chdir(REPODIR.DS.$team["project-slug"]) ;
         $command = 'git ls-tree --full-tree '.$identifier ;
         exec($command, $output) ;
         $files = $this->parseLSTree($output) ;
@@ -90,19 +90,19 @@ class RepositoryHomeAllOS extends Base {
         return $identifier ;
     }
 
-    protected function getRepositoryFeatures() {
-        $repositoryFactory = new \Model\Repository() ;
-        $repository = $repositoryFactory->getModel($this->params);
-        $r = $repository->getRepositoryFeatures($this->params["item"]);
+    protected function getTeamFeatures() {
+        $teamFactory = new \Model\Team() ;
+        $team = $teamFactory->getModel($this->params);
+        $r = $team->getTeamFeatures($this->params["item"]);
         return $r ;
     }
 
     protected function getCommitHistory() {
-        $repositoryFactory = new \Model\Repository() ;
+        $teamFactory = new \Model\Team() ;
         $commitParams = $this->params ;
         $commitParams["amount"] = 10 ;
-        $repository = $repositoryFactory->getModel($commitParams, "RepositoryCommits");
-        return $repository->getCommits();
+        $team = $teamFactory->getModel($commitParams, "TeamCommits");
+        return $team->getCommits();
     }
 
     protected function isSecure() {
@@ -111,15 +111,15 @@ class RepositoryHomeAllOS extends Base {
             || $_SERVER['SERVER_PORT'] == 443;
     }
 
-    public function deleteRepository() {
-        $repositoryFactory = new \Model\Repository() ;
-        $repository = $repositoryFactory->getModel($this->params);
-        return $repository->deleteRepository($this->params["item"]);
+    public function deleteTeam() {
+        $teamFactory = new \Model\Team() ;
+        $team = $teamFactory->getModel($this->params);
+        return $team->deleteTeam($this->params["item"]);
     }
 
     public function userIsAllowedAccess() {
         $user = $this->getLoggedInUser() ;
-        $repository = $this->getRepository() ;
+        $team = $this->getTeam() ;
         $settings = $this->getSettings() ;
         if (!isset($settings["PublicScope"]["enable_public"]) ||
             ( isset($settings["PublicScope"]["enable_public"]) && $settings["PublicScope"]["enable_public"] != "on" )) {
@@ -133,8 +133,8 @@ class RepositoryHomeAllOS extends Base {
             // if enable public is set to on
             if ($user == false) {
                 // and the user is not logged in
-                if ($repository["settings"]["PublicScope"]["enabled"] == "on" &&
-                    $repository["settings"]["PublicScope"]["public_pages"] == "on") {
+                if ($team["settings"]["PublicScope"]["enabled"] == "on" &&
+                    $team["settings"]["PublicScope"]["public_pages"] == "on") {
                     // if public pages are on
                     return true ; }
                 else {

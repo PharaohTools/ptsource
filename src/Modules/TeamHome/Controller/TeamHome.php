@@ -2,7 +2,7 @@
 
 Namespace Controller ;
 
-class RepositoryHome extends Base {
+class TeamHome extends Base {
 
     public function execute($pageVars) {
         $thisModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars) ;
@@ -16,7 +16,7 @@ class RepositoryHome extends Base {
 
         if($pageVars["route"]["action"] == "show"){ $this->content["data"] = $thisModel->getData(); }
         if($pageVars["route"]["action"] == "delete"){ $this->content["data"] = $thisModel->deleteData(); }
-        return array ("type"=>"view", "view"=>"repositoryHome", "pageVars"=>$this->content);
+        return array ("type"=>"view", "view"=>"teamHome", "pageVars"=>$this->content);
     }
 
     protected function getIndexControllerForOverride() {

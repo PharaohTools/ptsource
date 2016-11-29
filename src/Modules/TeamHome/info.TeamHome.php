@@ -2,31 +2,31 @@
 
 Namespace Info;
 
-class RepositoryHomeInfo extends PTConfigureBase {
+class TeamHomeInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "RepositoryHome/Home Page";
+    public $name = "TeamHome/Home Page";
 
     public function _construct() {
       parent::__construct();
     }
 
     public function routesAvailable() {
-      return array( "RepositoryHome" => array("show", "delete") );
+      return array( "TeamHome" => array("show", "delete") );
     }
 
     public function routeAliases() {
-      return array("repositoryHome"=>"RepositoryHome");
+      return array("teamHome"=>"TeamHome");
     }
 
     public function ignoredAuthenticationRoutes() {
-        return array( "RepositoryHome" => array("show") );
+        return array( "TeamHome" => array("show") );
     }
 
     public function helpDefinition() {
       $help = <<<"HELPDATA"
-  This is the Repository Home page module for a single build...
+  This is the Team Home page module for a single build...
 HELPDATA;
       return $help ;
     }

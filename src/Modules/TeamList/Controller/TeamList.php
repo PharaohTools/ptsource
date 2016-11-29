@@ -2,7 +2,7 @@
 
 Namespace Controller ;
 
-class RepositoryList extends Base {
+class TeamList extends Base {
 
     public function execute($pageVars) {
       $thisModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars) ;
@@ -10,7 +10,7 @@ class RepositoryList extends Base {
       $this->content = $pageVars ;
       if (is_array($thisModel)) { return $this->failDependencies($pageVars, $this->content, $thisModel) ; }
       $this->content["data"] = $thisModel->getData();
-      return array ("type"=>"view", "view"=>"repositoryList", "pageVars"=>$this->content);
+      return array ("type"=>"view", "view"=>"teamList", "pageVars"=>$this->content);
     }
 
 }

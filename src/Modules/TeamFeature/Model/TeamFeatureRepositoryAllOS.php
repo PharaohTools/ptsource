@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class RepositoryFeatureRepositoryAllOS extends Base {
+class TeamFeatureRepositoryAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -12,52 +12,52 @@ class RepositoryFeatureRepositoryAllOS extends Base {
     public $architectures = array("any") ;
 
     // Model Group
-    public $modelGroup = array("RepositoryFeatureRepository") ;
+    public $modelGroup = array("TeamFeatureRepository") ;
 
-    public function getAllRepositoryFeatures() {
-        $repositoryFeatures = array();
-        $names = $this->getRepositoryFeatureNames() ;
-        $repositoryFeatureFactory = new \Model\RepositoryFeature() ;
-        $repositoryFeature = $repositoryFeatureFactory->getModel($this->params);
+    public function getAllTeamFeatures() {
+        $teamFeatures = array();
+        $names = $this->getTeamFeatureNames() ;
+        $teamFeatureFactory = new \Model\TeamFeature() ;
+        $teamFeature = $teamFeatureFactory->getModel($this->params);
         foreach ($names as $name) {
-            $repositoryFeatures[$name] = $repositoryFeature->getRepositoryFeature($name); }
-        return $repositoryFeatures ;
+            $teamFeatures[$name] = $teamFeature->getTeamFeature($name); }
+        return $teamFeatures ;
     }
 
-    public function getAllRepositoryFeaturesFormFields() {
+    public function getAllTeamFeaturesFormFields() {
         $formFields = array();
-        $names = $this->getRepositoryFeatureNames() ;
-        $repositoryFeatureFactory = new \Model\RepositoryFeature() ;
-        $repositoryFeature = $repositoryFeatureFactory->getModel($this->params);
+        $names = $this->getTeamFeatureNames() ;
+        $teamFeatureFactory = new \Model\TeamFeature() ;
+        $teamFeature = $teamFeatureFactory->getModel($this->params);
         foreach ($names as $name) {
-            $bo = $repositoryFeature->getRepositoryFeature($name);
+            $bo = $teamFeature->getTeamFeature($name);
             $formFields[$name] = $bo["fields"] ; }
         return $formFields ;
     }
 
-    public function getStepRepositoryFeaturesFormFields() {
+    public function getStepTeamFeaturesFormFields() {
         $formFields = array();
-        $names = $this->getRepositoryFeatureNames(array("buildSteps")) ;
-        $repositoryFeatureFactory = new \Model\RepositoryFeature() ;
-        $repositoryFeature = $repositoryFeatureFactory->getModel($this->params);
+        $names = $this->getTeamFeatureNames(array("buildSteps")) ;
+        $teamFeatureFactory = new \Model\TeamFeature() ;
+        $teamFeature = $teamFeatureFactory->getModel($this->params);
         foreach ($names as $name) {
-            $bo = $repositoryFeature->getRepositoryFeature($name);
+            $bo = $teamFeature->getTeamFeature($name);
             $formFields[$name] = $bo["fields"] ; }
         return $formFields ;
     }
 
-    public function getRepositoryFeatureNames($includeTypes = array()) {
-        $repositoryFeatureNames = array() ;
+    public function getTeamFeatureNames($includeTypes = array()) {
+        $teamFeatureNames = array() ;
         $infos = \Core\AutoLoader::getInfoObjects() ;
-        $types = (count($includeTypes)>0) ? $includeTypes : array("repositoryFeatures") ;
+        $types = (count($includeTypes)>0) ? $includeTypes : array("teamFeatures") ;
         foreach ($infos as $info) {
             foreach ($types as $type) {
                 if ( method_exists($info, $type)) {
                     $name = get_class($info);
                     $name = str_replace("Info\\", "", $name) ;
                     $name = substr($name, 0, strlen($name)-4) ;
-                    $repositoryFeatureNames[] = $name; } } }
-        return $repositoryFeatureNames ;
+                    $teamFeatureNames[] = $name; } } }
+        return $teamFeatureNames ;
     }
 
 }

@@ -2,27 +2,27 @@
 
 Namespace Info;
 
-class RepositoryListInfo extends PTConfigureBase {
+class TeamListInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "RepositoryList/Home Page";
+    public $name = "TeamList/Home Page";
 
     public function _construct() {
       parent::__construct();
     }
 
     public function routesAvailable() {
-      return array( "RepositoryList" => array("show") );
+      return array( "TeamList" => array("show") );
     }
 
     public function routeAliases() {
-      return array("repositoryList"=>"RepositoryList");
+      return array("teamList"=>"TeamList");
     }
 
     public function helpDefinition() {
       $help = <<<"HELPDATA"
-  This command is part of Core - Display or find lists of repositories...
+  This command is part of Core - Display or find lists of teams...
 HELPDATA;
       return $help ;
     }

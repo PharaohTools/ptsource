@@ -1,4 +1,4 @@
-function displayRepositoryConfigureSettingsFieldset(targetmod, fieldset) {
+function displayTeamConfigureSettingsFieldset(targetmod, fieldset) {
 
     fields = build_settings_fieldsets[targetmod][fieldset]  ;
     html = "" ;

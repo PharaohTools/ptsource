@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class RepositoryConfigureAllOS extends Base {
+class TeamConfigureAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -15,14 +15,14 @@ class RepositoryConfigureAllOS extends Base {
     public $modelGroup = array("Default") ;
 
     private $builder ;
-    private $builderRepository ;
+    private $builderTeam ;
 
     public function __construct($params) {
         parent::__construct($params) ;
     }
 
     public function getData() {
-        if (isset($this->params["item"])) { $ret["repository"] = $this->getRepository(); }
+        if (isset($this->params["item"])) { $ret["team"] = $this->getTeam(); }
         $ret["builders"] = $this->getBuilders();
         $ret["settings"] = $this->getBuilderSettings();
         $ret["fields"] = $this->getBuilderFormFields();
@@ -57,21 +57,21 @@ class RepositoryConfigureAllOS extends Base {
     }
 
     public function getCopyData() {
-        if (isset($this->params["item"])) { $ret["repository"] = $this->getRepository(); }
-        $repositoryFactory = new \Model\Repository() ;
-        $repository = $repositoryFactory->getModel($this->params, "RepositoryRepository");
-        $ret["pipe_names"] = $repository->getRepositoryNames() ;
+        if (isset($this->params["item"])) { $ret["team"] = $this->getTeam(); }
+        $teamFactory = new \Model\Team() ;
+        $team = $teamFactory->getModel($this->params, "TeamTeam");
+        $ret["pipe_names"] = $team->getTeamNames() ;
         return $ret ;
     }
 
     public function saveState() {
-        return $this->saveRepository();
+        return $this->saveTeam();
     }
 
-    public function getRepository() {
-        $repositoryFactory = new \Model\Repository() ;
-        $repository = $repositoryFactory->getModel($this->params);
-        return $repository->getRepository($this->params["item"]);
+    public function getTeam() {
+        $teamFactory = new \Model\Team() ;
+        $team = $teamFactory->getModel($this->params);
+        return $team->getTeam($this->params["item"]);
     }
 
 //    public function getEventNames() {
@@ -79,10 +79,10 @@ class RepositoryConfigureAllOS extends Base {
 //
 //    public function getEvents() {
 //        $ff = array(
-//            "beforeRepositorySave" => array(""),
-//            "beforeCopiedRepositorySave" => array(""),
-//            "afterRepositorySave" => array(""),
-//            "afterCopiedRepositorySave" => array(""),
+//            "beforeTeamSave" => array(""),
+//            "beforeCopiedTeamSave" => array(""),
+//            "afterTeamSave" => array(""),
+//            "afterCopiedTeamSave" => array(""),
 //        );
 //        return $ff ; }
 
@@ -100,17 +100,17 @@ class RepositoryConfigureAllOS extends Base {
         return $this->builder ;
     }
 
-    private function getBuilderRepository() {
-        if (isset($this->builderRepository) && is_object($this->builderRepository)) {
-            return $this->builderRepository ;  }
-        $builderRepository = RegistryStore::getValue("builderRepositoryObject") ;
-        if (isset($builderRepository) && is_object($builderRepository)) {
-            $this->builderRepository = $builderRepository ;
-            return $this->builderRepository ;  }
-        $builderRepositoryFactory = new \Model\Builder() ;
-        $this->builderRepository = $builderRepositoryFactory->getModel($this->params, "BuilderRepository");
-        \Model\RegistryStore::setValue("builderRepositoryObject", $this->builderRepository) ;
-        return $this->builderRepository ;
+    private function getBuilderTeam() {
+        if (isset($this->builderTeam) && is_object($this->builderTeam)) {
+            return $this->builderTeam ;  }
+        $builderTeam = RegistryStore::getValue("builderTeamObject") ;
+        if (isset($builderTeam) && is_object($builderTeam)) {
+            $this->builderTeam = $builderTeam ;
+            return $this->builderTeam ;  }
+        $builderTeamFactory = new \Model\Builder() ;
+        $this->builderTeam = $builderTeamFactory->getModel($this->params, "BuilderTeam");
+        \Model\RegistryStore::setValue("builderTeamObject", $this->builderTeam) ;
+        return $this->builderTeam ;
     }
 
     public function getBuilders() {
@@ -124,19 +124,19 @@ class RepositoryConfigureAllOS extends Base {
     }
 
     public function getBuilderFormFields() {
-        $this->getBuilderRepository() ;
-        return $this->builderRepository->getAllBuildersFormFields();
+        $this->getBuilderTeam() ;
+        return $this->builderTeam->getAllBuildersFormFields();
     }
 
     public function getStepBuildersFormFields() {
-        $this->getBuilderRepository() ;
-        return $this->builderRepository->getStepBuildersFormFields();
+        $this->getBuilderTeam() ;
+        return $this->builderTeam->getStepBuildersFormFields();
     }
 
-    public function saveRepository() {
+    public function saveTeam() {
         $this->params["project-slug"] = $this->getFormattedSlug() ;
         $this->params["item"] = $this->params["project-slug"] ;
-        $repositoryFactory = new \Model\Repository() ;
+        $teamFactory = new \Model\Team() ;
         $data = array(
             "project-name" => $this->params["project-name"],
             "project-slug" => $this->params["project-slug"],
@@ -146,58 +146,58 @@ class RepositoryConfigureAllOS extends Base {
             $data["project-owner"] = $this->params["project-owner"] ;
         }
 
-        $ev = $this->runBCEvent("beforeRepositorySave") ;
+        $ev = $this->runBCEvent("beforeTeamSave") ;
         if ($ev == false) { return false ; }
 
 
         if ($this->params["creation"] == "yes") {
             $data["project-creator"] = $this->params["project-creator"] ;
             $data["project-owner"] = $this->params["project-creator"] ;
-            $repositoryDefault = $repositoryFactory->getModel($this->params);
-            $repositoryDefault->createRepository($this->params["project-slug"]) ; }
-        $repositorySaver = $repositoryFactory->getModel($this->params, "RepositorySaver");
+            $teamDefault = $teamFactory->getModel($this->params);
+            $teamDefault->createTeam($this->params["project-slug"]) ; }
+        $teamSaver = $teamFactory->getModel($this->params, "TeamSaver");
         // @todo dunno why i have to force this param
-        $repositorySaver->params["item"] = $this->params["item"];
-        $repositorySaver->saveRepository(array("type" => "Defaults", "data" => $data ));
-        // $repositorySaver->saveRepository(array("type" => "Steps", "data" => $this->params["steps"] ));
-        $repositorySaver->saveRepository(array("type" => "Settings", "data" => $this->params["settings"] ));
+        $teamSaver->params["item"] = $this->params["item"];
+        $teamSaver->saveTeam(array("type" => "Defaults", "data" => $data ));
+        // $teamSaver->saveTeam(array("type" => "Steps", "data" => $this->params["steps"] ));
+        $teamSaver->saveTeam(array("type" => "Settings", "data" => $this->params["settings"] ));
 
-        $ev = $this->runBCEvent("afterRepositorySave") ;
+        $ev = $this->runBCEvent("afterTeamSave") ;
         if ($ev == false) { return false ; }
 
         return true ;
     }
 
     protected function guessPipeName($orig) {
-        $repositoryFactory = new \Model\Repository() ;
-        $repository = $repositoryFactory->getModel($this->params, "RepositoryRepository");
-        $pipe_names = $repository->getRepositoryNames() ;
+        $teamFactory = new \Model\Team() ;
+        $team = $teamFactory->getModel($this->params, "TeamTeam");
+        $pipe_names = $team->getTeamNames() ;
         $req = (isset($this->params["project-name"])) ? $this->params["project-name"] : $orig ;
         if (!in_array($req, $pipe_names)) { return $req ; }
         $guess = $req." REPO" ;
         for ($i=1 ; $i<5001; $i++) {
-            $guess = "Copied Repository $orig $i" ;
+            $guess = "Copied Team $orig $i" ;
             if (!in_array($guess, $pipe_names)) {
                 break ; } }
         return $guess ;
     }
 
-    public function saveCopiedRepository() {
-        if (!isset($this->params["source_repository"])) {
+    public function saveCopiedTeam() {
+        if (!isset($this->params["source_team"])) {
             // we dont need to save anything if we have no source
             return false ; }
 
-        $repositoryFactory = new \Model\Repository() ;
-        $repositoryDefault = $repositoryFactory->getModel($this->params);
-        $sourcePipe = $repositoryDefault->getRepository($this->params["source_repository"]) ;
+        $teamFactory = new \Model\Team() ;
+        $teamDefault = $teamFactory->getModel($this->params);
+        $sourcePipe = $teamDefault->getTeam($this->params["source_team"]) ;
 
         $pname = $this->guessPipeName($sourcePipe["project-slug"]);
         $this->params["item"] = $this->getFormattedSlug($pname);
 
         $tempParams = $this->params ;
-        $tempParams["item"]  = $this->params["source_repository"] ;
-        $repositoryDefault = $repositoryFactory->getModel($tempParams);
-        $sourcePipe = $repositoryDefault->getRepository($this->params["source_repository"]) ;
+        $tempParams["item"]  = $this->params["source_team"] ;
+        $teamDefault = $teamFactory->getModel($tempParams);
+        $sourcePipe = $teamDefault->getTeam($this->params["source_team"]) ;
 
         $useParam = isset($this->params["project-description"]) && strlen($this->params["project-description"])>0 ;
         $pdesc = ($useParam) ?
@@ -212,22 +212,22 @@ class RepositoryConfigureAllOS extends Base {
 
         ) ;
 
-        $ev = $this->runBCEvent("beforeRepositorySave") ;
+        $ev = $this->runBCEvent("beforeTeamSave") ;
         if ($ev == false) { return false ; }
-        $ev = $this->runBCEvent("beforeCopiedRepositorySave") ;
+        $ev = $this->runBCEvent("beforeCopiedTeamSave") ;
         if ($ev == false) { return false ; }
 
-        $repositoryDefault->createRepository($this->params["item"]) ;
-        $repositorySaver = $repositoryFactory->getModel($this->params, "RepositorySaver");
+        $teamDefault->createTeam($this->params["item"]) ;
+        $teamSaver = $teamFactory->getModel($this->params, "TeamSaver");
         // @todo dunno y i have to force this param
-        $repositorySaver->params["item"] = $this->params["item"];
-        $repositorySaver->saveRepository(array("type" => "Defaults", "data" => $data ));
-        // $repositorySaver->saveRepository(array("type" => "Steps", "data" => $sourcePipe["steps"] ));
-        $repositorySaver->saveRepository(array("type" => "Settings", "data" => $sourcePipe["settings"] ));
+        $teamSaver->params["item"] = $this->params["item"];
+        $teamSaver->saveTeam(array("type" => "Defaults", "data" => $data ));
+        // $teamSaver->saveTeam(array("type" => "Steps", "data" => $sourcePipe["steps"] ));
+        $teamSaver->saveTeam(array("type" => "Settings", "data" => $sourcePipe["settings"] ));
 
-        $ev = $this->runBCEvent("afterRepositorySave") ;
+        $ev = $this->runBCEvent("afterTeamSave") ;
         if ($ev == false) { return false ; }
-        $ev = $this->runBCEvent("afterCopiedRepositorySave") ;
+        $ev = $this->runBCEvent("afterCopiedTeamSave") ;
         if ($ev == false) { return false ; }
 
         return $this->params["item"] ;

@@ -2,7 +2,7 @@
 
 Namespace Info;
 
-class RepositoryConfigureInfo extends PTConfigureBase {
+class TeamConfigureInfo extends PTConfigureBase {
 
     public $hidden = false;
 
@@ -13,15 +13,15 @@ class RepositoryConfigureInfo extends PTConfigureBase {
     }
 
     public function routesAvailable() {
-      return array("RepositoryConfigure" => array("show", "save", "new", "template", "copy"));
+      return array("TeamConfigure" => array("show", "save", "new", "template", "copy"));
     }
 
     public function routeAliases() {
-      return array("repositoryConfigure"=>"RepositoryConfigure", "build-configure"=>"RepositoryConfigure", "repositoryconfigure"=>"RepositoryConfigure");
+      return array("teamConfigure"=>"TeamConfigure", "build-configure"=>"TeamConfigure", "teamconfigure"=>"TeamConfigure");
     }
 
 //    public function events() {
-//        return array("beforeRepositorySave", "beforeCopiedRepositorySave", "afterRepositorySave", "afterCopiedRepositorySave");
+//        return array("beforeTeamSave", "beforeCopiedTeamSave", "afterTeamSave", "afterCopiedTeamSave");
 //    }
 
     public function helpDefinition() {

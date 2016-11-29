@@ -31,10 +31,10 @@
 					<!-- /.nav-second-level -->
 				</li>
 				<li>
-					<a href="/index.php?control=RepositoryConfigure&action=new"class=" hvr-bounce-in"><i class="fa fa-edit fa-fw hvr-bounce-in"></i> New Repository</a>
+					<a href="/index.php?control=TeamConfigure&action=new"class=" hvr-bounce-in"><i class="fa fa-edit fa-fw hvr-bounce-in"></i> New Team</a>
 				</li>
 				<li>
-					<a href="/index.php?control=RepositoryConfigure&action=copy"class=" hvr-bounce-in"><i class="fa fa-edit fa-fw hvr-bounce-in"></i> Copy Repository</a>
+					<a href="/index.php?control=TeamConfigure&action=copy"class=" hvr-bounce-in"><i class="fa fa-edit fa-fw hvr-bounce-in"></i> Copy Team</a>
 				</li>
 			</ul>
 		</div>
@@ -47,7 +47,7 @@
 		<div class="well well-lg">
 
 			<div class="row clearfix no-margin">
-				<h4 class="text-uppercase text-light">All Repositories</h4>
+				<h4 class="text-uppercase text-light">All Teams</h4>
 
 				<div role="tabpanel grid">
 
@@ -57,7 +57,7 @@
 
 							<div class="table table-striped table-bordered table-condensed">
                                 <div class="blCell cellRowIndex">#</div>
-                                <div class="blCell cellRowName">Repository</div>
+                                <div class="blCell cellRowName">Team</div>
                                 <div class="blCell cellRowFeatures">Features</div>
                                 <div class="blCell cellRowMore">More</div>
                             </div>
@@ -66,43 +66,43 @@
 							<?php
 
 							$i = 1;
-							foreach ($pageVars["data"]["repositories"] as $repositorySlug => $repositoryDetails) {
+							foreach ($pageVars["data"]["teams"] as $teamSlug => $teamDetails) {
 
-                                if ($repositoryDetails["last_status"] === true) {
+                                if ($teamDetails["last_status"] === true) {
                                     $successFailureClass = "successRow"  ; }
-                                else if ($repositoryDetails["last_status"] === false) {
+                                else if ($teamDetails["last_status"] === false) {
                                     $successFailureClass = "failureRow" ; }
                                 else {
                                     $successFailureClass = "unstableRow" ; }
 
-                                if (isset($repositoryDetails["project-name"])) {
-                                    $slugOrName = $repositoryDetails["project-name"] ; }
-                                else if (isset($repositorySlug)) {
-                                    $slugOrName = $repositorySlug ; }
+                                if (isset($teamDetails["project-name"])) {
+                                    $slugOrName = $teamDetails["project-name"] ; }
+                                else if (isset($teamSlug)) {
+                                    $slugOrName = $teamSlug ; }
                                 else {
                                     $slugOrName = "Unnamed Project" ; }
 
                                 ?>
 
-							<div class="repositoryRow <?php echo $successFailureClass ?>" id="blRow_<?php echo $repositorySlug; ?>" >
+							<div class="teamRow <?php echo $successFailureClass ?>" id="blRow_<?php echo $teamSlug; ?>" >
                                 <div class="blCell cellRowIndex" scope="row">
                                     <?php echo $i; ?>
                                 </div>
                                 <div class="blCell cellRowName">
-                                    <a href="/index.php?control=RepositoryHome&action=show&item=<?php echo $repositorySlug; ?>" class="pipeName">
+                                    <a href="/index.php?control=TeamHome&action=show&item=<?php echo $teamSlug; ?>" class="pipeName">
                                         <?php echo $slugOrName; ?>
                                     </a>
                                 </div>
                                 <div class="blCell cellRowFeatures">
                                     <?php
 
-                                    if (isset($repositoryDetails["features"]) &&
-                                        count($repositoryDetails["features"])>0 ) {
-                                        foreach ($repositoryDetails["features"] as $repository_feature) {
-                                            echo '<div class="repository-feature">' ;
-                                            echo ' <a target="_blank" href="'.$repository_feature["model"]["link"].'">' ;
-//                                                echo  '<h3>'.$repository_feature["model"]["title"].'</h3>' ;
-                                            echo '  <img src="'.$repository_feature["model"]["image"].'" />' ;
+                                    if (isset($teamDetails["features"]) &&
+                                        count($teamDetails["features"])>0 ) {
+                                        foreach ($teamDetails["features"] as $team_feature) {
+                                            echo '<div class="team-feature">' ;
+                                            echo ' <a target="_blank" href="'.$team_feature["model"]["link"].'">' ;
+//                                                echo  '<h3>'.$team_feature["model"]["title"].'</h3>' ;
+                                            echo '  <img src="'.$team_feature["model"]["image"].'" />' ;
                                             echo " </a>" ;
                                             echo '</div>' ; } }
                                     else {
@@ -112,13 +112,13 @@
                                 </div>
                                 <div  class="blCell cellRowMore">
                                     <span class="fullRow">
-                                        <a href="/index.php?control=RepositoryCharts&action=show&item=<?php echo $repositorySlug; ?>">Graphs</a>
+                                        <a href="/index.php?control=TeamCharts&action=show&item=<?php echo $teamSlug; ?>">Graphs</a>
                                     </span>
                                     <span class="fullRow">
-                                        <a href="/index.php?control=RepositoryCharts&action=contributors&item=<?php echo $repositorySlug; ?>">Contributors</a>
+                                        <a href="/index.php?control=TeamCharts&action=contributors&item=<?php echo $teamSlug; ?>">Contributors</a>
                                     </span>
                                     <span class="fullRow">
-                                        <a href="/index.php?control=RepositoryHistory&action=show&item=<?php echo $repositorySlug; ?>">History</a>
+                                        <a href="/index.php?control=TeamHistory&action=show&item=<?php echo $teamSlug; ?>">History</a>
                                     </span>
                                 </div>
 							</div>
@@ -140,4 +140,4 @@
             </p>
 	</div>
 </div><!-- /.container -->
-<link rel="stylesheet" type="text/css" href="/Assets/Modules/RepositoryList/css/repositorylist.css">
+<link rel="stylesheet" type="text/css" href="/Assets/Modules/TeamList/css/teamlist.css">

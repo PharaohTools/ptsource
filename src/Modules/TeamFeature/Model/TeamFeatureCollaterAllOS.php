@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class RepositoryFeatureCollaterAllOS extends Base {
+class TeamFeatureCollaterAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -12,9 +12,9 @@ class RepositoryFeatureCollaterAllOS extends Base {
     public $architectures = array("any") ;
 
     // Model Group
-    public $modelGroup = array("RepositoryFeatureCollater") ;
+    public $modelGroup = array("TeamFeatureCollater") ;
 
-    public function getRepositoryFeature($module) {
+    public function getTeamFeature($module) {
         $r = $this->collate($module);
         return $r ;
     }

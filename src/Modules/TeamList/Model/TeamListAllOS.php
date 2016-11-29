@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class RepositoryListAllOS extends Base {
+class TeamListAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -15,14 +15,14 @@ class RepositoryListAllOS extends Base {
     public $modelGroup = array("Default") ;
 
     public function getData() {
-        $ret["repositories"] = $this->getRepositories();
+        $ret["teams"] = $this->getTeams();
         return $ret ;
     }
 
-    public function getRepositories() {
-        $repositoryFactory = new \Model\Repository() ;
-        $repository = $repositoryFactory->getModel($this->params);
-        $repos = $repository->getRepositories();
+    public function getTeams() {
+        $teamFactory = new \Model\Team() ;
+        $team = $teamFactory->getModel($this->params);
+        $repos = $team->getTeams();
         return $repos ;
     }
 

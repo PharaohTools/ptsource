@@ -2,6 +2,6 @@
 
 Namespace Model;
 
-class RepositoryConfigure extends BaseModelFactory {
+class TeamConfigure extends BaseModelFactory {
 
 }

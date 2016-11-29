@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class RepositoryFeatureAllOS extends Base {
+class TeamFeatureAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -14,16 +14,16 @@ class RepositoryFeatureAllOS extends Base {
     // Model Group
     public $modelGroup = array("Default") ;
 
-    public function getRepositoryFeatures() {
-        $builderFactory = new RepositoryFeature();
-        $builderRepository = $builderFactory->getModel($this->params, "RepositoryFeatureRepository") ;
-        $builders = $builderRepository->getAllRepositoryFeatures();
+    public function getTeamFeatures() {
+        $builderFactory = new TeamFeature();
+        $builderRepository = $builderFactory->getModel($this->params, "TeamFeatureRepository") ;
+        $builders = $builderRepository->getAllTeamFeatures();
         $ret = $builders ;
         return $ret ;
     }
 
-    public function getRepositoryFeatureSettings() {
-        $builders = $this->getRepositoryFeatures();
+    public function getTeamFeatureSettings() {
+        $builders = $this->getTeamFeatures();
         // var_dump(1, $builders) ;
         $ret = array() ;
         foreach ($builders as $name => $builder) {
@@ -33,34 +33,34 @@ class RepositoryFeatureAllOS extends Base {
         return $ret ;
     }
 
-    public function getRepositoryFeature($module) {
-        $builderFactory = new RepositoryFeature();
-        $builderCollater = $builderFactory->getModel($this->params, "RepositoryFeatureCollater") ;
-        $builder = $builderCollater->getRepositoryFeature($module);
+    public function getTeamFeature($module) {
+        $builderFactory = new TeamFeature();
+        $builderCollater = $builderFactory->getModel($this->params, "TeamFeatureCollater") ;
+        $builder = $builderCollater->getTeamFeature($module);
         $ret = $builder ;
         return $ret ;
     }
 
-    public function saveRepositoryFeature($line) {
-        $builderFactory = new RepositoryFeature();
-        $builderSaver = $builderFactory->getModel($this->params, "RepositoryFeatureSaver") ;
-        $builder = $builderSaver->getRepositoryFeature($line);
+    public function saveTeamFeature($line) {
+        $builderFactory = new TeamFeature();
+        $builderSaver = $builderFactory->getModel($this->params, "TeamFeatureSaver") ;
+        $builder = $builderSaver->getTeamFeature($line);
         $ret = $builder ;
         return $ret ;
     }
 
-    public function getRepositoryFeatureNames() {
-        $builders = $this->getRepositoryFeatures() ;
+    public function getTeamFeatureNames() {
+        $builders = $this->getTeamFeatures() ;
         $names = array_keys($builders) ;
         return (isset($names) && is_array($names)) ? $names : false ;
     }
-    public function deleteRepositoryFeature($name) {
-        $builders = $this->getRepositoryFeatures() ;
+    public function deleteTeamFeature($name) {
+        $builders = $this->getTeamFeatures() ;
         $path = dirname(dirname(__FILE__)).DS."Data".DS."demobuilders.php" ;
         include($path) ;
         unset($builders[$name]);
 
-//        $builders = $this->getRepositoryFeatures() ;
+//        $builders = $this->getTeamFeatures() ;
 //        $path = dirname(dirname(__FILE__)).DS."Data".DS."demobuilders.php" ;
 //
 //        $file = fopen($path,"w");
