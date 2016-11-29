@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class RepositoryCollaterAllOS extends Base {
+class TeamCollaterAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -12,9 +12,9 @@ class RepositoryCollaterAllOS extends Base {
     public $architectures = array("any") ;
 
     // Model Group
-    public $modelGroup = array("RepositoryCollater") ;
+    public $modelGroup = array("TeamCollater") ;
 
-    public function getRepository($pipe = null) {
+    public function getTeam($pipe = null) {
         if ($pipe != null) { $this->params["item"] = $pipe ; }
         $r = $this->collate();
         return $r ;
@@ -43,7 +43,7 @@ class RepositoryCollaterAllOS extends Base {
             $loggingFactory = new \Model\Logging() ;
             $logging = $loggingFactory->getModel($this->params) ;
             // @todo this should be a warn log or something
-//            $logging->log("No defaults file available in repository", $this->getModuleName()) ;
+//            $logging->log("No defaults file available in team", $this->getModuleName()) ;
         }
         $defaults = $this->setDefaultSlugIfNeeded($defaults) ;
         return $defaults ;
@@ -67,37 +67,37 @@ class RepositoryCollaterAllOS extends Base {
             $loggingFactory = new \Model\Logging() ;
             $logging = $loggingFactory->getModel($this->params) ;
             // @todo this should be a warn log or something
-//            $logging->log("No settings file available in repository ".$this->params["item"], $this->getModuleName()) ;
+//            $logging->log("No settings file available in team ".$this->params["item"], $this->getModuleName()) ;
         }
         return array("settings" => $settings) ;
     }
 
     private function getFeatures() {
 
-        $repositoryFeatureFactory = new \Model\RepositoryFeature();
-        $repositoryFeatureRepository = $repositoryFeatureFactory->getModel($this->params, "RepositoryFeatureRepository") ;
-        $names = $repositoryFeatureRepository->getRepositoryFeatureNames();
-        $repositorySettings = $this->getSettings();
-        $repositoryDefaults = $this->getDefaults();
-        $this->params["repository-settings"] = $repositorySettings["settings"];
-        $repository = array() ;
-        $repository = array_merge($repository, $repositorySettings);
-        $repository = array_merge($repository, $repositoryDefaults);
+        $teamFeatureFactory = new \Model\TeamFeature();
+        $teamFeature = $teamFeatureFactory->getModel($this->params) ;
+        $names = $teamFeature->getTeamFeatureNames();
+        $teamSettings = $this->getSettings();
+        $teamDefaults = $this->getDefaults();
+        $this->params["team-settings"] = $teamSettings["settings"];
+        $team = array() ;
+        $team = array_merge($team, $teamSettings);
+        $team = array_merge($team, $teamDefaults);
         $enabledFeatures = array() ;
         $i = 0;
         // error_log("collating 1") ;
-        foreach ($repositorySettings["settings"] as $key => $values) {
+        foreach ($teamSettings["settings"] as $key => $values) {
             // error_log("collating 2") ;
             if (in_array($key, $names) && $values["enabled"] =="on") {
                 $cname = '\Model\\'.$key ;
                 $moduleFactory = new $cname();
-                $moduleRepositoryFeature = $moduleFactory->getModel($this->params, "RepositoryFeature");
+                $moduleTeamFeature = $moduleFactory->getModel($this->params, "TeamFeature");
                 // @ todo maybe an interface check? is object something?
 //                $values=array("default_fieldset" =>array(0 => array($values))) ; }
                 if (!isset($values["hash"])) { $values["hash"] = "12345" ; }
-                $moduleRepositoryFeature->setValues($values) ;
-                $moduleRepositoryFeature->setRepository($repository) ;
-                $collated = $moduleRepositoryFeature->collate();
+                $moduleTeamFeature->setValues($values) ;
+                $moduleTeamFeature->setTeam($team) ;
+                $collated = $moduleTeamFeature->collate();
                 //  error_log("collating 3") ;
                 if (array_key_exists(0, $collated)==true) {
                     foreach ($collated as $one_collated) {

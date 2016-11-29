@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class RepositoryCommitsAllOS extends Base {
+class TeamCommitsAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -12,10 +12,10 @@ class RepositoryCommitsAllOS extends Base {
     public $architectures = array("any") ;
 
     // Model Group
-    public $modelGroup = array("RepositoryCommits") ;
+    public $modelGroup = array("TeamCommits") ;
 
-    public function getCommits($repository=null, $amount=null, $page=null, $identifier=null) {
-        if ($repository != null) { $this->params["item"] = $repository ; }
+    public function getCommits($team=null, $amount=null, $page=null, $identifier=null) {
+        if ($team != null) { $this->params["item"] = $team ; }
         if ($amount != null) { $this->params["amount"] = $amount ; }
         if ($page != null) { $this->params["page"] = $page ; }
         if ($identifier != null) { $this->params["identifier"] = $identifier ; }

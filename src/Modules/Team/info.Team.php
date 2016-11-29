@@ -2,11 +2,11 @@
 
 Namespace Info;
 
-class RepositoryInfo extends PTConfigureBase {
+class TeamInfo extends PTConfigureBase {
 
     public $hidden = true;
 
-    public $name = "Repository Functionality";
+    public $name = "Team Functionality";
 
     public function _construct() {
       parent::__construct();
@@ -22,7 +22,7 @@ class RepositoryInfo extends PTConfigureBase {
 
     public function helpDefinition() {
       $help = <<<"HELPDATA"
-  This module provides functionality for Repositories. It provides no actions at the command line.
+  This module provides functionality for Teams. It provides no actions at the command line.
 HELPDATA;
       return $help ;
     }

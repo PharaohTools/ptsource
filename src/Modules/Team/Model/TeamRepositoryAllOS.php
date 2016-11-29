@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class RepositoryRepositoryAllOS extends Base {
+class TeamRepositoryAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -12,16 +12,16 @@ class RepositoryRepositoryAllOS extends Base {
     public $architectures = array("any") ;
 
     // Model Group
-    public $modelGroup = array("RepositoryRepository") ;
+    public $modelGroup = array("TeamRepository") ;
 
-    public function getAllRepositories() {
+    public function getAllTeams() {
         $repositories = array();
-        $names = $this->getRepositoryNames() ;
-        $repositoryFactory = new \Model\Repository() ;
-        $repository = $repositoryFactory->getModel($this->params);
+        $names = $this->getTeamNames() ;
+        $teamFactory = new \Model\Team() ;
+        $team = $teamFactory->getModel($this->params);
         foreach ($names as $name) {
             $user = $this->getLoggedInUser() ;
-            $repo = $repository->getRepository($name);
+            $repo = $team->getTeam($name);
             $hidden = (isset($repo["settings"]["HiddenScope"]["enabled"]) &&
                 $repo["settings"]["HiddenScope"]["enabled"]=="on") ? true : false ;
             $hidden_from_members = (isset($repo["settings"]["HiddenScope"]["hidden_from_members"]) &&
@@ -56,7 +56,7 @@ class RepositoryRepositoryAllOS extends Base {
         return $repositories ;
     }
 
-    public function getRepositoryNames() {
+    public function getTeamNames() {
         $repositories = scandir(REPODIR) ;
         for ($i=0; $i<count($repositories); $i++) {
             if (!in_array($repositories[$i], array(".", "..", "tmpfile"))){

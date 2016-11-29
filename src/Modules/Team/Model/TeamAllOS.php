@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class RepositoryAllOS extends Base {
+class TeamAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -14,55 +14,55 @@ class RepositoryAllOS extends Base {
     // Model Group
     public $modelGroup = array("Default") ;
 
-    public function getRepositories() {
-        $repositoryFactory = new Repository();
-        $repositoryRepository = $repositoryFactory->getModel($this->params, "RepositoryRepository") ;
-        $repositories = $repositoryRepository->getAllRepositories();
+    public function getTeams() {
+        $teamFactory = new Team();
+        $teamTeam = $teamFactory->getModel($this->params, "TeamRepository") ;
+        $repositories = $teamTeam->getAllTeams();
         $ret = $repositories ;
         return $ret ;
     }
 
-    public function getRepository($line) {
-        $repositoryFactory = new Repository();
-        $repositoryCollater = $repositoryFactory->getModel($this->params, "RepositoryCollater") ;
-        $repository = $repositoryCollater->getRepository($line);
-        $ret = $repository ;
+    public function getTeam($line) {
+        $teamFactory = new Team();
+        $teamCollater = $teamFactory->getModel($this->params, "TeamCollater") ;
+        $team = $teamCollater->getTeam($line);
+        $ret = $team ;
         return $ret ;
     }
 
-    public function saveRepository($line) {
-        $repositoryFactory = new Repository();
-        $repositorySaver = $repositoryFactory->getModel($this->params, "RepositorySaver") ;
-        $repository = $repositorySaver->getRepository($line);
-        $ret = $repository ;
+    public function saveTeam($line) {
+        $teamFactory = new Team();
+        $teamSaver = $teamFactory->getModel($this->params, "TeamSaver") ;
+        $team = $teamSaver->getTeam($line);
+        $ret = $team ;
         return $ret ;
     }
 
-    public function getRepositoryNames() {
-        $repositories = $this->getRepositories() ;
+    public function getTeamNames() {
+        $repositories = $this->getTeams() ;
         $names = array_keys($repositories) ;
         return (isset($names) && is_array($names)) ? $names : false ;
     }
 
-    public function getRepositoryFeatures() {
-        $repositoryFeatureFactory = new \Model\RepositoryFeature();
-        $repositoryFeatureRepository = $repositoryFeatureFactory->getModel($this->params, "RepositoryFeatureRepository") ;
-        $names = $repositoryFeatureRepository->getRepositoryFeatureNames();
-        $repository = $this->getRepository($this->params["item"]);
-        $this->params["repository-settings"] = $repository["settings"];
+    public function getTeamFeatures() {
+        $teamFeatureFactory = new \Model\TeamFeature();
+        $teamFeature = $teamFeatureFactory->getModel($this->params, "TeamFeature") ;
+        $names = $teamFeature->getTeamFeatureNames();
+        $team = $this->getTeam($this->params["item"]);
+        $this->params["team-settings"] = $team["settings"];
         $enabledFeatures = array() ;
         $i = 0;
-        foreach ($repository["settings"] as $key => $values) {
+        foreach ($team["settings"] as $key => $values) {
             if (in_array($key, $names) && $values["enabled"] =="on") {
                 $cname = '\Model\\'.$key ;
                 $moduleFactory = new $cname();
-                $moduleRepositoryFeature = $moduleFactory->getModel($this->params, "RepositoryFeature");
+                $moduleTeamFeature = $moduleFactory->getModel($this->params, "TeamFeature");
                 // @ todo maybe an interface check? is object something?
 //                $values=array("default_fieldset" =>array(0 => array($values))) ; }
                 if (!isset($values["hash"])) { $values["hash"] = "12345" ; }
-                $moduleRepositoryFeature->setValues($values) ;
-                $moduleRepositoryFeature->setRepository($repository) ;
-                $collated = $moduleRepositoryFeature->collate();
+                $moduleTeamFeature->setValues($values) ;
+                $moduleTeamFeature->setTeam($team) ;
+                $collated = $moduleTeamFeature->collate();
                 if (array_key_exists(0, $collated)==true) {
                     foreach ($collated as $one_collated) {
                         $enabledFeatures[$i]["module"] = $key  ;
@@ -78,7 +78,7 @@ class RepositoryAllOS extends Base {
         return $enabledFeatures ;
     }
 
-    public function deleteRepository($name) {
+    public function deleteTeam($name) {
         $loggingFactory = new \Model\Logging();
         $logging = $loggingFactory->getModel($this->params);
         if (file_exists(REPODIR.DS.$name)) {
@@ -90,7 +90,7 @@ class RepositoryAllOS extends Base {
             return true ; }
     }
 
-    public function createRepository($name) {
+    public function createTeam($name) {
         $loggingFactory = new \Model\Logging();
         $logging = $loggingFactory->getModel($this->params);
         if (file_exists(REPODIR.DS.$name)) {
@@ -108,7 +108,7 @@ class RepositoryAllOS extends Base {
                 $rc = self::executeAndGetReturnCode($comm);
                 $results[] = ($rc["rc"] == 0) ? true : false ;
                 if ($rc["rc"] != 0) {
-                    $logging->log("Repository creation command failed ".REPODIR.DS."$name ", $this->getModuleName(), LOG_FAILURE_EXIT_CODE) ;
+                    $logging->log("Team creation command failed ".REPODIR.DS."$name ", $this->getModuleName(), LOG_FAILURE_EXIT_CODE) ;
                     $logging->log("Failed command was {$comm}", $this->getModuleName()) ;
                     return false ; } }
             return (in_array(false, $results)) ? false : true ; }

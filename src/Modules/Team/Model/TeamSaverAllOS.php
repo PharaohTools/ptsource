@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class RepositorySaverAllOS extends Base {
+class TeamSaverAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -12,15 +12,15 @@ class RepositorySaverAllOS extends Base {
     public $architectures = array("any") ;
 
     // Model Group
-    public $modelGroup = array("RepositorySaver") ;
+    public $modelGroup = array("TeamSaver") ;
 
-    public function saveRepository($save) {
+    public function saveTeam($save) {
         $r = $this->saveStates($save);
         return $r ;
     }
 
-    public function getRepositoryNames() {
-        $repositories = $this->getRepositories() ;
+    public function getTeamNames() {
+        $repositories = $this->getTeams() ;
         $names = array_keys($repositories) ;
         return (isset($names) && is_array($names)) ? $names : false ;
     }
@@ -44,7 +44,7 @@ class RepositorySaverAllOS extends Base {
         $logging = $loggingFactory->getModel($this->params);
         if (isset($save["type"]) && $save["type"] == "Defaults") {
             $defaultsFile = REPODIR.DS.$this->params["item"].DS.'defaults' ;
-            $logging->log("Storing defaults file in Repository at $defaultsFile", $this->getModuleName()) ;
+            $logging->log("Storing defaults file in Team at $defaultsFile", $this->getModuleName()) ;
             $defaults = json_encode($save["data"], JSON_PRETTY_PRINT) ;
             $res = file_put_contents($defaultsFile, $defaults) ;
             return ($res === false) ? false : true ; }
@@ -56,7 +56,7 @@ class RepositorySaverAllOS extends Base {
         $logging = $loggingFactory->getModel($this->params);
         if (isset($save["type"]) && $save["type"] == "Steps") {
             $stepsFile = REPODIR.DS.$this->params["item"].DS.'steps' ;
-            $logging->log("Storing steps file in Repository at $stepsFile", $this->getModuleName()) ;
+            $logging->log("Storing steps file in Team at $stepsFile", $this->getModuleName()) ;
             $steps = json_encode($save["data"], JSON_PRETTY_PRINT) ;
             $res = file_put_contents($stepsFile, $steps) ;
             return ($res === false) ? false : true ; }
@@ -69,7 +69,7 @@ class RepositorySaverAllOS extends Base {
         $logging = $loggingFactory->getModel($this->params);
         if (isset($save["type"]) && $save["type"] == "Settings") {
             $stepsFile = REPODIR.DS.$this->params["item"].DS.'settings' ;
-            $logging->log("Storing settings file in Repository at $stepsFile", $this->getModuleName()) ;
+            $logging->log("Storing settings file in Team at $stepsFile", $this->getModuleName()) ;
             $steps = json_encode($save["data"], JSON_PRETTY_PRINT) ;
             $res = file_put_contents($stepsFile, $steps) ;
             return ($res === false) ? false : true ; }
