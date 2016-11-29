@@ -102,7 +102,7 @@ class RepositoryAllOS extends Base {
             $comms = array(
                 'mkdir -p '.REPODIR.DS.$name,
                 'git init --bare '.REPODIR.DS.$name,
-                'cd '.REPODIR.DS.$name.'; git config http.recievepack true ;' ) ;
+                'cd '.REPODIR.DS.$name.'; git config http.receivepack true ;' ) ;
             $results = array() ;
             foreach ($comms as $comm) {
                 $rc = self::executeAndGetReturnCode($comm);
