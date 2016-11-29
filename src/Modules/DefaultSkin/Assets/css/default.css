@@ -84,6 +84,10 @@ div.well h2.text-uppercase {
     color: #fff;
 }
 
+.panel-primary span {
+    color: #337ab7;
+}
+
 .panel-primary a,
 .panel-primary a:hover,
 .panel-primary a:focus{
