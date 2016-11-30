@@ -19,13 +19,8 @@ class TeamSaverAllOS extends Base {
         return $r ;
     }
 
-    public function saveJob($save) {
-        $r = $this->saveStates($save);
-        return $r ;
-    }
-
-    public function getJobNames() {
-        $teams = $this->getJobs() ;
+    public function getTeamNames() {
+        $teams = $this->getTeams() ;
         $names = array_keys($teams) ;
         return (isset($names) && is_array($names)) ? $names : false ;
     }
@@ -43,7 +38,7 @@ class TeamSaverAllOS extends Base {
 
             $eventRunnerFactory = new \Model\EventRunner() ;
             $eventRunner = $eventRunnerFactory->getModel($this->params) ;
-            $ev = $eventRunner->eventRunner("saveJobDefaults") ;
+            $ev = $eventRunner->eventRunner("saveTeamDefaults") ;
             // @todo handle this
             if ($ev == false) {
                 // return $this->failTrack() ;
@@ -81,7 +76,7 @@ class TeamSaverAllOS extends Base {
             $logging = $loggingFactory->getModel($this->params) ;
 
             if ($datastore->collectionExists('teams') == false) {
-                $logging->log("Creating Jobs Collection in Datastore", $this->getModuleName()) ;
+                $logging->log("Creating Teams Collection in Datastore", $this->getModuleName()) ;
                 $datastore->createCollection('teams', $column_defines) ; }
 
 //            var_dump("we are here 2", $newData) ;
