@@ -55,7 +55,7 @@ class TeamHomeAllOS extends Base {
     protected function getReadmeData($team) {
         $identifier = 'HEAD' ;
         $cur_dir = getcwd() ;
-        chdir(REPODIR.DS.$team["project-slug"]) ;
+        chdir(REPODIR.DS.$team["team-slug"]) ;
         $command = 'git ls-tree --full-tree '.$identifier ;
         exec($command, $output) ;
         $files = $this->parseLSTree($output) ;
