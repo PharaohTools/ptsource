@@ -289,7 +289,7 @@
                                     if (isset($pageVars["data"]['user']->username)) {
                                         ?>
                                         <div class="col-lg-4 col-md-6 hvr-pcreatoop">
-                                            <div class="panel panel-green">
+                                            <div class="panel panel-yellow">
                                                 <a href="/index.php?control=TeamList&action=show&filters[]=team_members[~]::<?php echo $pageVars["data"]['user']->username ; ?>">
                                                     <div class="panel-heading">
                                                         <div class="row">
