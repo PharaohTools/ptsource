@@ -49,7 +49,7 @@ class TeamAllOS extends Base {
         $teamFeature = $teamFeatureFactory->getModel($this->params, "TeamFeature") ;
         $names = $teamFeature->getTeamFeatureNames();
         $team = $this->getTeam($this->params["item"]);
-        $this->params["team-settings"] = $team["settings"];
+        $this->params["team_settings"] = $team["settings"];
         $enabledFeatures = array() ;
         $i = 0;
         foreach ($team["settings"] as $key => $values) {

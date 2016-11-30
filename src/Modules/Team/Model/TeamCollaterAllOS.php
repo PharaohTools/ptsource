@@ -79,7 +79,7 @@ class TeamCollaterAllOS extends Base {
         $names = $teamFeature->getTeamFeatureNames();
         $teamSettings = $this->getSettings();
         $teamDefaults = $this->getDefaults();
-        $this->params["team-settings"] = $teamSettings["settings"];
+        $this->params["team_settings"] = $teamSettings["settings"];
         $team = array() ;
         $team = array_merge($team, $teamSettings);
         $team = array_merge($team, $teamDefaults);
