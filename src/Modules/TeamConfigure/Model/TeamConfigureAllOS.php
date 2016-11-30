@@ -74,19 +74,6 @@ class TeamConfigureAllOS extends Base {
         return $team->getTeam($this->params["item"]);
     }
 
-//    public function getEventNames() {
-//        return array_keys($this->getEvents());   }
-//
-//    public function getEvents() {
-//        $ff = array(
-//            "beforeTeamSave" => array(""),
-//            "beforeCopiedTeamSave" => array(""),
-//            "afterTeamSave" => array(""),
-//            "afterCopiedTeamSave" => array(""),
-//        );
-//        return $ff ; }
-
-
     private function getBuilder() {
         if (isset($this->builder) && is_object($this->builder)) {
             return $this->builder ;  }
@@ -134,16 +121,16 @@ class TeamConfigureAllOS extends Base {
     }
 
     public function saveTeam() {
-        $this->params["team-slug"] = $this->getFormattedSlug() ;
-        $this->params["item"] = $this->params["team-slug"] ;
+        $this->params["team_slug"] = $this->getFormattedSlug() ;
+        $this->params["item"] = $this->params["team_slug"] ;
         $teamFactory = new \Model\Team() ;
         $data = array(
-            "team-name" => $this->params["team-name"],
-            "team-slug" => $this->params["team-slug"],
-            "team-description" => $this->params["team-description"]
+            "team_name" => $this->params["team_name"],
+            "team_slug" => $this->params["team_slug"],
+            "team_description" => $this->params["team_description"]
         ) ;
         if ($this->isAdmin()==true){
-            $data["team-owner"] = $this->params["team-owner"] ;
+            $data["team_owner"] = $this->params["team_owner"] ;
         }
 
         $ev = $this->runBCEvent("beforeTeamSave") ;
@@ -151,10 +138,10 @@ class TeamConfigureAllOS extends Base {
 
 
         if ($this->params["creation"] == "yes") {
-            $data["team-creator"] = $this->params["team-creator"] ;
-            $data["team-owner"] = $this->params["team-creator"] ;
+            $data["team_creator"] = $this->params["team_creator"] ;
+            $data["team_owner"] = $this->params["team_creator"] ;
             $teamDefault = $teamFactory->getModel($this->params);
-            $teamDefault->createTeam($this->params["team-slug"]) ; }
+            $teamDefault->createTeam($this->params["team_slug"]) ; }
         $teamSaver = $teamFactory->getModel($this->params, "TeamSaver");
         // @todo dunno why i have to force this param
         $teamSaver->params["item"] = $this->params["item"];
@@ -172,7 +159,7 @@ class TeamConfigureAllOS extends Base {
         $teamFactory = new \Model\Team() ;
         $team = $teamFactory->getModel($this->params, "TeamRepository");
         $pipe_names = $team->getTeamNames() ;
-        $req = (isset($this->params["team-name"])) ? $this->params["team-name"] : $orig ;
+        $req = (isset($this->params["team_name"])) ? $this->params["team_name"] : $orig ;
         if (!in_array($req, $pipe_names)) { return $req ; }
         $guess = $req." REPO" ;
         for ($i=1 ; $i<5001; $i++) {
@@ -191,7 +178,7 @@ class TeamConfigureAllOS extends Base {
         $teamDefault = $teamFactory->getModel($this->params);
         $sourcePipe = $teamDefault->getTeam($this->params["source_team"]) ;
 
-        $pname = $this->guessPipeName($sourcePipe["team-slug"]);
+        $pname = $this->guessPipeName($sourcePipe["team_slug"]);
         $this->params["item"] = $this->getFormattedSlug($pname);
 
         $tempParams = $this->params ;
@@ -199,16 +186,16 @@ class TeamConfigureAllOS extends Base {
         $teamDefault = $teamFactory->getModel($tempParams);
         $sourcePipe = $teamDefault->getTeam($this->params["source_team"]) ;
 
-        $useParam = isset($this->params["team-description"]) && strlen($this->params["team-description"])>0 ;
+        $useParam = isset($this->params["team_description"]) && strlen($this->params["team_description"])>0 ;
         $pdesc = ($useParam) ?
-            $this->params["team-description"] :
-            $sourcePipe["team-description"] ;
+            $this->params["team_description"] :
+            $sourcePipe["team_description"] ;
 
         // @todo we need to put all of this into modules, as build settings.
         $data = array(
-            "team-name" => $pname,
-            "team-slug" => $this->params["item"],
-            "team-description" => $pdesc,
+            "team_name" => $pname,
+            "team_slug" => $this->params["item"],
+            "team_description" => $pdesc,
 
         ) ;
 
@@ -243,14 +230,14 @@ class TeamConfigureAllOS extends Base {
     }
 
     private function getFormattedSlug($name = null) {
-        $tpn = (!is_null($name)) ? $name : $this->params["team-name"] ;
-        if ($this->params["team-slug"] == "") {
-            $this->params["team-slug"] = str_replace(" ", "_", $tpn);
-            $this->params["team-slug"] = str_replace("'", "", $this->params["team-slug"]);
-            $this->params["team-slug"] = str_replace('"', "", $this->params["team-slug"]);
-            $this->params["team-slug"] = str_replace("/", "", $this->params["team-slug"]);
-            $this->params["team-slug"] = strtolower($this->params["team-slug"]); }
-        return $this->params["team-slug"] ;
+        $tpn = (!is_null($name)) ? $name : $this->params["team_name"] ;
+        if ($this->params["team_slug"] == "") {
+            $this->params["team_slug"] = str_replace(" ", "_", $tpn);
+            $this->params["team_slug"] = str_replace("'", "", $this->params["team_slug"]);
+            $this->params["team_slug"] = str_replace('"', "", $this->params["team_slug"]);
+            $this->params["team_slug"] = str_replace("/", "", $this->params["team_slug"]);
+            $this->params["team_slug"] = strtolower($this->params["team_slug"]); }
+        return $this->params["team_slug"] ;
     }
 
 }
