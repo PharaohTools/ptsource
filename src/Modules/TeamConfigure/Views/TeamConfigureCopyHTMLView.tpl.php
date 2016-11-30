@@ -22,7 +22,7 @@
                 if ($pageVars["route"]["action"] !== "new") {
                 ?>
                 <li>
-                    <a href="/index.php?control=TeamHome&action=show&item=<?php echo $pageVars["data"]["team"]["project-slug"] ; ?>" class=" hvr-bounce-in">
+                    <a href="/index.php?control=TeamHome&action=show&item=<?php echo $pageVars["data"]["team"]["team-slug"] ; ?>" class=" hvr-bounce-in">
                         <i class="fa fa-home hvr-bounce-in"></i> Team Home
                     </a>
                 </li>
@@ -38,22 +38,22 @@
                 if ($pageVars["route"]["action"] !== "new") {
                 ?>
                 <li>
-                    <a href="/index.php?control=FileBrowser&action=show&item=<?php echo $pageVars["data"]["team"]["project-slug"] ; ?>"class=" hvr-bounce-in">
+                    <a href="/index.php?control=FileBrowser&action=show&item=<?php echo $pageVars["data"]["team"]["team-slug"] ; ?>"class=" hvr-bounce-in">
                         <i class="fa fa-folder-open-o hvr-bounce-in"></i> File Browser
                     </a>
                 </li>
                 <li>
-                    <a href="index.php?control=TeamCharts&action=show&item=<?php echo $pageVars["data"]["team"]["project-slug"] ; ?>"class=" hvr-bounce-in">
+                    <a href="index.php?control=TeamCharts&action=show&item=<?php echo $pageVars["data"]["team"]["team-slug"] ; ?>"class=" hvr-bounce-in">
                         <i class="fa fa-bar-chart-o hvr-bounce-in"></i> Charts
                     </a>
                 </li>
                 <li>
-                    <a href="/index.php?control=TeamHistory&action=show&item=<?php echo $pageVars["data"]["team"]["project-slug"] ; ?>"class=" hvr-bounce-in">
+                    <a href="/index.php?control=TeamHistory&action=show&item=<?php echo $pageVars["data"]["team"]["team-slug"] ; ?>"class=" hvr-bounce-in">
                         <i class="fa fa-history fa-fw hvr-bounce-in"></i> History <span class="badge"><?php echo $pageVars["data"]["history_count"] ; ?></span>
                     </a>
                 </li>
                 <li>
-                    <a href="/index.php?control=TeamHome&action=delete&item=<?php echo $pageVars["data"]["team"]["project-slug"] ; ?>"class=" hvr-bounce-in">
+                    <a href="/index.php?control=TeamHome&action=delete&item=<?php echo $pageVars["data"]["team"]["team-slug"] ; ?>"class=" hvr-bounce-in">
                         <i class="fa fa-trash fa-fw hvr-bounce-in"></i> Delete
                     </a>
                 </li>
@@ -89,23 +89,23 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="project-name" class="col-sm-2 control-label text-left">Project Name</label>
+                        <label for="team-name" class="col-sm-2 control-label text-left">Team Name</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="project-name" id="project-name" placeholder="Project Name" value="<?php echo $pageVars["data"]["team"]["project-name"] ; ?>" />
+                            <input type="text" class="form-control" name="team-name" id="team-name" placeholder="Team Name" value="<?php echo $pageVars["data"]["team"]["team-name"] ; ?>" />
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="project-slug" class="col-sm-2 control-label text-left">Project Slug</label>
+                        <label for="team-slug" class="col-sm-2 control-label text-left">Team Slug</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="project-slug" id="project-slug" placeholder="<?php echo $pageVars["data"]["team"]["project-slug"] ; ?>" value="<?php echo $pageVars["data"]["team"]["project-slug"] ; ?>" />
+                            <input type="text" class="form-control" name="team-slug" id="team-slug" placeholder="<?php echo $pageVars["data"]["team"]["team-slug"] ; ?>" value="<?php echo $pageVars["data"]["team"]["team-slug"] ; ?>" />
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="project-description" class="col-sm-2 control-label text-left">Description</label>
+                        <label for="team-description" class="col-sm-2 control-label text-left">Description</label>
                         <div class="col-sm-10">
-                            <textarea id="project-description" name="project-description" class="form-control"><?php echo $pageVars["data"]["team"]["project-description"] ; ?></textarea>
+                            <textarea id="team-description" name="team-description" class="form-control"><?php echo $pageVars["data"]["team"]["team-description"] ; ?></textarea>
                         </div>
                     </div>
                     <hr>
@@ -136,7 +136,7 @@
                             <button type="submit" id="bt" class="btn btn-success hvr-float-shadow" data-toggle="tooltip" data-placement="top" title="Create New Team" data-original-title="Tooltip on right"">Save Configuration</button>
                         </div>
                     </div>
-                    <input type="hidden" name="item" id="item" value="<?php echo $pageVars["data"]["team"]["project-slug"] ; ?>" />
+                    <input type="hidden" name="item" id="item" value="<?php echo $pageVars["data"]["team"]["team-slug"] ; ?>" />
                 </form>
              </div>
              <hr>

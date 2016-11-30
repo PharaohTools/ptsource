@@ -223,7 +223,7 @@ function switchOwnerButton(toOwner) {
     ht  = '<div class="btn btn-success">' ;
     ht += window.avOwners[toOwner] ;
     ht += '</div>' ;
-    ht += '<input type="hidden" name="project-owner" id="project-owner" value="'+window.avOwners[toOwner]+'"></input>' ;
+    ht += '<input type="hidden" name="team-owner" id="team-owner" value="'+window.avOwners[toOwner]+'"></input>' ;
     $('#newOwnerDiv').html(ht) ;
-    $('#project-owner').val(toOwner) ;
+    $('#team-owner').val(toOwner) ;
 }

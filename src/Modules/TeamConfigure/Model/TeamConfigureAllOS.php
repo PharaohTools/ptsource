@@ -15,7 +15,7 @@ class TeamConfigureAllOS extends Base {
     public $modelGroup = array("Default") ;
 
     private $builder ;
-    private $builderTeam ;
+    private $builderRepository ;
 
     public function __construct($params) {
         parent::__construct($params) ;
@@ -59,7 +59,7 @@ class TeamConfigureAllOS extends Base {
     public function getCopyData() {
         if (isset($this->params["item"])) { $ret["team"] = $this->getTeam(); }
         $teamFactory = new \Model\Team() ;
-        $team = $teamFactory->getModel($this->params, "TeamTeam");
+        $team = $teamFactory->getModel($this->params, "TeamRepository");
         $ret["pipe_names"] = $team->getTeamNames() ;
         return $ret ;
     }
@@ -100,17 +100,17 @@ class TeamConfigureAllOS extends Base {
         return $this->builder ;
     }
 
-    private function getBuilderTeam() {
-        if (isset($this->builderTeam) && is_object($this->builderTeam)) {
-            return $this->builderTeam ;  }
-        $builderTeam = RegistryStore::getValue("builderTeamObject") ;
-        if (isset($builderTeam) && is_object($builderTeam)) {
-            $this->builderTeam = $builderTeam ;
-            return $this->builderTeam ;  }
-        $builderTeamFactory = new \Model\Builder() ;
-        $this->builderTeam = $builderTeamFactory->getModel($this->params, "BuilderTeam");
-        \Model\RegistryStore::setValue("builderTeamObject", $this->builderTeam) ;
-        return $this->builderTeam ;
+    private function getBuilderRepository() {
+        if (isset($this->builderRepository) && is_object($this->builderRepository)) {
+            return $this->builderRepository ;  }
+        $builderRepository = RegistryStore::getValue("builderRepositoryObject") ;
+        if (isset($builderRepository) && is_object($builderRepository)) {
+            $this->builderRepository = $builderRepository ;
+            return $this->builderRepository ;  }
+        $builderRepositoryFactory = new \Model\Builder() ;
+        $this->builderRepository = $builderRepositoryFactory->getModel($this->params, "BuilderRepository");
+        \Model\RegistryStore::setValue("builderRepositoryObject", $this->builderRepository) ;
+        return $this->builderRepository ;
     }
 
     public function getBuilders() {
@@ -124,26 +124,26 @@ class TeamConfigureAllOS extends Base {
     }
 
     public function getBuilderFormFields() {
-        $this->getBuilderTeam() ;
-        return $this->builderTeam->getAllBuildersFormFields();
+        $this->getBuilderRepository() ;
+        return $this->builderRepository->getAllBuildersFormFields();
     }
 
     public function getStepBuildersFormFields() {
-        $this->getBuilderTeam() ;
-        return $this->builderTeam->getStepBuildersFormFields();
+        $this->getBuilderRepository() ;
+        return $this->builderRepository->getStepBuildersFormFields();
     }
 
     public function saveTeam() {
-        $this->params["project-slug"] = $this->getFormattedSlug() ;
-        $this->params["item"] = $this->params["project-slug"] ;
+        $this->params["team-slug"] = $this->getFormattedSlug() ;
+        $this->params["item"] = $this->params["team-slug"] ;
         $teamFactory = new \Model\Team() ;
         $data = array(
-            "project-name" => $this->params["project-name"],
-            "project-slug" => $this->params["project-slug"],
-            "project-description" => $this->params["project-description"]
+            "team-name" => $this->params["team-name"],
+            "team-slug" => $this->params["team-slug"],
+            "team-description" => $this->params["team-description"]
         ) ;
         if ($this->isAdmin()==true){
-            $data["project-owner"] = $this->params["project-owner"] ;
+            $data["team-owner"] = $this->params["team-owner"] ;
         }
 
         $ev = $this->runBCEvent("beforeTeamSave") ;
@@ -151,10 +151,10 @@ class TeamConfigureAllOS extends Base {
 
 
         if ($this->params["creation"] == "yes") {
-            $data["project-creator"] = $this->params["project-creator"] ;
-            $data["project-owner"] = $this->params["project-creator"] ;
+            $data["team-creator"] = $this->params["team-creator"] ;
+            $data["team-owner"] = $this->params["team-creator"] ;
             $teamDefault = $teamFactory->getModel($this->params);
-            $teamDefault->createTeam($this->params["project-slug"]) ; }
+            $teamDefault->createTeam($this->params["team-slug"]) ; }
         $teamSaver = $teamFactory->getModel($this->params, "TeamSaver");
         // @todo dunno why i have to force this param
         $teamSaver->params["item"] = $this->params["item"];
@@ -170,9 +170,9 @@ class TeamConfigureAllOS extends Base {
 
     protected function guessPipeName($orig) {
         $teamFactory = new \Model\Team() ;
-        $team = $teamFactory->getModel($this->params, "TeamTeam");
+        $team = $teamFactory->getModel($this->params, "TeamRepository");
         $pipe_names = $team->getTeamNames() ;
-        $req = (isset($this->params["project-name"])) ? $this->params["project-name"] : $orig ;
+        $req = (isset($this->params["team-name"])) ? $this->params["team-name"] : $orig ;
         if (!in_array($req, $pipe_names)) { return $req ; }
         $guess = $req." REPO" ;
         for ($i=1 ; $i<5001; $i++) {
@@ -191,7 +191,7 @@ class TeamConfigureAllOS extends Base {
         $teamDefault = $teamFactory->getModel($this->params);
         $sourcePipe = $teamDefault->getTeam($this->params["source_team"]) ;
 
-        $pname = $this->guessPipeName($sourcePipe["project-slug"]);
+        $pname = $this->guessPipeName($sourcePipe["team-slug"]);
         $this->params["item"] = $this->getFormattedSlug($pname);
 
         $tempParams = $this->params ;
@@ -199,16 +199,16 @@ class TeamConfigureAllOS extends Base {
         $teamDefault = $teamFactory->getModel($tempParams);
         $sourcePipe = $teamDefault->getTeam($this->params["source_team"]) ;
 
-        $useParam = isset($this->params["project-description"]) && strlen($this->params["project-description"])>0 ;
+        $useParam = isset($this->params["team-description"]) && strlen($this->params["team-description"])>0 ;
         $pdesc = ($useParam) ?
-            $this->params["project-description"] :
-            $sourcePipe["project-description"] ;
+            $this->params["team-description"] :
+            $sourcePipe["team-description"] ;
 
         // @todo we need to put all of this into modules, as build settings.
         $data = array(
-            "project-name" => $pname,
-            "project-slug" => $this->params["item"],
-            "project-description" => $pdesc,
+            "team-name" => $pname,
+            "team-slug" => $this->params["item"],
+            "team-description" => $pdesc,
 
         ) ;
 
@@ -243,14 +243,14 @@ class TeamConfigureAllOS extends Base {
     }
 
     private function getFormattedSlug($name = null) {
-        $tpn = (!is_null($name)) ? $name : $this->params["project-name"] ;
-        if ($this->params["project-slug"] == "") {
-            $this->params["project-slug"] = str_replace(" ", "_", $tpn);
-            $this->params["project-slug"] = str_replace("'", "", $this->params["project-slug"]);
-            $this->params["project-slug"] = str_replace('"', "", $this->params["project-slug"]);
-            $this->params["project-slug"] = str_replace("/", "", $this->params["project-slug"]);
-            $this->params["project-slug"] = strtolower($this->params["project-slug"]); }
-        return $this->params["project-slug"] ;
+        $tpn = (!is_null($name)) ? $name : $this->params["team-name"] ;
+        if ($this->params["team-slug"] == "") {
+            $this->params["team-slug"] = str_replace(" ", "_", $tpn);
+            $this->params["team-slug"] = str_replace("'", "", $this->params["team-slug"]);
+            $this->params["team-slug"] = str_replace('"', "", $this->params["team-slug"]);
+            $this->params["team-slug"] = str_replace("/", "", $this->params["team-slug"]);
+            $this->params["team-slug"] = strtolower($this->params["team-slug"]); }
+        return $this->params["team-slug"] ;
     }
 
 }
