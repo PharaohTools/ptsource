@@ -75,12 +75,12 @@
                                 else {
                                     $successFailureClass = "unstableRow" ; }
 
-                                if (isset($teamDetails["project-name"])) {
-                                    $slugOrName = $teamDetails["project-name"] ; }
+                                if (isset($teamDetails["team-name"])) {
+                                    $slugOrName = $teamDetails["team-name"] ; }
                                 else if (isset($teamSlug)) {
                                     $slugOrName = $teamSlug ; }
                                 else {
-                                    $slugOrName = "Unnamed Project" ; }
+                                    $slugOrName = "Unnamed Team" ; }
 
                                 ?>
 
@@ -114,9 +114,9 @@
                                     <span class="fullRow">
                                         <a href="/index.php?control=TeamCharts&action=show&item=<?php echo $teamSlug; ?>">Graphs</a>
                                     </span>
-                                    <span class="fullRow">
-                                        <a href="/index.php?control=TeamCharts&action=contributors&item=<?php echo $teamSlug; ?>">Contributors</a>
-                                    </span>
+<!--                                    <span class="fullRow">-->
+<!--                                        <a href="/index.php?control=TeamCharts&action=contributors&item=--><?php //echo $teamSlug; ?><!--">Contributors</a>-->
+<!--                                    </span>-->
                                     <span class="fullRow">
                                         <a href="/index.php?control=TeamHistory&action=show&item=<?php echo $teamSlug; ?>">History</a>
                                     </span>
