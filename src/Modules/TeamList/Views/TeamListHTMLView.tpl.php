@@ -75,8 +75,8 @@
                                 else {
                                     $successFailureClass = "unstableRow" ; }
 
-                                if (isset($teamDetails["team-name"])) {
-                                    $slugOrName = $teamDetails["team-name"] ; }
+                                if (isset($teamDetails["team_name"])) {
+                                    $slugOrName = $teamDetails["team_name"] ; }
                                 else if (isset($teamSlug)) {
                                     $slugOrName = $teamSlug ; }
                                 else {
@@ -99,7 +99,7 @@
                                     if (isset($teamDetails["features"]) &&
                                         count($teamDetails["features"])>0 ) {
                                         foreach ($teamDetails["features"] as $team_feature) {
-                                            echo '<div class="team-feature">' ;
+                                            echo '<div class="team_feature">' ;
                                             echo ' <a target="_blank" href="'.$team_feature["model"]["link"].'">' ;
 //                                                echo  '<h3>'.$team_feature["model"]["title"].'</h3>' ;
                                             echo '  <img src="'.$team_feature["model"]["image"].'" />' ;
