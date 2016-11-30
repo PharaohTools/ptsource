@@ -19,10 +19,12 @@ class DatastoreSQLLiteAllOS extends Base {
         parent::__construct($params) ;
         try {
             require_once(dirname(__DIR__).DS."Libraries".DS."Medoo".DS."medoo.php" ) ;
-
+            $data_dir = PFILESDIR.DS.PHARAOH_APP.'data'.DS ;
+            if (!file_exists($data_dir) || !is_dir($data_dir)) {
+                mkdir ($data_dir, 0777, true); }
             $this->database = new \medoo([
                 'database_type' => 'sqlite',
-                'database_file' => '/opt/pttrack/data/database.db',
+                'database_file' => PFILESDIR.DS.PHARAOH_APP.'data'.DS.'database.db',
                 'charset' => 'utf8'
             ]);}
         catch (\Exception $e) {
