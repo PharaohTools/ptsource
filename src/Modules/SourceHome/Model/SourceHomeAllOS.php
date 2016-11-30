@@ -21,7 +21,7 @@ class SourceHomeAllOS extends Base {
         if ($ret["user"] !== false) {
             $ret["my_owned_repositories"] = $this->getMyRepositoriesCount($ret["all_repositories"], $ret["user"]);
             $ret["my_member_repositories"] = $this->getMemberRepositoriesCount($ret["all_repositories"], $ret["user"]);
-            $ret["all_teams"] = $this->getRepositories();
+            $ret["all_teams"] = $this->getTeams();
             $ret["my_owned_teams"] = $this->getMyTeamsCount($ret["all_teams"], $ret["user"]);
             $ret["my_member_teams"] = $this->getMemberTeamsCount($ret["all_teams"], $ret["user"]); }
         return $ret ;
@@ -38,6 +38,13 @@ class SourceHomeAllOS extends Base {
         $repositoryFactory = new \Model\Repository() ;
         $repository = $repositoryFactory->getModel($this->params);
         $repos = $repository->getRepositories();
+        return $repos ;
+    }
+
+    public function getTeams() {
+        $teamFactory = new \Model\Team() ;
+        $team = $teamFactory->getModel($this->params);
+        $repos = $team->getTeams();
         return $repos ;
     }
 
