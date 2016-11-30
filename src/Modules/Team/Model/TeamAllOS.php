@@ -46,7 +46,7 @@ class TeamAllOS extends Base {
 
     public function getTeamFeatures() {
         $teamFeatureFactory = new \Model\TeamFeature();
-        $teamFeature = $teamFeatureFactory->getModel($this->params, "TeamFeature") ;
+        $teamFeature = $teamFeatureFactory->getModel($this->params) ;
         $names = $teamFeature->getTeamFeatureNames();
         $team = $this->getTeam($this->params["item"]);
         $this->params["team_settings"] = $team["settings"];
