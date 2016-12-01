@@ -20,7 +20,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="index.php?control=TeamConfigure&action=show&item=<?php echo $pageVars["data"]["team"]["team-slug"] ; ?>" class="hvr-bounce-in">
+                        <a href="index.php?control=TeamConfigure&action=show&item=<?php echo $pageVars["data"]["team"]["team_slug"] ; ?>" class="hvr-bounce-in">
                             <i class="fa  fa-cog fa-fw hvr-bounce-in"></i> Configure
                         </a>
                     </li>
@@ -32,17 +32,17 @@
                 ?>
                 
                     <li>
-                        <a href="index.php?control=FileBrowser&action=show&item=<?php echo $pageVars["data"]["team"]["team-slug"] ; ?>" class="hvr-bounce-in">
+                        <a href="index.php?control=FileBrowser&action=show&item=<?php echo $pageVars["data"]["team"]["team_slug"] ; ?>" class="hvr-bounce-in">
                             <i class="fa fa-folder-open-o hvr-bounce-in"></i> File Browser
                         </a>
                     </li>
                     <li>
-                        <a href="index.php?control=TeamCharts&action=show&item=<?php echo $pageVars["data"]["team"]["team-slug"] ; ?>" class="hvr-bounce-in">
+                        <a href="index.php?control=TeamCharts&action=show&item=<?php echo $pageVars["data"]["team"]["team_slug"] ; ?>" class="hvr-bounce-in">
                             <i class="fa fa-bar-chart-o hvr-bounce-in"></i> Charts
                         </a>
                     </li>
                     <li>
-                        <a href="index.php?control=TeamHistory&action=show&item=<?php echo $pageVars["data"]["team"]["team-slug"] ; ?>"class="hvr-bounce-in">
+                        <a href="index.php?control=TeamHistory&action=show&item=<?php echo $pageVars["data"]["team"]["team_slug"] ; ?>"class="hvr-bounce-in">
                             <i class="fa fa-history fa-fw hvr-bounce-in""></i> History <span class="badge"></span>
                         </a>
                     </li>
@@ -51,7 +51,7 @@
                     ?>
 
                     <li>
-                        <a href="index.php?control=TeamHome&action=delete&item=<?php echo $pageVars["data"]["team"]["team-slug"] ; ?>" class="hvr-bounce-in">
+                        <a href="index.php?control=TeamHome&action=delete&item=<?php echo $pageVars["data"]["team"]["team_slug"] ; ?>" class="hvr-bounce-in">
                             <i class="fa fa-trash fa-fw hvr-bounce-in""></i> Delete
                         </a>
                     </li>
@@ -70,20 +70,20 @@
                 <?php
 
 
-                if (isset($pageVars["data"]["team"]["team-name"])) {
-                    $slugOrName = $pageVars["data"]["team"]["team-name"] ; }
-                else if (isset($pageVars["data"]["team"]["team-slug"])) {
-                    $slugOrName = $pageVars["data"]["team"]["team-slug"] ; }
+                if (isset($pageVars["data"]["team"]["team_name"])) {
+                    $slugOrName = $pageVars["data"]["team"]["team_name"] ; }
+                else if (isset($pageVars["data"]["team"]["team_slug"])) {
+                    $slugOrName = $pageVars["data"]["team"]["team_slug"] ; }
                 else {
                     $slugOrName = "Unnamed Team" ; }
 
-                if (isset($pageVars["data"]["team"]["team-description"])) {
-                    $slugOrDescription = $pageVars["data"]["team"]["team-description"] ; }
+                if (isset($pageVars["data"]["team"]["team_description"])) {
+                    $slugOrDescription = $pageVars["data"]["team"]["team_description"] ; }
                 else {
                     $slugOrDescription = "No Description configured for Team" ; }
 
-                if (isset($pageVars["data"]["team"]["team-owner"])) {
-                    $ownerOrDescription = $pageVars["data"]["team"]["team-owner"] ; }
+                if (isset($pageVars["data"]["team"]["team_owner"])) {
+                    $ownerOrDescription = $pageVars["data"]["team"]["team_owner"] ; }
                 else {
                     $ownerOrDescription = "No Owner configured for Team" ; }
 
@@ -91,97 +91,13 @@
            
             <div class="row clearfix no-margin">
             	<h3 class="text-uppercase text-light ">Team: <strong><?php echo $slugOrName ; ?></strong> </h3>
-                <p> Slug: <?php echo $pageVars["data"]["team"]["team-slug"] ; ?></p>
+                <p> Slug: <?php echo $pageVars["data"]["team"]["team_slug"] ; ?></p>
                 <p> Description: <?php echo $slugOrDescription ; ?></p>
                 <p> Owner: <?php echo $ownerOrDescription ; ?></p>
             </div>
-                <?php
 
-                $ht_string = ($pageVars["data"]["is_https"] == true) ? 'HTTPS' : 'HTTP' ;
-                $ht_string_lower = strtolower($ht_string) ;
-                ?>
-                    
-                    <?php
-                    if (isset($pageVars["data"]["user"]->username)) {
+            <hr />
 
-                        $ownerOrPublic = (isset($pageVars["data"]["team"]["team-owner"]) &&
-                            strlen($pageVars["data"]["team"]["team-owner"])>0) ?
-                            $pageVars["data"]["team"]["team-owner"] : "public" ;
-                        ?>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <hr />
-                            <div class="col-sm-4">
-                                <span id="select_clone" class="centered_button select_git_command btn btn-success">Clone</span>
-                            </div>
-                            <div class="col-sm-4">
-                                <span id="select_push" class="centered_button select_git_command btn btn-warning">Push</span>
-                            </div>
-                            <div class="col-sm-4">
-                                <span id="select_pull" class="centered_button select_git_command btn btn-warning">Pull</span>
-                            </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <h2 class="git_command_text"><strong id="git_command_string">git clone</strong> <?php echo "{$ht_string_lower}://{$pageVars["data"]["user"]->username}:{password}@{$_SERVER["SERVER_NAME"]}/git/{$ownerOrPublic}/{$pageVars["data"]["team"]["team-slug"]} "  ; ?></h2>
-                        </div>
-                        <div class="col-sm-12">
-                            <span class="col-sm-3 centered_button btn btn-success">Write Enabled</span>
-                        </div>
-                    </div>
-                    <?php                        
-                    }
-                    else {
-                    ?>
-
-                <div class="row">
-                    <div class="col-sm-12">
-                        <hr />
-                        <?php
-
-                        if ($pageVars["data"]["team"]["settings"]["PublicScope"]["enabled"] == "on") {
-                            if ($pageVars["data"]["team"]["settings"]["PublicScope"]["public_read"] == "on") { ?>
-
-                        <div class="col-sm-4">
-                            <span id="select_clone" class="centered_button select_git_command btn btn-success">Clone</span>
-                        </div>
-
-                        <?php
-
-                        if (in_array($pageVars["data"]["current_user_role"], array("1", "2")) ||
-                            $pageVars["data"]["team"]["settings"]["PublicScope"]["public_write"] == "on") { ?>
-                            <div class="col-sm-4">
-                                <span id="select_push" class="centered_button select_git_command btn btn-warning">Push</span>
-                            </div>
-                            <div class="col-sm-4">
-                                <span id="select_pull" class="centered_button select_git_command btn btn-warning">Pull</span>
-                            </div>
-
-                        <?php } ?>
-                    </div>
-
-                    <div class="col-sm-12">
-                        <h2 class="git_command_text"><strong id="git_command_string">git clone</strong> <?php echo "{$ht_string_lower}://anon:any@{$_SERVER["SERVER_NAME"]}/git/public/{$pageVars["data"]["team"]["team-slug"]} "  ; ?></h2>
-                    </div>
-
-                        <?php } ?>
-                    <div class="col-sm-12">
-
-                        <?php
-
-                        if (in_array($pageVars["data"]["current_user_role"], array("1", "2")) ||
-                            $pageVars["data"]["team"]["settings"]["PublicScope"]["public_write"] == "on") {?>
-                                <span class="col-sm-3 centered_button btn btn-success">Write Enabled</span>
-                        <?php } else ?>
-                                <span class="col-sm-3 centered_button btn btn-danger">Write Disabled</span>
-                        <?php }
-                        ?>
-
-                    </div>
-                    </div>
-                        <?php
-                        } ?>
-
-                <hr />
             <div class="row clearfix no-margin build-home-properties">
                 <div class="fullRow">
                     <div class="pipe-features-block pipe-block">
@@ -193,7 +109,7 @@
                                 foreach ($pageVars["data"]["features"] as $team_feature) {
                                     if (isset($team_feature["hidden"]) && $team_feature["hidden"] != true
                                         || !isset($team_feature["hidden"]) ) {
-                                        echo '<div class="team-feature">' ;
+                                        echo '<div class="team_feature">' ;
                                         echo '<a target="_blank" href="'.$team_feature["model"]["link"].'">' ;
                                         echo  '<h3>'.$team_feature["model"]["title"].'</h3>' ;
                                         echo  '<img src="'.$team_feature["model"]["image"].'" />' ;
@@ -221,10 +137,10 @@
 
                         <div class="commitRow" id="blRow_<?php echo $commitDetails["commit"]; ?>" >
                             <div class="blCell cellRowIndex" scope="row"><?php echo $i; ?> </div>
-                            <div class="blCell cellRowMessage"><a href="/index.php?control=CommitDetails&action=show&item=<?php echo $pageVars["data"]["team"]["team-slug"]; ?>&identifier=<?php echo $pageVars["data"]["identifier"] ; ?>&commit=<?php echo $commitDetails["commit"] ; ?>" class="pipeName"><?php echo $commitDetails["message"]; ?>  </a> </div>
-                            <div class="blCell cellRowAuthor"><a href="/index.php?control=CommitDetails&action=show&item=<?php echo $pageVars["data"]["team"]["team-slug"]; ?>&identifier=<?php echo $pageVars["data"]["identifier"] ; ?>&commit=<?php echo $commitDetails["commit"] ; ?>" class="pipeName"><?php echo $commitDetails["author"]; ?>  </a> </div>
-                            <div class="blCell cellRowDate"><a href="/index.php?control=CommitDetails&action=show&item=<?php echo $pageVars["data"]["team"]["team-slug"]; ?>&identifier=<?php echo $pageVars["data"]["identifier"] ; ?>&commit=<?php echo $commitDetails["commit"] ; ?>" class="pipeName"><?php echo $commitDetails["date"]; ?>  </a> </div>
-                            <div class="blCell cellRowHash"><a href="/index.php?control=CommitDetails&action=show&item=<?php echo $pageVars["data"]["team"]["team-slug"]; ?>&identifier=<?php echo $pageVars["data"]["identifier"] ; ?>&commit=<?php echo $commitDetails["commit"] ; ?>" class="pipeName"><?php echo substr($commitDetails["commit"], 0, 6); ?>  </a> </div>
+                            <div class="blCell cellRowMessage"><a href="/index.php?control=CommitDetails&action=show&item=<?php echo $pageVars["data"]["team"]["team_slug"]; ?>&identifier=<?php echo $pageVars["data"]["identifier"] ; ?>&commit=<?php echo $commitDetails["commit"] ; ?>" class="pipeName"><?php echo $commitDetails["message"]; ?>  </a> </div>
+                            <div class="blCell cellRowAuthor"><a href="/index.php?control=CommitDetails&action=show&item=<?php echo $pageVars["data"]["team"]["team_slug"]; ?>&identifier=<?php echo $pageVars["data"]["identifier"] ; ?>&commit=<?php echo $commitDetails["commit"] ; ?>" class="pipeName"><?php echo $commitDetails["author"]; ?>  </a> </div>
+                            <div class="blCell cellRowDate"><a href="/index.php?control=CommitDetails&action=show&item=<?php echo $pageVars["data"]["team"]["team_slug"]; ?>&identifier=<?php echo $pageVars["data"]["identifier"] ; ?>&commit=<?php echo $commitDetails["commit"] ; ?>" class="pipeName"><?php echo $commitDetails["date"]; ?>  </a> </div>
+                            <div class="blCell cellRowHash"><a href="/index.php?control=CommitDetails&action=show&item=<?php echo $pageVars["data"]["team"]["team_slug"]; ?>&identifier=<?php echo $pageVars["data"]["identifier"] ; ?>&commit=<?php echo $commitDetails["commit"] ; ?>" class="pipeName"><?php echo substr($commitDetails["commit"], 0, 6); ?>  </a> </div>
                             <?php
 
                             $i++ ;
