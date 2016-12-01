@@ -17,11 +17,9 @@ class TeamHomeAllOS extends Base {
     public function getData() {
         $ret["team"] = $this->getTeam();
         $ret["features"] = $this->getTeamFeatures();
-        $ret["history"] = $this->getCommitHistory();
         $ret["is_https"] = $this->isSecure();
         $ret["user"] = $this->getLoggedInUser();
         $ret["current_user_role"] = $this->getCurrentUserRole($ret["user"]);
-        $ret["readme"] = $this->getReadmeData($ret["team"]) ;
         $ret = array_merge($ret, $this->getIdentifier()) ;
         return $ret ;
     }
@@ -52,27 +50,6 @@ class TeamHomeAllOS extends Base {
         return $r ;
     }
 
-    protected function getReadmeData($team) {
-        $identifier = 'HEAD' ;
-        $cur_dir = getcwd() ;
-        chdir(REPODIR.DS.$team["team-slug"]) ;
-        $command = 'git ls-tree --full-tree '.$identifier ;
-        exec($command, $output) ;
-        $files = $this->parseLSTree($output) ;
-        if (in_array("README.md", $files)) { $load_readme_res = true ; }
-        else { $load_readme_res = false ; }
-        if ($load_readme_res == false) {
-            $rd_res["exists"] = false ; }
-        else {
-            $rd_res["exists"] = true ;
-            $command = 'git show '.$identifier.':README.md ' ;
-            $rd_res["raw"] = shell_exec($command) ;
-            require_once(dirname(__DIR__).DS."Libraries".DS."parsedown".DS."Parsedown.php") ;
-            $Parsedown = new \Parsedown();
-            $rd_res["md"] = $Parsedown->text($rd_res["raw"]); }
-        chdir($cur_dir);
-        return $rd_res ;
-    }
 
     protected function parseLSTree($output) {
         $files = array() ;
@@ -95,14 +72,6 @@ class TeamHomeAllOS extends Base {
         $team = $teamFactory->getModel($this->params);
         $r = $team->getTeamFeatures($this->params["item"]);
         return $r ;
-    }
-
-    protected function getCommitHistory() {
-        $teamFactory = new \Model\Team() ;
-        $commitParams = $this->params ;
-        $commitParams["amount"] = 10 ;
-        $team = $teamFactory->getModel($commitParams, "TeamCommits");
-        return $team->getCommits();
     }
 
     protected function isSecure() {
