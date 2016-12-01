@@ -25,7 +25,7 @@
                 if ($pageVars["route"]["action"] !== "new") {
                 ?>
                 <li>
-                    <a href="/index.php?control=TeamHome&action=show&item=<?php echo $pageVars["data"]["team"]["team-slug"] ; ?>" class="hvr-bounce-in">
+                    <a href="/index.php?control=TeamHome&action=show&item=<?php echo $pageVars["data"]["team"]["team_slug"] ; ?>" class="hvr-bounce-in">
                         <i class="fa fa-home hvr-bounce-in"></i> Team Home
                     </a>
                 </li>
@@ -41,22 +41,22 @@
                 if ($pageVars["route"]["action"] !== "new") {
                 ?>
                 <li>
-                    <a href="/index.php?control=FileBrowser&action=show&item=<?php echo $pageVars["data"]["team"]["team-slug"] ; ?>" class="hvr-bounce-in">
+                    <a href="/index.php?control=FileBrowser&action=show&item=<?php echo $pageVars["data"]["team"]["team_slug"] ; ?>" class="hvr-bounce-in">
                         <i class="fa fa-folder-open-o hvr-bounce-in"></i> File Browser
                     </a>
                 </li>
                 <li>
-                    <a href="index.php?control=TeamCharts&action=show&item=<?php echo $pageVars["data"]["team"]["team-slug"] ; ?>" class="hvr-bounce-in">
+                    <a href="index.php?control=TeamCharts&action=show&item=<?php echo $pageVars["data"]["team"]["team_slug"] ; ?>" class="hvr-bounce-in">
                         <i class="fa fa-bar-chart-o hvr-bounce-in"></i> Charts
                     </a>
                 </li>
                 <li>
-                    <a href="/index.php?control=TeamHistory&action=show&item=<?php echo $pageVars["data"]["team"]["team-slug"] ; ?>" class="hvr-bounce-in">
+                    <a href="/index.php?control=TeamHistory&action=show&item=<?php echo $pageVars["data"]["team"]["team_slug"] ; ?>" class="hvr-bounce-in">
                         <i class="fa fa-history fa-fw hvr-bounce-in"></i> History
                     </a>
                 </li>
                 <li>
-                    <a href="/index.php?control=TeamHome&action=delete&item=<?php echo $pageVars["data"]["team"]["team-slug"] ; ?>" class="hvr-bounce-in">
+                    <a href="/index.php?control=TeamHome&action=delete&item=<?php echo $pageVars["data"]["team"]["team_slug"] ; ?>" class="hvr-bounce-in">
                         <i class="fa fa-trash fa-fw hvr-bounce-in"></i> Delete
                     </a>
                 </li>
@@ -70,7 +70,7 @@
                     <div class="well well-lg">
 
         <?php
-        $act = '/index.php?control=TeamConfigure&item='.$pageVars["data"]["team"]["team-slug"].'&action=save' ;
+        $act = '/index.php?control=TeamConfigure&item='.$pageVars["data"]["team"]["team_slug"].'&action=save' ;
         ?>
 
             <?php echo $this->renderLogs() ; ?>
@@ -96,21 +96,21 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="team-name" class="col-sm-2 control-label text-left">Team Name</label>
+                        <label for="team_name" class="col-sm-2 control-label text-left">Team Name</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="team-name" id="team-name" placeholder="Team Name" value="<?php echo $pageVars["data"]["team"]["team-name"] ; ?>" />
+                            <input type="text" class="form-control" name="team_name" id="team_name" placeholder="Team Name" value="<?php echo $pageVars["data"]["team"]["team_name"] ; ?>" />
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="team-slug" class="col-sm-2 control-label text-left">Team Slug</label>
+                        <label for="team_slug" class="col-sm-2 control-label text-left">Team Slug</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="team-slug" id="team-slug" placeholder="<?php echo $pageVars["data"]["team"]["team-slug"] ; ?>" value="<?php echo $pageVars["data"]["team"]["team-slug"] ; ?>" />
+                            <input type="text" class="form-control" name="team_slug" id="team_slug" placeholder="<?php echo $pageVars["data"]["team"]["team_slug"] ; ?>" value="<?php echo $pageVars["data"]["team"]["team_slug"] ; ?>" />
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="team-slug" class="col-sm-2 control-label text-left">Team Owner</label>
+                        <label for="team_slug" class="col-sm-2 control-label text-left">Team Owner</label>
 
                         <div class="col-sm-10">
                             <?php
@@ -157,14 +157,14 @@
                                     <?php
                                     $allOwners = $pageVars["data"]["available_users"] ;
                                     foreach ($allOwners as $oneOwner) {
-                                        if ($oneOwner == $pageVars["data"]["team"]["team-owner"]) {
+                                        if ($oneOwner == $pageVars["data"]["team"]["team_owner"]) {
                                             $owner = $oneOwner ; } }
 
                                     if (isset($owner)) {
                                         ?>
 
                                         <div class="btn btn-success" value="<?php echo $owner ; ?>"><?php echo $owner ; ?></div>
-                                        <input type="hidden" name="team-owner" id="team-owner" value="<?php echo $pageVars["data"]["team"]["team-owner"] ; ?>" />
+                                        <input type="hidden" name="team_owner" id="team_owner" value="<?php echo $pageVars["data"]["team"]["team_owner"] ; ?>" />
                                         <!--                                    <p>Owner Currently: </p>-->
 
                                     <?php
@@ -180,13 +180,13 @@
                             else {
                                 if ($pageVars["route"]["action"] == "new") {
                                     ?>
-                                    <h5 id="team-owner"><?php echo $pageVars["data"]["current_user_data"]->username ; ?></h5>
+                                    <h5 id="team_owner"><?php echo $pageVars["data"]["current_user_data"]->username ; ?></h5>
 
                                 <?php
 
                                 } else {
                                     ?>
-                                    <p id="team-owner"><?php echo $pageVars["data"]["team"]["team-owner"] ; ?></p>
+                                    <p id="team_owner"><?php echo $pageVars["data"]["team"]["team_owner"] ; ?></p>
                                 <?php
                                 }
 
@@ -196,9 +196,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="team-description" class="col-sm-2 control-label text-left">Description</label>
+                        <label for="team_description" class="col-sm-2 control-label text-left">Description</label>
                         <div class="col-sm-10">
-                            <textarea id="team-description" name="team-description" class="form-control"><?php echo $pageVars["data"]["team"]["team-description"] ; ?></textarea>
+                            <textarea id="team_description" name="team_description" class="form-control"><?php echo $pageVars["data"]["team"]["team_description"] ; ?></textarea>
                         </div>
                     </div>
                     <hr>
@@ -210,7 +210,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="team-slug" class="col-sm-1 control-label"></label>
+                        <label for="team_slug" class="col-sm-1 control-label"></label>
 
                         <div class="col-sm-12">
                             <div class="col-sm-12">
@@ -267,7 +267,7 @@
                             </span>
                         </div>
                     </div>
-                    <label for="team-slug" class="col-sm-1 control-label"></label>
+                    <label for="team_slug" class="col-sm-1 control-label"></label>
                 </div>
 
                                <hr />
@@ -285,7 +285,7 @@
 
                     ?>
 
-                    <input type="hidden" name="item" id="item" value="<?php echo $pageVars["data"]["team"]["team-slug"] ; ?>" />
+                    <input type="hidden" name="item" id="item" value="<?php echo $pageVars["data"]["team"]["team_slug"] ; ?>" />
 
                 </form>
             </div>
