@@ -133,9 +133,11 @@ class TeamConfigureAllOS extends Base {
             $data["team_owner"] = $this->params["team_owner"] ;
         }
 
+//        var_dump($data) ;
+//        die() ;
+
         $ev = $this->runBCEvent("beforeTeamSave") ;
         if ($ev == false) { return false ; }
-
 
         if ($this->params["creation"] == "yes") {
             $data["team_creator"] = $this->params["team_creator"] ;
