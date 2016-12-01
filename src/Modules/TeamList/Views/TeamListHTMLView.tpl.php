@@ -66,7 +66,7 @@
 							<?php
 
 							$i = 1;
-							foreach ($pageVars["data"]["teams"] as $teamSlug => $teamDetails) {
+							foreach ($pageVars["data"]["teams"] as $teamDetails) {
 
                                 if ($teamDetails["last_status"] === true) {
                                     $successFailureClass = "successRow"  ; }
@@ -77,19 +77,19 @@
 
                                 if (isset($teamDetails["team_name"])) {
                                     $slugOrName = $teamDetails["team_name"] ; }
-                                else if (isset($teamSlug)) {
-                                    $slugOrName = $teamSlug ; }
+                                    else if (isset($teamDetails["team_slug"])) {
+                                    $slugOrName = $teamDetails["team_slug"] ; }
                                 else {
                                     $slugOrName = "Unnamed Team" ; }
 
                                 ?>
 
-							<div class="teamRow <?php echo $successFailureClass ?>" id="blRow_<?php echo $teamSlug; ?>" >
+							<div class="teamRow <?php echo $successFailureClass ?>" id="blRow_<?php echo $teamDetails["team_slug"]; ?>" >
                                 <div class="blCell cellRowIndex" scope="row">
                                     <?php echo $i; ?>
                                 </div>
                                 <div class="blCell cellRowName">
-                                    <a href="/index.php?control=TeamHome&action=show&item=<?php echo $teamSlug; ?>" class="pipeName">
+                                    <a href="/index.php?control=TeamHome&action=show&item=<?php echo $teamDetails["team_slug"]; ?>" class="pipeName">
                                         <?php echo $slugOrName; ?>
                                     </a>
                                 </div>
@@ -112,13 +112,13 @@
                                 </div>
                                 <div  class="blCell cellRowMore">
                                     <span class="fullRow">
-                                        <a href="/index.php?control=TeamCharts&action=show&item=<?php echo $teamSlug; ?>">Graphs</a>
+                                        <a href="/index.php?control=TeamCharts&action=show&item=<?php echo $teamDetails["team_slug"]; ?>">Graphs</a>
                                     </span>
 <!--                                    <span class="fullRow">-->
-<!--                                        <a href="/index.php?control=TeamCharts&action=contributors&item=--><?php //echo $teamSlug; ?><!--">Contributors</a>-->
+<!--                                        <a href="/index.php?control=TeamCharts&action=contributors&item=--><?php //echo $teamDetails["team_slug"]; ?><!--">Contributors</a>-->
 <!--                                    </span>-->
                                     <span class="fullRow">
-                                        <a href="/index.php?control=TeamHistory&action=show&item=<?php echo $teamSlug; ?>">History</a>
+                                        <a href="/index.php?control=TeamHistory&action=show&item=<?php echo $teamDetails["team_slug"]; ?>">History</a>
                                     </span>
                                 </div>
 							</div>
