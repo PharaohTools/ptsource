@@ -105,6 +105,7 @@ class TeamAllOS extends Base {
                 'team_description' => 'string',
                 'team_client' => 'string',
                 'team_creator' => 'string',
+                'team_owner' => 'string',
                 'team_members' => 'string',
                 'milestones' => 'string',
                 'team_source' => 'string',
@@ -114,14 +115,15 @@ class TeamAllOS extends Base {
                 'team_public_issue_enabled' => 'string',
                 'team_public_comments_enabled' => 'string',
             );
-            $logging->log("Creating Jobs Collection in Datastore", $this->getModuleName()) ;
+            $logging->log("Creating Teams Collection in Datastore", $this->getModuleName()) ;
 
             $datastore->createCollection('teams', $column_defines) ; }
 
-        $logging->log("Creating New Job {$name} in Collection ".'teams', $this->getModuleName()) ;
+        $logging->log("Creating New Team {$name} in Collection ".'teams', $this->getModuleName()) ;
 
         $res = $datastore->insert('teams', array(
-            "team_slug"=>$name
+            "team_slug"=>$name,
+            "team_owner"=>$name,
         )) ;
 
         return ($res==false) ? false : true ;
