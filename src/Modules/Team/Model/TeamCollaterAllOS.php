@@ -34,27 +34,28 @@ class TeamCollaterAllOS extends Base {
     }
 
     private function getDefaults() {
+        $datastoreFactory = new \Model\Datastore() ;
+        $datastore = $datastoreFactory->getModel($this->params) ;
         $defaults = array() ;
-        $defaultsFile = REPODIR.DS.$this->params["item"].DS.'defaults' ;
-        if (file_exists($defaultsFile)) {
-            $defaultsFileData =  file_get_contents($defaultsFile) ;
-            $defaults = json_decode($defaultsFileData, true) ; }
-        else {
-            $loggingFactory = new \Model\Logging() ;
-            $logging = $loggingFactory->getModel($this->params) ;
-            // @todo this should be a warn log or something
-//            $logging->log("No defaults file available in team", $this->getModuleName()) ;
-        }
-        $defaults = $this->setDefaultSlugIfNeeded($defaults) ;
+        if (isset($this->params["item"])){
+            $defaults = $datastore->findOne('teams', array(array("where", 'team_slug', "=", $this->params["item"]))) ;
+            if ($this->userCanAccessTeam($defaults) === true) {
+                return $defaults ; } }
         return $defaults ;
     }
 
-    private function setDefaultSlugIfNeeded($defaults) {
-        if (!isset($defaults["project-slug"])) {
-            $defaults["project-slug"] = $this->params["item"] ; }
-        if (isset($defaults["project-slug"]) && $defaults["project-slug"] == "") {
-            $defaults["project-slug"] = $this->params["item"] ; }
-        return $defaults ;
+    private function userCanAccessTeam($team) {
+        $settings = $this->getSettings() ;
+        if (isset($settings["Signup"]["signup_enabled"]) && $settings["Signup"]["signup_enabled"]=="on") {
+            $signupFactory = new \Model\Signup() ;
+            $signup = $signupFactory->getModel($this->params);
+            $user = $signup->getLoggedInUserData();
+            if ($user->role == 1) { return true ; }
+            if ($team["team_owner"] == $user->username) { return true ; }
+            if (strpos($team["team_members"], $user->username.',') !== false) { return true ; }
+            if (strpos($team["team_members"], ','.$user->username) !== false) { return true ; }
+            return false ; }
+        return true ;
     }
 
     private function getSettings() {

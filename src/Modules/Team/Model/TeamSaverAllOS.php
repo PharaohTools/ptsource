@@ -53,6 +53,7 @@ class TeamSaverAllOS extends Base {
                 'team_description' => 'string',
                 'team_client' => 'string',
                 'team_creator' => 'string',
+                'team_owner' => 'string',
                 'team_members' => 'string',
                 'milestones' => 'string',
                 'team_source' => 'string',
@@ -70,6 +71,8 @@ class TeamSaverAllOS extends Base {
                     $newData[$column] = (isset($save["data"][$column])) ? $save["data"][$column] : "" ; } }
 
 
+
+
             $loggingFactory = new \Model\Logging() ;
             $this->params["echo-log"] = true ;
             $this->params["app-log"] = true ;
@@ -78,9 +81,6 @@ class TeamSaverAllOS extends Base {
             if ($datastore->collectionExists('teams') == false) {
                 $logging->log("Creating Teams Collection in Datastore", $this->getModuleName()) ;
                 $datastore->createCollection('teams', $column_defines) ; }
-
-//            var_dump("we are here 2", $newData) ;
-//            die();
 
             $clause = array("team_slug" => $save["data"]["team_slug"]) ;
 
