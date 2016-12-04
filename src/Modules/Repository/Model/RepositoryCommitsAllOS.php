@@ -14,11 +14,12 @@ class RepositoryCommitsAllOS extends Base {
     // Model Group
     public $modelGroup = array("RepositoryCommits") ;
 
-    public function getCommits($repository=null, $amount=null, $page=null, $identifier=null) {
+    public function getCommits($repository=null, $amount=null, $page=null, $identifier=null, $reverse=false) {
         if ($repository != null) { $this->params["item"] = $repository ; }
         if ($amount != null) { $this->params["amount"] = $amount ; }
         if ($page != null) { $this->params["page"] = $page ; }
         if ($identifier != null) { $this->params["identifier"] = $identifier ; }
+        if ($reverse != null) { $this->params["reverse"] = $reverse ; }
         $r = $this->collate();
         return $r ;
     }
@@ -66,6 +67,8 @@ class RepositoryCommitsAllOS extends Base {
         $command .= "$@ | perl -pe 'BEGIN{print \"[\"}; END{print \"]\\n\"}' | perl -pe 's/},]/}]/' " ;
         $commits = $this->executeAndLoad($command) ;
         $dirs_json = json_decode($commits, TRUE) ;
+        if ($this->params["reverse"] == true) {
+            $dirs_json = array_reverse($dirs_json) ; }
         return array("commits" => $dirs_json) ;
     }
 
