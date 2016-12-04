@@ -383,12 +383,14 @@
                                             foreach ($pageVars["data"]["latest_commits"] as $latestCommit) { ?>
                                                 <div class="commitRow" id="commitRow_<?php echo $latestCommit["commit"]; ?>" >
                                                     <div class="blCell cellRowName leftWideCell">
-                                                        <a href="/index.php?control=AlertHome&action=show&item=<?php echo $latestCommit["repo_slug"]; ?>">
+                                                        <a href="/index.php?control=RepositoryHome&action=show&item=<?php echo $latestCommit["repo_slug"]; ?>">
                                                             <?php echo $latestCommit["repo_name"]; ?>
                                                         </a>
                                                     </div>
                                                     <div class="blCell cellRowSourceHome rightNarrowCell" scope="row">
-                                                        <?php echo substr($latestCommit["commit"], 0, 6); ?>
+                                                        <a href="/index.php?control=CommitDetails&action=show&item=<?php echo $latestCommit["repo_slug"]; ?>&commit=<?php echo $latestCommit["commit"]; ?>">
+                                                            <?php echo substr($latestCommit["commit"], 0, 6); ?>
+                                                        </a>
                                                     </div>
                                                     <div class="blCell cellRowDescription fullRow"><?php
                                                         if(strlen($latestCommit["message"]) < 150) {
@@ -399,7 +401,11 @@
                                                             echo $trunc ; } ?>
                                                     </div>
                                                     <div class="blCell cellRowAssignee leftCell"><?php echo $latestCommit["author"]; ?> </div>
-                                                    <div class="blCell cellRowPriority rightCell"><?php echo $latestCommit["date"]; ?> </div>
+                                                    <div class="blCell cellRowPriority rightCell">
+                                                        <a href="/index.php?control=CommitDetails&action=show&item=<?php echo $latestCommit["repo_slug"]; ?>&commit=<?php echo $latestCommit["commit"]; ?>">
+                                                            <?php echo str_replace(" +0000", "", $latestCommit["date"]); ?>
+                                                        </a>
+                                                    </div>
                                                 </div>
                                                 <?php
                                                 $i++ ;
