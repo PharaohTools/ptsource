@@ -11,3 +11,11 @@
 #submit-parent-holder {
 
 }
+
+.commitRow {
+    margin-bottom: 10px;
+}
+
+.commitRow:hover {
+    background-color: #F5F5F5;
+}
