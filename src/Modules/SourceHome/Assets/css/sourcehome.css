@@ -14,8 +14,10 @@
 
 .commitRow {
     margin-bottom: 10px;
+    display: inline-block;
 }
 
 .commitRow:hover {
     background-color: #F5F5F5;
 }
+
