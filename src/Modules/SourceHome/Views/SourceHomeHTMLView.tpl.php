@@ -41,6 +41,22 @@
                 <li>
                     <a href="/index.php?control=RepositoryList&action=show" class=" hvr-bounce-in"><i class="fa fa-bars fa-fw hvr-bounce-in"></i> All Repositories</a>
                 </li>
+
+                <?php
+                    if ($pageVars["data"]["user"] !== false && ($pageVars["data"]["user"]->role == 1)) {
+                ?>
+
+                    <li>
+                        <a href="/index.php?control=TeamConfigure&action=new" class=" hvr-bounce-in"><i class="fa fa-edit fa-fw hvr-bounce-in"></i> New Team</a>
+                    </li>
+                    <li>
+                        <a href="/index.php?control=TeamList&action=show" class=" hvr-bounce-in"><i class="fa fa-bars fa-fw hvr-bounce-in"></i> All Teams</a>
+                    </li>
+
+                <?php
+                    }
+                ?>
+
             </ul>
         </div>
     </div>
@@ -359,26 +375,29 @@
                                     </div>
                                     <div class="col-sm-6 text-center">
                                         <?php
-                                        if (isset($pageVars["data"]["latest_commits"]) && count($pageVars["data"]["latest_commits"])>0 ) {
+
+                                        if (isset($pageVars["data"]["latest_commits"]) && count($pageVars["data"]["latest_commits"])>0 ) { ?>
+                                            <h4>Latest Commits</h4>
+                                            <?php
                                             $i = 1;
                                             foreach ($pageVars["data"]["latest_commits"] as $latestCommit) { ?>
-                                                <div class="commitRow" id="commitRow_<?php echo $latestCommit["commit-slug"]; ?>" >
-                                                    <div class="blCell cellRowSourceHome" scope="row"><?php echo $latestCommit["commit-slug"]; ?> </div>
+                                                <div class="commitRow" id="commitRow_<?php echo $latestCommit["commit"]; ?>" >
+                                                    <div class="blCell cellRowSourceHome" scope="row"><?php echo substr($latestCommit["commit"], 0, 6); ?> </div>
                                                     <div class="blCell cellRowName">
-                                                        <a href="/index.php?control=AlertHome&action=show&item=<?php echo $pageVars["data"]["job"]["job_slug"]; ?>&alert=<?php echo $latestCommit["alert-slug"] ; ?>" class="pipeName">
-                                                            <?php echo $latestCommit["alert-name"]; ?>
+                                                        <a href="/index.php?control=AlertHome&action=show&item=<?php echo $latestCommit["repo_slug"]; ?>">
+                                                            <?php echo $latestCommit["repo_name"]; ?>
                                                         </a>
                                                     </div>
                                                     <div class="blCell cellRowDescription"><?php
-                                                        if(strlen($latestCommit["commit-description"]) < 150) {
-                                                            echo $latestCommit["commit-description"]; }
+                                                        if(strlen($latestCommit["message"]) < 150) {
+                                                            echo $latestCommit["message"]; }
                                                         else {
-                                                            $trunc = substr($latestCommit["commit-description"], 0, 150) ;
+                                                            $trunc = substr($latestCommit["message"], 0, 150) ;
                                                             $trunc .= " ..." ;
                                                             echo $trunc ; } ?>
                                                     </div>
-                                                    <div class="blCell cellRowAssignee"><?php echo $latestCommit["commit-assignee"]; ?> </div>
-                                                    <div class="blCell cellRowPriority"><?php echo $latestCommit["commit-priority"]; ?> </div>
+                                                    <div class="blCell cellRowAssignee"><?php echo $latestCommit["author"]; ?> </div>
+                                                    <div class="blCell cellRowPriority"><?php echo $latestCommit["date"]; ?> </div>
                                                 </div>
                                                 <?php
                                                 $i++ ;
