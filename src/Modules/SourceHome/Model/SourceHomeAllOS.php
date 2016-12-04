@@ -17,6 +17,7 @@ class SourceHomeAllOS extends Base {
 
     public function getData() {
         $ret["all_repositories"] = $this->getRepositories();
+        $ret["latest_commits"] = $this->getLatestCommits($ret["all_repositories"]);
         $ret["user"] = $this->getLoggedInUser();
         if ($ret["user"] !== false) {
             $ret["my_owned_repositories"] = $this->getMyRepositoriesCount($ret["all_repositories"], $ret["user"]);
@@ -40,6 +41,30 @@ class SourceHomeAllOS extends Base {
         $repos = $repository->getRepositories();
         return $repos ;
     }
+
+    public function getLatestCommits($repos) {
+        $repositoryFactory = new \Model\Repository() ;
+        $repositoryCommits = $repositoryFactory->getModel($this->params, "RepositoryCommits");
+        $cur_commits = array() ;
+        foreach($repos as $repo_slug => $repo_details) {
+            $rcv = $repositoryCommits->getCommits($repo_slug, 50000, null, null, true) ;
+            $cur_commits[$repo_slug] = $rcv["commits"] ; }
+        $timestamps = array() ;
+        $all_in_list = array();
+        foreach ($cur_commits as $slug => $commit_set) {
+            foreach ($commit_set as $commit) {
+                $new_commit = $commit ;
+                $new_commit["repo_slug"] = $slug ;
+                $new_commit["repo_name"] = $repos[$new_commit["repo_slug"]]["project-name"] ;
+                $new_commit["timestamp"] = strtotime($commit["date"]) ;
+                $timestamps[] = $new_commit["timestamp"] ;
+                $all_in_list[] = $new_commit ; } }
+        $sorted = array_multisort($timestamps, SORT_DESC, $all_in_list);
+        $new_list = array_slice($all_in_list, 0, 25) ;
+        return $new_list ;
+//        return $all_in_list ;
+    }
+
 
     public function getTeams() {
         $teamFactory = new \Model\Team() ;
