@@ -118,7 +118,6 @@
                             if ($pageVars["data"]["current_user_data"] !== false && ($pageVars["data"]["current_user_data"]->role == 1)) {
                                 ?>
 
-
                                 <div class="col-sm-3">
                                     <div class="dropdown">
                                         <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
@@ -165,7 +164,6 @@
 
                                         <div class="btn btn-success" value="<?php echo $owner ; ?>"><?php echo $owner ; ?></div>
                                         <input type="hidden" name="team_owner" id="team_owner" value="<?php echo $pageVars["data"]["team"]["team_owner"] ; ?>" />
-                                        <!--                                    <p>Owner Currently: </p>-->
 
                                     <?php
                                     }
