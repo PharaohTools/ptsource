@@ -82,7 +82,11 @@ class SourceHomeAllOS extends Base {
             $tp["item"] = $repo_slug ;
             $repository = $repositoryFactory->getModel($tp);
             $features = $repository->getRepositoryFeatures();
-            var_dump("<pre>", $repo_slug, $features, "</pre>") ; }
+
+            foreach ($features as $a_feature) {
+                if ($a_feature["module"] =="TrackIssues") {
+
+                } } }
         return $all_features ;
     }
 
