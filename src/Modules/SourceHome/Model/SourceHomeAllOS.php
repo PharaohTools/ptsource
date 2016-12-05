@@ -18,6 +18,7 @@ class SourceHomeAllOS extends Base {
     public function getData() {
         $ret["all_repositories"] = $this->getRepositories();
         $ret["latest_commits"] = $this->getLatestCommits($ret["all_repositories"]);
+        $ret["latest_issues"] = $this->getLatestIssueLinks($ret["all_repositories"]);
         $ret["user"] = $this->getLoggedInUser();
         if ($ret["user"] !== false) {
             $ret["my_owned_repositories"] = $this->getMyRepositoriesCount($ret["all_repositories"], $ret["user"]);
@@ -65,6 +66,25 @@ class SourceHomeAllOS extends Base {
 //        return $all_in_list ;
     }
 
+
+
+    public function getLatestIssueLinks($repos) {
+        // track.pharaoh.tld/index.php?control=IssueList&action=show&item=5&output-format=JSON
+
+        // it will be module, values, link
+        // need a trackJobWatcher or something. We put in the server url and job id
+        // it will create uniter code to pull the issues dynamically
+
+        $repositoryFactory = new \Model\Repository() ;
+        $all_features = array() ;
+        foreach($repos as $repo_slug => $repo_details) {
+            $tp = $this->params ;
+            $tp["item"] = $repo_slug ;
+            $repository = $repositoryFactory->getModel($tp);
+            $features = $repository->getRepositoryFeatures();
+            var_dump("<pre>", $repo_slug, $features, "</pre>") ; }
+        return $all_features ;
+    }
 
     public function getTeams() {
         $teamFactory = new \Model\Team() ;
