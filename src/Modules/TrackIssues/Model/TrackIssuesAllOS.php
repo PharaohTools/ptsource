@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class MirrorRepositoryLinuxUnix extends Base {
+class TrackIssuesAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -151,10 +151,10 @@ class MirrorRepositoryLinuxUnix extends Base {
 
         $iString = "" ;
         $gitc = "git" ;
-        if (isset($this->params["build-settings"]["MirrorRepository"]["git_privkey_path"]) &&
-            $this->params["build-settings"]["MirrorRepository"]["git_privkey_path"] != "")  {
+        if (isset($this->params["build-settings"]["TrackIssues"]["git_privkey_path"]) &&
+            $this->params["build-settings"]["TrackIssues"]["git_privkey_path"] != "")  {
             $this->lm->log("Adding Private Key for cloning Git", $this->getModuleName()) ;
-            $iString .= ' -i "'.$this->params["build-settings"]["MirrorRepository"]["git_privkey_path"].'" ' ;
+            $iString .= ' -i "'.$this->params["build-settings"]["TrackIssues"]["git_privkey_path"].'" ' ;
             $gitc = "git-key-safe" ;}
 
         $lsCommand = $gitc.' '.$iString.' ls-remote -h '.$repo.' '.$branch ;
@@ -189,10 +189,10 @@ class MirrorRepositoryLinuxUnix extends Base {
 
         $iString = "" ;
         $gitc = "git" ;
-        if (isset($this->params["build-settings"]["MirrorRepository"]["git_privkey_path"]) &&
-            $this->params["build-settings"]["MirrorRepository"]["git_privkey_path"] != "")  {
+        if (isset($this->params["build-settings"]["TrackIssues"]["git_privkey_path"]) &&
+            $this->params["build-settings"]["TrackIssues"]["git_privkey_path"] != "")  {
             $this->lm->log("Adding Private Key for cloning Git", $this->getModuleName()) ;
-            $iString .= ' -i "'.$this->params["build-settings"]["MirrorRepository"]["git_privkey_path"].'" ' ;
+            $iString .= ' -i "'.$this->params["build-settings"]["TrackIssues"]["git_privkey_path"].'" ' ;
             $gitc = "git-key-safe" ;}
 
         $lsCommand = $gitc.' '.$iString.' ls-remote -h '.$repo.' '.$branch ;
@@ -209,7 +209,7 @@ class MirrorRepositoryLinuxUnix extends Base {
         if ($curSha !== "") {
 
             $this->lm->log ("Storing current remote commit ID $curSha", $this->getModuleName() ) ;
-            $this->params["build-settings"]["MirrorRepository"]["last_sha"] = $curSha ;
+            $this->params["build-settings"]["TrackIssues"]["last_sha"] = $curSha ;
         } else {
             $this->lm->log ("Incorrect SHA not storing : $curSha", $this->getModuleName() ) ;
 
@@ -218,7 +218,7 @@ class MirrorRepositoryLinuxUnix extends Base {
         $this->lm->log ("Storing last poll timestamp $time", $this->getModuleName() ) ;
         $pipelineFactory = new \Model\Pipeline() ;
         $pipelineSaver = $pipelineFactory->getModel($this->params, "PipelineSaver");
-        $this->params["build-settings"]["MirrorRepository"]["last_poll_timestamp"] = $time ;
+        $this->params["build-settings"]["TrackIssues"]["last_poll_timestamp"] = $time ;
         $pipelineSaver->savePipeline(array("type" => "Settings", "data" => $this->params["build-settings"] ));
         $result = true ;
         return $result ;
