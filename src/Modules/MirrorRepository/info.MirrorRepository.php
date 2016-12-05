@@ -6,7 +6,7 @@ class MirrorRepositoryInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "Poll SCM for code changes Functionality";
+    public $name = "Mirror Code Changes within a Repository";
 
     public function _construct() {
         parent::__construct();
@@ -17,11 +17,7 @@ class MirrorRepositoryInfo extends PTConfigureBase {
     }
 
     public function routeAliases() {
-        return array("mirrorepository"=>"MirrorRepository");
-    }
-
-    public function events() {
-        return array("prepareBuild");
+        return array("mirrorrepository"=>"MirrorRepository");
     }
 
     public function repositorySettings() {
