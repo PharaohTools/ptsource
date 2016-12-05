@@ -39,7 +39,12 @@ class SourceHome extends Base {
             return array ("type"=>"view", "view"=>"sourceHomeGetData", "pageVars"=>$this->content);
         }
 
-        // @todo output format change not being implemented
+//        echo "got here" ;
+        unset($this->content["params"]["output-format"]);
+        unset($this->content["route"]["extraParams"]["output-format"]);
+        unset($pageVars["params"]["output-format"]);
+        unset($pageVars["route"]["extraParams"]["output-format"]);
+        $thisModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars) ;
         $this->content["data"] = $thisModel->getData();
         return array ("type"=>"view", "view"=>"sourceHome", "pageVars"=>$this->content);
     }
