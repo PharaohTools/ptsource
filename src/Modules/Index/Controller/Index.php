@@ -21,7 +21,8 @@ class Index extends Base {
         $appSettings =  \Model\AppConfig::getAllAppVariables();
         if ($appSettings["mod_config"]["Index"]["allow_override"]=="on") {
             foreach ($appSettings["mod_config"] as $module => $moduleSettings) {
-                if ($moduleSettings["index_override"] == "on") {
+                if (isset($moduleSettings["index_override"]) &&
+                    $moduleSettings["index_override"] == "on") {
                     return \Core\AutoLoader::getController($module) ; } } }
         return null ;
     }
