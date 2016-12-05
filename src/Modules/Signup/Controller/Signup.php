@@ -51,8 +51,12 @@ class Signup extends Base {
 		if ($pageVars["route"]["action"] == "verify") {
             $thisModel->mailVerification(); }
 
-        $this->content["data"] = $thisModel->getlogin();
-        return array("type" => "view", "view" => "signupLogin", "pageVars" => $this->content);
+        if ($this->content["output-format"] == "JSON" ||
+            $this->content["route"]["extraParams"]["output-format"] == "JSON") {
+            return array("type" => "view", "view" => "signupLogin", "pageVars" => $this->content); }
+        else {
+            $this->content["data"] = $thisModel->getlogin();
+            return array("type" => "view", "view" => "signupLogin", "pageVars" => $this->content); }
 
     }
 }
