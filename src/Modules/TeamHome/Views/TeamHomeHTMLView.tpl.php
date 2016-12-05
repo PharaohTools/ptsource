@@ -1,67 +1,51 @@
 <div class="container" id="wrapper">
-       
         <div class="navbar-default col-sm-2 sidebar" role="navigation">
-		<div class="sidebar-nav ">
-			<ul class="nav in" id="side-menu">
+            <div class="sidebar-nav ">
+                <ul class="nav in" id="side-menu">
 
-                <?php
-
-                if (in_array($pageVars["data"]["current_user_role"], array("1", "2"))) {
-
-                ?>
-                    <li>
-                        <a href="/index.php?control=Index&amp;action=show" class="hvr-bounce-in">
-                            <i class="fa fa-dashboard fa-fw hvr-bounce-in"></i> Dashboard
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/index.php?control=TeamList&amp;action=show" class="hvr-bounce-in">
-                            <i class="fa fa-bars fa-fw hvr-bounce-in"></i> All Teams
-                        </a>
-                    </li>
-                    <li>
-                        <a href="index.php?control=TeamConfigure&action=show&item=<?php echo $pageVars["data"]["team"]["team_slug"] ; ?>" class="hvr-bounce-in">
-                            <i class="fa  fa-cog fa-fw hvr-bounce-in"></i> Configure
-                        </a>
-                    </li>
-
-                <?php
-
-                }
-
-                ?>
-                
-                    <li>
-                        <a href="index.php?control=FileBrowser&action=show&item=<?php echo $pageVars["data"]["team"]["team_slug"] ; ?>" class="hvr-bounce-in">
-                            <i class="fa fa-folder-open-o hvr-bounce-in"></i> File Browser
-                        </a>
-                    </li>
-                    <li>
-                        <a href="index.php?control=TeamCharts&action=show&item=<?php echo $pageVars["data"]["team"]["team_slug"] ; ?>" class="hvr-bounce-in">
-                            <i class="fa fa-bar-chart-o hvr-bounce-in"></i> Charts
-                        </a>
-                    </li>
-                    <li>
-                        <a href="index.php?control=TeamHistory&action=show&item=<?php echo $pageVars["data"]["team"]["team_slug"] ; ?>"class="hvr-bounce-in">
-                            <i class="fa fa-history fa-fw hvr-bounce-in""></i> History <span class="badge"></span>
-                        </a>
-                    </li>
                     <?php
-                        if (in_array($pageVars["data"]["current_user_role"], array("1", "2"))) {
+
+                    if (in_array($pageVars["data"]["current_user_role"], array("1", "2"))) {
+
+                    ?>
+                        <li>
+                            <a href="/index.php?control=Index&amp;action=show" class="hvr-bounce-in">
+                                <i class="fa fa-dashboard fa-fw hvr-bounce-in"></i> Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/index.php?control=TeamList&amp;action=show" class="hvr-bounce-in">
+                                <i class="fa fa-bars fa-fw hvr-bounce-in"></i> All Teams
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.php?control=TeamConfigure&action=show&item=<?php echo $pageVars["data"]["team"]["team_slug"] ; ?>" class="hvr-bounce-in">
+                                <i class="fa  fa-cog fa-fw hvr-bounce-in"></i> Configure
+                            </a>
+                        </li>
+
+                    <?php
+
+                    }
+
                     ?>
 
-                    <li>
-                        <a href="index.php?control=TeamHome&action=delete&item=<?php echo $pageVars["data"]["team"]["team_slug"] ; ?>" class="hvr-bounce-in">
-                            <i class="fa fa-trash fa-fw hvr-bounce-in""></i> Delete
-                        </a>
-                    </li>
+                        <?php
+                            if (in_array($pageVars["data"]["current_user_role"], array("1", "2"))) {
+                        ?>
 
-                <?php
-                    }
-                ?>
+                        <li>
+                            <a href="index.php?control=TeamHome&action=delete&item=<?php echo $pageVars["data"]["team"]["team_slug"] ; ?>" class="hvr-bounce-in">
+                                <i class="fa fa-trash fa-fw hvr-bounce-in""></i> Delete
+                            </a>
+                        </li>
 
-            </ul>
-        </div>
+                    <?php
+                        }
+                    ?>
+
+                </ul>
+            </div>
         </div>
     
         <div class="col-lg-9">
@@ -106,15 +90,17 @@
                             <?php
                             if (isset($pageVars["data"]["features"]) &&
                                 count($pageVars["data"]["features"])>0 ) {
+                                $i =0 ;
                                 foreach ($pageVars["data"]["features"] as $team_feature) {
                                     if (isset($team_feature["hidden"]) && $team_feature["hidden"] != true
                                         || !isset($team_feature["hidden"]) ) {
                                         echo '<div class="team_feature">' ;
-                                        echo '<a target="_blank" href="'.$team_feature["model"]["link"].'">' ;
-                                        echo  '<h3>'.$team_feature["model"]["title"].'</h3>' ;
-                                        echo  '<img src="'.$team_feature["model"]["image"].'" />' ;
-                                        echo "</a>" ;
-                                        echo '</div>' ; } } }
+                                        echo ' <a target="_blank" href="'.$team_feature["model"]["link"].'">' ;
+                                        echo  '  <h3>'.$team_feature["model"]["title"].'</h3>' ;
+                                        echo  '  <img src="'.$team_feature["model"]["image"].'" />' ;
+                                        echo " </a>" ;
+                                        echo '</div>' ; }
+                                        $i++ ; } }
                             else {
                                 ?>
                                 <h5>No Features configured for Team</h5>
@@ -130,22 +116,19 @@
                         <h4 class="propertyTitle">Team History:</h4>
                         <?php
                         if (isset($pageVars["data"]["history"]) && count($pageVars["data"]["history"])>0 ) {
-                        $i = 1;
+                            $i = 1;
+                            foreach ($pageVars["data"]["history"]["commits"] as $commitDetails) {
+                            ?>
 
-                        foreach ($pageVars["data"]["history"]["commits"] as $commitDetails) {
-                        ?>
+                            <div class="commitRow" id="blRow_<?php echo $commitDetails["commit"]; ?>" >
+                                <div class="blCell cellRowIndex" scope="row"><?php echo $i; ?> </div>
+                                <div class="blCell cellRowMessage"><a href="/index.php?control=CommitDetails&action=show&item=<?php echo $pageVars["data"]["team"]["team_slug"]; ?>&identifier=<?php echo $pageVars["data"]["identifier"] ; ?>&commit=<?php echo $commitDetails["commit"] ; ?>" class="pipeName"><?php echo $commitDetails["message"]; ?>  </a> </div>
+                                <div class="blCell cellRowAuthor"><a href="/index.php?control=CommitDetails&action=show&item=<?php echo $pageVars["data"]["team"]["team_slug"]; ?>&identifier=<?php echo $pageVars["data"]["identifier"] ; ?>&commit=<?php echo $commitDetails["commit"] ; ?>" class="pipeName"><?php echo $commitDetails["author"]; ?>  </a> </div>
+                                <div class="blCell cellRowDate"><a href="/index.php?control=CommitDetails&action=show&item=<?php echo $pageVars["data"]["team"]["team_slug"]; ?>&identifier=<?php echo $pageVars["data"]["identifier"] ; ?>&commit=<?php echo $commitDetails["commit"] ; ?>" class="pipeName"><?php echo $commitDetails["date"]; ?>  </a> </div>
+                                <div class="blCell cellRowHash"><a href="/index.php?control=CommitDetails&action=show&item=<?php echo $pageVars["data"]["team"]["team_slug"]; ?>&identifier=<?php echo $pageVars["data"]["identifier"] ; ?>&commit=<?php echo $commitDetails["commit"] ; ?>" class="pipeName"><?php echo substr($commitDetails["commit"], 0, 6); ?>  </a> </div>
+                                <?php
 
-                        <div class="commitRow" id="blRow_<?php echo $commitDetails["commit"]; ?>" >
-                            <div class="blCell cellRowIndex" scope="row"><?php echo $i; ?> </div>
-                            <div class="blCell cellRowMessage"><a href="/index.php?control=CommitDetails&action=show&item=<?php echo $pageVars["data"]["team"]["team_slug"]; ?>&identifier=<?php echo $pageVars["data"]["identifier"] ; ?>&commit=<?php echo $commitDetails["commit"] ; ?>" class="pipeName"><?php echo $commitDetails["message"]; ?>  </a> </div>
-                            <div class="blCell cellRowAuthor"><a href="/index.php?control=CommitDetails&action=show&item=<?php echo $pageVars["data"]["team"]["team_slug"]; ?>&identifier=<?php echo $pageVars["data"]["identifier"] ; ?>&commit=<?php echo $commitDetails["commit"] ; ?>" class="pipeName"><?php echo $commitDetails["author"]; ?>  </a> </div>
-                            <div class="blCell cellRowDate"><a href="/index.php?control=CommitDetails&action=show&item=<?php echo $pageVars["data"]["team"]["team_slug"]; ?>&identifier=<?php echo $pageVars["data"]["identifier"] ; ?>&commit=<?php echo $commitDetails["commit"] ; ?>" class="pipeName"><?php echo $commitDetails["date"]; ?>  </a> </div>
-                            <div class="blCell cellRowHash"><a href="/index.php?control=CommitDetails&action=show&item=<?php echo $pageVars["data"]["team"]["team_slug"]; ?>&identifier=<?php echo $pageVars["data"]["identifier"] ; ?>&commit=<?php echo $commitDetails["commit"] ; ?>" class="pipeName"><?php echo substr($commitDetails["commit"], 0, 6); ?>  </a> </div>
-                            <?php
-
-                            $i++ ;
-                            }
-                        }
+                                $i++ ; } }
                             ?>
                         </div>
                 </div>
@@ -186,6 +169,7 @@
         </div>
 
     </div>
+
 </div>
 <link rel="stylesheet" type="text/css" href="/Assets/Modules/TeamHome/css/teamhome.css">
 <link rel="stylesheet" type="text/css" href="/Assets/Modules/TeamHistory/css/teamhistory.css">
