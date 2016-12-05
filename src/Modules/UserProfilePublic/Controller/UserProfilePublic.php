@@ -2,7 +2,7 @@
 
 Namespace Controller ;
 
-class UserProfile extends Base {
+class UserProfilePublic extends Base {
 
     public function execute($pageVars) {
         $thisModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars) ;
@@ -18,8 +18,8 @@ class UserProfile extends Base {
             if($loginSession["status"] == TRUE){
                 $this->content["data"] = $thisModel->getData();
 //                $this->content["userdata"] = $thisModel->getUserDetails();
-                return array ("type"=>"view", "view"=>"UserProfile", "pageVars"=>$this->content); }
-            return array ("type"=>"view", "view"=>"UserProfileAlert", "pageVars"=>$this->content); }
+                return array ("type"=>"view", "view"=>"UserProfilePublic", "pageVars"=>$this->content); }
+            return array ("type"=>"view", "view"=>"UserProfilePublicAlert", "pageVars"=>$this->content); }
 
         if (in_array($pageVars["route"]["action"], array("create"))) {
             if($loginSession["status"] == TRUE){
@@ -29,7 +29,7 @@ class UserProfile extends Base {
                 $this->content["route"]["extraParams"]["output-format"] = "JSON";
                 $this->content["data"] = $thisModel->getData();
                 return array ("type"=>"view", "view"=>"userProfileCreateUser", "pageVars"=>$this->content);  }
-            return array ("type"=>"view", "view"=>"UserProfileAlert", "pageVars"=>$this->content); }
+            return array ("type"=>"view", "view"=>"UserProfilePublicAlert", "pageVars"=>$this->content); }
 
         if (in_array($pageVars["route"]["action"], array("update"))) {
             if($loginSession["status"] == TRUE){
@@ -39,7 +39,7 @@ class UserProfile extends Base {
                 $this->content["route"]["extraParams"]["output-format"] = "JSON";
                 $this->content["data"] = $thisModel->getData();
                 return array ("type"=>"view", "view"=>"userProfileUpdateUser", "pageVars"=>$this->content);  }
-            return array ("type"=>"view", "view"=>"UserProfileAlert", "pageVars"=>$this->content); }
+            return array ("type"=>"view", "view"=>"UserProfilePublicAlert", "pageVars"=>$this->content); }
 
         if (in_array($pageVars["route"]["action"], array("delete"))) {
             if($loginSession["status"] == TRUE){
@@ -49,22 +49,22 @@ class UserProfile extends Base {
                 $this->content["route"]["extraParams"]["output-format"] = "JSON";
                 $this->content["data"] = $thisModel->getData();
                 return array ("type"=>"view", "view"=>"userProfileDeleteUser", "pageVars"=>$this->content);  }
-            return array ("type"=>"view", "view"=>"UserProfileAlert", "pageVars"=>$this->content); }
+            return array ("type"=>"view", "view"=>"UserProfilePublicAlert", "pageVars"=>$this->content); }
 
         if (in_array($pageVars["route"]["action"], array("show"))) {
             if($loginSession["status"] == TRUE){
                 $this->content["data"] = $thisModel->getData();
                 $this->content["userdata"] = $thisModel->getUserDetails();
-                return array ("type"=>"view", "view"=>"UserProfile", "pageVars"=>$this->content); }
-            return array ("type"=>"view", "view"=>"UserProfileAlert", "pageVars"=>$this->content); }
+                return array ("type"=>"view", "view"=>"UserProfilePublic", "pageVars"=>$this->content); }
+            return array ("type"=>"view", "view"=>"UserProfilePublicAlert", "pageVars"=>$this->content); }
 
         if (in_array($pageVars["route"]["action"], array("save"))) {
             if($loginSession["status"] == TRUE){
                 $thisModel->saveData();
                 $this->content["data"] = $thisModel->getData();
                 $this->content["userdata"] = $thisModel->getUserDetails();
-                return array ("type"=>"view", "view"=>"UserProfile", "pageVars"=>$this->content); }
-            return array ("type"=>"view", "view"=>"UserProfileAlert", "pageVars"=>$this->content); }
+                return array ("type"=>"view", "view"=>"UserProfilePublic", "pageVars"=>$this->content); }
+            return array ("type"=>"view", "view"=>"UserProfilePublicAlert", "pageVars"=>$this->content); }
 
         if (in_array($pageVars["route"]["action"], array("get-user"))) {
             // @todo output format change not being implemented
