@@ -21,3 +21,10 @@
     background-color: #F5F5F5;
 }
 
+.hiddenCommitRow {
+    display: none ;
+}
+
+.hiddenIssueRow {
+    display: none ;
+}
