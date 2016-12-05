@@ -379,15 +379,19 @@
                                         if (isset($pageVars["data"]["latest_commits"]) && count($pageVars["data"]["latest_commits"])>0 ) { ?>
                                             <h4>Latest Commits</h4>
                                             <?php
-                                            $i = 1;
-                                            foreach ($pageVars["data"]["latest_commits"] as $latestCommit) { ?>
-                                                <div class="commitRow" id="commitRow_<?php echo $latestCommit["commit"]; ?>" >
+                                            $i = 0;
+                                            foreach ($pageVars["data"]["latest_commits"] as $latestCommit) {
+                                                if ($i > 5) { $hidString = " hiddenCommitRow" ; }
+                                                else { $hidString = "" ; }
+                                                ?>
+
+                                                <div class="commitRow <?php echo $hidString; ?>" id="commitRow_<?php echo $latestCommit["commit"]; ?>" >
                                                     <div class="blCell cellRowName leftWideCell">
                                                         <a href="/index.php?control=RepositoryHome&action=show&item=<?php echo $latestCommit["repo_slug"]; ?>">
                                                             <?php echo $latestCommit["repo_name"]; ?>
                                                         </a>
                                                     </div>
-                                                    <div class="blCell cellRowSourceHome rightNarrowCell" scope="row">
+                                                    <div class="blCell cellRowSourceHome rightNarrowCell">
                                                         <a href="/index.php?control=CommitDetails&action=show&item=<?php echo $latestCommit["repo_slug"]; ?>&commit=<?php echo $latestCommit["commit"]; ?>">
                                                             <?php echo substr($latestCommit["commit"], 0, 6); ?>
                                                         </a>
@@ -409,11 +413,19 @@
                                                 </div>
                                                 <?php
                                                 $i++ ;
-                                            } }
+                                            } ?>
+
+                                        <div class="blCell">
+                                            <button class="btn btn-info" id="showMoreCommits">
+                                                Show More
+                                            </button>
+                                        </div>
+                                    </div>
+                                        <?php }
                                         else { ?>
                                             <h4>No Latest Commits Found</h4>
-                                        <?php  }  ?>
                                     </div>
+                                        <?php  }  ?>
                                 </div>
 
 
