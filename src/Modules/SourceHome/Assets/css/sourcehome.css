@@ -17,6 +17,7 @@
     display: inline-block;
 }
 
+.trackerRow:hover,
 .commitRow:hover {
     background-color: #F5F5F5;
 }
