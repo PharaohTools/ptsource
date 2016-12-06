@@ -155,6 +155,8 @@
                     <i class="fa fa-2x fa-arrow-circle-up"></i>
                 </span>
             </div>
-            <script type="text/javascript" src="/Assets/Modules/DefaultSkin/js/bundle.js"></script>
+
 	</body>
 </html>
+
+<script type="text/javascript" src="/Assets/Modules/DefaultSkin/js/bundle.js"></script>
