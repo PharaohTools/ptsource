@@ -348,7 +348,7 @@
                                                 ?>
 
                                                     <div class="trackerRow col-sm-12">
-                                                        <a target-" href="<?php echo $IssueTracker["values"]["track_job_url"]; ?>">
+                                                        <a target="_blank" href="<?php echo $IssueTracker["values"]["track_job_url"]; ?>">
                                                             <?php echo $IssueTracker["model"]["title"]; ?>
                                                         </a>
                                                         <img src="<?php echo $IssueTracker["model"]["image"]; ?>" alt="Pharaoh Track" />
