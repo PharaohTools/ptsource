@@ -339,31 +339,20 @@
                                 <div class="row text-center">
                                     <div class="col-sm-6 text-center">
                                         <?php
-                                        if (isset($pageVars["data"]["latest_issues"]) && count($pageVars["data"]["latest_issues"])>0 ) {
+                                        if (isset($pageVars["data"]["latest_issues"]) && count($pageVars["data"]["latest_issues"])>0 ) { ?>
+                                            <h4>Latest Issues</h4>
+                                            <?php
                                             $i = 1;
 
-                                            foreach ($pageVars["data"]["latest_issues"] as $latestAlert) {
+                                            foreach ($pageVars["data"]["latest_issues"] as $IssueTracker) {
                                                 ?>
 
-
-                                                <div class="alertRow" id="alertRow_<?php echo $latestAlert["alert-slug"]; ?>" >
-                                                    <div class="blCell cellRowSourceHome" scope="row"><?php echo $latestAlert["alert-slug"]; ?> </div>
-                                                    <div class="blCell cellRowName">
-                                                        <a href="/index.php?control=AlertHome&action=show&item=<?php echo $pageVars["data"]["job"]["job_slug"]; ?>&alert=<?php echo $latestAlert["alert-slug"] ; ?>" class="pipeName">
-                                                            <?php echo $latestAlert["alert-name"]; ?>
+                                                    <div class="trackerRow col-sm-12">
+                                                        <a target-" href="<?php echo $IssueTracker["values"]["track_job_url"]; ?>">
+                                                            <?php echo $IssueTracker["model"]["title"]; ?>
                                                         </a>
+                                                        <img src="<?php echo $IssueTracker["model"]["image"]; ?>" alt="Pharaoh Track" />
                                                     </div>
-                                                    <div class="blCell cellRowDescription"><?php
-                                                        if (strlen($latestAlert["alert-description"]) < 150) {
-                                                            echo $latestAlert["alert-description"]; }
-                                                        else {
-                                                            $trunc = substr($latestAlert["alert-description"], 0, 150) ;
-                                                            $trunc .= " ..." ;
-                                                            echo $trunc ; } ?>
-                                                    </div>
-                                                    <div class="blCell cellRowAssignee"><?php echo $latestAlert["alert-assignee"]; ?> </div>
-                                                    <div class="blCell cellRowPriority"><?php echo $latestAlert["alert-priority"]; ?> </div>
-                                                </div>
                                                 <?php
 
                                                 $i++ ;
