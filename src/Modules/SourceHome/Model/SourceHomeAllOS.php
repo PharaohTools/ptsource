@@ -77,6 +77,7 @@ class SourceHomeAllOS extends Base {
 
         $repositoryFactory = new \Model\Repository() ;
         $all_features = array() ;
+        $ret_features = array() ;
         foreach($repos as $repo_slug => $repo_details) {
             $tp = $this->params ;
             $tp["item"] = $repo_slug ;
@@ -86,8 +87,10 @@ class SourceHomeAllOS extends Base {
             foreach ($features as $a_feature) {
                 if ($a_feature["module"] =="TrackIssues") {
 
+                    $ret_features[] = $a_feature ;
+
                 } } }
-        return $all_features ;
+        return $ret_features ;
     }
 
     public function getTeams() {
