@@ -28,3 +28,7 @@
 .hiddenIssueRow {
     display: none ;
 }
+
+.trackerRow img {
+    max-width: 12.5%;
+}
