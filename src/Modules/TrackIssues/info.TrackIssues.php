@@ -21,7 +21,15 @@ class TrackIssuesInfo extends PTConfigureBase {
     }
 
     public function repositorySettings() {
-        return array("enabled", "endpoint");
+        return array();
+    }
+
+    public function events() {
+        return array("getRepositoryFeatures");
+    }
+
+    public function repositoryFeatures() {
+        return array("trackIssues");
     }
 
     public function helpDefinition() {
