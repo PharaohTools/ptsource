@@ -348,10 +348,17 @@
                                                 ?>
 
                                                     <div class="trackerRow col-sm-12">
-                                                        <a target="_blank" href="<?php echo $IssueTracker["values"]["track_job_url"]; ?>">
-                                                            <?php echo $IssueTracker["model"]["title"]; ?>
-                                                        </a>
-                                                        <img src="<?php echo $IssueTracker["model"]["image"]; ?>" alt="Pharaoh Track" />
+                                                        <div class="blCell cellRowDescription fullRow">
+                                                            <a target="_blank" href="<?php echo $IssueTracker["values"]["track_job_url"]; ?>">
+                                                                <?php echo $IssueTracker["model"]["title"]; ?>
+                                                            </a>
+                                                            <img src="<?php echo $IssueTracker["model"]["image"]; ?>" alt="Pharaoh Track - <?php echo $IssueTracker["model"]["title"]; ?>" />
+                                                        </div>
+                                                        <div class="blCell cellRowDescription fullRow">
+                                                            <button class="btn btn-success">
+                                                                Loading Issues
+                                                            </button>
+                                                        </div>
                                                     </div>
                                                 <?php
 
@@ -386,7 +393,7 @@
                                                         </a>
                                                     </div>
                                                     <div class="blCell cellRowDescription fullRow"><?php
-                                                        if(strlen($latestCommit["message"]) < 150) {
+                                                        if (strlen($latestCommit["message"]) < 150) {
                                                             echo $latestCommit["message"]; }
                                                         else {
                                                             $trunc = substr($latestCommit["message"], 0, 150) ;
