@@ -384,12 +384,12 @@
                                                 <div class="commitRow <?php echo $hidString; ?>" id="commitRow_<?php echo $latestCommit["commit"]; ?>" >
                                                     <div class="blCell cellRowName leftWideCell">
                                                         <a href="/index.php?control=RepositoryHome&action=show&item=<?php echo $latestCommit["repo_slug"]; ?>">
-                                                            <?php echo $latestCommit["repo_name"]; ?>
+                                                            <i class="fa fa-database"></i> <?php echo $latestCommit["repo_name"]; ?>
                                                         </a>
                                                     </div>
                                                     <div class="blCell cellRowSourceHome rightNarrowCell">
                                                         <a href="/index.php?control=CommitDetails&action=show&item=<?php echo $latestCommit["repo_slug"]; ?>&commit=<?php echo $latestCommit["commit"]; ?>">
-                                                            <?php echo substr($latestCommit["commit"], 0, 6); ?>
+                                                            <i class="fa fa-pencil"></i> <?php echo substr($latestCommit["commit"], 0, 6); ?>
                                                         </a>
                                                     </div>
                                                     <div class="blCell cellRowDescription fullRow"><?php
@@ -400,7 +400,11 @@
                                                             $trunc .= " ..." ;
                                                             echo $trunc ; } ?>
                                                     </div>
-                                                    <div class="blCell cellRowAssignee leftCell"><?php echo $latestCommit["author"]; ?> </div>
+                                                    <div class="blCell cellRowAssignee leftCell">
+                                                        <a href="/index.php?control=UserProfilePublic&action=show&item=<?php echo $latestCommit["repo_slug"]; ?>&commit=<?php echo $latestCommit["commit"]; ?>">
+                                                            <?php echo $latestCommit["author"]; ?>
+                                                        </a>
+                                                    </div>
                                                     <div class="blCell cellRowPriority rightCell">
                                                         <a href="/index.php?control=CommitDetails&action=show&item=<?php echo $latestCommit["repo_slug"]; ?>&commit=<?php echo $latestCommit["commit"]; ?>">
                                                             <?php echo str_replace(" +0000", "", $latestCommit["date"]); ?>
