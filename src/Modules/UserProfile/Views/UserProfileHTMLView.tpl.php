@@ -194,6 +194,13 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="new_ssh_key" class="col-sm-4 control-label text-left" style="color:#757575;" >New SSH Key</label>
+                            <div class="col-sm-7">
+                                <textarea class="form-control" id="new_ssh_key" name="new_ssh_key">Enter Your New Key Here</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <div class="col-sm-offset-4 col-sm-3 actionButtonWrap">
 
                                 <?php
