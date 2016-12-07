@@ -12,9 +12,15 @@
 
 }
 
+.trackerRow,
 .commitRow {
-    margin-bottom: 10px;
+    margin-bottom: 7.5px;
     display: inline-block;
+}
+
+.trackerRow,
+.commitRow {
+    padding: 5px 0px;
 }
 
 .trackerRow:hover,
