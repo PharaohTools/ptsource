@@ -348,17 +348,17 @@
                                                 ?>
 
                                                     <div class="trackerRow col-sm-12">
-                                                        <div class="blCell cellRowDescription fullRow">
-                                                            <a target="_blank" href="<?php echo $IssueTracker["values"]["track_job_url"]; ?>">
+                                                        <a target="_blank" href="<?php echo $IssueTracker["values"]["track_job_url"]; ?>">
+                                                            <div class="blCell cellRowDescription fullRow">
                                                                 <?php echo $IssueTracker["model"]["title"]; ?>
-                                                            </a>
-                                                            <img src="<?php echo $IssueTracker["model"]["image"]; ?>" alt="Pharaoh Track - <?php echo $IssueTracker["model"]["title"]; ?>" />
-                                                        </div>
-                                                        <div class="blCell cellRowDescription fullRow">
-                                                            <button class="btn btn-success">
-                                                                Loading Issues
-                                                            </button>
-                                                        </div>
+                                                                <img src="<?php echo $IssueTracker["model"]["image"]; ?>" alt="Pharaoh Track - <?php echo $IssueTracker["model"]["title"]; ?>" />
+                                                            </div>
+                                                            <div class="blCell cellRowDescription fullRow">
+                                                                <button class="btn btn-success">
+                                                                    Loading Issues
+                                                                </button>
+                                                            </div>
+                                                        </a>
                                                     </div>
                                                 <?php
 
@@ -401,7 +401,7 @@
                                                             echo $trunc ; } ?>
                                                     </div>
                                                     <div class="blCell cellRowAssignee leftCell">
-                                                        <a href="/index.php?control=UserProfilePublic&action=show&item=<?php echo $latestCommit["repo_slug"]; ?>&commit=<?php echo $latestCommit["commit"]; ?>">
+                                                        <a href="/index.php?control=UserProfilePublic&action=show&item=<?php echo $latestCommit["repo_slug"]; ?>">
                                                             <?php echo $latestCommit["author"]; ?>
                                                         </a>
                                                     </div>
