@@ -53,14 +53,9 @@
 
                 <?php
 
-                if ($pageVars["route"]["action"] == "new") {
-                ?>
-                    <h5 class="text-uppercase text-primary">Create New User</h5>
-                <?php
-                }
                 if ($pageVars["route"]["action"] == "show") {
                 ?>
-                    <h5 class="text-uppercase text-primary">Update Current User</h5>
+                    <h5 class="text-uppercase text-primary">User Profile</h5>
                 <?php
                 }
                 ?>
@@ -193,36 +188,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-sm-offset-4 col-sm-3 actionButtonWrap">
-
-                                <?php
-
-                                if ($pageVars["route"]["action"] !== "new") {
-                                    ?>
-                                    <button onclick="updateUser(); return false;" class="btn btn-success hvr-grow-shadow actionButton">
-                                        Update Password
-                                    </button>
-                                    <button onclick="deleteUser(); return false;" class="btn btn-warning hvr-grow-shadow actionButton">
-                                        Delete User
-                                    </button>
-                                <?php }
-                                else {
-                                    ?>
-                                    <button onclick="createUser(); return false;" class="btn btn-success hvr-grow-shadow actionButton">
-                                        Create New User
-                                    </button>
-                                    <?php
-
-
-
-
-                                }
-
-                                ?>
-
-                            </div>
-                        </div>
 
                     </form>
 
