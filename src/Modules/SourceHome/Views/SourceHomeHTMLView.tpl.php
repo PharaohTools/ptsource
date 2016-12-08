@@ -345,9 +345,11 @@
                                             $i = 1;
 
                                             foreach ($pageVars["data"]["latest_issues"] as $IssueTracker) {
+                                                if ($i > 5) { $hidString = " hiddenTrackerRow" ; }
+                                                else { $hidString = "" ; }
                                                 ?>
 
-                                                    <div class="trackerRow col-sm-12">
+                                                    <div class="trackerRow col-sm-12 <?php echo $hidString; ?>">
                                                         <a target="_blank" href="<?php echo $IssueTracker["values"]["track_job_url"]; ?>">
                                                             <div class="blCell cellRowDescription fullRow">
                                                                 <?php echo $IssueTracker["model"]["title"]; ?>
@@ -363,12 +365,19 @@
                                                 <?php
 
                                                 $i++ ;
-                                            } }
+                                            } ?>
+
+                                        <div class="blCell">
+                                            <button class="btn btn-info" id="showMoreTrackers">
+                                                Show More
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <?php }
                                         else { ?>
                                             <h4>No Latest Issues Found</h4>
-
-                                        <?php  }  ?>
                                     </div>
+                                        <?php  }  ?>
                                     <div class="col-sm-6 text-center">
                                         <?php
 
