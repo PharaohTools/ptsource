@@ -188,6 +188,33 @@
                             </div>
                         </div>
 
+                        <span>
+
+Full name : David Amanshia
+                        </span>
+                        <span>
+User Name: phpengine
+
+                        </span>
+                        <span>
+User Profile Bio: Add a bio
+
+                        </span>
+                        <span>
+User Profile Organisation Name: Pharaoh Tools
+                        </span>
+                        <span>
+User Profile Location: London
+                        </span>
+                        <span>
+User Profile Website: http://www.pharaohtools.com
+                        </span>
+                        <span>
+User Creation Date: Joined on Nov 26, 2012
+
+
+                        </span>
+
 
                     </form>
 
