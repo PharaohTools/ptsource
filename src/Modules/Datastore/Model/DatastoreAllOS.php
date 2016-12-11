@@ -19,11 +19,14 @@ class DatastoreAllOS extends Base {
         parent::__construct($params) ;
         try {
             $settings = $this->getSettings() ;
-            if (isset($settings["DatastoreMySQL"]["ds_mysql_enabled"])) {
+            if (isset($settings['DatastoreMySQL']['ds_mysql_enabled']) &&
+                $settings['DatastoreMySQL']['ds_mysql_enabled'] === "on") {
                 $tds = 'MySQL' ; }
-            else if (isset($settings["DatastoreMongo"]["ds_mongo_enabled"])) {
+            else if (isset($settings['DatastoreMongo']['ds_mongo_enabled']) &&
+                $settings['DatastoreMongo']['ds_mongo_enabled'] === "on") {
                 $tds = 'Mongo' ; }
-            else if (isset($settings["DatastoreSQLLite"]["ds_sqllite_enabled"])) {
+            else if (isset($settings['DatastoreSQLLite']['ds_sqllite_enabled']) &&
+                $settings['DatastoreSQLLite']['ds_sqllite_enabled'] === "on") {
                 $tds = 'SQLLite' ; }
             if (!isset($tds)) {
                 $tds = 'SQLLite' ; }
