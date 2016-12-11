@@ -1,4 +1,4 @@
-#!/usr/bin/php5
+#!/usr/bin/env php
 <?php
 // Read from stdin. First line is the username, second line is the password.
 $handle = fopen ("php://stdin","r");
