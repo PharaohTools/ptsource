@@ -8,17 +8,17 @@
                     </button>
                 </li>
                 <li>
-                    <a href="/index.php?control=Index&amp;action=show"class="hvr-bounce-in">
+                    <a href="/index.php?control=Index&action=show" class="hvr-bounce-in">
                         <i class="fa fa-dashboard hvr-bounce-in"></i> Dashboard
                     </a>
                 </li>
                 <li>
-                    <a href="index.php?control=RepositoryHome&action=show"class="hvr-bounce-in">
+                    <a href="index.php?control=RepositoryHome&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
                         <i class="fa fa-home hvr-bounce-in"></i>  Repository Home
                     </a>
                 </li>
                 <li>
-                    <a href="/index.php?control=RepositoryList&amp;action=show"class="hvr-bounce-in">
+                    <a href="/index.php?control=RepositoryList&action=show"class="hvr-bounce-in">
                         <i class="fa fa-bars hvr-bounce-in"></i> All Repositories
                     </a>
                 </li>
