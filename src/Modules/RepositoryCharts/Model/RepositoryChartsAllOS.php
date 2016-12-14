@@ -20,8 +20,8 @@ class RepositoryChartsAllOS extends Base {
     }
 
     public function getData() {
-        $ret["repository"] = $this->getRepository();
-        if ($ret["repository"]["is_bare_empty"] == true) {
+        $ret['repository'] = $this->getRepository();
+        if ($ret['repository']["is_bare_empty"] == true) {
 
         }
         else {
