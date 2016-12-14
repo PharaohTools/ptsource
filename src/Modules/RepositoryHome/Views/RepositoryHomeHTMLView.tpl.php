@@ -188,16 +188,16 @@
                         <h4 class="propertyTitle">Repository Features:</h4>
                         <div class="col-sm-12">
                             <?php
-                            if (isset($pageVars["data"]["features"]) &&
-                                count($pageVars["data"]["features"])>0 ) {
-                                foreach ($pageVars["data"]["features"] as $repository_feature) {
-                                    if (isset($repository_feature["hidden"]) && $repository_feature["hidden"] != true
+                            if (isset($pageVars["data"]['features']) &&
+                                count($pageVars["data"]['features'])>0 ) {
+                                foreach ($pageVars["data"]['features'] as $repository_feature) {
+                                    if ( (isset($repository_feature["hidden"]) && $repository_feature["hidden"] != true)
                                         || !isset($repository_feature["hidden"]) ) {
                                         echo '<div class="repository-feature">' ;
-                                        echo '<a target="_blank" href="'.$repository_feature["model"]["link"].'">' ;
-                                        echo  '<h3>'.$repository_feature["model"]["title"].'</h3>' ;
-                                        echo  '<img src="'.$repository_feature["model"]["image"].'" />' ;
-                                        echo "</a>" ;
+                                        echo ' <a target="_blank" href="'.$repository_feature["model"]["link"].'">' ;
+                                        echo '  <h3>'.$repository_feature["model"]["title"].'</h3>' ;
+                                        echo '  <img src="'.$repository_feature["model"]["image"].'" />' ;
+                                        echo " </a>" ;
                                         echo '</div>' ; } } }
                             else {
                                 ?>
