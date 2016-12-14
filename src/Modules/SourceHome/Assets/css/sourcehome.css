@@ -17,6 +17,7 @@
     margin-bottom: 7.5px;
     display: inline-block;
     padding: 5px 0px;
+    border: 1px solid white ;
 }
 
 .trackerRow:hover,
