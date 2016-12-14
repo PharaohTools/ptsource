@@ -8,8 +8,9 @@
 require_once(dirname(dirname(__DIR__)).DIRECTORY_SEPARATOR."Constants.php");
 $vardata = file_get_contents(PFILESDIR.PHARAOH_APP.DS.PHARAOH_APP.DS.PHARAOH_APP.'vars') ;
 $vars = json_decode($vardata, true);
-$fsslval = $vars["mod_config"]["ApplicationInstance"]["force_ssl"] ;
-$force_ssl = (isset($fsslval) && $fsslval=="on") ? true : false ;
+$force_ssl = (
+    isset($vars["mod_config"]["ApplicationInstance"]["force_ssl"]) &&
+    $vars["mod_config"]["ApplicationInstance"]["force_ssl"]=="on")? true : false ;
 if ($force_ssl == true) {
     if(empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == "off"){
         $redirect = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
