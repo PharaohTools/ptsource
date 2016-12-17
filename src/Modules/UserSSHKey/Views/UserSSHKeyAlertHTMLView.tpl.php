@@ -30,7 +30,7 @@
                             <a href="/index.php?control=UserManager&action=show" class=" hvr-curl-bottom-right">User Manager</a>
                         </li>
                         <li>
-                            <a href="/index.php?control=UserProfile&action=show" class=" hvr-curl-bottom-right">User Profile</a>
+                            <a href="/index.php?control=UserSSHKey&action=show" class=" hvr-curl-bottom-right">User Profile</a>
                         </li>
                         <li>
                             <a href="/index.php?control=ModuleManager&action=show" class=" hvr-curl-bottom-right">Modules</a>
@@ -59,4 +59,4 @@
 	  </div>
 	</div>
 </div><!-- container -->
-<link rel="stylesheet" href="/index.php?control=AssetLoader&action=show&user=UserProfile&type=css&asset=usermanager.css">
+<link rel="stylesheet" href="/index.php?control=AssetLoader&action=show&user=UserSSHKey&type=css&asset=usermanager.css">

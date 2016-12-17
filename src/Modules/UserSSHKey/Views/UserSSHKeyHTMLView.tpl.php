@@ -30,7 +30,7 @@
                             <a href="/index.php?control=UserManager&action=show" class=" hvr-curl-bottom-right">User Manager</a>
                         </li>
                         <li>
-                            <a href="/index.php?control=UserProfile&action=show" class=" hvr-curl-bottom-right">User Profile</a>
+                            <a href="/index.php?control=UserSSHKey&action=show" class=" hvr-curl-bottom-right">User Profile</a>
                         </li>
                         <li>
                             <a href="/index.php?control=ModuleManager&action=show" class=" hvr-curl-bottom-right">Modules</a>
@@ -68,23 +68,23 @@
 
                 <div class="row clearfix no-margin">
                 <h5 class="text-uppercase text-light" style="margin-top: 15px;margin-left: 51px;">  </h5>
-                <div class="form-group" id="userprofile-loading-holder">
+                <div class="form-group" id="usersshkey-loading-holder">
                 </div>
                 <div class="fullRow">
                     <span style="color:#FF0000;" id="form_alert"></span>
 <!--                    <p style="color: #7CFC00; margin-left: 100px;" id="registration_error_msg"></p>-->
                     <?php if ($pageVars["route"]["action"] !== "new") { ?>
-                        <a href="/index.php?control=UserProfile&action=new" class="btn btn-info hvr-grow-shadow rightAlignButton">
+                        <a href="/index.php?control=UserSSHKey&action=new" class="btn btn-info hvr-grow-shadow rightAlignButton">
                             Create New User
                         </a>
                     <?php } else { ?>
-                        <a href="/index.php?control=UserProfile&action=show" class="btn btn-info hvr-grow-shadow rightAlignButton">
+                        <a href="/index.php?control=UserSSHKey&action=show" class="btn btn-info hvr-grow-shadow rightAlignButton">
                             Edit Current User
                         </a>
                     <?php } ?>
                 </div>
-                <div class="form-group" id="userprofile-fields">
-                    <form class="form-horizontal custom-form" action="/index.php?control=UserProfile&action=create" method="POST">
+                <div class="form-group" id="usersshkey-fields">
+                    <form class="form-horizontal custom-form" action="/index.php?control=UserSSHKey&action=create" method="POST">
                         <?php
 
                         if ($pageVars["route"]["action"] !== "new") {
@@ -243,5 +243,5 @@
             </p>
     </div>
 </div><!-- container -->
-<link rel="stylesheet" href="/Assets/Modules/UserProfile/css/userprofile.css">
-<script type="text/javascript" src="/Assets/Modules/UserProfile/js/userprofile.js"></script>
+<link rel="stylesheet" href="/Assets/Modules/UserSSHKey/css/usersshkey.css">
+<script type="text/javascript" src="/Assets/Modules/UserSSHKey/js/usersshkey.js"></script>

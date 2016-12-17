@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class UserProfileAnyOS extends BasePHPApp {
+class UserSSHKeyAnyOS extends BasePHPApp {
 
     // Compatibility
     public $os = array("any") ;

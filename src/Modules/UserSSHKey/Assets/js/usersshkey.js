@@ -53,7 +53,7 @@ function changePassword() {
 
 
 function createUser() {
-    rurl = $('#base_url').val() + '/index.php?control=UserProfile&action=create&output-format=JSON' ;
+    rurl = $('#base_url').val() + '/index.php?control=UserSSHKey&action=create&output-format=JSON' ;
     console.log(rurl) ;
 
     if ($('#create_username').val() == '') {
@@ -130,7 +130,7 @@ function deleteUser() {
 //        $('#update_username_text').val("Loading...") ;
         uname = $('#update_username').val() ;
         my_uname = $('#my_uname').val() ; ;
-        rurl = $('#base_url').val() + '/index.php?control=UserProfile&action=delete&output-format=JSON' ;
+        rurl = $('#base_url').val() + '/index.php?control=UserSSHKey&action=delete&output-format=JSON' ;
         console.log(rurl) ;
 
         $.ajax({
@@ -190,7 +190,7 @@ function updateUser() {
             $('#update_password_match').focus();
             return; }
 
-        rurl = $('#base_url').val() + '/index.php?control=UserProfile&action=update&output-format=JSON' ;
+        rurl = $('#base_url').val() + '/index.php?control=UserSSHKey&action=update&output-format=JSON' ;
         console.log(rurl) ;
 
         $.ajax({
@@ -227,7 +227,7 @@ function refreshUserDetails(username) {
     $('#update_email').val("Loading...") ;
     $('#update_username_text').val("Loading...") ;
 
-    rurl = $('#base_url').val() + '/index.php?control=UserProfile&action=get-user&output-format=JSON' ;
+    rurl = $('#base_url').val() + '/index.php?control=UserSSHKey&action=get-user&output-format=JSON' ;
     console.log(rurl) ;
     ld_str  = '<span class="btn btn-info hvr-grow-shadow actionButton">' ;
     ld_str += '  Loading... ' ;

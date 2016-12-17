@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class UserProfileDeleteUserAllOS extends Base {
+class UserSSHKeyDeleteUserAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;

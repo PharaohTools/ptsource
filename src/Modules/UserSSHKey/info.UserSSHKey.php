@@ -2,7 +2,7 @@
 
 Namespace Info;
 
-class UserProfileInfo extends PTConfigureBase {
+class UserSSHKeyInfo extends PTConfigureBase {
 
     public $hidden = false;
 
@@ -13,11 +13,11 @@ class UserProfileInfo extends PTConfigureBase {
     }
 
     public function routesAvailable() {
-      return array( "UserProfile" =>  array("show", "save", "new", "create", "delete", "get-user", "update"));
+      return array( "UserSSHKey" =>  array("show", "save", "new", "create", "delete", "get-user", "update"));
     }
 
     public function routeAliases() {
-      return array("user-profile"=>"UserProfile", "userprofile"=>"UserProfile");
+      return array("user-sshkey"=>"UserSSHKey", "usersshkey"=>"UserSSHKey");
     }
 
     public function helpDefinition() {

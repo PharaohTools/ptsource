@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class UserProfileCreateUserAllOS extends Base {
+class UserSSHKeyCreateUserAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
