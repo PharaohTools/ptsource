@@ -16,6 +16,7 @@ class RepositoryCharts extends Base {
 
         if($pageVars["route"]["action"] == "show") { $this->content["data"] = $thisModel->getData(); }
         if($pageVars["route"]["action"] == "delete") { $this->content["data"] = $thisModel->deleteData(); }
+
         return array ("type"=>"view", "view"=>"repositoryCharts", "pageVars"=>$this->content);
     }
 

@@ -2,6 +2,8 @@
 
 Namespace Model;
 
+use Masterminds\HTML5\Exception;
+
 class RepositoryChartsAllOS extends Base {
 
     // Compatibility
@@ -21,7 +23,9 @@ class RepositoryChartsAllOS extends Base {
 
     public function getData() {
         $ret['repository'] = $this->getRepository();
-        if ($ret['repository']["is_bare_empty"] == true) {
+
+//        die("ravey") ;
+        if (isset($ret['repository']["is_bare_empty"]) && $ret['repository']["is_bare_empty"] == true) {
 
         }
         else {
@@ -71,26 +75,36 @@ class RepositoryChartsAllOS extends Base {
     protected function getRepositoryCharts($repo) {
         $client = new \Gitter\Client();
         $loc = REPODIR.DS.$this->params["item"] ;
-        $repository = $client->getRepository($loc);
-//        var_dump($repository) ;
-//        die() ;
-        $repository->addStatistics(array(
-            new \Gitter\Statistics\Contributors(),
-            new \Gitter\Statistics\Date,
-            new \Gitter\Statistics\Day,
-            new \Gitter\Statistics\Hour
-        ));
-        $stats = $repository->statistics() ;
-//        var_dump("<pre>", $stats, "</pre>") ;
-//        die();
+        $repositoryObject = new \GitPrettyStats\Repository($loc, $client);
+        $stats = $this->loadStats($repositoryObject) ;
         $new_stats = array() ;
-        foreach ($stats["statistics"] as $one_stat) {
-            $new_stats[$one_stat["title"]] = $one_stat["value"] ; }
+        if (count($stats) > 0) {
+            foreach ($stats["statistics"] as $one_stat) {
+                $new_stats[$one_stat["title"]] = $one_stat["value"] ; } }
         $ret_stats = array(
             "statistics" => $new_stats,
             "charts" => $stats["charts"]
         ) ;
         return $ret_stats ;
+    }
+
+    protected function loadStats($repository) {
+        try {
+//            var_dump($repository) ;
+//            $commits = $repository->getCommits();
+//            var_dump($commits) ;
+            $repository->addStatistics(array(
+                new \Gitter\Statistics\Contributors,
+                new \Gitter\Statistics\Date,
+                new \Gitter\Statistics\Day,
+                new \Gitter\Statistics\Hour
+            ));
+            $stats = $repository->statistics() ;
+            return $stats ; }
+        catch (\Exception $e) {
+
+//            var_dump("heres why its shit", $e) ;
+        }
     }
 
     protected function getCommitHistory() {
