@@ -33,12 +33,18 @@
                             <a href="/index.php?control=UserProfile&action=show" class=" hvr-curl-bottom-right">User Profile</a>
                         </li>
                         <li>
+                            <a href="/index.php?control=UserSSHKey&action=show" class=" hvr-curl-bottom-right">SSH Keys</a>
+                        </li>
+                        <li>
                             <a href="/index.php?control=ModuleManager&action=show" class=" hvr-curl-bottom-right">Modules</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>
             </ul>
+
+
+
         </div>
     </div>
 
@@ -190,13 +196,6 @@
                             <div class="col-sm-7">
                                 <input type="password" class="form-control" id="update_password_match" name="update_password_match" placeholder="Retype Password">
                                 <span style="color:#FF0000;" id="update_password_match_alert"></span>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="new_ssh_key" class="col-sm-4 control-label text-left" style="color:#757575;" >New SSH Key</label>
-                            <div class="col-sm-7">
-                                <textarea class="form-control" id="new_ssh_key" name="new_ssh_key">Enter Your New Key Here</textarea>
                             </div>
                         </div>
 
