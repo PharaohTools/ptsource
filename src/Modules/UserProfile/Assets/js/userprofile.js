@@ -1,5 +1,5 @@
 function changePassword() {
-    rurl = $('#base_url').val() + '/index.php?control=UserManager&action=changepassword&output-format=JSON' ;
+    var rurl = $('#base_url').val() + '/index.php?control=UserManager&action=changepassword&output-format=JSON' ;
     console.log(rurl) ;
 
     $('#update_password').html('');
@@ -229,7 +229,7 @@ function refreshUserDetails(username) {
 
     rurl = $('#base_url').val() + '/index.php?control=UserProfile&action=get-user&output-format=JSON' ;
     console.log(rurl) ;
-    ld_str  = '<span class="btn btn-info hvr-grow-shadow actionButton">' ;
+    var ld_str  = '<span class="btn btn-info hvr-grow-shadow actionButton">' ;
     ld_str += '  Loading... ' ;
     ld_str += '</span>' ;
     $('.actionButtonWrap').html(ld_str) ;
@@ -261,7 +261,7 @@ function updateUserFields(userData) {
     $('#update_email').val(userData.email) ;
     $('#update_username_text').val(userData.username) ;
     $('#update_username').val(userData.username) ;
-    btn_str  = '<button onclick="updateUser(); return false;" class="btn btn-success hvr-grow-shadow actionButton">' ;
+    var btn_str  = '<button onclick="updateUser(); return false;" class="btn btn-success hvr-grow-shadow actionButton">' ;
     btn_str += '  Update Details ' ;
     btn_str += '</button>' ;
     btn_str += '<button onclick="deleteUser(); return false;" class="btn btn-warning hvr-grow-shadow actionButton">' ;
