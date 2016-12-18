@@ -16,8 +16,7 @@ class RepositoryCollaterAllOS extends Base {
 
     public function getRepository($pipe = null) {
         if ($pipe != null) { $this->params["item"] = $pipe ; }
-        $r = $this->collate();
-        return $r ;
+        return $this->collate();
     }
 
     private function collate() {
@@ -88,7 +87,7 @@ class RepositoryCollaterAllOS extends Base {
         // error_log("collating 1") ;
         foreach ($repositorySettings["settings"] as $key => $values) {
             // error_log("collating 2") ;
-            if (in_array($key, $names) && $values["enabled"] =="on") {
+            if (in_array($key, $names) && isset($values["enabled"]) && $values["enabled"] =="on") {
                 $cname = '\Model\\'.$key ;
                 $moduleFactory = new $cname();
                 $moduleRepositoryFeature = $moduleFactory->getModel($this->params, "RepositoryFeature");
