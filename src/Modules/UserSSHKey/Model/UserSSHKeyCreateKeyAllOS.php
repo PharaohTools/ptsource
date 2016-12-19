@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class UserSSHKeyCreateUserAllOS extends Base {
+class KeySSHKeyCreateKeyAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -12,33 +12,33 @@ class UserSSHKeyCreateUserAllOS extends Base {
     public $architectures = array("any") ;
 
     // Model Group
-    public $modelGroup = array("CreateUser") ;
+    public $modelGroup = array("CreateKey") ;
 
     public function getData() {
-        $ret["data"] = $this->createUser();
+        $ret["data"] = $this->createKey();
         return $ret ;
     }
 
-    public function createUser() {
+    public function createKey() {
 
 //        $create_perms = $this->checkCreationPermissions() ;
 //        if ($create_perms !== true) { return $create_perms ; }
 
-        $valid = $this->validateUserDetails() ;
+        $valid = $this->validateKeyDetails() ;
         if ($valid !== true) { return $valid ; }
 
-        $createdUser = $this->makeTheUser() ;
-        if ($createdUser !== true) { return $createdUser ; }
+        $createdKey = $this->makeTheKey() ;
+        if ($createdKey !== true) { return $createdKey ; }
 
         $return = array(
             "status" => true ,
-            "message" => "User Created",
-            "user" => $this->getOneUserDetails($this->params["create_username"]) );
+            "message" => "Key Created",
+            "user" => $this->getOneKeyDetails($this->params["create_username"]) );
         return $return ;
 
     }
 
-    public function validateUserDetails() {
+    public function validateKeyDetails() {
         if ($this->userAlreadyExists()) {
             $return = array(
                 "status" => false ,
@@ -54,7 +54,7 @@ class UserSSHKeyCreateUserAllOS extends Base {
     }
 
     private function userAlreadyExists() {
-        $allusers = $this->getAllUserDetails() ;
+        $allusers = $this->getAllKeyDetails() ;
         foreach ($allusers as $oneuser) {
             if ($oneuser->username == $this->params["create_username"]) {
                 return true ; } }
@@ -74,21 +74,21 @@ class UserSSHKeyCreateUserAllOS extends Base {
         return true ;
     }
 
-    private function getAllUserDetails() {
+    private function getAllKeyDetails() {
         $signupFactory = new \Model\Signup();
         $signup = $signupFactory->getModel($this->params);
-        $me = $signup->getLoggedInUserData() ;
-        $rid = $signup->getUserRole($me->email);
+        $me = $signup->getLoggedInKeyData() ;
+        $rid = $signup->getKeyRole($me->email);
         if ($rid == 1) {
-            $au =$signup->getUsersData();
+            $au =$signup->getKeysData();
             return $au; }
         return array() ;
     }
 
-    private function getOneUserDetails($username) {
+    private function getOneKeyDetails($username) {
         $signupFactory = new \Model\Signup();
         $signup = $signupFactory->getModel($this->params);
-        $au =$signup->getUsersData();
+        $au =$signup->getKeysData();
         foreach ($au as $oneuser) {
             if ($oneuser->username == $this->params["create_username"]) {
                 $return = new \StdClass();
@@ -98,17 +98,17 @@ class UserSSHKeyCreateUserAllOS extends Base {
         return array() ;
     }
 
-    private function makeTheUser() {
+    private function makeTheKey() {
 
-        $newUser["username"] = $this->params["create_username"] ;
-        $newUser["password"] = $this->params["update_password"] ;
-        $newUser["email"] = $this->params["create_email"] ;
-        $newUser["status"] = 1 ;
-        $newUser["role"] = 1 ;
+        $newKey["username"] = $this->params["create_username"] ;
+        $newKey["password"] = $this->params["update_password"] ;
+        $newKey["email"] = $this->params["create_email"] ;
+        $newKey["status"] = 1 ;
+        $newKey["role"] = 1 ;
 
         $signupFactory = new \Model\Signup();
         $signup = $signupFactory->getModel($this->params);
-        $cu = $signup->createNewUser($newUser);
+        $cu = $signup->createNewKey($newKey);
 
         if ($cu == false) {
             $return = array(

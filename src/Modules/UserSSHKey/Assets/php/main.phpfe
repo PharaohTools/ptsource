@@ -1,0 +1,23 @@
+<?php
+
+$jQuery('#hide_menu_button')->on('click', function() use ($jQuery)  {
+    $jQuery('#page_sidebar')->css('display', 'none');
+    $pageCon = $jQuery('#page_content') ;
+    $pageCon->removeClass('col-lg-9');
+    $pageCon->addClass('col-lg-12');
+    $jQuery('#show_menu_wrapper')->css('display', 'block');
+    $path_header = $jQuery('#path_header') ;
+    $path_header->removeClass('col-lg-12');
+    $path_header->addClass('col-lg-9');
+});
+
+$jQuery('#show_menu_button')->on('click', function() use ($jQuery)  {
+    $jQuery('#page_sidebar')->css('display', 'block');
+    $pageCon = $jQuery('#page_content') ;
+    $pageCon->removeClass('col-lg-12');
+    $pageCon->addClass('col-lg-9');
+    $jQuery('#show_menu_wrapper')->css('display', 'none');
+    $path_header = $jQuery('#path_header') ;
+    $path_header->removeClass('col-lg-9');
+    $path_header->addClass('col-lg-12');
+});
