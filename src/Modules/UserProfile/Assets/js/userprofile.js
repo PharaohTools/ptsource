@@ -53,7 +53,7 @@ function changePassword() {
 
 
 function createUser() {
-    rurl = $('#base_url').val() + '/index.php?control=UserProfile&action=create&output-format=JSON' ;
+    var rurl = $('#base_url').val() + '/index.php?control=UserProfile&action=create&output-format=JSON' ;
     console.log(rurl) ;
 
     if ($('#create_username').val() == '') {
