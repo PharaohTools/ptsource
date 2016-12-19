@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class UserSSHKeyDeleteUserAllOS extends Base {
+class UserSSHKeyDeleteKeyAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -12,14 +12,14 @@ class UserSSHKeyDeleteUserAllOS extends Base {
     public $architectures = array("any") ;
 
     // Model Group
-    public $modelGroup = array("DeleteUser") ;
+    public $modelGroup = array("DeleteKey") ;
 
     public function getData() {
-        $ret["data"] = $this->deleteUser();
+        $ret["data"] = $this->deleteKey();
         return $ret ;
     }
 
-    public function deleteUser() {
+    public function deleteKey() {
 
 //        $create_perms = $this->checkCreationPermissions() ;
 //        if ($create_perms !== true) { return $create_perms ; }
@@ -81,7 +81,7 @@ class UserSSHKeyDeleteUserAllOS extends Base {
                 "status" => false ,
                 "message" => "You cannot delete your own user" );
             return $return ; }
-        $cu = $signup->deleteUser($this->params["create_username"]);
+        $cu = $signup->deleteKey($this->params["create_username"]);
         if ($cu == false) {
             $return = array(
                 "status" => false ,

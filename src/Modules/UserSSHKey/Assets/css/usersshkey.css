@@ -46,6 +46,12 @@ p.moduleListText { margin: 0; }
     float: left;
 }
 
+.public_ssh_key_row {
+    width: 100%;
+    display: block;
+    float: left;
+}
+
 #form_alert {
     float: left;
     display: block;
@@ -72,4 +78,8 @@ p.moduleListText { margin: 0; }
 
 .actionButtonWrap {
 
+}
+
+#create_new_key_fields {
+    display: none ;
 }

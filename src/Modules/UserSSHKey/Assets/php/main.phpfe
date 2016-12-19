@@ -1,23 +1,63 @@
 <?php
 
-$jQuery('#hide_menu_button')->on('click', function() use ($jQuery)  {
-    $jQuery('#page_sidebar')->css('display', 'none');
-    $pageCon = $jQuery('#page_content') ;
-    $pageCon->removeClass('col-lg-9');
-    $pageCon->addClass('col-lg-12');
-    $jQuery('#show_menu_wrapper')->css('display', 'block');
-    $path_header = $jQuery('#path_header') ;
-    $path_header->removeClass('col-lg-12');
-    $path_header->addClass('col-lg-9');
+$jQuery('#create_new_key')->on('click', function() use ($jQuery)  {
+    $jQuery('#create_new_key_fields')->fadeIn();
+    $jQuery('#create_new_key')->fadeOut();
 });
 
-$jQuery('#show_menu_button')->on('click', function() use ($jQuery)  {
-    $jQuery('#page_sidebar')->css('display', 'block');
-    $pageCon = $jQuery('#page_content') ;
-    $pageCon->removeClass('col-lg-12');
-    $pageCon->addClass('col-lg-9');
-    $jQuery('#show_menu_wrapper')->css('display', 'none');
-    $path_header = $jQuery('#path_header') ;
-    $path_header->removeClass('col-lg-9');
-    $path_header->addClass('col-lg-12');
+
+
+$console->log('before Key Start') ;
+
+$jQuery('#save_new_key')->on('click', function() use ($jQuery, $console)  {
+    createNewSSHKey($jQuery, $console) ;
 });
+
+function createNewSSHKey($jQuery, $console) {
+
+    $console->log('Create Key Start') ;
+
+    if ($jQuery('#new_ssh_key_title')->val() == '') {
+        $jQuery('#new_ssh_key_title_alert')->html('Please enter an SSH Key Title');
+        $jQuery('#new_ssh_key_title')->focus();
+        return; }
+
+    $console->log('Create Key ssh title') ;
+
+    if ($jQuery('#new_ssh_key')->val() == '') {
+        $jQuery('#new_ssh_key_alert')->html('Please enter a Public SSH Key');
+        $jQuery('#new_ssh_key')->focus();
+        return; }
+
+    $console->log('Create Key pubkey') ;
+
+    $json_data = getJsonData($jQuery) ;
+
+
+    $console->log($json_data) ;
+
+    $jQuery->ajax($json_data);
+    //  getPublicKeyFingerprint(string $algorithm = 'md5')
+}
+
+function getJsonData($jQuery) {
+
+    $rurl = 'index.php?control=UserSSHKey&action=create&output-format=JSON' ;
+    $data = new StdClass() ;
+    $key = $jQuery('#new_ssh_key')->val() ;
+    $title = $jQuery('#new_ssh_key_title')->val() ;
+    $data["ssh_public_key"] = $key;
+
+    $new_data_string = "new_ssh_key=".$key.'&' ;
+    $new_data_string = $new_data_string."new_ssh_key_title=".$title ;
+    $new_data_string = \js_core::$window->encodeURI($new_data_string) ;
+
+    $data = array(
+        'type' => 'POST',
+        'url' => $rurl,
+        'dataType'=> "json",
+        'data' => $new_data_string
+    ) ;
+
+    return $data ;
+}

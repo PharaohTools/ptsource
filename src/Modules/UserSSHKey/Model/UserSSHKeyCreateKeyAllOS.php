@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class KeySSHKeyCreateKeyAllOS extends Base {
+class UserSSHKeyCreateKeyAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -20,6 +20,7 @@ class KeySSHKeyCreateKeyAllOS extends Base {
     }
 
     public function createKey() {
+//        var_dump($this->params) ;
 
 //        $create_perms = $this->checkCreationPermissions() ;
 //        if ($create_perms !== true) { return $create_perms ; }
@@ -100,11 +101,10 @@ class KeySSHKeyCreateKeyAllOS extends Base {
 
     private function makeTheKey() {
 
-        $newKey["username"] = $this->params["create_username"] ;
-        $newKey["password"] = $this->params["update_password"] ;
-        $newKey["email"] = $this->params["create_email"] ;
-        $newKey["status"] = 1 ;
-        $newKey["role"] = 1 ;
+        $newKey["ssh_public_key"] = $this->params["new_ssh_key"] ;
+        $newKey["title"] = $this->params["new_ssh_key_title"] ;
+        $newKey["fingerprint"] = $this->params["create_email"] ;
+        $newKey["user"] = "" ;
 
         $signupFactory = new \Model\Signup();
         $signup = $signupFactory->getModel($this->params);
@@ -113,7 +113,7 @@ class KeySSHKeyCreateKeyAllOS extends Base {
         if ($cu == false) {
             $return = array(
                 "status" => false ,
-                "message" => "Unable to create this user" );
+                "message" => "Unable to add this SSH Key to your account" );
             return $return ; }
 
         return true ;
