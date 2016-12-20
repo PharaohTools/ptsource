@@ -160,4 +160,3 @@
         </div>
 </div><!-- container -->
 <link rel="stylesheet" href="/Assets/Modules/UserSSHKey/css/usersshkey.css">
-<script type="text/javascript" src="/Assets/Modules/UserSSHKey/js/usersshkey.js"></script>
