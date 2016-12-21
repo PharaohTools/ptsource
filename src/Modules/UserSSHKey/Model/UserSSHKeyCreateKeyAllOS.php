@@ -26,11 +26,11 @@ class UserSSHKeyCreateKeyAllOS extends Base {
         $createdKey = $this->addTheKey() ;
         if ($createdKey !== true) {
             return $createdKey ; }
-        $one_stored_key = $this->getOneKeyDetails($this->params["create_username"]) ;
+        $finger = $this->getFingerprint() ;
         $return = array(
             "status" => true ,
             "message" => "Key Created",
-            "fingerprint" => "" );
+            "fingerprint" => $finger );
         return $return ;
 
     }
@@ -61,7 +61,7 @@ class UserSSHKeyCreateKeyAllOS extends Base {
     private function keyInvalid() {
 
         if (strlen($this->params["new_ssh_key"]) <7 ) {
-            $return = "This does not apear to be an SSH Key" ;
+            $return = "This does not appear to be an SSH Key. It's not long enough" ;
             return $return ; }
 
         $crypt_loc = dirname(__DIR__).DS.'Libraries'.DS.'phpseclib'.DS.'Crypt'.DS ;
@@ -76,19 +76,19 @@ class UserSSHKeyCreateKeyAllOS extends Base {
             if (!in_array($math_file, array('.', '..'))) {
                 require_once $math_loc.$math_file ; } }
 
-//        $seclib_loc = dirname(__DIR__).DS.'Libraries'.DS.'phpseclib'.DS.'Crypt'.DS.'RSA.php' ;
-//        require_once $seclib_loc;
-        $rsa = new \Crypt_RSA() ;
-        $rsa->setPublicKey($this->params["new_ssh_key"]) ;
-
-        $finger = $rsa->getPublicKeyFingerprint() ;
+        $finger = $this->getFingerprint() ;
         if ($finger === false) {
-            $msg = 'Unable to generate fingerprint.l This key is invalid.' ;
+            $msg = 'Unable to generate fingerprint. This key is invalid.' ;
             return $msg ; }
-//        var_dump($finger, $this->params["new_ssh_key"]) ;
-
 
         return true ;
+    }
+
+    private function getFingerprint() {
+        $rsa = new \Crypt_RSA() ;
+        $rsa->setPublicKey($this->params["new_ssh_key"]) ;
+        $finger = $rsa->getPublicKeyFingerprint() ;
+        return $finger ;
     }
 
     private function getAllKeyDetails() {
@@ -107,24 +107,17 @@ class UserSSHKeyCreateKeyAllOS extends Base {
         $parsed_filters[] = array("where", "user_name", '=', $uname ) ;
 
         if ($datastore->collectionExists('user_ssh_keys')==false){
-
             $column_defines = array(
-                'key_id' => 'integer',
+                'key_id' => 'INTEGER PRIMARY KEY ASC',
+                'user_id' => 'string',
                 'title' => 'string',
                 'key_data' => 'string',
                 'fingerprint' => 'string'
             );
             $logging->log("Creating User SSH Keys Collection in Datastore", $this->getModuleName()) ;
+            $datastore->createCollection('user_ssh_keys', $column_defines) ; }
 
-            $datastore->createCollection('user_ssh_keys', $column_defines) ;
-        }
         $keys = $datastore->findAll('user_ssh_keys', $parsed_filters) ;
-
-//        var_dump($keys) ;
-
-//        $logging->log('Collating Existing, Collection', $this->getModuleName()) ;
-
-
         return $keys ;
     }
 
@@ -143,20 +136,25 @@ class UserSSHKeyCreateKeyAllOS extends Base {
 
     private function addTheKey() {
 
-        $newKey["key_data"] = $this->params["new_ssh_key"] ;
-        $newKey["title"] = $this->params["new_ssh_key_title"] ;
-        $newKey["fingerprint"] = $this->params["create_email"] ;
 
         $datastoreFactory = new \Model\Datastore() ;
         $datastore = $datastoreFactory->getModel($this->params) ;
 
+        $signupFactory = new \Model\Signup();
+        $signup = $signupFactory->getModel($this->params);
+        $au =$signup->getLoggedInUserData();
+
+
+        $rsa = new \Crypt_RSA() ;
+        $rsa->setPublicKey($this->params["new_ssh_key"]) ;
+        $finger = $rsa->getPublicKeyFingerprint() ;
 
         $res = $datastore->insert('user_ssh_keys', array(
-            "job_slug"=>$this->params["item"],
-            "issue_slug"=>$name,
+            "user_id" => $au->username,
+            "key_data" => $this->params["new_ssh_key"],
+            "title" => $this->params["new_ssh_key_title"],
+            "fingerprint" => $finger
         )) ;
-
-
 
         if ($res == false) {
             $return = array(
