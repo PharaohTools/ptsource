@@ -22,6 +22,7 @@ class UserSSHKeyAnyOS extends BasePHPApp {
         $ret['user'] = $this->getUserDetails();
         $ret['allusers'] = $this->getAllUserDetails();
         $ret['email_users_enabled'] = $this->getEnabledStatus();
+        $ret['public_ssh_keys'] = $this->getAllKeyDetails();
         return $ret ;
     }
 
@@ -34,13 +35,6 @@ class UserSSHKeyAnyOS extends BasePHPApp {
             ($this->params['update_password'] == $this->params['update_password_match'])) {
             $user->password = $this->params['update_password']; }
         $this->saveUser($user);
-    }
-
-    public function getUserDetails() {
-        $signupFactory = new \Model\Signup();
-        $signup = $signupFactory->getModel($this->params);
-        $oldData=$signup->getLoggedInUserData();
-        return $oldData;
     }
 
     public function getEnabledStatus() {
@@ -65,17 +59,50 @@ class UserSSHKeyAnyOS extends BasePHPApp {
         return false ;
     }
 
-    private function saveUser($user) {
+
+    public function getAllKeyDetails() {
+
         $signupFactory = new \Model\Signup();
         $signup = $signupFactory->getModel($this->params);
-        $oldData=$signup->updateUser($user);
-        return $oldData;
+        $me = $signup->getLoggedInUserData() ;
+        $uname = $me->username;
+
+        $datastoreFactory = new \Model\Datastore() ;
+        $datastore = $datastoreFactory->getModel($this->params) ;
+
+        $loggingFactory = new \Model\Logging() ;
+        $logging = $loggingFactory->getModel($this->params) ;
+        $parsed_filters = array() ;
+        $parsed_filters[] = array("where", "user_id", '=', $uname ) ;
+
+        if ($datastore->collectionExists('user_ssh_keys')==false){
+            $column_defines = array(
+                'key_id' => 'INTEGER PRIMARY KEY ASC',
+                'key_hash' => 'string',
+                'user_id' => 'string',
+                'title' => 'string',
+                'key_data' => 'string',
+                'fingerprint' => 'string'
+            );
+            $logging->log("Creating User SSH Keys Collection in Datastore", $this->getModuleName()) ;
+            $datastore->createCollection('user_ssh_keys', $column_defines) ; }
+
+        $keys = $datastore->findAll('user_ssh_keys', $parsed_filters) ;
+        return $keys ;
     }
 
-    private function createUser($user) {
+    public function keyAlreadyExists($title) {
+        $allkeys = $this->getAllKeyDetails() ;
+        foreach ($allkeys as $onekey) {
+            if ($onekey->keyname == $title) {
+                return true ; } }
+        return false ;
+    }
+
+    public function getUserDetails() {
         $signupFactory = new \Model\Signup();
         $signup = $signupFactory->getModel($this->params);
-        $oldData=$signup->updateUser($user);
+        $oldData=$signup->getLoggedInUserData();
         return $oldData;
     }
 

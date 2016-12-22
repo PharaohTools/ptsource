@@ -83,3 +83,21 @@ p.moduleListText { margin: 0; }
 #create_new_key_fields {
     display: none ;
 }
+
+.public_ssh_key_row .cellRowIndex {
+    width: 15%;
+    display: block;
+    float: left;
+}
+
+.public_ssh_key_row .cellRowKeyDetails {
+    width: 65%;
+    display: block;
+    float: left;
+}
+
+.public_ssh_key_row .cellRowDeleteKey {
+    width: 20%;
+    display: block;
+    float: left;
+}

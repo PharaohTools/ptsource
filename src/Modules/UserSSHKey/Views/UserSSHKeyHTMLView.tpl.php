@@ -42,11 +42,13 @@
         </div>
     </div>
 
-  <div class="col-lg-9">
+    <div class="col-lg-9">
         <div class="well well-lg">
             <?php echo $this->renderLogs() ; ?>
             <div class="row clearfix no-margin">
-           <h4 class="text-uppercase text-primary"><i class="fa fa-users hvr-grow-rotate"></i>User Profile</h4>
+           <h4 class="text-uppercase text-primary">
+               <i class="fa fa-users hvr-grow-rotate"></i>User Profile
+           </h4>
 
                 <div class="row clearfix no-margin">
                 <h5 class="text-uppercase text-light" style="margin-top: 15px;margin-left: 51px;">  </h5>
@@ -111,7 +113,7 @@
 
                                                     ?>
 
-                                                    <div class="public_ssh_key_row" id="blRow_<?php echo $public_ssh_key['fingerprint']; ?>" >
+                                                    <div class="public_ssh_key_row" id="sshkey_<?php echo base64_encode($public_ssh_key['fingerprint']); ?>" >
                                                         <div class="blCell cellRowIndex" scope="row"> <?php echo $i; ?> </div>
                                                         <div class="blCell cellRowKeyDetails">
                                                             <div class="fullRow">
@@ -128,6 +130,12 @@
                                                             <btn class="btn btn-warning">Delete</btn>
                                                         </div>
                                                     </div>
+
+                                                    <script type="text/javascript">
+                                                        <?php
+                                                                echo "" ;
+                                                        ?>
+                                                    </script>
 
                                                     <?php
 

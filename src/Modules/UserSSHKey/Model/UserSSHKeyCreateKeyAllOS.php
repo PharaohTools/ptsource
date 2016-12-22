@@ -36,7 +36,8 @@ class UserSSHKeyCreateKeyAllOS extends Base {
     }
 
     public function validateKeyDetails() {
-        if ($this->keyAlreadyExists()) {
+        $keyBase = new \Model\UserSSHKeyAnyOS($this->params) ;
+        if ($keyBase->keyAlreadyExists($this->params["new_ssh_key_title"]) === true) {
             $return = array(
                 "status" => false ,
                 "message" => "This Key Name already exists" );
@@ -48,14 +49,6 @@ class UserSSHKeyCreateKeyAllOS extends Base {
                 "message" => $presult );
             return $return ; }
         return true ;
-    }
-
-    private function keyAlreadyExists() {
-        $allkeys = $this->getAllKeyDetails() ;
-        foreach ($allkeys as $onekey) {
-            if ($onekey->keyname == $this->params["new_ssh_key_title"]) {
-                return true ; } }
-        return false ;
     }
 
     private function keyInvalid() {
@@ -91,52 +84,7 @@ class UserSSHKeyCreateKeyAllOS extends Base {
         return $finger ;
     }
 
-    private function getAllKeyDetails() {
-
-        $signupFactory = new \Model\Signup();
-        $signup = $signupFactory->getModel($this->params);
-        $me = $signup->getLoggedInUserData() ;
-        $uname = $me->username;
-
-        $datastoreFactory = new \Model\Datastore() ;
-        $datastore = $datastoreFactory->getModel($this->params) ;
-
-        $loggingFactory = new \Model\Logging() ;
-        $logging = $loggingFactory->getModel($this->params) ;
-        $parsed_filters = array() ;
-        $parsed_filters[] = array("where", "user_name", '=', $uname ) ;
-
-        if ($datastore->collectionExists('user_ssh_keys')==false){
-            $column_defines = array(
-                'key_id' => 'INTEGER PRIMARY KEY ASC',
-                'user_id' => 'string',
-                'title' => 'string',
-                'key_data' => 'string',
-                'fingerprint' => 'string'
-            );
-            $logging->log("Creating User SSH Keys Collection in Datastore", $this->getModuleName()) ;
-            $datastore->createCollection('user_ssh_keys', $column_defines) ; }
-
-        $keys = $datastore->findAll('user_ssh_keys', $parsed_filters) ;
-        return $keys ;
-    }
-
-    private function getOneKeyDetails($keyname) {
-        $signupFactory = new \Model\Signup();
-        $signup = $signupFactory->getModel($this->params);
-        $au =$signup->getKeysData();
-        foreach ($au as $onekey) {
-            if ($onekey->keyname == $this->params["new_ssh_key_title"]) {
-                $return = new \StdClass();
-                $return->keyname = $onekey->keyname ;
-                $return->email = $onekey->email ;
-                return $return ; } }
-        return array() ;
-    }
-
     private function addTheKey() {
-
-
         $datastoreFactory = new \Model\Datastore() ;
         $datastore = $datastoreFactory->getModel($this->params) ;
 
@@ -144,14 +92,14 @@ class UserSSHKeyCreateKeyAllOS extends Base {
         $signup = $signupFactory->getModel($this->params);
         $au =$signup->getLoggedInUserData();
 
-
         $rsa = new \Crypt_RSA() ;
         $rsa->setPublicKey($this->params["new_ssh_key"]) ;
         $finger = $rsa->getPublicKeyFingerprint() ;
-
+        
         $res = $datastore->insert('user_ssh_keys', array(
             "user_id" => $au->username,
             "key_data" => $this->params["new_ssh_key"],
+            "key_hash" => uniqid(),
             "title" => $this->params["new_ssh_key_title"],
             "fingerprint" => $finger
         )) ;
