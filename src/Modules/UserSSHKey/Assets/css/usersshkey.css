@@ -85,13 +85,13 @@ p.moduleListText { margin: 0; }
 }
 
 .public_ssh_key_row .cellRowIndex {
-    width: 15%;
+    width: 10%;
     display: block;
     float: left;
 }
 
 .public_ssh_key_row .cellRowKeyDetails {
-    width: 65%;
+    width: 70%;
     display: block;
     float: left;
 }
@@ -100,4 +100,13 @@ p.moduleListText { margin: 0; }
     width: 20%;
     display: block;
     float: left;
+}
+
+.loading_keys {
+    display: none ;
+}
+
+.loading_keys img {
+    display: block ;
+    margin: 0 auto ;
 }
