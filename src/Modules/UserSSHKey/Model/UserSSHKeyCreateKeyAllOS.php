@@ -27,9 +27,14 @@ class UserSSHKeyCreateKeyAllOS extends Base {
         if ($createdKey !== true) {
             return $createdKey ; }
         $finger = $this->getFingerprint() ;
+
+        $keyBase = new \Model\UserSSHKeyAnyOS($this->params) ;
+        $all_keys = $keyBase->getAllKeyDetails() ;
+
         $return = array(
             "status" => true ,
             "message" => "Key Created",
+            "public_ssh_keys" => $all_keys,
             "fingerprint" => $finger );
         return $return ;
 
