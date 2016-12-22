@@ -64,20 +64,28 @@
                     <form class="form-horizontal custom-form" action="/index.php?control=UserSSHKey&action=create" method="POST">
 
                         <div class="col-sm-12">
-                            <label for="new_ssh_key_title" class="col-sm-4 control-label text-left" style="color:#757575">Title</label>
-                            <div class="col-sm-7">
-                                <input type="text" class="form-control" id="new_ssh_key_title" name="new_ssh_key_title" value="" placeholder="Your Key Name" />
-                                <span style="color:#FF0000;" id="new_ssh_key_title_alert"></span>
+                            <div class="col-sm-12 create_new_key_field">
+                                <label for="new_ssh_key_title" class="col-sm-4 control-label text-left" style="color:#757575">Title</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" id="new_ssh_key_title" name="new_ssh_key_title" value="" placeholder="Your Key Name" />
+                                    <span style="color:#FF0000;" id="new_ssh_key_title_alert"></span>
+                                </div>
                             </div>
+
+                            <div class="col-sm-12 create_new_key_field">
+                                <label for="new_ssh_key" class="col-sm-4 control-label text-left" style="color:#757575;">SSH Key</label>
+                                <div class="col-sm-7">
+                                    <textarea class="form-control" id="new_ssh_key" name="new_ssh_key">Your New Key</textarea>
+                                    <span style="color:#FF0000;" id="new_ssh_key_alert"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 loading_keys">
+                                <img src="/Assets/Modules/UserSSHKey/image/loading.gif" alt="Loading Keys">
+                            </div>
+
                         </div>
 
-                        <div class="col-sm-12">
-                            <label for="new_ssh_key" class="col-sm-4 control-label text-left" style="color:#757575;">SSH Key</label>
-                            <div class="col-sm-7">
-                                <textarea class="form-control" id="new_ssh_key" name="new_ssh_key">Your New Key</textarea>
-                                <span style="color:#FF0000;" id="new_ssh_key_alert"></span>
-                            </div>
-                        </div>
 
                         <div class="col-sm-12">
                             <div class="col-sm-offset-4 col-sm-3 actionButtonWrap">
@@ -113,7 +121,7 @@
 
                                                     ?>
 
-                                                    <div class="public_ssh_key_row" id="sshkey_<?php echo base64_encode($public_ssh_key['fingerprint']); ?>" >
+                                                    <div class="public_ssh_key_row" id="sshkey_<?php echo $public_ssh_key['key_hash'] ; ?>" >
                                                         <div class="blCell cellRowIndex" scope="row"> <?php echo $i; ?> </div>
                                                         <div class="blCell cellRowKeyDetails">
                                                             <div class="fullRow">
@@ -130,12 +138,6 @@
                                                             <btn class="btn btn-warning">Delete</btn>
                                                         </div>
                                                     </div>
-
-                                                    <script type="text/javascript">
-                                                        <?php
-                                                                echo "" ;
-                                                        ?>
-                                                    </script>
 
                                                     <?php
 
