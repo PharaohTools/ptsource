@@ -87,9 +87,10 @@ class keyTable {
         $i = 1;
 
         foreach ($data['public_ssh_keys'] as $public_ssh_key) {
-            $ht .= '<div class="public_ssh_key_row" id="'
-                .$public_ssh_key['key_hash'].'">' ;
-            $ht .= '  <div class="blCell cellRowIndex" scope="row">'.$i.'</div> ' ;
+            $ht .= '<div class="public_ssh_key_row" id="' ;
+            $ht .= $public_ssh_key['key_hash'] ;
+            $ht .= '">' ;
+            $ht .= '  <div class="blCell cellRowIndex">'.$i.'</div> ' ;
             $ht .= '  <div class="blCell cellRowKeyDetails">' ;
             $ht .= '    <div class="fullRow">' ;
             $ht .= '        '.$public_ssh_key['title'] ;
