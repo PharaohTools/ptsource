@@ -80,6 +80,8 @@ class UserSSHKeyAnyOS extends BasePHPApp {
                 'key_id' => 'INTEGER PRIMARY KEY ASC',
                 'key_hash' => 'string',
                 'user_id' => 'string',
+                'created_on' => 'string',
+                'last_used' => 'string',
                 'title' => 'string',
                 'key_data' => 'string',
                 'fingerprint' => 'string'
@@ -88,6 +90,15 @@ class UserSSHKeyAnyOS extends BasePHPApp {
             $datastore->createCollection('user_ssh_keys', $column_defines) ; }
 
         $keys = $datastore->findAll('user_ssh_keys', $parsed_filters) ;
+        $keys = $this->keyDecorator($keys) ;
+        return $keys ;
+    }
+
+    public function keyDecorator($keys) {
+        foreach ($keys as &$onekey) {
+            $onekey['created_on_format'] = date('H:i d/m/Y', $onekey['created_on']);
+            $onekey['last_used_format'] = date('H:i d/m/Y', $onekey['last_used']);
+        }
         return $keys ;
     }
 
