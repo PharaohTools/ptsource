@@ -107,7 +107,7 @@
                                 <div class="table-responsive">
                                     <div class="table table-striped table-bordered table-condensed">
 
-                                        <div class="allSSHKeyRows table-hover">
+                                        <div id="allSSHKeyRows" class="allSSHKeyRows table-hover">
 
                                             <?php
 

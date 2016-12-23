@@ -32,21 +32,16 @@ function createNewSSHKey($jQuery, $console) {
 
     $console->log('Create Key pubkey') ;
 
-    $handler = new handler() ;
     $ajax_object = getJsonData($jQuery) ;
     $ajax_object->done(
-        function ($data) use ($handler, $jQuery) {
-            $handler->handleData($data) ;
+        function ($data) use ($jQuery) {
             $jQuery('.create_new_key_field')->fadeIn('fast') ;
             $jQuery('.loading_keys')->fadeOut('fast') ;
             $kt = new keyTable() ;
-            $kt->rewriteTable($data) ;
+            $kt->rewriteTable($data, $jQuery) ;
         }
     );
 
-//    $console->log($json_data) ;
-
-    //  getPublicKeyFingerprint(string $algorithm = 'md5')
 }
 
 function getJsonData($jQuery) {
@@ -72,43 +67,49 @@ function getJsonData($jQuery) {
     return $ajax_object ;
 }
 
-class handler {
-
-    public function handleData($data) {
-        \js_core::$window->alert($data);
-        //do some stuff
-    }
-}
-
 class keyTable {
 
-    public function rewriteTable($data) {
+    public function rewriteTable($data, $jQuery) {
         $ht = '' ;
-        $i = 1;
+        $i = 1 ;
+        $console = \js_core::$console ;
 
-        foreach ($data['public_ssh_keys'] as $public_ssh_key) {
-            $ht .= '<div class="public_ssh_key_row" id="' ;
-            $ht .= $public_ssh_key['key_hash'] ;
-            $ht .= '">' ;
-            $ht .= '  <div class="blCell cellRowIndex">'.$i.'</div> ' ;
-            $ht .= '  <div class="blCell cellRowKeyDetails">' ;
-            $ht .= '    <div class="fullRow">' ;
-            $ht .= '        '.$public_ssh_key['title'] ;
-            $ht .= '    </div>' ;
-            $ht .= '    <div class="fullRow">' ;
-            $ht .= '        '.$public_ssh_key['fingerprint'] ;
-            $ht .= '    </div>' ;
-            $ht .= '    <div class="fullRow">' ;
-            $ht .= '        Key Creation Data — Last used within the last 4 days' ;
-            $ht .= '    </div>' ;
-            $ht .= '  </div>' ;
-            $ht .= '  <div class="blCell cellRowDeleteKey">' ;
-            $ht .= '    <btn class="btn btn-warning">Delete</btn>' ;
-            $ht .= '  </div>' ;
-            $ht .= '</div>' ;
-            $i++ ; }
+        foreach ($data as $datKey => $datVal) {
+            $console->log("dat is: ", $datKey, $datVal ) ;
+            foreach ($datVal as $datKey2 => $datVal2) {
+                $console->log("dat2 is: ", $datKey2, $datVal2 ) ; } }
 
-        $jq = \js_core::$jQuery ;
-        $jq('.allSSHKeyRows')->html($ht) ;
+        foreach ($data->data->public_ssh_keys as $title => $public_ssh_key_array) {
+
+            $full_key = array();
+            foreach ($public_ssh_key_array as $index => $cur_val) {
+                $full_key[$index] = $cur_val ; }
+
+            $ht = $ht . "<div class='public_ssh_key_row' id='". "\n";
+            $ht = $ht . $full_key["key_hash"];
+            $ht = $ht . "'>";
+            $ht = $ht . '  <div class="blCell cellRowIndex">' . $i . '</div> ';
+            $ht = $ht . '  <div class="blCell cellRowKeyDetails">';
+            $ht = $ht . '    <div class="fullRow">';
+            $ht = $ht . '        ' . $full_key["title"];
+            $ht = $ht . '    </div>';
+            $ht = $ht . '    <div class="fullRow">';
+            $ht = $ht . '        ' . $full_key["fingerprint"];
+            $ht = $ht . '    </div>';
+            $ht = $ht . '    <div class="fullRow">';
+            $ht = $ht . '        Key Creation Data — Last used within the last 4 days';
+            $ht = $ht . '    </div>';
+            $ht = $ht . '  </div>';
+            $ht = $ht . '  <div class="blCell cellRowDeleteKey">';
+            $ht = $ht . '    <btn class="btn btn-warning">Delete</btn>';
+            $ht = $ht . '  </div>';
+            $ht = $ht . '</div>';
+            $i = $i + 1;
+        }
+
+        $jQuery('#allSSHKeyRows')->html($ht) ;
+
+        $console->log($ht) ;
+
     }
 }
