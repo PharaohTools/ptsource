@@ -39,6 +39,10 @@ function createNewSSHKey($jQuery, $console) {
             $jQuery('.loading_keys')->fadeOut('fast') ;
             $kt = new keyTable() ;
             $kt->rewriteTable($data, $jQuery) ;
+            $jQuery('#create_new_key_fields')->fadeOut();
+            $jQuery('#create_new_key')->fadeIn();
+            $jQuery('#new_ssh_key_title')->val('') ;
+            $jQuery('#new_ssh_key')->val('') ;
         }
     );
 
@@ -72,12 +76,6 @@ class keyTable {
     public function rewriteTable($data, $jQuery) {
         $ht = '' ;
         $i = 1 ;
-        $console = \js_core::$console ;
-
-        foreach ($data as $datKey => $datVal) {
-            $console->log("dat is: ", $datKey, $datVal ) ;
-            foreach ($datVal as $datKey2 => $datVal2) {
-                $console->log("dat2 is: ", $datKey2, $datVal2 ) ; } }
 
         foreach ($data->data->public_ssh_keys as $title => $public_ssh_key_array) {
 
@@ -97,7 +95,7 @@ class keyTable {
             $ht = $ht . '        ' . $full_key["fingerprint"];
             $ht = $ht . '    </div>';
             $ht = $ht . '    <div class="fullRow">';
-            $ht = $ht . '        Key Creation Data — Last used within the last 4 days';
+            $ht = $ht . '        Created on: ' . $full_key["created_on_format"] .' — Last used on: ' . $full_key["created_on_format"];
             $ht = $ht . '    </div>';
             $ht = $ht . '  </div>';
             $ht = $ht . '  <div class="blCell cellRowDeleteKey">';
@@ -108,8 +106,6 @@ class keyTable {
         }
 
         $jQuery('#allSSHKeyRows')->html($ht) ;
-
-        $console->log($ht) ;
 
     }
 }
