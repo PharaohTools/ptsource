@@ -75,7 +75,7 @@
                             <div class="col-sm-12 create_new_key_field">
                                 <label for="new_ssh_key" class="col-sm-4 control-label text-left" style="color:#757575;">SSH Key</label>
                                 <div class="col-sm-7">
-                                    <textarea class="form-control" id="new_ssh_key" name="new_ssh_key" placeholder="Your Key Content">Your New Key</textarea>
+                                    <textarea class="form-control" id="new_ssh_key" name="new_ssh_key" placeholder="Your Key Content"></textarea>
                                     <span style="color:#FF0000;" id="new_ssh_key_alert"></span>
                                 </div>
                             </div>
