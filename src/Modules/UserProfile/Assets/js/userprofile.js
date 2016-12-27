@@ -18,11 +18,6 @@ function changePassword() {
         return; }
 
     if ($('#update_password_match').val() == '') {
-        $('#update_password_alert').html('Please enter your new password');
-        $('#update_password_match').focus();
-        return; }
-
-    if ($('#update_password_match').val() == '') {
         $('#update_password_match_alert').html('Please enter new password Again');
         $('#update_password_match').focus();
         return; }
