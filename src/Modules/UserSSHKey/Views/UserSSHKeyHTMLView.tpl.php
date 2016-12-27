@@ -165,7 +165,6 @@
                                                 jQuery(document).ready(function(){
 
                                                     window.callPHP = function (func_name, argy) {
-                                                        alert(func_name + " " + argy) ;
                                                         var phpCode = "<" ;
                                                         phpCode = phpCode + "?php" + "\n\n" ;
                                                         phpCode = " " + func_name + "(" + argy + ");" ;
