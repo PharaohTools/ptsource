@@ -276,7 +276,9 @@ class SignupAllOS extends Base {
 
     public function deleteUser($username) {
         $oldData = $this->getUsersData();
-        if ($myfile = fopen($this->getUserFileLocation(), "w")) { }
+        if ($myfile = fopen($this->getUserFileLocation(), "w")) {
+
+        }
         else {
             echo json_encode(array("status" => false,
                 "id"=>"registration_error_msg",
