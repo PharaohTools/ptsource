@@ -14,6 +14,16 @@ $jQuery('#save_new_key')->on('click', function() use ($jQuery, $console)  {
 
 });
 
+function disableSSHKey($selector) {
+    $console = \js_core::$console ;
+    $console->log('Deleting the following SSH Key: ' . $selector) ;
+}
+
+function deleteSSHKey($selector) {
+    $console = \js_core::$console ;
+    $console->log('Deleting the following SSH Key: ' . $selector) ;
+}
+
 function createNewSSHKey($jQuery, $console) {
 
     $console->log('Create Key Start') ;
@@ -48,9 +58,9 @@ function createNewSSHKey($jQuery, $console) {
 
 }
 
-function getJsonData($jQuery) {
+function getJsonData($jQuery, $call) {
 
-    $rurl = 'index.php?control=UserSSHKey&action=create&output-format=JSON' ;
+    $rurl = 'index.php?control=UserSSHKey&action=' . $call . '&output-format=JSON' ;
     $data = new StdClass() ;
     $key = $jQuery('#new_ssh_key')->val() ;
     $title = $jQuery('#new_ssh_key_title')->val() ;

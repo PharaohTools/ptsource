@@ -36,7 +36,6 @@
                             <a href="/index.php?control=ModuleManager&action=show" class=" hvr-curl-bottom-right">Modules</a>
                         </li>
                     </ul>
-                    <!-- /.nav-second-level -->
                 </li>
             </ul>
         </div>
@@ -135,7 +134,16 @@
                                                             </div>
                                                         </div>
                                                         <div class="blCell cellRowDeleteKey">
-                                                            <btn class="btn btn-warning">Delete</btn>
+                                                            <div class="fullRow">
+                                                                <btn class="btn btn-warning" id="disable_<?php echo $public_ssh_key['key_hash'] ; ?>" onclick="callPHP('disableSSHKey', '<?php echo $public_ssh_key['key_hash'] ; ?>'); ">
+                                                                    Disable
+                                                                </btn>
+                                                            </div>
+                                                            <div class="fullRow">
+                                                                <btn class="btn btn-danger" id="delete_<?php echo $public_ssh_key['key_hash'] ; ?>" onclick="callPHP('deleteSSHKey', '<?php echo $public_ssh_key['key_hash'] ; ?>'); ">
+                                                                    Delete
+                                                                </btn>
+                                                            </div>
                                                         </div>
                                                     </div>
 
@@ -153,6 +161,23 @@
                                             }
 
                                             ?>
+                                            <script type="text/javascript">
+                                                jQuery(document).ready(function(){
+
+                                                    window.callPHP = function (func_name, argy) {
+                                                        alert(func_name + " " + argy) ;
+                                                        var phpCode = "<" ;
+                                                        phpCode = phpCode + "?php" + "\n\n" ;
+                                                        phpCode = " " + func_name + "(" + argy + ");" ;
+                                                        phpEngine.execute(phpCode).fail(function (error) {
+                                                            print(error.toString());
+                                                            return false ;
+                                                        });
+                                                        return true ;
+                                                    }
+
+                                                });
+                                            </script>
                                         </div>
                                     </div>
                                 </div>

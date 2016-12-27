@@ -84,6 +84,15 @@ p.moduleListText { margin: 0; }
     display: none ;
 }
 
+.public_ssh_key_row {
+    margin: 10px 0px;
+    display: block;
+}
+
+.public_ssh_key_row:hover {
+    background-color: white;
+}
+
 .public_ssh_key_row .cellRowIndex {
     width: 10%;
     display: block;
