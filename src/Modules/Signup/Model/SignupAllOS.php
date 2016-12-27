@@ -225,12 +225,17 @@ class SignupAllOS extends Base {
 
         $passEncrypted = $this->getSaltWord($newUser["password"]) ;
         $newUser["password"] = $passEncrypted ;
+        $newUser["created_on"] = time() ;
 
         if (!$this->userExist($newUser['email'])) {
             $oldData=$this->getUsersData();
             if ($myfile = fopen($this->getUserFileLocation(), "w")) { }
             else {
-                echo json_encode(array("status" => false, "id"=>"registration_error_msg", "msg" => "Unable to write to users datastore. Contact Administrator.")); }
+                echo json_encode(array(
+                    "status" => false,
+                    "id"=>"registration_error_msg",
+                    "msg" => "Unable to write to users datastore. Contact Administrator."
+                ) ) ; }
             if ($oldData==null) {
                 //@todo change format of saved data.
                 fwrite($myfile, json_encode(array($newUser))); }
@@ -266,6 +271,10 @@ class SignupAllOS extends Base {
                         $two->password = $one->password ; }
                     $two->role = $one->role ;
                     $two->status = $one->status ;
+                    if (!isset($one->created_on)) {
+                        $two->created_on = time() ; }
+                    else {
+                        $two->created_on = $one->created_on ; }
                     $nray[] = $two ; }
                 else {
                     $nray[] = $one ; } }
