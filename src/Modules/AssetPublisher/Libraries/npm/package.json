@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build:fs": "node fs",
-    "build": "npm run build:fs && (browserify app --standalone=pharaohTrack | uglifyjs --mangle > ../../../PostInput/Assets/Modules/DefaultSkin/js/bundle.js) && cp ../../../PostInput/Assets/Modules/DefaultSkin/js/bundle.js ../../../DefaultSkin/Assets/js/bundle.js",
+    "build": "npm run build:fs && (browserify app --standalone=pharaohTrack | uglifyjs > ../../../PostInput/Assets/Modules/DefaultSkin/js/bundle.js) && cp ../../../PostInput/Assets/Modules/DefaultSkin/js/bundle.js ../../../DefaultSkin/Assets/js/bundle.js",
     "webpack": "webpack"
   },
   "keywords": [
