@@ -73,3 +73,37 @@ p.moduleListText { margin: 0; }
 .actionButtonWrap {
 
 }
+
+#hide_menu_button {
+
+}
+
+#hide_menu_button:hover {
+    background-color: white;
+    color: #5bc0de;
+}
+
+#show_menu_wrapper {
+    display: none ;
+}
+
+#avatar {
+    width: 90%;
+    margin: 5px 5%;
+    display: block;
+    float: left;
+    min-height: 200px;
+    border: 1px darkslategray solid;
+    background-color: #e7e7e7;
+}
+
+#avatar h4 {
+    text-align: center;
+}
+
+.profileSection {
+    width: 100%;
+    display: block;
+    float: left;
+    border: 0.5px darkslategray solid;
+}

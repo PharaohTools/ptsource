@@ -3,20 +3,16 @@
         <div class="sidebar-nav ">
             <ul class="nav in" id="side-menu">
                 <li class="sidebar-search">
-                    <div class="input-group custom-search-form hvr-bounce-in">
-                        <input type="text" class="form-control" placeholder="Search...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </span>
+                    <div class="thin_padding" id="show_menu_wrapper">
+                        <button class="btn btn-success" id="show_menu_button" type="button">
+                            Show Menu
+                        </button>
                     </div>
-                    <!-- /input-group -->
-                </li>
-                <li>
-                    <a href="/index.php?control=Index&action=show" class=" hvr-bounce-in">
-                        <i class="fa fa-dashboard hvr-bounce-in"></i> Dashboard
-                    </a>
+                    <div class="thin_padding" id="hide_menu_wrapper">
+                        <button class="btn btn-info" id="hide_menu_button" type="button">
+                            Hide Menu
+                        </button>
+                    </div>
                 </li>
                 <li>
                     <a href="/index.php?control=ApplicationConfigure&action=show" class=" hvr-bounce-in">
@@ -30,203 +26,243 @@
                             <a href="/index.php?control=UserManager&action=show" class=" hvr-curl-bottom-right">User Manager</a>
                         </li>
                         <li>
-                            <a href="/index.php?control=UserProfilePublic&action=show" class=" hvr-curl-bottom-right">User Profile</a>
+                            <a href="/index.php?control=UserSSHKey&action=show" class=" hvr-curl-bottom-right">User Profile</a>
                         </li>
                         <li>
                             <a href="/index.php?control=ModuleManager&action=show" class=" hvr-curl-bottom-right">Modules</a>
                         </li>
                     </ul>
-                    <!-- /.nav-second-level -->
                 </li>
             </ul>
         </div>
     </div>
 
-  <div class="col-lg-9">
-                    <div class="well well-lg">
-<!--        <h2 class="text-uppercase text-light"><a href="/"> PTBuild - Pharaoh Tools</a></h2>-->
+    <div class="col-lg-9">
+        <div class="well well-lg">
 
-                        <?php echo $this->renderLogs() ; ?>
+            <?php echo $this->renderLogs() ; ?>
 
-                        <div class="row clearfix no-margin">
-           <h4 class="text-uppercase text-primary"><i class="fa fa-users hvr-grow-rotate"></i>User Profile</h4>
+            <div class="row clearfix no-margin">
+                <h4 class="text-uppercase text-primary">
+                    <i class="fa fa-users hvr-grow-rotate"></i>User Profile
+                </h4>
 
                 <?php
 
-                if ($pageVars["route"]["action"] == "show") {
+                if ($pageVars['route']['action'] == "show") {
                 ?>
                     <h5 class="text-uppercase text-primary">User Profile</h5>
                 <?php
                 }
                 ?>
 
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <div id="avatar">
+                            <?php
+                            if (isset($pageVars['data']['user']->avatar_image) &&
+                                is_string($pageVars['data']['user']->avatar_image) > 3 &&
+                                strlen($pageVars['data']['user']->avatar_image) > 3) {
+                                ?>
+                                <img src="<?php echo $pageVars['data']['user']->avatar_image ; ?>" alt="Your Avatar" />
+                            <?php } else { ?>
+                                <h4>
+                                    No Avatar Stored
+                                </h4>
+                            <?php } ?>
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
 
-                <div class="row clearfix no-margin">
-                <h5 class="text-uppercase text-light" style="margin-top: 15px;margin-left: 51px;">  </h5>
-                <div class="form-group" id="userprofilepublic-loading-holder">
+                        <?php
+                        if (isset($pageVars['data']['user']->full_name)) { ?>
+                            <h3>
+                                <?php echo $pageVars['data']['user']->full_name ; ?>
+                            </h3>
+                        <?php } else { ?>
+                            <h5>
+                                No Full Name Stored
+                            </h5>
+                        <?php } ?>
+
+                        <?php
+                        if (isset($pageVars['data']['user']->username)) { ?>
+                            <h4>
+                                <?php echo $pageVars['data']['user']->username ; ?>
+                            </h4>
+                        <?php } else { ?>
+                            <h5>
+                                No User Name Stored
+                            </h5>
+                        <?php } ?>
+
+                        <?php
+                        if (isset($pageVars['data']['user']->created_on)) { ?>
+                            <h4>
+                                <?php echo date('H:i d/m/Y', $pageVars['data']['user']->created_on) ; ?>
+                            </h4>
+                        <?php } else { ?>
+                            <h5>
+                                No Join Date Stored
+                            </h5>
+                        <?php } ?>
+
+                        <?php
+                        if (isset($pageVars['data']['user']->user_bio)) { ?>
+                            <h6>
+                                <?php echo $pageVars['data']['user']->user_bio ; ?>
+                            </h6>
+                        <?php } else { ?>
+                            <h5>
+                                No User Bio Stored
+                            </h5>
+                        <?php } ?>
+
+                        <?php
+                        if (isset($pageVars['data']['user']->email)) {
+                            if (isset($pageVars['data']['user']->display_email) &&
+                                $pageVars['data']['user']->display_email === 'on') { ?>
+                                <h5>
+                                    <?php echo $pageVars['data']['user']->email ; ?>
+                                </h5>
+                            <?php } else { ?>
+                                <h5>E-Mail Hidden</h5>
+                            <?php } ?>
+                        <?php } else { ?>
+                            <h5>
+                                No User Email Stored
+                            </h5>
+                        <?php } ?>
+
+                        <?php
+                        if (isset($pageVars['data']['user']->website)) {
+                            if (isset($pageVars['data']['user']->display_website) &&
+                                $pageVars['data']['user']->display_website === 'on') { ?>
+                                <h5>
+                                    <?php echo $pageVars['data']['user']->website ; ?>
+                                </h5>
+                            <?php } else { ?>
+                                <h5>Website Hidden</h5>
+                            <?php } ?>
+                        <?php } else { ?>
+                            <h5>
+                                No Website Stored
+                            </h5>
+                        <?php } ?>
+
+                        <?php
+                        if (isset($pageVars['data']['user']->location)) {
+                            if (isset($pageVars['data']['user']->display_location) &&
+                                $pageVars['data']['user']->display_location === 'on') { ?>
+                                <h5>
+                                    <?php echo $pageVars['data']['user']->location ; ?>
+                                </h5>
+                            <?php } else { ?>
+                                <h5>Location Hidden</h5>
+                            <?php } ?>
+                        <?php } else { ?>
+                            <h5>
+                                No Location Stored
+                            </h5>
+                        <?php } ?>
+
+                        <?php
+                        if (isset($pageVars['data']['user_teams']) && is_array($pageVars['data']['user_teams'])) {
+                            foreach ($pageVars['data']['user_teams'] as $team) { ?>
+                                <div class="one_team">
+                                    <div class="one_team_logo">
+                                        <a href="<?php echo $team['link'] ; ?>" class="one_team_link">
+                                            <img src="<?php echo $team['image'] ; ?>" class="one_team_image" />
+                                        </a>
+                                    </div>
+                                </div>
+                            <?php } ?>
+                        <?php } else { ?>
+                            <h5>
+                                No User Teams
+                            </h5>
+                        <?php } ?>
+
+                    </div>
                 </div>
-                <div class="fullRow">
-                    <span style="color:#FF0000;" id="form_alert"></span>
-<!--                    <p style="color: #7CFC00; margin-left: 100px;" id="registration_error_msg"></p>-->
-                    <?php if ($pageVars["route"]["action"] !== "new") { ?>
-                        <a href="/index.php?control=UserProfilePublic&action=new" class="btn btn-info hvr-grow-shadow rightAlignButton">
-                            Create New User
-                        </a>
-                    <?php } else { ?>
-                        <a href="/index.php?control=UserProfilePublic&action=show" class="btn btn-info hvr-grow-shadow rightAlignButton">
-                            Edit Current User
-                        </a>
-                    <?php } ?>
-                </div>
+
                 <div class="form-group" id="userprofilepublic-fields">
-                    <form class="form-horizontal custom-form" action="/index.php?control=UserProfilePublic&action=create" method="POST">
+                    <form class="form-horizontal custom-form"
+                          action="/index.php?control=UserProfilePublic&action=create"
+                          method="POST">
+
                         <?php
 
-                        if ($pageVars["route"]["action"] !== "new") {
-                        ?>
-
-                        <div class="form-group">
-                            <label for="update_username" class="col-sm-4 control-label text-left" style="color:#757575">User Name</label>
-                            <div class="col-sm-7">
+                        if ( isset($pageVars['data']['popular_repositories']) &&
+                             is_array($pageVars['data']['popular_repositories']) ) {
+                            ?>
+                            <div class="row clearfix form-group col-sm-12">
+                                <h4>Popular Repositories</h4>
                                 <?php
-
-
-                                if ($pageVars["data"]["allusers"] === false) {
+                                foreach ($pageVars['data']['popular_repositories'] as $one_repo) {
                                     ?>
-
-
-                                    <input type="text" readonly="readonly" class="form-control" id="update_username" name="update_username" placeholder="User Name" value="<?php echo $pageVars["data"]["user"]->username ; ?>">
-                                <?php
-                                } else {
-
-                                    ?>
-
-                                    <div class="dropdownUsers">
-                                        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-                                            Select Current User
-                                            <span class="caret"></span>
-                                        </button>
-                                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                                            <?php
-                                            foreach($pageVars["data"]["allusers"] as $oneUser) {
-                                                ?>
-                                                <li role="presentation">
-                                                    <a role="menuitem" tabindex="-1" onclick="refreshUserDetails('<?php echo $oneUser->username ; ?>');">
-                                                        <?= $oneUser->username ; ?>
-                                                    </a>
-                                                </li>
-                                            <?php
-                                            }
-                                            ?>
-                                        </ul>
-                                        <input type="hidden" class="form-control" id="update_username" name="update_username" value="<?php echo $pageVars["data"]["user"]->username ; ?>">
-                                    </div>
-                                    <div class="userShow">
-                                        <input type="text" readonly="readonly" class="form-control" id="update_username_text" name="update_username_text" value="<?php echo $pageVars["data"]["user"]->username ; ?>">
-                                    </div>
 
                                 <?php
                                 }
                                 ?>
-
-                                <span style="color:#FF0000;" id="update_username_alert"></span>
-                                <input type="hidden" class="form-control my_uname" id="my_uname" name="my_uname" value="<?php echo $pageVars["data"]["user"]->username ; ?>" >
                             </div>
-                        </div>
+                        <?php  }
 
-                        <?php
-
-                        }
-                        else  {
+                        if ( isset($pageVars['data']['contribution_activity']) &&
+                             is_array($pageVars['data']['contribution_activity']) ) {
                             ?>
+                            <div class="row clearfix form-group col-sm-12">
+                                <h4>Contribution Activity</h4>
+                                <p>
+                                    December 2016
 
-                            <div class="form-group">
-                                <label for="create_username" class="col-sm-4 control-label text-left" style="color:#757575">Username</label>
-                                <div class="col-sm-7">
-                                    <input type="text" class="form-control" id="create_username" name="create_username" value="" placeholder="Username" />
-                                    <span style="color:#FF0000;" id="update_username_alert"></span>
-                                </div>
+                                    phpengine/pssht PHP
+                                    Dec 18
+                                </p>
+                                <?php
+                                foreach ($pageVars['data']['popular_repositories'] as $one_repo) {
+                                    ?>
+
+                                <?php
+                                }
+                                ?>
                             </div>
+                        <?php  }
 
-                        <?php
-                        }
-
-                        if ($pageVars["data"]["allusers"] === false) {
+                        if ( isset($pageVars['data']['recent_contributions']) &&
+                             is_array($pageVars['data']['recent_contributions']) ) {
                             ?>
+                            <div class="form-group col-sm-12">
+                                <h4>Recent Contributions</h4>
+                                <p>
+                                    December 2016
 
-<!--                            <input type="text" readonly="readonly" class="form-control" id="update_username" name="update_username" placeholder="User Name" value="--><?php //echo $pageVars["data"]["user"]->username ; ?><!--">-->
-                        <?php  }  ?>
+                                    phpengine/pssht PHP
+                                    Dec 18
+                                </p>
+                                <?php
+                                foreach ($pageVars['data']['recent_contributions'] as $contribution) {
+                                    ?>
 
-                        <?php
-
-                        if ($pageVars["route"]["action"] !== "new") { $email_string = $pageVars["data"]["user"]->email ; }
-                        else { $email_string = "" ; }
-
-                        ?>
-
-                        <div class="form-group">
-                            <label for="update_email" class="col-sm-4 control-label text-left" style="color:#757575">Email</label>
-                            <div class="col-sm-7">
-                                <input type="text" class="form-control" id="update_email" name="update_email"
-                                       value="<?php echo $email_string ; ?>" placeholder="Email">
-                                <span style="color:#FF0000;" id="update_email_alert"></span>
+                                <?php
+                                }
+                                ?>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="update_password" class="col-sm-4 control-label text-left" style="color:#757575">Password</label>
-                            <div class="col-sm-7">
-                                <input type="password" class="form-control" id="update_password" name="update_password" placeholder="Password">
-                                <span style="color:#FF0000;" id="update_password_alert"></span>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="update_password_match" class="col-sm-4 control-label text-left" style="color:#757575;" >Confirm Password</label>
-                            <div class="col-sm-7">
-                                <input type="password" class="form-control" id="update_password_match" name="update_password_match" placeholder="Retype Password">
-                                <span style="color:#FF0000;" id="update_password_match_alert"></span>
-                            </div>
-                        </div>
-
-                        <span>
-
-Full name : David Amanshia
-                        </span>
-                        <span>
-User Name: phpengine
-
-                        </span>
-                        <span>
-User Profile Bio: Add a bio
-
-                        </span>
-                        <span>
-User Profile Organisation Name: Pharaoh Tools
-                        </span>
-                        <span>
-User Profile Location: London
-                        </span>
-                        <span>
-User Profile Website: http://www.pharaohtools.com
-                        </span>
-                        <span>
-User Creation Date: Joined on Nov 26, 2012
-
-
-                        </span>
+                        <?php  } ?>
 
 
                     </form>
 
                 </div>
-            </div>
-     
-            <hr>
 
-            <p class="text-center">
-                Visit www.pharaohtools.com for more
-            </p>
+            <hr />
+
+            <div class="form-group col-sm-12">
+                <p class="text-center">
+                    Visit www.pharaohtools.com for more
+                </p>
+            </div>
+
     </div>
 </div><!-- container -->
 <link rel="stylesheet" href="/Assets/Modules/UserProfilePublic/css/userprofilepublic.css">
-<script type="text/javascript" src="/Assets/Modules/UserProfilePublic/js/userprofilepublic.js"></script>

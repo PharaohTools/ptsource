@@ -20,8 +20,10 @@ class UserProfilePublicAnyOS extends BasePHPApp {
 
     public function getData() {
         $ret['user'] = $this->getUserDetails();
-        $ret['allusers'] = $this->getAllUserDetails();
         $ret['email_users_enabled'] = $this->getEnabledStatus();
+        $ret['popular_repositories'] = array();
+        $ret['recent_contributions'] = array();
+        $ret['contribution_activity'] = array();
         return $ret ;
     }
 
