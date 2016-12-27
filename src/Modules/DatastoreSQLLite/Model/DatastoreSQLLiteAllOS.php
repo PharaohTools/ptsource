@@ -98,7 +98,7 @@ class DatastoreSQLLiteAllOS extends Base {
         $this->params["echo-log"] ;
         $logging = $loggingFactory->getModel($this->params) ;
         $logging->log("Attempting to insert into table {$table}.", $this->getModuleName()) ;
-$res = $this->database->insert($table, $rowData) ;
+        $res = $this->database->insert($table, $rowData) ;
         if ($res == false) {
             $logging->log("Unable to insert into table {$table}, Error: {$this->database->error()[2]}, {$this->database->last_query()}", $this->getModuleName()) ; }
         return $res ;    }
@@ -126,7 +126,7 @@ $res = $this->database->insert($table, $rowData) ;
         $this->params["echo-log"] ;
         $logging = $loggingFactory->getModel($this->params) ;
         $k = array_keys($clause) ;
-        if (count($clause)==1) {
+        if (count($clause)===1) {
             $clause = "WHERE {$k[0]} = '".$clause[$k[0]]."'" ;
             $logging->log("Attempting to update table {$table} $clause.", $this->getModuleName()) ; }
         else {
