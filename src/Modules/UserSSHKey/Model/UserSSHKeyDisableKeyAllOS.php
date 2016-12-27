@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class UserSSHKeyDeleteKeyAllOS extends Base {
+class UserSSHKeyDisableKeyAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -12,28 +12,28 @@ class UserSSHKeyDeleteKeyAllOS extends Base {
     public $architectures = array("any") ;
 
     // Model Group
-    public $modelGroup = array("DeleteKey") ;
+    public $modelGroup = array("DisableKey") ;
 
     public function getData() {
-        $ret["data"] = $this->deleteKey();
+        $ret["data"] = $this->disableKey();
         return $ret ;
     }
 
-    public function deleteKey() {
+    public function disableKey() {
 
         $key = $this->keyExists() ;
         if ($key === false) {
             $return = array(
                 "status" => false ,
-                "message" => "You do not own a key with this hash, so cannot be deleted",
+                "message" => "You do not own a key with this hash, so cannot be disabled",
                 "key_hash" => $this->params["key_hash"] );
             return $return ; }
 
-        $deletedKey = $this->deleteTheKey() ;
-        if ($deletedKey === false) {
+        $disabledKey = $this->disableTheKey() ;
+        if ($disabledKey === false) {
             $return = array(
                 "status" => false ,
-                "message" => "Unable to delete this Key.",
+                "message" => "Unable to disable this Key.",
                 "key_hash" => $this->params["key_hash"] );
             return $return ; }
 
@@ -44,7 +44,7 @@ class UserSSHKeyDeleteKeyAllOS extends Base {
 
         $return = array(
             "status" => true ,
-            "message" => "Key Deleted",
+            "message" => "Key Disabled",
             "public_ssh_keys" => $all_keys,
             "key_hash" => $this->params["key_hash"]  );
 
@@ -72,17 +72,22 @@ class UserSSHKeyDeleteKeyAllOS extends Base {
         return false ;
     }
 
-    private function deleteTheKey() {
+    private function disableTheKey() {
         $signupFactory = new \Model\Signup();
         $signup = $signupFactory->getModel($this->params);
         $me = $signup->getLoggedInUserData() ;
         $uname = $me->username;
+
+        $key = $this->keyExists() ;
+        var_dump($key) ;
+        $new_key = $key[0] ;
+
         $datastoreFactory = new \Model\Datastore() ;
         $datastore = $datastoreFactory->getModel($this->params) ;
-        $parsed_filters = array() ;
-        $parsed_filters[] = array("where", "key_hash", '=', $this->params["key_hash"] ) ;
+        $clause = array("where", "key_hash", '=', $this->params["key_hash"] ) ;
         $parsed_filters[] = array("where", "user_id", '=', $uname ) ;
-        $res = $datastore->delete('user_ssh_keys', $parsed_filters) ;
+        $res = $datastore->update('user_ssh_keys', $clause) ;
+//        $table, $clause, $rowData
         return $res ;
     }
 

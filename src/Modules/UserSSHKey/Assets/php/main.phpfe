@@ -10,57 +10,82 @@ $console->log('before Key Start') ;
 $jQuery('#save_new_key')->on('click', function() use ($jQuery, $console)  {
     $jQuery('.create_new_key_field')->fadeOut('fast') ;
     $jQuery('.loading_keys')->fadeIn('fast') ;
-    createNewSSHKey($jQuery, $console) ;
+    $isValid = validateSSHKey() ;
+    if ($isValid === true) {
+        return createNewSSHKey() ;
+    }
+    return false ;
+});
+
+$jQuery('.disable_ssh_key')->on('click', function($this) use ($jQuery, $console)  {
+    $console->log( $this->target->id );
+    $id = $this->target->id ;
+    $key_hash = str_replace('disable_', '', $id) ;
+    $console->log( $key_hash );
+    disableSSHKey($key_hash) ;
 
 });
 
-function disableSSHKey($selector) {
+$jQuery('.delete_ssh_key')->on('click', function($this) use ($jQuery, $console)  {
+    $console->log( $this->target->id );
+    $id = $this->target->id ;
+    $key_hash = str_replace('delete_', '', $id) ;
+    $console->log( $key_hash );
+    deleteSSHKey($key_hash) ;
+
+});
+
+function deleteSSHKey($key_hash) {
+    $jQuery = \js_core::$jQuery ;
     $console = \js_core::$console ;
-    $console->log('Deleting the following SSH Key: ' . $selector) ;
-}
-
-function deleteSSHKey($selector) {
-    $console = \js_core::$console ;
-    $console->log('Deleting the following SSH Key: ' . $selector) ;
-}
-
-function createNewSSHKey($jQuery, $console) {
-
-    $console->log('Create Key Start') ;
-
-    if ($jQuery('#new_ssh_key_title')->val() == '') {
-        $jQuery('#new_ssh_key_title_alert')->html('Please enter an SSH Key Title');
-        $jQuery('#new_ssh_key_title')->focus();
-        return; }
-
-    $console->log('Create Key ssh title') ;
-
-    if ($jQuery('#new_ssh_key')->val() == '') {
-        $jQuery('#new_ssh_key_alert')->html('Please enter a Public SSH Key');
-        $jQuery('#new_ssh_key')->focus();
-        return; }
-
-    $console->log('Create Key pubkey') ;
-
-    $ajax_object = getJsonData($jQuery) ;
-    $ajax_object->done(
-        function ($data) use ($jQuery) {
-            $jQuery('.create_new_key_field')->fadeIn('fast') ;
-            $jQuery('.loading_keys')->fadeOut('fast') ;
+    $console->log($key_hash) ;
+    $rurl = 'index.php?control=UserSSHKey&action=delete&output-format=JSON' ;
+    $new_data_string = "key_hash=".$key_hash ;
+    $new_data_string = \js_core::$window->encodeURI($new_data_string) ;
+    $data = array(
+        'type' => 'POST',
+        'url' => $rurl,
+        'dataType'=> "json",
+        'data' => $new_data_string
+    ) ;
+    $ajax_object = $jQuery->ajax($data);
+    return $ajax_object->done(
+        function ($data) use ($jQuery, $console) {
+            $console->log($data) ;
             $kt = new keyTable() ;
             $kt->rewriteTable($data, $jQuery) ;
-            $jQuery('#create_new_key_fields')->fadeOut();
-            $jQuery('#create_new_key')->fadeIn();
-            $jQuery('#new_ssh_key_title')->val('') ;
-            $jQuery('#new_ssh_key')->val('') ;
+        }
+    );
+}
+
+function disableSSHKey($key_hash) {
+    $jQuery = \js_core::$jQuery ;
+    $console = \js_core::$console ;
+    $console->log($key_hash) ;
+    $rurl = 'index.php?control=UserSSHKey&action=disable&output-format=JSON' ;
+    $new_data_string = "key_hash=".$key_hash ;
+    $new_data_string = \js_core::$window->encodeURI($new_data_string) ;
+    $data = array(
+        'type' => 'POST',
+        'url' => $rurl,
+        'dataType'=> "json",
+        'data' => $new_data_string
+    ) ;
+    $ajax_object = $jQuery->ajax($data);
+    return $ajax_object->done(
+        function ($data) use ($jQuery, $console) {
+            $console->log($data) ;
+            $kt = new keyTable() ;
+            $kt->rewriteTable($data, $jQuery) ;
         }
     );
 
 }
 
-function getJsonData($jQuery, $call) {
+function createNewSSHKey() {
+    $jQuery = \js_core::$jQuery ;
 
-    $rurl = 'index.php?control=UserSSHKey&action=' . $call . '&output-format=JSON' ;
+    $rurl = 'index.php?control=UserSSHKey&action=create&output-format=JSON' ;
     $data = new StdClass() ;
     $key = $jQuery('#new_ssh_key')->val() ;
     $title = $jQuery('#new_ssh_key_title')->val() ;
@@ -78,7 +103,32 @@ function getJsonData($jQuery, $call) {
     ) ;
 
     $ajax_object = $jQuery->ajax($data);
-    return $ajax_object ;
+    return $ajax_object->done(
+        function ($data) use ($jQuery) {
+            $jQuery('.create_new_key_field')->fadeIn('fast') ;
+            $jQuery('.loading_keys')->fadeOut('fast') ;
+            $kt = new keyTable() ;
+            $kt->rewriteTable($data, $jQuery) ;
+            $jQuery('#create_new_key_fields')->fadeOut();
+            $jQuery('#create_new_key')->fadeIn();
+            $jQuery('#new_ssh_key_title')->val('') ;
+            $jQuery('#new_ssh_key')->val('') ;
+        }
+    );
+}
+
+
+function validateSSHKey() {
+    $jQuery = \js_core::$jQuery ;
+    if ($jQuery('#new_ssh_key_title')->val() == '') {
+        $jQuery('#new_ssh_key_title_alert')->html('Please enter an SSH Key Title');
+        $jQuery('#new_ssh_key_title')->focus();
+        return false ; }
+    if ($jQuery('#new_ssh_key')->val() == '') {
+        $jQuery('#new_ssh_key_alert')->html('Please enter a Public SSH Key');
+        $jQuery('#new_ssh_key')->focus();
+        return false ; }
+    return true ;
 }
 
 class keyTable {

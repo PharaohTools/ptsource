@@ -81,6 +81,7 @@ class UserSSHKeyAnyOS extends BasePHPApp {
                 'key_hash' => 'string',
                 'user_id' => 'string',
                 'created_on' => 'string',
+                'enabled' => 'string',
                 'last_used' => 'string',
                 'title' => 'string',
                 'key_data' => 'string',

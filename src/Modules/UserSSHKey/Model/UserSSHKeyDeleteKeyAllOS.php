@@ -21,73 +21,66 @@ class UserSSHKeyDeleteKeyAllOS extends Base {
 
     public function deleteKey() {
 
-//        $create_perms = $this->checkCreationPermissions() ;
-//        if ($create_perms !== true) { return $create_perms ; }
+        $key = $this->keyExists() ;
+        if ($key === false) {
+            $return = array(
+                "status" => false ,
+                "message" => "You do not own a key with this hash, so cannot be deleted",
+                "key_hash" => $this->params["key_hash"] );
+            return $return ; }
 
-        $valid = $this->validateUserDetails() ;
-        if ($valid !== true) { return $valid ; }
+        $deletedKey = $this->deleteTheKey() ;
+        if ($deletedKey === false) {
+            $return = array(
+                "status" => false ,
+                "message" => "Unable to delete this Key.",
+                "key_hash" => $this->params["key_hash"] );
+            return $return ; }
 
-        $deletedUser = $this->deleteTheUser() ;
-        if ($deletedUser !== true) { return $deletedUser ; }
+        $keyBase = new \Model\UserSSHKeyAnyOS($this->params) ;
+        $all_keys = $keyBase->getAllKeyDetails() ;
 
         $return = array(
             "status" => true ,
-            "message" => "User Deleted",
-            "user" => $this->getOneUserDetails($this->params["create_username"]) );
+            "message" => "Key Deleted",
+            "public_ssh_keys" => $all_keys,
+            "key_hash" => $this->params["key_hash"]  );
+
         return $return ;
 
     }
 
-    public function validateUserDetails() {
-        if ($this->userAlreadyExists() == false) {
-            $return = array(
-                "status" => false ,
-                "message" => "This user does not exist" );
-            return $return ; }
-        return true ;
-    }
+    private function keyExists() {
 
-    private function userAlreadyExists() {
-        $allusers = $this->getAllUserDetails() ;
-        foreach ($allusers as $oneuser) {
-            if ($oneuser->username == $this->params["create_username"]) {
-                return true ; } }
+        $signupFactory = new \Model\Signup();
+        $signup = $signupFactory->getModel($this->params);
+        $me = $signup->getLoggedInUserData() ;
+        $uname = $me->username;
+
+        $datastoreFactory = new \Model\Datastore() ;
+        $datastore = $datastoreFactory->getModel($this->params) ;
+
+        $parsed_filters = array() ;
+        $parsed_filters[] = array("where", "key_hash", '=', $this->params["key_hash"] ) ;
+        $parsed_filters[] = array("where", "user_id", '=', $uname ) ;
+        $keys = $datastore->findAll('user_ssh_keys', $parsed_filters) ;
+        if (count($keys)>0) {
+            return $keys ;
+        }
         return false ;
     }
 
-    private function getAllUserDetails() {
+    private function deleteTheKey() {
         $signupFactory = new \Model\Signup();
         $signup = $signupFactory->getModel($this->params);
-        $au =$signup->getUsersData();
-        return $au;
-    }
-
-    private function getOneUserDetails($username) {
-        $signupFactory = new \Model\Signup();
-        $signup = $signupFactory->getModel($this->params);
-        $au =$signup->getUsersData();
-        foreach ($au as $oneuser) {
-            if ($oneuser->username == $username) {
-                return $oneuser ; } }
-        return array() ;
-    }
-
-    private function deleteTheUser() {
-        $signupFactory = new \Model\Signup();
-        $signup = $signupFactory->getModel($this->params);
-        $liu = $signup->getLoggedInUserData();
-        if ($liu->username == $this->params["create_username"]) {
-            $return = array(
-                "status" => false ,
-                "message" => "You cannot delete your own user" );
-            return $return ; }
-        $cu = $signup->deleteKey($this->params["create_username"]);
-        if ($cu == false) {
-            $return = array(
-                "status" => false ,
-                "message" => "Unable to delete this user" );
-            return $return ; }
-        return true ;
+        $me = $signup->getLoggedInUserData() ;
+        $uname = $me->username;
+        $datastoreFactory = new \Model\Datastore() ;
+        $datastore = $datastoreFactory->getModel($this->params) ;
+        $parsed_filters = array( "key_hash" => $this->params["key_hash"] ) ;
+//        $parsed_filters[] = array("where", "user_id", '=', $uname ) ;
+        $res = $datastore->delete('user_ssh_keys', $parsed_filters) ;
+        return $res ;
     }
 
 }

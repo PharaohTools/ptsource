@@ -27,17 +27,17 @@ class UserSSHKey extends Base {
                 $this->content["params"]["output-format"] = "JSON";
                 $this->content['route']["extraParams"]["output-format"] = "JSON";
                 $this->content["data"] = $thisModel->getData();
-                return array ("type"=>"view", "view"=>"userSSHKeyCreateKey", "pageVars"=>$this->content);  }
+                return array ("type"=>"view", "view"=>"userSSHKeyAPHAX", "pageVars"=>$this->content);  }
             return array ("type"=>"view", "view"=>"UserSSHKeyAlert", "pageVars"=>$this->content); }
 
-        if ($pageVars['route']['action'] === "update") {
+        if ($pageVars['route']['action'] === "disable") {
             if($loginSession["status"] == TRUE){
                 // @todo output format change not being implemented
-                $thisModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars, "UpdateKey") ;
+                $thisModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars, "DisableKey") ;
                 $this->content["params"]["output-format"] = "JSON";
                 $this->content['route']["extraParams"]["output-format"] = "JSON";
                 $this->content["data"] = $thisModel->getData();
-                return array ("type"=>"view", "view"=>"userSSHKeyUpdateKey", "pageVars"=>$this->content);  }
+                return array ("type"=>"view", "view"=>"userSSHKeyAPHAX", "pageVars"=>$this->content);  }
             return array ("type"=>"view", "view"=>"UserSSHKeyAlert", "pageVars"=>$this->content); }
 
         if ($pageVars['route']['action'] === "delete") {
@@ -47,7 +47,7 @@ class UserSSHKey extends Base {
                 $this->content["params"]["output-format"] = "JSON";
                 $this->content['route']["extraParams"]["output-format"] = "JSON";
                 $this->content["data"] = $thisModel->getData();
-                return array ("type"=>"view", "view"=>"userSSHKeyDeleteKey", "pageVars"=>$this->content);  }
+                return array ("type"=>"view", "view"=>"userSSHKeyAPHAX", "pageVars"=>$this->content);  }
             return array ("type"=>"view", "view"=>"UserSSHKeyAlert", "pageVars"=>$this->content); }
 
         if ($pageVars['route']['action'] === "show") {

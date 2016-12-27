@@ -106,6 +106,7 @@ class UserSSHKeyCreateKeyAllOS extends Base {
             "key_data" => $this->params["new_ssh_key"],
             "key_hash" => uniqid(),
             "created_on" => time(),
+            "enabled" => 'on',
             "last_used" => time(),
             "title" => $this->params["new_ssh_key_title"],
             "fingerprint" => $finger
