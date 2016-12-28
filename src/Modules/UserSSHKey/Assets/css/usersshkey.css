@@ -119,3 +119,11 @@ p.moduleListText { margin: 0; }
     display: block ;
     margin: 0 auto ;
 }
+
+.hidden {
+    display: none;
+}
+
+.button_loader img {
+    max-height: 30px;
+}
