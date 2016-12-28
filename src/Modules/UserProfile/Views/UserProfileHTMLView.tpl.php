@@ -217,39 +217,69 @@
                             </div>
                         </div>
 
-                        <?php
+                        <div class="fieldsets_wrap form-group col-sm-12">
+                            <?php
 
-                        foreach ($pageVars['data']['extra_fieldsets'] as $extra_fieldset) {
+                            foreach ($pageVars['data']['extra_fieldsets'] as $extra_fieldset) {
+                                ?>
+
+                                <div class="form-group extra_field">
+                                    <label for="update_email" class="col-sm-4 control-label text-left" style="color:#757575">
+                                        <?php echo $extra_fieldset['title'] ; ?>
+                                    </label>
+                                    <?php if ( $extra_fieldset['type'] === 'text') { ?>
+                                        <div class="col-sm-7">
+                                            <input type="text"
+                                                   class="form-control"
+                                                   id="update_<?php echo $extra_fieldset['slug'] ; ?>"
+                                                   name="update_<?php echo $extra_fieldset['slug'] ; ?>"
+                                                   placeholder="<?php echo $extra_fieldset['title'] ; ?>"
+                                                   value="<?php
+                                                    if (isset($pageVars["data"]["user"]->{$extra_fieldset['slug']})) {
+                                                        echo $pageVars["data"]["user"]->{$extra_fieldset['slug']} ;
+                                                    }
+                                                    ?>" />
+                                            <span style="color:#FF0000;" id="update_<?php echo $extra_fieldset['slug'] ; ?>_alert"></span>
+                                        </div>
+                                    <?php } else if ( $extra_fieldset['type'] === 'textarea') { ?>
+                                        <div class="col-sm-7">
+                                            <span style="color:#FF0000;" id="update_<?php echo $extra_fieldset['slug'] ; ?>_alert"></span>
+                                            <textarea class="form-control"
+                                                      id="update_<?php echo $extra_fieldset['slug'] ; ?>"
+                                                      name="update_<?php echo $extra_fieldset['slug'] ; ?>" ><?php
+                                                if (isset($pageVars["data"]["user"]->{$extra_fieldset['slug']})) {
+                                                    echo $pageVars["data"]["user"]->{$extra_fieldset['slug']} ;
+                                                }
+                                                ?></textarea>
+                                        </div>
+                                    <?php } else if ( $extra_fieldset['type'] === 'boolean') { ?>
+                                        <div class="col-sm-7">
+                                            <input type="text" class="form-control"
+                                                   id="update_<?php echo $extra_fieldset['slug'] ; ?>"
+                                                   name="update_<?php echo $extra_fieldset['slug'] ; ?>"
+                                                   placeholder="<?php echo $extra_fieldset['title'] ; ?>" />
+                                            <span style="color:#FF0000;" id="update_<?php echo $extra_fieldset['slug'] ; ?>_alert"></span>
+                                        </div>
+                                    <?php } ?>
+                                </div>
+
+
+
+                                <?php
+                            }
+
+
                             ?>
-
-                            <div class="form-group">
-                                <label for="update_email" class="col-sm-4 control-label text-left" style="color:#757575">
-                                    <?php echo $extra_fieldset['title'] ; ?>
-                                </label>
-                                <?php if ( $extra_fieldset['type'] === 'text') { ?>
-                                    <div class="col-sm-7">
-                                        <input type="text" class="form-control"
-                                               id="update_<?php echo $extra_fieldset['slug'] ; ?>"
-                                               name="update_<?php echo $extra_fieldset['slug'] ; ?>"
-                                               placeholder="<?php echo $extra_fieldset['title'] ; ?>" />
-                                        <span style="color:#FF0000;" id="update_<?php echo $extra_fieldset['slug'] ; ?>_alert"></span>
-                                    </div>
-                                <?php } else if ( $extra_fieldset['type'] === 'boolean') { ?>
-                                <?php } ?>
+                            <div class="extra_fields_loader hidden" id="extra_fields_loader">
+                                <img src="/Assets/Modules/UserSSHKey/image/loading.gif" alt="Updating User" />
                             </div>
 
-
-
-                            <?php
-                        }
-
-
-                        ?>
+                        </div>
                         <div class="form-group">
                             <div class="col-sm-offset-4 col-sm-3 actionButtonWrap">
-                                <button id="updateExtraFields" class="btn btn-success hvr-grow-shadow actionButton">
+                                <a id="update_extra_fields" class="btn btn-success hvr-grow-shadow actionButton">
                                     Update Extra Fields
-                                </button>
+                                </a>
                             </div>
                         </div>
 
