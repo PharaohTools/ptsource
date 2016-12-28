@@ -264,17 +264,62 @@ class SignupAllOS extends Base {
                 if ($user->username == $one->username) {
                     $two = new \stdClass();
                     $two->username = $one->username ;
-                    $two->email = $one->email ;
+
+                    if (isset($user->email)) {
+                        $two->email = $user->email ; }
+                    else {
+                        $two->email = $one->email ; }
+
                     if (isset($user->password)) {
                         $two->password = $this->getSaltWord($user->password) ; }
                     else {
                         $two->password = $one->password ; }
+
+                    // role and status cant be updated here
                     $two->role = $one->role ;
                     $two->status = $one->status ;
+
                     if (!isset($one->created_on)) {
                         $two->created_on = time() ; }
                     else {
                         $two->created_on = $one->created_on ; }
+
+                    if (isset($user->user_bio) ) {
+                        $two->user_bio = $user->user_bio; }
+                    else if (isset($one->user_bio) ) {
+                        $two->user_bio = $one->user_bio; }
+                    else {
+                        $two->user_bio = '' ; }
+
+                    if (isset($user->location) ) {
+                        $two->location = $user->location; }
+                    else if (isset($one->location) ) {
+                        $two->location = $one->location; }
+                    else {
+                        $two->location ='' ; }
+
+                    if (isset($user->website) ) {
+                        $two->website = $user->website; }
+                    else if (isset($one->website) ) {
+                        $two->website = $one->website; }
+                    else {
+                        $two->website = '' ; }
+
+                    if (isset($user->full_name) ) {
+                        $two->full_name = $user->full_name; }
+                    else if (isset($one->full_name) ) {
+                        $two->full_name = $one->full_name; }
+                    else {
+                        $two->full_name = '' ; }
+
+                    if (isset($user->avatar) ) {
+                        $two->avatar = $user->avatar; }
+                    else if (isset($one->avatar) ) {
+                        $two->avatar = $one->avatar; }
+                    else {
+                        $two->avatar = '' ; }
+
+
                     $nray[] = $two ; }
                 else {
                     $nray[] = $one ; } }
