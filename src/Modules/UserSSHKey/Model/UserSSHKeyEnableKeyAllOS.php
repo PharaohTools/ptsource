@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class UserSSHKeyDisableKeyAllOS extends Base {
+class UserSSHKeyEnableKeyAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -12,15 +12,10 @@ class UserSSHKeyDisableKeyAllOS extends Base {
     public $architectures = array("any") ;
 
     // Model Group
-    public $modelGroup = array("DisableKey") ;
-
-    public function getDataFromDisable() {
-        $ret["data"] = $this->disableKey();
-        return $ret ;
-    }
+    public $modelGroup = array("EnableKey") ;
 
     public function getDataFromEnable() {
-        $ret["data"] = $this->enableKey();
+        $ret["data"] = $this->disableKey();
         return $ret ;
     }
 
@@ -49,7 +44,7 @@ class UserSSHKeyDisableKeyAllOS extends Base {
 
         $return = array(
             "status" => true ,
-            "message" => "Key Disabled",
+            "message" => "Key Enabled",
             "public_ssh_keys" => $all_keys,
             "key_hash" => $this->params["key_hash"]  );
 

@@ -79,14 +79,14 @@ class UserSSHKeyDisableKeyAllOS extends Base {
         $uname = $me->username;
 
         $key = $this->keyExists() ;
-        var_dump($key) ;
         $new_key = $key[0] ;
+        $new_key["enabled"] = 'off' ;
 
         $datastoreFactory = new \Model\Datastore() ;
         $datastore = $datastoreFactory->getModel($this->params) ;
-        $clause = array("where", "key_hash", '=', $this->params["key_hash"] ) ;
-        $parsed_filters[] = array("where", "user_id", '=', $uname ) ;
-        $res = $datastore->update('user_ssh_keys', $clause) ;
+        $clause = array("key_hash" => $this->params["key_hash"] ) ;
+//        $parsed_filters[] = array("where", "user_id", '=', $uname ) ;
+        $res = $datastore->update('user_ssh_keys', $clause, $new_key) ;
 //        $table, $clause, $rowData
         return $res ;
     }
