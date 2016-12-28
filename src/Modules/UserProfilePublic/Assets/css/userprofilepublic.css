@@ -97,6 +97,11 @@ p.moduleListText { margin: 0; }
     background-color: #e7e7e7;
 }
 
+#avatar img {
+    width: 90%;
+    margin: auto;
+}
+
 #avatar h4 {
     text-align: center;
 }

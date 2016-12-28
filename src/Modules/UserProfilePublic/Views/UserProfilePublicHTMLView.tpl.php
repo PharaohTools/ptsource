@@ -55,11 +55,12 @@
                     <div class="col-sm-4">
                         <div id="avatar">
                             <?php
-                            if (isset($pageVars['data']['user']->avatar_image) &&
-                                is_string($pageVars['data']['user']->avatar_image) > 3 &&
-                                strlen($pageVars['data']['user']->avatar_image) > 3) {
+
+                            if (isset($pageVars['data']['user']->avatar) &&
+                                is_string($pageVars['data']['user']->avatar) &&
+                            (strlen($pageVars['data']['user']->avatar) > 3 )) {
                                 ?>
-                                <img src="<?php echo $pageVars['data']['user']->avatar_image ; ?>" alt="Your Avatar" />
+                                <img src="<?php echo $pageVars['data']['user']->avatar ; ?>" alt="Your Avatar" />
                             <?php } else { ?>
                                 <h4>
                                     No Avatar Stored
@@ -196,7 +197,9 @@
                                 <?php
                                 foreach ($pageVars['data']['popular_repositories'] as $one_repo) {
                                     ?>
-
+                                    <p>
+                                        A popular repo
+                                    </p>
                                 <?php
                                 }
                                 ?>
@@ -208,16 +211,12 @@
                             ?>
                             <div class="row clearfix form-group col-sm-12">
                                 <h4>Contribution Activity</h4>
-                                <p>
-                                    December 2016
-
-                                    phpengine/pssht PHP
-                                    Dec 18
-                                </p>
                                 <?php
-                                foreach ($pageVars['data']['popular_repositories'] as $one_repo) {
+                                foreach ($pageVars['data']['contribution_activity'] as $contribution_activity) {
                                     ?>
-
+                                    <p>
+                                        A single contribution
+                                    </p>
                                 <?php
                                 }
                                 ?>
@@ -229,16 +228,12 @@
                             ?>
                             <div class="form-group col-sm-12">
                                 <h4>Recent Contributions</h4>
-                                <p>
-                                    December 2016
-
-                                    phpengine/pssht PHP
-                                    Dec 18
-                                </p>
                                 <?php
                                 foreach ($pageVars['data']['recent_contributions'] as $contribution) {
                                     ?>
-
+                                    <p>
+                                        A recent contribution
+                                    </p>
                                 <?php
                                 }
                                 ?>
