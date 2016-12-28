@@ -255,7 +255,7 @@
                                         </div>
                                     <?php } else if ( $extra_fieldset['type'] === 'boolean') { ?>
                                         <div class="col-sm-7">
-                                            <input type="text" class="form-control"
+                                            <input type="checkbox" class="form-control"
                                                    id="update_<?php echo $extra_fieldset['slug'] ; ?>"
                                                    name="update_<?php echo $extra_fieldset['slug'] ; ?>"
                                                    placeholder="<?php echo $extra_fieldset['title'] ; ?>" />

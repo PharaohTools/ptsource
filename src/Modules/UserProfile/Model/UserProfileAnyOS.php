@@ -60,6 +60,9 @@ class UserProfileAnyOS extends BasePHPApp {
             array ( 'title' => "User Bio", 'slug' => "user_bio", 'type' => "textarea" ),
             array ( 'title' => "Website", 'slug' => "website", 'type' => "text" ),
             array ( 'title' => "Location", 'slug' => "location", 'type' => "text" ),
+            array ( 'title' => "Show Email", 'slug' => "show_email", 'type' => "boolean" ),
+            array ( 'title' => "Show Website", 'slug' => "show_website", 'type' => "boolean" ),
+            array ( 'title' => "Show Location", 'slug' => "show_location", 'type' => "boolean" ),
         ) ;
         return $fieldsets ;
     }
