@@ -135,9 +135,29 @@
                                                         </div>
                                                         <div class="blCell cellRowDeleteKey">
                                                             <div class="fullRow">
-                                                                <btn class="btn btn-warning disable_ssh_key" id="disable_<?php echo $public_ssh_key['key_hash'] ; ?>">
-                                                                    Disable
-                                                                </btn>
+                                                                <?php if ($public_ssh_key['enabled'] === 'on') {
+                                                                    $disable_hidden = '' ;
+                                                                    $enable_hidden = ' hidden' ;
+                                                                } else {
+                                                                    $disable_hidden = ' hidden' ;
+                                                                    $enable_hidden = '' ;
+                                                                } ?>
+                                                                <div class="fullRow">
+                                                                    <btn class="btn btn-warning <?php echo $enable_hidden ; ?> enable_ssh_key" id="enable_<?php echo $public_ssh_key['key_hash'] ; ?>">
+                                                                        Enable
+                                                                    </btn>
+                                                                    <div class="button_loader hidden" id="enable_<?php echo $public_ssh_key['key_hash'] ; ?>_loading">
+                                                                        <img src="/Assets/Modules/UserSSHKey/image/loading.gif" alt="Loading Keys">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="fullRow">
+                                                                    <btn class="btn btn-warning <?php echo $disable_hidden ; ?> disable_ssh_key" id="disable_<?php echo $public_ssh_key['key_hash'] ; ?>">
+                                                                        Disable
+                                                                    </btn>
+                                                                    <div class="button_loader hidden" id="disable_<?php echo $public_ssh_key['key_hash'] ; ?>_loading">
+                                                                        <img src="/Assets/Modules/UserSSHKey/image/loading.gif" alt="Loading Keys">
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                             <div class="fullRow">
                                                                 <btn class="btn btn-danger delete_ssh_key" id="delete_<?php echo $public_ssh_key['key_hash'] ; ?>">
