@@ -124,7 +124,9 @@
                                                         <div class="blCell cellRowIndex" scope="row"> <?php echo $i; ?> </div>
                                                         <div class="blCell cellRowKeyDetails">
                                                             <div class="fullRow">
-                                                                <?php echo $public_ssh_key['title']; ?>
+                                                                <strong>
+                                                                    <?php echo $public_ssh_key['title']; ?>
+                                                                </strong>
                                                             </div>
                                                             <div class="fullRow">
                                                                 <?php echo $public_ssh_key['fingerprint']; ?>
