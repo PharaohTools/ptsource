@@ -34,6 +34,14 @@ class UserProfileAnyOS extends BasePHPApp {
         if (isset($this->params['update_password']) &&
             ($this->params['update_password'] == $this->params['update_password_match'])) {
             $user->password = $this->params['update_password']; }
+        if (isset($this->params['update_user_bio']) ) {
+            $user->user_bio = $this->params['update_user_bio']; }
+        if (isset($this->params['update_location']) ) {
+            $user->user_bio = $this->params['update_location']; }
+        if (isset($this->params['update_website']) ) {
+            $user->user_bio = $this->params['update_website']; }
+        if (isset($this->params['update_full_name']) ) {
+            $user->user_bio = $this->params['update_full_name']; }
         $this->saveUser($user);
     }
 
@@ -49,7 +57,7 @@ class UserProfileAnyOS extends BasePHPApp {
         $fieldsets = array(
             array ( 'title' => "Full Name", 'slug' => "full_name", 'type' => "text" ),
             array ( 'title' => "avatar", 'slug' => "avatar", 'type' => "text" ),
-            array ( 'title' => "User Bio", 'slug' => "user_bio", 'type' => "text" ),
+            array ( 'title' => "User Bio", 'slug' => "user_bio", 'type' => "textarea" ),
             array ( 'title' => "Website", 'slug' => "website", 'type' => "text" ),
             array ( 'title' => "Location", 'slug' => "location", 'type' => "text" ),
         ) ;

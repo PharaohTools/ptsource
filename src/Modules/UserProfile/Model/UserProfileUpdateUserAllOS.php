@@ -21,19 +21,24 @@ class UserProfileUpdateUserAllOS extends Base {
 
     public function updateUser() {
 
-//        $create_perms = $this->checkCreationPermissions() ;
-//        if ($create_perms !== true) { return $create_perms ; }
-
         $valid = $this->validateUserDetails() ;
-        if ($valid !== true) { return $valid ; }
+        if ($valid !== true) {
+            return $valid ; }
 
-        $createdUser = $this->updateTheUser() ;
-        if ($createdUser !== true) { return $createdUser ; }
+        $check_password = $this->passwordIncluded() ;
+        if ($check_password === true) {
+            $createdUser = $this->updateTheUserPassword() ;
+            if ($createdUser !== true) {
+                return $createdUser ; } }
+        else {
+            $createdUser = $this->updateTheUserDetails() ;
+            if ($createdUser !== true) {
+                return $createdUser ; } }
 
         $return = array(
             "status" => true ,
-            "message" => "User Password Updated for {$this->params["create_username"]}",
-            "user" => $this->getOneUserDetails($this->params["create_username"]) );
+            "message" => "User Details Updated for {$this->params["update_username"]}",
+            "user" => $this->getOneUserDetails($this->params["update_username"]) );
         return $return ;
 
     }
@@ -44,20 +49,28 @@ class UserProfileUpdateUserAllOS extends Base {
                 "status" => false ,
                 "message" => "This username does not exist" );
             return $return ; }
-        $presult = $this->passwordInvalid() ;
-        if ($presult !== true) {
-            $return = array(
-                "status" => false ,
-                "message" => $presult );
-            return $return ; }
+        $check_password = $this->passwordIncluded() ;
+        if ($check_password === true) {
+            $presult = $this->passwordInvalid() ;
+            if ($presult !== true) {
+                $return = array(
+                    "status" => false ,
+                    "message" => $presult );
+                return $return ; } }
         return true ;
     }
 
     private function userAlreadyExists() {
         $allusers = $this->getAllUserDetails() ;
         foreach ($allusers as $oneuser) {
-            if ($oneuser->username == $this->params["create_username"]) {
+            if ($oneuser->username == $this->params["update_username"]) {
                 return true ; } }
+        return false ;
+    }
+
+    private function passwordIncluded() {
+        if (isset($this->params["update_password"])) {
+            return true ; }
         return false ;
     }
 
@@ -90,15 +103,15 @@ class UserProfileUpdateUserAllOS extends Base {
         $signup = $signupFactory->getModel($this->params);
         $au =$signup->getUsersData();
         foreach ($au as $oneuser) {
-            if ($oneuser->username == $this->params["create_username"]) {
+            if ($oneuser->username === $this->params["update_username"]) {
                 return $oneuser ; } }
         return array() ;
     }
 
-    private function updateTheUser() {
+    private function updateTheUserPassword() {
 
         $userMod = new \StdClass() ;
-        $userMod->username = $this->params["create_username"] ;
+        $userMod->username = $this->params["update_username"] ;
         $userMod->password = $this->params["update_password"] ;
 
         $signupFactory = new \Model\Signup();
@@ -108,7 +121,33 @@ class UserProfileUpdateUserAllOS extends Base {
         if ($cu !== true) {
             $return = array(
                 "status" => false ,
-                "message" => "Unable to update this user password" );
+                "message" => "Unable to update this user." );
+            return $return ; }
+
+        return true ;
+    }
+
+    private function updateTheUserDetails() {
+
+        $userMod = new \StdClass() ;
+        $userMod->username = $this->params["update_username"] ;
+        if (isset($this->params["update_user_bio"])) {
+            $userMod->user_bio = $this->params["update_user_bio"] ; }
+        if (isset($this->params["update_full_name"])) {
+            $userMod->full_name = $this->params["update_full_name"] ;}
+        if (isset($this->params["update_website"])) {
+            $userMod->website = $this->params["update_website"] ;}
+        if (isset($this->params["update_location"])) {
+            $userMod->location = $this->params["update_location"] ; }
+
+        $signupFactory = new \Model\Signup();
+        $signup = $signupFactory->getModel($this->params);
+        $cu = $signup->updateUser($userMod);
+
+        if ($cu !== true) {
+            $return = array(
+                "status" => false ,
+                "message" => "Unable to update this user." );
             return $return ; }
 
         return true ;
