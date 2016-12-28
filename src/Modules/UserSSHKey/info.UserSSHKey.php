@@ -13,7 +13,7 @@ class UserSSHKeyInfo extends PTConfigureBase {
     }
 
     public function routesAvailable() {
-        return array( 'UserSSHKey' =>  array("show", "new", "create", "delete", "disable", "update"));
+        return array( 'UserSSHKey' =>  array("show", "new", "create", "delete", "enable", "disable", "update"));
     }
 
     public function routeAliases() {
