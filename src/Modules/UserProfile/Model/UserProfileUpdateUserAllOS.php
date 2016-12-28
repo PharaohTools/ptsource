@@ -62,7 +62,9 @@ class UserProfileUpdateUserAllOS extends Base {
 
     private function userAlreadyExists() {
         $allusers = $this->getAllUserDetails() ;
+//        var_dump($allusers) ;
         foreach ($allusers as $oneuser) {
+//            var_dump($oneuser->username) ;
             if ($oneuser->username == $this->params["update_username"]) {
                 return true ; } }
         return false ;
@@ -91,11 +93,11 @@ class UserProfileUpdateUserAllOS extends Base {
         $signupFactory = new \Model\Signup();
         $signup = $signupFactory->getModel($this->params);
         $me = $signup->getLoggedInUserData() ;
-        $rid = $signup->getUserRole($me->email);
-        if ($rid == 1) {
-            $au =$signup->getUsersData();
-            return $au; }
-        return array() ;
+//        $rid = $signup->getUserRole($me->email);
+        $au =$signup->getUsersData();
+        return $au;
+//        if ($rid == 1) { }
+//        return array() ;
     }
 
     private function getOneUserDetails($username) {
@@ -139,6 +141,8 @@ class UserProfileUpdateUserAllOS extends Base {
             $userMod->website = $this->params["update_website"] ;}
         if (isset($this->params["update_location"])) {
             $userMod->location = $this->params["update_location"] ; }
+        if (isset($this->params["update_avatar"])) {
+            $userMod->avatar = $this->params["update_avatar"] ; }
 
         $signupFactory = new \Model\Signup();
         $signup = $signupFactory->getModel($this->params);

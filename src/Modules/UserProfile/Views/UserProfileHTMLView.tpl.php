@@ -250,7 +250,8 @@
                                                 if (isset($pageVars["data"]["user"]->{$extra_fieldset['slug']})) {
                                                     echo $pageVars["data"]["user"]->{$extra_fieldset['slug']} ;
                                                 }
-                                                ?></textarea>
+                                                ?>
+                                            </textarea>
                                         </div>
                                     <?php } else if ( $extra_fieldset['type'] === 'boolean') { ?>
                                         <div class="col-sm-7">
@@ -263,13 +264,8 @@
                                     <?php } ?>
                                 </div>
 
+                                <?php } ?>
 
-
-                                <?php
-                            }
-
-
-                            ?>
                             <div class="extra_fields_loader hidden" id="extra_fields_loader">
                                 <img src="/Assets/Modules/UserSSHKey/image/loading.gif" alt="Updating User" />
                             </div>
