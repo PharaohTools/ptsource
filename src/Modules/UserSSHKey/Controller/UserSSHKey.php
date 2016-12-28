@@ -40,10 +40,20 @@ class UserSSHKey extends Base {
                 return array ("type"=>"view", "view"=>"userSSHKeyAPHAX", "pageVars"=>$this->content);  }
             return array ("type"=>"view", "view"=>"UserSSHKeyAlert", "pageVars"=>$this->content); }
 
+        if ($pageVars['route']['action'] === "enable") {
+            if($loginSession["status"] == TRUE){
+                // @todo output format change not being implemented
+                $thisModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars, "EnableKey") ;
+                $this->content["params"]["output-format"] = "JSON";
+                $this->content['route']["extraParams"]["output-format"] = "JSON";
+                $this->content["data"] = $thisModel->getData();
+                return array ("type"=>"view", "view"=>"userSSHKeyAPHAX", "pageVars"=>$this->content);  }
+            return array ("type"=>"view", "view"=>"UserSSHKeyAlert", "pageVars"=>$this->content); }
+
         if ($pageVars['route']['action'] === "delete") {
             if($loginSession["status"] == TRUE){
                 // @todo output format change not being implemented
-                $thisModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars, "DeleteKey") ;
+                $thisModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars, "EnableKey") ;
                 $this->content["params"]["output-format"] = "JSON";
                 $this->content['route']["extraParams"]["output-format"] = "JSON";
                 $this->content["data"] = $thisModel->getData();
@@ -57,21 +67,6 @@ class UserSSHKey extends Base {
                 return array ("type"=>"view", "view"=>"UserSSHKey", "pageVars"=>$this->content); }
             return array ("type"=>"view", "view"=>"UserSSHKeyAlert", "pageVars"=>$this->content); }
 
-        if ($pageVars['route']['action'] === "save") {
-            if($loginSession["status"] == TRUE){
-                $thisModel->saveData();
-                $this->content["data"] = $thisModel->getData();
-                $this->content["userdata"] = $thisModel->getUserDetails();
-                return array ("type"=>"view", "view"=>"UserSSHKey", "pageVars"=>$this->content); }
-            return array ("type"=>"view", "view"=>"UserSSHKeyAlert", "pageVars"=>$this->content); }
-
-        if ($pageVars['route']['action'] === "get-user") {
-            // @todo output format change not being implemented
-            $thisModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars, "GetKey") ;
-            $this->content["params"]["output-format"] = "JSON";
-            $this->content['route']["extraParams"]["output-format"] = "JSON";
-            $this->content["data"] = $thisModel->getData();
-            return array ("type"=>"view", "view"=>"userSSHKeyGetKey", "pageVars"=>$this->content); }
     }
 
 }

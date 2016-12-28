@@ -9,20 +9,20 @@ class UserSSHKeyInfo extends PTConfigureBase {
     public $name = "Edit SSH Keys for Users";
 
     public function __construct() {
-      parent::__construct();
+        parent::__construct();
     }
 
     public function routesAvailable() {
-      return array( "UserSSHKey" =>  array("show", "save", "new", "create", "delete", "disable", "get-user", "update"));
+        return array( 'UserSSHKey' =>  array("show", "new", "create", "delete", "disable", "update"));
     }
 
     public function routeAliases() {
-      return array("user-sshkey"=>"UserSSHKey", "usersshkey"=>"UserSSHKey");
+        return array('user-sshkey' => 'UserSSHKey', 'usersshkey' => 'UserSSHKey');
     }
 
     public function helpDefinition() {
-      $help = 'The User profile allows you to edit Users.';
-      return $help ;
+        $help = 'The User SSH Key Module allows you to store and edit SSH Keys.';
+        return $help ;
     }
 
 }
