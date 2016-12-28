@@ -15,23 +15,18 @@
                     </div>
                 </li>
                 <li>
-                    <a href="/index.php?control=ApplicationConfigure&action=show" class=" hvr-bounce-in">
-                        <i class="fa fa-cogs fa-fw"></i> Configure PTBuild<span class="fa arrow"></span>
+                    <a class=" hvr-bounce-in">
+                        <i class="fa fa-user fa-fw"></i> User Menu <span class="fa arrow"></span>
                     </a>
-                    <ul class="nav nav-second-level collapse">
-                        <li>
-                            <a href="/index.php?control=ApplicationConfigure&action=show" class=" hvr-curl-bottom-right">Application</a>
-                        </li>
-                        <li>
-                            <a href="/index.php?control=UserManager&action=show" class=" hvr-curl-bottom-right">User Manager</a>
-                        </li>
-                        <li>
-                            <a href="/index.php?control=UserSSHKey&action=show" class=" hvr-curl-bottom-right">User Profile</a>
-                        </li>
-                        <li>
-                            <a href="/index.php?control=ModuleManager&action=show" class=" hvr-curl-bottom-right">Modules</a>
-                        </li>
-                    </ul>
+                </li>
+                <li>
+                    <a href="/index.php?control=UserManager&action=show" class=" hvr-curl-bottom-right">User Manager</a>
+                </li>
+                <li>
+                    <a href="/index.php?control=UserProfile&action=show" class=" hvr-curl-bottom-right">Edit Profile</a>
+                </li>
+                <li>
+                    <a href="/index.php?control=UserProfilePublic&action=show" class=" hvr-curl-bottom-right active">Public Profile</a>
                 </li>
             </ul>
         </div>
