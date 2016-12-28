@@ -20,23 +20,20 @@
                 </li>
                 <li>
                     <a href="/index.php?control=ApplicationConfigure&action=show" class=" hvr-bounce-in">
-                        <i class="fa fa-cogs fa-fw"></i> Configure PTBuild<span class="fa arrow"></span>
+                        <i class="fa fa-user fa-fw"></i> User Menu <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level collapse">
                         <li>
-                            <a href="/index.php?control=ApplicationConfigure&action=show" class=" hvr-curl-bottom-right">Application</a>
+                            <a href="/index.php?control=UserProfile&action=show" class=" hvr-curl-bottom-right">Edit Profile</a>
+                        </li>
+                        <li>
+                            <a href="/index.php?control=UserProfilePublic&action=show" class=" hvr-curl-bottom-right">Public Profile</a>
                         </li>
                         <li>
                             <a href="/index.php?control=UserManager&action=show" class=" hvr-curl-bottom-right">User Manager</a>
                         </li>
                         <li>
-                            <a href="/index.php?control=UserProfile&action=show" class=" hvr-curl-bottom-right">User Profile</a>
-                        </li>
-                        <li>
                             <a href="/index.php?control=UserSSHKey&action=show" class=" hvr-curl-bottom-right">SSH Keys</a>
-                        </li>
-                        <li>
-                            <a href="/index.php?control=ModuleManager&action=show" class=" hvr-curl-bottom-right">Modules</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
@@ -162,16 +159,9 @@
                         <?php
                         }
 
-                        if ($pageVars["data"]["allusers"] === false) {
-                            ?>
-
-<!--                            <input type="text" readonly="readonly" class="form-control" id="update_username" name="update_username" placeholder="User Name" value="--><?php //echo $pageVars["data"]["user"]->username ; ?><!--">-->
-                        <?php  }  ?>
-
-                        <?php
-
-                        if ($pageVars["route"]["action"] !== "new") { $email_string = $pageVars["data"]["user"]->email ; }
-                        else { $email_string = "" ; }
+                        $email_string = '' ;
+                        if ($pageVars["route"]["action"] !== "new") {
+                            $email_string = $pageVars["data"]["user"]->email ; }
 
                         ?>
 
@@ -220,15 +210,49 @@
                                     </button>
                                     <?php
 
-
-
-
                                 }
 
                                 ?>
 
                             </div>
                         </div>
+
+                        <?php
+
+                        foreach ($pageVars['data']['extra_fieldsets'] as $extra_fieldset) {
+                            ?>
+
+                            <div class="form-group">
+                                <label for="update_email" class="col-sm-4 control-label text-left" style="color:#757575">
+                                    <?php echo $extra_fieldset['title'] ; ?>
+                                </label>
+                                <?php if ( $extra_fieldset['type'] === 'text') { ?>
+                                    <div class="col-sm-7">
+                                        <input type="text" class="form-control"
+                                               id="update_<?php echo $extra_fieldset['slug'] ; ?>"
+                                               name="update_<?php echo $extra_fieldset['slug'] ; ?>"
+                                               placeholder="<?php echo $extra_fieldset['title'] ; ?>" />
+                                        <span style="color:#FF0000;" id="update_<?php echo $extra_fieldset['slug'] ; ?>_alert"></span>
+                                    </div>
+                                <?php } else if ( $extra_fieldset['type'] === 'boolean') { ?>
+                                <?php } ?>
+                            </div>
+
+
+
+                            <?php
+                        }
+
+
+                        ?>
+                        <div class="form-group">
+                            <div class="col-sm-offset-4 col-sm-3 actionButtonWrap">
+                                <button id="updateExtraFields" class="btn btn-success hvr-grow-shadow actionButton">
+                                    Update Extra Fields
+                                </button>
+                            </div>
+                        </div>
+
 
                     </form>
 
