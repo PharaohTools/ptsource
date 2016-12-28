@@ -22,6 +22,7 @@ class UserProfileAnyOS extends BasePHPApp {
         $ret['user'] = $this->getUserDetails();
         $ret['allusers'] = $this->getAllUserDetails();
         $ret['email_users_enabled'] = $this->getEnabledStatus();
+        $ret['extra_fieldsets'] = $this->getExtraFieldsets();
         return $ret ;
     }
 
@@ -41,6 +42,18 @@ class UserProfileAnyOS extends BasePHPApp {
         $signup = $signupFactory->getModel($this->params);
         $oldData=$signup->getLoggedInUserData();
         return $oldData;
+    }
+
+    public function getExtraFieldsets() {
+
+        $fieldsets = array(
+            array ( 'title' => "Full Name", 'slug' => "full_name", 'type' => "text" ),
+            array ( 'title' => "avatar", 'slug' => "avatar", 'type' => "text" ),
+            array ( 'title' => "User Bio", 'slug' => "user_bio", 'type' => "text" ),
+            array ( 'title' => "Website", 'slug' => "website", 'type' => "text" ),
+            array ( 'title' => "Location", 'slug' => "location", 'type' => "text" ),
+        ) ;
+        return $fieldsets ;
     }
 
     public function getEnabledStatus() {
