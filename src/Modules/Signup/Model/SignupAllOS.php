@@ -319,6 +319,26 @@ class SignupAllOS extends Base {
                     else {
                         $two->avatar = '' ; }
 
+                    if (isset($user->show_email) ) {
+                        $two->show_email = $user->show_email; }
+                    else if (isset($one->show_email) ) {
+                        $two->show_email = $one->show_email; }
+                    else {
+                        $two->show_email = '' ; }
+
+                    if (isset($user->show_website) ) {
+                        $two->show_website = $user->show_website; }
+                    else if (isset($one->show_website) ) {
+                        $two->show_website = $one->show_website; }
+                    else {
+                        $two->show_website = '' ; }
+
+                    if (isset($user->show_location) ) {
+                        $two->show_location = $user->show_location; }
+                    else if (isset($one->show_location) ) {
+                        $two->show_location = $one->show_location; }
+                    else {
+                        $two->show_location = '' ; }
 
                     $nray[] = $two ; }
                 else {
