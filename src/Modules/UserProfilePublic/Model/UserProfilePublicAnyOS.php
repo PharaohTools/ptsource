@@ -21,21 +21,12 @@ class UserProfilePublicAnyOS extends BasePHPApp {
     public function getData() {
         $ret['user'] = $this->getUserDetails();
         $ret['email_users_enabled'] = $this->getEnabledStatus();
-        $ret['popular_repositories'] = array();
+        $ret['all_repositories'] = $this->getRepositories();
+        $ret['my_repositories'] = $this->getMyRepositories($ret['all_repositories'], $ret['user']);
+        $ret['my_member_repositories'] = $this->getMemberRepositories($ret['all_repositories'], $ret['user']);
         $ret['recent_contributions'] = array();
         $ret['contribution_activity'] = array();
         return $ret ;
-    }
-
-    public function saveData() {
-        $user = new \stdClass() ;
-        // @todo sanitize these request vars. Use Params?
-        $user->username = $this->params['update_username'];
-        $user->email = $this->params['update_email'];
-        if (isset($this->params['update_password']) &&
-            ($this->params['update_password'] == $this->params['update_password_match'])) {
-            $user->password = $this->params['update_password']; }
-        $this->saveUser($user);
     }
 
     public function getUserDetails() {
@@ -43,6 +34,28 @@ class UserProfilePublicAnyOS extends BasePHPApp {
         $signup = $signupFactory->getModel($this->params);
         $oldData=$signup->getLoggedInUserData();
         return $oldData;
+    }
+
+    public function getRepositories() {
+        $repositoryFactory = new \Model\Repository() ;
+        $repository = $repositoryFactory->getModel($this->params);
+        $repos = $repository->getRepositories();
+        return $repos ;
+    }
+
+    public function getMyRepositories($all_repos, $user) {
+        foreach ($all_repos as $one_repo) {
+            if ($one_repo["project-owner"] == $user->username) {
+                $my_repos[] = $one_repo ; } }
+        return $my_repos ;
+    }
+
+    public function getMemberRepositories($all_repos, $user) {
+        foreach ($all_repos as $one_repo) {
+            $repo_members = explode(",", $one_repo["project-members"]) ;
+            if ( in_array($user->username, $repo_members)) {
+                $member_repos[] = $one_repo ; } }
+        return $member_repos ;
     }
 
     public function getEnabledStatus() {
@@ -65,20 +78,6 @@ class UserProfilePublicAnyOS extends BasePHPApp {
             $au =$signup->getUsersData();
             return $au;  }
         return false ;
-    }
-
-    private function saveUser($user) {
-        $signupFactory = new \Model\Signup();
-        $signup = $signupFactory->getModel($this->params);
-        $oldData=$signup->updateUser($user);
-        return $oldData;
-    }
-
-    private function createUser($user) {
-        $signupFactory = new \Model\Signup();
-        $signup = $signupFactory->getModel($this->params);
-        $oldData=$signup->updateUser($user);
-        return $oldData;
     }
 
     public function checkLoginSession() {

@@ -111,5 +111,33 @@ p.moduleListText { margin: 0; }
     width: 100%;
     display: block;
     float: left;
-    border: 0.5px darkslategray solid;
+    border: 1px darkslategray solid;
+}
+
+.profile_repository {
+    border: 1px darkslategray solid;
+    background-color: #eeebff;
+    padding-bottom: 4px ;
+}
+
+.profile_repository_title {
+
+}
+
+.profile_repository_description {
+
+}
+
+.profile_repository_features .repository-feature {
+    display: block;
+    float: left;
+    margin: 0;
+    padding: 0;
+    width: 25%;
+}
+
+.profile_repository_features .repository-feature img {
+    max-width: 40px;
+    max-height: 40px;
+    margin: 2px;
 }

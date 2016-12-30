@@ -84,6 +84,7 @@
                         <?php
                         if (isset($pageVars['data']['user']->username)) { ?>
                             <h4>
+                                <strong>Username: </strong>
                                 <?php echo $pageVars['data']['user']->username ; ?>
                             </h4>
                         <?php } else { ?>
@@ -95,6 +96,7 @@
                         <?php
                         if (isset($pageVars['data']['user']->created_on)) { ?>
                             <h4>
+                                <strong>Joined On: </strong>
                                 <?php echo date('H:i d/m/Y', $pageVars['data']['user']->created_on) ; ?>
                             </h4>
                         <?php } else { ?>
@@ -105,9 +107,10 @@
 
                         <?php
                         if (isset($pageVars['data']['user']->user_bio)) { ?>
-                            <h6>
+                            <h5>
+                                <strong>Bio: </strong>
                                 <?php echo $pageVars['data']['user']->user_bio ; ?>
-                            </h6>
+                            </h5>
                         <?php } else { ?>
                             <h5>
                                 No User Bio Stored
@@ -116,9 +119,10 @@
 
                         <?php
                         if (isset($pageVars['data']['user']->email)) {
-                            if (isset($pageVars['data']['user']->display_email) &&
-                                $pageVars['data']['user']->display_email === 'on') { ?>
+                            if (isset($pageVars['data']['user']->show_email) &&
+                                $pageVars['data']['user']->show_email === 'on') { ?>
                                 <h5>
+                                    <strong>E-Mail: </strong>
                                     <?php echo $pageVars['data']['user']->email ; ?>
                                 </h5>
                             <?php } else { ?>
@@ -132,9 +136,10 @@
 
                         <?php
                         if (isset($pageVars['data']['user']->website)) {
-                            if (isset($pageVars['data']['user']->display_website) &&
-                                $pageVars['data']['user']->display_website === 'on') { ?>
+                            if (isset($pageVars['data']['user']->show_website) &&
+                                $pageVars['data']['user']->show_website === 'on') { ?>
                                 <h5>
+                                    <strong>Site: </strong>
                                     <?php echo $pageVars['data']['user']->website ; ?>
                                 </h5>
                             <?php } else { ?>
@@ -148,9 +153,10 @@
 
                         <?php
                         if (isset($pageVars['data']['user']->location)) {
-                            if (isset($pageVars['data']['user']->display_location) &&
-                                $pageVars['data']['user']->display_location === 'on') { ?>
+                            if (isset($pageVars['data']['user']->show_location) &&
+                                $pageVars['data']['user']->show_location === 'on') { ?>
                                 <h5>
+                                    <strong>Location: </strong>
                                     <?php echo $pageVars['data']['user']->location ; ?>
                                 </h5>
                             <?php } else { ?>
@@ -189,17 +195,96 @@
 
                         <?php
 
-                        if ( isset($pageVars['data']['popular_repositories']) &&
-                             is_array($pageVars['data']['popular_repositories']) ) {
+                        if ( isset($pageVars['data']['my_repositories']) &&
+                             is_array($pageVars['data']['my_repositories']) ) {
                             ?>
                             <div class="row clearfix form-group col-sm-12">
-                                <h4>Popular Repositories</h4>
+                                <h4>My Repositories</h4>
                                 <?php
-                                foreach ($pageVars['data']['popular_repositories'] as $one_repo) {
+                                foreach ($pageVars['data']['my_repositories'] as $one_repo) {
                                     ?>
-                                    <p>
-                                        A popular repo
-                                    </p>
+                                    <div class="col-sm-4">
+                                        <div class="profile_repository col-sm-12">
+                                            <div class="profile_repository_title col-sm-12">
+                                                <a href="/index.php?control=RepositoryHome&action=show&item=<?php echo $one_repo['project-slug']; ?>">
+                                                    <h4>
+                                                        <?php echo $one_repo['project-name'] ; ?>
+                                                    </h4>
+                                                </a>
+                                            </div>
+                                            <div class="profile_repository_description col-sm-12">
+                                                <p>
+                                                    <?php echo $one_repo['project-description'] ; ?>
+                                                </p>
+                                            </div>
+                                            <div class="profile_repository_features col-sm-12">
+
+                                                <?php
+
+                                                if (isset($one_repo['features']) &&
+                                                    count($one_repo['features'])>0 ) {
+                                                    foreach ($one_repo['features'] as $repository_feature) {
+                                                        echo '<div class="repository-feature">' ;
+                                                        echo ' <a target="_blank" href="'.$repository_feature['model']['link'].'">' ;
+                                                        echo '  <img src="'.$repository_feature['model']['image'].'" />' ;
+                                                        echo ' </a>' ;
+                                                        echo '</div>' ; } }
+                                                else {
+                                                    echo '&nbsp;' ; }
+
+                                                ?>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php
+                                }
+                                ?>
+                            </div>
+                        <?php  }
+
+                        if ( isset($pageVars['data']['my_member_repositories']) &&
+                             is_array($pageVars['data']['my_member_repositories']) ) {
+                            ?>
+                            <div class="row clearfix form-group col-sm-12">
+                                <h4>Repositories I am a Member of</h4>
+                                <?php
+                                foreach ($pageVars['data']['my_member_repositories'] as $one_repo) {
+                                    ?>
+                                    <div class="col-sm-4">
+                                        <div class="profile_repository col-sm-12">
+                                            <div class="profile_repository_title col-sm-12">
+                                                <a href="/index.php?control=RepositoryHome&action=show&item=<?php echo $one_repo['project-slug']; ?>">
+                                                    <h4>
+                                                        <?php echo $one_repo['project-name'] ; ?>
+                                                    </h4>
+                                                </a>
+                                            </div>
+                                            <div class="profile_repository_description col-sm-12">
+                                                <p>
+                                                    <?php echo $one_repo['project-description'] ; ?>
+                                                </p>
+                                            </div>
+                                            <div class="profile_repository_features col-sm-12">
+
+                                                <?php
+
+                                                if (isset($one_repo['features']) &&
+                                                    count($one_repo['features'])>0 ) {
+                                                    foreach ($one_repo['features'] as $repository_feature) {
+                                                        echo '<div class="repository-feature">' ;
+                                                        echo ' <a target="_blank" href="'.$repository_feature['model']['link'].'">' ;
+                                                        echo '  <img src="'.$repository_feature['model']['image'].'" />' ;
+                                                        echo ' </a>' ;
+                                                        echo '</div>' ; } }
+                                                else {
+                                                    echo '&nbsp;' ; }
+
+                                                ?>
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 <?php
                                 }
                                 ?>
