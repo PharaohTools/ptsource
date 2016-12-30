@@ -291,6 +291,36 @@
                             </div>
                         <?php  }
 
+                        if ( isset($pageVars['data']['my_teams']) &&
+                             is_array($pageVars['data']['my_teams']) ) {
+                            ?>
+                            <div class="row clearfix form-group col-sm-12">
+                                <h4>My Teams</h4>
+                                <?php
+                                foreach ($pageVars['data']['my_teams'] as $one_team) {
+                                    ?>
+                                    <div class="col-sm-4">
+                                        <div class="profile_team col-sm-12">
+                                            <div class="profile_team_title col-sm-12">
+                                                <a href="/index.php?control=TeamHome&action=show&item=<?php echo $one_team['team-slug']; ?>">
+                                                    <h4>
+                                                        <?php echo $one_team['team-name'] ; ?>
+                                                    </h4>
+                                                </a>
+                                            </div>
+                                            <div class="profile_team_description col-sm-12">
+                                                <p>
+                                                    <?php echo $one_team['team-description'] ; ?>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php
+                                }
+                                ?>
+                            </div>
+                        <?php  }
+
                         if ( isset($pageVars['data']['contribution_activity']) &&
                              is_array($pageVars['data']['contribution_activity']) ) {
                             ?>
