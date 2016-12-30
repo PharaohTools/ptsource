@@ -80,12 +80,13 @@ class UserSSHKeyEnableKeyAllOS extends Base {
 
         $key = $this->keyExists() ;
         $new_key = $key[0] ;
+
         $new_key["enabled"] = 'on' ;
+//        var_dump($new_key) ;
 
         $datastoreFactory = new \Model\Datastore() ;
         $datastore = $datastoreFactory->getModel($this->params) ;
-        $clause = array("where", "key_hash", '=', $this->params["key_hash"] ) ;
-        $parsed_filters[] = array("where", "user_id", '=', $uname ) ;
+        $clause = array('key_hash' => $this->params["key_hash"] ) ;
         $res = $datastore->update('user_ssh_keys', $clause, $new_key) ;
         return $res ;
     }
