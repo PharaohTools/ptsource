@@ -209,7 +209,7 @@
 
                                     if ($i === 1) { ?>
 
-                                        <div class="profile_repository_row fullRow">
+                                <div class="profile_repository_row fullRow">
 
                                     <?php } ?>
 
@@ -253,6 +253,7 @@
                                     <?php
 
                                     $count++ ;
+                                    $i++ ;
                                     if ($i === 3 || $count >= count($pageVars['data']['my_repositories'])) {
 
                                         $i = 1 ;
