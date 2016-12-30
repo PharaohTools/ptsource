@@ -202,7 +202,7 @@
                                 <h4>My Repositories</h4>
                                 <?php
 
-                                $i = 1 ;
+                                $i = 0 ;
                                 $count = 0 ;
 
                                 foreach ($pageVars['data']['my_repositories'] as $one_repo) {
@@ -256,7 +256,7 @@
                                     $i++ ;
                                     if ($i === 3 || $count >= count($pageVars['data']['my_repositories'])) {
 
-                                        $i = 1 ;
+                                        $i = 0 ;
                                         ?>
 
                                 </div> <!-- profile_repository_row-->
