@@ -168,23 +168,6 @@
                             </h5>
                         <?php } ?>
 
-                        <?php
-                        if (isset($pageVars['data']['user_teams']) && is_array($pageVars['data']['user_teams'])) {
-                            foreach ($pageVars['data']['user_teams'] as $team) { ?>
-                                <div class="one_team">
-                                    <div class="one_team_logo">
-                                        <a href="<?php echo $team['link'] ; ?>" class="one_team_link">
-                                            <img src="<?php echo $team['image'] ; ?>" class="one_team_image" />
-                                        </a>
-                                    </div>
-                                </div>
-                            <?php } ?>
-                        <?php } else { ?>
-                            <h5>
-                                No User Teams
-                            </h5>
-                        <?php } ?>
-
                     </div>
                 </div>
 
@@ -262,6 +245,23 @@
                                 </div> <!-- profile_repository_row-->
 
                                     <?php }  } ?>
+
+                        <?php
+                        if (isset($pageVars['data']['user_teams']) && is_array($pageVars['data']['user_teams'])) {
+                            foreach ($pageVars['data']['user_teams'] as $team) { ?>
+                                <div class="one_team">
+                                    <div class="one_team_logo">
+                                        <a href="<?php echo $team['link'] ; ?>" class="one_team_link">
+                                            <img src="<?php echo $team['image'] ; ?>" class="one_team_image" />
+                                        </a>
+                                    </div>
+                                </div>
+                            <?php } ?>
+                        <?php } else { ?>
+                            <h5>
+                                No User Teams
+                            </h5>
+                        <?php } ?>
 
                             </div>
                         <?php  }
