@@ -207,7 +207,7 @@
 
                                 foreach ($pageVars['data']['my_repositories'] as $one_repo) {
 
-                                    if ($i === 1) { ?>
+                                    if ($i === 0) { ?>
 
                                 <div class="profile_repository_row fullRow">
 
