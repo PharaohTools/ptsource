@@ -127,3 +127,18 @@ p.moduleListText { margin: 0; }
 .button_loader img {
     max-height: 30px;
 }
+
+.disable_ssh_key,
+.enable_ssh_key  {
+    margin: 3px 0px 0px 0px ;
+}
+
+.delete_ssh_key {
+    margin: 3px 0px 3px 0px ;
+}
+
+.cellRowIndex {
+    background-image: url("/Assets/Modules/UserSSHKey/image/key.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
