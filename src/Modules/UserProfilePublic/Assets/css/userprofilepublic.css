@@ -99,7 +99,8 @@ p.moduleListText { margin: 0; }
 
 #avatar img {
     width: 90%;
-    margin: auto;
+    margin: 5% 5%;
+    display: block;
 }
 
 #avatar h4 {
