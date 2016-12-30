@@ -249,8 +249,17 @@
                             <div class="row clearfix form-group col-sm-12">
                                 <h4>Repositories I am a Member of</h4>
                                 <?php
+
+                                $i = 1 ;
+
                                 foreach ($pageVars['data']['my_member_repositories'] as $one_repo) {
-                                    ?>
+
+                                    if ($i === 1) { ?>
+
+                                <div class="profile_repository_row fullRow">
+
+                                    <?php }  ?>
+
                                     <div class="col-sm-4">
                                         <div class="profile_repository col-sm-12">
                                             <div class="profile_repository_title col-sm-12">
@@ -285,9 +294,17 @@
                                             </div>
                                         </div>
                                     </div>
-                                <?php
-                                }
-                                ?>
+
+                                    <?php
+                                    if ($i === 3) {
+
+                                        $i = 1 ;
+                                        ?>
+
+                                </div> <!-- profile_repository_row-->
+
+                                <?php }  } ?>
+
                             </div>
                         <?php  }
 
