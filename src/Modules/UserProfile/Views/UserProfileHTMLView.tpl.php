@@ -252,8 +252,7 @@
                                                 if (isset($pageVars["data"]["user"]->{$extra_fieldset['slug']})) {
                                                     echo $pageVars["data"]["user"]->{$extra_fieldset['slug']} ;
                                                 }
-                                                ?>
-                                            </textarea>
+                                                ?></textarea>
                                         </div>
                                     <?php } else if ( $extra_fieldset['type'] === 'boolean') { ?>
                                         <div class="col-sm-7">
