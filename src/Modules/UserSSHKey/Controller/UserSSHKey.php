@@ -53,7 +53,7 @@ class UserSSHKey extends Base {
         if ($pageVars['route']['action'] === "delete") {
             if($loginSession["status"] == TRUE){
                 // @todo output format change not being implemented
-                $thisModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars, "EnableKey") ;
+                $thisModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars, "DeleteKey") ;
                 $this->content["params"]["output-format"] = "JSON";
                 $this->content['route']["extraParams"]["output-format"] = "JSON";
                 $this->content["data"] = $thisModel->getData();
