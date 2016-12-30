@@ -258,7 +258,10 @@
                                         <div class="col-sm-7">
                                             <input type="checkbox" class="form-control"
                                                    id="update_<?php echo $extra_fieldset['slug'] ; ?>"
-                                                   name="update_<?php echo $extra_fieldset['slug'] ; ?>"
+                                                   name="update_<?php echo $extra_fieldset['slug'] ; ?>" <?php
+                                            if (isset($pageVars["data"]["user"]->{$extra_fieldset['slug']}) &&
+                                                $pageVars["data"]["user"]->{$extra_fieldset['slug']} === 'on') {
+                                                echo ' checked="checked" ' ; }?>
                                                    placeholder="<?php echo $extra_fieldset['title'] ; ?>" />
                                             <span style="color:#FF0000;" id="update_<?php echo $extra_fieldset['slug'] ; ?>_alert"></span>
                                         </div>
