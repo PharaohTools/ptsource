@@ -28,7 +28,7 @@ class SignupAllOS extends Base {
     }
 
     private function getUserFileLocation() {
-        return dirname(dirname(__FILE__)).DS."Data".DS."users.txt" ;
+        return dirname(__DIR__).DS."Data".DS."users.txt" ;
     }
 
     private function getSalt() {
