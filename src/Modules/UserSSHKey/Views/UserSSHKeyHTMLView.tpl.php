@@ -145,7 +145,7 @@
                                                                     $enable_hidden = '' ;
                                                                 } ?>
                                                                 <div class="fullRow">
-                                                                    <btn class="btn btn-warning <?php echo $enable_hidden ; ?> enable_ssh_key" id="enable_<?php echo $public_ssh_key['key_hash'] ; ?>">
+                                                                    <btn class="btn btn-success <?php echo $enable_hidden ; ?> enable_ssh_key" id="enable_<?php echo $public_ssh_key['key_hash'] ; ?>">
                                                                         Enable
                                                                     </btn>
                                                                     <div class="button_loader hidden" id="enable_<?php echo $public_ssh_key['key_hash'] ; ?>_loading">
@@ -165,6 +165,9 @@
                                                                 <btn class="btn btn-danger delete_ssh_key" id="delete_<?php echo $public_ssh_key['key_hash'] ; ?>">
                                                                     Delete
                                                                 </btn>
+                                                                <div class="button_loader hidden" id="delete_<?php echo $public_ssh_key['key_hash'] ; ?>_loading">
+                                                                      <img src="/Assets/Modules/UserSSHKey/image/loading.gif" alt="Loading Keys" />
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
