@@ -20,6 +20,9 @@ function updateExtraFields() {
 
         $jQuery = \js_core::$jQuery ;
         $new_data_string = "update_user_bio=".$jQuery('#update_user_bio')->val().'&' ;
+        $new_data_string = $new_data_string."update_show_location=".$jQuery('#update_show_location')->val().'&' ;
+        $new_data_string = $new_data_string."update_show_email=".$jQuery('#update_show_email')->val().'&' ;
+        $new_data_string = $new_data_string."update_show_wesbite=".$jQuery('#update_show_wesbite')->val().'&' ;
         $new_data_string = $new_data_string."update_avatar=".$jQuery('#update_avatar')->val().'&' ;
         $new_data_string = $new_data_string."update_username=".$jQuery('#update_username')->val().'&' ;
         $new_data_string = $new_data_string."update_full_name=".$jQuery('#update_full_name')->val().'&' ;

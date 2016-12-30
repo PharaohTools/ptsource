@@ -224,7 +224,9 @@
                                 ?>
 
                                 <div class="form-group extra_field">
-                                    <label for="update_email" class="col-sm-4 control-label text-left" style="color:#757575">
+                                    <label for="update_<?php echo $extra_fieldset['slug'] ; ?>"
+                                           class="col-sm-4 control-label text-left"
+                                           style="color:#757575">
                                         <?php echo $extra_fieldset['title'] ; ?>
                                     </label>
                                     <?php if ( $extra_fieldset['type'] === 'text') { ?>
