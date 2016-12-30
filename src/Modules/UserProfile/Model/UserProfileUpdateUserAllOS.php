@@ -143,6 +143,12 @@ class UserProfileUpdateUserAllOS extends Base {
             $userMod->location = $this->params["update_location"] ; }
         if (isset($this->params["update_avatar"])) {
             $userMod->avatar = $this->params["update_avatar"] ; }
+        if (isset($this->params["update_show_location"])) {
+            $userMod->show_location = $this->params["update_show_location"] ; }
+        if (isset($this->params["update_show_website"])) {
+            $userMod->show_website = $this->params["update_show_website"] ; }
+        if (isset($this->params["update_show_email"])) {
+            $userMod->show_email = $this->params["update_show_email"] ; }
 
         $signupFactory = new \Model\Signup();
         $signup = $signupFactory->getModel($this->params);
