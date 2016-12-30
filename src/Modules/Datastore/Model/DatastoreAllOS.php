@@ -109,11 +109,7 @@ class DatastoreAllOS extends Base {
     public function delete($table, $filters) {
         $datastoreFactory = new $this->targetDataStore() ;
         $datastore = $datastoreFactory->getModel($this->params) ;
-//        $rows = $this->find($table, $filters) ;
-//        $dels = array() ;
-//        foreach($rows as $row) {
-            $dels[] = $datastore->delete($table, $filters) ;
-//        }
+        $dels[] = $datastore->delete($table, $filters) ;
         return (in_array(false, $dels)) ? false : true ;
     }
 
