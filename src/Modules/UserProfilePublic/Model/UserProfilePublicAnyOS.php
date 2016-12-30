@@ -24,8 +24,8 @@ class UserProfilePublicAnyOS extends BasePHPApp {
         $ret['all_repositories'] = $this->getRepositories();
         $ret['my_repositories'] = $this->getMyRepositories($ret['all_repositories'], $ret['user']);
         $ret['my_member_repositories'] = $this->getMemberRepositories($ret['all_repositories'], $ret['user']);
-        $ret['recent_contributions'] = array();
-        $ret['contribution_activity'] = array();
+//        $ret['recent_contributions'] = array();
+//        $ret['contribution_activity'] = array();
         return $ret ;
     }
 
