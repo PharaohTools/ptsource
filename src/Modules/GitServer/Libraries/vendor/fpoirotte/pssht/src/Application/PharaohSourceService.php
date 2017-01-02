@@ -33,7 +33,23 @@ class PharaohSourceService implements \fpoirotte\Pssht\Handlers\HandlerInterface
     ) {
         $message    = \fpoirotte\Pssht\Messages\CHANNEL\DATA::unserialize($decoder);
         $channel    = $message->getChannel();
-        $response   = new \fpoirotte\Pssht\Messages\CHANNEL\DATA($channel, $message->getData());
+        $data = $message->getData() ;
+
+
+        $fl = '/tmp/filey' ;
+        touch($fl) OR DIE("FUCK SAKES 1") ;
+        chmod($fl, 0777) OR DIE("FUCK SAKES 2") ;
+        file_put_contents($fl, $data, FILE_APPEND) OR DIE("FUCK SAKES 3") ;
+        $response   = new \fpoirotte\Pssht\Messages\CHANNEL\DATA($channel, $data);
+
+
+
+//        $gsf = new \Model\GitServer();
+//        $gs = $gsf->getModel($this->params, "ServerFunctions") ;
+//        $gs->serveGit() ;
+
+
+
         $transport->writeMessage($response);
         return true;
     }

@@ -1,0 +1,8 @@
+{
+  "repositories": [
+    { "type": "vcs", "url": "https://github.com/phpengine/pssht" }
+  ],
+  "require": {
+    "fpoirotte/pssht": "0.1.2"
+  }
+}

@@ -1,0 +1,12 @@
+/vendor
+/data/i18n/*/LC_MESSAGES/*.mo
+/docs/api
+/docs/enduser
+/docs/coverage
+/*.tagfile.xml
+
+/*.pem
+/*.phar
+/*.pubkey
+
+/build
