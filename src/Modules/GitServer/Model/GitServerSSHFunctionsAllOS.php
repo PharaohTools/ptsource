@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class GitServerFunctionsAllOS extends Base {
+class GitServerSSHFunctionsAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -12,257 +12,170 @@ class GitServerFunctionsAllOS extends Base {
     public $architectures = array("any") ;
 
     // Model Group
-    public $modelGroup = array("ServerFunctions") ;
+    public $modelGroup = array("ServerSSHFunctions") ;
 
-    /* The following code has been ported from Git source <http://git-scm.com>
-       by Jon Lund Steffensen, July 2011. Licenced under GPL2. */
+    public function backendData() {
 
-    public function str_endswith($s, $test) {
-        $strlen = strlen($s);
-        $testlen = strlen($test);
-        if ($testlen > $strlen) return FALSE;
-        return substr_compare($s, $test, -$testlen) === 0;
-    }
+        $pos = strpos($this->params["item"], '/') ;
+        $repo_name = $this->params["item"] ;
+        if ($pos !== false) {
+            $repo_name = substr($this->params["item"], 0, $pos) ; }
 
-    public function header_nocache() {
-        header('Expires: Fri, 01 Jan 1980 00:00:00 GMT');
-        header('Pragma: no-cache');
-        header('Cache-Control: no-cache, max-age=0, must-revalidate');
-    }
+        define("DEBUG_LOG",        true);
+        define("HTTP_AUTH",        false);
+        define("GZIP_SUPPORT",     false);
+        define("GIT_ROOT",         REPODIR.DS );
+        define("GIT_HTTP_BACKEND", "/usr/lib/git-core/git-http-backend");
+        define("GIT_BIN",          "/usr/bin/git");
+        define("REMOTE_USER",      "smart-http");
+        define("LOG_RESPONSE",     "/tmp/response.log");
+        define("LOG_PROCESS",      "/tmp/process.log");
+//        error_log("three" ) ;
 
-    public function header_cache_forever() {
-        header('Expires: '.date('r', time() + 31536000));
-        header('Cache-Control: public, max-age=31536000');
-    }
+        if(isset($_SERVER["PATH_INFO"])) {
+            list($git_project_path, $path_info) = $temp = preg_split("/\//", $_SERVER["PATH_INFO"], 2, PREG_SPLIT_NO_EMPTY);
+            $git_project_path = "/" . $git_project_path . "/";
+            $path_info = "/" . $path_info; }
+        else {
+            $git_project_path = "/";
+            $path_info = ""; }
 
-    public function send_local_file($type, $path) {
-        $f = @fopen($path, 'rb');
-        if (!$f) {
-            header('Status: 404 Not Found');
-            die();
+        $path_info = "/".$this->params["item"] ;
+        $request_headers = $this->getAllHeaders();
+
+        $php_input = file_get_contents("php://input");
+
+        $env = array (
+            "GIT_PROJECT_ROOT"    => REPODIR ,
+            "GIT_HTTP_EXPORT_ALL" => 1,
+            "GIT_HTTP_MAX_REQUEST_BUFFER" => "1000M",
+//            'PATH' => $_SERVER["PATH"],
+//            "REMOTE_USER"         => "ptsource",
+//            "REMOTE_USER"         => "smart-http",
+            "REMOTE_USER"         => isset($_SERVER["REMOTE_USER"])          ? $_SERVER["REMOTE_USER"]          : "ptsource",
+            "REMOTE_ADDR"         => isset($_SERVER["REMOTE_ADDR"])          ? $_SERVER["REMOTE_ADDR"]          : "",
+            "REQUEST_METHOD"      => isset($_SERVER["REQUEST_METHOD"])       ? $_SERVER["REQUEST_METHOD"]       : "",
+            "PATH_INFO"           => $path_info,
+            "QUERY_STRING"        => isset($_SERVER["QUERY_STRING"])         ? $_SERVER["QUERY_STRING"]         : "",
+            "CONTENT_TYPE"        => isset($request_headers["Accept"]) ? $request_headers["Accept"] : "",
+
+        );
+        // THIS IS IMPORTANT!! THIS IS WHAT STOPS PUSH WORKING. THE GIT CLIENT
+        $env["CONTENT_TYPE"]= str_replace("result", "request",$env["CONTENT_TYPE"] );
+
+//        $env = array_merge($_SERVER, $env) ;
+
+
+        $gitRequestUser = $this->getGitRequestUser() ;
+
+        if ($this->userIsAllowed($gitRequestUser, $repo_name)==false) {
+            header('HTTP/1.1 403 Forbidden');
+            return false ;  }
+
+//        $pathStarts = array('/HEAD', '/info/', '/objects/') ;
+//        $scm_synonyms = array("git", "scm") ;
+//        $qs = $_SERVER["REQUEST_URI"] ;
+//      THIS IS IMPORTANT! THIS STOPS PUSH FROM WORKING. IF THE QUERY STRING ENV VAR IS NOT SPECIFICALLY
+//      SET TO HAVE A STRING WITH ONE PARAMETER IN THE CLIENT ASSUMES A DUMB SERVER PROTOCOL
+        $qs = $_SERVER["REQUEST_URI"] ;
+
+        $qsmpos = strpos($qs, "?") ;
+        if ($qsmpos==false) {
+            $service = basename($qs) ;
+            $qs ="service={$service}" ; }
+        else {
+            if ($qsmpos !== false) {
+                $qs = substr($qs, $qsmpos+1); }}
+
+        $env["QUERY_STRING"] = $qs ;
+
+        $env["PATH_INFO"] = $path_info ;
+
+        if (isset($service)) {
+            $path_info = str_replace($service, "", $path_info) ;
+//            if (substr($path_info, 0, 1) == '/') {
+//                $env["PATH_INFO"] = substr($path_info, 1, strlen($path_info)-1) ; }
         }
 
-        $stat = fstat($f);
-        header('Content-Type: '.$type);
-        header('Last-Modified: '.date('r', $stat['mtime']));
-
-        fpassthru($f);
-        fclose($f);
-    }
-
-    public function get_text_file($git_path, $name) {
-        header_nocache();
-        send_local_file('text/plain', $git_path.$name);
-    }
-
-    public function get_loose_object($git_path, $name) {
-        header_cache_forever();
-        send_local_file('application/x-git-loose-object', $git_path.$name);
-    }
-
-    public function get_pack_file($git_path, $name) {
-        header_cache_forever();
-        send_local_file('application/x-git-packed-objects', $git_path.$name);
-    }
-
-    public function get_idx_file($git_path, $name) {
-        header_cache_forever();
-        send_local_file('application/x-git-packed-objects-toc', $git_path.$name);
-    }
+        $settings = array
+        (
+            0 => array("pipe", "r"),
+            1 => array("pipe", "w"),
+        );
+        if(defined(DEBUG_LOG))
+        {
+            $settings[2] = array("file", LOG_PROCESS, "a");
+        }
+        $process = proc_open(GIT_HTTP_BACKEND , $settings, $pipes, REPODIR.$path_info, $env);
 
 
-    public function ref_entry_cmp($a, $b) {
-        return strcmp($a[0], $b[0]);
-    }
 
-    public function read_packed_refs($f) {
-        $list = array();
+//        ob_start();
+////        var_dump("this env", phpinfo()) ;
+//        var_dump("srv:", $_SERVER, "env:", $env) ;
+////        var_dump("grq:", $gitRequestUser) ;
+////        var_dump("this env", $_SERVER['HTTP_AUTHORIZATION'], "user", $this->params["user"], "remote user", $_SERVER["REMOTE_USER"], "AUTH user", $_SERVER["PHP_AUTH_USER"], $_SERVER["PHP_AUTH_PW"], $_SERVER["HTTP_AUTHORIZATION"]) ;
+//        $res = ob_get_clean();
+//        file_put_contents('/var/log/pharaoh.log', $res, FILE_APPEND) ;
 
-        while (($line = fgets($f)) !== FALSE) {
-            if (preg_match('~^([0-9a-f]{40})\s(\S+)~', $line, $matches)) {
-                $list[] = array($matches[2], $matches[1]);
+        if (is_resource($process)) {
+//            error_log("php in: $php_input" ) ;
+            fwrite($pipes[0], $php_input);
+            fclose($pipes[0]);
+            $return_output = stream_get_contents($pipes[1]);
+            fclose($pipes[1]);
+            $return_code = proc_close($process);
+//            error_log("\n\n\nNew Request" ) ;
+//            error_log("rc: $return_code, stduot: $return_output" ) ;
+        }
+        else {
+//            error_log("is r:", is_resource($process) ) ;
+        }
+        if(!empty($return_output))
+        {
+//            echo 'Pharaoh Source Git Server' ;
+            list($response_headers, $response_body)
+                = $response
+                = preg_split("/\R\R/", $return_output, 2, PREG_SPLIT_NO_EMPTY);
+
+            foreach(preg_split("/\R/", $response_headers) as $response_header)
+            {
+                error_log("RH: $response_header" ) ;
+                header($response_header);
+            }
+            if(isset($request_headers["Accept-Encoding"]) && strpos($request_headers["Accept-Encoding"], "gzip") !== false && GZIP_SUPPORT)
+            {
+                error_log("using gzip" ) ;
+                $gzipoutput = gzencode($response_body, 6);
+                ini_set("zlib.output_compression", "Off");
+                header("Content-Encoding: gzip");
+                header("Content-Length: " . strlen($gzipoutput));
+                echo $gzipoutput;
+            }
+            else
+            {
+                error_log("using no gzip" ) ;
+                echo $response_body;
             }
         }
+//        echo 'Something went wrong' ;
 
-        usort($list, 'ref_entry_cmp');
-        return $list;
-    }
-
-    public function get_packed_refs($git_path) {
-        $packed_refs_path = $git_path.'/packed-refs';
-        $f = @fopen($packed_refs_path, 'r');
-
-        $list = array();
-
-        if ($f) {
-            $list = read_packed_refs($f);
-            fclose($f);
+        if(DEBUG_LOG)
+        {
+//            file_put_contents(LOG_RESPONSE, "");
+            $log = "";
+            $log .= "\$request_headers = " . print_r($request_headers, true);
+            $log .= "\$env = " . print_r($env, true);
+            $log .= "\$server = " . print_r($_SERVER, true);
+            $log .= "\$php_input = " . PHP_EOL . $php_input . PHP_EOL;
+            //$log .= "\$return_output = " . PHP_EOL . $return_output . PHP_EOL;
+            $log .= "\$response = " . print_r($response, true);
+            $log .= str_repeat("-", 80) . PHP_EOL;
+            $log .= PHP_EOL;
+            file_put_contents(LOG_RESPONSE, $log, FILE_APPEND);
         }
 
-        return $list;
     }
-
-    public function resolve_ref($git_path, $ref) {
-        $depth = 5;
-
-        while (TRUE) {
-            $depth -= 1;
-            if ($depth < 0) {
-                return array(NULL, '0000000000000000000000000000000000000000');
-            }
-
-            $path = $git_path.'/'.$ref;
-            if (!@lstat($path)) {
-                foreach (get_packed_refs($git_path) as $pref) {
-                    if (!strcmp($pref[0], $ref)) {
-                        return array($ref, $pref[1]);
-                    }
-                }
-                return array(NULL, '0000000000000000000000000000000000000000');
-            }
-
-            if (is_link($path)) {
-                $dest = readlink($path);
-                if (strlen($dest) >= 5 && !strcmp('refs/', substr($dest, 0, 5))) {
-                    $ref = $dest;
-                    continue;
-                }
-            }
-
-            if (is_dir($path)) {
-                return array(NULL, '0000000000000000000000000000000000000000');
-            }
-
-            $buffer = file_get_contents($path);
-            if (!preg_match('~ref:\s*(.*)~', $buffer, $matches)) {
-                if (strlen($buffer) < 40) {
-                    return array(NULL, '0000000000000000000000000000000000000000');
-                }
-
-                return array($ref, substr($buffer, 0, 40));
-            }
-
-            $ref = $matches[1];
-        }
-    }
-
-    public function get_ref_dir($git_path, $base, $list=array()) {
-        $path = $git_path.'/'.$base;
-        $dir = dir($path);
-
-        while (($entry = $dir->read()) !== FALSE) {
-            if ($entry[0] == '.') continue;
-            if (strlen($entry) > 255) continue;
-            if (str_endswith($entry, '.lock')) continue;
-
-            $entry_path = $path.'/'.$entry;
-
-            if (is_dir($entry_path)) {
-                $list = get_ref_dir($git_path, $base.'/'.$entry, $list);
-            } else {
-                $r = resolve_ref($git_path, $base.'/'.$entry);
-                $list[] = array($base.'/'.$entry, $r[1]);
-            }
-        }
-
-        usort($list, 'ref_entry_cmp');
-        return $list;
-    }
-
-    public function get_loose_refs($git_path) {
-        return get_ref_dir($git_path, 'refs');
-    }
-
-    public function get_refs($git_path) {
-        $list = array_merge(get_loose_refs($git_path), get_packed_refs($git_path));
-        usort($list, 'ref_entry_cmp');
-        return $list;
-    }
-
-    public function get_info_refs($git_path, $name) {
-        header_nocache();
-        header('Content-Type: text/plain');
-
-        /* TODO Are dereferenced tags needed in this
-           list, or just a convenience? */
-
-        foreach (get_refs($git_path) as $ref) {
-            echo $ref[1]."\t".$ref[0]."\n";
-        }
-    }
-
-    public function get_info_packs($git_path, $name) {
-        header_nocache();
-        header('Content-Type: text/plain; charset=utf-8');
-
-        $pack_dir = $git_path.'/objects/pack';
-        $dir = dir($pack_dir);
-
-        while (($entry = $dir->read()) !== FALSE) {
-            if (str_endswith($entry, '.idx')) {
-                $name = substr($entry, 0, -4);
-                if (is_file($pack_dir.'/'.$name.'.pack')) {
-                    echo 'P '.$name.'.pack'."\n";
-                }
-            }
-        }
-    }
-
-    public function serveGit() {
-
-
-        $services = array(
-            array('GET', '/HEAD$', 'get_text_file'),
-            array('GET', '/info/refs$', 'get_info_refs'),
-            array('GET', '/objects/info/alternates$', 'get_text_file'),
-            array('GET', '/objects/info/http-alternates$', 'get_text_file'),
-            array('GET', '/objects/info/packs$', 'get_info_packs'),
-            array('GET', '/objects/[0-9a-f]{2}/[0-9a-f]{38}$', 'get_loose_object'),
-            array('GET', '/objects/pack/pack-[0-9a-f]{40}\\.pack$', 'get_pack_file'),
-            array('GET', '/objects/pack/pack-[0-9a-f]{40}\\.idx$', 'get_idx_file'));
-
-
-        /* Base url of this app */
-        $url_base = '/php-git-server';
-
-        /* Repositories */
-        $repos = array(
-            array('/php-git-server.git', '.git'),
-            array('/wiki.git', '/home/jon/Wiki/.git'));
-
-        $repos = array("ptbuild") ;
-
-        foreach ($repos as $repo) {
-            //if (preg_match('~^'.$url_base.$repo[0].'(/.*)~', $url_path, $matches)) {
-            if ($repo == "ptbuild") {
-                $repo_path = "ptbuild";
-                $repo_location = "/opt/ptsource/repositories" ;
-
-
-                foreach ($services as $service) {
-                    if (preg_match('~^'.$service[1].'~', $repo_path)) {
-
-                        if ($_SERVER['REQUEST_METHOD'] != $service[0]) {
-                            header('Status: 405 Method Not Allowed');
-                            header('Allow: '.$service[0]);
-                            echo 'Method Not Allowed';
-                            die();
-                        }
-                        //                call_user_func($service[2], $repo[1], $repo_path);
-                        call_user_func($service[2], $repo_location, $repo_path);
-                        die();
-                    }
-                }
-
-                header('Status: 404 Not Found');
-                die();
-            }
-        }
-
-        header('Status: 404 Not Found');
-        die();
-    }
-
 
 
 }
