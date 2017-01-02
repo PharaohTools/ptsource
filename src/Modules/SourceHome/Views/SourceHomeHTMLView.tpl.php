@@ -43,7 +43,7 @@
                 </li>
 
                 <?php
-                    if ($pageVars["data"]["user"] !== false && ($pageVars["data"]["user"]->role == 1)) {
+                    if ($pageVars['data']['user'] !== false && ($pageVars['data']['user']->role === 1)) {
                 ?>
 
                     <li>
@@ -199,12 +199,12 @@
                                     </div>
 
                                     <?php
-                                    if (isset($pageVars["data"]['user']->username)) {
+                                    if (isset($pageVars['data']['user']->username)) {
                                     ?>
 
                                     <div class="col-lg-4 col-md-6 hvr-pcreatoop">
                                         <div class="panel panel-green">
-                                            <a href="/index.php?control=RepositoryList&action=show&filters[]=user::<?php echo $pageVars["data"]['user']->username ; ?>">
+                                            <a href="/index.php?control=RepositoryList&action=show&filters[]=user::<?php echo $pageVars['data']['user']->username ; ?>">
                                                 <div class="panel-heading">
                                                     <div class="row">
                                                         <div class="col-xs-12 huge hvr-grow-rotate text-center">
@@ -258,7 +258,7 @@
                                                     <div class="row">
                                                         <div class="col-xs-12 text-center">
                                                             <div class="huge hvr-grow-rotate" ><?php
-                                                                $jc = (isset( $pageVars["data"]['all_teams'])) ?  count($pageVars["data"]['all_teams']) : "?" ;
+                                                                $jc = (isset( $pageVars['data']['all_teams'])) ?  count($pageVars['data']['all_teams']) : "?" ;
                                                                 echo $jc; ?></div>
                                                             <div>All</div>
                                                         </div>
@@ -273,16 +273,16 @@
                                         </div>
                                     </div>
                                     <?php
-                                    if (isset($pageVars["data"]['user']->username)) {
+                                    if (isset($pageVars['data']['user']->username)) {
                                         ?>
                                         <div class="col-lg-4 col-md-6 hvr-pcreatoop">
                                             <div class="panel panel-green">
-                                                <a href="/index.php?control=TeamList&action=show&filters[]=team_creator::<?php echo $pageVars["data"]['user']->username ; ?>">
+                                                <a href="/index.php?control=TeamList&action=show&filters[]=team_creator::<?php echo $pageVars['data']['user']->username ; ?>">
                                                     <div class="panel-heading">
                                                         <div class="row">
                                                             <div class="col-xs-12 text-center">
                                                                 <div class="huge  hvr-grow-rotate"><?php
-                                                                    $jc = (isset( $pageVars["data"]['my_team_created_count'])) ?  $pageVars["data"]['my_job_created_count'] : "?" ;
+                                                                    $jc = (isset( $pageVars['data']['my_team_created_count'])) ?  $pageVars['data']['my_job_created_count'] : "?" ;
                                                                     echo $jc; ?></div>
                                                                 <div>Yours</div>
                                                             </div>
@@ -302,16 +302,16 @@
                                     }
                                     ?>
                                     <?php
-                                    if (isset($pageVars["data"]['user']->username)) {
+                                    if (isset($pageVars['data']['user']->username)) {
                                         ?>
                                         <div class="col-lg-4 col-md-6 hvr-pcreatoop">
                                             <div class="panel panel-yellow">
-                                                <a href="/index.php?control=TeamList&action=show&filters[]=team_members[~]::<?php echo $pageVars["data"]['user']->username ; ?>">
+                                                <a href="/index.php?control=TeamList&action=show&filters[]=team_members[~]::<?php echo $pageVars['data']['user']->username ; ?>">
                                                     <div class="panel-heading">
                                                         <div class="row">
                                                             <div class="col-xs-12 text-center">
                                                                 <div class="huge  hvr-grow-rotate"><?php
-                                                                    $jc = (isset( $pageVars["data"]['my_team_member_count'])) ?  $pageVars["data"]['my_job_member_count'] : "?" ;
+                                                                    $jc = (isset( $pageVars['data']['my_team_member_count'])) ?  $pageVars['data']['my_job_member_count'] : "?" ;
                                                                     echo $jc; ?></div>
                                                                 <div>Member</div>
                                                             </div>
@@ -339,12 +339,12 @@
                                 <div class="row text-center">
                                     <div class="col-sm-6 text-center">
                                         <?php
-                                        if (isset($pageVars["data"]["latest_issues"]) && count($pageVars["data"]["latest_issues"])>0 ) { ?>
+                                        if (isset($pageVars['data']["latest_issues"]) && count($pageVars['data']["latest_issues"])>0 ) { ?>
                                             <h4>Latest Issues</h4>
                                             <?php
                                             $i = 1;
 
-                                            foreach ($pageVars["data"]["latest_issues"] as $IssueTracker) {
+                                            foreach ($pageVars['data']["latest_issues"] as $IssueTracker) {
                                                 if ($i > 5) { $hidString = " hiddenTrackerRow" ; }
                                                 else { $hidString = "" ; }
                                                 ?>
@@ -381,11 +381,11 @@
                                     <div class="col-sm-6 text-center">
                                         <?php
 
-                                        if (isset($pageVars["data"]["latest_commits"]) && count($pageVars["data"]["latest_commits"])>0 ) { ?>
+                                        if (isset($pageVars['data']["latest_commits"]) && count($pageVars['data']["latest_commits"])>0 ) { ?>
                                             <h4>Latest Commits</h4>
                                             <?php
                                             $i = 0;
-                                            foreach ($pageVars["data"]["latest_commits"] as $latestCommit) {
+                                            foreach ($pageVars['data']["latest_commits"] as $latestCommit) {
                                                 if ($i > 5) { $hidString = " hiddenCommitRow" ; }
                                                 else { $hidString = "" ; }
                                                 ?>
