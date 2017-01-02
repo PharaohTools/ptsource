@@ -41,8 +41,11 @@
             A banner (eg. legal disclaimer) to display upon connection.
             Do not forget to add a trailing carriage return / linefeed
             if needed (using "&#13;" or "&#10;" respectively).
+
+            Pharaoh Source X&#10;
+
         -->
-        <parameter key="banner">Hello world!&#10;</parameter>
+        <parameter key="banner">Pharaoh Source</parameter>
 
         <!--
             Server's private keys (in OpenSSH format, ie. PEM-encoded).
@@ -112,6 +115,7 @@
         -->
         <parameter key="auth.hostbased" type="collection">
             <parameter key="%USER%" type="collection">
+                <parameter>/etc/ssh/id_rsa.pub</parameter>
                 <parameter>/etc/ssh/ssh_host_dsa_key.pub</parameter>
                 <parameter>/etc/ssh/ssh_host_rsa_key.pub</parameter>
                 <parameter>/etc/ssh/ssh_host_ecdsa_key.pub</parameter>
