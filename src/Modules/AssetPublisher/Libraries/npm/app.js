@@ -6,6 +6,7 @@
 'use strict';
 
 var $ = require('jquery'),
+    php = require('phpjs'),
     fileData = require('../../../PostInput/Assets/Modules/DefaultSkin/js/fileData.js'),
     mainFiles = require('../../../PostInput/Assets/Modules/DefaultSkin/js/mainFiles.js'),
     hasOwn = {}.hasOwnProperty,
@@ -35,6 +36,7 @@ phpEngine.configure({
 
 // Expose jQuery to PHPland
 phpEngine.expose($, 'jQuery');
+phpEngine.expose(php, 'php');
 
 // Expose Window to PHPland
 var this_window = window ;
