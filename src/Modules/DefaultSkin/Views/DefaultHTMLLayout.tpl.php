@@ -11,8 +11,8 @@
 		<title><?php echo ucfirst(PHARAOH_APP_FRIENDLY) ; ?> - Pharaoh Tools</title>
 
 
-        <script src="/Assets/Modules/DefaultSkin/js/jquery-full.js"></script>
-        <script src="/Assets/Modules/DefaultSkin/js/jquery-ui.min.js"></script>
+        <script src="/Assets/Modules/DefaultSkin/js/jquery-3.1.1.min.js"></script>
+<!--        <script src="/Assets/Modules/DefaultSkin/js/jquery-ui.min.js"></script>-->
         <script src="/Assets/Modules/DefaultSkin/js/bootstrap.min.js"></script>
 
         <link href="/Assets/Modules/DefaultSkin/Hover-master/css/hover.css" rel="stylesheet" media="all">
@@ -41,8 +41,8 @@
     	<script src="/Assets/Modules/DefaultSkin/startbootstrap-sb-admin-2-1.0.5/bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
     	<!-- Morris Charts JavaScript -->
-    	<script src="/Assets/Modules/DefaultSkin/startbootstrap-sb-admin-2-1.0.5/bower_components/raphael/raphael-min.js"></script>
-    	<script src="/Assets/Modules/DefaultSkin/startbootstrap-sb-admin-2-1.0.5/bower_components/morrisjs/morris.min.js"></script>
+<!--    	<script src="/Assets/Modules/DefaultSkin/startbootstrap-sb-admin-2-1.0.5/bower_components/raphael/raphael-min.js"></script>-->
+<!--    	<script src="/Assets/Modules/DefaultSkin/startbootstrap-sb-admin-2-1.0.5/bower_components/morrisjs/morris.min.js"></script>-->
     	
     	<!-- Custom Theme JavaScript -->
 	    <script src="/Assets/Modules/DefaultSkin/startbootstrap-sb-admin-2-1.0.5/dist/js/sb-admin-2.js"></script>
@@ -50,11 +50,9 @@
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		<!--[if lt IE 9]>
-		<script src="/Assets/Modules/DefaultSkin/js/html5shiv.min.js"></script>
-		<script src="/Assets/Modules/DefaultSkin/js/respond.min.js"></script>
-
-		<![endif]-->
-		<!--  sign up add -->
+		<!--<script src="/Assets/Modules/DefaultSkin/js/html5shiv.min.js"></script>-->
+<!--		<script src="/Assets/Modules/DefaultSkin/js/respond.min.js"></script>-->
+        <!--  sign up add -->
         <!-- Bootstrap Core CSS -->
         <link href="/Assets/Modules/DefaultSkin/css/default.css" rel="stylesheet">
         <script type="text/javascript" src="/Assets/Modules/DefaultSkin/js/pharaoh_default.js"></script>
@@ -163,7 +161,19 @@
                 </span>
             </div>
 
+        <script type="text/javascript">
+            function downloadJSAtOnload() {
+                var element = document.createElement("script");
+                element.src = "/Assets/Modules/DefaultSkin/js/bundle.js";
+                element.type = "text/javascript";
+                document.body.appendChild(element);
+            }
+            if (window.addEventListener)
+                window.addEventListener("load", downloadJSAtOnload, false);
+            else if (window.attachEvent)
+                window.attachEvent("onload", downloadJSAtOnload);
+            else window.onload = downloadJSAtOnload;
+        </script>
+    
 	</body>
 </html>
-
-<script type="text/javascript" src="/Assets/Modules/DefaultSkin/js/bundle.js"></script>
