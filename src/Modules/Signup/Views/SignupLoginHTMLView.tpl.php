@@ -56,7 +56,7 @@
 									<div >
 									<label for="Signed in"><input name="Signed in" id="Signed in"  type="checkbox" style="color:#A2A1A1;"> Keep Me Signed in</label>
 									</div>	
-									<button type="button" onclick="submit_login();" class="btn  btn-primary  btn-1 btn-1a hvr-grow-shadow" >
+									<button type="submit" onclick="submit_login(); false;" class="load_hidden btn  btn-primary  btn-1 btn-1a hvr-grow-shadow" >
 										Log in
 									</button>
 									
