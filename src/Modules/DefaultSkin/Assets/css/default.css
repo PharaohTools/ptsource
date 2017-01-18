@@ -126,3 +126,7 @@ h3.title_username {
     width: 20%;
     float: left;
 }
+
+.load_hidden {
+    display: none;
+}
