@@ -5,14 +5,16 @@ $console->log("PHPFE Started") ;
 \js_core::$console = $console ;
 \js_core::$window = $window ;
 \js_core::$Math = $Math ;
+\core::$php = $phpjs ;
 $console->log("js class inititialized") ;
 
 class js_core {
-
     public static $jQuery ;
     public static $console ;
     public static $window ;
     public static $Math ;
+}
 
-
+class core {
+    public static $php ;
 }
