@@ -1,0 +1,1 @@
+module.exports = ["php_classes/ChatApplication.php","php_classes/WindowMessage.php","php_core/main_aaa.php","php_core/main_window.php"];
