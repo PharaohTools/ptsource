@@ -44,7 +44,7 @@ class AssetPublisherLinuxUnix extends Base {
             return true ; }
         $npmDir = dirname(__DIR__).DS."Libraries".DS."npm".DS ;
         $logging->log("Executing NPM Build command", $this->getModuleName()) ;
-        $comm = "cd {$npmDir} && npm run build" ;
+        $comm = "cd {$npmDir} && npm install && npm run build" ;
         $status = $this->executeAndGetReturnCode($comm, true, true);
         if ($status["rc"] !== 0) {
             $logging->log("Executing NPM Build command failed", $this->getModuleName()) ;
