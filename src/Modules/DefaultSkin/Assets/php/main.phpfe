@@ -6,7 +6,7 @@ $console->log("PHPFE Started") ;
 \js_core::$window = $window ;
 \js_core::$Math = $Math ;
 \core::$php = $phpjs ;
-$console->log("js class inititialized") ;
+$console->log("js class initialized") ;
 
 class js_core {
     public static $jQuery ;
@@ -21,3 +21,4 @@ class core {
 
 $console->log("enabling load-locked elements") ;
 $jQuery('.load_hidden')->removeClass('load_hidden') ;
+$jQuery('.load_pending')->remove() ;
