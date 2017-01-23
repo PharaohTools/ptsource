@@ -35,7 +35,10 @@
 
                         </div>
                         <div id="login_success_msg"></div>
-							<div class="form-group" >
+							<div class="form-group load_pending" >
+                                <img src="/Assets/Modules/SourceHome/images/loading.gif">
+                            </div>
+							<div class="form-group load_hidden" >
 								
 								<label for="inputEmail3" class="col-sm-3 control-label text-left" style="color:#757575;">User Name</label>
 								<div class="col-sm-8">
