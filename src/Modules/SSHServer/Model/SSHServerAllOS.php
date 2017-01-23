@@ -22,32 +22,37 @@ class SSHServerAllOS extends Base {
     public function getEvents() {
         $ff = array(
             "afterApplicationConfigurationSave" => array(
-                "createDefaultConfigurations",
+                "ensureServerStatus",
             ),
         );
         return $ff ;
     }
 
 
-    public function createDefaultConfigurations() {
+    public function ensureSSHServerStatus() {
 
         $loggingFactory = new \Model\Logging();
         $this->params["echo-log"] = true ;
         $logging = $loggingFactory->getModel($this->params);
-        $mod_config = \Model\AppConfig::getAppVariable("mod_config") ;
-        $full_options = array(
-            "instance_id" => $this->getNewInstanceID(),
-            "instance_title" => "Pharaoh Build Node",
-            "organisation" => "A Pharaoh Tools Organization");
-        $option_titles = array_keys($full_options);
 
-        foreach ($option_titles as $option_title) {
-            $opt = $mod_config["SSHServer"][$option_title] ;
-            if (!isset($opt) || $opt == "") {
-                $mod_config["SSHServer"][$option_title] = $full_options[$option_title] ;
-                $logging->log("Creating default configuration for Application Instance {$option_title} ...", $this->getModuleName());
-            }
-        }
+
+        $mod_config = \Model\AppConfig::getAppVariable("mod_config") ;
+
+        $opt = $mod_config["SSHServer"][$option_title] ;
+
+//        $full_options = array(
+//            "instance_id" => $this->getNewInstanceID(),
+//            "instance_title" => "Pharaoh Build Node",
+//            "organisation" => "A Pharaoh Tools Organization");
+//        $option_titles = array_keys($full_options);
+//
+//        foreach ($option_titles as $option_title) {
+//            $opt = $mod_config["SSHServer"][$option_title] ;
+//            if (!isset($opt) || $opt == "") {
+//                $mod_config["SSHServer"][$option_title] = $full_options[$option_title] ;
+//                $logging->log("Creating default configuration for Application Instance {$option_title} ...", $this->getModuleName());
+//            }
+//        }
 
         $orig_config = \Model\AppConfig::getAppVariable("mod_config") ;
         if ($mod_config==$orig_config) {
