@@ -2,22 +2,22 @@
 
 Namespace Info;
 
-class ApplicationInstanceInfo extends PTConfigureBase {
+class SSHServerInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "Application Instance Configurations";
+    public $name = "SSH Server Integration";
 
     public function _construct() {
         parent::__construct();
     }
 
     public function routesAvailable() {
-        return array( "ApplicationInstance" => array_merge(parent::routesAvailable(), array("help") ) );
+        return array( "SSHServer" => array_merge(parent::routesAvailable(), array("help") ) );
     }
 
     public function routeAliases() {
-        return array("ApplicationInstance");
+        return array("SSHServer");
     }
 
     public function events() {
@@ -26,19 +26,18 @@ class ApplicationInstanceInfo extends PTConfigureBase {
 
     public function configuration() {
         return array(
-            "instance_id"=> array("type" => "text", "default" => "Instance ID", "label" => "Application Instance ID?", ),
-            "instance_title"=> array("type" => "text", "default" => "Example Title", "label" => "Application Instance Title?", ),
-            "organisation"=> array("type" => "text", "default" => "Example Organisation", "label" => "Organisation Name?", ),
+            "enable_ssh_server"=> array("type" => "text", "default" => "Instance ID", "label" => "Enable Git SSH Server?", ),
+            "server_port"=> array("type" => "text", "default" => "22", "label" => "Git SSH Server Port?", ),
             "force_ssl"=> array("type" => "boolean", "label" => "Force SSL?", ),
         );
     }
 
     public function helpDefinition() {
        $help = <<<"HELPDATA"
-    This extension provides Application Instance Configuration It provides code
+    This extension provides Git SSH Server Integration. It provides code
     functionality, but no extra CLI commands.
 
-    ApplicationInstance
+    SSHServer
 
 HELPDATA;
       return $help ;

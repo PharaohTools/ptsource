@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class ApplicationInstanceAllOS extends Base {
+class SSHServerAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -42,9 +42,9 @@ class ApplicationInstanceAllOS extends Base {
         $option_titles = array_keys($full_options);
 
         foreach ($option_titles as $option_title) {
-            $opt = $mod_config["ApplicationInstance"][$option_title] ;
+            $opt = $mod_config["SSHServer"][$option_title] ;
             if (!isset($opt) || $opt == "") {
-                $mod_config["ApplicationInstance"][$option_title] = $full_options[$option_title] ;
+                $mod_config["SSHServer"][$option_title] = $full_options[$option_title] ;
                 $logging->log("Creating default configuration for Application Instance {$option_title} ...", $this->getModuleName());
             }
         }

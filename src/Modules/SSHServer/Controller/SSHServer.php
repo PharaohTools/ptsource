@@ -2,7 +2,7 @@
 
 Namespace Controller ;
 
-class ApplicationInstance extends Base {
+class SSHServer extends Base {
 
     public function execute($pageVars) {
 
@@ -16,7 +16,7 @@ class ApplicationInstance extends Base {
             $this->content["helpData"] = $helpModel->getHelpData($pageVars["route"]["control"]);
             return array ("type"=>"view", "view"=>"help", "pageVars"=>$this->content); }
 
-        $this->content["messages"][] = "Help is the only valid ApplicationInstance Action";
+        $this->content["messages"][] = "Help is the only valid SSHServer Action";
         return array ("type"=>"control", "control"=>"index", "pageVars"=>$this->content);
 
     }
