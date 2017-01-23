@@ -20,6 +20,22 @@
                 </li>
                 <li>
                     <a href="/index.php?control=ApplicationConfigure&action=show" class=" hvr-bounce-in">
+                        <i class="fa fa-cogs fa-fw"></i> Configure PTBuild<span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level collapse">
+                        <li>
+                            <a href="/index.php?control=ApplicationConfigure&action=show" class=" hvr-curl-bottom-right">Application</a>
+                        </li>
+                        <li>
+                            <a href="/index.php?control=UserManager&action=show" class=" hvr-curl-bottom-right">User Manager</a>
+                        </li>
+                        <li>
+                            <a href="/index.php?control=ModuleManager&action=show" class=" hvr-curl-bottom-right">Modules</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/index.php?control=ApplicationConfigure&action=show" class=" hvr-bounce-in">
                         <i class="fa fa-user fa-fw"></i> User Menu <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level collapse">
@@ -30,10 +46,10 @@
                             <a href="/index.php?control=UserProfilePublic&action=show" class=" hvr-curl-bottom-right">Public Profile</a>
                         </li>
                         <li>
-                            <a href="/index.php?control=UserManager&action=show" class=" hvr-curl-bottom-right">User Manager</a>
+                            <a href="/index.php?control=UserSSHKey&action=show" class=" hvr-curl-bottom-right">SSH Keys</a>
                         </li>
                         <li>
-                            <a href="/index.php?control=UserSSHKey&action=show" class=" hvr-curl-bottom-right">SSH Keys</a>
+                            <a href="/index.php?control=UserOAuthKey&action=show" class=" hvr-curl-bottom-right">OAuth Keys</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
