@@ -27,7 +27,13 @@ class EchoService implements \fpoirotte\Pssht\Handlers\HandlerInterface
 
         $logging = \Plop\Plop::getInstance();
 
-        $command = $message->getCommand() ;
+        if (method_exists($message, 'getData')) {
+            $command = $message->getData() ;
+        }
+        else {
+            var_dump($message) ;
+            $command = "a command" ;
+        }
 
         $logging->info("Original command is: $command") ;
         $command = str_replace('/git/public/', '/opt/ptsource/repositories/', $command) ;
@@ -48,8 +54,8 @@ class EchoService implements \fpoirotte\Pssht\Handlers\HandlerInterface
 
         $lines = explode(PHP_EOL, $cur_git_out) ;
 
-        for ($i=0; $i < count($lines)-1 ; $i++) {
         $str = "" ;
+        for ($i=0; $i < count($lines)-1 ; $i++) {
 //        for ($i=0; $i < 1 ; $i++) {
 
             $encLine = $this->pktLineEncode($lines[$i]) ;
@@ -62,7 +68,7 @@ class EchoService implements \fpoirotte\Pssht\Handlers\HandlerInterface
         }
         $response   = new \fpoirotte\Pssht\Messages\CHANNEL\DATA(
             $message->getChannel(),
-            $str.PHP_EOL
+            $str
         );
 
         $transport->writeMessage($response);

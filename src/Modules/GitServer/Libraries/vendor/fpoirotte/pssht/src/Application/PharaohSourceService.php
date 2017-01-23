@@ -35,6 +35,12 @@ class PharaohSourceService implements \fpoirotte\Pssht\Handlers\HandlerInterface
         $channel    = $message->getChannel();
         $data = $message->getData() ;
 
+        $logging = \Plop\Plop::getInstance();
+
+        $command = $message->getData() ;
+        $logging->info("Original command is: $command") ;
+        $command = str_replace('/git/public/', '/opt/ptsource/repositories/', $command) ;
+        $logging->info("new command is: $command") ;
 
         $fl = '/tmp/filey' ;
         touch($fl) OR DIE("FUCK SAKES 1") ;
