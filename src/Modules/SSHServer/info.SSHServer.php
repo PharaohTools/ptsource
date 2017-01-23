@@ -26,9 +26,9 @@ class SSHServerInfo extends PTConfigureBase {
 
     public function configuration() {
         return array(
-            "enable_ssh_server"=> array("type" => "text", "default" => "Instance ID", "label" => "Enable Git SSH Server?", ),
+            "enable_ssh_server"=> array("type" => "boolean", "label" => "Enable Git SSH Server?", ),
             "server_port"=> array("type" => "text", "default" => "22", "label" => "Git SSH Server Port?", ),
-            "force_ssl"=> array("type" => "boolean", "label" => "Force SSL?", ),
+//            "force_ssl"=> array("type" => "boolean", "label" => "Force SSL?", ),
         );
     }
 
