@@ -1,0 +1,144 @@
+p.moduleListText { margin: 0; }
+
+.moduleList {
+    display: block;
+    list-style-type: none;
+    position: relative;
+}
+
+.moduleEntry {
+    display: block;
+    border: 1px solid #d3d3d3;
+    /*position: absolute;*/
+    /*top: 5px;*/
+    /*right: 5px;*/
+    /*bottom: 5px;*/
+}
+
+.moduleEntryOdd {
+    background-color: grey; }
+
+.moduleEntryEven{
+    background-color: white; }
+
+.moduleEntryFirst {
+    /*margin: 0 0 2% 0 !important; */
+}
+.list-group.panel > .list-group-item {
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px
+}
+.list-group-submenu {
+  margin-left:20px;
+}
+
+.successMessage {
+    color: green ;
+}
+
+.errorMessage {
+    color: red ;
+}
+
+.fullRow {
+    width: 100%;
+    display: block;
+    float: left;
+}
+
+.public_ssh_key_row {
+    width: 100%;
+    display: block;
+    float: left;
+}
+
+#form_alert {
+    float: left;
+    display: block;
+    margin-left: 10%;
+}
+
+.rightAlignButton {
+    float: right;
+    display: block;
+    margin-right: 10%;
+}
+
+.dropdownUsers {
+    width: 50%;
+    display: block;
+    float: left;
+}
+
+.userShow {
+    width: 50%;
+    display: block;
+    float: left;
+}
+
+.actionButtonWrap {
+
+}
+
+#create_new_key_fields {
+    display: none ;
+}
+
+.public_ssh_key_row {
+    margin: 10px 0px;
+    display: block;
+}
+
+.public_ssh_key_row:hover {
+    background-color: white;
+}
+
+.public_ssh_key_row .cellRowIndex {
+    width: 10%;
+    display: block;
+    float: left;
+}
+
+.public_ssh_key_row .cellRowKeyDetails {
+    width: 70%;
+    display: block;
+    float: left;
+}
+
+.public_ssh_key_row .cellRowDeleteKey {
+    width: 20%;
+    display: block;
+    float: left;
+}
+
+.loading_keys {
+    display: none ;
+}
+
+.loading_keys img {
+    display: block ;
+    margin: 0 auto ;
+}
+
+.hidden {
+    display: none;
+}
+
+.button_loader img {
+    max-height: 30px;
+}
+
+.disable_ssh_key,
+.enable_ssh_key  {
+    margin: 3px 0px 0px 0px ;
+}
+
+.delete_ssh_key {
+    margin: 3px 0px 3px 0px ;
+}
+
+.cellRowIndex {
+    background-image: url("/Assets/Modules/UserOAuthKey/image/key.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+}

@@ -1,0 +1,212 @@
+<?php
+
+setPageTriggers() ;
+
+function setPageTriggers() {
+    $jQuery = \js_core::$jQuery ;
+    $console = \js_core::$console ;
+
+    $jQuery('#create_new_key')->on('click', function() use ($jQuery)  {
+        $jQuery('#create_new_key_fields')->fadeIn();
+        $jQuery('#create_new_key')->fadeOut();
+    });
+
+    $console->log('before Key Start') ;
+
+    $jQuery('#save_new_key')->on('click', function() use ($jQuery, $console)  {
+        $jQuery('.create_new_key_field')->fadeOut('fast') ;
+        $jQuery('.loading_keys')->fadeIn('fast') ;
+        $isValid = validateSSHKey() ;
+        if ($isValid === true) {
+            return createNewSSHKey() ;
+        }
+        return false ;
+    });
+
+    $jQuery('.disable_ssh_key')->on('click', function($this) use ($jQuery, $console)  {
+        $console->log( $this->target->id );
+        $id = $this->target->id ;
+        $key_hash = str_replace('disable_', '', $id) ;
+        $jQuery('#disable_'.$key_hash)->addClass('hidden') ;
+        $jQuery('#disable_'.$key_hash.'_loading')->removeClass('hidden') ;
+        $console->log( $key_hash );
+        changeSSHKey('disable', $key_hash) ;
+//    $jQuery('#enable_'.$key_hash)->removeClass('hidden') ;
+//    $jQuery('#disable_'.$key_hash.'_loading')->addClass('hidden') ;
+    });
+
+    $jQuery('.enable_ssh_key')->on('click', function($this) use ($jQuery, $console)  {
+        $console->log( $this->target->id );
+        $id = $this->target->id ;
+        $key_hash = str_replace('enable_', '', $id) ;
+        $jQuery('#enable_'.$key_hash)->addClass('hidden') ;
+        $jQuery('#enable_'.$key_hash.'_loading')->removeClass('hidden') ;
+        $console->log( $key_hash );
+        changeSSHKey('enable', $key_hash) ;
+//    $jQuery('#disable_'.$key_hash)->removeClass('hidden') ;
+//    $jQuery('#enable_'.$key_hash.'_loading')->addClass('hidden') ;
+    });
+
+    $jQuery('.delete_ssh_key')->on('click', function($this) use ($jQuery, $console)  {
+        $console->log( $this->target->id );
+        $id = $this->target->id ;
+        $key_hash = str_replace('delete_', '', $id) ;
+        $jQuery('#delete_'.$key_hash)->addClass('hidden') ;
+        $jQuery('#delete_'.$key_hash.'_loading')->removeClass('hidden') ;
+        $console->log( $key_hash );
+        changeSSHKey('delete', $key_hash) ;
+//    $jQuery('#delete_'.$key_hash.'_loading')->addClass('hidden') ;
+    });
+
+}
+
+function changeSSHKey($changeType, $key_hash) {
+    $jQuery = \js_core::$jQuery ;
+    $console = \js_core::$console ;
+    $console->log($key_hash) ;
+    $rurl = 'index.php?control=UserSSHKey&action='.$changeType.'&output-format=JSON' ;
+    $new_data_string = "key_hash=".$key_hash ;
+    $new_data_string = \js_core::$window->encodeURI($new_data_string) ;
+    $data = array(
+        'type' => 'POST',
+        'url' => $rurl,
+        'dataType'=> "json",
+        'data' => $new_data_string
+    ) ;
+    $ajax_object = $jQuery->ajax($data);
+    return $ajax_object->done(
+        function ($data) use ($jQuery, $console) {
+            $console->log($data) ;
+            $kt = new keyTable() ;
+            $kt->rewriteTable($data, $jQuery) ;
+        }
+    );
+}
+
+function createNewSSHKey() {
+    $jQuery = \js_core::$jQuery ;
+
+    $rurl = 'index.php?control=UserSSHKey&action=create&output-format=JSON' ;
+    $key = $jQuery('#new_ssh_key')->val() ;
+    $title = $jQuery('#new_ssh_key_title')->val() ;
+
+    $new_data_string = "new_ssh_key=".$key.'&' ;
+    $new_data_string = $new_data_string."new_ssh_key_title=".$title ;
+    $new_data_string = \js_core::$window->encodeURI($new_data_string) ;
+
+    $data = array(
+        'type' => 'POST',
+        'url' => $rurl,
+        'dataType'=> "json",
+        'data' => $new_data_string
+    ) ;
+
+    $ajax_object = $jQuery->ajax($data);
+    return $ajax_object->done(
+        function ($data) use ($jQuery) {
+            $jQuery('.create_new_key_field')->fadeIn('fast') ;
+            $jQuery('.loading_keys')->fadeOut('fast') ;
+            $kt = new keyTable() ;
+            $kt->rewriteTable($data, $jQuery) ;
+            $jQuery('#create_new_key_fields')->fadeOut();
+            $jQuery('#create_new_key')->fadeIn();
+            $jQuery('#new_ssh_key_title')->val('') ;
+            $jQuery('#new_ssh_key')->val('') ;
+        }
+    );
+}
+
+
+function validateSSHKey() {
+    $jQuery = \js_core::$jQuery ;
+    if ($jQuery('#new_ssh_key_title')->val() == '') {
+        $jQuery('#new_ssh_key_title_alert')->html('Please enter an SSH Key Title');
+        $jQuery('#new_ssh_key_title')->focus();
+        return false ; }
+    if ($jQuery('#new_ssh_key')->val() == '') {
+        $jQuery('#new_ssh_key_alert')->html('Please enter a Public SSH Key');
+        $jQuery('#new_ssh_key')->focus();
+        return false ; }
+    return true ;
+}
+
+class keyTable {
+
+    public function rewriteTable($data, $jQuery) {
+        $ht = '' ;
+        $i = 1 ;
+
+        $console = \js_core::$console ;
+        $window = \js_core::$window ;
+
+        foreach ($data->data->public_ssh_keys as $title => $full_key_array) {
+
+            $full_key = array();
+            foreach ($full_key_array as $index => $cur_val) {
+                $full_key[$index] = $cur_val ; }
+
+            $ht = $ht . "<div class='public_ssh_key_row' id='". "\n";
+            $ht = $ht . $full_key["key_hash"];
+            $ht = $ht . "'>";
+            $ht = $ht . '  <div class="blCell cellRowIndex">' . $i . '</div> ';
+            $ht = $ht . '  <div class="blCell cellRowKeyDetails">';
+            $ht = $ht . '    <div class="fullRow">';
+            $ht = $ht . '        <strong>' . $full_key["title"].'</strong>';
+            $ht = $ht . '    </div>';
+            $ht = $ht . '    <div class="fullRow">';
+            $ht = $ht . '        ' . $full_key["fingerprint"];
+            $ht = $ht . '    </div>';
+            $ht = $ht . '    <div class="fullRow">';
+            $ht = $ht . '        Created on: ' . $full_key["created_on_format"] .' — Last used on: ' . $full_key["created_on_format"];
+            $ht = $ht . '    </div>';
+            $ht = $ht . '  </div>';
+            $ht = $ht . '  <div class="blCell cellRowDeleteKey">';
+            $ht = $ht . '  <div class="fullRow">';
+
+            if ($full_key['enabled'] === 'on') {
+                $disable_hidden = '' ;
+                $enable_hidden = ' hidden' ;
+            }
+            // Else isnt working
+            if ($full_key['enabled'] === 'off') {
+                $disable_hidden = ' hidden' ;
+                $enable_hidden = '' ;
+            }
+            $ht = $ht . '    <btn class="btn btn-success '.$enable_hidden.' enable_ssh_key" id="enable_'.$full_key['key_hash'].'">';
+            $ht = $ht . '      Enable';
+            $ht = $ht . '    </btn>';
+            $ht = $ht . '    <div class="button_loader hidden" id="enable_'.$full_key['key_hash'].'_loading">';
+            $ht = $ht . '      <img src="/Assets/Modules/UserSSHKey/image/loading.gif" alt="Loading Keys" />';
+            $ht = $ht . '    </div>';
+            $ht = $ht . '  </div>';
+
+            $ht = $ht . '  <div class="fullRow">';
+            $ht = $ht . '    <btn class="btn btn-warning '.$disable_hidden.' disable_ssh_key" id="disable_'.$full_key['key_hash'].'">';
+            $ht = $ht . '      Disable';
+            $ht = $ht . '    </btn>';
+            $ht = $ht . '    <div class="button_loader hidden" id="disable_'.$full_key['key_hash'].'_loading">';
+            $ht = $ht . '      <img src="/Assets/Modules/UserSSHKey/image/loading.gif" alt="Loading Keys" />';
+            $ht = $ht . '    </div>';
+            $ht = $ht . '  </div>';
+
+            $ht = $ht . '  <div class="fullRow">';
+            $ht = $ht . '    <btn class="btn btn-danger delete_ssh_key" id="delete_'.$full_key['key_hash'].'">';
+            $ht = $ht . '      Delete';
+            $ht = $ht . '    </btn>';
+            $ht = $ht . '    <div class="button_loader hidden" id="delete_'.$full_key['key_hash'].'_loading">';
+            $ht = $ht . '      <img src="/Assets/Modules/UserSSHKey/image/loading.gif" alt="Loading Keys" />';
+            $ht = $ht . '    </div>';
+            $ht = $ht . '  </div>';
+
+            $ht = $ht . '  </div>';
+            $ht = $ht . '</div>';
+
+            
+            $i = $i + 1;
+        }
+
+        $jQuery('#allSSHKeyRows')->html($ht) ;
+        setPageTriggers() ;
+
+    }
+}
