@@ -163,10 +163,11 @@
 
         <script type="text/javascript">
             function downloadJSAtOnload() {
-                var element = document.createElement("script");
-                element.src = "/Assets/Modules/DefaultSkin/js/bundle.js";
-                element.type = "text/javascript";
-                document.body.appendChild(element);
+//                var element = document.createElement("script");
+//                element.src = "/Assets/Modules/DefaultSkin/js/bundle.js";
+//                element.type = "text/javascript";
+//                document.body.appendChild(element);
+                $.getScript("/Assets/Modules/DefaultSkin/js/bundle.js");
             }
             if (window.addEventListener)
                 window.addEventListener("load", downloadJSAtOnload, false);
