@@ -102,14 +102,13 @@ class UserOAuthKeyCreateKeyAllOS extends Base {
         $signup = $signupFactory->getModel($this->params);
         $au =$signup->getLoggedInUserData();
 
-        $rsa = new \Crypt_RSA() ;
-        $rsa->setPublicKey($this->params["new_oauth_key"]) ;
-        $finger = $rsa->getPublicKeyFingerprint() ;
-        
+        $oauth = $this->createOauth() ;
+        $finger = md5($oauth["user"].':'.$oauth["key"]) ;
+
         $res = $datastore->insert('user_oauth_keys', array(
             "user_id" => $au->username,
-            "key_start" => $this->params["new_oauth_key"],
-            "key_end" => $this->params["new_oauth_key"],
+            "oauth_user" => $oauth["user"],
+            "oauth_key" => $oauth["key"],
             "key_hash" => uniqid(),
             "created_on" => time(),
             "enabled" => 'on',
@@ -125,6 +124,18 @@ class UserOAuthKeyCreateKeyAllOS extends Base {
             return $return ; }
 
         return true ;
+    }
+
+    private function createOauth() {
+        $characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+        $string = '';
+        $max = strlen($characters) - 1;
+        for ($i = 0; $i < 32; $i++) {
+            $string .= $characters[mt_rand(0, $max)];
+        }
+        $oauth["user"] = substr($string, 0, 16) ;
+        $oauth["key"] = substr($string, 16) ;
+        return $oauth ;
     }
 
 }

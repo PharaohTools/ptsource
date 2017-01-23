@@ -87,10 +87,9 @@ function createNewOAuthKey() {
     $jQuery = \js_core::$jQuery ;
 
     $rurl = 'index.php?control=UserOAuthKey&action=create&output-format=JSON' ;
-    $key = $jQuery('#new_oauth_key')->val() ;
     $title = $jQuery('#new_oauth_key_title')->val() ;
 
-    $new_data_string = "new_oauth_key=".$key.'&' ;
+    $new_data_string = "" ;
     $new_data_string = $new_data_string."new_oauth_key_title=".$title ;
     $new_data_string = \js_core::$window->encodeURI($new_data_string) ;
 
@@ -109,9 +108,7 @@ function createNewOAuthKey() {
             $kt = new keyTable() ;
             $kt->rewriteTable($data, $jQuery) ;
             $jQuery('#create_new_key_fields')->fadeOut();
-            $jQuery('#create_new_key')->fadeIn();
             $jQuery('#new_oauth_key_title')->val('') ;
-            $jQuery('#new_oauth_key')->val('') ;
         }
     );
 }

@@ -46,7 +46,7 @@ p.moduleListText { margin: 0; }
     float: left;
 }
 
-.public_ssh_key_row {
+.public_oauth_key_row {
     width: 100%;
     display: block;
     float: left;
@@ -84,28 +84,28 @@ p.moduleListText { margin: 0; }
     display: none ;
 }
 
-.public_ssh_key_row {
+.public_oauth_key_row {
     margin: 10px 0px;
     display: block;
 }
 
-.public_ssh_key_row:hover {
+.public_oauth_key_row:hover {
     background-color: white;
 }
 
-.public_ssh_key_row .cellRowIndex {
+.public_oauth_key_row .cellRowIndex {
     width: 10%;
     display: block;
     float: left;
 }
 
-.public_ssh_key_row .cellRowKeyDetails {
+.public_oauth_key_row .cellRowKeyDetails {
     width: 70%;
     display: block;
     float: left;
 }
 
-.public_ssh_key_row .cellRowDeleteKey {
+.public_oauth_key_row .cellRowDeleteKey {
     width: 20%;
     display: block;
     float: left;
@@ -128,12 +128,12 @@ p.moduleListText { margin: 0; }
     max-height: 30px;
 }
 
-.disable_ssh_key,
-.enable_ssh_key  {
+.disable_oauth_key,
+.enable_oauth_key  {
     margin: 3px 0px 0px 0px ;
 }
 
-.delete_ssh_key {
+.delete_oauth_key {
     margin: 3px 0px 3px 0px ;
 }
 

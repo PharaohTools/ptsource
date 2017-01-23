@@ -84,7 +84,8 @@ class UserOAuthKeyAnyOS extends BasePHPApp {
                 'enabled' => 'string',
                 'last_used' => 'string',
                 'title' => 'string',
-                'key_data' => 'string',
+                'oauth_user' => 'string',
+                'oauth_key' => 'string',
                 'fingerprint' => 'string'
             );
             $logging->log("Creating User OAuth Keys Collection in Datastore", $this->getModuleName()) ;
