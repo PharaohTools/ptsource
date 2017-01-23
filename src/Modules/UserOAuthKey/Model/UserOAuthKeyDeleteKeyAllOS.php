@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class UserSSHKeyDeleteKeyAllOS extends Base {
+class UserOAuthKeyDeleteKeyAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -37,13 +37,13 @@ class UserSSHKeyDeleteKeyAllOS extends Base {
                 "key_hash" => $this->params["key_hash"] );
             return $return ; }
 
-        $keyBase = new \Model\UserSSHKeyAnyOS($this->params) ;
+        $keyBase = new \Model\UserOAuthKeyAnyOS($this->params) ;
         $all_keys = $keyBase->getAllKeyDetails() ;
 
         $return = array(
             "status" => true ,
             "message" => "Key Deleted",
-            "public_ssh_keys" => $all_keys,
+            "public_oauth_keys" => $all_keys,
             "key_hash" => $this->params["key_hash"]  );
 
         return $return ;
@@ -63,7 +63,7 @@ class UserSSHKeyDeleteKeyAllOS extends Base {
         $parsed_filters = array() ;
         $parsed_filters[] = array("where", "key_hash", '=', $this->params["key_hash"] ) ;
         $parsed_filters[] = array("where", "user_id", '=', $uname ) ;
-        $keys = $datastore->findAll('user_ssh_keys', $parsed_filters) ;
+        $keys = $datastore->findAll('user_oauth_keys', $parsed_filters) ;
         if (count($keys)>0) {
             return $keys ;
         }
@@ -79,7 +79,7 @@ class UserSSHKeyDeleteKeyAllOS extends Base {
         $datastore = $datastoreFactory->getModel($this->params) ;
         $parsed_filters = array( "key_hash" => $this->params["key_hash"] ) ;
 //        $parsed_filters[] = array("where", "user_id", '=', $uname ) ;
-        $res = $datastore->delete('user_ssh_keys', $parsed_filters) ;
+        $res = $datastore->delete('user_oauth_keys', $parsed_filters) ;
         return $res ;
     }
 

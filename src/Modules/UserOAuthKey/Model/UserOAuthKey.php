@@ -2,6 +2,6 @@
 
 Namespace Model;
 
-class UserSSHKey extends BaseModelFactory {
+class UserOAuthKey extends BaseModelFactory {
 
 }

@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class UserSSHKeyAnyOS extends BasePHPApp {
+class UserOAuthKeyAnyOS extends BasePHPApp {
 
     // Compatibility
     public $os = array("any") ;
@@ -22,7 +22,7 @@ class UserSSHKeyAnyOS extends BasePHPApp {
         $ret['user'] = $this->getUserDetails();
         $ret['allusers'] = $this->getAllUserDetails();
         $ret['email_users_enabled'] = $this->getEnabledStatus();
-        $ret['public_ssh_keys'] = $this->getAllKeyDetails();
+        $ret['public_oauth_keys'] = $this->getAllKeyDetails();
         return $ret ;
     }
 
@@ -75,7 +75,7 @@ class UserSSHKeyAnyOS extends BasePHPApp {
         $parsed_filters = array() ;
         $parsed_filters[] = array("where", "user_id", '=', $uname ) ;
 
-        if ($datastore->collectionExists('user_ssh_keys')==false){
+        if ($datastore->collectionExists('user_oauth_keys')==false){
             $column_defines = array(
                 'key_id' => 'INTEGER PRIMARY KEY ASC',
                 'key_hash' => 'string',
@@ -87,10 +87,10 @@ class UserSSHKeyAnyOS extends BasePHPApp {
                 'key_data' => 'string',
                 'fingerprint' => 'string'
             );
-            $logging->log("Creating User SSH Keys Collection in Datastore", $this->getModuleName()) ;
-            $datastore->createCollection('user_ssh_keys', $column_defines) ; }
+            $logging->log("Creating User OAuth Keys Collection in Datastore", $this->getModuleName()) ;
+            $datastore->createCollection('user_oauth_keys', $column_defines) ; }
 
-        $keys = $datastore->findAll('user_ssh_keys', $parsed_filters) ;
+        $keys = $datastore->findAll('user_oauth_keys', $parsed_filters) ;
         $keys = $this->keyDecorator($keys) ;
         return $keys ;
     }

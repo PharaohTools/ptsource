@@ -2,26 +2,26 @@
 
 Namespace Info;
 
-class UserSSHKeyInfo extends PTConfigureBase {
+class UserOAuthKeyInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "Edit SSH Keys for Users";
+    public $name = "Edit OAuth Keys for Users";
 
     public function __construct() {
         parent::__construct();
     }
 
     public function routesAvailable() {
-        return array( 'UserSSHKey' =>  array("show", "new", "create", "delete", "enable", "disable", "update"));
+        return array( 'UserOAuthKey' =>  array("show", "new", "create", "delete", "enable", "disable", "update"));
     }
 
     public function routeAliases() {
-        return array('user-sshkey' => 'UserSSHKey', 'usersshkey' => 'UserSSHKey');
+        return array('user-oauthkey' => 'UserOAuthKey', 'useroauthkey' => 'UserOAuthKey');
     }
 
     public function helpDefinition() {
-        $help = 'The User SSH Key Module allows you to store and edit SSH Keys.';
+        $help = 'The User OAuth Key Module allows you to store and edit OAuth Keys.';
         return $help ;
     }
 

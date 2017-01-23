@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class UserSSHKeyEnableKeyAllOS extends Base {
+class UserOAuthKeyEnableKeyAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -39,13 +39,13 @@ class UserSSHKeyEnableKeyAllOS extends Base {
 
 
 
-        $keyBase = new \Model\UserSSHKeyAnyOS($this->params) ;
+        $keyBase = new \Model\UserOAuthKeyAnyOS($this->params) ;
         $all_keys = $keyBase->getAllKeyDetails() ;
 
         $return = array(
             "status" => true ,
             "message" => "Key Enabled",
-            "public_ssh_keys" => $all_keys,
+            "public_oauth_keys" => $all_keys,
             "key_hash" => $this->params["key_hash"]  );
 
         return $return ;
@@ -65,7 +65,7 @@ class UserSSHKeyEnableKeyAllOS extends Base {
         $parsed_filters = array() ;
         $parsed_filters[] = array("where", "key_hash", '=', $this->params["key_hash"] ) ;
         $parsed_filters[] = array("where", "user_id", '=', $uname ) ;
-        $keys = $datastore->findAll('user_ssh_keys', $parsed_filters) ;
+        $keys = $datastore->findAll('user_oauth_keys', $parsed_filters) ;
         if (count($keys)>0) {
             return $keys ;
         }
@@ -87,7 +87,7 @@ class UserSSHKeyEnableKeyAllOS extends Base {
         $datastoreFactory = new \Model\Datastore() ;
         $datastore = $datastoreFactory->getModel($this->params) ;
         $clause = array('key_hash' => $this->params["key_hash"] ) ;
-        $res = $datastore->update('user_ssh_keys', $clause, $new_key) ;
+        $res = $datastore->update('user_oauth_keys', $clause, $new_key) ;
         return $res ;
     }
 

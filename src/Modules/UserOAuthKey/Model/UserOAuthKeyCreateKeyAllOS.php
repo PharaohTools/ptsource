@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class UserSSHKeyCreateKeyAllOS extends Base {
+class UserOAuthKeyCreateKeyAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -26,23 +26,21 @@ class UserSSHKeyCreateKeyAllOS extends Base {
         $createdKey = $this->addTheKey() ;
         if ($createdKey !== true) {
             return $createdKey ; }
-        $finger = $this->getFingerprint() ;
 
-        $keyBase = new \Model\UserSSHKeyAnyOS($this->params) ;
+        $keyBase = new \Model\UserOAuthKeyAnyOS($this->params) ;
         $all_keys = $keyBase->getAllKeyDetails() ;
 
         $return = array(
             "status" => true ,
             "message" => "Key Created",
-            "public_ssh_keys" => $all_keys,
-            "fingerprint" => $finger );
+            "public_oauth_keys" => $all_keys );
         return $return ;
 
     }
 
     public function validateKeyDetails() {
-        $keyBase = new \Model\UserSSHKeyAnyOS($this->params) ;
-        if ($keyBase->keyAlreadyExists($this->params["new_ssh_key_title"]) === true) {
+        $keyBase = new \Model\UserOAuthKeyAnyOS($this->params) ;
+        if ($keyBase->keyAlreadyExists($this->params["new_oauth_key_title"]) === true) {
             $return = array(
                 "status" => false ,
                 "message" => "This Key Name already exists" );
@@ -58,33 +56,40 @@ class UserSSHKeyCreateKeyAllOS extends Base {
 
     private function keyInvalid() {
 
-        if (strlen($this->params["new_ssh_key"]) <7 ) {
-            $return = "This does not appear to be an SSH Key. It's not long enough" ;
-            return $return ; }
-
-        $crypt_loc = dirname(__DIR__).DS.'Libraries'.DS.'phpseclib'.DS.'Crypt'.DS ;
-        $crypt_files = scandir($crypt_loc) ;
-        foreach ($crypt_files as $crypt_file) {
-            if (!in_array($crypt_file, array('.', '..'))) {
-                require_once $crypt_loc.$crypt_file ; } }
-
-        $math_loc = dirname(__DIR__).DS.'Libraries'.DS.'phpseclib'.DS.'Math'.DS ;
-        $math_files = scandir($math_loc) ;
-        foreach ($math_files as $math_file) {
-            if (!in_array($math_file, array('.', '..'))) {
-                require_once $math_loc.$math_file ; } }
-
-        $finger = $this->getFingerprint() ;
-        if ($finger === false) {
-            $msg = 'Unable to generate fingerprint. This key is invalid.' ;
-            return $msg ; }
+//        if (strlen($this->params["new_oauth_key"]) <7 ) {
+//            $return = "This does not appear to be an OAuth Key. It's not long enough" ;
+//            return $return ; }
+//
+//        $crypt_loc = dirname(__DIR__).DS.'Libraries'.DS.'phpseclib'.DS.'Crypt'.DS ;
+//        $crypt_files = scandir($crypt_loc) ;
+//        foreach ($crypt_files as $crypt_file) {
+//            if (!in_array($crypt_file, array('.', '..'))) {
+//                require_once $crypt_loc.$crypt_file ; } }
+//
+//        $math_loc = dirname(__DIR__).DS.'Libraries'.DS.'phpseclib'.DS.'Math'.DS ;
+//        $math_files = scandir($math_loc) ;
+//        foreach ($math_files as $math_file) {
+//            if (!in_array($math_file, array('.', '..'))) {
+//                require_once $math_loc.$math_file ; } }
+//
+//        $finger = $this->getFingerprint() ;
+//        if ($finger === false) {
+//            $msg = 'Unable to generate fingerprint. This key is invalid.' ;
+//            return $msg ; }
 
         return true ;
     }
 
+//    private function getFingerprint() {
+//        $rsa = new \Crypt_RSA() ;
+//        $rsa->setPublicKey($this->params["new_oauth_key"]) ;
+//        $finger = $rsa->getPublicKeyFingerprint() ;
+//        return $finger ;
+//    }
+
     private function getFingerprint() {
         $rsa = new \Crypt_RSA() ;
-        $rsa->setPublicKey($this->params["new_ssh_key"]) ;
+        $rsa->setPublicKey($this->params["new_oauth_key"]) ;
         $finger = $rsa->getPublicKeyFingerprint() ;
         return $finger ;
     }
@@ -98,24 +103,25 @@ class UserSSHKeyCreateKeyAllOS extends Base {
         $au =$signup->getLoggedInUserData();
 
         $rsa = new \Crypt_RSA() ;
-        $rsa->setPublicKey($this->params["new_ssh_key"]) ;
+        $rsa->setPublicKey($this->params["new_oauth_key"]) ;
         $finger = $rsa->getPublicKeyFingerprint() ;
         
-        $res = $datastore->insert('user_ssh_keys', array(
+        $res = $datastore->insert('user_oauth_keys', array(
             "user_id" => $au->username,
-            "key_data" => $this->params["new_ssh_key"],
+            "key_start" => $this->params["new_oauth_key"],
+            "key_end" => $this->params["new_oauth_key"],
             "key_hash" => uniqid(),
             "created_on" => time(),
             "enabled" => 'on',
             "last_used" => time(),
-            "title" => $this->params["new_ssh_key_title"],
+            "title" => $this->params["new_oauth_key_title"],
             "fingerprint" => $finger
         )) ;
 
         if ($res == false) {
             $return = array(
                 "status" => false ,
-                "message" => "Unable to add this SSH Key to your account" );
+                "message" => "Unable to add this OAuth Key to your account" );
             return $return ; }
 
         return true ;
