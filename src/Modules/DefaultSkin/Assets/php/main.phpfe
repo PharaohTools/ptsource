@@ -22,3 +22,6 @@ class core {
 $console->log("enabling load-locked elements") ;
 $jQuery('.load_hidden')->removeClass('load_hidden') ;
 $jQuery('.load_pending')->remove() ;
+
+$jQuery('.app-loader')->fadeOut('fast') ;
+$jQuery('.app-wrapper')->show() ;
