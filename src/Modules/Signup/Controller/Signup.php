@@ -51,7 +51,7 @@ class Signup extends Base {
 		if ($pageVars["route"]["action"] == "verify") {
             $thisModel->mailVerification(); }
 
-        if ($this->content["output-format"] == "JSON" ||
+        if ( (isset($this->content["output-format"]) && $this->content["output-format"] == "JSON") ||
             $this->content["route"]["extraParams"]["output-format"] == "JSON") {
             return array("type" => "view", "view" => "signupLogin", "pageVars" => $this->content); }
         else {
