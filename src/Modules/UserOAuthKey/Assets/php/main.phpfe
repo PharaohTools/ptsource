@@ -77,7 +77,7 @@ function changeOAuthKey($changeType, $key_hash) {
     return $ajax_object->done(
         function ($data) use ($jQuery, $console) {
             $console->log($data) ;
-            $kt = new keyTable() ;
+            $kt = new oAuthKeyTable() ;
             $kt->rewriteTable($data, $jQuery) ;
         }
     );
@@ -105,7 +105,7 @@ function createNewOAuthKey() {
         function ($data) use ($jQuery) {
             $jQuery('.create_new_key_field')->fadeIn('fast') ;
             $jQuery('.loading_keys')->fadeOut('fast') ;
-            $kt = new keyTable() ;
+            $kt = new oAuthKeyTable() ;
             $kt->rewriteTable($data, $jQuery) ;
             $jQuery('#create_new_key_fields')->fadeOut();
             $jQuery('#new_oauth_key_title')->val('') ;
@@ -127,7 +127,7 @@ function validateOAuthKey() {
     return true ;
 }
 
-class keyTable {
+class oAuthKeyTable {
 
     public function rewriteTable($data, $jQuery) {
         $ht = '' ;
@@ -142,6 +142,8 @@ class keyTable {
             foreach ($full_key_array as $index => $cur_val) {
                 $full_key[$index] = $cur_val ; }
 
+                \js_core::$console->log($full_key["fingerprint"]) ;
+
             $ht = $ht . "<div class='public_oauth_key_row' id='". "\n";
             $ht = $ht . $full_key["key_hash"];
             $ht = $ht . "'>";
@@ -154,7 +156,7 @@ class keyTable {
             $ht = $ht . '        ' . $full_key["fingerprint"];
             $ht = $ht . '    </div>';
             $ht = $ht . '    <div class="fullRow">';
-            $ht = $ht . '        Created on: ' . $full_key["created_on_format"] .' — Last used on: ' . $full_key["created_on_format"];
+            $ht = $ht . '        Created on: ' . $full_key["created_on_format"] .' — Last Used: ' . $full_key["created_on_format"];
             $ht = $ht . '    </div>';
             $ht = $ht . '  </div>';
             $ht = $ht . '  <div class="blCell cellRowDeleteKey">';
