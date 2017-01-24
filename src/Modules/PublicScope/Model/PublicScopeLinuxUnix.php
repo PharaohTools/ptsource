@@ -68,9 +68,10 @@ class PublicScopeLinuxUnix extends Base {
         $repositories = $this->getRepositories() ;
         $public_repositories = array() ;
         foreach ($repositories as $repository) {
-            if ($repository['settings']["PublicScope"]["enabled"] === 'on') {
-                if ($repository['settings']["PublicScope"]["public_pages"] === 'on') {
-                    $public_repositories[] = $repository ; } } }
+            if (isset($repository['settings']["PublicScope"])) {
+                if ($repository['settings']["PublicScope"]["enabled"] === 'on') {
+                    if ($repository['settings']["PublicScope"]["public_pages"] === 'on') {
+                        $public_repositories[] = $repository ; } } } }
         $public_repositories_html = $this->getHTMLFromRepositories($public_repositories) ;
         \Model\RegistryStore::setValue('public_links', $public_repositories_html) ;
         return $public_repositories ;
