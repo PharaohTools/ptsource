@@ -215,7 +215,9 @@ class SignupAllOS extends Base {
         $users = $this->getUsersData() ;
         $retuser = false ;
         foreach ($users as $user) {
-            if ($user->username == $_SESSION["username"]) {
+
+            if (isset($_SESSION["username"]) &&
+                $user->username === $_SESSION["username"]) {
                 $retuser = $user ;
                 break ; } }
         return $retuser ;
