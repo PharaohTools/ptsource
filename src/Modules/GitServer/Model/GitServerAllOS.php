@@ -14,6 +14,25 @@ class GitServerAllOS extends Base {
     // Model Group
     public $modelGroup = array("Default") ;
 
+    public function getEventNames() {
+        return array_keys($this->getEvents());
+    }
+
+    public function getEvents() {
+        $ff = array(
+            "afterApplicationConfigurationSave" => array(
+                "ensureSSHServerStatus",
+            ),
+        );
+        return $ff ;
+    }
+
+    public function ensureSSHServerStatus() {
+        $gsf = new \Model\GitServer();
+        $gs = $gsf->getModel($this->params, "ServerFunctions") ;
+        $gs->serveGit() ;
+    }
+
     public function backendData2() {
         $gsf = new \Model\GitServer();
         $gs = $gsf->getModel($this->params, "ServerFunctions") ;
@@ -192,11 +211,13 @@ class GitServerAllOS extends Base {
         return $headers;
     }
 
-    protected function userIsAllowed($gitRequestUser, $repo_name) {
+
+    public function userIsAllowed($gitRequestUser, $repo_name) {
         $isWriteAction = $this->isWriteAction() ;
         if ($isWriteAction == false) {
             //error_log("is not a write") ;
             $publicReads = $this->repoPublicAllowed("read", $repo_name) ;
+//            var_dump('public reads', $publicReads) ;
             if ($publicReads == true) {
                 return true ; }
             else {
@@ -247,24 +268,38 @@ class GitServerAllOS extends Base {
     }
 
     protected function authUserToRead($gitRequestUser, $repo_name) {
-        if ( $gitRequestUser["user"] == "anon" ) { return false ; }
+        if ( $gitRequestUser["user"] == "anon" ) {
+            return false ; }
         $repoFactory = new \Model\Repository() ;
         $repo = $repoFactory->getModel($this->params, "Default") ;
         $thisRepo = $repo->getRepository($repo_name) ;
         $hidden = (isset($thisRepo["settings"]["HiddenScope"]["enabled"]) && $thisRepo["settings"]["HiddenScope"]["enabled"]=="on") ? true : false ;
         $hidden_from_members = (isset($thisRepo["settings"]["HiddenScope"]["hidden_from_members"]) && $thisRepo["settings"]["HiddenScope"]["hidden_from_members"]=="on") ? true : false ;
-        if ($hidden == true) {
+
+        $signupFactory = new \Model\Signup();
+        $signup = $signupFactory->getModel($this->params) ;
+
+        if ($signup->userNameExist($gitRequestUser["user"]) === false) {
+            return false ;
+        }
+
+        if ($hidden === true) {
+//            var_dump('its hidden');
             // @todo here
             // if logged in user is owner
-            if ($gitRequestUser["user"]==$thisRepo["project-owner"]) { return true ; }
+            if ($gitRequestUser["user"] === $thisRepo["project-owner"]) {
+//                var_dump('user match ting');
+                return true ; }
             // if settings say hide from members return false
-            if ($hidden_from_members==true) { return false ; }
+            if ($hidden_from_members === true) {
+                return false ; }
             // if logged in user is member return true
             $pm = explode(",", $thisRepo["project-members"]) ;
-            if (in_array($gitRequestUser["user"], $pm)) { return true ; }
+            if (in_array($gitRequestUser["user"], $pm)) {
+                return true ; }
             return false ;
-        } else {
-            return true ; }
+        }
+
     }
 
     protected function authUserToWrite($gitRequestUser, $repo_name) {
@@ -288,25 +323,19 @@ class GitServerAllOS extends Base {
             return true ; }    }
 
     protected function isWriteAction() {
-        if ( strpos($_SERVER["REQUEST_URI"], "git-receive-pack") !== false) {
-            return true ; }
-        return false ;
-    }
-
-    public function strPosX2($haystack, $needle, $number){
-        if ($number == 1) {
-            return strpos($haystack, $needle); }
-        else if ($number > 1){
-            return strpos($haystack, $needle, $this->strPosX($haystack, $needle, $number - 1) + strlen($needle)); }
+        // @TODO There are multiple better ways to do this. Maybe a method parameter
+        // var_dump($_SERVER["REQUEST_URI"]) ;
+        if (isset($_SERVER["REQUEST_URI"])) {
+            // Its a http request
+            if ( strpos($_SERVER["REQUEST_URI"], "git-receive-pack") !== false) {
+                return true ; }
+            return false ; }
         else {
-            return error_log('Error: Value for parameter $number is out of range'); }
+            // Its an SSH request
+             if (strpos($this->params["ssh_command"], 'git-recieve-pack') === 0) {
+                return true ; }
+            return false ; }
     }
 
-    public function strPosX($haystack, $needle, $number){
-        $cur_sp = 0 ;
-        for ($i=1 ; $i<=$number; $i++) {
-            $cur_sp = strpos($haystack, $needle, $cur_sp) ; }
-        return  $cur_sp ;
-    }
 
 }
