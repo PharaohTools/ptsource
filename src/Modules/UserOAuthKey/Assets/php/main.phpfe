@@ -23,8 +23,8 @@ function setPageTriggers() {
         return false ;
     });
 
-    $jQuery('.disable_oauth_key')->on('click', function($this) use ($jQuery, $console)  {
-        $console->log( $this->target->id );
+    $jQuery('.disable_oauth_key')->on('click', function($jqthis) use ($jQuery, $console)  {
+        $console->log( $jqthis->target->id );
         $id = $this->target->id ;
         $key_hash = str_replace('disable_', '', $id) ;
         $jQuery('#disable_'.$key_hash)->addClass('hidden') ;
@@ -35,8 +35,8 @@ function setPageTriggers() {
 //    $jQuery('#disable_'.$key_hash.'_loading')->addClass('hidden') ;
     });
 
-    $jQuery('.enable_oauth_key')->on('click', function($this) use ($jQuery, $console)  {
-        $console->log( $this->target->id );
+    $jQuery('.enable_oauth_key')->on('click', function($jqthis) use ($jQuery, $console)  {
+        $console->log( $jqthis->target->id );
         $id = $this->target->id ;
         $key_hash = str_replace('enable_', '', $id) ;
         $jQuery('#enable_'.$key_hash)->addClass('hidden') ;
@@ -47,8 +47,8 @@ function setPageTriggers() {
 //    $jQuery('#enable_'.$key_hash.'_loading')->addClass('hidden') ;
     });
 
-    $jQuery('.delete_oauth_key')->on('click', function($this) use ($jQuery, $console)  {
-        $console->log( $this->target->id );
+    $jQuery('.delete_oauth_key')->on('click', function($jqthis) use ($jQuery, $console)  {
+        $console->log( $jqthis->target->id );
         $id = $this->target->id ;
         $key_hash = str_replace('delete_', '', $id) ;
         $jQuery('#delete_'.$key_hash)->addClass('hidden') ;
