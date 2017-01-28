@@ -14,168 +14,104 @@ class GitServerSSHFunctionsAllOS extends Base {
     // Model Group
     public $modelGroup = array("ServerSSHFunctions") ;
 
-    public function backendData() {
 
-        $pos = strpos($this->params["item"], '/') ;
-        $repo_name = $this->params["item"] ;
-        if ($pos !== false) {
-            $repo_name = substr($this->params["item"], 0, $pos) ; }
-
-        define("DEBUG_LOG",        true);
-        define("HTTP_AUTH",        false);
-        define("GZIP_SUPPORT",     false);
-        define("GIT_ROOT",         REPODIR.DS );
-        define("GIT_HTTP_BACKEND", "/usr/lib/git-core/git-http-backend");
-        define("GIT_BIN",          "/usr/bin/git");
-        define("REMOTE_USER",      "smart-http");
-        define("LOG_RESPONSE",     "/tmp/response.log");
-        define("LOG_PROCESS",      "/tmp/process.log");
-//        error_log("three" ) ;
-
-        if(isset($_SERVER["PATH_INFO"])) {
-            list($git_project_path, $path_info) = $temp = preg_split("/\//", $_SERVER["PATH_INFO"], 2, PREG_SPLIT_NO_EMPTY);
-            $git_project_path = "/" . $git_project_path . "/";
-            $path_info = "/" . $path_info; }
+    public function ensureSSHServerStatus() {
+        $loggingFactory = new \Model\Logging();
+        $this->params["echo-log"] = true ;
+        $this->params["app-log"] = true ;
+        $this->params["php-log"] = true ;
+        $logging = $loggingFactory->getModel($this->params);
+        $mod_config = \Model\AppConfig::getAppVariable("mod_config") ;
+        $is_enabled = ($mod_config["SSHServer"]['enable_ssh_server'] === 'on') ;
+        if ($is_enabled === true) {
+            $app_root  = PFILESDIR.PHARAOH_APP.DS.PHARAOH_APP.DS ;
+            $bin_file = $app_root . 'src'.DS.'Modules'.DS.'GitServer'.DS.'Libraries' ;
+            $bin_file .= DS.'vendor'.DS.'fpoirotte'.DS.'pssht'.DS.'bin'.DS.'pssht' ;
+            $base_bin = basename($bin_file) ;
+            error_log($bin_file) ;
+            if (is_file($bin_file)) {
+                $logging->log("Found Server Bin file {$base_bin}", $this->getModuleName()) ;
+                $comm = "cd {$app_root} && bash -c 'php {$bin_file} >> {$app_root}ssh_log.txt 2>&1 ' & " ;
+                # bash -c 'php /opt/ptsource/ptsource/src/Modules/GitServer/Libraries/vendor/fpoirotte/psshtin/pssht > /tmp/outy 2>&1 ' &
+                $logging->log("Comm is {$comm}", $this->getModuleName()) ;
+//                $status = $this->executeAndGetReturnCode($comm);
+//                if ($status !== 0) {
+//                    return false; }
+            } }
         else {
-            $git_project_path = "/";
-            $path_info = ""; }
+            $app_root  = PFILESDIR.PHARAOH_APP.DS.PHARAOH_APP.DS ;
+            $bin_file = $app_root . 'src'.DS.'Modules'.DS.'GitServer'.DS.'Libraries' ;
+            $bin_file .= DS.'vendor'.DS.'fpoirotte'.DS.'pssht'.DS.'bin'.DS.'pssht' ;
+            $base_bin = basename($bin_file) ;
+            error_log($bin_file) ;
+            if (is_file($bin_file)) {
+                $logging->log("Found Server Bin file {$base_bin}", $this->getModuleName()) ;
+                $comm = "cd {$app_root} && pkill pssht " ;
+                # bash -c 'php /opt/ptsource/ptsource/src/Modules/GitServer/Libraries/vendor/fpoirotte/psshtin/pssht > /tmp/outy 2>&1 ' &
+                $logging->log("Comm is {$comm}", $this->getModuleName()) ;
+//                $status = $this->executeAndGetReturnCode($comm);
+//                if ($status !== 0) {
+//                    return false; }
+            } }
+        $logging->log("SSH Server Status has been ensured", $this->getModuleName());
+        return true ;
+    }
 
-        $path_info = "/".$this->params["item"] ;
-        $request_headers = $this->getAllHeaders();
+    public function sshUserIsAllowed($gitRequestUser, $ssh_command) {
+        $parsed = $this->parseSSHCommand($ssh_command) ;
+        $gr_ray = array('user' => $gitRequestUser) ;
+        $gsf = new \Model\GitServer();
+        $this->params['item'] = $parsed['repo_name'] ;
+        $gs = $gsf->getModel($this->params) ;
+        $res = $gs->userIsAllowed($gr_ray, $parsed['repo_name']) ;
+        return $res ;
+    }
 
-        $php_input = file_get_contents("php://input");
-
-        $env = array (
-            "GIT_PROJECT_ROOT"    => REPODIR ,
-            "GIT_HTTP_EXPORT_ALL" => 1,
-            "GIT_HTTP_MAX_REQUEST_BUFFER" => "1000M",
-//            'PATH' => $_SERVER["PATH"],
-//            "REMOTE_USER"         => "ptsource",
-//            "REMOTE_USER"         => "smart-http",
-            "REMOTE_USER"         => isset($_SERVER["REMOTE_USER"])          ? $_SERVER["REMOTE_USER"]          : "ptsource",
-            "REMOTE_ADDR"         => isset($_SERVER["REMOTE_ADDR"])          ? $_SERVER["REMOTE_ADDR"]          : "",
-            "REQUEST_METHOD"      => isset($_SERVER["REQUEST_METHOD"])       ? $_SERVER["REQUEST_METHOD"]       : "",
-            "PATH_INFO"           => $path_info,
-            "QUERY_STRING"        => isset($_SERVER["QUERY_STRING"])         ? $_SERVER["QUERY_STRING"]         : "",
-            "CONTENT_TYPE"        => isset($request_headers["Accept"]) ? $request_headers["Accept"] : "",
-
-        );
-        // THIS IS IMPORTANT!! THIS IS WHAT STOPS PUSH WORKING. THE GIT CLIENT
-        $env["CONTENT_TYPE"]= str_replace("result", "request",$env["CONTENT_TYPE"] );
-
-//        $env = array_merge($_SERVER, $env) ;
-
-
-        $gitRequestUser = $this->getGitRequestUser() ;
-
-        if ($this->userIsAllowed($gitRequestUser, $repo_name)==false) {
-            header('HTTP/1.1 403 Forbidden');
-            return false ;  }
-
-//        $pathStarts = array('/HEAD', '/info/', '/objects/') ;
-//        $scm_synonyms = array("git", "scm") ;
-//        $qs = $_SERVER["REQUEST_URI"] ;
-//      THIS IS IMPORTANT! THIS STOPS PUSH FROM WORKING. IF THE QUERY STRING ENV VAR IS NOT SPECIFICALLY
-//      SET TO HAVE A STRING WITH ONE PARAMETER IN THE CLIENT ASSUMES A DUMB SERVER PROTOCOL
-        $qs = $_SERVER["REQUEST_URI"] ;
-
-        $qsmpos = strpos($qs, "?") ;
-        if ($qsmpos==false) {
-            $service = basename($qs) ;
-            $qs ="service={$service}" ; }
-        else {
-            if ($qsmpos !== false) {
-                $qs = substr($qs, $qsmpos+1); }}
-
-        $env["QUERY_STRING"] = $qs ;
-
-        $env["PATH_INFO"] = $path_info ;
-
-        if (isset($service)) {
-            $path_info = str_replace($service, "", $path_info) ;
-//            if (substr($path_info, 0, 1) == '/') {
-//                $env["PATH_INFO"] = substr($path_info, 1, strlen($path_info)-1) ; }
+    protected function parseSSHCommand($ssh_command) {
+        if (strpos($ssh_command, 'git-upload-pack') === 0) {
+            // is a read
+            $readwrite = 'read' ;
+            $without_gitcomm = substr($ssh_command, 15) ;
         }
-
-        $settings = array
-        (
-            0 => array("pipe", "r"),
-            1 => array("pipe", "w"),
-        );
-        if(defined(DEBUG_LOG))
-        {
-            $settings[2] = array("file", LOG_PROCESS, "a");
-        }
-        $process = proc_open(GIT_HTTP_BACKEND , $settings, $pipes, REPODIR.$path_info, $env);
-
-
-
-//        ob_start();
-////        var_dump("this env", phpinfo()) ;
-//        var_dump("srv:", $_SERVER, "env:", $env) ;
-////        var_dump("grq:", $gitRequestUser) ;
-////        var_dump("this env", $_SERVER['HTTP_AUTHORIZATION'], "user", $this->params["user"], "remote user", $_SERVER["REMOTE_USER"], "AUTH user", $_SERVER["PHP_AUTH_USER"], $_SERVER["PHP_AUTH_PW"], $_SERVER["HTTP_AUTHORIZATION"]) ;
-//        $res = ob_get_clean();
-//        file_put_contents('/var/log/pharaoh.log', $res, FILE_APPEND) ;
-
-        if (is_resource($process)) {
-//            error_log("php in: $php_input" ) ;
-            fwrite($pipes[0], $php_input);
-            fclose($pipes[0]);
-            $return_output = stream_get_contents($pipes[1]);
-            fclose($pipes[1]);
-            $return_code = proc_close($process);
-//            error_log("\n\n\nNew Request" ) ;
-//            error_log("rc: $return_code, stduot: $return_output" ) ;
+        elseif (strpos($ssh_command, 'git-recieve-pack') === 0) {
+            // is a write
+            $readwrite = 'write' ;
+            $without_gitcomm = substr($ssh_command, 15) ;
         }
         else {
-//            error_log("is r:", is_resource($process) ) ;
+            // not an allowed command
+            return false ;
         }
-        if(!empty($return_output))
-        {
-//            echo 'Pharaoh Source Git Server' ;
-            list($response_headers, $response_body)
-                = $response
-                = preg_split("/\R\R/", $return_output, 2, PREG_SPLIT_NO_EMPTY);
-
-            foreach(preg_split("/\R/", $response_headers) as $response_header)
-            {
-                error_log("RH: $response_header" ) ;
-                header($response_header);
-            }
-            if(isset($request_headers["Accept-Encoding"]) && strpos($request_headers["Accept-Encoding"], "gzip") !== false && GZIP_SUPPORT)
-            {
-                error_log("using gzip" ) ;
-                $gzipoutput = gzencode($response_body, 6);
-                ini_set("zlib.output_compression", "Off");
-                header("Content-Encoding: gzip");
-                header("Content-Length: " . strlen($gzipoutput));
-                echo $gzipoutput;
-            }
-            else
-            {
-                error_log("using no gzip" ) ;
-                echo $response_body;
-            }
-        }
-//        echo 'Something went wrong' ;
-
-        if(DEBUG_LOG)
-        {
-//            file_put_contents(LOG_RESPONSE, "");
-            $log = "";
-            $log .= "\$request_headers = " . print_r($request_headers, true);
-            $log .= "\$env = " . print_r($env, true);
-            $log .= "\$server = " . print_r($_SERVER, true);
-            $log .= "\$php_input = " . PHP_EOL . $php_input . PHP_EOL;
-            //$log .= "\$return_output = " . PHP_EOL . $return_output . PHP_EOL;
-            $log .= "\$response = " . print_r($response, true);
-            $log .= str_repeat("-", 80) . PHP_EOL;
-            $log .= PHP_EOL;
-            file_put_contents(LOG_RESPONSE, $log, FILE_APPEND);
-        }
+        $repo_path = $this->parseGitCommand($without_gitcomm) ;
+        $path_sections = $this->parseRepoPath($repo_path) ;
+        return $path_sections ;
 
     }
 
+    protected function parseGitCommand($without_gitcomm) {
+        $start = strpos($without_gitcomm, "/") ;
+        $no_first = substr($without_gitcomm, $start-1) ;
+        $end = strrpos($no_first, "/") ;
+        $parsed = substr($no_first, 0, $end+1) ;
+        return $parsed ;
+    }
+
+    protected function parseRepoPath($repo_path) {
+
+        $sections = explode('/', $repo_path) ;
+        $return_sections = array() ;
+
+        if (in_array($sections[0], array('git', 'scm')) ) {
+            $return_sections['scm_type'] = 'git' ;
+        } else {
+            // This is an incorrect command
+            return false ;
+        }
+
+        $return_sections['repo_owner'] = $sections[1] ;
+        $return_sections['repo_name'] = $sections[2] ;
+
+        return $return_sections ;
+    }
 
 }
