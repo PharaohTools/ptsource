@@ -14,7 +14,6 @@ class SSHServerAllOS extends Base {
     // Model Group
     public $modelGroup = array("Default") ;
 
-
     public function getEventNames() {
         return array_keys($this->getEvents());
     }
@@ -22,59 +21,52 @@ class SSHServerAllOS extends Base {
     public function getEvents() {
         $ff = array(
             "afterApplicationConfigurationSave" => array(
-                "ensureServerStatus",
+                "ensureSSHServerStatus",
             ),
         );
         return $ff ;
     }
 
-
     public function ensureSSHServerStatus() {
-
         $loggingFactory = new \Model\Logging();
         $this->params["echo-log"] = true ;
+        $this->params["app-log"] = true ;
+        $this->params["php-log"] = true ;
         $logging = $loggingFactory->getModel($this->params);
-
-
         $mod_config = \Model\AppConfig::getAppVariable("mod_config") ;
-
-        $opt = $mod_config["SSHServer"][$option_title] ;
-
-//        $full_options = array(
-//            "instance_id" => $this->getNewInstanceID(),
-//            "instance_title" => "Pharaoh Build Node",
-//            "organisation" => "A Pharaoh Tools Organization");
-//        $option_titles = array_keys($full_options);
-//
-//        foreach ($option_titles as $option_title) {
-//            $opt = $mod_config["SSHServer"][$option_title] ;
-//            if (!isset($opt) || $opt == "") {
-//                $mod_config["SSHServer"][$option_title] = $full_options[$option_title] ;
-//                $logging->log("Creating default configuration for Application Instance {$option_title} ...", $this->getModuleName());
-//            }
-//        }
-
-        $orig_config = \Model\AppConfig::getAppVariable("mod_config") ;
-        if ($mod_config==$orig_config) {
-            return true ;
-        }
-        $logging->log("Writing new default values", $this->getModuleName());
-        \Model\AppConfig::setAppVariable("mod_config", $mod_config ) ;
-
+        $is_enabled = ($mod_config["SSHServer"]['enable_ssh_server'] === 'on') ;
+        if ($is_enabled === true) {
+            $app_root  = PFILESDIR.PHARAOH_APP.DS.PHARAOH_APP.DS ;
+            $bin_file = $app_root . 'src'.DS.'Modules'.DS.'GitServer'.DS.'Libraries' ;
+            $bin_file .= DS.'vendor'.DS.'fpoirotte'.DS.'pssht'.DS.'bin'.DS.'pssht' ;
+            $base_bin = basename($bin_file) ;
+            error_log($bin_file) ;
+            if (is_file($bin_file)) {
+                $logging->log("Found Server Bin file {$base_bin}", $this->getModuleName()) ;
+                $comm = "cd {$app_root} && bash -c 'php {$bin_file} >> {$app_root}ssh_log.txt 2>&1 ' & " ;
+                # bash -c 'php /opt/ptsource/ptsource/src/Modules/GitServer/Libraries/vendor/fpoirotte/psshtin/pssht > /tmp/outy 2>&1 ' &
+                $logging->log("Comm is {$comm}", $this->getModuleName()) ;
+//                $status = $this->executeAndGetReturnCode($comm);
+//                if ($status !== 0) {
+//                    return false; }
+            } }
+        else {
+            $app_root  = PFILESDIR.PHARAOH_APP.DS.PHARAOH_APP.DS ;
+            $bin_file = $app_root . 'src'.DS.'Modules'.DS.'GitServer'.DS.'Libraries' ;
+            $bin_file .= DS.'vendor'.DS.'fpoirotte'.DS.'pssht'.DS.'bin'.DS.'pssht' ;
+            $base_bin = basename($bin_file) ;
+            error_log($bin_file) ;
+            if (is_file($bin_file)) {
+                $logging->log("Found Server Bin file {$base_bin}", $this->getModuleName()) ;
+                $comm = "cd {$app_root} && pkill pssht " ;
+                # bash -c 'php /opt/ptsource/ptsource/src/Modules/GitServer/Libraries/vendor/fpoirotte/psshtin/pssht > /tmp/outy 2>&1 ' &
+                $logging->log("Comm is {$comm}", $this->getModuleName()) ;
+//                $status = $this->executeAndGetReturnCode($comm);
+//                if ($status !== 0) {
+//                    return false; }
+            } }
+        $logging->log("SSH Server Status has been ensured", $this->getModuleName());
         return true ;
-    }
-
-    protected function getNewInstanceID($length=16) {
-        $uid = "" ;
-        for ($i=0; $i<$length; $i++) {
-            $avail_chars  = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" ;
-            $avail_chars .= "abcdefghijklmnopqrstuvwxyz" ;
-            $avail_chars .= "0123456789" ;
-//            $avail_chars .= "!£%^&*(){}+=_-<>" ;
-            $char = rand(0,strlen($avail_chars)) ;
-            $cur = substr($avail_chars, $char, 1) ;
-            $uid .= $cur ; }
-        return $uid ;
     }
 
 }
