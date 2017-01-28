@@ -380,6 +380,14 @@ class SignupAllOS extends Base {
         return false;
     }
 
+    public function userNameExist($name) {
+        $users = $this->getUsersData();
+        foreach ($users as $user) {
+            if ($user->username== $name)
+                return true; }
+        return false;
+    }
+
     public function getUserRole($email) {
         if ($this->userExist($email)) {
             $users = $this->getUsersData();
