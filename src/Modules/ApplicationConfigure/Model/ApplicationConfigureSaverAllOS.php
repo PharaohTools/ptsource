@@ -27,6 +27,8 @@ class ApplicationConfigureSaverAllOS extends Base {
         $eventRunnerFactory = new \Model\EventRunner() ;
         $eventRunner = $eventRunnerFactory->getModel($this->params) ;
         $ev = $eventRunner->eventRunner("afterApplicationConfigurationSave") ;
+//        var_dump($ev, 'here') ;
+//        die() ;
         if ($ev == false) { return false ; }
         // @todo actually use logic here
         return true ;
