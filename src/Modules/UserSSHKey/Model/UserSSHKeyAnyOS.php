@@ -60,12 +60,14 @@ class UserSSHKeyAnyOS extends BasePHPApp {
     }
 
 
-    public function getAllKeyDetails() {
+    public function getAllKeyDetails($uname = null) {
 
-        $signupFactory = new \Model\Signup();
-        $signup = $signupFactory->getModel($this->params);
-        $me = $signup->getLoggedInUserData() ;
-        $uname = $me->username;
+        if ($uname === null) {
+            $signupFactory = new \Model\Signup();
+            $signup = $signupFactory->getModel($this->params);
+            $me = $signup->getLoggedInUserData() ;
+            $uname = $me->username;
+        }
 
         $datastoreFactory = new \Model\Datastore() ;
         $datastore = $datastoreFactory->getModel($this->params) ;
