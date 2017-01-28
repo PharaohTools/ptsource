@@ -1,9 +1,8 @@
 #!/usr/bin/env php
 <?php
-// Read from stdin. First line is the username, second line is the password.
-$handle = fopen ("php://stdin","r");
-$username = trim(fgets($handle));
-$password = trim(fgets($handle));
+// Read from cli. First param is the username, second is the ssh command  run.
+
+$username = $argv[1] ;
 
 require_once(dirname(dirname(dirname(__DIR__))).DIRECTORY_SEPARATOR."Constants.php");
 require_once(dirname(dirname(dirname(__DIR__))).DIRECTORY_SEPARATOR."AutoLoad.php");
@@ -11,20 +10,27 @@ require_once(dirname(dirname(dirname(__DIR__))).DIRECTORY_SEPARATOR."AutoLoad.ph
 $autoLoader = new \Core\autoLoader();
 $autoLoader->launch();
 
-if (userValid($username, $password)==false) {
+$keys = findUserKeys($username) ;
+if ($keys === false || count($keys)===0) {
+    echo "User does not have keys available\n" ;
     exit (1) ; }
 
-//echo "username/password allowed for user $username\n";
+
+    foreach ($keys as $key) {
+        $with_command = 'command="/opt/davewrap.php",no-port-forwarding,no-X11-forwarding,no-pty ' ;
+        $new_key = $with_command.$key['key_data'] ;
+        echo "$new_key\n" ;
+    }
+//var_dump($keys);
 exit (0);
 
-function userValid($username, $password) {
-    // @todo should check if public scope is enabled first probably before authing anon user
-    if ($username=="anon") { return true ; }
-    $signupFactory = new \Model\Signup() ;
-    $signup = $signupFactory->getModel(array(), "Default") ;
-    $res = $signup->checkLogin($username, $password, false) ;
-    if ($res["status"] == true) { return true ; }
-    return false ;
+
+function findUserKeys($username) {
+//    $ray = array("ssh_command" => $ssh_command) ;
+    $uskf = new \Model\UserSSHKey();
+    $usk = $uskf->getModel(array()) ;
+    $res = $usk->getAllKeyDetails($username) ;
+    return $res ;
 }
 
 ?>
