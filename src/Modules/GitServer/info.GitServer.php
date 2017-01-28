@@ -24,6 +24,18 @@ class GitServerInfo extends PTConfigureBase {
         return array("GitServer"=>array("serve"));
     }
 
+    public function events() {
+        return array("afterApplicationConfigurationSave");
+    }
+
+    public function configuration() {
+        return array(
+            "enable_ssh_server"=> array("type" => "boolean", "label" => "Enable Git SSH Server?", ),
+            "server_port"=> array("type" => "text", "default" => "22", "label" => "Git SSH Server Port?", ),
+//            "force_ssl"=> array("type" => "boolean", "label" => "Force SSL?", ),
+        );
+    }
+
     public function helpDefinition() {
       $help = <<<"HELPDATA"
   This is the Git Server Module
