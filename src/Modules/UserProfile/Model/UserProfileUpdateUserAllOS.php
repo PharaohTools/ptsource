@@ -37,8 +37,8 @@ class UserProfileUpdateUserAllOS extends Base {
 
         $return = array(
             "status" => true ,
-            "message" => "User Details Updated for {$this->params["update_username"]}",
-            "user" => $this->getOneUserDetails($this->params["update_username"]) );
+            "message" => "User Details Updated for {$this->params["create_username"]}",
+            "user" => $this->getOneUserDetails($this->params["create_username"]) );
         return $return ;
 
     }
@@ -65,7 +65,7 @@ class UserProfileUpdateUserAllOS extends Base {
 //        var_dump($allusers) ;
         foreach ($allusers as $oneuser) {
 //            var_dump($oneuser->username) ;
-            if ($oneuser->username == $this->params["update_username"]) {
+            if ($oneuser->username == $this->params["create_username"]) {
                 return true ; } }
         return false ;
     }
@@ -105,7 +105,7 @@ class UserProfileUpdateUserAllOS extends Base {
         $signup = $signupFactory->getModel($this->params);
         $au =$signup->getUsersData();
         foreach ($au as $oneuser) {
-            if ($oneuser->username === $this->params["update_username"]) {
+            if ($oneuser->username === $this->params["create_username"]) {
                 return $oneuser ; } }
         return array() ;
     }
@@ -113,7 +113,7 @@ class UserProfileUpdateUserAllOS extends Base {
     private function updateTheUserPassword() {
 
         $userMod = new \StdClass() ;
-        $userMod->username = $this->params["update_username"] ;
+        $userMod->username = $this->params["create_username"] ;
         $userMod->password = $this->params["update_password"] ;
 
         $signupFactory = new \Model\Signup();
@@ -132,7 +132,7 @@ class UserProfileUpdateUserAllOS extends Base {
     private function updateTheUserDetails() {
 
         $userMod = new \StdClass() ;
-        $userMod->username = $this->params["update_username"] ;
+        $userMod->username = $this->params["create_username"] ;
         if (isset($this->params["update_user_bio"])) {
             $userMod->user_bio = $this->params["update_user_bio"] ; }
         if (isset($this->params["update_full_name"])) {
