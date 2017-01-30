@@ -57,13 +57,15 @@ class GitServerSSHFunctionsAllOS extends Base {
         return true ;
     }
 
-    public function sshUserIsAllowed($gitRequestUser, $ssh_command) {
-        $parsed = $this->parseSSHCommand($ssh_command) ;
+    public function sshUserIsAllowed($gitRequestUser, $repo_name) {
+//        $parsed = $this->parseSSHCommand($ssh_command) ;
         $gr_ray = array('user' => $gitRequestUser) ;
         $gsf = new \Model\GitServer();
-        $this->params['item'] = $parsed['repo_name'] ;
+        $pos = strrpos($repo_name, '/') ;
+        $repo_name = substr($repo_name, $pos) ;
+        $this->params['item'] = $repo_name ;
         $gs = $gsf->getModel($this->params) ;
-        $res = $gs->userIsAllowed($gr_ray, $parsed['repo_name']) ;
+        $res = $gs->userIsAllowed($gr_ray, $repo_name) ;
         return $res ;
     }
 
