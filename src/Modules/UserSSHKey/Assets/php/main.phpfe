@@ -90,9 +90,8 @@ function createNewSSHKey() {
     $key = $jQuery('#new_ssh_key')->val() ;
     $title = $jQuery('#new_ssh_key_title')->val() ;
 
-    $new_data_string = "new_ssh_key=".$key.'&' ;
-    $new_data_string = $new_data_string."new_ssh_key_title=".$title ;
-    $new_data_string = \js_core::$window->encodeURI($new_data_string) ;
+    $new_data_string = "new_ssh_key=".\js_core::$window->encodeURIComponent($key).'&' ;
+    $new_data_string = $new_data_string."new_ssh_key_title=".\js_core::$window->encodeURIComponent($title) ;
 
     $data = array(
         'type' => 'POST',
