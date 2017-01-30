@@ -1,6 +1,7 @@
 #!/usr/bin/env php
 <?php
 
+file_put_contents('/tmp/userx_log', time()."\n", FILE_APPEND) ;
 // Read from cli. First param is the username, second is the ssh command  run.
 $username = $argv[1] ;
 require_once( dirname(dirname(dirname(__DIR__))) . DIRECTORY_SEPARATOR . "Constants.php" );
