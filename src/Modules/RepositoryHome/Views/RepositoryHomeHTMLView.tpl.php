@@ -111,18 +111,35 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <hr />
-                            <div class="col-sm-4">
-                                <span id="select_clone" class="centered_button select_git_command btn btn-success">Clone</span>
+                            <div class="col-sm-2">
+                                &nbsp;
                             </div>
                             <div class="col-sm-4">
-                                <span id="select_push" class="centered_button select_git_command btn btn-warning">Push</span>
+                                <span id="select_http" class="centered_button select_git_command btn btn-success">HTTP/S</span>
                             </div>
                             <div class="col-sm-4">
-                                <span id="select_pull" class="centered_button select_git_command btn btn-warning">Pull</span>
+                                <span id="select_ssh" class="centered_button select_git_command btn btn-warning">SSH</span>
+                            </div>
+                            <div class="col-sm-2">
+                                &nbsp;
                             </div>
                         </div>
                         <div class="col-sm-12">
-                            <h2 class="git_command_text"><strong id="git_command_string">git clone</strong> <?php echo "{$ht_string_lower}://{$pageVars["data"]["user"]->username}:{password}@{$_SERVER["SERVER_NAME"]}/git/{$ownerOrPublic}/{$pageVars["data"]["repository"]["project-slug"]} "  ; ?></h2>
+
+                            <?php
+
+                            $git_http_url = "{$ht_string_lower}://{$pageVars["data"]["user"]->username}:{password}@{$_SERVER["SERVER_NAME"]}/git/{$ownerOrPublic}/{$pageVars["data"]["repository"]["project-slug"]} " ;
+                            $git_ssh_url = "ssh://git@{$_SERVER["SERVER_NAME"]}/git/{$ownerOrPublic}/{$pageVars["data"]["repository"]["project-slug"]} " ;
+
+
+                            ?>
+                            <input type="hidden" id="git_http_url" value="<?= $git_http_url ;?>" />
+                            <input type="hidden" id="git_ssh_url" value="<?= $git_ssh_url ;?>" />
+
+                            <h2 class="git_command_text">
+                                <strong>git clone</strong>
+                                <strong id="git_url_string"><?php echo $git_http_url  ; ?><strong
+                            </h2>
                         </div>
                         <div class="col-sm-12">
                             <span class="col-sm-3 centered_button btn btn-success">Write Enabled</span>
