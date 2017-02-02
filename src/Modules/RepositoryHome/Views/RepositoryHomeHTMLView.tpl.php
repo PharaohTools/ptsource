@@ -129,7 +129,7 @@
                             <?php
 
                             $git_http_url = "{$ht_string_lower}://{$pageVars["data"]["user"]->username}:{password}@{$_SERVER["SERVER_NAME"]}/git/{$ownerOrPublic}/{$pageVars["data"]["repository"]["project-slug"]} " ;
-                            $git_ssh_url = "ssh://git@{$_SERVER["SERVER_NAME"]}/git/{$ownerOrPublic}/{$pageVars["data"]["repository"]["project-slug"]} " ;
+                            $git_ssh_url = "ssh://ptgit@{$_SERVER["SERVER_NAME"]}/git/{$ownerOrPublic}/{$pageVars["data"]["repository"]["project-slug"]} " ;
 
 
                             ?>
