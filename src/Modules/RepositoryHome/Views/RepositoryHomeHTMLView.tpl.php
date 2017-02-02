@@ -138,7 +138,7 @@
 
                             <h2 class="git_command_text">
                                 <strong>git clone</strong>
-                                <strong id="git_url_string"><?php echo $git_http_url  ; ?><strong
+                                <strong id="git_url_string"><?php echo $git_http_url  ; ?></strong>
                             </h2>
                         </div>
                         <div class="col-sm-12">
