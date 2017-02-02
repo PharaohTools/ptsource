@@ -79,6 +79,14 @@
                                 </div>
                             </div>
 
+                            <div class="col-sm-12 create_new_key_field">
+                                <div class="col-sm-offset-4 col-sm-3 actionButtonWrap">
+                                    <a id="save_new_key" class="btn btn-success hvr-grow-shadow actionButton">
+                                        Save this Key
+                                    </a>
+                                </div>
+                            </div>
+
                             <div class="col-sm-12 loading_keys">
                                 <img src="/Assets/Modules/UserSSHKey/image/loading.gif" alt="Loading Keys">
                             </div>
@@ -86,13 +94,6 @@
                         </div>
 
 
-                        <div class="col-sm-12">
-                            <div class="col-sm-offset-4 col-sm-3 actionButtonWrap">
-                                <a id="save_new_key" class="btn btn-success hvr-grow-shadow actionButton">
-                                    Save this Key
-                                </a>
-                            </div>
-                        </div>
                     </form>
                 </div>
 
@@ -129,7 +130,7 @@
                                                                 </strong>
                                                             </div>
                                                             <div class="fullRow">
-                                                                <?php echo $public_ssh_key['fingerprint']; ?>
+                                                                <?php echo $public_ssh_key['key_hash']; ?>
                                                             </div>
                                                             <div class="fullRow">
                                                                Created On: <?php echo $public_ssh_key['created_on_format'] ; ?> — Last Used: <?php echo $public_ssh_key['last_used_format'] ; ?>
