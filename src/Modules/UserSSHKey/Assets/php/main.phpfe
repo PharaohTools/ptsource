@@ -31,8 +31,6 @@ function setPageTriggers() {
         $jQuery('#disable_'.$key_hash.'_loading')->removeClass('hidden') ;
         $console->log( $key_hash );
         changeSSHKey('disable', $key_hash) ;
-//    $jQuery('#enable_'.$key_hash)->removeClass('hidden') ;
-//    $jQuery('#disable_'.$key_hash.'_loading')->addClass('hidden') ;
     });
 
     $jQuery('.enable_ssh_key')->on('click', function($this) use ($jQuery, $console)  {
@@ -43,8 +41,6 @@ function setPageTriggers() {
         $jQuery('#enable_'.$key_hash.'_loading')->removeClass('hidden') ;
         $console->log( $key_hash );
         changeSSHKey('enable', $key_hash) ;
-//    $jQuery('#disable_'.$key_hash)->removeClass('hidden') ;
-//    $jQuery('#enable_'.$key_hash.'_loading')->addClass('hidden') ;
     });
 
     $jQuery('.delete_ssh_key')->on('click', function($this) use ($jQuery, $console)  {
@@ -55,7 +51,6 @@ function setPageTriggers() {
         $jQuery('#delete_'.$key_hash.'_loading')->removeClass('hidden') ;
         $console->log( $key_hash );
         changeSSHKey('delete', $key_hash) ;
-//    $jQuery('#delete_'.$key_hash.'_loading')->addClass('hidden') ;
     });
 
 }
