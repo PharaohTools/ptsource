@@ -97,14 +97,34 @@ class UserSSHKeyCreateKeyAllOS extends Base {
         $signup = $signupFactory->getModel($this->params);
         $au =$signup->getLoggedInUserData();
 
-        $rsa = new \Crypt_RSA() ;
-        $rsa->setPublicKey($this->params["new_ssh_key"]) ;
-        $finger = $rsa->getPublicKeyFingerprint() ;
-        
+//        $rsa = new \Crypt_RSA() ;
+//        $rsa->setPublicKey($this->params["new_ssh_key"]) ;
+//        $finger = $rsa->getPublicKeyFingerprint() ;
+
+//        require_once ('/opt/ptsource/ptsource/src/Modules/UserSSHKey/Libraries/phpseclib/Crypt/Hash.php') ;
+//        $hash = new \Crypt_Hash('sha256');
+//        $hash->setKey() ;
+//        $finger = $hash->hash($this->params["new_ssh_key"]);
+
+        // $finger_command = '#!/bin/bash'."\n".'ssh-keygen -lf /dev/stdin <<<"'.$this->params["new_ssh_key"].'"' ;
+        $finger_command = '#!/bin/bash '."\n".'ssh-keygen -lf /dev/stdin <<<"'.$this->params["new_ssh_key"].'"' ;
+        ob_start() ;
+        $this->executeAsShell($finger_command) ;
+        $finger_str = ob_get_clean() ;
+
+        $finger_parts = explode(' ', $finger_str) ;
+        $finger = $finger_parts[1] ;
+
+//        file_put_contents('/tmp/keyfind', "finger: ".$finger."\n", FILE_APPEND) ;
+        file_put_contents('/tmp/keyfind', "finger command: ".$finger_command."\n", FILE_APPEND) ;
+        file_put_contents('/tmp/keyfind', "finger out: ".$finger_str."\n", FILE_APPEND) ;
+
+        $hash = md5($this->stripKey($this->params["new_ssh_key"])) ;
+
         $res = $datastore->insert('user_ssh_keys', array(
             "user_id" => $au->username,
             "key_data" => $this->params["new_ssh_key"],
-            "key_hash" => uniqid(),
+            "key_hash" => $hash,
             "created_on" => time(),
             "enabled" => 'on',
             "last_used" => time(),
@@ -119,6 +139,13 @@ class UserSSHKeyCreateKeyAllOS extends Base {
             return $return ; }
 
         return true ;
+    }
+
+    private function stripKey($orig) {
+        $new = str_replace("ssh-rsa ", "", $orig) ;
+        $pos = strpos($new, " ") ;
+        $res = substr($new, 0, $pos) ;
+        return $res ;
     }
 
 }
