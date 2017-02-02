@@ -9,7 +9,6 @@ $repo_name = $argv[2] ;
 file_put_contents('/tmp/authlog', 'auth log '.exec('whoami')."\n", FILE_APPEND) ;
 file_put_contents('/tmp/authlog', "\nvalue - ".$username."\n", FILE_APPEND) ;
 file_put_contents('/tmp/authlog', "\norig param - ".$repo_name."\n\n\n\n", FILE_APPEND) ;
-//file_put_contents('/tmp/authlog', "\norig env - ".$ssh_original_command."\n\n\n\n", FILE_APPEND) ;
 
 $base = '/opt/ptsource/ptsource/src' ;
 require_once($base.DIRECTORY_SEPARATOR."Constants.php");
