@@ -5,7 +5,7 @@ echo "ptgit key var: " + $PTGIT_KEY >> /tmp/sshlog ;
 echo "ptgit user var: " + $PTGIT_USER >> /tmp/sshlog ;
 # echo $SSH_ORIGINAL_COMMAND ;
 
-if [[ $SSH_ORIGINAL_COMMAND == git-upload-pack* ]] || [[ $SSH_ORIGINAL_COMMAND == git-recieve-pack* ]] ; then
+if [[ $SSH_ORIGINAL_COMMAND == git-upload-pack* ]] || [[ $SSH_ORIGINAL_COMMAND == git-receive-pack* ]] ; then
 
     if [[ $SSH_ORIGINAL_COMMAND == */$PTGIT_USER/* ]] ; then
         new_command=`sed "s,/git/$PTGIT_USER,/opt/ptsource/repositories,g" <<<"$SSH_ORIGINAL_COMMAND"`
