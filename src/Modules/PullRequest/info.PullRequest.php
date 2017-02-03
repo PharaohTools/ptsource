@@ -6,7 +6,7 @@ class PullRequestInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "Single Commit Details Page";
+    public $name = "Pull Request Details Page";
 
     public function _construct() {
       parent::__construct();
@@ -22,7 +22,7 @@ class PullRequestInfo extends PTConfigureBase {
 
     public function helpDefinition() {
       $help = <<<"HELPDATA"
-  This is the Repository Home page module for a single build...
+  This is the Repository Pull Request page module...
 HELPDATA;
       return $help ;
     }
