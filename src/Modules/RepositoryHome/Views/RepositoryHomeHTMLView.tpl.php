@@ -46,6 +46,11 @@
                             <i class="fa fa-history fa-fw hvr-bounce-in""></i> History <span class="badge"></span>
                         </a>
                     </li>
+                    <li>
+                        <a href="index.php?control=RepositoryPullRequests&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>"class="hvr-bounce-in">
+                            <i class="fa fa-history fa-fw hvr-bounce-in""></i> Pull Requests <span class="badge"></span>
+                        </a>
+                    </li>
                     <?php
                         if (in_array($pageVars["data"]["current_user_role"], array("1", "2"))) {
                     ?>
@@ -188,15 +193,14 @@
                         if (in_array($pageVars["data"]["current_user_role"], array("1", "2")) ||
                             $pageVars["data"]["repository"]["settings"]["PublicScope"]["public_write"] == "on") {?>
                                 <span class="col-sm-3 centered_button btn btn-success">Write Enabled</span>
-                        <?php } else ?>
+                        <?php } else { ?>
                                 <span class="col-sm-3 centered_button btn btn-danger">Write Disabled</span>
-                        <?php }
-                        ?>
+                        <?php } ?>
 
                     </div>
-                    </div>
+                </div>
                         <?php
-                        } ?>
+                        }  } ?>
 
                 <hr />
             <div class="row clearfix no-margin build-home-properties">
