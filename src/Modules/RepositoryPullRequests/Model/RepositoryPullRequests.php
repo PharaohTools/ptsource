@@ -2,6 +2,6 @@
 
 Namespace Model;
 
-class RepositoryHistory extends BaseModelFactory {
+class RepositoryPullRequests extends BaseModelFactory {
 
 }

@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class RepositoryHistoryAllOS extends Base {
+class RepositoryPullRequestsAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;

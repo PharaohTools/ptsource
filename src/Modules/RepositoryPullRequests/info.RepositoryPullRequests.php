@@ -2,22 +2,22 @@
 
 Namespace Info;
 
-class RepositoryHistoryInfo extends PTConfigureBase {
+class RepositoryPullRequestsInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "RepositoryHistory/Home Page";
+    public $name = "RepositoryPullRequests/Home Page";
 
     public function _construct() {
       parent::__construct();
     }
 
     public function routesAvailable() {
-      return array( "RepositoryHistory" => array("show") );
+      return array( "RepositoryPullRequests" => array("show") );
     }
 
     public function routeAliases() {
-      return array("repositoryHistory"=>"RepositoryHistory");
+      return array("repositoryHistory"=>"RepositoryPullRequests");
     }
 
     public function helpDefinition() {

@@ -2,7 +2,7 @@
 
 Namespace Controller ;
 
-class RepositoryHistory extends Base {
+class RepositoryPullRequests extends Base {
 
     public function execute($pageVars) {
       $thisModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars) ;
