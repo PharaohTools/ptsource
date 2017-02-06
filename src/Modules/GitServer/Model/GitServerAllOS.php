@@ -29,8 +29,8 @@ class GitServerAllOS extends Base {
 
     public function ensureSSHServerStatus() {
         $gsf = new \Model\GitServer();
-        $gs = $gsf->getModel($this->params, "ServerFunctions") ;
-        $gs->serveGit() ;
+        $gs = $gsf->getModel($this->params, "ServerSSHFunctions") ;
+        return $gs->ensureSSHServerStatus() ;
     }
 
     public function backendData2() {
