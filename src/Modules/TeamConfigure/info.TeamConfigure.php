@@ -17,7 +17,7 @@ class TeamConfigureInfo extends PTConfigureBase {
     }
 
     public function routeAliases() {
-      return array("teamConfigure"=>"TeamConfigure", "build-configure"=>"TeamConfigure", "teamconfigure"=>"TeamConfigure");
+      return array("teamConfigure"=>"TeamConfigure", "teamconfigure"=>"TeamConfigure");
     }
 
 //    public function events() {
