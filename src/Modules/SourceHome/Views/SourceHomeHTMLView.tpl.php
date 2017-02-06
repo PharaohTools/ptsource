@@ -43,7 +43,7 @@
                 </li>
 
                 <?php
-                    if ($pageVars['data']['user'] !== false && ($pageVars['data']['user']->role === 1)) {
+                    if ($pageVars['data']['user'] !== false && ($pageVars['data']['user']->role == "1")) {
                 ?>
 
                     <li>
