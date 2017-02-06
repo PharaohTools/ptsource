@@ -53,6 +53,11 @@
                     </a>
                 </li>
                 <li>
+                    <a href="index.php?control=RepositoryPullRequests&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>"class="hvr-bounce-in">
+                        <i class="fa fa-history fa-fw hvr-bounce-in""></i> Pull Requests <span class="badge"></span>
+                    </a>
+                </li>
+                <li>
                     <a href="/index.php?control=RepositoryHome&action=delete&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>"class=" hvr-bounce-in">
                         <i class="fa fa-trash fa-fw hvr-bounce-in"></i> Delete
                     </a>
