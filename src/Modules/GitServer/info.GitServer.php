@@ -30,9 +30,8 @@ class GitServerInfo extends PTConfigureBase {
 
     public function configuration() {
         return array(
-            "enable_ssh_server"=> array("type" => "boolean", "label" => "Enable Git SSH Server?", ),
-            "server_port"=> array("type" => "text", "default" => "22", "label" => "Git SSH Server Port?", ),
-//            "force_ssl"=> array("type" => "boolean", "label" => "Force SSL?", ),
+            "enable_ssh_server"=> array("type" => "boolean", "label" => "Enable OpenSSH Server Integration?", ),
+//            "server_port"=> array("type" => "text", "default" => "22", "label" => "Git SSH Server Port?", ),
         );
     }
 
