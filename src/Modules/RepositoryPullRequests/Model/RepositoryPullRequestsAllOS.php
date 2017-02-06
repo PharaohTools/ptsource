@@ -15,7 +15,7 @@ class RepositoryPullRequestsAllOS extends Base {
     public $modelGroup = array("Default") ;
 
     public function getData() {
-        $ret = $this->getCommitHistory();
+        $ret = $this->getRepositoryPullRequests();
         $ret["repository"] = $this->getRepository();
         return $ret ;
     }
@@ -27,7 +27,7 @@ class RepositoryPullRequestsAllOS extends Base {
         return $r ;
     }
 
-    public function getCommitHistory() {
+    public function getRepositoryPullRequests() {
         $repositoryFactory = new \Model\Repository() ;
         $repository = $repositoryFactory->getModel($this->params, "RepositoryCommits");
         return $repository->getCommits();

@@ -10,7 +10,7 @@ class RepositoryPullRequests extends Base {
       $this->content = $pageVars ;
       if (is_array($thisModel)) { return $this->failDependencies($pageVars, $this->content, $thisModel) ; }
       $this->content["data"] = $thisModel->getData();
-      return array ("type"=>"view", "view"=>"repositoryHistory", "pageVars"=>$this->content);
+      return array ("type"=>"view", "view"=>"repositoryPullRequests", "pageVars"=>$this->content);
     }
 
 }

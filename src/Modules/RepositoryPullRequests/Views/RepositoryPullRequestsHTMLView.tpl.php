@@ -44,7 +44,7 @@
                 </li>
                 <li>
                     <a href="/index.php?control=RepositoryPullRequests&action=show&item=<?php echo $pageVars['data']["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
-                        <i class="fa fa-history fa-fw hvr-bounce-in"></i> History <span class="badge"><?php echo $pageVars['data']["history_count"] ; ?></span>
+                        <i class="fa fa-pullrequests fa-fw hvr-bounce-in"></i> History <span class="badge"><?php echo $pageVars['data']["pullrequests_count"] ; ?></span>
                     </a>
                 </li>
                 <li>
@@ -60,7 +60,7 @@
 	<div class="col-lg-9">
 		<div class="well well-lg">
 			<div class="row clearfix no-margin">
-				<h4 class="text-uppercase text-light">Commit History</h4>
+				<h4 class="text-uppercase text-light">Pull Requests</h4>
 
                 <?php
                     echo $this->renderWidgetPosition('IdentifierSelector', 'default') ;
@@ -85,30 +85,30 @@
 
                                     $i = 1;
 
-                                    foreach ($pageVars['data']['commits'] as $commitDetails) {
+                                    foreach ($pageVars['data']['pull_requests'] as $onePullRequest) {
 
                                         ?>
 
-                                        <div class="commitRow" id="blRow_<?php echo $commitDetails['commit']; ?>" >
+                                        <div class="pullRequestRow" id="blRow_<?php echo $onePullRequest['pr_id']; ?>" >
                                             <div class="blCell cellRowIndex" scope="row"><?php echo $i; ?> </div>
                                             <div class="blCell cellRowMessage">
-                                                <a href="/index.php?control=CommitDetails&action=show&item=<?php echo $pageVars['data']["repository"]["project-slug"]; ?>&identifier=<?php echo $pageVars['data']['identifier'] ; ?>&commit=<?php echo $commitDetails['commit'] ; ?>" class="pipeName">
-                                                    <?php echo $commitDetails["message"]; ?>
+                                                <a href="/index.php?control=PullRequest&action=show&item=<?php echo $pageVars['data']["repository"]["project-slug"]; ?>&identifier=<?php echo $pageVars['data']['identifier'] ; ?>&pr_id=<?php echo $onePullRequest['pr_id'] ; ?>" class="pipeName">
+                                                    <?php echo $onePullRequest["message"]; ?>
                                                 </a>
                                             </div>
                                             <div class="blCell cellRowAuthor">
-                                                <a href="/index.php?control=CommitDetails&action=show&item=<?php echo $pageVars['data']["repository"]["project-slug"]; ?>&identifier=<?php echo $pageVars['data']['identifier'] ; ?>&commit=<?php echo $commitDetails['commit'] ; ?>" class="pipeName">
-                                                    <?php echo $commitDetails["author"]; ?>
+                                                <a href="/index.php?control=PullRequest&action=show&item=<?php echo $pageVars['data']["repository"]["project-slug"]; ?>&identifier=<?php echo $pageVars['data']['identifier'] ; ?>&pr_id=<?php echo $onePullRequest['pr_id'] ; ?>" class="pipeName">
+                                                    <?php echo $onePullRequest["requestor"]; ?>
                                                 </a>
                                             </div>
                                             <div class="blCell cellRowDate">
-                                                <a href="/index.php?control=CommitDetails&action=show&item=<?php echo $pageVars['data']["repository"]["project-slug"]; ?>&identifier=<?php echo $pageVars['data']['identifier'] ; ?>&commit=<?php echo $commitDetails['commit'] ; ?>" class="pipeName">
-                                                    <?php echo str_replace('+0000', '', $commitDetails["date"]) ; ?>
+                                                <a href="/index.php?control=PullRequest&action=show&item=<?php echo $pageVars['data']["repository"]["project-slug"]; ?>&identifier=<?php echo $pageVars['data']['identifier'] ; ?>&pr_id=<?php echo $onePullRequest['pr_id'] ; ?>" class="pipeName">
+                                                    <?php echo str_replace('+0000', '', $onePullRequest["date"]) ; ?>
                                                 </a>
                                             </div>
                                             <div class="blCell cellRowHash">
-                                                <a href="/index.php?control=CommitDetails&action=show&item=<?php echo $pageVars['data']["repository"]["project-slug"]; ?>&identifier=<?php echo $pageVars['data']['identifier'] ; ?>&commit=<?php echo $commitDetails['commit'] ; ?>" class="pipeName">
-                                                    <?php echo substr($commitDetails['commit'], 0, 6); ?>
+                                                <a href="/index.php?control=PullRequest&action=show&item=<?php echo $pageVars['data']["repository"]["project-slug"]; ?>&identifier=<?php echo $pageVars['data']['identifier'] ; ?>&pr_id=<?php echo $onePullRequest['pr_id'] ; ?>" class="pipeName">
+                                                    <?php echo substr($onePullRequest['pr_id'], 0, 6); ?>
                                                 </a>
                                             </div>
                                         </div>
@@ -130,7 +130,7 @@
             </p>
         </div>
     </div><!-- /.container -->
-<link rel="stylesheet" type="text/css" href="/Assets/Modules/RepositoryPullRequests/css/repositoryhistory.css">
-<script type="text/javascript" src="/Assets/Modules/RepositoryPullRequests/js/repositoryhistory.js"></script>
+<link rel="stylesheet" type="text/css" href="/Assets/Modules/RepositoryPullRequests/css/repositorypullrequests.css">
+<script type="text/javascript" src="/Assets/Modules/RepositoryPullRequests/js/repositorypullrequests.js"></script>
 
 

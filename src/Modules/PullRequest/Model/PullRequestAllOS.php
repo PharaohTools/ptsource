@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class CommitDetailsAllOS extends Base {
+class PullRequestAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -24,7 +24,7 @@ class CommitDetailsAllOS extends Base {
         $ret["features"] = $this->getRepositoryFeatures();
         $ret["user"] = $this->getLoggedInUser();
         $ret["current_user_role"] = $this->getCurrentUserRole($ret["user"]);
-        $ret["commit"] = $this->getCommit();
+        $ret["pull_request"] = $this->getPullRequest();
         return $ret ;
     }
 
@@ -36,8 +36,10 @@ class CommitDetailsAllOS extends Base {
     }
 
     public function getCurrentUserRole($user = null) {
-        if ($user == null) { $user = $this->getLoggedInUser(); }
-        if ($user == false) { return false ; }
+        if ($user === null) {
+            $user = $this->getLoggedInUser(); }
+        if ($user === false) {
+            return false ; }
         return $user->role ;
     }
 
@@ -59,11 +61,11 @@ class CommitDetailsAllOS extends Base {
         return $r ;
     }
 
-    public function getCommit() {
+    public function getPullRequest() {
         $client = new \Gitter\Client;
         $loc = REPODIR.DS.$this->params["item"] ;
         $repository = $client->getRepository($loc);
-        $commit = $repository->getCommit($this->params["commit"]);
+        $commit = $repository->getPullRequest($this->params['pull_request']);
         return $commit ;
     }
 

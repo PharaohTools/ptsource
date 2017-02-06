@@ -17,7 +17,7 @@ class RepositoryPullRequestsInfo extends PTConfigureBase {
     }
 
     public function routeAliases() {
-      return array("repositoryHistory"=>"RepositoryPullRequests");
+      return array("repositoryPullRequests"=>"RepositoryPullRequests");
     }
 
     public function helpDefinition() {
