@@ -32,6 +32,23 @@
 					</ul>
 					<!-- /.nav-second-level -->
 				</li>
+
+                <?php
+
+                if (in_array($pageVars["data"]["current_user_role"], array("1", "2"))) {
+
+                    ?>
+                    <li>
+                        <a href="index.php?control=RepositoryConfigure&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
+                            <i class="fa  fa-cog fa-fw hvr-bounce-in"></i> Configure
+                        </a>
+                    </li>
+
+                    <?php
+
+                }
+
+                ?>
                 <li>
                     <a href="/index.php?control=FileBrowser&action=show&item=<?php echo $pageVars['data']["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
                         <i class="fa fa-folder-open-o hvr-bounce-in"></i> File Browser
