@@ -67,7 +67,7 @@ class RepositoryCommitsAllOS extends Base {
         $command .= "$@ | perl -pe 'BEGIN{print \"[\"}; END{print \"]\\n\"}' | perl -pe 's/},]/}]/' " ;
         $commits = $this->executeAndLoad($command) ;
         $dirs_json = json_decode($commits, TRUE) ;
-        if ($this->params["reverse"] == true) {
+        if (isset($this->params["reverse"]) && $this->params["reverse"] == true) {
             $dirs_json = array_reverse($dirs_json) ; }
         return array("commits" => $dirs_json) ;
     }

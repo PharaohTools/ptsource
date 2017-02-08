@@ -53,7 +53,7 @@ class RepositoryAllOS extends Base {
         $enabledFeatures = array() ;
         $i = 0;
         foreach ($repository["settings"] as $key => $values) {
-            if (in_array($key, $names) && $values["enabled"] =="on") {
+            if (in_array($key, $names) && array_key_exists("enabled", $values) && $values["enabled"] =="on") {
                 $cname = '\Model\\'.$key ;
                 $moduleFactory = new $cname();
                 $moduleRepositoryFeature = $moduleFactory->getModel($this->params, "RepositoryFeature");
