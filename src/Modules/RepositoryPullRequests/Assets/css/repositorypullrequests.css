@@ -1,27 +1,4 @@
-.historyImage {
-    max-width:40px;
-    max-height:40px;
-}
-
-.historyImageWide {
-    max-width:50%;
-}
-
-.runningBuild {
-    background-color: #dee;
-    margin: 0 0 10px 0;
-    overflow-x: hidden;
-}
-
-.runningBuildRow {
-    background-color: #dee;
-}
-
-.runningBuild p {
-    margin: 0 0 0 0;
-}
-
-.commitRow {
+.pullRequestRow {
     width: 100%;
     display: block ;
     float:left ;
@@ -37,22 +14,36 @@
     width: 5% ;
 }
 
-.cellRowMessage{
-    width: 30% ;
+.cellRowTitle {
     text-align: left;
+    float: left;
+    display: block;
 }
 
-.cellRowAuthor{
-    width: 25% ;
+.cellRowAuthor {
     text-align: left;
+    float: left;
+    display: block;
 }
 
-.cellRowDate{
+.cellRowDate {
     width: 27.5% ;
     text-align: left;
 }
 
-.cellRowHash{
+.cellRowHash {
     width: 12.5% ;
     text-align: left;
+}
+
+#create_new_pull_request_fields {
+    display: none ;
+}
+
+/*.create_new_pull_request_field {*/
+    /*display: none ;*/
+/*}*/
+
+.loading_pull_requests {
+    display: none;
 }

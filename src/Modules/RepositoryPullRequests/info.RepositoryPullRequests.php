@@ -13,7 +13,7 @@ class RepositoryPullRequestsInfo extends PTConfigureBase {
     }
 
     public function routesAvailable() {
-      return array( "RepositoryPullRequests" => array("show") );
+      return array( "RepositoryPullRequests" => array("show", "create") );
     }
 
     public function routeAliases() {

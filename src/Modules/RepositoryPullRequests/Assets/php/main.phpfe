@@ -1,0 +1,163 @@
+<?php
+
+$RepositoryPullRequests = new \RepositoryPullRequests() ;
+$RepositoryPullRequests->setRepoPullRequestsPageTriggers() ;
+
+class RepositoryPullRequests {
+
+    public function setRepoPullRequestsPageTriggers() {
+        $jQuery = \js_core::$jQuery ;
+        $console = \js_core::$console ;
+
+        $jQuery('#create_new_pull_request')->on('click', function() use ($jQuery)  {
+            $jQuery('#create_new_pull_request_fields')->fadeIn();
+            $jQuery('#create_new_pull_request')->fadeOut();
+        });
+
+        $jQuery('#save_new_pull_request')->on('click', function() use ($jQuery, $console)  {
+            $isValid = self::validatePullRequest() ;
+            if ($isValid === true) {
+                $jQuery('#create_new_pull_request_fields')->fadeOut('fast') ;
+                $jQuery('.loading_pull_requests')->fadeIn('fast') ;
+                return self::createNewPullRequest() ;
+            } else {
+                return false ;
+            }
+        });
+
+        $jQuery('.source_branch_option')->on('click', function($jqthis) use ($jQuery, $console)  {
+            $console->log("t id:", $jqthis->target->id);
+            $id = $jqthis->target->id ;
+            $branch = \core::$php->substr($id, 21);
+            $console->log("source branch:", $branch);
+            $jQuery('#new_pull_request_source_branch')->val($branch);
+            $jQuery('#new_pull_request_source_branch_display')->html($branch);
+        });
+
+        $jQuery('.target_branch_option')->on('click', function($jqthis) use ($jQuery, $console)  {
+            $console->log("t id:", $jqthis->target->id);
+            $id = $jqthis->target->id ;
+            $branch = \core::$php->substr($id, 21);
+            $console->log("target branch:", $branch);
+            $jQuery('#new_pull_request_target_branch')->val($branch);
+            $jQuery('#new_pull_request_target_branch_display')->html($branch);
+        });
+
+    }
+
+    public function createNewPullRequest() {
+        $jQuery = \js_core::$jQuery ;
+
+        $rurl = 'index.php?control=RepositoryPullRequests&action=create&output-format=JSON' ;
+        $title = $jQuery('#new_pull_request_title')->val() ;
+        $description = $jQuery('#new_pull_request_description')->val() ;
+        $source_branch = $jQuery('#new_pull_request_source_branch')->val() ;
+        $source_commit = $jQuery('#new_pull_request_source_commit')->val() ;
+        $target_branch = $jQuery('#new_pull_request_target_branch')->val() ;
+        $target_commit = $jQuery('#new_pull_request_target_commit')->val() ;
+        $repo_name = $jQuery('#new_pull_request_item')->val() ;
+
+        $new_data_string = "new_pull_request_title=".\js_core::$window->encodeURIComponent($title).'&' ;
+        $new_data_string = $new_data_string."new_pull_request_description=".\js_core::$window->encodeURIComponent($description).'&' ;
+        $new_data_string = $new_data_string."repository_slug=".\js_core::$window->encodeURIComponent($repo_name).'&' ;
+        $new_data_string = $new_data_string."new_pull_request_source_branch=".\js_core::$window->encodeURIComponent($source_branch).'&' ;
+        $new_data_string = $new_data_string."new_pull_request_source_commit=".\js_core::$window->encodeURIComponent($source_commit).'&' ;
+        $new_data_string = $new_data_string."new_pull_request_target_branch=".\js_core::$window->encodeURIComponent($target_branch).'&' ;
+        $new_data_string = $new_data_string."new_pull_request_target_commit=".\js_core::$window->encodeURIComponent($target_commit) ;
+
+        $data = array(
+            'type' => 'POST',
+            'url' => $rurl,
+            'dataType'=> "json",
+            'data' => $new_data_string
+        ) ;
+
+        $ajax_object = $jQuery->ajax($data);
+        return $ajax_object->done(
+            function ($data) use ($jQuery) {
+                $jQuery('.create_new_pull_request_field')->fadeIn('fast') ;
+                $jQuery('.loading_pull_requests')->fadeOut('fast') ;
+                $kt = new pullRequestTable() ;
+                $kt->rewriteTable($data, $jQuery) ;
+                $jQuery('#create_new_pull_request_fields')->fadeOut();
+                $jQuery('#create_new_pull_request')->fadeIn();
+                $jQuery('#new_pull_request_title')->val('') ;
+                $jQuery('#new_pull_request')->val('') ;
+            }
+        );
+    }
+
+
+    public function validatePullRequest() {
+        $jQuery = \js_core::$jQuery ;
+
+        $non_empty_fields = array(
+            array("new_pull_request_title", "Pull Request Title"),
+            array("new_pull_request_description", "Pull Request Description"),
+            array("new_pull_request_source_branch", "Pull Request Source Branch"),
+            array("new_pull_request_source_commit", "Pull Request Source Commit"),
+            array("new_pull_request_target_branch", "Pull Request Target Branch"),
+            array("new_pull_request_target_commit", "Pull Request Target Commit"),
+        ) ;
+
+        foreach ($non_empty_fields as $non_empty_field) {
+            if ($jQuery('#'.$non_empty_field[0])->val() == '') {
+                $jQuery('#'.$non_empty_field[0].'_alert')->html('Please enter a '.$non_empty_field[1]);
+//                $jQuery('#'.$non_empty_field[0])->focus();
+                return false ; }
+            else {
+                $jQuery('#'.$non_empty_field[0].'_alert')->html('');
+            }
+        }
+
+        return true ;
+    }
+
+}
+
+
+class pullRequestTable {
+
+    public function rewriteTable($data, $jQuery) {
+        $ht = '' ;
+        $i = 1 ;
+
+        foreach ($data->data->pull_requests as $title => $onePullRequestRay) {
+
+            $onePullRequest = array();
+            foreach ($onePullRequestRay as $index => $cur_val) {
+                $onePullRequest[$index] = $cur_val ; }
+
+            \js_core::$console->log($onePullRequest) ;
+
+                $ht = $ht . '<div class="pullRequestRow" id="blRow_' . $onePullRequest['pr_id'] . '" >' ;
+                $ht = $ht . '   <div class="blCell cellRowIndex col-sm-2" scope="row">' . $i . '</div>' ;
+                $ht = $ht . '       <div class="col-sm-10">' ;
+                $ht = $ht . '           <div class="blCell cellRowTitle">' ;
+                $ht = $ht . '               <a href="/index.php?control=PullRequest&action=show&item='.$onePullRequest["repo_pr_id"].'&pr_id='.$onePullRequest['pr_id'].'" class="pipeName">' ;
+                $ht = $ht . $onePullRequest["title"] ;
+                $ht = $ht . '               </a>' ;
+                $ht = $ht . '           </div>' ;
+                $ht = $ht . '           <div class="blCell cellRowAuthor">' ;
+                $ht = $ht . '               <a href="/index.php?control=PullRequest&action=show&item='.$onePullRequest["repo_pr_id"].'&pr_id='.$onePullRequest['pr_id'].'" class="pipeName">' ;
+                $ht = $ht . $onePullRequest["requestor"] ;
+                $ht = $ht . '               </a>' ;
+                $ht = $ht . '           </div>' ;
+                $ht = $ht . '           <div class="blCell cellRowDate">' ;
+                $ht = $ht . '               <a href="/index.php?control=PullRequest&action=show&item='.$onePullRequest["repo_pr_id"].'&pr_id='.$onePullRequest['pr_id'].'" class="pipeName">' ;
+                $ht = $ht . $onePullRequest["description"] ;
+                $ht = $ht . '               </a>' ;
+                $ht = $ht . '           </div>' ;
+                $ht = $ht . '       </div>' ;
+                $ht = $ht . '   </div>' ;
+                $ht = $ht . '</div>' ;
+
+
+            $i = $i + 1;
+        }
+
+        $jQuery('#allPullRequestRows')->html($ht) ;
+        setPageTriggers() ;
+
+    }
+}
