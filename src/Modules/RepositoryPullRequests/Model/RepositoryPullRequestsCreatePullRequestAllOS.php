@@ -28,7 +28,9 @@ class RepositoryPullRequestsCreatePullRequestAllOS extends Base {
             return $createdPullRequest ; }
 
         $prBase = new \Model\RepositoryPullRequests() ;
-        $prOb = $prBase->getModel($this->params) ;
+        $temp_params = $this->params ;
+        $temp_params['item'] = $this->params["repository_slug"] ;
+        $prOb = $prBase->getModel($temp_params) ;
         $all_prs = $prOb->getRepositoryPullRequests() ;
 
         $return = array(
@@ -60,7 +62,7 @@ class RepositoryPullRequestsCreatePullRequestAllOS extends Base {
             'description' => $this->params["new_pull_request_description"],
         )) ;
 
-        if ($res == 0) {
+        if ($res === false) {
             ob_start();
             var_dump($res);
             $dump = ob_get_clean();
@@ -69,6 +71,11 @@ class RepositoryPullRequestsCreatePullRequestAllOS extends Base {
                 "status" => false ,
                 "message" => "Unable to add this Pull Request to the Repository" );
             return $return ; }
+
+        ob_start();
+        var_dump("not zero", $res);
+        $dump = ob_get_clean();
+        file_put_contents('/tmp/pharaoh.log', $dump, FILE_APPEND) ;
 
         return true ;
     }
