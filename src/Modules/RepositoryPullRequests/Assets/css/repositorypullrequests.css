@@ -15,19 +15,21 @@
 }
 
 .cellRowTitle {
+    width: 100%;
     text-align: left;
     float: left;
     display: block;
 }
 
 .cellRowAuthor {
+    width: 100%;
     text-align: left;
     float: left;
     display: block;
 }
 
 .cellRowDate {
-    width: 27.5% ;
+    width: 100%;
     text-align: left;
 }
 
