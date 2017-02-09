@@ -84,57 +84,57 @@
 
                 <?php
                 if ($pageVars["route"]["action"]=="show") {
-                if ($pageVars["data"]["is_file"] == true) {
-                ?>
-
-                <div class="form-group col-sm-9">
-                    <h4>File: <strong><?php echo $pageVars["data"]["relpath"] ; ?></strong></h4>
-                </div>
-                <div class="form-group col-sm-3">
-                    <?php
-                    if (isset($pageVars["data"]["current_branch"]) && $pageVars["data"]["current_branch"] != null) {
-                        ?>
-                        <h4>Branch : <strong><?php echo $pageVars["data"]["current_branch"] ; ?></strong></h4>
-                    <?php
-                    }
-                    ?>
-                </div>
-
-                <?php
-                } else {
+                    if ($pageVars["data"]["is_file"] == true) {
                     ?>
 
-                    <div class="form-group col-sm-3 thin_padding">
-                        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-                            Select Branch
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" id="assigneelist" role="menu" aria-labelledby="dropdownMenu1">
-                            <?php
-                            foreach($pageVars["data"]["branches"] as $branch_name) {
-                                ?>
-                                <li role="presentation">
-                                    <a role="menuitem" tabindex="-1" href="<?php echo $act ; ?>&identifier=<?php echo $branch_name ; ?>">
-                                        <?= $branch_name ?>
-                                    </a>
-                                </li>
-                            <?php
-                            }
-                            ?>
-                        </ul>
+                    <div class="form-group col-sm-9">
+                        <h4>File: <strong><?php echo $pageVars["data"]["relpath"] ; ?></strong></h4>
                     </div>
-                    <div class="form-group col-sm-9 thin_padding">
+                    <div class="form-group col-sm-3">
                         <?php
                         if (isset($pageVars["data"]["current_branch"]) && $pageVars["data"]["current_branch"] != null) {
                             ?>
-                            <h4> Current Branch : <strong><?php echo $pageVars["data"]["current_branch"] ; ?></strong></h4>
+                            <h4>Branch : <strong><?php echo $pageVars["data"]["current_branch"] ; ?></strong></h4>
                         <?php
                         }
                         ?>
                     </div>
 
-                <?php
-                }
+                    <?php
+                    } else {
+                        ?>
+
+                        <div class="form-group col-sm-3 thin_padding">
+                            <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                                Select Branch
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" id="assigneelist" role="menu" aria-labelledby="dropdownMenu1">
+                                <?php
+                                foreach($pageVars["data"]["branches"] as $branch_name) {
+                                    ?>
+                                    <li role="presentation">
+                                        <a role="menuitem" tabindex="-1" href="<?php echo $act ; ?>&identifier=<?php echo $branch_name ; ?>">
+                                            <?= $branch_name ?>
+                                        </a>
+                                    </li>
+                                <?php
+                                }
+                                ?>
+                            </ul>
+                        </div>
+                        <div class="form-group col-sm-9 thin_padding">
+                            <?php
+                            if (isset($pageVars["data"]["current_branch"]) && $pageVars["data"]["current_branch"] != null) {
+                                ?>
+                                <h4> Current Branch : <strong><?php echo $pageVars["data"]["current_branch"] ; ?></strong></h4>
+                            <?php
+                            }
+                            ?>
+                        </div>
+
+                    <?php
+                    }
                 }
                 ?>
             </div>
