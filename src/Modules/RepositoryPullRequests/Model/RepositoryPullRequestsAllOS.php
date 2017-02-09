@@ -73,11 +73,13 @@ class RepositoryPullRequestsAllOS extends Base {
     }
 
     private function getAvailableBranches() {
-        $filebrowserDir = $this->repoRootDir() ;
+        $filebrowserDir = $this->getFileBrowserDir() ;
         $command = "cd {$filebrowserDir} && git branch" ;
         $all_branches_string = $this->executeAndLoad($command) ;
         $all_branches_string = str_replace('* ', "", $all_branches_string) ;
-        return explode("\n", $all_branches_string) ;
+        $all_branches_string = str_replace(' ', "", $all_branches_string) ;
+        $all_branches_ray = explode("\n", $all_branches_string) ;
+        return $all_branches_ray ;
     }
 
     private function repoRootDir() {
