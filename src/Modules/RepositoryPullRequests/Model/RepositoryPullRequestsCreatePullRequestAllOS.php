@@ -63,19 +63,10 @@ class RepositoryPullRequestsCreatePullRequestAllOS extends Base {
         )) ;
 
         if ($res === false) {
-            ob_start();
-            var_dump($res);
-            $dump = ob_get_clean();
-            file_put_contents('/tmp/pharaoh.log', $dump, FILE_APPEND) ;
             $return = array(
                 "status" => false ,
                 "message" => "Unable to add this Pull Request to the Repository" );
             return $return ; }
-
-        ob_start();
-        var_dump("not zero", $res);
-        $dump = ob_get_clean();
-        file_put_contents('/tmp/pharaoh.log', $dump, FILE_APPEND) ;
 
         return true ;
     }
