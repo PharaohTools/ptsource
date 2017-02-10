@@ -49,3 +49,9 @@
 .loading_pull_requests {
     display: none;
 }
+
+#allPullRequestRows h3,
+#allPullRequestRows h4 {
+    margin: 0 auto ;
+    padding: 0 auto ;
+}
