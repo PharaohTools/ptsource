@@ -62,11 +62,13 @@ class PullRequestAllOS extends Base {
     }
 
     public function getPullRequest() {
-        $client = new \Gitter\Client;
-        $loc = REPODIR.DS.$this->params["item"] ;
-        $repository = $client->getRepository($loc);
-        $commit = $repository->getPullRequest($this->params['pull_request']);
-        return $commit ;
+        $datastoreFactory = new \Model\Datastore() ;
+        $datastore = $datastoreFactory->getModel($this->params) ;
+        $parsed_filters = array() ;
+        $parsed_filters[] = array("where", "repo_pr_id", '=', $this->params["item"] ) ;
+        $parsed_filters[] = array("where", "pr_id", '=', $this->params["pr_id"] ) ;
+        $pr = $datastore->findOne('pull_requests', $parsed_filters) ;
+        return $pr ;
     }
 
     public function getRepositoryFeatures() {
