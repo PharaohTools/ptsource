@@ -58,10 +58,10 @@ class TeamSaverAllOS extends Base {
                 'milestones' => 'string',
                 'team_source' => 'string',
                 'current_state' => 'string',
-                'team_public_scope_enabled' => 'string',
-                'team_public_home_enabled' => 'string',
                 'team_public_issue_enabled' => 'string',
                 'team_public_comments_enabled' => 'string',
+                'team_public_scope_enabled' => 'string',
+                'team_public_home_enabled' => 'string',
             );
 
             $newData = array() ;
@@ -69,9 +69,6 @@ class TeamSaverAllOS extends Base {
             foreach ($columns as $column) {
                 if (array_key_exists($column, $save["data"])) {
                     $newData[$column] = (isset($save["data"][$column])) ? $save["data"][$column] : "" ; } }
-
-
-
 
             $loggingFactory = new \Model\Logging() ;
             $this->params["echo-log"] = true ;
