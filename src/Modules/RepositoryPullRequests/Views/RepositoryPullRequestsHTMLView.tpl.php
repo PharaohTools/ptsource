@@ -249,20 +249,16 @@
                                                 <div class="pullRequestRow" id="blRow_<?php echo $onePullRequest['id']; ?>" >
                                                     <div class="blCell cellRowIndex col-sm-2" scope="row"><?php echo $i; ?> </div>
                                                     <div class="col-sm-10">
-                                                        <div class="blCell cellRowTitle">
+                                                        <div class="blCell cellRowTitle col-sm-12">
                                                             <a href="/index.php?control=PullRequest&action=show&item=<?php echo $onePullRequest["repo_pr_id"]; ?>&pr_id=<?php echo $onePullRequest['pr_id'] ; ?>" class="pipeName">
-                                                                <?php echo $onePullRequest["title"]; ?>
+                                                                <h4><?php echo $onePullRequest['title']; ?></h4>
                                                             </a>
                                                         </div>
-                                                        <div class="blCell cellRowAuthor">
+                                                        <div class="blCell cellRowAuthor col-sm-12">
                                                             <a href="/index.php?control=PullRequest&action=show&item=<?php echo $onePullRequest["repo_pr_id"]; ?>&pr_id=<?php echo $onePullRequest['pr_id'] ; ?>" class="pipeName">
-                                                                <?php echo $onePullRequest["requestor"]; ?>
+                                                                <?php echo $onePullRequest['requestor']; ?>
                                                             </a>
-                                                        </div>
-                                                        <div class="blCell cellRowDate">
-                                                            <a href="/index.php?control=PullRequest&action=show&item=<?php echo $onePullRequest["repo_pr_id"]; ?>&pr_id=<?php echo $onePullRequest['pr_id'] ; ?>" class="pipeName">
-                                                                <?php echo str_replace('+0000', '', $onePullRequest["date"]) ; ?>
-                                                            </a>
+                                                            opened this Pull Request on <?php echo date_create_from_format('H:i d/m/Y', $onePullRequest['created_on']) ; ?>
                                                         </div>
                                                     </div>
                                                 </div>
