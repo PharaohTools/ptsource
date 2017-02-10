@@ -65,14 +65,86 @@
     <div class="col-lg-9">
         <div class="well well-lg ">
             <div class="row clearfix no-margin">
-            	<h3 class="text-uppercase text-light ">Commit</h3>
-                <p><strong>Title: </strong><?php echo $pageVars["data"]['pull_request']->getMessage() ; ?></p>
-                <p><strong>Requestor: </strong><?php echo $pageVars["data"]['pull_request']->getAuthor()->getName() ; ?></p>
-                <p><strong>Commit ID: </strong><?php echo $pageVars["data"]['pull_request']->getShortHash() ; ?></p>
-                <p><strong>Source Branch: </strong><?php echo $pageVars["data"]['pull_request']->getDate()->format('H:i d/m/Y') ; ?></p>
-                <p><strong>Target Branch: </strong><?php echo $pageVars["data"]['pull_request']->getDate()->format('H:i d/m/Y') ; ?></p>
+            	<h3 class="text-uppercase text-light ">Pull Request</h3>
+                <p><strong>Requestor: </strong><?php echo $pageVars["data"]['pull_request']['requestor'] ; ?></p>
+                <p><strong>Source Branch: </strong><?php echo $pageVars["data"]['pull_request']['source_branch'] ; ?></p>
+                <p><strong>Target Branch: </strong><?php echo $pageVars["data"]['pull_request']['target_branch'] ; ?></p>
                 <hr />
-<!--                <p><strong>File Browser: </strong><a href="http://source.pharaoh.tld/"></a></p>-->
+            </div>
+
+            <div class="row clearfix no-margin">
+                <h3>
+                    <strong>Title: </strong><?php echo $pageVars["data"]['pull_request']['title'] ; ?>
+                </h3>
+                <div>
+                    <?php
+
+                    if ($pageVars["data"]['pull_request']['open'] === false) {
+                        ?>
+                            <span class="btn btn-danger">
+                                Closed
+                            </span>
+                        <?php
+                    } else {
+                        ?>
+                            <span class="btn btn-success">
+                                Open
+                            </span>
+                        <?php
+                    }
+
+                    ?>
+                </div>
+                <h5>
+                    <a href="index.php?control=UserProfilePublic&action=show&user=<?php echo $pageVars["data"]['pull_request']['requestor'] ; ?>"><?php echo $pageVars["data"]['pull_request']['requestor'] ; ?></a>
+                    wants to merge 1 commit into <?php echo $pageVars["data"]['pull_request']['target_branch'] ; ?> from <?php echo $pageVars["data"]['pull_request']['source_branch'] ; ?>
+                </h5>
+                <p>
+                    +2 −0
+                    Conversation 0 Commits 1 Files changed 1
+                    Reviewers
+                    No reviews
+                    Assignees
+                    No one assigned
+                    Labels
+                    None yet
+                    Projects
+                    None yet
+                    Milestone
+                    No milestone
+                    Notifications
+                </p>
+                <p>
+                    You’re receiving notifications because you’re subscribed to this repository.
+                    1 participant
+                    @gitter-badger
+                    @gitter-badger
+                    gitter-badger commented on 10 Jul 2015
+                    asmblah/uniter now has a Chat Room on Gitter
+                </p>
+                <p>
+                    @asmblah has just created a chat room. You can visit it here: https://gitter.im/asmblah/uniter.
+                    This pull-request adds this badge to your README.md:
+                </p>
+                <p>
+                    Gitter
+                </p>
+                <h4>
+                    If my aim is a little off, please let me know.
+                    Happy chatting.
+                </h4>
+                <p>
+                    PS: Click here if you would prefer not to receive automatic pull-requests from Gitter in future.
+                    @gitter-badger 	Added Gitter badge
+                    a3b849c
+                    All checks have passed
+                    1 successful check
+                    continuous-integration/travis-ci/pr — The Travis CI build passed
+                    Details
+                    This branch has no conflicts with the base branch
+                    Only those with write access to this repository can merge pull requests.
+                </p>
+                <hr />
             </div>
 
         </div>
