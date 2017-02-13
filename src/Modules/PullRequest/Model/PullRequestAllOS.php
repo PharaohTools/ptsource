@@ -25,6 +25,7 @@ class PullRequestAllOS extends Base {
         $ret["user"] = $this->getLoggedInUser();
         $ret["current_user_role"] = $this->getCurrentUserRole($ret["user"]);
         $ret["pull_request"] = $this->getPullRequest();
+        $ret["pharaoh_build_integration"] = array();
         return $ret ;
     }
 
