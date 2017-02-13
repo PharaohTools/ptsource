@@ -74,22 +74,32 @@ class PullRequestAllOS extends Base {
     }
 
     public function getPullRequestComments($pr) {
-        $comments[] = array("data" => '
+        $comments[] = array(
+            "data" => '
                     You’re receiving notifications because you’re subscribed to this repository.
                     1 participant
                     @gitter-badger
                     @gitter-badger
                     gitter-badger commented on 10 Jul 2015
-                    asmblah/uniter now has a Chat Room on Gitter') ;
-        $comments[] = array("data" => '@asmblah has just created a chat room. You can visit it here: https://gitter.im/asmblah/uniter.
-                    This pull-request adds this badge to your README.md:') ;
-        $comments[] = array("data" => '
+                    asmblah/uniter now has a Chat Room on Gitter',
+            "created_on" => time()-500,
+            "author" => 'testadmin',) ;
+        $comments[] = array(
+            "data" => '@asmblah has just created a chat room. You can visit it here: https://gitter.im/asmblah/uniter.
+                    This pull-request adds this badge to your README.md:',
+            "created_on" => time()-750,
+            "author" => 'admin',) ;
+        $comments[] = array(
+            "data" => '
                     You’re receiving notifications because you’re subscribed to this repository.
                     1 participant
                     @gitter-badger
                     @gitter-badger
                     gitter-badger commented on 10 Jul 2015
-                    asmblah/uniter now has a Chat Room on Gitter') ;
+                    asmblah/uniter now has a Chat Room on Gitter',
+            "created_on" => time()-1000,
+            "author" => 'admin',
+            ) ;
         return $comments ;
     }
 
