@@ -219,7 +219,7 @@
                                         echo ' <a target="_blank" href="'.$repository_feature["model"]["link"].'">' ;
                                         echo '  <h3>'.$repository_feature["model"]["title"].'</h3>' ;
                                         echo '  <img src="'.$repository_feature["model"]["image"].'" />' ;
-                                        echo " </a>" ;
+                                        echo ' </a>' ;
                                         echo '</div>' ; } } }
                             else {
                                 ?>
