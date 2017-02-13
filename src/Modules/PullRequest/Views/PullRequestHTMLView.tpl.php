@@ -65,12 +65,12 @@
     <div class="col-lg-9">
         <div class="well well-lg ">
             <div class="row clearfix no-margin">
-            	<h3 class="text-uppercase text-light">Pull Request</h3>
-                <p><strong>Requestor: </strong><?php echo $pageVars["data"]['pull_request']['requestor'] ; ?></p>
-                <p><strong>Source Branch: </strong><?php echo $pageVars["data"]['pull_request']['source_branch'] ; ?></p>
-                <p><strong>Source Commit: </strong><?php echo $pageVars["data"]['pull_request']['source_commit'] ; ?></p>
-                <p><strong>Target Branch: </strong><?php echo $pageVars["data"]['pull_request']['target_branch'] ; ?></p>
-                <hr />
+                <h3 class="text-uppercase text-light">
+                    <strong>
+                        <?php echo $pageVars["data"]["repository"]["project-name"] ; ?>:
+                    </strong>
+                    Pull Request
+                </h3>
             </div>
 
             <div class="row clearfix no-margin">
@@ -196,12 +196,15 @@
 
 
                 <hr />
-                <h4>
-                    New Comment:
-                </h4>
-                <textarea>
-
-                </textarea>
+                <div class="form-group col-sm-12">
+                    <h4>
+                        New Comment:
+                    </h4>
+                    <textarea class="col-sm-12"></textarea>
+                    <span class="btn btn-success ">
+                        Add Comment
+                    </span>
+                </div>
             </div>
 
         </div>
