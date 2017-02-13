@@ -42,6 +42,7 @@ class RepositoryPullRequestsCreatePullRequestAllOS extends Base {
     }
 
     public function validatePullRequestDetails() {
+        // TODO i dont think this needs explaining
         return true ;
     }
 
@@ -59,6 +60,9 @@ class RepositoryPullRequestsCreatePullRequestAllOS extends Base {
             'requestor' => $au->username,
             'created_on' => time(),
             'last_changed' => time(),
+            'source_branch' => $this->params["source_branch"],
+            'source_commit' => $this->params["source_commit"],
+            'target_branch' => $this->params["target_branch"],
             'description' => $this->params["new_pull_request_description"],
         )) ;
 
