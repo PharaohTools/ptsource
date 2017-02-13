@@ -25,7 +25,8 @@ class PullRequestAllOS extends Base {
         $ret["user"] = $this->getLoggedInUser();
         $ret["current_user_role"] = $this->getCurrentUserRole($ret["user"]);
         $ret["pull_request"] = $this->getPullRequest();
-        $ret["pharaoh_build_integration"] = array();
+        $ret["pull_request_comments"] = $this->getPullRequestComments($ret["pull_request"]);
+        $ret["pharaoh_build_integration"] = $this->getPharaohBuildIntegration($ret["features"]);
         return $ret ;
     }
 
@@ -72,11 +73,74 @@ class PullRequestAllOS extends Base {
         return $pr ;
     }
 
+    public function getPullRequestComments($pr) {
+        $comments[] = array("data" => '
+                    You’re receiving notifications because you’re subscribed to this repository.
+                    1 participant
+                    @gitter-badger
+                    @gitter-badger
+                    gitter-badger commented on 10 Jul 2015
+                    asmblah/uniter now has a Chat Room on Gitter') ;
+        $comments[] = array("data" => '@asmblah has just created a chat room. You can visit it here: https://gitter.im/asmblah/uniter.
+                    This pull-request adds this badge to your README.md:') ;
+        $comments[] = array("data" => '
+                    You’re receiving notifications because you’re subscribed to this repository.
+                    1 participant
+                    @gitter-badger
+                    @gitter-badger
+                    gitter-badger commented on 10 Jul 2015
+                    asmblah/uniter now has a Chat Room on Gitter') ;
+        return $comments ;
+    }
+
     public function getRepositoryFeatures() {
         $repositoryFactory = new \Model\Repository() ;
         $repository = $repositoryFactory->getModel($this->params);
         $r = $repository->getRepositoryFeatures($this->params["item"]);
         return $r ;
+    }
+
+    protected function getPharaohBuildIntegration($features) {
+
+        $use_integration = false ;
+        foreach ($features as $feature) {
+            if ( ($feature["module"]==='StandardFeatures') &&
+                 ($feature['values']['ptbuild_enabled'] === 'on')) {
+                $use_integration = true ;
+            }
+        }
+
+
+//        var_dump($features) ;
+//        die() ;
+
+        if ($use_integration === true) {
+            $res = array(
+                'status' => true,
+                'success_results' => array(
+                    array(
+                        'slug' => 'build_status',
+                        'name' => 'Pharaoh Build Status',
+                        'result' => 'passed',
+                        'exitcode' => 0,
+                        'message' => 'The Pharaoh Build job has Passed'
+                    ),
+                    array(
+                        'slug' => 'behat',
+                        'name' => 'Behat Tests',
+                        'result' => 'passed',
+                        'exitcode' => 0,
+                        'message' => 'The Behat functional tests have Passed'
+                    ),
+                ),
+                'failure_results' => array(),
+            ) ;
+            $pbi = $res ;
+        }
+        else {
+            $pbi = false ;
+        }
+        return $pbi ;
     }
 
     public function userIsAllowedAccess() {
