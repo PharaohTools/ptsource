@@ -219,9 +219,19 @@
 
 
                         <div class="form-group col-sm-12 comment_row">
-                            <p>
-                                <?php echo $comment['data'] ; ?>
-                            </p>
+                            <div class="fullWidth">
+                                <div class="col-sm-6">
+                                    <?php echo $comment['author'] ; ?>
+                                </div>
+                                <div class="col-sm-6">
+                                    <?php echo date('H:i d/m/Y', $comment['created_on']) ; ?>
+                                </div>
+                            </div>
+                            <div class="fullWidth">
+                                <p>
+                                    <?php echo $comment['data'] ; ?>
+                                </p>
+                            </div>
                         </div>
 
 
