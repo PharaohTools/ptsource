@@ -78,7 +78,7 @@
 		<div class="well well-lg">
 			<div class="row clearfix no-margin">
 
-				<h4 class="text-uppercase text-light">Commit History</h4>
+                <h3 class="text-uppercase text-light">Commit History: <strong><?php echo $pageVars['data']["repository"]["project-name"] ; ?></strong></h3>
 
                 <div class="form-group col-sm-12">
                     <div class="form-group col-sm-3 thin_padding">
