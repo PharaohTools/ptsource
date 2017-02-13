@@ -101,55 +101,42 @@
                     wants to merge 1 commit into <?php echo $pageVars["data"]['pull_request']['target_branch'] ; ?> from <?php echo $pageVars["data"]['pull_request']['source_branch'] ; ?>
                 </h5>
 
-                <hr />
-
-                <p>
-                    +2 −0
-                    Conversation 0 Commits 1 Files changed 1
-                    Reviewers
-                    No reviews
-                    Assignees
-                    No one assigned
-                    Labels
-                    None yet
-                    Projects
-                    None yet
-                    Milestone
-                    No milestone
-                    Notifications
-                </p>
-                <p>
-                    You’re receiving notifications because you’re subscribed to this repository.
-                    1 participant
-                    @gitter-badger
-                    @gitter-badger
-                    gitter-badger commented on 10 Jul 2015
-                    asmblah/uniter now has a Chat Room on Gitter
-                </p>
-                <p>
-                    @asmblah has just created a chat room. You can visit it here: https://gitter.im/asmblah/uniter.
-                    This pull-request adds this badge to your README.md:
-                </p>
-                <p>
-                    Gitter
-                </p>
-                <h4>
-                    If my aim is a little off, please let me know.
-                    Happy chatting.
-                </h4>
-                <p>
-                    PS: Click here if you would prefer not to receive automatic pull-requests from Gitter in future.
-                    @gitter-badger 	Added Gitter badge
-                    a3b849c
-                    All checks have passed
-                    1 successful check
-                    continuous-integration/travis-ci/pr — The Travis CI build passed
-                    Details
-                    This branch has no conflicts with the base branch
-                    Only those with write access to this repository can merge pull requests.
-                </p>
 
                 <?php
+
+                $user_can_merge_request = true ;
+
+                if ($user_can_merge_request === true) {
+
+                    ?>
+                    <div class="form-group col-sm-12">
+                        <hr />
+
+                        <h4>
+                            Merge Request:
+                        </h4>
+
+                        <div class="col-sm-8">
+                            <h5>This pull request can be automatically merged </h5>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <i class="huge fa fa-check-square"></i>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <span class="btn btn-success ">
+                                Perform Merge
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <?php
+                }
+
+
+
 
                 if (isset($pageVars['data']['pharaoh_build_integration']) &&
                     $pageVars['data']['pharaoh_build_integration'] !== false) {
@@ -160,43 +147,92 @@
                 if ($pharaoh_build_integration === true) {
 
                     ?>
-                    <hr />
+                    <div class="form-group col-sm-12">
+                        <hr />
 
-                    <?php
+                        <h4>
+                            Pharaoh Build Integration:
+                        </h4>
 
-                    $status = $pageVars['data']['pharaoh_build_integration']['status'] ;
-                    if ($status === 'passed') {
-                        $text_status = "Passing" ;
-                        $btn_class = "btn-success" ;
-                    }
-                    else if ($status === 'pending') {
-                        $text_status = "Pending" ;
-                        $btn_class = "btn-warning" ;
-                    }
-                    else if ($status === 'none') {
-                        $text_status = "Passing" ;
-                        $btn_class = "btn-primary" ;
-                    }
+                        <?php echo count($pageVars['data']['pharaoh_build_integration']['success_results']) ; ?>
+                        successful check/s
 
 
-                    ?>
+                        <?php
 
+                        $status = $pageVars['data']['pharaoh_build_integration']['status'] ;
+                        # success_results
+                        foreach ($pageVars['data']['pharaoh_build_integration']['success_results'] as $s_res) {
+                            if ($status === 'passed') {
+                                $text_status = "Passing" ;
+                                $btn_class = "btn-success" ;
+                            }
+                            else if ($status === 'pending') {
+                                $text_status = "Pending" ;
+                                $btn_class = "btn-warning" ;
+                            }
+                            else if ($status === 'none') {
+                                $text_status = "Passing" ;
+                                $btn_class = "btn-primary" ;
+                            }
+                            else {
+                                $text_status = "Passing" ;
+                                $btn_class = "btn-primary" ;
+                            }
+                            ?>
 
-                    Pharaoh Build Integration Status:
-                    <span class="<?php echo $btn_class ; ?>">
-                        <?php echo $text_status ; ?>
-                    </span>
-                    <?php echo $pageVars['data']['pharaoh_build_integration']['success_count'] ; ?> successful check/s
-                    continuous-integration/travis-ci/pr — The Travis CI build passed
+                            <div class="col-sm-12 build_integration_row">
+                                <div class="col-sm-12">
+                                    <h4><?php echo $s_res['name'] ; ?></h4>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h5><?php echo $s_res['message'] ; ?></h5>
+                                </div>
+                                <div class="col-sm-6">
+                                    <span class="btn <?php echo $btn_class ; ?>">
+                                        <h3><?php echo $text_status ; ?></h3>
+                                    </span>
+                                </div>
+                            </div>
 
+                            <?php
+                        }
+
+                        ?>
+
+                    </div>
 
                     <?php
                 }
                 ?>
 
-
-                <hr />
                 <div class="form-group col-sm-12">
+                    <hr />
+                    <h4>
+                        Comments:
+                    </h4>
+
+                    <?php
+                        $comments = $pageVars["data"]['pull_request_comments'] ;
+                        foreach ($comments as $comment) {
+                            ?>
+
+
+                        <div class="form-group col-sm-12 comment_row">
+                            <p>
+                                <?php echo $comment['data'] ; ?>
+                            </p>
+                        </div>
+
+
+                            <?php
+                        }
+                    ?>
+
+                </div>
+
+                <div class="form-group col-sm-12">
+                    <hr />
                     <h4>
                         New Comment:
                     </h4>
@@ -211,4 +247,4 @@
 
     </div>
 </div>
-<link rel="stylesheet" type="text/css" href="/Assets/Modules/PullRequest/css/commitdetails.css">
+<link rel="stylesheet" type="text/css" href="/Assets/Modules/PullRequest/css/pullrequest.css">
