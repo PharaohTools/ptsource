@@ -65,9 +65,10 @@
     <div class="col-lg-9">
         <div class="well well-lg ">
             <div class="row clearfix no-margin">
-            	<h3 class="text-uppercase text-light ">Pull Request</h3>
+            	<h3 class="text-uppercase text-light">Pull Request</h3>
                 <p><strong>Requestor: </strong><?php echo $pageVars["data"]['pull_request']['requestor'] ; ?></p>
                 <p><strong>Source Branch: </strong><?php echo $pageVars["data"]['pull_request']['source_branch'] ; ?></p>
+                <p><strong>Source Commit: </strong><?php echo $pageVars["data"]['pull_request']['source_commit'] ; ?></p>
                 <p><strong>Target Branch: </strong><?php echo $pageVars["data"]['pull_request']['target_branch'] ; ?></p>
                 <hr />
             </div>
@@ -99,6 +100,9 @@
                     <a href="index.php?control=UserProfilePublic&action=show&user=<?php echo $pageVars["data"]['pull_request']['requestor'] ; ?>"><?php echo $pageVars["data"]['pull_request']['requestor'] ; ?></a>
                     wants to merge 1 commit into <?php echo $pageVars["data"]['pull_request']['target_branch'] ; ?> from <?php echo $pageVars["data"]['pull_request']['source_branch'] ; ?>
                 </h5>
+
+                <hr />
+
                 <p>
                     +2 −0
                     Conversation 0 Commits 1 Files changed 1
@@ -144,7 +148,60 @@
                     This branch has no conflicts with the base branch
                     Only those with write access to this repository can merge pull requests.
                 </p>
+
+                <?php
+
+                if (isset($pageVars['data']['pharaoh_build_integration']) &&
+                    $pageVars['data']['pharaoh_build_integration'] !== false) {
+                    $pharaoh_build_integration = true ; }
+                else {
+                    $pharaoh_build_integration = false ; }
+
+                if ($pharaoh_build_integration === true) {
+
+                    ?>
+                    <hr />
+
+                    <?php
+
+                    $status = $pageVars['data']['pharaoh_build_integration']['status'] ;
+                    if ($status === 'passed') {
+                        $text_status = "Passing" ;
+                        $btn_class = "btn-success" ;
+                    }
+                    else if ($status === 'pending') {
+                        $text_status = "Pending" ;
+                        $btn_class = "btn-warning" ;
+                    }
+                    else if ($status === 'none') {
+                        $text_status = "Passing" ;
+                        $btn_class = "btn-primary" ;
+                    }
+
+
+                    ?>
+
+
+                    Pharaoh Build Integration Status:
+                    <span class="<?php echo $btn_class ; ?>">
+                        <?php echo $text_status ; ?>
+                    </span>
+                    <?php echo $pageVars['data']['pharaoh_build_integration']['success_count'] ; ?> successful check/s
+                    continuous-integration/travis-ci/pr — The Travis CI build passed
+
+
+                    <?php
+                }
+                ?>
+
+
                 <hr />
+                <h4>
+                    New Comment:
+                </h4>
+                <textarea>
+
+                </textarea>
             </div>
 
         </div>
