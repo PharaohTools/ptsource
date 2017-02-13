@@ -55,6 +55,9 @@ class RepositoryPullRequestsAllOS extends Base {
                 'requestor' => 'string',
                 'created_on' => 'string',
                 'last_changed' => 'string',
+                'source_branch' => 'string',
+                'source_commit' => 'string',
+                'target_branch' => 'string',
                 'description' => 'string',
             );
             $logging->log("Creating Pull Requests Collection in Datastore", $this->getModuleName()) ;
