@@ -126,7 +126,7 @@
                                         </div>
                                     </div>
                                     <label for="new_pull_request_source_commit" class="col-sm-1 control-label text-left" style="color:#757575;">Commit</label>
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-3">
                                         <input type="text"
                                                class="form-control"
                                                id="new_pull_request_source_commit"
@@ -136,7 +136,7 @@
                                         <span style="color:#FF0000;" id="new_pull_request_source_commit_alert"></span>
                                     </div>
                                     <div class="col-sm-1">
-                                        <span class="btn btn-primary" id="new_pull_request_source_commit_find">Find</span>
+                                        <span class="btn btn-primary findButton" id="new_pull_request_source_commit_find">Find</span>
                                     </div>
                                 </div>
                                 <div class="col-sm-12 create_new_pull_request_field">
@@ -172,27 +172,14 @@
                                             <input type="hidden" id="new_pull_request_target_branch" name="new_pull_request_target_branch" value="" />
                                         </div>
                                     </div>
-                                    <label for="new_pull_request_target_commit" class="col-sm-1 control-label text-left" style="color:#757575;">Commit</label>
-                                    <div class="col-sm-4">
-                                        <input type="text"
-                                               class="form-control"
-                                               id="new_pull_request_target_commit"
-                                               name="new_pull_request_target_commit"
-                                               value=""
-                                               placeholder="Latest Commit" />
-                                        <span style="color:#FF0000;" id="new_pull_request_target_commit_alert"></span>
-                                    </div>
-                                    <div class="col-sm-1">
-                                        <span class="btn btn-primary" id="new_pull_request_target_commit_find">Find</span>
-                                    </div>
                                 </div>
 
                                 <div class="col-sm-12 create_new_pull_request_field">
                                     <label for="new_pull_request_title" class="col-sm-1 control-label text-left" style="color:#757575">Desc.</label>
                                     <div class="col-sm-11">
-                                        <textarea type="text" class="form-control"
+                                        <textarea class="form-control"
                                                   id="new_pull_request_description"
-                                                  name="new_pull_request_description" value=""
+                                                  name="new_pull_request_description"
                                                   placeholder="Pull Request Description"></textarea>
                                         <span style="color:#FF0000;" id="new_pull_request_description_alert"></span>
                                     </div>
@@ -209,10 +196,12 @@
                                     </div>
                                 </div>
 
+                            </div>
+
+                            <div class="col-sm-12">
                                 <div class="col-sm-12 loading_pull_requests">
                                     <img src="/Assets/Modules/UserSSHKey/image/loading.gif" alt="Loading Keys">
                                 </div>
-
                             </div>
 
                             <div class="col-sm-12">
@@ -258,7 +247,7 @@
                                                             <a href="/index.php?control=PullRequest&action=show&item=<?php echo $onePullRequest["repo_pr_id"]; ?>&pr_id=<?php echo $onePullRequest['pr_id'] ; ?>" class="pipeName">
                                                                 <?php echo $onePullRequest['requestor']; ?>
                                                             </a>
-                                                            opened this Pull Request on <?php echo date_create_from_format('H:i d/m/Y', $onePullRequest['created_on']) ; ?>
+                                                            opened this request on <?php echo date('H:i d/m/Y', $onePullRequest['created_on']) ; ?>
                                                         </div>
                                                     </div>
                                                 </div>
