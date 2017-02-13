@@ -264,7 +264,7 @@
 
                                             ?>
 
-                                            <div class="col-sm-12">
+                                            <div id="allPullRequestRows" class="allPullRequestRows table-hover">
                                                 <h4>
                                                     There are no Pull Requests associated with this Repository
                                                 </h4>
