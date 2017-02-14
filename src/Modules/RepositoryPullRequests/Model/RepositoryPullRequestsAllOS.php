@@ -15,7 +15,6 @@ class RepositoryPullRequestsAllOS extends Base {
     public $modelGroup = array("Default") ;
 
     public function getData() {
-        $ret = $this->getRepositoryPullRequests();
         $ret["repository"] = $this->getRepository();
         $ret["branches"] = $this->getAvailableBranches();
         $ret["pull_requests"] = $this->getRepositoryPullRequests();
