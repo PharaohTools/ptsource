@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class RepositoryPullRequestsAllOS extends Base {
+class PullRequestCommentsAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -12,15 +12,7 @@ class RepositoryPullRequestsAllOS extends Base {
     public $architectures = array("any") ;
 
     // Model Group
-    public $modelGroup = array("Default") ;
-
-    public function getData() {
-        $ret = $this->getRepositoryPullRequests();
-        $ret["repository"] = $this->getRepository();
-        $ret["branches"] = $this->getAvailableBranches();
-        $ret["pull_requests"] = $this->getRepositoryPullRequests();
-        return $ret ;
-    }
+    public $modelGroup = array("Comments") ;
 
     public function getRepository() {
         $repositoryFactory = new \Model\Repository() ;
@@ -29,7 +21,7 @@ class RepositoryPullRequestsAllOS extends Base {
         return $r ;
     }
 
-    public function getRepositoryPullRequests($uname = null) {
+    public function getPullRequestComments($uname = null) {
 
         if ($uname === null) {
             $signupFactory = new \Model\Signup();
@@ -45,48 +37,81 @@ class RepositoryPullRequestsAllOS extends Base {
         $logging = $loggingFactory->getModel($this->params) ;
         $parsed_filters = array() ;
 //        $parsed_filters[] = array("where", "requestor", '=', $uname ) ;
-        $parsed_filters[] = array("where", "repo_pr_id", '=', $this->params["item"] ) ;
+        $parsed_filters[] = array("where", "pr_id", '=', $this->params["pr_id"] ) ;
+        $parsed_filters[] = array("where", "repo_id", '=', $this->params["item"] ) ;
 
-        if ($datastore->collectionExists('pull_requests') === false) {
+        if ($datastore->collectionExists('pull_request_comments') === false) {
             $column_defines = array(
-                'pr_id' => 'INTEGER PRIMARY KEY ASC',
+                'id' => 'INTEGER PRIMARY KEY ASC',
                 'title' => 'string',
-                'repo_pr_id' => 'string',
+                'pr_id' => 'string',
+                'repo_id' => 'string',
                 'requestor' => 'string',
                 'created_on' => 'string',
                 'last_changed' => 'string',
-                'source_branch' => 'string',
-                'source_commit' => 'string',
-                'target_branch' => 'string',
-                'description' => 'string',
+                'data' => 'string',
             );
-            $logging->log("Creating Pull Requests Collection in Datastore", $this->getModuleName()) ;
-            $datastore->createCollection('pull_requests', $column_defines) ; }
+            $logging->log("Creating Pull Request Comments Collection in Datastore", $this->getModuleName()) ;
+            $datastore->createCollection('pull_request_comments', $column_defines) ; }
 
-        $keys = $datastore->findAll('pull_requests', $parsed_filters) ;
+        $keys = $datastore->findAll('pull_request_comments', $parsed_filters) ;
 //        $keys = $this->keyDecorator($keys) ;
         return $keys ;
     }
 
-    public function getUserDetails() {
+
+    public function attemptCreatePullRequestComment() {
+        $valid = $this->validatePullRequestCommentDetails() ;
+        if ($valid !== true) {
+            return $valid ; }
+        $createdPullRequestComment = $this->addThePullRequestComment() ;
+        if ($createdPullRequestComment !== true) {
+            return $createdPullRequestComment ; }
+
+        $prBase = new \Model\RepositoryPullRequestComments() ;
+        $temp_params = $this->params ;
+        $temp_params['item'] = $this->params["repository_slug"] ;
+        $prOb = $prBase->getModel($temp_params) ;
+        $all_prs = $prOb->getRepositoryPullRequestComments() ;
+
+        $return = array(
+            "status" => true ,
+            "message" => "Pull Request Comment Created",
+            "pull_requests" => $all_prs);
+        return $return ;
+
+    }
+
+    public function validatePullRequestCommentDetails() {
+        // TODO i dont think this needs explaining
+        return true ;
+    }
+
+    private function addThePullRequestComment() {
+        $datastoreFactory = new \Model\Datastore() ;
+        $datastore = $datastoreFactory->getModel($this->params) ;
+
         $signupFactory = new \Model\Signup();
         $signup = $signupFactory->getModel($this->params);
-        $oldData = $signup->getLoggedInUserData();
-        return $oldData;
-    }
+        $au =$signup->getLoggedInUserData();
 
-    private function getAvailableBranches() {
-        $filebrowserDir = $this->repoRootDir() ;
-        $command = "cd {$filebrowserDir} && git branch" ;
-        $all_branches_string = $this->executeAndLoad($command) ;
-        $all_branches_string = str_replace('* ', "", $all_branches_string) ;
-        $all_branches_string = str_replace(' ', "", $all_branches_string) ;
-        $all_branches_ray = explode("\n", $all_branches_string) ;
-        return $all_branches_ray ;
-    }
+        $res = $datastore->insert('pull_requests', array(
+            "title" => $this->params["title"],
+            'pr_id' => $this->params["pr_id"],
+            'repo_pr_id' => $this->params["item"],
+            'requestor' => $au->username,
+            'created_on' => time(),
+            'last_changed' => time(),
+            'data' => $this->params["comment_data"],
+        )) ;
 
-    private function repoRootDir() {
-        return REPODIR.DS.$this->params["item"].DS;
+        if ($res === false) {
+            $return = array(
+                "status" => false ,
+                "message" => "Unable to add this Pull Request to the Repository" );
+            return $return ; }
+
+        return true ;
     }
 
 }
