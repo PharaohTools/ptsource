@@ -13,7 +13,7 @@ class PullRequestInfo extends PTConfigureBase {
     }
 
     public function routesAvailable() {
-      return array( "PullRequest" => array("show", "delete") );
+      return array( "PullRequest" => array("show", "delete", "add-comment") );
     }
 
     public function routeAliases() {
