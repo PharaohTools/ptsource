@@ -62,6 +62,7 @@
     </head>
 
 	<body class="loader-body">
+    <div id="message_overlay"></div>
     <div class="app-loader"></div>
     <div class="app-wrapper">
 		<input type="hidden" id="base_url" value="">
