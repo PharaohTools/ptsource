@@ -80,7 +80,8 @@
                 <div>
                     <?php
 
-                    if ($pageVars["data"]['pull_request']['open'] === false) {
+                    if ((isset($pageVars["data"]['pull_request']['open'])) &&
+                        ($pageVars["data"]['pull_request']['open'] === false)) {
                         ?>
                             <span class="btn btn-danger">
                                 Closed
