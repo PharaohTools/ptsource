@@ -22,11 +22,13 @@
     color: darkgreen;
 }
 
-
-
 .build_integration_row,
 .comment_row {
     border: 1px darkslategray solid;
     background-color: #eeebff;
     padding-bottom: 4px ;
+}
+
+.loading_pull_request_comments {
+    display: none;
 }
