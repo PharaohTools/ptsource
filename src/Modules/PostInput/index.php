@@ -29,6 +29,8 @@ $cleo_vars[1] = $_REQUEST['control'];
 $cleo_vars[2] = $_REQUEST['action'];
 foreach($_REQUEST as $post_key => $post_var) {
     if (!in_array($post_key, array('control', 'action'))) {
-        $cleo_vars[] = "--$post_key=$_REQUEST[$post_key]" ; } }
+        if (!is_array($_REQUEST[$post_key])) {
+            $cleo_vars[] = "--$post_key=$_REQUEST[$post_key]" ;
+        } } }
 $_ENV[PHARAOH_APP.'_bootstrap'] = serialize($cleo_vars);
 include(dirname(dirname(__DIR__)).DIRECTORY_SEPARATOR."Bootstrap.php");
