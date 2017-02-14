@@ -73,11 +73,13 @@ class PullRequestCommentsAllOS extends Base {
 //        $temp_params['item'] = $this->params["repository_slug"] ;
 //        $prOb = $prBase->getModel($temp_params) ;
         $all_prs = $this->getPullRequestComments() ;
+        var_dump($all_prs) ;
+
 
         $return = array(
             "status" => true ,
             "message" => "Pull Request Comment Created",
-            "pull_requests" => $all_prs);
+            "pull_request_comments" => $all_prs);
         return $return ;
 
     }
@@ -99,7 +101,7 @@ class PullRequestCommentsAllOS extends Base {
 //            "title" => $this->params["title"],
             "title" => '',
             'pr_id' => $this->params["pr_id"],
-            'repo_pr_id' => $this->params["repository_slug"],
+            'repo_id' => $this->params["repository_slug"],
             'requestor' => $au->username,
             'created_on' => time(),
             'last_changed' => time(),
