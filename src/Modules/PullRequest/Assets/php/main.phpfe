@@ -17,7 +17,7 @@ class PullRequest {
         $jQuery('#save_new_pull_request_comment')->on('click', function() use ($jQuery, $console)  {
             $isValid = self::validatePullRequestComment() ;
             if ($isValid === true) {
-                $jQuery('#create_new_pull_request_comment_fields')->fadeOut('fast') ;
+                $jQuery('.new_pr_comment_field')->fadeOut('fast') ;
                 $jQuery('.loading_pull_request_comments')->fadeIn('fast') ;
                 return self::createNewPullRequestComment() ;
             } else {
@@ -29,16 +29,19 @@ class PullRequest {
 
     public function createNewPullRequestComment() {
         $jQuery = \js_core::$jQuery ;
+        \js_core::$console->log('Creating PR Comment 1') ;
 
         $rurl = 'index.php?control=PullRequest&action=add-comment&output-format=JSON' ;
         $comment = $jQuery('#new_pull_request_comment')->val() ;
         $repo_name = $jQuery('#repo_name')->val() ;
         $pr_id = $jQuery('#pr_id')->val() ;
 
+        \js_core::$console->log('Creating PR Comment 2') ;
         $new_data_string = "new_pull_request_comment=".\js_core::$window->encodeURIComponent($comment).'&' ;
         $new_data_string = $new_data_string."pr_id=".\js_core::$window->encodeURIComponent($pr_id).'&' ;
         $new_data_string = $new_data_string."repository_slug=".\js_core::$window->encodeURIComponent($repo_name) ;
 
+        \js_core::$console->log('Creating PR Comment 3') ;
         $data = array(
             'type' => 'POST',
             'url' => $rurl,
@@ -46,10 +49,15 @@ class PullRequest {
             'data' => $new_data_string
         ) ;
 
+        \js_core::$console->log('Creating PR Comment 4') ;
         $ajax_object = $jQuery->ajax($data);
         return $ajax_object->done(
             function ($data) use ($jQuery) {
-//                $jQuery('.create_new_pull_request_comment_field')->fadeIn('fast') ;
+
+                \js_core::$console->log('Creating PR Comment 5 - after ajax') ;
+                \js_core::$console->log('Creating PR Comment 6', $data) ;
+
+
                 $jQuery('.loading_pull_request_comments')->fadeOut('fast') ;
                 $kt = new pullRequestCommentTable() ;
                 $kt->rewriteTable($data, $jQuery) ;
