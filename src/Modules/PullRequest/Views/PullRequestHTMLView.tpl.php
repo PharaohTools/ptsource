@@ -246,8 +246,10 @@
                     <h4>
                         New Comment:
                     </h4>
-                    <textarea class="col-sm-12" name="new_pull_request_comment" id="new_pull_request_comment"></textarea>
-                    <span id="save_new_pull_request_comment" class="btn btn-success">
+                    <textarea class="col-sm-12 new_pr_comment_field"
+                              name="new_pull_request_comment"
+                              id="new_pull_request_comment"></textarea>
+                    <span id="save_new_pull_request_comment" class="new_pr_comment_field btn btn-success">
                         Add Comment
                     </span>
                 </div>
