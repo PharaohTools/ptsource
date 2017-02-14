@@ -246,11 +246,20 @@
                     <h4>
                         New Comment:
                     </h4>
-                    <textarea class="col-sm-12"></textarea>
-                    <span class="btn btn-success ">
+                    <textarea class="col-sm-12" id=""></textarea>
+                    <span id="save_new_pull_request_comment" class="btn btn-success">
                         Add Comment
                     </span>
                 </div>
+
+                <div class="col-sm-12">
+                    <div class="col-sm-12 loading_pull_request_comments">
+                        <img src="/Assets/Modules/UserSSHKey/image/loading.gif" alt="Saving Comment">
+                    </div>
+                </div>
+
+                <input type="hidden" name="pr_id" id="pr_id" value="<?php echo $pageVars["data"]['pull_request']['pr_id'] ; ?>">
+                <input type="hidden" name="repo_name" id="repo_name" value="<?php echo $pageVars["data"]['repository']['project-slug'] ; ?>">
             </div>
 
         </div>
