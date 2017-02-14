@@ -38,7 +38,7 @@ class PullRequestCommentsAllOS extends Base {
         $parsed_filters = array() ;
 //        $parsed_filters[] = array("where", "requestor", '=', $uname ) ;
         $parsed_filters[] = array("where", "pr_id", '=', $this->params["pr_id"] ) ;
-        $parsed_filters[] = array("where", "repo_id", '=', $this->params["item"] ) ;
+        $parsed_filters[] = array("where", "repo_id", '=', $this->params["repository_slug"] ) ;
 
         if ($datastore->collectionExists('pull_request_comments') === false) {
             $column_defines = array(
@@ -68,11 +68,11 @@ class PullRequestCommentsAllOS extends Base {
         if ($createdPullRequestComment !== true) {
             return $createdPullRequestComment ; }
 
-        $prBase = new \Model\RepositoryPullRequestComments() ;
-        $temp_params = $this->params ;
-        $temp_params['item'] = $this->params["repository_slug"] ;
-        $prOb = $prBase->getModel($temp_params) ;
-        $all_prs = $prOb->getRepositoryPullRequestComments() ;
+//        $prBase = new \Model\PullRequest() ;
+//        $temp_params = $this->params ;
+//        $temp_params['item'] = $this->params["repository_slug"] ;
+//        $prOb = $prBase->getModel($temp_params) ;
+        $all_prs = $this->getPullRequestComments() ;
 
         $return = array(
             "status" => true ,
@@ -96,13 +96,14 @@ class PullRequestCommentsAllOS extends Base {
         $au =$signup->getLoggedInUserData();
 
         $res = $datastore->insert('pull_requests', array(
-            "title" => $this->params["title"],
+//            "title" => $this->params["title"],
+            "title" => '',
             'pr_id' => $this->params["pr_id"],
-            'repo_pr_id' => $this->params["item"],
+            'repo_pr_id' => $this->params["repository_slug"],
             'requestor' => $au->username,
             'created_on' => time(),
             'last_changed' => time(),
-            'data' => $this->params["comment_data"],
+            'data' => $this->params["new_pull_request_comment"],
         )) ;
 
         if ($res === false) {
