@@ -75,20 +75,16 @@ class PullRequestAllOS extends Base {
 
     public function getPullRequestComments($pr) {
         $comments[] = array(
-            "data" => '
-                    You’re receiving notifications because you’re subscribed to this repository.
-                    1 participant
-                    @gitter-badger
-                    @gitter-badger
-                    gitter-badger commented on 10 Jul 2015
-                    asmblah/uniter now has a Chat Room on Gitter',
+            "data" => 'omg look its data from a comment in a Pull Request
+                    <h4>I even handle html for formatting</h4>
+                    <p>And this should definintely be validated and processed by a form</p>',
             "created_on" => time()-500,
-            "author" => 'testadmin',) ;
+            "author" => 'testadmin') ;
         $comments[] = array(
             "data" => '@asmblah has just created a chat room. You can visit it here: https://gitter.im/asmblah/uniter.
                     This pull-request adds this badge to your README.md:',
             "created_on" => time()-750,
-            "author" => 'admin',) ;
+            "author" => 'admin') ;
         $comments[] = array(
             "data" => '
                     You’re receiving notifications because you’re subscribed to this repository.
@@ -119,10 +115,6 @@ class PullRequestAllOS extends Base {
                 $use_integration = true ;
             }
         }
-
-
-//        var_dump($features) ;
-//        die() ;
 
         if ($use_integration === true) {
             $res = array(
