@@ -19,6 +19,71 @@ class core {
     public static $php ;
 }
 
+class WindowMessage {
+
+    public static function showMessage($msg_data, $msg_type) {
+        $jQuery = \js_core::$jQuery ;
+        $message_overlay = $jQuery('#message_overlay') ;
+        $msg_hash = self::makeid() ;
+        $message_overlay->append(self::getMessageHTML($msg_data, $msg_type, $msg_hash)) ;
+        \js_core::$console->log('come on then') ;
+        $window = \js_core::$window ;
+        $window->setTimeout(function() use ($msg_hash) {
+            self::hideMessage($msg_hash) ;
+        }, 3000) ;
+    }
+
+    public static function hideMessage($msg_hash) {
+        $jQuery = \js_core::$jQuery ;
+        $message_overlay = $jQuery('#msg_'.$msg_hash) ;
+        $message_overlay->remove() ;
+        return true ;
+    }
+
+    public static function getMessageHTML($msg_data, $msg_type, $msg_hash) {
+        if ($msg_type === "good") {
+            $msg_class = ' btn-success' ; }
+        else {
+            $msg_class = ' btn-danger' ; }
+        $h = '' ;
+        $h = $h . '  <div id="msg_'.$msg_hash.'" class="fullRow">' ;
+        $h = $h . '    <span class="message_text '.$msg_class.'">' ;
+        $h = $h . $msg_data ;
+        $h = $h . '    </span>' ;
+        $h = $h . '  </div>' ;
+        return $h ;
+    }
+
+
+    public static function randomNum() {
+//        $to_floor = \js_core::$window->Math->random() * $hi;
+        $r = \js_core::$window->Math->random() ;
+        $to_floor = $r * 62;
+        return \js_core::$window->Math->floor($to_floor);
+    }
+
+    public static function randomChar(){
+        $str = 'a b c d e f g h i j k l m n o p q r s t u v w x y z ' ;
+        $str = $str . 'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z ' ;
+        $str = $str . '1 2 3 4 5 6 7 8 9 0 ' ;
+        $char_ray = \core::$php->explode(' ', $str);
+        $rand = self::randomNum() ;
+        return $char_ray[$rand];
+    }
+
+    public static function makeid(){
+        $length = 16 ;
+        $str = "";
+        for($i = 0; $i < $length; $i=$i+1) {
+            $str = $str . self::randomChar();
+        }
+        \js_core::$console->log($str);
+        return $str;
+    }
+
+
+}
+
 $console->log("enabling load-locked elements") ;
 $jQuery('.load_hidden')->removeClass('load_hidden') ;
 $jQuery('.load_pending')->remove() ;
