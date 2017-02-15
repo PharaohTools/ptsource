@@ -15,7 +15,7 @@ class PullRequest extends Base {
         if ($pageVars["route"]["action"] == 'add-comment') {
             $commentModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars, 'Comments') ;
             $this->content["data"] = $commentModel->attemptCreatePullRequestComment();
-            return array ("type"=>"view", "view"=>"pullRequestsAPHAX", "pageVars"=>$this->content); }
+            return array ("type"=>"view", "view"=>"pullRequestAPHAX", "pageVars"=>$this->content); }
         return array ("type"=>"view", "view"=>"pullRequest", "pageVars"=>$this->content);
     }
 
