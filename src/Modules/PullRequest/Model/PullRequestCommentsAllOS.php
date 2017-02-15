@@ -21,24 +21,13 @@ class PullRequestCommentsAllOS extends Base {
         return $r ;
     }
 
-    public function getPullRequestComments($uname = null) {
-
-        if ($uname === null) {
-            $signupFactory = new \Model\Signup();
-            $signup = $signupFactory->getModel($this->params);
-            $me = $signup->getLoggedInUserData() ;
-            $uname = $me->username;
-        }
+    public function getPullRequestComments($pr) {
 
         $datastoreFactory = new \Model\Datastore() ;
         $datastore = $datastoreFactory->getModel($this->params) ;
-
-        $loggingFactory = new \Model\Logging() ;
-        $logging = $loggingFactory->getModel($this->params) ;
         $parsed_filters = array() ;
-//        $parsed_filters[] = array("where", "requestor", '=', $uname ) ;
-        $parsed_filters[] = array("where", "pr_id", '=', $this->params["pr_id"] ) ;
-        $parsed_filters[] = array("where", "repo_id", '=', $this->params["repository_slug"] ) ;
+        $parsed_filters[] = array("where", "repo_id", '=', $this->params["item"] ) ;
+        $parsed_filters[] = array("where", "pr_id", '=', $pr["pr_id"] ) ;
 
         if ($datastore->collectionExists('pull_request_comments') === false) {
             $column_defines = array(
@@ -51,11 +40,12 @@ class PullRequestCommentsAllOS extends Base {
                 'last_changed' => 'string',
                 'data' => 'string',
             );
+            $loggingFactory = new \Model\Logging() ;
+            $logging = $loggingFactory->getModel($this->params) ;
             $logging->log("Creating Pull Request Comments Collection in Datastore", $this->getModuleName()) ;
             $datastore->createCollection('pull_request_comments', $column_defines) ; }
 
         $keys = $datastore->findAll('pull_request_comments', $parsed_filters) ;
-//        $keys = $this->keyDecorator($keys) ;
         return $keys ;
     }
 
@@ -73,7 +63,7 @@ class PullRequestCommentsAllOS extends Base {
 //        $temp_params['item'] = $this->params["repository_slug"] ;
 //        $prOb = $prBase->getModel($temp_params) ;
         $all_prs = $this->getPullRequestComments() ;
-        var_dump($all_prs) ;
+//        var_dump($all_prs) ;
 
 
         $return = array(
@@ -97,9 +87,9 @@ class PullRequestCommentsAllOS extends Base {
         $signup = $signupFactory->getModel($this->params);
         $au =$signup->getLoggedInUserData();
 
-        $res = $datastore->insert('pull_requests', array(
+        $res = $datastore->insert('pull_request_comments', array(
 //            "title" => $this->params["title"],
-            "title" => '',
+            "title" => 'title',
             'pr_id' => $this->params["pr_id"],
             'repo_id' => $this->params["repository_slug"],
             'requestor' => $au->username,
@@ -108,10 +98,12 @@ class PullRequestCommentsAllOS extends Base {
             'data' => $this->params["new_pull_request_comment"],
         )) ;
 
+//        var_dump('res is: ', $res) ;
+        
         if ($res === false) {
             $return = array(
                 "status" => false ,
-                "message" => "Unable to add this Pull Request to the Repository" );
+                "message" => "Unable to add this Pull Request Comment to the Repository" );
             return $return ; }
 
         return true ;
