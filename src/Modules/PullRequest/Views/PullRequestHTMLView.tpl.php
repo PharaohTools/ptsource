@@ -174,25 +174,26 @@
                             }
                             else if ($status === 'none') {
                                 $text_status = "Passing" ;
-                                $btn_class = "btn-primary" ;
+                                $btn_class = "btn-success" ;
                             }
                             else {
                                 $text_status = "Passing" ;
-                                $btn_class = "btn-primary" ;
+                                $btn_class = "btn-success" ;
                             }
                             ?>
 
-                            <div class="col-sm-12 build_integration_row">
+                            <div class="form-group col-sm-12 build_integration_row">
                                 <div class="col-sm-12">
-                                    <h4><?php echo $s_res['name'] ; ?></h4>
+                                    <h4 class="text-center"><?php echo $s_res['name'] ; ?></h4>
+                                    <hr class="no-margin-hr" />
                                 </div>
-                                <div class="col-sm-6">
-                                    <h5><?php echo $s_res['message'] ; ?></h5>
-                                </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-2">
                                     <span class="btn <?php echo $btn_class ; ?>">
                                         <h3><?php echo $text_status ; ?></h3>
                                     </span>
+                                </div>
+                                <div class="col-sm-10">
+                                    <h4><?php echo $s_res['message'] ; ?></h4>
                                 </div>
                             </div>
 
@@ -222,7 +223,7 @@
                         <div class="form-group col-sm-12 comment_row">
                             <div class="fullWidth">
                                 <div class="col-sm-6">
-                                    <?php echo $comment['author'] ; ?>
+                                    <?php echo $comment['requestor'] ; ?>
                                 </div>
                                 <div class="col-sm-6">
                                     <?php echo date('H:i d/m/Y', $comment['created_on']) ; ?>
