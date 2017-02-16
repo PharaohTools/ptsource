@@ -43,6 +43,12 @@
                         <i class="fa fa-history fa-fw hvr-bounce-in""></i> History <span class="badge"></span>
                     </a>
                 </li>
+                <li>
+                    <a href="index.php?control=RepositoryPullRequests&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>"class="hvr-bounce-in">
+                        <i class="fa fa-code-o fa-fw hvr-bounce-in""></i> Pull Requests <span class="badge"></span>
+                    </a>
+                </li>
+
 
                 <?php
                 if (in_array($pageVars["data"]["current_user_role"], array("1", "2"))) {
@@ -126,9 +132,24 @@
                         </div>
 
                         <div class="col-sm-12">
-                            <span class="btn btn-success ">
-                                Perform Merge
-                            </span>
+
+                            <div class="col-sm-4">
+                                <span class="btn btn-success ">
+                                    Perform Merge
+                                </span>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <span class="btn btn-danger ">
+                                    Reject Request
+                                </span>
+                            </div>
+
+                            <div class="col-sm-4">
+<!--                                <span class="btn btn-success ">-->
+<!--                                    Perform Merge-->
+<!--                                </span>-->
+                            </div>
                         </div>
 
                     </div>
@@ -184,7 +205,7 @@
 
                             <div class="form-group col-sm-12 build_integration_row">
                                 <div class="col-sm-12">
-                                    <h4 class="text-center"><?php echo $s_res['name'] ; ?></h4>
+                                    <h4 class="text-center"><strong><?php echo $s_res['name'] ; ?></strong></h4>
                                     <hr class="no-margin-hr" />
                                 </div>
                                 <div class="col-sm-2">
@@ -214,32 +235,32 @@
                         Comments:
                     </h4>
 
+                    <div id="comments_table">
                     <?php
                         $comments = $pageVars["data"]['pull_request_comments'] ;
                         foreach ($comments as $comment) {
                             ?>
 
-
-                        <div class="form-group col-sm-12 comment_row">
-                            <div class="fullWidth">
-                                <div class="col-sm-6">
-                                    <?php echo $comment['requestor'] ; ?>
+                            <div class="form-group col-sm-12 comment_row">
+                                <div class="fullWidth">
+                                    <div class="col-sm-6">
+                                        <?php echo $comment['requestor'] ; ?>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <?php echo date('H:i d/m/Y', $comment['created_on']) ; ?>
+                                    </div>
                                 </div>
-                                <div class="col-sm-6">
-                                    <?php echo date('H:i d/m/Y', $comment['created_on']) ; ?>
+                                <div class="fullWidth">
+                                    <p>
+                                        <?php echo $comment['data'] ; ?>
+                                    </p>
                                 </div>
                             </div>
-                            <div class="fullWidth">
-                                <p>
-                                    <?php echo $comment['data'] ; ?>
-                                </p>
-                            </div>
-                        </div>
-
 
                             <?php
                         }
                     ?>
+                </div>
 
                 </div>
 
