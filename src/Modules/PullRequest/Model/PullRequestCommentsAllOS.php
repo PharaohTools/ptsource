@@ -27,7 +27,8 @@ class PullRequestCommentsAllOS extends Base {
         $datastore = $datastoreFactory->getModel($this->params) ;
         $parsed_filters = array() ;
         $parsed_filters[] = array("where", "repo_id", '=', $this->params["item"] ) ;
-        $parsed_filters[] = array("where", "pr_id", '=', $pr["pr_id"] ) ;
+        $parsed_filters[] = array("where", "pr_id", '=', $this->params["pr_id"] ) ;
+
 
         if ($datastore->collectionExists('pull_request_comments') === false) {
             $column_defines = array(
@@ -58,13 +59,8 @@ class PullRequestCommentsAllOS extends Base {
         if ($createdPullRequestComment !== true) {
             return $createdPullRequestComment ; }
 
-//        $prBase = new \Model\PullRequest() ;
-//        $temp_params = $this->params ;
-//        $temp_params['item'] = $this->params["repository_slug"] ;
-//        $prOb = $prBase->getModel($temp_params) ;
         $all_prs = $this->getPullRequestComments() ;
-//        var_dump($all_prs) ;
-
+//        var_dump('<pre>', $all_prs, $this->params, '</pre>') ;
 
         $return = array(
             "status" => true ,
