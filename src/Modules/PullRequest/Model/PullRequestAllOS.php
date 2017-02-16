@@ -105,14 +105,14 @@ class PullRequestAllOS extends Base {
                         'name' => 'Pharaoh Build Status',
                         'result' => 'passed',
                         'exitcode' => 0,
-                        'message' => 'The Pharaoh Build job has Passed'
+                        'message' => 'The Pharaoh Build job has Passed. This will check things like installation are working, and creating the resources for a newly released version.'
                     ),
                     array(
                         'slug' => 'behat',
                         'name' => 'Behat Tests',
                         'result' => 'passed',
                         'exitcode' => 0,
-                        'message' => 'The Behat functional tests have Passed'
+                        'message' => 'The Behat functional tests have Passed. These are the main tests for the Application, and will check that individual pieces of functionality within the application are working as expected.'
                     ),
                 ),
                 'failure_results' => array(),
