@@ -39,7 +39,8 @@ class PullRequest {
         \js_core::$console->log('Creating PR Comment 2') ;
         $new_data_string = "new_pull_request_comment=".\js_core::$window->encodeURIComponent($comment).'&' ;
         $new_data_string = $new_data_string."pr_id=".\js_core::$window->encodeURIComponent($pr_id).'&' ;
-        $new_data_string = $new_data_string."repository_slug=".\js_core::$window->encodeURIComponent($repo_name) ;
+        $new_data_string = $new_data_string."repository_slug=".\js_core::$window->encodeURIComponent($repo_name).'&' ;
+        $new_data_string = $new_data_string."item=".\js_core::$window->encodeURIComponent($repo_name) ;
 
         \js_core::$console->log('Creating PR Comment 3') ;
         $data = array(
@@ -53,16 +54,13 @@ class PullRequest {
         $ajax_object = $jQuery->ajax($data);
         return $ajax_object->done(
             function ($data) use ($jQuery) {
-
-                \js_core::$console->log('Creating PR Comment 5 - after ajax') ;
-                \js_core::$console->log('Creating PR Comment 6', $data) ;
-
-
+//                \js_core::$console->log('Creating PR Comment 5 - after ajax') ;
+//                \js_core::$console->log('Creating PR Comment 6', $data) ;
                 $jQuery('.loading_pull_request_comments')->fadeOut('fast') ;
                 $kt = new pullRequestCommentTable() ;
                 $kt->rewriteTable($data, $jQuery) ;
-                $jQuery('#create_new_pull_request_comment_fields')->fadeOut();
-                $jQuery('#create_new_pull_request_comment')->fadeIn();
+//                $jQuery('#create_new_pull_request_comment_fields')->fadeOut();
+                $jQuery('.new_pr_comment_field')->fadeIn();
                 $jQuery('#new_pull_request_comment_title')->val('') ;
                 $jQuery('#new_pull_request_comment')->val('') ;
             }
@@ -90,38 +88,33 @@ class pullRequestCommentTable {
 
     public function rewriteTable($data, $jQuery) {
         $ht = '' ;
+
         $i = 1 ;
 
-        foreach ($data->data->pull_request_comments as $title => $onePullRequestRay) {
+        foreach ($data->pull_request_comments as $title => $commentRay) {
 
-            $onePullRequest = array();
-            foreach ($onePullRequestRay as $index => $cur_val) {
-                $onePullRequest[$index] = $cur_val ; }
+            $comment = array();
+            foreach ($commentRay as $index => $cur_val) {
+                $comment[$index] = $cur_val ; }
 
-                \js_core::$console->log($onePullRequest) ;
-
-                $ht = $ht . '<div class="pullRequestRow" id="blRow_' . $onePullRequest['pr_id'] . '" >' ;
-                $ht = $ht . '   <div class="blCell cellRowIndex col-sm-2" scope="row">' . $i . '</div>' ;
-                $ht = $ht . '       <div class="col-sm-10">' ;
-                $ht = $ht . '           <div class="blCell cellRowTitle col-sm-12">' ;
-                $ht = $ht . '               <a href="/index.php?control=PullRequest&action=show&item='.$onePullRequest["repo_pr_id"].'&pr_id='.$onePullRequest['pr_id'].'" class="pipeName">' ;
-                $ht = $ht . $onePullRequest["title"] ;
-                $ht = $ht . '               </a>' ;
-                $ht = $ht . '           </div>' ;
-                $ht = $ht . '           <div class="blCell cellRowAuthor col-sm-12">' ;
-                $ht = $ht . '               <a href="/index.php?control=PullRequest&action=show&item='.$onePullRequest["repo_pr_id"].'&pr_id='.$onePullRequest['pr_id'].'" class="pipeName">' ;
-                $ht = $ht . $onePullRequest["requestor"] ;
-                $ht = $ht . '               </a>' ;
-                $ht = $ht . '               opened this request on '.\core::$php->date('H:i d/m/Y', $onePullRequest['created_on']) ;
-                $ht = $ht . '           </div>' ;
-                $ht = $ht . '       </div>' ;
-                $ht = $ht . '   </div>' ;
-                $ht = $ht . '</div>' ;
+            $ht = $ht . '<div class="form-group col-sm-12 comment_row"> ';
+            $ht = $ht . '  <div class="fullWidth"> ';
+            $ht = $ht . '    <div class="col-sm-6"> ';
+            $ht = $ht . '      '.$comment['requestor'] ;
+            $ht = $ht . '    </div> ';
+            $ht = $ht . '    <div class="col-sm-6"> ';
+            $ht = $ht . '       '.\core::$php->date('H:i d/m/Y', $comment['created_on']) ;
+            $ht = $ht . '    </div> ';
+            $ht = $ht . '   </div> ';
+            $ht = $ht . '   <div class="fullWidth"> ';
+            $ht = $ht . '       <p>'.$comment['data'].' </p> ';
+            $ht = $ht . '   </div> ';
+            $ht = $ht . '</div>' ;
 
             $i = $i + 1;
         }
 
-        $jQuery('#allPullRequestRows')->html($ht) ;
+        $jQuery('#comments_table')->html($ht) ;
         setPageTriggers() ;
 
     }
