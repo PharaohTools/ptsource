@@ -111,6 +111,19 @@
 
                 <?php
 
+                if ($pageVars["data"]['pull_request']['status'] === 'rejected') {
+                    ?>
+                        <h4>This pull request has been rejected.</h4>
+                    <?php
+                }
+                else if ($pageVars["data"]['pull_request']['status'] === 'accepted') {
+                    ?>
+                        <h4>This pull request has been accepted, on XX_DATE_XX by XX_USER_XX.</h4>
+                    <?php
+                }
+                else {
+                    // if its not rejected or accepted its open
+
                 $user_can_merge_request = true ;
 
                 if ($user_can_merge_request === true) {
@@ -153,12 +166,8 @@
                         </div>
 
                     </div>
-
                     <?php
                 }
-
-
-
 
                 if (isset($pageVars['data']['pharaoh_build_integration']) &&
                     $pageVars['data']['pharaoh_build_integration'] !== false) {
@@ -257,10 +266,11 @@
                                 </div>
                             </div>
 
-                            <?php
+                            }
+                <?php
                         }
                     ?>
-                </div>
+                    </div>
 
                 </div>
 
@@ -285,6 +295,12 @@
 
                 <input type="hidden" name="pr_id" id="pr_id" value="<?php echo $pageVars["data"]['pull_request']['pr_id'] ; ?>">
                 <input type="hidden" name="repo_name" id="repo_name" value="<?php echo $pageVars["data"]['repository']['project-slug'] ; ?>">
+
+                <?php
+
+                    // end if pull request is open
+                }
+                ?>
             </div>
 
         </div>
