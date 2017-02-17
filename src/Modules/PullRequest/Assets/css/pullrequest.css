@@ -21,3 +21,25 @@
     font-weight: bold;
     color: darkgreen;
 }
+
+.build_integration_row,
+.comment_row {
+    border: 1px darkslategray solid;
+    background-color: #eeebff;
+    padding-bottom: 4px ;
+}
+
+.loading_pull_request_comments {
+    display: none;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.no-margin-hr {
+    margin-top: 2px;
+    margin-bottom: 2px;
+    border: 0;
+    border-top: 1px solid #000;
+}

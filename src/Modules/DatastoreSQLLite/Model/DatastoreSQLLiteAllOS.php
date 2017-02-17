@@ -94,8 +94,6 @@ class DatastoreSQLLiteAllOS extends Base {
 
     public function insert($table, $rowData) {
         $loggingFactory = new \Model\Logging() ;
-        $this->params["app-log"] ;
-        $this->params["echo-log"] ;
         $logging = $loggingFactory->getModel($this->params) ;
         $logging->log("Attempting to insert into table {$table}.", $this->getModuleName()) ;
         $res = $this->database->insert($table, $rowData) ;

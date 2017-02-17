@@ -15,7 +15,6 @@ class RepositoryPullRequestsAllOS extends Base {
     public $modelGroup = array("Default") ;
 
     public function getData() {
-        $ret = $this->getRepositoryPullRequests();
         $ret["repository"] = $this->getRepository();
         $ret["branches"] = $this->getAvailableBranches();
         $ret["pull_requests"] = $this->getRepositoryPullRequests();
@@ -55,7 +54,11 @@ class RepositoryPullRequestsAllOS extends Base {
                 'requestor' => 'string',
                 'created_on' => 'string',
                 'last_changed' => 'string',
+                'source_branch' => 'string',
+                'source_commit' => 'string',
+                'target_branch' => 'string',
                 'description' => 'string',
+                'status' => 'string',
             );
             $logging->log("Creating Pull Requests Collection in Datastore", $this->getModuleName()) ;
             $datastore->createCollection('pull_requests', $column_defines) ; }
@@ -77,7 +80,9 @@ class RepositoryPullRequestsAllOS extends Base {
         $command = "cd {$filebrowserDir} && git branch" ;
         $all_branches_string = $this->executeAndLoad($command) ;
         $all_branches_string = str_replace('* ', "", $all_branches_string) ;
-        return explode("\n", $all_branches_string) ;
+        $all_branches_string = str_replace(' ', "", $all_branches_string) ;
+        $all_branches_ray = explode("\n", $all_branches_string) ;
+        return $all_branches_ray ;
     }
 
     private function repoRootDir() {

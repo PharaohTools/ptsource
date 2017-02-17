@@ -17,6 +17,8 @@ class RepositoryHistoryAllOS extends Base {
     public function getData() {
         $ret = $this->getCommitHistory();
         $ret["repository"] = $this->getRepository();
+        $ret["branches"] = $this->getAvailableBranches();
+//        var_dump($ret["commits"]) ;
         return $ret ;
     }
 
@@ -32,5 +34,20 @@ class RepositoryHistoryAllOS extends Base {
         $repository = $repositoryFactory->getModel($this->params, "RepositoryCommits");
         return $repository->getCommits();
     }
+
+    private function getAvailableBranches() {
+        $filebrowserDir = $this->repoRootDir() ;
+        $command = "cd {$filebrowserDir} && git branch" ;
+        $all_branches_string = $this->executeAndLoad($command) ;
+        $all_branches_string = str_replace('* ', "", $all_branches_string) ;
+        $all_branches_string = str_replace(' ', "", $all_branches_string) ;
+        $all_branches_ray = explode("\n", $all_branches_string) ;
+        return $all_branches_ray ;
+    }
+
+    private function repoRootDir() {
+        return REPODIR.DS.$this->params["item"].DS;
+    }
+
 
 }

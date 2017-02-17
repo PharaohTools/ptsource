@@ -43,6 +43,12 @@
                         <i class="fa fa-history fa-fw hvr-bounce-in""></i> History <span class="badge"></span>
                     </a>
                 </li>
+                <li>
+                    <a href="index.php?control=RepositoryPullRequests&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>"class="hvr-bounce-in">
+                        <i class="fa fa-code-o fa-fw hvr-bounce-in""></i> Pull Requests <span class="badge"></span>
+                    </a>
+                </li>
+
 
                 <?php
                 if (in_array($pageVars["data"]["current_user_role"], array("1", "2"))) {
@@ -65,18 +71,240 @@
     <div class="col-lg-9">
         <div class="well well-lg ">
             <div class="row clearfix no-margin">
-            	<h3 class="text-uppercase text-light ">Commit</h3>
-                <p><strong>Title: </strong><?php echo $pageVars["data"]['pull_request']->getMessage() ; ?></p>
-                <p><strong>Requestor: </strong><?php echo $pageVars["data"]['pull_request']->getAuthor()->getName() ; ?></p>
-                <p><strong>Commit ID: </strong><?php echo $pageVars["data"]['pull_request']->getShortHash() ; ?></p>
-                <p><strong>Source Branch: </strong><?php echo $pageVars["data"]['pull_request']->getDate()->format('H:i d/m/Y') ; ?></p>
-                <p><strong>Target Branch: </strong><?php echo $pageVars["data"]['pull_request']->getDate()->format('H:i d/m/Y') ; ?></p>
-                <hr />
-<!--                <p><strong>File Browser: </strong><a href="http://source.pharaoh.tld/"></a></p>-->
+                <h3 class="text-uppercase text-light">
+                    <strong>
+                        <?php echo $pageVars["data"]["repository"]["project-name"] ; ?>:
+                    </strong>
+                    Pull Request
+                </h3>
+            </div>
+
+            <div class="row clearfix no-margin">
+                <h3>
+                    <strong>Title: </strong><?php echo $pageVars["data"]['pull_request']['title'] ; ?>
+                </h3>
+                <div>
+                    <?php
+
+                    if ((isset($pageVars["data"]['pull_request']['open'])) &&
+                        ($pageVars["data"]['pull_request']['open'] === false)) {
+                        ?>
+                            <span class="btn btn-danger">
+                                Closed
+                            </span>
+                        <?php
+                    } else {
+                        ?>
+                            <span class="btn btn-success">
+                                Open
+                            </span>
+                        <?php
+                    }
+
+                    ?>
+                </div>
+                <h5>
+                    <a href="index.php?control=UserProfilePublic&action=show&user=<?php echo $pageVars["data"]['pull_request']['requestor'] ; ?>"><?php echo $pageVars["data"]['pull_request']['requestor'] ; ?></a>
+                    wants to merge 1 commit into <?php echo $pageVars["data"]['pull_request']['target_branch'] ; ?> from <?php echo $pageVars["data"]['pull_request']['source_branch'] ; ?>
+                </h5>
+
+
+                <?php
+
+                if ($pageVars["data"]['pull_request']['status'] === 'rejected') {
+                    ?>
+                        <h4>This pull request has been rejected.</h4>
+                    <?php
+                }
+                else if ($pageVars["data"]['pull_request']['status'] === 'accepted') {
+                    ?>
+                        <h4>This pull request has been accepted, on XX_DATE_XX by XX_USER_XX.</h4>
+                    <?php
+                }
+                else {
+                    // if its not rejected or accepted its open
+
+                $user_can_merge_request = true ;
+
+                if ($user_can_merge_request === true) {
+
+                    ?>
+                    <div class="form-group col-sm-12">
+                        <hr />
+
+                        <h4>
+                            Merge Request:
+                        </h4>
+
+                        <div class="col-sm-8">
+                            <h5>This pull request can be automatically merged </h5>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <i class="huge fa fa-check-square"></i>
+                        </div>
+
+                        <div class="col-sm-12">
+
+                            <div class="col-sm-4">
+                                <span class="btn btn-success ">
+                                    Perform Merge
+                                </span>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <span class="btn btn-danger ">
+                                    Reject Request
+                                </span>
+                            </div>
+
+                            <div class="col-sm-4">
+<!--                                <span class="btn btn-success ">-->
+<!--                                    Perform Merge-->
+<!--                                </span>-->
+                            </div>
+                        </div>
+
+                    </div>
+                    <?php
+                }
+
+                if (isset($pageVars['data']['pharaoh_build_integration']) &&
+                    $pageVars['data']['pharaoh_build_integration'] !== false) {
+                    $pharaoh_build_integration = true ; }
+                else {
+                    $pharaoh_build_integration = false ; }
+
+                if ($pharaoh_build_integration === true) {
+
+                    ?>
+                    <div class="form-group col-sm-12">
+                        <hr />
+
+                        <h4>
+                            Pharaoh Build Integration:
+                        </h4>
+
+                        <?php echo count($pageVars['data']['pharaoh_build_integration']['success_results']) ; ?>
+                        successful check/s
+
+
+                        <?php
+
+                        $status = $pageVars['data']['pharaoh_build_integration']['status'] ;
+                        # success_results
+                        foreach ($pageVars['data']['pharaoh_build_integration']['success_results'] as $s_res) {
+                            if ($status === 'passed') {
+                                $text_status = "Passing" ;
+                                $btn_class = "btn-success" ;
+                            }
+                            else if ($status === 'pending') {
+                                $text_status = "Pending" ;
+                                $btn_class = "btn-warning" ;
+                            }
+                            else if ($status === 'none') {
+                                $text_status = "Passing" ;
+                                $btn_class = "btn-success" ;
+                            }
+                            else {
+                                $text_status = "Passing" ;
+                                $btn_class = "btn-success" ;
+                            }
+                            ?>
+
+                            <div class="form-group col-sm-12 build_integration_row">
+                                <div class="col-sm-12">
+                                    <h4 class="text-center"><strong><?php echo $s_res['name'] ; ?></strong></h4>
+                                    <hr class="no-margin-hr" />
+                                </div>
+                                <div class="col-sm-2">
+                                    <span class="btn <?php echo $btn_class ; ?>">
+                                        <h3><?php echo $text_status ; ?></h3>
+                                    </span>
+                                </div>
+                                <div class="col-sm-10">
+                                    <h4><?php echo $s_res['message'] ; ?></h4>
+                                </div>
+                            </div>
+
+                            <?php
+                        }
+
+                        ?>
+
+                    </div>
+
+                    <?php
+                }
+                ?>
+
+                <div class="form-group col-sm-12">
+                    <hr />
+                    <h4>
+                        Comments:
+                    </h4>
+
+                    <div id="comments_table">
+                    <?php
+                        $comments = $pageVars["data"]['pull_request_comments'] ;
+                        foreach ($comments as $comment) {
+                            ?>
+
+                            <div class="form-group col-sm-12 comment_row">
+                                <div class="fullWidth">
+                                    <div class="col-sm-6">
+                                        <?php echo $comment['requestor'] ; ?>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <?php echo date('H:i d/m/Y', $comment['created_on']) ; ?>
+                                    </div>
+                                </div>
+                                <div class="fullWidth">
+                                    <p>
+                                        <?php echo $comment['data'] ; ?>
+                                    </p>
+                                </div>
+                            </div>
+
+                            }
+                <?php
+                        }
+                    ?>
+                    </div>
+
+                </div>
+
+                <div class="form-group col-sm-12">
+                    <hr />
+                    <h4>
+                        New Comment:
+                    </h4>
+                    <textarea class="col-sm-12 new_pr_comment_field"
+                              name="new_pull_request_comment"
+                              id="new_pull_request_comment"></textarea>
+                    <span id="save_new_pull_request_comment" class="new_pr_comment_field btn btn-success">
+                        Add Comment
+                    </span>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="col-sm-12 loading_pull_request_comments">
+                        <img src="/Assets/Modules/UserSSHKey/image/loading.gif" alt="Saving Comment">
+                    </div>
+                </div>
+
+                <input type="hidden" name="pr_id" id="pr_id" value="<?php echo $pageVars["data"]['pull_request']['pr_id'] ; ?>">
+                <input type="hidden" name="repo_name" id="repo_name" value="<?php echo $pageVars["data"]['repository']['project-slug'] ; ?>">
+
+                <?php
+
+                    // end if pull request is open
+                }
+                ?>
             </div>
 
         </div>
 
     </div>
 </div>
-<link rel="stylesheet" type="text/css" href="/Assets/Modules/PullRequest/css/commitdetails.css">
+<link rel="stylesheet" type="text/css" href="/Assets/Modules/PullRequest/css/pullrequest.css">

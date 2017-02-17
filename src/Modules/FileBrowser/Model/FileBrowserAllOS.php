@@ -89,10 +89,8 @@ class FileBrowserAllOS extends Base {
         $filebrowserDir = $this->getFileBrowserDir() ;
         $command = "cd {$filebrowserDir} && git branch" ;
         $all_branches_string = $this->executeAndLoad($command) ;
-//        var_dump("<pre>", $all_branches_string, "</pre>") ;
-//            die() ;
         $all_branches_string = str_replace('* ', "", $all_branches_string) ;
-//        var_dump("<pre>", $all_branches_string, "</pre>") ;
+        $all_branches_string = str_replace(' ', "", $all_branches_string) ;
         $all_branches_ray = explode("\n", $all_branches_string) ;
         return $all_branches_ray ;
     }

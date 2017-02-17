@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-echo "Original command: " + $SSH_ORIGINAL_COMMAND >> /tmp/sshlog ;
-echo "ptgit key var: " + $PTGIT_KEY >> /tmp/sshlog ;
-echo "ptgit user var: " + $PTGIT_USER >> /tmp/sshlog ;
+echo "Original command: $SSH_ORIGINAL_COMMAND" >> /tmp/sshlog ;
+echo "ptgit key var: $PTGIT_KEY" >> /tmp/sshlog ;
+echo "ptgit user var: $PTGIT_USER" >> /tmp/sshlog ;
 # echo $SSH_ORIGINAL_COMMAND ;
 
 if [[ $SSH_ORIGINAL_COMMAND == git-upload-pack* ]] || [[ $SSH_ORIGINAL_COMMAND == git-receive-pack* ]] ; then

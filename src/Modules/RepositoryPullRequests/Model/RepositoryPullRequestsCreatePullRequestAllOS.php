@@ -28,7 +28,9 @@ class RepositoryPullRequestsCreatePullRequestAllOS extends Base {
             return $createdPullRequest ; }
 
         $prBase = new \Model\RepositoryPullRequests() ;
-        $prOb = $prBase->getModel($this->params) ;
+        $temp_params = $this->params ;
+        $temp_params['item'] = $this->params["repository_slug"] ;
+        $prOb = $prBase->getModel($temp_params) ;
         $all_prs = $prOb->getRepositoryPullRequests() ;
 
         $return = array(
@@ -40,6 +42,7 @@ class RepositoryPullRequestsCreatePullRequestAllOS extends Base {
     }
 
     public function validatePullRequestDetails() {
+        // TODO i dont think this needs explaining
         return true ;
     }
 
@@ -57,14 +60,14 @@ class RepositoryPullRequestsCreatePullRequestAllOS extends Base {
             'requestor' => $au->username,
             'created_on' => time(),
             'last_changed' => time(),
+            'source_branch' => $this->params["source_branch"],
+            'source_commit' => $this->params["source_commit"],
+            'target_branch' => $this->params["target_branch"],
             'description' => $this->params["new_pull_request_description"],
+            'status' => 'open',
         )) ;
 
-        if ($res == 0) {
-            ob_start();
-            var_dump($res);
-            $dump = ob_get_clean();
-            file_put_contents('/tmp/pharaoh.log', $dump, FILE_APPEND) ;
+        if ($res === false) {
             $return = array(
                 "status" => false ,
                 "message" => "Unable to add this Pull Request to the Repository" );

@@ -25,6 +25,8 @@ class PullRequestAllOS extends Base {
         $ret["user"] = $this->getLoggedInUser();
         $ret["current_user_role"] = $this->getCurrentUserRole($ret["user"]);
         $ret["pull_request"] = $this->getPullRequest();
+        $ret["pull_request_comments"] = $this->getPullRequestComments($ret["pull_request"]);
+        $ret["pharaoh_build_integration"] = $this->getPharaohBuildIntegration($ret["features"]);
         return $ret ;
     }
 
@@ -62,11 +64,20 @@ class PullRequestAllOS extends Base {
     }
 
     public function getPullRequest() {
-        $client = new \Gitter\Client;
-        $loc = REPODIR.DS.$this->params["item"] ;
-        $repository = $client->getRepository($loc);
-        $commit = $repository->getPullRequest($this->params['pull_request']);
-        return $commit ;
+        $datastoreFactory = new \Model\Datastore() ;
+        $datastore = $datastoreFactory->getModel($this->params) ;
+        $parsed_filters = array() ;
+        $parsed_filters[] = array("where", "repo_pr_id", '=', $this->params["item"] ) ;
+        $parsed_filters[] = array("where", "pr_id", '=', $this->params["pr_id"] ) ;
+        $pr = $datastore->findOne('pull_requests', $parsed_filters) ;
+        return $pr ;
+    }
+
+    public function getPullRequestComments($pr) {
+        $prFactory = new \Model\PullRequest() ;
+        $prob = $prFactory->getModel($this->params, 'Comments') ;
+        $prc = $prob->getPullRequestComments($pr) ;
+        return $prc ;
     }
 
     public function getRepositoryFeatures() {
@@ -74,6 +85,44 @@ class PullRequestAllOS extends Base {
         $repository = $repositoryFactory->getModel($this->params);
         $r = $repository->getRepositoryFeatures($this->params["item"]);
         return $r ;
+    }
+
+    protected function getPharaohBuildIntegration($features) {
+        $use_integration = false ;
+        foreach ($features as $feature) {
+            if ( ($feature["module"]==='StandardFeatures') &&
+                 ($feature['values']['ptbuild_enabled'] === 'on')) {
+                $use_integration = true ;
+            }
+        }
+
+        if ($use_integration === true) {
+            $res = array(
+                'status' => true,
+                'success_results' => array(
+                    array(
+                        'slug' => 'build_status',
+                        'name' => 'Pharaoh Build Status',
+                        'result' => 'passed',
+                        'exitcode' => 0,
+                        'message' => 'The Pharaoh Build job has Passed. This will check things like installation are working, and creating the resources for a newly released version.'
+                    ),
+                    array(
+                        'slug' => 'behat',
+                        'name' => 'Behat Tests',
+                        'result' => 'passed',
+                        'exitcode' => 0,
+                        'message' => 'The Behat functional tests have Passed. These are the main tests for the Application, and will check that individual pieces of functionality within the application are working as expected.'
+                    ),
+                ),
+                'failure_results' => array(),
+            ) ;
+            $pbi = $res ;
+        }
+        else {
+            $pbi = false ;
+        }
+        return $pbi ;
     }
 
     public function userIsAllowedAccess() {
