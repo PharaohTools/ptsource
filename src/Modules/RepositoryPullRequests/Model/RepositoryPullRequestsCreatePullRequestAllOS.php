@@ -64,6 +64,7 @@ class RepositoryPullRequestsCreatePullRequestAllOS extends Base {
             'source_commit' => $this->params["source_commit"],
             'target_branch' => $this->params["target_branch"],
             'description' => $this->params["new_pull_request_description"],
+            'status' => 'open',
         )) ;
 
         if ($res === false) {
