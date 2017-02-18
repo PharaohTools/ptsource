@@ -188,7 +188,6 @@
                         <?php echo count($pageVars['data']['pharaoh_build_integration']['success_results']) ; ?>
                         successful check/s
 
-
                         <?php
 
                         $status = $pageVars['data']['pharaoh_build_integration']['status'] ;
@@ -289,7 +288,7 @@
 
                 <div class="col-sm-12">
                     <div class="col-sm-12 loading_pull_request_comments">
-                        <img src="/Assets/Modules/UserSSHKey/image/loading.gif" alt="Saving Comment">
+                        <img src="/Assets/Modules/UserSSHKey/image/loading.gif" alt="Saving Comment" />
                     </div>
                 </div>
 
