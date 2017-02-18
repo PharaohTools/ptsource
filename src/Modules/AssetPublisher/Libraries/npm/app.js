@@ -13,20 +13,21 @@ var $ = jQuery,
     phpEngine = uniter.createEngine('PHP'),
     output = document.getElementById('output');
 
-var file_require_string = "" ;
-var current_page_module = getParameterByName('Control') ;
-// mainFiles.forEach(function (filePath) {
-//     console.log("current page:  " + current_page_module) ;
-//     console.log("this first path: " + filePath) ;
-//     var modName = filePath.replace("/opt/ptsource/ptsource/src/Modules/", "");
-//     modName = modName.replace("/php/main.phpfe", "");
-//     var relative_url = '/Assets/Modules/'+modName+'/php/main.phpfe' ;
-//     console.log("this second path: " + filePath) ;
-//     console.log("relative url: " + relative_url) ;
-//     file_require_string += 'require("'+relative_url+'") ; ';
-// });
+var file_require_string = 'require("/Assets/Modules/DefaultSkin/php/main.phpfe") ; ';
+console.log("this pn", window.location.pathname) ;
+if (window.location.pathname !== '/') {
+    var current_page_module = getParameterByName('control') ;
+    var mainpath = '/opt/ptsource/ptsource/src/Modules/'+current_page_module+'/Assets/php/main.phpfe' ;
+    console.log("this main", mainpath) ;
+    if (mainFiles.indexOf(mainpath) != -1) {
+        var relative_url = '/Assets/Modules/'+current_page_module+'/php/main.phpfe' ;
+        console.log("relative url: " + relative_url) ;
+        file_require_string += 'require("'+relative_url+'") ; ';
+    }
 
-file_require_string = 'require("/Assets/Modules/DefaultSkin/php/main.phpfe") ; ';
+}
+
+
 
 console.log("file_require_string: " + file_require_string) ;
 
@@ -46,7 +47,7 @@ function getFileData(path) {
     // if (!hasOwn.call(fileData, path)) {
     //     throw new Error('Unknown file "' + path + '"');
     // }
-    console.log("trying to load: ", path) ;
+    // console.log("trying to load: ", path) ;
     var filedata ;
     $.ajax({
         url: path,
@@ -66,7 +67,7 @@ function getFileData(path) {
 phpEngine.configure({
     include: function (path, promise) {
         var fd = getFileData(path) ;
-        console.log("fd: " + fd) ;
+        // console.log("fd: " + fd) ;
         promise.resolve(fd);
     }
 });
