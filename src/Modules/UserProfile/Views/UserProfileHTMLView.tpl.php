@@ -287,7 +287,7 @@
                                 <?php } ?>
 
                             <div class="extra_fields_loader hidden" id="extra_fields_loader">
-                                <img src="/Assets/Modules/UserSSHKey/image/loading.gif" alt="Updating User" />
+                                <img src="/Assets/Modules/DefaultSkin/image/loader.gif" alt="Updating User" />
                             </div>
 
                         </div>
