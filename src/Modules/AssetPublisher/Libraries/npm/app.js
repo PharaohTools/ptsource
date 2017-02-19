@@ -69,10 +69,9 @@ phpEngine.configure({
     }
 });
 
-var php = "" ;
 // Expose jQuery to PHPland
 phpEngine.expose($, 'jQuery');
-phpEngine.expose(php, 'phpjs');
+// phpEngine.expose(php, 'phpjs');
 
 // Expose Window to PHPland
 var this_window = window ;
