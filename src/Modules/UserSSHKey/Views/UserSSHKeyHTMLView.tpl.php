@@ -88,7 +88,7 @@
                             </div>
 
                             <div class="col-sm-12 loading_keys">
-                                <img src="/Assets/Modules/UserSSHKey/image/loading.gif" alt="Loading Keys">
+                                <img src="/Assets/Modules/DefaultSkin/image/loader.gif" alt="Loading Keys">
                             </div>
 
                         </div>
