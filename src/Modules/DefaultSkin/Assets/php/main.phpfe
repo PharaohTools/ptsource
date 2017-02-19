@@ -63,10 +63,7 @@ class WindowMessage {
     }
 
     public static function randomChar(){
-        $str = 'a b c d e f g h i j k l m n o p q r s t u v w x y z ' ;
-        $str = $str . 'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z ' ;
-        $str = $str . '1 2 3 4 5 6 7 8 9 0 ' ;
-        $char_ray = \core::$php->explode(' ', $str);
+        $char_ray = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','1','2','3','4','5','6','7','8','9','0'] ;
         $rand = self::randomNum() ;
         return $char_ray[$rand];
     }
@@ -79,6 +76,46 @@ class WindowMessage {
         }
         \js_core::$console->log($str);
         return $str;
+    }
+
+    public static function areYouSure($message, $yesfunction) {
+//        inject_fields = inject_fields || false;
+//        function_after_inject = function_after_inject || false;
+        $htmlvar  = '<div id="overlay_are_you_sure"> ';
+        $htmlvar = $htmlvar . '    <div class="overlay_inner"> ';
+        $htmlvar = $htmlvar . '        <div id="close_button_div"> ';
+        $htmlvar = $htmlvar . '            <span id="close_page_overlay"> ';
+        $htmlvar = $htmlvar . '                <img src="/Assets/Modules/DefaultSkin/image/close_button.png" /> ';
+        $htmlvar = $htmlvar . '            </span> ';
+        $htmlvar = $htmlvar . '        </div> ';
+        $htmlvar = $htmlvar . '        <div class="overlay_content"> ';
+        $htmlvar = $htmlvar . '            <h3 class="progressTitle">' . $message . '</h3> ';
+        $htmlvar = $htmlvar . '            <div class="fullWidth"> ';
+        $htmlvar = $htmlvar . '                <span id="are_you_sure_yes" class="btn btn-success hvr-float-shadow">Yes</span> ';
+        $htmlvar = $htmlvar . '                <span id="are_you_sure_no" class="btn btn-warning hvr-float-shadow">No</span> ';
+        $htmlvar = $htmlvar . '            </div> ';
+        $htmlvar = $htmlvar . '            <div class="fullWidth"> ';
+        $htmlvar = $htmlvar . '                <div id="overlay_data"></div>';
+        $htmlvar = $htmlvar . '            </div> ';
+        $htmlvar = $htmlvar . '        </div> ';
+        $htmlvar = $htmlvar . '    </div> ';
+        $htmlvar = $htmlvar . '</div> ';
+
+        $jQuery = \js_core::$jQuery ;
+
+        $jQuery('body')->append($htmlvar) ;
+
+        $jQuery('#close_page_overlay')->on('click', function() use ($jQuery) {
+            $jQuery('#close_page_overlay')->fadeOut('fast') ;
+        } );
+        $jQuery('#are_you_sure_no')->on('click', function() use ($jQuery) {
+            $jQuery('#close_page_overlay')->fadeOut('fast') ;
+        } );
+        $jQuery('#are_you_sure_yes')->on('click', function() use ($jQuery, $yesfunction) {
+            $yesfunction() ;
+            $jQuery('#close_page_overlay')->fadeOut('fast') ;
+        } );
+
     }
 
 
