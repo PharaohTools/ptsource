@@ -62,10 +62,17 @@ class RepositoryPullRequestsAllOS extends Base {
             );
             $logging->log("Creating Pull Requests Collection in Datastore", $this->getModuleName()) ;
             $datastore->createCollection('pull_requests', $column_defines) ; }
+        $data = $datastore->findAll('pull_requests', $parsed_filters) ;
+        $data = $this->dataDecorator($data) ;
+        return $data ;
+    }
 
-        $keys = $datastore->findAll('pull_requests', $parsed_filters) ;
-//        $keys = $this->keyDecorator($keys) ;
-        return $keys ;
+    public function dataDecorator($rows) {
+        foreach ($rows as &$onerow) {
+            $onerow['created_on_format'] = date('H:i d/m/Y', $onerow['created_on']);
+            $onerow['last_changed_format'] = date('H:i d/m/Y', $onerow['last_changed']);
+        }
+        return $rows ;
     }
 
     public function getUserDetails() {
