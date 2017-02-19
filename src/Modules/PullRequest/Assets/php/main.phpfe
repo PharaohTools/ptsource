@@ -1,11 +1,11 @@
 <?php
 
 $PullRequest = new \PullRequest() ;
-$PullRequest->setRepoPullRequestsPageTriggers() ;
+$PullRequest->setPageTriggers() ;
 
 class PullRequest {
 
-    public function setRepoPullRequestsPageTriggers() {
+    public function setPageTriggers() {
         $jQuery = \js_core::$jQuery ;
         $console = \js_core::$console ;
 
@@ -23,6 +23,22 @@ class PullRequest {
             } else {
                 return false ;
             }
+        });
+
+        $jQuery('#merge_request_accept')->on('click', function() use ($jQuery, $console)  {
+            $yesFunction = function () {
+                \js_core::$window->location->href = "" ;
+            } ;
+            $msg = 'Are you sure you want to accept this request?' ;
+            WindowMessage::areYouSure($msg, $yesFunction) ;
+        });
+
+        $jQuery('#merge_request_reject')->on('click', function() use ($jQuery, $console)  {
+            $yesFunction = function () {
+                \js_core::$window->location->href = "" ;
+            } ;
+            $msg = 'Are you sure you want to reject this request?' ;
+            WindowMessage::areYouSure($msg, $yesFunction) ;
         });
 
     }
@@ -88,34 +104,27 @@ class pullRequestCommentTable {
 
     public function rewriteTable($data, $jQuery) {
         $ht = '' ;
-
         $i = 1 ;
-
         foreach ($data->pull_request_comments as $title => $commentRay) {
-
             $comment = array();
             foreach ($commentRay as $index => $cur_val) {
                 $comment[$index] = $cur_val ; }
-
             $ht = $ht . '<div class="form-group col-sm-12 comment_row"> ';
             $ht = $ht . '  <div class="fullWidth"> ';
             $ht = $ht . '    <div class="col-sm-6"> ';
             $ht = $ht . '      '.$comment['requestor'] ;
             $ht = $ht . '    </div> ';
             $ht = $ht . '    <div class="col-sm-6"> ';
-            $ht = $ht . '       '.\core::$php->date('H:i d/m/Y', $comment['created_on']) ;
+            $ht = $ht . '       '.$comment['created_on_format'] ;
             $ht = $ht . '    </div> ';
             $ht = $ht . '   </div> ';
             $ht = $ht . '   <div class="fullWidth"> ';
             $ht = $ht . '       <p>'.$comment['data'].' </p> ';
             $ht = $ht . '   </div> ';
             $ht = $ht . '</div>' ;
-
             $i = $i + 1;
         }
-
         $jQuery('#comments_table')->html($ht) ;
         setPageTriggers() ;
-
     }
 }
