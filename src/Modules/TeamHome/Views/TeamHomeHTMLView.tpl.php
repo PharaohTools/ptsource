@@ -36,7 +36,7 @@
 
                         <li>
                             <a href="index.php?control=TeamHome&action=delete&item=<?php echo $pageVars["data"]["team"]["team_slug"] ; ?>" class="hvr-bounce-in">
-                                <i class="fa fa-trash fa-fw hvr-bounce-in""></i> Delete
+                                <i class="fa fa-trash fa-fw hvr-bounce-in"></i> Delete
                             </a>
                         </li>
 
