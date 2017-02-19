@@ -5,7 +5,6 @@ $console->log("PHPFE Started") ;
 \js_core::$console = $console ;
 \js_core::$window = $window ;
 \js_core::$Math = $Math ;
-\core::$php = $phpjs ;
 $console->log("js class initialized") ;
 
 class js_core {
@@ -15,9 +14,6 @@ class js_core {
     public static $Math ;
 }
 
-class core {
-    public static $php ;
-}
 
 class WindowMessage {
 
