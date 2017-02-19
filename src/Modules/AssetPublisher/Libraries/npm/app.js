@@ -14,11 +14,11 @@ var $ = jQuery,
     output = document.getElementById('output');
 
 var file_require_string = 'require("/Assets/Modules/DefaultSkin/php/main.phpfe") ; ';
-console.log("this pn", window.location.pathname) ;
+// console.log("this pn", window.location.pathname) ;
 if (window.location.pathname !== '/') {
     var current_page_module = getParameterByName('control') ;
     var mainpath = '/opt/ptsource/ptsource/src/Modules/'+current_page_module+'/Assets/php/main.phpfe' ;
-    console.log("this main", mainpath) ;
+    // console.log("this main", mainpath) ;
     if (mainFiles.indexOf(mainpath) != -1) {
         var relative_url = '/Assets/Modules/'+current_page_module+'/php/main.phpfe' ;
         console.log("relative url: " + relative_url) ;
@@ -27,10 +27,7 @@ if (window.location.pathname !== '/') {
 
 }
 
-
-
-console.log("file_require_string: " + file_require_string) ;
-
+// console.log("file_require_string: " + file_require_string) ;
 function getParameterByName(name, url) {
     if (!url) {
         url = window.location.href;
@@ -94,10 +91,9 @@ phpEngine.getStdout().on('data', function (data) {
     document.body.insertAdjacentHTML('beforeEnd', data);
 });
 
-// this is looking in the filedata file which is all the php compressed in a key value with path keys
 var php_code_string = '<?php '+file_require_string+' ?>' ;
 
 // Go!
 phpEngine.execute(php_code_string).fail(function (error) {
-    // console.warn('ERROR: ' + error.toString());
+    console.warn('ERROR: ' + error.toString());
 });
