@@ -30,6 +30,34 @@ class PullRequestAllOS extends Base {
         return $ret ;
     }
 
+    public function closePullRequest() {
+
+        $user = $this->getLoggedInUser();
+        $can_close = false ;
+        $pull_request = $this->getPullRequest();
+        // if user is the requestor they can close it
+        if ($pull_request['requestor'] == $user->username) {
+            $can_close = true ;
+        }
+        // if user is an admin they can close it
+        if ($user->role == 1) {
+            $can_close = true ;
+        }
+        // if user can write to the repo they can close it
+        if ($this->authUserToWrite($user->username, $this->params["item"])) {
+
+        }
+
+        if ($can_close) {
+
+        }
+        else {
+            $ret["status"] = false ;
+            $ret["message"] = 'You do not have sufficient permission to close this pull request' ;
+        }
+        return $ret ;
+    }
+
     protected function getLoggedInUser() {
         $signupFactory = new \Model\Signup() ;
         $signup = $signupFactory->getModel($this->params);
