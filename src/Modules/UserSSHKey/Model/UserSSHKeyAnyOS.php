@@ -92,17 +92,17 @@ class UserSSHKeyAnyOS extends BasePHPApp {
             $logging->log("Creating User SSH Keys Collection in Datastore", $this->getModuleName()) ;
             $datastore->createCollection('user_ssh_keys', $column_defines) ; }
 
-        $keys = $datastore->findAll('user_ssh_keys', $parsed_filters) ;
-        $keys = $this->keyDecorator($keys) ;
-        return $keys ;
+        $data = $datastore->findAll('user_ssh_keys', $parsed_filters) ;
+        $data = $this->dataDecorator($data) ;
+        return $data ;
     }
 
-    public function keyDecorator($keys) {
-        foreach ($keys as &$onekey) {
-            $onekey['created_on_format'] = date('H:i d/m/Y', $onekey['created_on']);
-            $onekey['last_used_format'] = date('H:i d/m/Y', $onekey['last_used']);
+    public function dataDecorator($data) {
+        foreach ($data as &$onerow) {
+            $onerow['created_on_format'] = date('H:i d/m/Y', $onerow['created_on']);
+            $onerow['last_used_format'] = date('H:i d/m/Y', $onerow['last_used']);
         }
-        return $keys ;
+        return $data ;
     }
 
     public function keyAlreadyExists($title) {
