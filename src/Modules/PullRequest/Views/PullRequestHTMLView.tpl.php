@@ -45,7 +45,7 @@
                 </li>
                 <li>
                     <a href="index.php?control=RepositoryPullRequests&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>"class="hvr-bounce-in">
-                        <i class="fa fa-code-o fa-fw hvr-bounce-in"></i> Pull Requests <span class="badge"></span>
+                        <i class="fa fa-code fa-fw hvr-bounce-in"></i> Pull Requests <span class="badge"></span>
                     </a>
                 </li>
 
@@ -113,7 +113,7 @@
 
                 if ($pageVars["data"]['pull_request']['status'] === 'rejected') {
                     ?>
-                        <h4>This pull request has been rejected.</h4>
+                        <h4>This pull request has been rejected, on XX_DATE_XX by XX_USER_XX.</h4>
                     <?php
                 }
                 else if ($pageVars["data"]['pull_request']['status'] === 'accepted') {
@@ -124,17 +124,19 @@
                 else {
                     // if its not rejected or accepted its open
 
-                $user_can_merge_request = true ;
+                    ?>
+                    <hr />
 
-                if ($user_can_merge_request === true) {
+                    <h4>
+                        Merge Request:
+                    </h4>
+                    <?php
+                $request_can_be_merged = true ;
+
+                if ($request_can_be_merged === true) {
 
                     ?>
                     <div class="form-group col-sm-12">
-                        <hr />
-
-                        <h4>
-                            Merge Request:
-                        </h4>
 
                         <div class="col-sm-8">
                             <h5>This pull request can be automatically merged </h5>
@@ -147,22 +149,45 @@
                         <div class="col-sm-12">
 
                             <div class="col-sm-4">
-                                <span class="btn btn-success ">
+                                <span id="merge_request_accept" class="btn btn-success ">
                                     Perform Merge
                                 </span>
                             </div>
 
                             <div class="col-sm-4">
-                                <span class="btn btn-danger ">
+                                <span id="merge_request_reject" class="btn btn-danger ">
                                     Reject Request
                                 </span>
                             </div>
 
                             <div class="col-sm-4">
-<!--                                <span class="btn btn-success ">-->
-<!--                                    Perform Merge-->
-<!--                                </span>-->
                             </div>
+
+                        </div>
+
+                    </div>
+                    <?php
+                } else {
+                    ?>
+                    <div class="col-sm-8">
+                        <h5>This pull request cannot be automatically merged </h5>
+                    </div>
+
+                    <div class="col-sm-12">
+
+                        <div class="col-sm-4">
+                            <span id="merge_unable_notify_requestor" class="btn btn-success ">
+                                Notify Requestor
+                            </span>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <span id="merge_request_reject" class="btn btn-danger ">
+                                Reject Request
+                            </span>
+                        </div>
+
+                        <div class="col-sm-4">
                         </div>
 
                     </div>
@@ -239,34 +264,39 @@
 
                 <div class="form-group col-sm-12">
                     <hr />
-                    <h4>
-                        Comments:
-                    </h4>
-
                     <div id="comments_table">
                     <?php
                         $comments = $pageVars["data"]['pull_request_comments'] ;
-                        foreach ($comments as $comment) {
+
+                        if (is_array($comments) && count($comments)>0) {
                             ?>
-
-                            <div class="form-group col-sm-12 comment_row">
-                                <div class="fullWidth">
-                                    <div class="col-sm-6">
-                                        <?php echo $comment['requestor'] ; ?>
+                            <h4>Comments:</h4>
+                            <?php
+                            foreach ($comments as $comment) {
+                                ?>
+                                <div class="form-group col-sm-12 comment_row">
+                                    <div class="fullWidth">
+                                        <div class="col-sm-6">
+                                            <?php echo $comment['requestor'] ; ?>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <?php echo date('H:i d/m/Y', $comment['created_on']) ; ?>
+                                        </div>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <?php echo date('H:i d/m/Y', $comment['created_on']) ; ?>
+                                    <div class="fullWidth">
+                                        <p>
+                                            <?php echo $comment['data'] ; ?>
+                                        </p>
                                     </div>
                                 </div>
-                                <div class="fullWidth">
-                                    <p>
-                                        <?php echo $comment['data'] ; ?>
-                                    </p>
-                                </div>
-                            </div>
-
+                                <?php
                             }
-                <?php
+                        } else {
+                            ?>
+                            <div class="form-group col-sm-12">
+                                <h4>No comments have been made yet</h4>
+                            </div>
+                            <?php
                         }
                     ?>
                     </div>
@@ -288,7 +318,7 @@
 
                 <div class="col-sm-12">
                     <div class="col-sm-12 loading_pull_request_comments">
-                        <img src="/Assets/Modules/UserSSHKey/image/loading.gif" alt="Saving Comment" />
+                        <img src="/Assets/Modules/DefaultSkin/image/loader.gif" alt="Saving Comment" />
                     </div>
                 </div>
 
