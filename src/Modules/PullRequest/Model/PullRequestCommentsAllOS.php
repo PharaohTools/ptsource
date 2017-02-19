@@ -46,8 +46,17 @@ class PullRequestCommentsAllOS extends Base {
             $logging->log("Creating Pull Request Comments Collection in Datastore", $this->getModuleName()) ;
             $datastore->createCollection('pull_request_comments', $column_defines) ; }
 
-        $keys = $datastore->findAll('pull_request_comments', $parsed_filters) ;
-        return $keys ;
+        $data = $datastore->findAll('pull_request_comments', $parsed_filters) ;
+        $data = $this->dataDecorator($data) ;
+        return $data ;
+    }
+
+    public function dataDecorator($rows) {
+        foreach ($rows as &$onerow) {
+            $onerow['created_on_format'] = date('H:i d/m/Y', $onerow['created_on']);
+            $onerow['last_changed_format'] = date('H:i d/m/Y', $onerow['last_changed']);
+        }
+        return $rows ;
     }
 
 
