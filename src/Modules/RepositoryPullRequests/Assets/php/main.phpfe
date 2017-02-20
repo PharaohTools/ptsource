@@ -27,8 +27,9 @@ class RepositoryPullRequests {
 
         $jQuery('.source_branch_option')->on('click', function($jqthis) use ($jQuery, $console)  {
             $console->log("t id:", $jqthis->target->id);
-            $id = $jqthis->target->id ;
-            $branch = \core::$php->substr($id, 21);
+//            $id = $jqthis->target->id ;
+            $branch = $jQuery('#'.$jqthis->target->id)->attr('data-source_branch');
+//            $branch = \core::$php->substr($id, 21);
             $console->log("source branch:", $branch);
             $jQuery('#new_pull_request_source_branch')->val($branch);
             $jQuery('#new_pull_request_source_branch_display')->html($branch);
@@ -36,8 +37,8 @@ class RepositoryPullRequests {
 
         $jQuery('.target_branch_option')->on('click', function($jqthis) use ($jQuery, $console)  {
             $console->log("t id:", $jqthis->target->id);
-            $id = $jqthis->target->id ;
-            $branch = \core::$php->substr($id, 21);
+//            $id = $jqthis->target->id ;
+            $branch = $jQuery('#'.$jqthis->target->id)->attr('data-target_branch');
             $console->log("target branch:", $branch);
             $jQuery('#new_pull_request_target_branch')->val($branch);
             $jQuery('#new_pull_request_target_branch_display')->html($branch);
@@ -125,7 +126,7 @@ class pullRequestTable {
             foreach ($onePullRequestRay as $index => $cur_val) {
                 $onePullRequest[$index] = $cur_val ; }
 
-            \js_core::$console->log($onePullRequest) ;
+                \js_core::$console->log($onePullRequest) ;
 
                 $ht = $ht . '<div class="pullRequestRow" id="blRow_' . $onePullRequest['pr_id'] . '" >' ;
                 $ht = $ht . '   <div class="blCell cellRowIndex col-sm-2" scope="row">' . $i . '</div>' ;
@@ -139,7 +140,7 @@ class pullRequestTable {
                 $ht = $ht . '               <a href="/index.php?control=PullRequest&action=show&item='.$onePullRequest["repo_pr_id"].'&pr_id='.$onePullRequest['pr_id'].'" class="pipeName">' ;
                 $ht = $ht . $onePullRequest["requestor"] ;
                 $ht = $ht . '               </a>' ;
-                $ht = $ht . '               opened this request on '.\core::$php->date('H:i d/m/Y', $onePullRequest['created_on']) ;
+                $ht = $ht . '               opened this request on '.$onePullRequest['created_on_format'] ;
                 $ht = $ht . '           </div>' ;
                 $ht = $ht . '       </div>' ;
                 $ht = $ht . '   </div>' ;
