@@ -43,3 +43,10 @@
     border: 0;
     border-top: 1px solid #000;
 }
+
+.pull_request_status_display {
+    width: 90%;
+    display: block ;
+    margin: 0% 5%;
+    font-size: 250%;
+}
