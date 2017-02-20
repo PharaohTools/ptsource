@@ -35,21 +35,32 @@ class PullRequestAllOS extends Base {
         $user = $this->getLoggedInUser();
         $can_close = false ;
         $pull_request = $this->getPullRequest();
-        // if user is the requestor they can close it
-        if ($pull_request['requestor'] == $user->username) {
+        $gsf = new \Model\GitServer();
+        $gs = $gsf->getModel($this->params) ;
+        if ( ($pull_request['requestor'] == $user->username) ||
+             ($user->role == 1)  ||
+             ($gs->authUserToWrite($user->username, $this->params["item"]))) {
+            // if user is the requestor they can close it
+            // if user is an admin they can close it
             $can_close = true ;
         }
-        // if user is an admin they can close it
-        if ($user->role == 1) {
-            $can_close = true ;
-        }
-        // if user can write to the repo they can close it
-        if ($this->authUserToWrite($user->username, $this->params["item"])) {
-
-        }
-
-        if ($can_close) {
-
+        if ($can_close === true) {
+            $datastoreFactory = new \Model\Datastore() ;
+            $datastore = $datastoreFactory->getModel($this->params) ;
+            $pull_request['status'] = 'closed' ;
+            $clause = array(
+                'pr_id' => $this->params["pr_id"],
+                'repo_pr_id' => $this->params["item"],
+            ) ;
+            $res = $datastore->update('pull_requests', $clause, $pull_request) ;
+            if ($res === false) {
+                $ret["status"] = false ;
+                $ret["message"] = 'Unable to update this pull request' ;
+            }
+            else {
+                $ret["status"] = true ;
+                $ret["message"] = 'Pull Request Status updated to Closed' ;
+            }
         }
         else {
             $ret["status"] = false ;
