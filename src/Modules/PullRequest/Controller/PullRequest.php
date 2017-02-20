@@ -11,8 +11,9 @@ class PullRequest extends Base {
         if (is_array($thisModel)) {
             return $this->failDependencies($pageVars, $this->content, $thisModel) ; }
         if ($pageVars["route"]["action"] == "close") {
-            $close_data = $thisModel->closePullRequest();
-            $this->content["data"] = $thisModel->getData(); }
+            $close_data = $thisModel->updatePullRequestStatus();
+            $page_data = $thisModel->getData();
+            $this->content["data"] = array_merge($close_data, $page_data) ; }
         if ($pageVars["route"]["action"] == "show") {
             $this->content["data"] = $thisModel->getData(); }
         if ($pageVars["route"]["action"] == 'add-comment') {
