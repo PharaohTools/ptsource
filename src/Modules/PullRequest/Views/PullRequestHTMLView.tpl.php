@@ -87,7 +87,13 @@
                     <?php
 
                     if (isset($pageVars["data"]['pull_request']['status'])) {
-                        if ($pageVars["data"]['pull_request']['status'] === 'closed') {
+                        if ($pageVars["data"]['pull_request']['status'] === 'rejected') {
+                            ?>
+                            <span class="pull_request_status_display btn btn-danger">
+                                Rejected
+                            </span>
+                            <?php
+                        } else if ($pageVars["data"]['pull_request']['status'] === 'closed') {
                             ?>
                             <span class="pull_request_status_display btn btn-danger">
                                 Closed
@@ -95,8 +101,14 @@
                             <?php
                         } else if ($pageVars["data"]['pull_request']['status'] === 'open') {
                             ?>
-                            <span class="pull_request_status_display btn btn-success">
+                            <span class="pull_request_status_display btn btn-warning">
                                 Open
+                            </span>
+                            <?php
+                        } else if ($pageVars["data"]['pull_request']['status'] === 'accepted') {
+                            ?>
+                            <span class="pull_request_status_display btn btn-success">
+                                Accepted
                             </span>
                             <?php
                         }
@@ -122,78 +134,78 @@
                         <h4>This pull request has been accepted, on XX_DATE_XX by XX_USER_XX.</h4>
                     <?php
                 }
-                else {
-                    // if its not rejected or accepted its open
-
+                else if ($pageVars["data"]['pull_request']['status'] === 'open') {
                     ?>
+
                     <hr />
 
                     <h4>
                         Merge Request:
                     </h4>
                     <?php
-                $request_can_be_merged = true ;
+                    $request_can_be_merged = true ;
 
-                if ($request_can_be_merged === true) {
+                    if ($request_can_be_merged === true) {
 
-                    ?>
-                    <div class="form-group col-sm-12">
+                        ?>
+                        <div class="form-group col-sm-12">
 
-                        <div class="col-sm-8">
-                            <h5>This pull request can be automatically merged </h5>
+                            <div class="col-sm-8">
+                                <h5>This pull request can be automatically merged </h5>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <i class="huge fa fa-check-square"></i>
+                            </div>
+
+                            <div class="col-sm-12">
+
+                                <div class="col-sm-4">
+                                <span id="merge_request_accept" class="btn btn-success ">
+                                    Perform Merge
+                                </span>
+                                </div>
+
+                                <div class="col-sm-4">
+                                <span id="merge_request_reject" class="btn btn-danger ">
+                                    Reject Request
+                                </span>
+                                </div>
+
+                                <div class="col-sm-4">
+                                </div>
+
+                            </div>
+
                         </div>
-
-                        <div class="col-sm-4">
-                            <i class="huge fa fa-check-square"></i>
+                        <?php
+                    } else {
+                        ?>
+                        <div class="col-sm-8">
+                            <h5>This pull request cannot be automatically merged </h5>
                         </div>
 
                         <div class="col-sm-12">
 
                             <div class="col-sm-4">
-                                <span id="merge_request_accept" class="btn btn-success ">
-                                    Perform Merge
-                                </span>
-                            </div>
-
-                            <div class="col-sm-4">
-                                <span id="merge_request_reject" class="btn btn-danger ">
-                                    Reject Request
-                                </span>
-                            </div>
-
-                            <div class="col-sm-4">
-                            </div>
-
-                        </div>
-
-                    </div>
-                    <?php
-                } else {
-                    ?>
-                    <div class="col-sm-8">
-                        <h5>This pull request cannot be automatically merged </h5>
-                    </div>
-
-                    <div class="col-sm-12">
-
-                        <div class="col-sm-4">
                             <span id="merge_unable_notify_requestor" class="btn btn-success ">
                                 Notify Requestor
                             </span>
-                        </div>
+                            </div>
 
-                        <div class="col-sm-4">
+                            <div class="col-sm-4">
                             <span id="merge_request_reject" class="btn btn-danger ">
                                 Reject Request
                             </span>
-                        </div>
+                            </div>
 
-                        <div class="col-sm-4">
-                        </div>
+                            <div class="col-sm-4">
+                            </div>
 
-                    </div>
-                    <?php
-                }
+                        </div>
+                        <?php
+                    }
+
 
                 if (isset($pageVars['data']['pharaoh_build_integration']) &&
                     $pageVars['data']['pharaoh_build_integration'] !== false) {
