@@ -93,7 +93,7 @@
                                 Closed
                             </span>
                             <?php
-                        } else if ($pageVars["data"]['pull_request']['status'] === 'open') {{
+                        } else if ($pageVars["data"]['pull_request']['status'] === 'open') {
                             ?>
                             <span class="pull_request_status_display btn btn-success">
                                 Open
