@@ -236,8 +236,8 @@
                                                 ?>
 
                                                 <div class="pullRequestRow" id="blRow_<?php echo $onePullRequest['id']; ?>" >
-                                                    <div class="blCell cellRowIndex col-sm-2" scope="row"><?php echo $i; ?> </div>
-                                                    <div class="col-sm-10">
+                                                    <div class="blCell cellRowIndex col-sm-2"><?php echo $i; ?> </div>
+                                                    <div class="col-sm-6">
                                                         <div class="blCell cellRowTitle col-sm-12">
                                                             <a href="/index.php?control=PullRequest&action=show&item=<?php echo $onePullRequest["repo_pr_id"]; ?>&pr_id=<?php echo $onePullRequest['pr_id'] ; ?>" class="pipeName">
                                                                 <h4><?php echo $onePullRequest['title']; ?></h4>
@@ -249,6 +249,36 @@
                                                             </a>
                                                             opened this request on <?php echo date('H:i d/m/Y', $onePullRequest['created_on']) ; ?>
                                                         </div>
+                                                    </div>
+                                                    <div class="blCell col-sm-4">
+                                                        <?php
+
+                                                        if ($onePullRequest['status'] === 'rejected') {
+                                                            ?>
+                                                            <span class="pull_request_status_display btn btn-danger">
+                                                                Rejected
+                                                            </span>
+                                                            <?php
+                                                        } else if ($onePullRequest['status'] === 'closed') {
+                                                            ?>
+                                                            <span class="pull_request_status_display btn btn-danger">
+                                                                Closed
+                                                            </span>
+                                                            <?php
+                                                        } else if ($onePullRequest['status'] === 'open') {
+                                                            ?>
+                                                            <span class="pull_request_status_display btn btn-warning">
+                                                                Open
+                                                            </span>
+                                                            <?php
+                                                        } else if ($onePullRequest['status'] === 'accepted') {
+                                                            ?>
+                                                            <span class="pull_request_status_display btn btn-success">
+                                                                Accepted
+                                                            </span>
+                                                            <?php
+                                                        }
+                                                        ?>
                                                     </div>
                                                 </div>
 
