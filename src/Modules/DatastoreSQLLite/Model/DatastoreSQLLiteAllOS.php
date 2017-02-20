@@ -128,7 +128,12 @@ class DatastoreSQLLiteAllOS extends Base {
             $clause = "WHERE {$k[0]} = '".$clause[$k[0]]."'" ;
             $logging->log("Attempting to update table {$table} $clause.", $this->getModuleName()) ; }
         else {
-            $logging->log("Attempting to update table {$table} where {$table} field: {$k[0]} is value: {$clause[$k[0]]}.", $this->getModuleName()) ; }
+            $clause_ray = array() ;
+            foreach ($clause as $a_clause_key => $a_clause_value) {
+                $clause_ray[] = "{$a_clause_key} = '".$a_clause_value."'" ;
+            }
+            $clause = 'WHERE '.implode(' AND ', $clause_ray) ;
+            $logging->log("Attempting to update table {$table} {$clause}.", $this->getModuleName()) ; }
         $res = $this->database->update($table, $rowData, $clause) ;
         if ($res == false) {
             $logging->log("Unable to update table {$table}, Error: {$this->database->error()[2]}, {$this->database->last_query()}", $this->getModuleName()) ; }
