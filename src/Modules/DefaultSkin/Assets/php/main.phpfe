@@ -59,7 +59,7 @@ class WindowMessage {
     }
 
     public static function randomChar(){
-        $char_ray = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','1','2','3','4','5','6','7','8','9','0'] ;
+        $char_ray = array('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','1','2','3','4','5','6','7','8','9','0') ;
         $rand = self::randomNum() ;
         return $char_ray[$rand];
     }
@@ -77,6 +77,8 @@ class WindowMessage {
     public static function areYouSure($message, $yesfunction) {
 //        inject_fields = inject_fields || false;
 //        function_after_inject = function_after_inject || false;
+
+        \js_core::$console->log('are you sure 1') ;
         $htmlvar  = '<div id="overlay_are_you_sure"> ';
         $htmlvar = $htmlvar . '    <div class="overlay_inner"> ';
         $htmlvar = $htmlvar . '        <div id="close_button_div"> ';
@@ -97,21 +99,24 @@ class WindowMessage {
         $htmlvar = $htmlvar . '    </div> ';
         $htmlvar = $htmlvar . '</div> ';
 
+        \js_core::$console->log('are you sure 2') ;
         $jQuery = \js_core::$jQuery ;
 
         $jQuery('body')->append($htmlvar) ;
+        $jQuery('#overlay_are_you_sure')->show() ;
 
         $jQuery('#close_page_overlay')->on('click', function() use ($jQuery) {
-            $jQuery('#close_page_overlay')->fadeOut('fast') ;
+            $jQuery('#overlay_are_you_sure')->fadeOut('fast') ;
         } );
         $jQuery('#are_you_sure_no')->on('click', function() use ($jQuery) {
-            $jQuery('#close_page_overlay')->fadeOut('fast') ;
+            $jQuery('#overlay_are_you_sure')->fadeOut('fast') ;
         } );
         $jQuery('#are_you_sure_yes')->on('click', function() use ($jQuery, $yesfunction) {
             $yesfunction() ;
-            $jQuery('#close_page_overlay')->fadeOut('fast') ;
+            $jQuery('#overlay_are_you_sure')->fadeOut('fast') ;
         } );
 
+        \js_core::$console->log('are you sure 3') ;
     }
 
 
