@@ -30,10 +30,10 @@ class PullRequestAllOS extends Base {
         return $ret ;
     }
 
-    public function closePullRequest() {
+    public function updatePullRequestStatus() {
 
         $user = $this->getLoggedInUser();
-        $can_close = false ;
+        $can_update = false ;
         $pull_request = $this->getPullRequest();
         $gsf = new \Model\GitServer();
         $gs = $gsf->getModel($this->params) ;
@@ -42,12 +42,14 @@ class PullRequestAllOS extends Base {
              ($gs->authUserToWrite($user->username, $this->params["item"]))) {
             // if user is the requestor they can close it
             // if user is an admin they can close it
-            $can_close = true ;
+            $can_update = true ;
         }
-        if ($can_close === true) {
+        if ($can_update === true) {
             $datastoreFactory = new \Model\Datastore() ;
             $datastore = $datastoreFactory->getModel($this->params) ;
-            $pull_request['status'] = 'closed' ;
+            if (in_array($this->params["update_status"], array('closed', 'rejected', 'accepted'))) {
+                $pull_request['status'] = $this->params["update_status"] ;
+            }
             $clause = array(
                 'pr_id' => $this->params["pr_id"],
                 'repo_pr_id' => $this->params["item"],
