@@ -86,19 +86,20 @@
                 <div>
                     <?php
 
-                    if ((isset($pageVars["data"]['pull_request']['open'])) &&
-                        ($pageVars["data"]['pull_request']['open'] === false)) {
-                        ?>
-                            <span class="btn btn-danger">
+                    if (isset($pageVars["data"]['pull_request']['status'])) {
+                        if ($pageVars["data"]['pull_request']['status'] === 'closed') {
+                            ?>
+                            <span class="pull_request_status_display btn btn-danger">
                                 Closed
                             </span>
-                        <?php
-                    } else {
-                        ?>
-                            <span class="btn btn-success">
+                            <?php
+                        } else if ($pageVars["data"]['pull_request']['status'] === 'open') {{
+                            ?>
+                            <span class="pull_request_status_display btn btn-success">
                                 Open
                             </span>
-                        <?php
+                            <?php
+                        }
                     }
 
                     ?>
