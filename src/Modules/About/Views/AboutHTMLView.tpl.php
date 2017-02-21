@@ -29,21 +29,19 @@
 
                 <?php echo $this->renderLogs() ; ?>
 
-                <p> Pharaoh Tools: Build </p>
+                <p> Pharaoh Tools: Source </p>
                 <p> Part of the Pharaoh Tools Package </p>
                 <p>
-                    Build and Monitoring Server in PHP.
+                    Source Control Management Server in PHP.
                     <br/>
-                    Create simple or complex build pipelines fully integrated with pharaoh tools
+                    Manage Repositories, Data, Teams
                     <br/>
-                    Create monitoring application features in minutes.
+                    Full feature set, Easily extensible with downloadable modules.
                     <br/>
-                    Using Convention over Configuration, a lot of common build tasks can be completed with little or
-                    no extra implementation work.
                 </p>
             </div>
             <div class="row clearfix no-margin">
-                <hr>
+                <hr />
                 <p class="text-center">
                                 Visit <a href="http://www.pharaohtools.com">www.pharaohtools.com</a> for more
 
