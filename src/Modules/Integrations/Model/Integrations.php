@@ -2,6 +2,6 @@
 
 Namespace Model;
 
-class ModuleManager extends BaseModelFactory {
+class Integrations extends BaseModelFactory {
 
 }

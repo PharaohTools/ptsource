@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class ModuleManagerWebAnyOS extends BasePHPApp {
+class IntegrationsWebAnyOS extends BasePHPApp {
 
     // Compatibility
     public $os = array("any") ;

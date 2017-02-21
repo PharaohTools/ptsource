@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class ModuleManagerWebActionAnyOS extends BasePHPApp {
+class IntegrationsWebActionAnyOS extends BasePHPApp {
 
     // Compatibility
     public $os = array("any") ;
@@ -24,7 +24,7 @@ class ModuleManagerWebActionAnyOS extends BasePHPApp {
     public function installModules() {
         //var_dump($_REQUEST["module-source"]);
         if (isset($_REQUEST["module-source"]) && strlen($_REQUEST["module-source"]) > 0) {
-            $modFactory = new \Model\ModuleManager() ;
+            $modFactory = new \Model\Integrations() ;
             $mmpr = $this->params ;
             $mmpr["module-source"] = $_REQUEST["module-source"] ;
             $mm = $modFactory->getModel($mmpr);
@@ -35,7 +35,7 @@ class ModuleManagerWebActionAnyOS extends BasePHPApp {
 
     public function enableModule() {
         if (isset($_REQUEST["module-enable"]) && strlen($_REQUEST["module-enable"]) > 0) {
-            $modFactory = new \Model\ModuleManager() ;
+            $modFactory = new \Model\Integrations() ;
             $mmpr = $this->params ;
             $mmpr["module-enable"] = $_REQUEST["module-enable"] ;
             $mm = $modFactory->getModel($mmpr);
@@ -46,7 +46,7 @@ class ModuleManagerWebActionAnyOS extends BasePHPApp {
 
     public function disableModule() {
         if (isset($_REQUEST["module-disable"]) && strlen($_REQUEST["module-disable"]) > 0) {
-            $modFactory = new \Model\ModuleManager() ;
+            $modFactory = new \Model\Integrations() ;
             $mmpr = $this->params ;
             $mmpr["module-disable"] = $_REQUEST["module-disable"] ;
             $mm = $modFactory->getModel($mmpr);

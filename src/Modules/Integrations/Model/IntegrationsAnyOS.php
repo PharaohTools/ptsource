@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class ModuleManagerAnyOS extends BasePHPApp {
+class IntegrationsAnyOS extends BasePHPApp {
 
     // Compatibility
     public $os = array("any") ;
@@ -17,11 +17,11 @@ class ModuleManagerAnyOS extends BasePHPApp {
     public function __construct($params) {
         parent::__construct($params);
         $this->setParameterOverrides() ;
-        $this->autopilotDefiner = "ModuleManager";
+        $this->autopilotDefiner = "Integrations";
         $this->fileSources = $this->getFileSources() ;
         $this->programNameMachine = "modulemanager"; // command and app dir name
-        $this->programNameFriendly = " ModuleManager "; // 12 chars
-        $this->programNameInstaller = "ModuleManager";
+        $this->programNameFriendly = " Integrations "; // 12 chars
+        $this->programNameInstaller = "Integrations";
         $this->initialize();
     }
 

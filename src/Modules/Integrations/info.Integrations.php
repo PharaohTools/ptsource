@@ -2,7 +2,7 @@
 
 Namespace Info;
 
-class ModuleManagerInfo extends PTConfigureBase {
+class IntegrationsInfo extends PTConfigureBase {
 
     public $hidden = false;
 
@@ -13,20 +13,20 @@ class ModuleManagerInfo extends PTConfigureBase {
     }
 
     public function routesAvailable() {
-      return array( "ModuleManager" =>  array_merge(parent::routesAvailable(), array(
+      return array( "Integrations" =>  array_merge(parent::routesAvailable(), array(
           "install", "ensure", "uninstall", "enable", "disable", "show", "webaction"
       )) );
     }
 
     public function routeAliases() {
-      return array("module-manager"=>"ModuleManager", "modulemanager"=>"ModuleManager");
+      return array("module-manager"=>"Integrations", "modulemanager"=>"Integrations");
     }
 
     public function helpDefinition() {
       $help = '
   The Module Manager allows you to manage modules. Install, Ensure, Uninstall, Enable, Disable.
 
-  ModuleManager, module-manager, modulemanager
+  Integrations, module-manager, modulemanager
 
         - install
         Installs the latest version of a module. If a module of the same name already exists in your Extensions directory,
