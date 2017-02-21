@@ -33,6 +33,9 @@
                         <li>
                             <a href="/index.php?control=ModuleManager&action=show" class=" hvr-curl-bottom-right">Modules</a>
                         </li>
+                        <li>
+                            <a href="/index.php?control=Integrations&action=show" class=" hvr-curl-bottom-right">Integrations</a>
+                        </li>
 					</ul>
 					<!-- /.nav-second-level -->
 				</li>

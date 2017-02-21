@@ -32,6 +32,9 @@
                         <i class="fa fa-suitcase hvr-bounce-in"></i> Module Manager
                     </a>
                 </li>
+                <li>
+                    <a href="/index.php?control=Integrations&action=show" class=" hvr-curl-bottom-right">Integrations</a>
+                </li>
             </ul>
         </div>
     </div>
