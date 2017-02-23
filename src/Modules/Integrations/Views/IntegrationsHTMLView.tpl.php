@@ -56,15 +56,15 @@
 
                             if ($message_suffix == "installed") {
                                 $ms2 = "install" ;
-                                $modName = $pageVars["module-{$ms2}"] ; }
+                                $modName = $pageVars["integration-{$ms2}"] ; }
                             else if (in_array($message_suffix, array("disabled", "enabled"))) {
                                 $ms2 = substr($message_suffix, 0, strlen($message_suffix)-1) ;
-                                $modName = $pageVars["module-{$ms2}"] ; }
+                                $modName = $pageVars["integration-{$ms2}"] ; }
                             var_dump($pageVars) ;
                             ?>
 
                             <div class="col-sm-12 btn btn-success">
-                                Successfully <?php echo ucfirst($message_suffix) ; ?> Module : <?php echo ucfirst($modName) ; ?>
+                                Successfully <?php echo ucfirst($message_suffix) ; ?> Integration : <?php echo ucfirst($modName) ; ?>
                             </div>
 
                         <?php
@@ -74,7 +74,7 @@
 
                 </div>
 
-                <h3>Module and Extension Manager</h3>
+                <h3>Application Integration Manager</h3>
 
                 <div class="form-group">
 
@@ -85,171 +85,114 @@
                         </div>
 
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" name="module-source" id="module-source" placeholder="Git Repository"  />
+                            <input type="text" class="form-control" name="integration-source" id="integration-source" placeholder="Git Repository"  />
                         </div>
 
                         <div class="col-sm-3">
-                            <button type="submit" class="btn btn-success">Download Module</button>
+                            <button type="submit" class="btn btn-success">Download Integration</button>
                         </div>
 
                     </form>
 
                 </div>
 
-                    <div class="form-group">
-
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <hr />
                         <div class="col-sm-12">
-                            <hr />
-                            <div class="col-sm-12">
-                                <h3>Available Modules: <i style="font-size: 18px;" class="fa fa-chevron-down"></i> <a class="text-center" href="/index.php?control=Integrations&action=webcacheupdate">Update Cache</a></h3>
-                            </div>
-
-                            <div class="col-sm-12" style="height: 150px; overflow-y: scroll; resize:both;">
-
-                                <div class="form-group ui-sortable moduleList" id="sortableSteps">
-
-                                    <?php
-
-                                    $oddeven = "Odd" ;
-
-                                    foreach ($pageVars["data"]["available_modules"] as $modSlug => $one_available_module) {
-                                        //echo '<div class="form-group ui-state-default ui-sortable-handle moduleEntry" id="step'.$modSlug.'">' ;
-
-                                        $oddeven = ($oddeven == "Odd") ? "Even" : "Odd" ;
-
-                                        echo ' <div class="col-sm-12 moduleEntry moduleEntry'.$oddeven.'" id="step'.$modSlug.'">' ;
-                                        echo '  <div class="col-sm-8">' ;
-                                        echo '   <p><strong>'.$one_available_module["name"].' </strong></p>';
-                                        echo '   <p>'.$one_available_module["description"].'</p>';
-                                        echo '   <p><strong>Dependencies: </strong>'.implode(", ", $one_available_module["dependencies"]).'</p>';
-                                        echo '   <input type="hidden" id="steps['.$modSlug.'][module]" name="steps['.$modSlug.'][module]" value="'.$one_available_module["module"].'" />';
-                                        echo '   <input type="hidden" id="steps['.$modSlug.'][steptype]" name="steps['.$modSlug.'][steptype]" value="'.$one_available_module["steptype"].'" />';
-                                        echo '  </div>';
-                                        echo '  <div class="col-sm-4">'  ;
-                                        echo '   <div class="col-sm-12 ">' ;
-                                        echo '    <a class="btn btn-success text-center" href="/index.php?control=Integrations&action=webinstall&source=defaultrepo&modname='.$modSlug.'">Download</a>' ;
-                                        echo '   </div>';
-                                        echo '   <div class="col-sm-12">' ;
-                                        echo '    <a class="btn btn-success text-center" href="/index.php?control=Integrations&action=webinstall&source=defaultrepo&modname='.$modSlug.'&dependencies=true">Download Dependencies</a>' ;
-                                        echo '   </div>';
-                                        echo '  </div>';
-                                        echo ' </div>';
-                                        // echo '</div>';
-                                    } ?>
-
-                                    <br style="clear: both;" />
-
-                                </div> <!-- sortable end -->
-
-                            </div>
-
+                            <h3> Enabled Integrations: <i style="font-size: 18px;" class="fa fa-chevron-down"></i></h3>
                         </div>
+                        <?php
 
-                    </div>
-
-                    <div class="form-group">
-
-                        <div class="col-sm-12">
-                            <hr />
-                            <div class="col-sm-12">
-                                <h3> Enabled Modules: <i style="font-size: 18px;" class="fa fa-chevron-down"></i></h3>
-                            </div>
-                                <?php
-
-                                if (count($pageVars["data"]["installed_modules"]) > 0) {
-                                    echo '<div class="col-sm-12" style="height: 150px; overflow-y: scroll; resize:both;">' ;
-                                    $oddeven = "Odd" ;
-                                    foreach ($pageVars["data"]["installed_modules"] as $instModuleInfo) {
-                                        $oddeven = ($oddeven == "Odd") ? "Even" : "Odd" ;
-                                        echo '<div class="col-sm-12 moduleEntry moduleEntry'.$oddeven.'">';
-                                        echo '  <div class="col-sm-8">';
-                                        echo '    <p class="moduleListText"><strong>'.$instModuleInfo["command"].'</strong></p>';
-                                        echo '    <p>'.$instModuleInfo["name"]."</p>";
-                                        echo '  </div>';
-                                        echo '  <div class="col-sm-4">';
-                                        echo '    <a class="btn btn-success text-center" href="/index.php?control=Integrations&action=webaction&uninstall='.$instModuleInfo["command"].'">Uninstall</a>';
-                                        echo '    <a class="btn btn-warning text-center" href="/index.php?control=Integrations&action=webaction&module-disable='.$instModuleInfo["command"].'">Disable</a>';
-                                        echo '  </div>';
-                                        echo '</div>'; } }
-                                else {
-                                    echo '<div class="col-sm-12" style="height: 40px;">' ;
-                                    echo '<p>No Enabled modules found</p>' ; }
-                                ?>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-12">
-                            <hr />
-                            <div class="col-sm-12">
-                                <h3> Disabled Modules: <i style="font-size: 18px;" class="fa fa-chevron-down"></i></h3>
-                            </div>
-
-                                <?php
-
-                                if (count($pageVars["data"]["disabled_modules"]) > 0) {
-                                    echo '<div class="col-sm-12" style="height: 150px; overflow-y: scroll; resize:both;">' ;
-                                    $oddeven = "Odd" ;
-                                    foreach ($pageVars["data"]["disabled_modules"] as $instModuleInfo) {
-                                        $oddeven = ($oddeven == "Odd") ? "Even" : "Odd" ;
-                                        echo '<div class="col-sm-12 moduleEntry moduleEntry'.$oddeven.'">';
-                                        echo '  <div class="col-sm-8">';
-                                        echo '    <p class="moduleListText"><strong>'.$instModuleInfo.'</strong></p>';
-                                        echo '  </div>';
-                                        echo '  <div class="col-sm-4">';
-                                        echo '    <a class="btn btn-success text-center" href="/index.php?control=Integrations&action=webaction&uninstall='.$instModuleInfo.'">Uninstall</a>';
-                                        echo '    <a class="btn btn-info text-center" href="/index.php?control=Integrations&action=webaction&module-enable='.$instModuleInfo.'">Enable</a>';
-                                        echo '  </div>';
-                                        echo '</div>'; } }
-                                else {
-                                    echo '<div class="col-sm-12" style="height: 40px;">' ;
-                                    echo '<p>No Disabled modules found</p>' ; }
-                                ?>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-12">
-                            <hr />
-                            <div class="col-sm-12">
-                                <h3> Incompatible Modules: <i style="font-size: 18px;" class="fa fa-chevron-down"></i></h3>
-                            </div>
-                            <?php
-                                if (count($pageVars["data"]["incompatible_modules"]) > 0) {
-                                    echo '<div class="col-sm-12" style="height: 50px; overflow-y: scroll; resize:both;">' ;
-                                    $oddeven = "Odd" ;
-                                    foreach ($pageVars["data"]["incompatible_modules"] as $compatModuleInfo) {
-                                        $oddeven = ($oddeven == "Odd") ? "Even" : "Odd" ;
-                                        echo '<div class="col-sm-12 moduleEntry moduleEntry'.$oddeven.'">';
-                                        echo '  <div class="col-sm-8">';
-                                        echo '    <p class="moduleListText"><strong>'.$compatModuleInfo["command"].'</strong> - '.$compatModuleInfo["name"]."</p>";
-                                        echo '  </div>';
-                                        echo '</div>'; } }
-                                else {
-                                    echo '<div class="col-sm-12" style="height: 40px;">' ;
-                                    echo '<p>No Incompatible modules found</p>' ; }
+                        if (count($pageVars["data"]["installed_integrations"]) > 0) {
                             ?>
+
+                            <div class="col-sm-12">
+
+                            <?php
+                            $oddeven = "Odd" ;
+                            foreach ($pageVars["data"]["installed_integrations"] as $instIntegrationInfo) {
+                                $oddeven = ($oddeven == "Odd") ? "Even" : "Odd" ;
+
+                                ?>
+                                <div class="btn btn-primary integrationEntry integrationEntry<?php echo $oddeven ; ?>">
+                                  <div class="col-sm-12">
+                                    <p class="integrationListText"><strong><?php echo $instIntegrationInfo["command"] ; ?></strong></p>
+                                    <p><?php echo $instIntegrationInfo["name"] ; ?></p>
+                                  </div>
+                                  <div class="col-sm-12">
+                                    <a class="btn btn-success text-center" href="/index.php?control=Integrations&action=webaction&uninstall=<?php echo $instIntegrationInfo["command"] ; ?>">Uninstall</a>
+                                  </div>
+                                </div>
+                            <?php
+                            }
+                            ?>
+
                             </div>
-                        </div>
-
+col-sm-3
+                        <?php
+                        }
+                        else {
+                        ?>
+                            <div class="col-sm-12" style="height: 40px;">
+                                <p>No Enabled integrations found</p>
+                            </div>
+                        <?php
+                        }
+                        ?>
                     </div>
+                </div>
 
-                <!--
-                <form class="form-horizontal custom-form" action="<?= $act ; ?>" method="POST">
 
-                    <div class="form-group">
+<!--                </div>-->
+
+                <div class="form-group">
+
+                    <div class="col-sm-12">
+                        <hr />
                         <div class="col-sm-12">
-                            <button type="submit" class="btn btn-success">Save Configuration</button>
+                            <h3>Available Integrations: <i style="font-size: 18px;" class="fa fa-chevron-down"></i> <a class="text-center" href="/index.php?control=Integrations&action=webcacheupdate">Update Cache</a></h3>
                         </div>
+
+                        <div class="col-sm-12">
+
+                            <?php
+
+                            $oddeven = "Odd" ;
+
+                            foreach ($pageVars["data"]["available_integrations"] as $modSlug => $one_available_integration) {
+                                //echo '<div class="form-group ui-state-default ui-sortable-handle integrationEntry" id="step'.$modSlug.'">' ;
+
+                                $oddeven = ($oddeven === "Odd") ? "Even" : "Odd" ;
+                                ?>
+
+                                <div class="col-sm-3 integrationEntry integrationEntry<?php echo $oddeven ; ?>" id="step<?php echo $modSlug ; ?>">
+                                    <div class="col-sm-12">
+                                        <p><strong><?php echo $one_available_integration["name"] ; ?> </strong></p>
+                                        <p><?php echo $one_available_integration["description"] ; ?></p>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <a class="btn btn-success text-center" href="/index.php?control=Integrations&action=webinstall&source=defaultrepo&modname=<?php echo $modSlug ; ?>">
+                                            Download
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <?php
+
+                            } ?>
+
+                            <br style="clear: both;" />
+
+                        </div>
+
                     </div>
 
-                    <div class="form-group">
-                        <input type="hidden" name="item" id="item" value="<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" />
-                    </div>
+                </div>
 
-                </form>
-                -->
             </div>
-            <hr>
-                <p class="text-center">
+            <hr />
+            <p class="text-center">
                 Visit <a href="http://www.pharaohtools.com">www.pharaohtools.com</a> for more
             </p>
 
@@ -257,4 +200,4 @@
 
 </div><!-- container -->
 
-<link rel="stylesheet" href="/Assets/Modules/Integrations/css/modulemanager.css">
+<link rel="stylesheet" href="/Assets/Modules/Integrations/css/integrations.css">

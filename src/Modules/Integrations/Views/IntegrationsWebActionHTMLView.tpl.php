@@ -142,4 +142,4 @@
     </div>
 </div><!-- container -->
 
-<link rel="stylesheet" href="/Assets/Integrations/css/modulemanager.css">
+<link rel="stylesheet" href="/Assets/Integrations/css/integrations.css">
