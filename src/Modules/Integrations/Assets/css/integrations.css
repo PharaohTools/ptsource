@@ -1,26 +1,19 @@
-p.moduleListText { margin: 0; }
+p.integrationListText { margin: 0; }
 
-.moduleList {
+.integrationList {
     display: block;
     list-style-type: none;
     position: relative;
 }
 
-.moduleEntry {
+.integrationEntry {
     display: block;
     border: 1px solid #d3d3d3;
     /*position: absolute;*/
-    /*top: 5px;*/
-    /*right: 5px;*/
-    /*bottom: 5px;*/
+    padding: 0px 1.25%;
+    width: 22.5%;
 }
 
-.moduleEntryOdd {
-    background-color: grey; }
-
-.moduleEntryEven{
-    background-color: white; }
-
-.moduleEntryFirst {
+.integrationEntryFirst {
     /*margin: 0 0 2% 0 !important; */
 }
