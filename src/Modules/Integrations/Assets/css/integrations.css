@@ -10,8 +10,10 @@ p.integrationListText { margin: 0; }
     display: block;
     border: 1px solid #d3d3d3;
     /*position: absolute;*/
-    padding: 0px 1.25%;
+    margin: 0px 1.25%;
     width: 22.5%;
+    color: #000 ;
+    float: left;
 }
 
 .integrationEntryFirst {
