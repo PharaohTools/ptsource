@@ -19,14 +19,14 @@ class IntegrationsAnyOS extends BasePHPApp {
         $this->setParameterOverrides() ;
         $this->autopilotDefiner = "Integrations";
         $this->fileSources = $this->getFileSources() ;
-        $this->programNameMachine = "modulemanager"; // command and app dir name
+        $this->programNameMachine = "integrations"; // command and app dir name
         $this->programNameFriendly = " Integrations "; // 12 chars
         $this->programNameInstaller = "Integrations";
         $this->initialize();
     }
 
     protected function setParameterOverrides() {
-        $this->params["module-manager"] = true ;
+        $this->params["integrations"] = true ;
         $this->params["no-executor"] = true ;
         $ms = $this->getModuleSource() ;
         $name = substr($ms, strrpos($ms, "/"));
