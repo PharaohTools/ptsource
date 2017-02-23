@@ -116,11 +116,11 @@
 
                                 ?>
                                 <div class="btn btn-primary integrationEntry integrationEntry<?php echo $oddeven ; ?>">
-                                  <div class="col-sm-12">
+                                  <div class="fullWidth">
                                     <p class="integrationListText"><strong><?php echo $instIntegrationInfo["command"] ; ?></strong></p>
                                     <p><?php echo $instIntegrationInfo["name"] ; ?></p>
                                   </div>
-                                  <div class="col-sm-12">
+                                  <div class="fullWidth">
                                     <a class="btn btn-success text-center" href="/index.php?control=Integrations&action=webaction&uninstall=<?php echo $instIntegrationInfo["command"] ; ?>">Uninstall</a>
                                   </div>
                                 </div>
@@ -129,7 +129,7 @@
                             ?>
 
                             </div>
-col-sm-3
+
                         <?php
                         }
                         else {
