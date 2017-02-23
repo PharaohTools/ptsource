@@ -10,17 +10,20 @@ class Integrations extends Base {
         $this->content = $pageVars ;
         if (is_array($thisModel)) {
             return $this->failDependencies($pageVars, $this->content, $thisModel) ; }
-        if (in_array($pageVars["route"]["action"], array("webaction"))) {
+
+        if ($pageVars["route"]["action"] === "webaction") {
             $webActionModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars, "WebAction") ;
             $webModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars, "Web") ;
             $webAction = $webActionModel->getData();
             $this->content["data"] = $webModel->getData();
             $this->content["data"]["webAction"] = $webAction ;
-            return array ("type"=>"view", "view"=>"moduleManager", "pageVars"=>$this->content);  }
-        if (in_array($pageVars["route"]["action"], array("show"))) {
+            return array ("type"=>"view", "view"=>"integrations", "pageVars"=>$this->content);  }
+
+        if ($pageVars["route"]["action"] === "show") {
             $webModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars, "Web") ;
             $this->content["data"] = $webModel->getData();
-            return array ("type"=>"view", "view"=>"moduleManager", "pageVars"=>$this->content);  }
+            return array ("type"=>"view", "view"=>"integrations", "pageVars"=>$this->content);  }
+
     }
 
 }
