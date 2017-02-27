@@ -113,15 +113,38 @@
                             $oddeven = "Odd" ;
                             foreach ($pageVars["data"]["installed_integrations"] as $instIntegrationInfo) {
                                 $oddeven = ($oddeven == "Odd") ? "Even" : "Odd" ;
-
                                 ?>
+
                                 <div class="btn btn-primary integrationEntry integrationEntry<?php echo $oddeven ; ?>">
                                   <div class="fullWidth">
-                                    <p class="integrationListText"><strong><?php echo $instIntegrationInfo["command"] ; ?></strong></p>
-                                    <p><?php echo $instIntegrationInfo["name"] ; ?></p>
+                                    <p class="integrationListText">
+                                        <strong>
+                                            <?php echo $instIntegrationInfo["name"] ; ?>
+                                        </strong>
+                                    </p>
+                                    <span>
+                                        <img src="<?php echo $instIntegrationInfo["image"] ; ?>"
+                                             alt="<?php echo $instIntegrationInfo["name"] ; ?>"
+                                             class="integration_logo" />
+                                    </span>
+                                    <p>
+                                        <?php
+
+                                            if (strlen($instIntegrationInfo["description"]) < 60) {
+                                                $desc = $instIntegrationInfo["description"] ;
+                                            } else {
+                                                $desc = substr($instIntegrationInfo["description"], 0, 60) ;
+                                                $desc = $desc . '...' ;
+                                            }
+                                            echo $desc ;
+
+                                        ?>
+                                    </p>
                                   </div>
                                   <div class="fullWidth">
-                                    <a class="btn btn-success text-center" href="/index.php?control=Integrations&action=webaction&uninstall=<?php echo $instIntegrationInfo["command"] ; ?>">Uninstall</a>
+                                    <a class="btn btn-success text-center" href="<?php echo $instIntegrationInfo["manage_link"] ; ?>">
+                                        Manage
+                                    </a>
                                   </div>
                                 </div>
                             <?php
@@ -166,14 +189,14 @@
                                 $oddeven = ($oddeven === "Odd") ? "Even" : "Odd" ;
                                 ?>
 
-                                <div class="col-sm-3 integrationEntry integrationEntry<?php echo $oddeven ; ?>" id="step<?php echo $modSlug ; ?>">
+                                <div class="btn btn-warning integrationEntry integrationEntry<?php echo $oddeven ; ?>" id="step<?php echo $modSlug ; ?>">
                                     <div class="col-sm-12">
                                         <p><strong><?php echo $one_available_integration["name"] ; ?> </strong></p>
                                         <p><?php echo $one_available_integration["description"] ; ?></p>
                                     </div>
                                     <div class="col-sm-12">
                                         <a class="btn btn-success text-center" href="/index.php?control=Integrations&action=webinstall&source=defaultrepo&modname=<?php echo $modSlug ; ?>">
-                                            Download
+                                            Manage
                                         </a>
                                     </div>
                                 </div>
