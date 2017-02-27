@@ -6,7 +6,7 @@ class PharaohBuildIntegrationInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "Provides Functionality to integrate Pharaoh Track Issues with a Repository";
+    public $name = "Provides Functionality to integrate Pharaoh Build Reports with a Repository";
 
     public function _construct() {
         parent::__construct();
@@ -34,7 +34,7 @@ class PharaohBuildIntegrationInfo extends PTConfigureBase {
 
     public function helpDefinition() {
        $help = <<<"HELPDATA"
-    This extension provides integration with Pharaoh Track Issues for a Repository ,
+    This extension provides integration with Pharaoh Build Reports for a Repository ,
     but no extra CLI commands.
 
     PharaohBuildIntegration
