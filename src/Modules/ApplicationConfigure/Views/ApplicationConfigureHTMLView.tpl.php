@@ -45,12 +45,7 @@
 
             <div class="row clearfix no-margin">
 
-                <?php
-                $act = '/index.php?control=ApplicationConfigure&action=save' ;
-                ?>
-
-                <form class="form-horizontal custom-form" action="<?= $act ; ?>" method="POST">
-
+                <form class="form-horizontal custom-form" action="/index.php?control=ApplicationConfigure&action=save" method="POST">
 
                     <h3 class="text-uppercase text-light" style="margin-top: 15px;">
                         Module Configuration <i style="font-size: 18px;" class="fa fa-chevron-right"></i>
@@ -60,7 +55,10 @@
 
                         if (is_array($pageVars["data"]["mod_configs"]) && count($pageVars["data"]["mod_configs"]>0)) {
                             foreach ($pageVars["data"]["mod_configs"] as $module_name => $one_mod_confs) {
-                                echo '  <div class="col-sm-10">' ;
+                                $slug = strtolower($module_name) ;
+                                $slug = str_replace(" ", "_", $slug) ;
+                                echo '  <a name="'.$slug.'"></a>' ;
+                                echo '  <div class="col-sm-10" name="'.$slug.'">' ;
                                 echo '      <h4>Module: '.$module_name.'</h4>';
                                 echo '  </div>';
                                 foreach ($one_mod_confs as $one_config_slug => $one_conf_tails) {
@@ -104,9 +102,12 @@
                                     echo '  </div>';
                                     echo '</div>'; } } }
                         else {
-                            echo '<div class="form-group">' ;
-                            echo '    <p>No Modules are providing editable configurations</p>';
-                            echo '</div>'; }
+                            ?>
+                            <div class="form-group">
+                                <p>No Modules are providing editable configurations</p>
+                            </div>
+                    <?php
+                        }
 
                     ?>
 
