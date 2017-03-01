@@ -34,12 +34,12 @@ class PharaohBuildIntegrationDisplayLinkAllOS extends Base {
 	}
 
     protected function getAllPharaohBuildIntegration() {
-        $sf = array( "track_job" ) ;
+        $sf = array( "build_job" ) ;
         return $sf ;
     }
 
     public function getLink() {
-        $ff = array("link" =>$this->repositoryFeatureValues["track_job_url"]);
+        $ff = array("link" =>$this->repositoryFeatureValues["build_job_url"]);
         return $ff ;
     }
 
@@ -50,7 +50,7 @@ class PharaohBuildIntegrationDisplayLinkAllOS extends Base {
 
 	public function getImage() {
         $prefix = '/Assets/Modules/DefaultSkin/image/' ;
-        $ff = array("image" => "{$prefix}track-logo.png");
+        $ff = array("image" => "{$prefix}build-logo.png");
 		return $ff ;
 	}
 
