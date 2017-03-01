@@ -77,30 +77,80 @@
                 <h3>Application Integration Manager</h3>
 
                 <div class="form-group">
-
-                    <form class="form-horizontal custom-form" action="<?php echo '/index.php?control=Integrations&action=webaction' ; ?>" method="POST">
-
-                        <div class="col-sm-3">
-                            <label for="project-name" class="control-label text-left">Git Repository</label>
+                    <div class="col-sm-12">
+                        <hr />
+                        <div class="col-sm-12">
+                            <h3> Enabled Integrations: <i style="font-size: 18px;" class="fa fa-chevron-down"></i></h3>
                         </div>
+                        <?php
 
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control" name="integration-source" id="integration-source" placeholder="Git Repository"  />
-                        </div>
+                        if (count($pageVars["data"]["enabled_integrations"]) > 0) {
+                            ?>
 
-                        <div class="col-sm-3">
-                            <button type="submit" class="btn btn-success">Download Integration</button>
-                        </div>
+                            <div class="col-sm-12">
 
-                    </form>
+                            <?php
+                            $oddeven = "Odd" ;
+                            foreach ($pageVars["data"]["enabled_integrations"] as $instIntegrationInfo) {
+                                $oddeven = ($oddeven == "Odd") ? "Even" : "Odd" ;
+                                ?>
 
+                                <div class="btn btn-primary integrationEntry integrationEntry<?php echo $oddeven ; ?>">
+                                  <div class="fullWidth">
+                                    <p class="integrationListText">
+                                        <strong>
+                                            <?php echo $instIntegrationInfo["name"] ; ?>
+                                        </strong>
+                                    </p>
+                                    <span>
+                                        <img src="<?php echo $instIntegrationInfo["image"] ; ?>"
+                                             alt="<?php echo $instIntegrationInfo["name"] ; ?>"
+                                             class="integration_logo" />
+                                    </span>
+                                    <p>
+                                        <?php
+
+                                            if (strlen($instIntegrationInfo["description"]) < 60) {
+                                                $desc = $instIntegrationInfo["description"] ;
+                                            } else {
+                                                $desc = substr($instIntegrationInfo["description"], 0, 60) ;
+                                                $desc = $desc . '...' ;
+                                            }
+                                            echo $desc ;
+
+                                        ?>
+                                    </p>
+                                  </div>
+                                  <div class="fullWidth">
+                                    <a class="btn btn-success text-center" href="<?php echo $instIntegrationInfo["manage_link"] ; ?>">
+                                        Manage
+                                    </a>
+                                  </div>
+                                </div>
+                            <?php
+                            }
+                            ?>
+
+                            </div>
+
+                        <?php
+                        }
+                        else {
+                        ?>
+                            <div class="col-sm-12" style="height: 40px;">
+                                <p>No Enabled integrations found</p>
+                            </div>
+                        <?php
+                        }
+                        ?>
+                    </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-sm-12">
                         <hr />
                         <div class="col-sm-12">
-                            <h3> Enabled Integrations: <i style="font-size: 18px;" class="fa fa-chevron-down"></i></h3>
+                            <h3> Installed Integrations: <i style="font-size: 18px;" class="fa fa-chevron-down"></i></h3>
                         </div>
                         <?php
 
