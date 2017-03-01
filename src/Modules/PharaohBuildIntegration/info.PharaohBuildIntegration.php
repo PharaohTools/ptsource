@@ -32,6 +32,31 @@ class PharaohBuildIntegrationInfo extends PTConfigureBase {
         return array("pharaohBuildIntegration");
     }
 
+    public function configuration() {
+        return array(
+            "enabled"=> array(
+                "type" => "boolean",
+                "default" => "",
+                "label" => "Enable Pharaoh Build Integration?", ),
+            "build_instance_url_0"=> array(
+                "type" => "text",
+                "default" => "",
+                "label" => "Home page of Build Instance 0?", ),
+            "build_instance_key_0"=> array(
+                "type" => "text",
+                "default" => "",
+                "label" => "API Key of Build Instance 0?", ),
+            "build_instance_url_1"=> array(
+                "type" => "text",
+                "default" => "",
+                "label" => "Home page of Build Instance 1?", ),
+            "build_instance_key_1"=> array(
+                "type" => "text",
+                "default" => "",
+                "label" => "API Key of Build Instance 1?", ),
+        );
+    }
+
     public function helpDefinition() {
        $help = <<<"HELPDATA"
     This extension provides integration with Pharaoh Build Reports for a Repository ,
