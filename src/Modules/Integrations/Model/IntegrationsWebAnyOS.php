@@ -15,26 +15,42 @@ class IntegrationsWebAnyOS extends BasePHPApp {
     public $modelGroup = array("Web") ;
 
     public function getData() {
-        $ret["installed_integrations"] = $this->getEnabledIntegrations();
-        $ret["available_integrations"] = $this->findAllIntegrationNames();
+        $ret["enabled_integrations"] = $this->getEnabledIntegrations();
+        $ret["installed_integrations"] = $this->getAvailableIntegrations();
+        $ret["available_integrations"] = $this->getAllIntegrations();
         return $ret ;
     }
 
-    private function findAllIntegrationNames() {
-        $allInfoObjects = \Core\AutoLoader::getInfoObjects() ;
-        $integrationNames = array() ;
-        foreach ($allInfoObjects as $infoObject) {
-            $array_keys = array_keys($infoObject->routesAvailable()) ;
-            $miniRay = array() ;
-            $miniRay["command"] = $array_keys[0] ;
-            $miniRay["name"] = $infoObject->name ;
-            $miniRay["hidden"] = $infoObject->hidden ;
-            $integrationNames[] = $miniRay ; }
-        return $integrationNames;
+    private function getEnabledIntegrations() {
+        $settings = $this->getSettings() ;
+        $all = $this->getAllIntegrations() ;
+        $enabled = array() ;
+        foreach (array('Track', 'Source', 'Build', 'Manage') as $tool) {
+            if ($settings['Pharaoh'.$tool.'Integration']['enabled'] === 'on') {
+                $enabled['Pharaoh'.$tool] = $all['Pharaoh'.$tool] ;
+            }
+        }
+        return $enabled ;
     }
 
-    private function getEnabledIntegrations() {
+    protected function getSettings() {
+        $settings = \Model\AppConfig::getAppVariable("mod_config");
+        return $settings ;
+    }
 
+    protected function getAvailableIntegrations() {
+        $ray = $this->getAllIntegrations() ;
+        $ignore_keys = array_keys($this->getEnabledIntegrations()) ;
+        $new_ray = array() ;
+        foreach ($ray as $ray_title => $ray_entry) {
+            if (!in_array($ray_title, $ignore_keys)) {
+                $new_ray[$ray_title] = $ray_entry ;
+            }
+        }
+        return $new_ray ;
+    }
+
+    private function getAllIntegrations() {
         $ray = array(
             "PharaohBuild" => array(
                 "repo_url" => "http://www.github.com/PharaohTools/build.git",
@@ -69,20 +85,6 @@ class IntegrationsWebAnyOS extends BasePHPApp {
                 "group" => "pharaoh_tools",
                 "dependencies" => array("Logging", "SendEmail"),
             ),
-//            "TestIntegrationFour" => array(
-//                "repo_url" => "http://www.github.com/PharaohIntegrations/test-four.git",
-//                "description" => "This is the fourth test description",
-//                "name" => "Test Integration Two",
-//                "group" => "test_integrations",
-//                "dependencies" => array("Logging", "SendEmail"),
-//            ),
-//            "DummyLinuxIntegration" => array(
-//                "repo_url" => "http://www.github.com/PharaohIntegrations/test-two.git",
-//                "description" => "This is the dummy linux integration test description",
-//                "name" => "Dummy Linux Integration",
-//                "group" => "dummy_integrations",
-//                "dependencies" => array("Logging", "SendEmail"),
-//            ),
         );
         return $ray ;
     }
