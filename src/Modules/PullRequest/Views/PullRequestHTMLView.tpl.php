@@ -223,48 +223,75 @@
                             Pharaoh Build Integration:
                         </h4>
 
-                        <?php echo count($pageVars['data']['pharaoh_build_integration']['success_results']) ; ?>
-                        successful check/s
+                        <?php echo count($pageVars['data']['pharaoh_build_integration']) ; ?>
+                        check/s
 
                         <?php
 
-                        $status = $pageVars['data']['pharaoh_build_integration']['status'] ;
-                        # success_results
-                        foreach ($pageVars['data']['pharaoh_build_integration']['success_results'] as $s_res) {
-                            if ($status === 'passed') {
-                                $text_status = "Passing" ;
-                                $btn_class = "btn-success" ;
-                            }
-                            else if ($status === 'pending') {
-                                $text_status = "Pending" ;
-                                $btn_class = "btn-warning" ;
-                            }
-                            else if ($status === 'none') {
-                                $text_status = "Passing" ;
-                                $btn_class = "btn-success" ;
-                            }
-                            else {
-                                $text_status = "Passing" ;
-                                $btn_class = "btn-success" ;
-                            }
-                            ?>
+                        foreach ($pageVars['data']['pharaoh_build_integration'] as $build_job) {
 
-                            <div class="form-group col-sm-12 build_integration_row">
-                                <div class="col-sm-12">
-                                    <h4 class="text-center"><strong><?php echo $s_res['name'] ; ?></strong></h4>
-                                    <hr class="no-margin-hr" />
+                            $build_status = $build_job['build_status']['status'] ;
+
+                            if ($build_status === 'error') {
+                                ?>
+                                <div class="form-group col-sm-12 build_integration_row">
+                                    <div class="col-sm-12">
+                                        <h4 class="text-center">
+                                            <strong>
+                                                Error retrieving build status :
+                                                <?php
+                                                echo $build_job['build_status']['message'] ;
+                                                ?>
+                                            </strong>
+                                        </h4>
+                                        <hr class="no-margin-hr" />
+                                    </div>
                                 </div>
-                                <div class="col-sm-2">
+
+                                <?php
+                            } else {
+                                var_dump($build_job['results']) ;
+                                if ($build_job['results']['status'] === 'passed') {
+                                    $text_status = "Passing" ;
+                                    $btn_class = "btn-success" ;
+                                }
+                                else if ($build_job['results']['status'] === 'pending') {
+                                    $text_status = "Pending" ;
+                                    $btn_class = "btn-warning" ;
+                                }
+                                else if ($build_job['results']['status'] === 'none') {
+                                    $text_status = "Passing" ;
+                                    $btn_class = "btn-success" ;
+                                }
+                                else {
+                                    $text_status = "Passing" ;
+                                    $btn_class = "btn-success" ;
+                                }
+                                ?>
+
+                                <div class="form-group col-sm-12 build_integration_row">
+                                    <div class="col-sm-12">
+                                        <h4 class="text-center">
+                                            <strong>
+                                                <?php echo $s_res['name'] ; ?>
+                                            </strong>
+                                        </h4>
+                                        <hr class="no-margin-hr" />
+                                    </div>
+                                    <div class="col-sm-2">
                                     <span class="btn <?php echo $btn_class ; ?>">
                                         <h3><?php echo $text_status ; ?></h3>
                                     </span>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <h4><?php echo $s_res['message'] ; ?></h4>
+                                    </div>
                                 </div>
-                                <div class="col-sm-10">
-                                    <h4><?php echo $s_res['message'] ; ?></h4>
-                                </div>
-                            </div>
 
-                            <?php
+                                <?php
+
+                            }
+
                         }
 
                         ?>
