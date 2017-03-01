@@ -24,22 +24,88 @@ class PharaohBuildIntegrationAllOS extends Base {
             array(
                 "type" => "boolean",
                 "optional" => true,
-                "name" => "Enable Following a Pharaoh Track Job?"
+                "name" => "Enable Integrating with Pharaoh Build job/s?"
             ),
-            "track_job_url" =>
-            array(
-                "type" => "text",
-                "optional" => true,
-                "name" => "Pharaoh Track Job URL?"
+
+            "fieldsets" => array(
+                "build_jobs" => array(
+                    "instance_url" =>
+                        array(
+                            "type" => "text",
+                            "name" => "Build Server URL",
+                            "slug" => "instance_url"),
+                    "job_slug" =>
+                        array(
+                            "type" => "text",
+                            "name" => "Build Job Slug",
+                            "slug" => "job_slug"),
+//                    "title" =>
+//                        array(
+//                            "type" => "text",
+//                            "name" => "Job Title",
+//                            "slug" => "jobtitle"),
+                )
             ),
-//            "use_credentials" =>
-//            array(
-//                "type" => "text",
-//                "optional" => true,
-//                "name" => "Use Credentials?"
-//            ),
+
         );
         return $ff ;
+    }
+
+    public function findJobStatus($build_job) {
+        $apif = new \Model\PharaohAPI();
+        $params = $this->params ;
+        $params['api_module'] = 'PublishReports' ;
+        $params['api_function'] = 'get_status' ;
+        $params['slug'] = $build_job['job_slug'] ;
+        $params['api_instance_url'] = $build_job['instance_url'] ;
+        $params['api_key'] = $this->findInstanceKey($build_job['instance_url']) ;
+        $api_request = $apif->getModel($params, 'Request') ;
+        $result = $api_request->performAPIRequest() ;
+        return $result;
+    }
+
+    public function findJobReports($build_job) {
+        $apif = new \Model\PharaohAPI();
+        $params = $this->params ;
+        $params['api_module'] = 'PublishReports' ;
+        $params['api_function'] = 'get_reports' ;
+        $params['slug'] = 'build-job-slug' ;
+        $params['api_instance_url'] = $build_job['instance_url'] ;
+        $params['api_key'] = $this->findInstanceKey($build_job['instance_url']) ;
+        $api_request = $apif->getModel($params, 'Request') ;
+        $result = $api_request->performAPIRequest() ;
+        return $result;
+    }
+
+    public function findInstanceKey($instance_url) {
+
+        $instance_url = $this->ensureTrailingSlash($instance_url) ;
+
+        $settings = $this->getSettings() ;
+        $instance_key = false ;
+        if ($settings['PharaohBuildIntegration']['enabled'] === 'on') {
+
+            for ($i=0; $i<5; $i++) {
+                if (isset($settings['PharaohBuildIntegration']['build_instance_url_'.$i])) {
+                    $url = $settings['PharaohBuildIntegration']['build_instance_url_'.$i] ;
+                    $url_with_slash = $this->ensureTrailingSlash($url) ;
+                    if ($url_with_slash === $instance_url) {
+                        $instance_key = $settings['PharaohBuildIntegration']['build_instance_key_'.$i] ;
+                    }
+                }
+            }
+        }
+        else {
+            // Build Integration is not enabled
+            return false ;
+        }
+        return $instance_key ;
+
+    }
+
+    protected function getSettings() {
+        $settings = \Model\AppConfig::getAppVariable("mod_config");
+        return $settings ;
     }
 
 }
