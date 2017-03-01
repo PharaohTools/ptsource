@@ -17,8 +17,6 @@ class PullRequest {
         $jQuery('#save_new_pull_request_comment')->on('click', function() use ($jQuery, $console)  {
             $isValid = self::validatePullRequestComment() ;
             if ($isValid === true) {
-                $jQuery('.new_pr_comment_field')->fadeOut('fast') ;
-                $jQuery('.loading_pull_request_comments')->fadeIn('fast') ;
                 return self::createNewPullRequestComment() ;
             } else {
                 return false ;
@@ -52,6 +50,9 @@ class PullRequest {
     public function createNewPullRequestComment() {
         $jQuery = \js_core::$jQuery ;
         \js_core::$console->log('Creating PR Comment 1') ;
+
+        $jQuery('.new_pr_comment_field')->fadeOut('fast') ;
+        $jQuery('.loading_pull_request_comments')->fadeIn('fast') ;
 
         $rurl = 'index.php?control=PullRequest&action=add-comment&output-format=JSON' ;
         $comment = $jQuery('#new_pull_request_comment')->val() ;
