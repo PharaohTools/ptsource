@@ -26,7 +26,7 @@ class PullRequestAllOS extends Base {
         $ret["current_user_role"] = $this->getCurrentUserRole($ret["user"]);
         $ret["pull_request"] = $this->getPullRequest();
         $ret["pull_request_comments"] = $this->getPullRequestComments($ret["pull_request"]);
-        $ret["pharaoh_build_integration"] = $this->getPharaohBuildIntegration($ret["features"]);
+        $ret["pharaoh_build_integration"] = $this->getPharaohBuildIntegration($ret["features"], $ret["repository"]);
         return $ret ;
     }
 
@@ -128,42 +128,38 @@ class PullRequestAllOS extends Base {
         return $r ;
     }
 
-    protected function getPharaohBuildIntegration($features) {
-        $use_integration = false ;
+    protected function getPharaohBuildIntegration($features, $repository) {
+        $pbi = false ;
         foreach ($features as $feature) {
-            if ( ($feature["module"]==='StandardFeatures') &&
-                 ($feature['values']['ptbuild_enabled'] === 'on')) {
-                $use_integration = true ;
+            if ( ($feature["module"]==='PharaohBuildIntegration') &&
+                 ($feature['values']['enabled'] === 'on')) {
+                $res = $this->getBuildReports($feature) ;
+                $pbi = $res ;
             }
         }
-
-        if ($use_integration === true) {
-            $res = array(
-                'status' => true,
-                'success_results' => array(
-                    array(
-                        'slug' => 'build_status',
-                        'name' => 'Pharaoh Build Status',
-                        'result' => 'passed',
-                        'exitcode' => 0,
-                        'message' => 'The Pharaoh Build job has Passed. This will check things like installation are working, and creating the resources for a newly released version.'
-                    ),
-                    array(
-                        'slug' => 'behat',
-                        'name' => 'Behat Tests',
-                        'result' => 'passed',
-                        'exitcode' => 0,
-                        'message' => 'The Behat functional tests have Passed. These are the main tests for the Application, and will check that individual pieces of functionality within the application are working as expected.'
-                    ),
-                ),
-                'failure_results' => array(),
-            ) ;
-            $pbi = $res ;
-        }
-        else {
-            $pbi = false ;
-        }
         return $pbi ;
+    }
+
+    protected function getBuildReports($feature) {
+        $results = array() ;
+        foreach ($feature['values']['build_jobs'] as $build_job) {
+            $results[] = $this->calculateBuildJob($build_job) ;
+        }
+        return $results ;
+    }
+
+    protected function calculateBuildJob($build_job) {
+        $pbif = new \Model\PharaohBuildIntegration() ;
+        $pbi = $pbif->getModel($this->params) ;
+        $job_status = $pbi->findJobStatus($build_job) ;
+        $job_reports = $pbi->findJobReports($build_job) ;
+
+        $bjr = array(
+            'build_status' => $job_status,
+            'results' => $job_reports
+        ) ;
+
+        return $bjr ;
     }
 
     public function userIsAllowedAccess() {
