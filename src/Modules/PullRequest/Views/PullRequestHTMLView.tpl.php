@@ -126,24 +126,30 @@
 
                 if ($pageVars["data"]['pull_request']['status'] === 'rejected') {
                     ?>
-                        <h4>This pull request has been rejected, on XX_DATE_XX by XX_USER_XX.</h4>
+                        <h4>This pull request has been rejected, at
+                            <?php echo date('H:i', $pageVars["data"]['pull_request']['last_changed']) ; ?> on
+                            <?php echo date('d/m/Y', $pageVars["data"]['pull_request']['last_changed']) ; ?> by
+                            <?php echo $pageVars["data"]['pull_request']['rejected_by'] ; ?>.</h4>
                     <?php
                 }
                 else if ($pageVars["data"]['pull_request']['status'] === 'accepted') {
                     ?>
-                        <h4>This pull request has been accepted, on XX_DATE_XX by XX_USER_XX.</h4>
+                        <h4>This pull request has been accepted, at
+                            <?php echo date('H:i', $pageVars["data"]['pull_request']['last_changed']) ; ?> on
+                            <?php echo date('d/m/Y', $pageVars["data"]['pull_request']['last_changed']) ; ?> by
+                            <?php echo $pageVars["data"]['pull_request']['accepted_by'] ; ?>.</h4>
                     <?php
                 }
                 else if ($pageVars["data"]['pull_request']['status'] === 'open') {
                     ?>
 
-                    <hr />
+                    <hr/>
 
                     <h4>
                         Merge Request:
                     </h4>
                     <?php
-                    $request_can_be_merged = true ;
+                    $request_can_be_merged = true;
 
                     if ($request_can_be_merged === true) {
 
@@ -206,173 +212,189 @@
                         <?php
                     }
 
+                }
 
-                if (isset($pageVars['data']['pharaoh_build_integration']) &&
-                    $pageVars['data']['pharaoh_build_integration'] !== false) {
-                    $pharaoh_build_integration = true ; }
-                else {
-                    $pharaoh_build_integration = false ; }
+                if ( in_array($pageVars["data"]['pull_request']['status'],  array('open', 'accepted'))) {
 
-                if ($pharaoh_build_integration === true) {
+                    if (isset($pageVars['data']['pharaoh_build_integration']) &&
+                        $pageVars['data']['pharaoh_build_integration'] !== false) {
+                        $pharaoh_build_integration = true ; }
+                    else {
+                        $pharaoh_build_integration = false ; }
 
-                    ?>
-                    <div class="form-group col-sm-12">
-                        <hr />
+                    if ($pharaoh_build_integration === true) {
 
-                        <h4>
-                            Pharaoh Build Integration:
-                        </h4>
+                        ?>
+                        <div class="form-group col-sm-12">
+                            <hr />
 
-                        <?php echo count($pageVars['data']['pharaoh_build_integration']) ; ?>
-                        check/s
+                            <h4>
+                                Pharaoh Build Integration:
+                            </h4>
 
-                        <?php
+                            <?php echo count($pageVars['data']['pharaoh_build_integration']) ; ?>
+                            check/s
 
-                        foreach ($pageVars['data']['pharaoh_build_integration'] as $build_job) {
+                            <?php
 
-                            $build_status = $build_job['build_status']['status'] ;
+                            foreach ($pageVars['data']['pharaoh_build_integration'] as $build_job) {
 
-                            if ($build_status === 'error') {
-                                ?>
-                                <div class="form-group col-sm-12 build_integration_row">
-                                    <div class="col-sm-12">
-                                        <h4 class="text-center">
-                                            <strong>
-                                                Error retrieving build status :
-                                                <?php
-                                                echo $build_job['build_status']['message'] ;
-                                                ?>
-                                            </strong>
-                                        </h4>
-                                        <hr class="no-margin-hr" />
+                                $build_status = $build_job['build_status']['status'] ;
+
+                                if ($build_status === 'error') {
+                                    ?>
+                                    <div class="form-group col-sm-12 build_integration_row">
+                                        <div class="col-sm-12">
+                                            <h4 class="text-center">
+                                                <strong>
+                                                    Error retrieving build status :
+                                                    <?php
+                                                    echo $build_job['build_status']['message'] ;
+                                                    ?>
+                                                </strong>
+                                            </h4>
+                                            <hr class="no-margin-hr" />
+                                        </div>
                                     </div>
-                                </div>
 
-                                <?php
-                            } else if ($build_job['build_status']['result'] === 'failure') {
-                                ?>
-                                <div class="form-group col-sm-12 build_integration_row">
-                                    <div class="col-sm-12">
-                                        <h4 class="text-center">
-                                            <strong>
-                                                Build Status Failed :
-                                                <?php
-                                                echo $build_job['build_status']['data'] ;
-                                                ?>
-                                            </strong>
-                                        </h4>
-                                        <hr class="no-margin-hr" />
+                                    <?php
+                                } else if ($build_job['build_status']['result'] === 'failure') {
+                                    ?>
+                                    <div class="form-group col-sm-12 build_integration_row">
+                                        <div class="col-sm-12">
+                                            <h4 class="text-center">
+                                                <strong>
+                                                    Build Status Failed :
+                                                    <?php
+                                                    echo $build_job['build_status']['data'] ;
+                                                    ?>
+                                                </strong>
+                                            </h4>
+                                            <hr class="no-margin-hr" />
+                                        </div>
                                     </div>
-                                </div>
 
-                                <?php
-                            } else {
+                                    <?php
+                                } else {
 //                                var_dump($build_job) ;
 
-                                if ($build_job['results']['status'] === 'success') {
-                                    $text_status = "Passing" ;
-                                    $btn_class = "btn-success" ;
-                                }
-                                else if ($build_job['results']['status'] === 'pending') {
-                                    $text_status = "Pending" ;
-                                    $btn_class = "btn-warning" ;
-                                }
-                                else if ($build_job['results']['status'] === 'failure') {
-                                    $text_status = "Failed" ;
-                                    $btn_class = "btn-danger" ;
-                                }
-                                else {
-                                    $text_status = "Passing" ;
-                                    $btn_class = "btn-success" ;
-                                }
-                                ?>
+                                    if ($build_job['results']['status'] === 'success') {
+                                        $text_status = "Passing" ;
+                                        $btn_class = "btn-success" ;
+                                    }
+                                    else if ($build_job['results']['status'] === 'pending') {
+                                        $text_status = "Pending" ;
+                                        $btn_class = "btn-warning" ;
+                                    }
+                                    else if ($build_job['results']['status'] === 'failure') {
+                                        $text_status = "Failed" ;
+                                        $btn_class = "btn-danger" ;
+                                    }
+                                    else {
+                                        $text_status = "Passing" ;
+                                        $btn_class = "btn-success" ;
+                                    }
+                                    ?>
 
-                                <div class="form-group col-sm-12 build_integration_row">
-                                    <div class="col-sm-12">
-                                        <h4 class="text-center">
-                                            Build Job:
-                                            <strong>
-                                                <a target="_blank" href="<?php echo $build_job['build_status']['data']['build_job_link'] ; ?>">
-                                                    <?php echo $build_job['build_status']['data']['build_job_title'] ; ?>
-                                                </a>
-                                            </strong>
-                                        </h4>
-                                        <hr class="no-margin-hr" />
-                                    </div>
-                                    <div class="col-sm-2">
+                                    <div class="form-group col-sm-12 build_integration_row">
+                                        <div class="col-sm-12">
+                                            <h4 class="text-center">
+                                                Build Job:
+                                                <strong>
+                                                    <a target="_blank" href="<?php echo $build_job['build_status']['data']['build_job_link'] ; ?>">
+                                                        <?php echo $build_job['build_status']['data']['build_job_title'] ; ?>
+                                                    </a>
+                                                </strong>
+                                            </h4>
+                                            <hr class="no-margin-hr" />
+                                        </div>
+                                        <div class="col-sm-2">
                                     <span class="btn <?php echo $btn_class ; ?>">
                                         <h3><?php echo $text_status ; ?></h3>
                                     </span>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <h5>Build Link:
+                                                <a target="_blank" href="<?php echo $build_job['build_status']['data']['build_job_link'] ; ?>">
+                                                    <?php echo $build_job['build_status']['data']['build_job_link'] ; ?>
+                                                </a>
+                                            </h5>
+                                            <h5>Run ID:
+                                                <a target="_blank" href="<?php echo $build_job['build_status']['data']['build_run_link'] ; ?>">
+                                                    <?php echo $build_job['build_status']['data']['build_id'] ; ?>
+                                                </a>
+                                            </h5>
+                                            <h5>Run Time: <?php echo date('H:i d/m/Y', $build_job['build_status']['data']['build_run_time']) ; ?></h5>
+                                        </div>
                                     </div>
-                                    <div class="col-sm-10">
-                                        <h5>Build Link:
-                                            <a target="_blank" href="<?php echo $build_job['build_status']['data']['build_job_link'] ; ?>">
-                                                <?php echo $build_job['build_status']['data']['build_job_link'] ; ?>
-                                            </a>
-                                        </h5>
-                                        <h5>Run ID:
-                                            <a target="_blank" href="<?php echo $build_job['build_status']['data']['build_run_link'] ; ?>">
-                                                <?php echo $build_job['build_status']['data']['build_id'] ; ?>
-                                            </a>
-                                        </h5>
-                                        <h5>Run Time: <?php echo date('H:i d/m/Y', $build_job['build_status']['data']['build_run_time']) ; ?></h5>
-                                    </div>
-                                </div>
 
-                                <?php
+                                    <?php
+
+                                }
 
                             }
 
-                        }
+                            ?>
 
-                        ?>
+                        </div>
+
+                        <?php
+                    }
+
+                }
+
+
+
+                if ( in_array($pageVars["data"]['pull_request']['status'],  array('open', 'accepted'))) {
+
+                    ?>
+
+                    <div class="form-group col-sm-12">
+                        <hr/>
+                        <div id="comments_table">
+                            <?php
+                            $comments = $pageVars["data"]['pull_request_comments'];
+
+                            if (is_array($comments) && count($comments) > 0) {
+                                ?>
+                                <h4>Comments:</h4>
+                                <?php
+                                foreach ($comments as $comment) {
+                                    ?>
+                                    <div class="form-group col-sm-12 comment_row">
+                                        <div class="fullWidth">
+                                            <div class="col-sm-6">
+                                                <?php echo $comment['requestor']; ?>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <?php echo date('H:i d/m/Y', $comment['created_on']); ?>
+                                            </div>
+                                        </div>
+                                        <div class="fullWidth">
+                                            <p>
+                                                <?php echo $comment['data']; ?>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <?php
+                                }
+                            } else {
+                                ?>
+                                <div class="form-group col-sm-12">
+                                    <h4>No comments have been made</h4>
+                                </div>
+                                <?php
+                            }
+                            ?>
+                        </div>
 
                     </div>
 
                     <?php
                 }
+
+                if ($pageVars["data"]['pull_request']['status'] =='open') {
                 ?>
-
-                <div class="form-group col-sm-12">
-                    <hr />
-                    <div id="comments_table">
-                    <?php
-                        $comments = $pageVars["data"]['pull_request_comments'] ;
-
-                        if (is_array($comments) && count($comments)>0) {
-                            ?>
-                            <h4>Comments:</h4>
-                            <?php
-                            foreach ($comments as $comment) {
-                                ?>
-                                <div class="form-group col-sm-12 comment_row">
-                                    <div class="fullWidth">
-                                        <div class="col-sm-6">
-                                            <?php echo $comment['requestor'] ; ?>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <?php echo date('H:i d/m/Y', $comment['created_on']) ; ?>
-                                        </div>
-                                    </div>
-                                    <div class="fullWidth">
-                                        <p>
-                                            <?php echo $comment['data'] ; ?>
-                                        </p>
-                                    </div>
-                                </div>
-                                <?php
-                            }
-                        } else {
-                            ?>
-                            <div class="form-group col-sm-12">
-                                <h4>No comments have been made yet</h4>
-                            </div>
-                            <?php
-                        }
-                    ?>
-                    </div>
-
-                </div>
 
                 <div class="form-group col-sm-12">
                     <hr />
@@ -401,6 +423,7 @@
                     // end if pull request is open
                 }
                 ?>
+
             </div>
 
         </div>
