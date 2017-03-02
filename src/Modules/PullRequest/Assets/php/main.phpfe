@@ -77,12 +77,9 @@ class PullRequest {
         $ajax_object = $jQuery->ajax($data);
         return $ajax_object->done(
             function ($data) use ($jQuery) {
-//                \js_core::$console->log('Creating PR Comment 5 - after ajax') ;
-//                \js_core::$console->log('Creating PR Comment 6', $data) ;
                 $jQuery('.loading_pull_request_comments')->fadeOut('fast') ;
                 $kt = new pullRequestCommentTable() ;
                 $kt->rewriteTable($data, $jQuery) ;
-//                $jQuery('#create_new_pull_request_comment_fields')->fadeOut();
                 $jQuery('.new_pr_comment_field')->fadeIn();
                 $jQuery('#new_pull_request_comment_title')->val('') ;
                 $jQuery('#new_pull_request_comment')->val('') ;
