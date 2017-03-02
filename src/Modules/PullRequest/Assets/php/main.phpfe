@@ -129,6 +129,5 @@ class pullRequestCommentTable {
             $i = $i + 1;
         }
         $jQuery('#comments_table')->html($ht) ;
-        setPageTriggers() ;
     }
 }
