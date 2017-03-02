@@ -49,6 +49,13 @@ class PullRequestAllOS extends Base {
             $datastore = $datastoreFactory->getModel($this->params) ;
             if (in_array($this->params["update_status"], array('closed', 'rejected', 'accepted'))) {
                 $pull_request['status'] = $this->params["update_status"] ;
+                $pull_request['last_changed'] = time() ;
+                if ($this->params["update_status"] == 'rejected') {
+                    $pull_request['rejected_by'] = $user->username ;
+                }
+                if ($this->params["update_status"] == 'accepted') {
+                    $pull_request['accepted_by'] = $user->username ;
+                }
             }
             $clause = array(
                 'pr_id' => $this->params["pr_id"],
