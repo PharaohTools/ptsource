@@ -75,10 +75,7 @@ class WindowMessage {
     }
 
     public static function areYouSure($message, $yesfunction) {
-//        inject_fields = inject_fields || false;
-//        function_after_inject = function_after_inject || false;
 
-        \js_core::$console->log('are you sure 1') ;
         $htmlvar  = '<div id="overlay_are_you_sure"> ';
         $htmlvar = $htmlvar . '    <div class="overlay_inner"> ';
         $htmlvar = $htmlvar . '        <div id="close_button_div"> ';
@@ -99,8 +96,8 @@ class WindowMessage {
         $htmlvar = $htmlvar . '    </div> ';
         $htmlvar = $htmlvar . '</div> ';
 
-        \js_core::$console->log('are you sure 2') ;
         $jQuery = \js_core::$jQuery ;
+        $jQuery('#overlay_are_you_sure')->remove() ;
 
         $jQuery('body')->append($htmlvar) ;
         $jQuery('#overlay_are_you_sure')->show() ;
@@ -116,7 +113,6 @@ class WindowMessage {
             $jQuery('#overlay_are_you_sure')->fadeOut('fast') ;
         } );
 
-        \js_core::$console->log('are you sure 3') ;
     }
 
 
