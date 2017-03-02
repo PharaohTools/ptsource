@@ -133,30 +133,30 @@ class PullRequestAllOS extends Base {
         foreach ($features as $feature) {
             if ( ($feature["module"]==='PharaohBuildIntegration') &&
                  ($feature['values']['enabled'] === 'on')) {
-                $res = $this->getBuildReports($feature) ;
+                $res = $this->getBuildReports($feature, $repository) ;
                 $pbi = $res ;
             }
         }
         return $pbi ;
     }
 
-    protected function getBuildReports($feature) {
+    protected function getBuildReports($feature, $repository) {
         $results = array() ;
         foreach ($feature['values']['build_jobs'] as $build_job) {
-            $results[] = $this->calculateBuildJob($build_job) ;
+            $results[] = $this->calculateBuildJob($build_job, $repository) ;
         }
         return $results ;
     }
 
-    protected function calculateBuildJob($build_job) {
+    protected function calculateBuildJob($build_job, $repository) {
         $pbif = new \Model\PharaohBuildIntegration() ;
         $pbi = $pbif->getModel($this->params) ;
-        $job_status = $pbi->findJobStatus($build_job) ;
-        $job_reports = $pbi->findJobReports($build_job) ;
+        $job_status = $pbi->findJobStatus($build_job, $repository) ;
+//        $job_reports = $pbi->findJobReports($build_job, $repository) ;
 
         $bjr = array(
             'build_status' => $job_status,
-            'results' => $job_reports
+//            'results' => $job_reports
         ) ;
 
         return $bjr ;
