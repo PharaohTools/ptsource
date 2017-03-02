@@ -249,9 +249,27 @@
                                 </div>
 
                                 <?php
+                            } else if ($build_job['build_status']['result'] === 'failure') {
+                                ?>
+                                <div class="form-group col-sm-12 build_integration_row">
+                                    <div class="col-sm-12">
+                                        <h4 class="text-center">
+                                            <strong>
+                                                Build Status Failed :
+                                                <?php
+                                                echo $build_job['build_status']['data'] ;
+                                                ?>
+                                            </strong>
+                                        </h4>
+                                        <hr class="no-margin-hr" />
+                                    </div>
+                                </div>
+
+                                <?php
                             } else {
-                                var_dump($build_job['results']) ;
-                                if ($build_job['results']['status'] === 'passed') {
+//                                var_dump($build_job) ;
+
+                                if ($build_job['results']['status'] === 'success') {
                                     $text_status = "Passing" ;
                                     $btn_class = "btn-success" ;
                                 }
@@ -259,9 +277,9 @@
                                     $text_status = "Pending" ;
                                     $btn_class = "btn-warning" ;
                                 }
-                                else if ($build_job['results']['status'] === 'none') {
-                                    $text_status = "Passing" ;
-                                    $btn_class = "btn-success" ;
+                                else if ($build_job['results']['status'] === 'failure') {
+                                    $text_status = "Failed" ;
+                                    $btn_class = "btn-danger" ;
                                 }
                                 else {
                                     $text_status = "Passing" ;
@@ -272,8 +290,11 @@
                                 <div class="form-group col-sm-12 build_integration_row">
                                     <div class="col-sm-12">
                                         <h4 class="text-center">
+                                            Build Job:
                                             <strong>
-                                                <?php echo $s_res['name'] ; ?>
+                                                <a target="_blank" href="<?php echo $build_job['build_status']['data']['build_job_link'] ; ?>">
+                                                    <?php echo $build_job['build_status']['data']['build_job_title'] ; ?>
+                                                </a>
                                             </strong>
                                         </h4>
                                         <hr class="no-margin-hr" />
@@ -284,7 +305,17 @@
                                     </span>
                                     </div>
                                     <div class="col-sm-10">
-                                        <h4><?php echo $s_res['message'] ; ?></h4>
+                                        <h5>Build Link:
+                                            <a target="_blank" href="<?php echo $build_job['build_status']['data']['build_job_link'] ; ?>">
+                                                <?php echo $build_job['build_status']['data']['build_job_link'] ; ?>
+                                            </a>
+                                        </h5>
+                                        <h5>Run ID:
+                                            <a target="_blank" href="<?php echo $build_job['build_status']['data']['build_run_link'] ; ?>">
+                                                <?php echo $build_job['build_status']['data']['build_id'] ; ?>
+                                            </a>
+                                        </h5>
+                                        <h5>Run Time: <?php echo date('H:i d/m/Y', $build_job['build_status']['data']['build_run_time']) ; ?></h5>
                                     </div>
                                 </div>
 
