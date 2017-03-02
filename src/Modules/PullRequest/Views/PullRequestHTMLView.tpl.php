@@ -321,7 +321,7 @@
                                             </h5>
                                             <h5>Run ID:
                                                 <a target="_blank" href="<?php echo $build_job['build_status']['data']['build_run_link'] ; ?>">
-                                                    <?php echo $build_job['build_status']['data']['build_id'] ; ?>
+                                                    <?php echo $build_job['build_status']['data']['run_id'] ; ?>
                                                 </a>
                                             </h5>
                                             <h5>Run Time: <?php echo date('H:i d/m/Y', $build_job['build_status']['data']['build_run_time']) ; ?></h5>
