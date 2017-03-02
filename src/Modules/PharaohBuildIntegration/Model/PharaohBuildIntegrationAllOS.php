@@ -51,14 +51,14 @@ class PharaohBuildIntegrationAllOS extends Base {
         return $ff ;
     }
 
-    public function findJobStatus($build_job) {
+    public function findJobStatus($build_job, $repository) {
         $apif = new \Model\PharaohAPI();
         $params = $this->params ;
-        $params['api_module'] = 'PublishReports' ;
+        $params['api_module'] = 'PublishStatus' ;
         $params['api_function'] = 'get_status' ;
-        $params['slug'] = $build_job['job_slug'] ;
         $params['api_instance_url'] = $build_job['instance_url'] ;
         $params['api_key'] = $this->findInstanceKey($build_job['instance_url']) ;
+        $params['api_param_slug'] = $build_job['job_slug'] ;
         $api_request = $apif->getModel($params, 'Request') ;
         $result = $api_request->performAPIRequest() ;
         return $result;
@@ -69,9 +69,10 @@ class PharaohBuildIntegrationAllOS extends Base {
         $params = $this->params ;
         $params['api_module'] = 'PublishReports' ;
         $params['api_function'] = 'get_reports' ;
-        $params['slug'] = 'build-job-slug' ;
+        $params['slug'] = $build_job['job_slug'] ;
         $params['api_instance_url'] = $build_job['instance_url'] ;
         $params['api_key'] = $this->findInstanceKey($build_job['instance_url']) ;
+        $params['api_param_slug'] = $build_job['job_slug'] ;
         $api_request = $apif->getModel($params, 'Request') ;
         $result = $api_request->performAPIRequest() ;
         return $result;
