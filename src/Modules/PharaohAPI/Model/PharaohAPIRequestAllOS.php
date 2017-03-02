@@ -45,9 +45,14 @@ class PharaohAPIRequestAllOS extends Base {
         $curlParams['api_function'] = $api_default->findAPIFunction() ;
         // get the API function parameters for the request
 //        $curlParams['api_module'] = $api_default->findAPIFunction() ;
+
+
         $curlParams['control'] = 'PharaohAPI' ;
         $curlParams['action'] = 'call' ;
         $curlParams['output-format'] = 'JSON' ;
+
+        $extra_params = $this->getExtraAPIParams() ;
+        $curlParams = array_merge($extra_params, $curlParams) ;
 
         $ch = curl_init();
         $curlUrl = $this->ensureTrailingSlash($instance_url).'index.php?control=PharaohAPI&action=call&output-format=JSON' ;
@@ -60,10 +65,24 @@ class PharaohAPIRequestAllOS extends Base {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $server_output = curl_exec ($ch);
 
-        curl_close ($ch);
+//        ob_start();
+//        var_dump('api returned: ' ,$server_output) ;
+//        $out = ob_get_clean() ;
+//        error_log($out) ;
+//        curl_close ($ch);
         $callObject = json_decode($server_output, true);
 
         return $callObject;
+    }
+
+
+    public function getExtraAPIParams() {
+        $extras = array() ;
+        foreach ($this->params as $key => $value) {
+            if (strpos($key,'api_param_') === 0) {
+                $new_key = substr($key, 10) ;
+                $extras[$new_key] = $value ; } }
+        return $extras ;
     }
 
 }
