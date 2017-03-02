@@ -129,28 +129,43 @@ class pullRequestTable {
                 \js_core::$console->log($onePullRequest) ;
 
                 $ht = $ht . '<div class="pullRequestRow" id="blRow_' . $onePullRequest['pr_id'] . '" >' ;
-                $ht = $ht . '   <div class="blCell cellRowIndex col-sm-2" scope="row">' . $i . '</div>' ;
-                $ht = $ht . '       <div class="col-sm-10">' ;
+                $ht = $ht . '   <div class="blCell cellRowIndex col-sm-2">' . $i . '</div>' ;
+                $ht = $ht . '       <div class="col-sm-6">' ;
                 $ht = $ht . '           <div class="blCell cellRowTitle col-sm-12">' ;
                 $ht = $ht . '               <a href="/index.php?control=PullRequest&action=show&item='.$onePullRequest["repo_pr_id"].'&pr_id='.$onePullRequest['pr_id'].'" class="pipeName">' ;
-                $ht = $ht . $onePullRequest["title"] ;
+                $ht = $ht . '                   <h4>'.$onePullRequest['title'].'</h4>' ;
                 $ht = $ht . '               </a>' ;
                 $ht = $ht . '           </div>' ;
-                $ht = $ht . '           <div class="blCell cellRowAuthor col-sm-12">' ;
-                $ht = $ht . '               <a href="/index.php?control=PullRequest&action=show&item='.$onePullRequest["repo_pr_id"].'&pr_id='.$onePullRequest['pr_id'].'" class="pipeName">' ;
-                $ht = $ht . $onePullRequest["requestor"] ;
-                $ht = $ht . '               </a>' ;
-                $ht = $ht . '               opened this request on '.$onePullRequest['created_on_format'] ;
-                $ht = $ht . '           </div>' ;
+                $ht = $ht . '       <div class="blCell cellRowAuthor col-sm-12">' ;
+                $ht = $ht . '           <a href="/index.php?control=PullRequest&action=show&item='.$onePullRequest["repo_pr_id"].'&pr_id='.$onePullRequest['pr_id'].'" class="pipeName">' ;
+                $ht = $ht . $onePullRequest['requestor'];
+                $ht = $ht . '           </a>' ;
+                $ht = $ht . 'opened this request on '.$onePullRequest['created_on_format'] ;
                 $ht = $ht . '       </div>' ;
                 $ht = $ht . '   </div>' ;
-                $ht = $ht . '</div>' ;
+                $ht = $ht . '<div class="blCell col-sm-4">' ;
+
+                if ($onePullRequest['status'] === 'rejected') {
+                    $ht = $ht . '<span class="pull_request_status_display btn btn-danger">' ;
+                    $ht = $ht . '   Rejected' ;
+                } else if ($onePullRequest['status'] === 'closed') {
+                    $ht = $ht . ' <span class="pull_request_status_display btn btn-danger">' ;
+                    $ht = $ht . '   Closed' ;
+                } else if ($onePullRequest['status'] === 'open') {
+                    $ht = $ht . '<span class="pull_request_status_display btn btn-warning">' ;
+                    $ht = $ht . '   Open' ;
+                } else if ($onePullRequest['status'] === 'accepted') {
+                    $ht = $ht . '<span class="pull_request_status_display btn btn-success">' ;
+                    $ht = $ht . '   Accepted' ;
+                }
+                    $ht = $ht . '</span>' ;
+                $ht = $ht . '</div> ';
+                $ht = $ht . '</div> ';
 
             $i = $i + 1;
         }
 
         $jQuery('#allPullRequestRows')->html($ht) ;
-        setPageTriggers() ;
 
     }
 }
