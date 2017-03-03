@@ -23,7 +23,8 @@ exit (1);
 
 function userValid($username, $password) {
     // @todo should check if public scope is enabled first probably before authing anon user
-    if ($username=="anon") { return true ; }
+    if ($username=="anon") {
+        return true ; }
     $signupFactory = new \Model\Signup() ;
     $signup = $signupFactory->getModel(array(), "Default") ;
     $res = $signup->checkLogin($username, $password, false) ;
@@ -35,10 +36,15 @@ function userValid($username, $password) {
 
 function oauthKeyValid($username, $password) {
     // @todo should check if public scope is enabled first probably before authing anon user
-    if ($username=="anon") { return true ; }
+    if ($username=="anon") {
+        return false ; }
     $uoakFactory = new \Model\UserOAuthKey() ;
-    $uoak = $uoakFactory->getModel(array(), "Default") ;
-    $res = $uoak->checkOAuth($username, $password, false) ;
+    $uoak = $uoakFactory->getModel(array(), "AuthenticateKey") ;
+    $res = $uoak->authenticateOauth($username, $password, false) ;
+//    ob_start() ;
+//    var_dump('oauth results', $res) ;
+//    $out = ob_get_clean() ;
+//    error_log('authcheck' . $out) ;
     if ($res["status"] === true) {
         // don't just return true here
         return true ; }
