@@ -39,32 +39,24 @@ class UserOAuthKeyAuthenticateKeyAllOS extends Base {
     }
 
 
-    private function authenticateOauth() {
-
-
-    }
-
-    public function checkLoginInfo($usr, $pass, $start_session=true) {
-        $file = $this->getUserFileLocation();
-        $accountsJson = file_get_contents($file);
-        $accounts = json_decode($accountsJson);
-        $verified = false;
-        foreach($accounts as $account) {
-            // @todo SECURITY if acccount group is restricted, refuse the login
-            if ($account->username == $usr &&
-                $account->password == $this->getSaltWord($pass) &&
-                $account->status == 1) {
-                $verified = true; } }
-        if (($verified== true) && ($start_session == false)) {
-            return array("status" => true) ;
+    public function authenticateOauth($username, $key) {
+        $datastoreFactory = new \Model\Datastore() ;
+        $datastore = $datastoreFactory->getModel($this->params) ;
+//        $loggingFactory = new \Model\Logging() ;
+//        $logging = $loggingFactory->getModel($this->params) ;
+        $parsed_filters = array() ;
+        $parsed_filters[] = array("where", "oauth_user", '=', $username ) ;
+        $parsed_filters[] = array("where", "oauth_key", '=', $key ) ;
+        $keys = $datastore->findAll('user_oauth_keys', $parsed_filters) ;
+        $key_exists = array() ;
+        if (count($keys) === 1) {
+            $key_exists['status'] = true ;
         }
-        if ($verified === true) {
-            session_start() ;
-            $_SESSION["login-status"]=true;
-            $_SESSION["username"] = $usr;
-            return array("status" => true); }
         else {
-            return array("status" => false, "msg" => "Sorry!! Wrong User name Or Password"); }
+            $key_exists['status'] = false ;
+            $key_exists['msg'] = "Sorry!! Wrong User name Or Password" ;
+        }
+        return $key_exists ;
     }
 
 }
