@@ -122,7 +122,7 @@
                                     ?>
 
 
-                                    <input type="text" readonly="readonly" class="form-control" id="update_username" name="update_username" placeholder="User Name" value="<?php echo $pageVars["data"]["user"]->username ; ?>">
+                                    <input type="text" readonly="readonly" class="form-control" id="update_username" name="update_username" placeholder="User Name" value="<?php echo $pageVars["data"]["user"]['username'] ; ?>">
                                 <?php
                                 } else {
 
@@ -138,18 +138,18 @@
                                             foreach($pageVars["data"]["allusers"] as $oneUser) {
                                                 ?>
                                                 <li role="presentation">
-                                                    <a role="menuitem" tabindex="-1" onclick="refreshUserDetails('<?php echo $oneUser->username ; ?>');">
-                                                        <?= $oneUser->username ; ?>
+                                                    <a role="menuitem" tabindex="-1" onclick="refreshUserDetails('<?php echo $oneUser['username'] ; ?>');">
+                                                        <?= $oneUser['username'] ; ?>
                                                     </a>
                                                 </li>
                                             <?php
                                             }
                                             ?>
                                         </ul>
-                                        <input type="hidden" class="form-control" id="update_username" name="update_username" value="<?php echo $pageVars["data"]["user"]->username ; ?>">
+                                        <input type="hidden" class="form-control" id="update_username" name="update_username" value="<?php echo $pageVars["data"]["user"]['username'] ; ?>">
                                     </div>
                                     <div class="userShow">
-                                        <input type="text" readonly="readonly" class="form-control" id="update_username_text" name="update_username_text" value="<?php echo $pageVars["data"]["user"]->username ; ?>">
+                                        <input type="text" readonly="readonly" class="form-control" id="update_username_text" name="update_username_text" value="<?php echo $pageVars["data"]["user"]['username'] ; ?>">
                                     </div>
 
                                 <?php
@@ -157,7 +157,7 @@
                                 ?>
 
                                 <span style="color:#FF0000;" id="update_username_alert"></span>
-                                <input type="hidden" class="form-control my_uname" id="my_uname" name="my_uname" value="<?php echo $pageVars["data"]["user"]->username ; ?>" >
+                                <input type="hidden" class="form-control my_uname" id="my_uname" name="my_uname" value="<?php echo $pageVars["data"]["user"]['username'] ; ?>" >
                             </div>
                         </div>
 
@@ -180,7 +180,7 @@
 
                         $email_string = '' ;
                         if ($pageVars["route"]["action"] !== "new") {
-                            $email_string = $pageVars["data"]["user"]->email ; }
+                            $email_string = $pageVars["data"]["user"]['email'] ; }
 
                         ?>
 
@@ -256,8 +256,8 @@
                                                    name="update_<?php echo $extra_fieldset['slug'] ; ?>"
                                                    placeholder="<?php echo $extra_fieldset['title'] ; ?>"
                                                    value="<?php
-                                                    if (isset($pageVars["data"]["user"]->{$extra_fieldset['slug']})) {
-                                                        echo $pageVars["data"]["user"]->{$extra_fieldset['slug']} ;
+                                                    if (isset($pageVars["data"]["user"][$extra_fieldset['slug']])) {
+                                                        echo $pageVars["data"]["user"][$extra_fieldset['slug']] ;
                                                     }
                                                     ?>" />
                                             <span style="color:#FF0000;" id="update_<?php echo $extra_fieldset['slug'] ; ?>_alert"></span>
@@ -268,8 +268,8 @@
                                             <textarea class="form-control"
                                                       id="update_<?php echo $extra_fieldset['slug'] ; ?>"
                                                       name="update_<?php echo $extra_fieldset['slug'] ; ?>" ><?php
-                                                if (isset($pageVars["data"]["user"]->{$extra_fieldset['slug']})) {
-                                                    echo $pageVars["data"]["user"]->{$extra_fieldset['slug']} ;
+                                                if (isset($pageVars["data"]["user"][$extra_fieldset['slug']])) {
+                                                    echo $pageVars["data"]["user"][$extra_fieldset['slug']] ;
                                                 }
                                                 ?></textarea>
                                         </div>
@@ -278,8 +278,8 @@
                                             <input type="checkbox" class="form-control"
                                                    id="update_<?php echo $extra_fieldset['slug'] ; ?>"
                                                    name="update_<?php echo $extra_fieldset['slug'] ; ?>" <?php
-                                            if (isset($pageVars["data"]["user"]->{$extra_fieldset['slug']}) &&
-                                                $pageVars["data"]["user"]->{$extra_fieldset['slug']} === 'on') {
+                                            if (isset($pageVars["data"]["user"][$extra_fieldset['slug']]) &&
+                                                $pageVars["data"]["user"][$extra_fieldset['slug']] === 'on') {
                                                 echo ' checked="checked" ' ; }?>
                                                    placeholder="<?php echo $extra_fieldset['title'] ; ?>" />
                                             <span style="color:#FF0000;" id="update_<?php echo $extra_fieldset['slug'] ; ?>_alert"></span>
