@@ -64,8 +64,8 @@ class UserProfileUpdateUserAllOS extends Base {
         $allusers = $this->getAllUserDetails() ;
 //        var_dump($allusers) ;
         foreach ($allusers as $oneuser) {
-//            var_dump($oneuser->username) ;
-            if ($oneuser->username == $this->params["create_username"]) {
+//            var_dump($oneuser['username']) ;
+            if ($oneuser['username'] == $this->params["create_username"]) {
                 return true ; } }
         return false ;
     }
@@ -90,14 +90,10 @@ class UserProfileUpdateUserAllOS extends Base {
     }
 
     private function getAllUserDetails() {
-        $signupFactory = new \Model\Signup();
-        $signup = $signupFactory->getModel($this->params);
-        $me = $signup->getLoggedInUserData() ;
-//        $rid = $signup->getUserRole($me->email);
-        $au =$signup->getUsersData();
+        $uaf = new \Model\UserAccount() ;
+        $ua = $uaf->getModel($this->params) ;
+        $au = $ua->getUsersData();
         return $au;
-//        if ($rid == 1) { }
-//        return array() ;
     }
 
     private function getOneUserDetails($username) {
@@ -105,7 +101,7 @@ class UserProfileUpdateUserAllOS extends Base {
         $signup = $signupFactory->getModel($this->params);
         $au =$signup->getUsersData();
         foreach ($au as $oneuser) {
-            if ($oneuser->username === $this->params["create_username"]) {
+            if ($oneuser['username'] === $this->params["create_username"]) {
                 return $oneuser ; } }
         return array() ;
     }
@@ -113,7 +109,7 @@ class UserProfileUpdateUserAllOS extends Base {
     private function updateTheUserPassword() {
 
         $userMod = new \StdClass() ;
-        $userMod->username = $this->params["create_username"] ;
+        $userMod['username'] = $this->params["create_username"] ;
         $userMod->password = $this->params["update_password"] ;
 
         $signupFactory = new \Model\Signup();
@@ -131,28 +127,29 @@ class UserProfileUpdateUserAllOS extends Base {
 
     private function updateTheUserDetails() {
 
-        $userMod = new \StdClass() ;
-        $userMod->username = $this->params["create_username"] ;
+        $userMod = array() ;
+        $userMod['username'] = $this->params["create_username"] ;
         if (isset($this->params["update_user_bio"])) {
-            $userMod->user_bio = $this->params["update_user_bio"] ; }
+            $userMod['user_bio'] = $this->params["update_user_bio"] ; }
         if (isset($this->params["update_full_name"])) {
-            $userMod->full_name = $this->params["update_full_name"] ;}
+            $userMod['full_name'] = $this->params["update_full_name"] ;}
         if (isset($this->params["update_website"])) {
-            $userMod->website = $this->params["update_website"] ;}
+            $userMod['website'] = $this->params["update_website"] ;}
         if (isset($this->params["update_location"])) {
-            $userMod->location = $this->params["update_location"] ; }
+            $userMod['location'] = $this->params["update_location"] ; }
         if (isset($this->params["update_avatar"])) {
-            $userMod->avatar = $this->params["update_avatar"] ; }
+            $userMod['avatar'] = $this->params["update_avatar"] ; }
         if (isset($this->params["update_show_location"])) {
-            $userMod->show_location = $this->params["update_show_location"] ; }
+            $userMod['show_location'] = $this->params["update_show_location"] ; }
         if (isset($this->params["update_show_website"])) {
-            $userMod->show_website = $this->params["update_show_website"] ; }
+            $userMod['show_website'] = $this->params["update_show_website"] ; }
         if (isset($this->params["update_show_email"])) {
-            $userMod->show_email = $this->params["update_show_email"] ; }
+            $userMod['show_email'] = $this->params["update_show_email"] ; }
 
-        $signupFactory = new \Model\Signup();
-        $signup = $signupFactory->getModel($this->params);
-        $cu = $signup->updateUser($userMod);
+
+        $uaf = new \Model\UserAccount() ;
+        $ua = $uaf->getModel($this->params) ;
+        $cu = $ua->updateUser($userMod);
 
         if ($cu !== true) {
             $return = array(
