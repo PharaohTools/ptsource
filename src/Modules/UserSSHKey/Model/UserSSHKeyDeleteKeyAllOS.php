@@ -55,7 +55,7 @@ class UserSSHKeyDeleteKeyAllOS extends Base {
         $signupFactory = new \Model\Signup();
         $signup = $signupFactory->getModel($this->params);
         $me = $signup->getLoggedInUserData() ;
-        $uname = $me->username;
+        $uname = $me['username'];
 
         $datastoreFactory = new \Model\Datastore() ;
         $datastore = $datastoreFactory->getModel($this->params) ;
@@ -74,7 +74,7 @@ class UserSSHKeyDeleteKeyAllOS extends Base {
         $signupFactory = new \Model\Signup();
         $signup = $signupFactory->getModel($this->params);
         $me = $signup->getLoggedInUserData() ;
-        $uname = $me->username;
+        $uname = $me['username'];
         $datastoreFactory = new \Model\Datastore() ;
         $datastore = $datastoreFactory->getModel($this->params) ;
         $parsed_filters = array( "key_hash" => $this->params["key_hash"] ) ;
