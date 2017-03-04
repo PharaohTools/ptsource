@@ -74,7 +74,7 @@ class SourceHomeAjaxDataAllOS extends Base {
         $issueFactory = new \Model\Issue() ;
         $allCounts = 0 ;
         $allJobs = $this->getAllJobs() ;
-        $username = (isset($this->params["user"]->username)) ? $this->params["user"]->username : "" ;
+        $username = (isset($this->params["user"]['username'])) ? $this->params["user"]['username'] : "" ;
         foreach ($allJobs as $oneJob) {
             $filters = array($types[$type].'::'.$username) ;
 
@@ -101,7 +101,7 @@ class SourceHomeAjaxDataAllOS extends Base {
     public function getJobCreatedCount() {
         $this->getLoggedInUser() ;
         $jobFactory = new \Model\Job() ;
-        $username = (isset($this->params["user"]->username)) ? $this->params["user"]->username : "" ;
+        $username = (isset($this->params["user"]['username'])) ? $this->params["user"]['username'] : "" ;
         $filters = array('job_creator::'.$username) ;
         $tempParams = $this->params ;
         $tempParams["filters"] = $filters ;
@@ -120,7 +120,7 @@ class SourceHomeAjaxDataAllOS extends Base {
     public function getJobMemberCount() {
         $this->getLoggedInUser() ;
         $jobFactory = new \Model\Job() ;
-        $username = (isset($this->params["user"]->username)) ? $this->params["user"]->username : "" ;
+        $username = (isset($this->params["user"]['username'])) ? $this->params["user"]['username'] : "" ;
         $filters = array('job_members[~]::'.$username) ;
         $tempParams = $this->params ;
         $tempParams["filters"] = $filters ;
