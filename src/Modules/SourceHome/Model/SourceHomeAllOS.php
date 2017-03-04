@@ -103,7 +103,8 @@ class SourceHomeAllOS extends Base {
     public function getMyRepositoriesCount($all_repos, $user) {
         $my_repos = 0 ;
         foreach ($all_repos as $one_repo) {
-            if ($one_repo["project-owner"] == $user->username) {
+            if (isset ($one_repo["project-owner"]) &&
+                $one_repo["project-owner"] == $user->username) {
                 $my_repos ++ ; } }
         return $my_repos ;
     }
@@ -111,7 +112,8 @@ class SourceHomeAllOS extends Base {
     public function getMemberRepositoriesCount($all_repos, $user) {
         $member_repos = 0 ;
         foreach ($all_repos as $one_repo) {
-            $repo_members = explode(",", $one_repo["project-members"]) ;
+            $pm = (isset($one_repo["project-members"])) ? $one_repo["project-members"] : "" ;
+            $repo_members = explode(",", $pm) ;
             if ( in_array($user->username, $repo_members)) {
                 $member_repos ++ ; } }
         return $member_repos ;
@@ -120,7 +122,8 @@ class SourceHomeAllOS extends Base {
     public function getMyTeamsCount($all_teams, $user) {
         $my_teams = 0 ;
         foreach ($all_teams as $one_team) {
-            if ($one_team["project-owner"] == $user->username) {
+            $po = (isset($one_team["project-owner"])) ? $one_team["project-owner"] : "" ;
+            if ($po == $user->username) {
                 $my_teams ++ ; } }
         return $my_teams ;
     }
@@ -128,7 +131,8 @@ class SourceHomeAllOS extends Base {
     public function getMemberTeamsCount($all_teams, $user) {
         $member_teams = 0 ;
         foreach ($all_teams as $one_team) {
-            $team_members = explode(",", $one_team["project-members"]) ;
+            $pm = (isset($one_team["project-members"])) ? $one_team["project-members"] : "" ;
+            $team_members = explode(",", $pm) ;
             if ( in_array($user->username, $team_members)) {
                 $member_teams ++ ; } }
         return $member_teams ;
