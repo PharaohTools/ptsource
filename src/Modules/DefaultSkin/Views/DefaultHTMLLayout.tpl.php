@@ -75,7 +75,7 @@
 
                     <?php
 
-                    if (isset($_SESSION) && $_SESSION["login-status"]==true) {
+                    if (isset($_SESSION["login-status"]) && $_SESSION["login-status"]==true) {
 
                     ?>
 
