@@ -106,7 +106,7 @@ class UserOAuthKeyCreateKeyAllOS extends Base {
         $finger = md5($oauth["user"].':'.$oauth["key"]) ;
 
         $res = $datastore->insert('user_oauth_keys', array(
-            "user_id" => $au->username,
+            "user_id" => $au['username'],
             "oauth_user" => $oauth["user"],
             "oauth_key" => $oauth["key"],
             "key_hash" => uniqid(),
