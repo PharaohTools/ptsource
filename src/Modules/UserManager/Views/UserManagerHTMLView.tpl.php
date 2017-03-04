@@ -83,64 +83,64 @@
 					foreach ($pageVars["userdata"] as $userdetails) { ?>
                 	    <tr class="default">
                 	    <th scope="row"><?php echo $i ; ?></th>
-	           	        <td><?php echo '<b>'.$userdetails->username.'</b>'; ?></td>
-                	    <td><?php echo '<p style="">'.$userdetails->email.'</p>'; ?></td>
+	           	        <td><?php echo '<b>'.$userdetails['username'].'</b>'; ?></td>
+                	    <td><?php echo '<p style="">'.$userdetails['email'].'</p>'; ?></td>
                         <td><?php 
-							if($userdetails->role==1){
+							if($userdetails['role']==1){
 							echo '<b><p class="text-primary">Admin</p></b>'; }
-							if($userdetails->role==2){
+							if($userdetails['role']==2){
 							echo '<b><p class="text-success">Builder</p></b>'; }
-							if($userdetails->role==3){
+							if($userdetails['role']==3){
 							echo '<b><p class="text-warning">Viewer</p></b>'; } ?>
 						</td>
 						<td>
 				<?php
-                     if ($userdetails->role == 1) { ?>
+                     if ($userdetails['role'] == 1) { ?>
                            <div class="btn-group">
                             <button type="button" class="btn btn-primary  btn-xs ">Options</button>
 							<button type="button" class="btn btn-default  btn-xs dropdown-toggle hvr-grow" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button>
 							<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
 							<li class="divider"></li><li><a class="bg-info">Change role</a></li><li class="divider"></li>
-							<li><a href="<?php echo'/index.php?control=UserManager&action=changerole&username='.$userdetails->username.'&email='.$userdetails->email.'&role=2' ?>" class="hvr-grow-shadow">Builder</a></li>
-							<li><a href="<?php echo'/index.php?control=UserManager&action=changerole&username='.$userdetails->username.'&email='.$userdetails->email.'&role=3' ?>"class="hvr-grow-shadow">Viewer</a></li>
+							<li><a href="<?php echo'/index.php?control=UserManager&action=changerole&username='.$userdetails['username'].'&email='.$userdetails['email'].'&role=2' ?>" class="hvr-grow-shadow">Builder</a></li>
+							<li><a href="<?php echo'/index.php?control=UserManager&action=changerole&username='.$userdetails['username'].'&email='.$userdetails['email'].'&role=3' ?>"class="hvr-grow-shadow">Viewer</a></li>
 							<li class="divider"></li><li><a class="bg-info">User option</a></li><li class="divider"></li>
-							<li><a href="<?php echo'/index.php?control=UserManager&action=removeuser&username='.$userdetails->username.'&email='.$userdetails->email.'' ?>" class="text-info hvr-grow-shadow">Restrict user</a></li>
-							<li><a href="<?php echo'/index.php?control=UserManager&action=adduser&username='.$userdetails->username.'&email='.$userdetails->email.'' ?>" class="text-info hvr-grow-shadow">Allow user</a></li>
+							<li><a href="<?php echo'/index.php?control=UserManager&action=removeuser&username='.$userdetails['username'].'&email='.$userdetails['email'].'' ?>" class="text-info hvr-grow-shadow">Restrict user</a></li>
+							<li><a href="<?php echo'/index.php?control=UserManager&action=adduser&username='.$userdetails['username'].'&email='.$userdetails['email'].'' ?>" class="text-info hvr-grow-shadow">Allow user</a></li>
 							</ul>
 							</div><?php }
-                            if ($userdetails->role == 2) { ?>
+                     if ($userdetails['role'] == 2) { ?>
 							 <div class="btn-group">
                             <button type="button" class="btn btn-primary  btn-xs">Options</button>
 							<button type="button" class="btn btn-default  btn-xs dropdown-toggle hvr-grow" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button>
 							<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
 							<li class="divider"></li><li><a class="bg-info">Change role</a></li><li class="divider"></li>
-							<li><a href="<?php echo'/index.php?control=UserManager&action=changerole&username='.$userdetails->username.'&email='.$userdetails->email.'&role=1' ?>" class="hvr-grow-shadow">Admin</a></li>
-							<li><a href="<?php echo'/index.php?control=UserManager&action=changerole&username='.$userdetails->username.'&email='.$userdetails->email.'&role=3' ?>" class="hvr-grow-shadow">Viewer</a></li>
+							<li><a href="<?php echo'/index.php?control=UserManager&action=changerole&username='.$userdetails['username'].'&email='.$userdetails['email'].'&role=1' ?>" class="hvr-grow-shadow">Admin</a></li>
+							<li><a href="<?php echo'/index.php?control=UserManager&action=changerole&username='.$userdetails['username'].'&email='.$userdetails['email'].'&role=3' ?>" class="hvr-grow-shadow">Viewer</a></li>
 							<li class="divider"></li><li><a class="bg-info">User option</a></li><li class="divider"></li>
-							<li><a href="<?php echo'/index.php?control=UserManager&action=removeuser&username='.$userdetails->username.'&email='.$userdetails->email.'' ?>" class="text-info hvr-grow-shadow">Restrict user</a></li>
-							<li><a href="<?php echo'/index.php?control=UserManager&action=adduser&username='.$userdetails->username.'&email='.$userdetails->email.'' ?>" class="text-info hvr-grow-shadow">Allow user</a></li>
+							<li><a href="<?php echo'/index.php?control=UserManager&action=removeuser&username='.$userdetails['username'].'&email='.$userdetails['email'].'' ?>" class="text-info hvr-grow-shadow">Restrict user</a></li>
+							<li><a href="<?php echo'/index.php?control=UserManager&action=adduser&username='.$userdetails['username'].'&email='.$userdetails['email'].'' ?>" class="text-info hvr-grow-shadow">Allow user</a></li>
 							</ul>
 							</div><?php }
-		                    if ($userdetails->role == 3) { ?>
+                     if ($userdetails['role'] == 3) { ?>
                            <div class="btn-group">
                            <button type="button" class="btn btn-primary  btn-xs">Options</button>
 							<button type="button" class="btn btn-default  btn-xs dropdown-toggle hvr-grow" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button>
 							<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
 							<li class="divider"></li><li><a class="bg-info">Change role</a></li><li class="divider"></li>
-							<li><a href="<?php echo'/index.php?control=UserManager&action=changerole&username='.$userdetails->username.'&email='.$userdetails->email.'&role=1' ?>" class="hvr-grow-shadow">Admin</a></li>
-							<li><a href="<?php echo'/index.php?control=UserManager&action=changerole&username='.$userdetails->username.'&email='.$userdetails->email.'&role=2' ?>" class="hvr-grow-shadow">Builder</a></li>
+							<li><a href="<?php echo'/index.php?control=UserManager&action=changerole&username='.$userdetails['username'].'&email='.$userdetails['email'].'&role=1' ?>" class="hvr-grow-shadow">Admin</a></li>
+							<li><a href="<?php echo'/index.php?control=UserManager&action=changerole&username='.$userdetails['username'].'&email='.$userdetails['email'].'&role=2' ?>" class="hvr-grow-shadow">Builder</a></li>
 							<li class="divider"></li><li><a class="bg-info">User option</a></li><li class="divider"></li>
-							<li><a href="<?php echo'/index.php?control=UserManager&action=removeuser&username='.$userdetails->username.'&email='.$userdetails->email.'' ?>" class="text-info hvr-grow-shadow">Restrict user</a></li>
-							<li><a href="<?php echo'/index.php?control=UserManager&action=adduser&username='.$userdetails->username.'&email='.$userdetails->email.'' ?>" class="text-info hvr-grow-shadow">Allow user</a></li>
+							<li><a href="<?php echo'/index.php?control=UserManager&action=removeuser&username='.$userdetails['username'].'&email='.$userdetails['email'].'' ?>" class="text-info hvr-grow-shadow">Restrict user</a></li>
+							<li><a href="<?php echo'/index.php?control=UserManager&action=adduser&username='.$userdetails['username'].'&email='.$userdetails['email'].'' ?>" class="text-info hvr-grow-shadow">Allow user</a></li>
 							</ul>
 							</div><?php } ?>
         		            </td>
         		            <td>
-        		            <?php if($userdetails->restrict == 0) { 
-								echo '<b><p class="text-success">Active</p></b>'; }
-								else{
-								echo '<b><p class="text-danger">Restricted</p></b>';}
-								?>
+                    <?php if($userdetails['restrict'] == 0) {
+                        echo '<b><p class="text-success">Active</p></b>'; }
+                        else{
+                        echo '<b><p class="text-danger">Restricted</p></b>';}
+                        ?>
         		            </td> 
                             </tr>
 							<?php 
