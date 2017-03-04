@@ -37,9 +37,9 @@ exit (0);
 //
 ////        $uskf = new \Model\UserSSHKey();
 ////        $usk = $uskf->getModel(array()) ;
-////        $signupF = new \Model\Signup();
-////        $signup = $signupF->getModel(array()) ;
-////        $users = $signup->getUsersData() ;
+////        $userAccountF = new \Model\UserAccount();
+////        $userAccount = $userAccountF->getModel(array()) ;
+////        $users = $userAccount->getUsersData() ;
 //
 //
 //        $dbf = new \Model\Datastore();
@@ -85,12 +85,12 @@ function findUserKeys($username, $hash) {
     if ($username === 'ptgit') {
         $uskf = new \Model\UserSSHKey();
         $usk = $uskf->getModel(array()) ;
-        $signupF = new \Model\Signup();
-        $signup = $signupF->getModel(array()) ;
-        $users = $signup->getUsersData() ;
+        $userAccountF = new \Model\UserAccount();
+        $userAccount = $userAccountF->getModel(array()) ;
+        $users = $userAccount->getUsersData() ;
         $new_key = array() ;
         foreach ($users as $user) {
-            $res = $usk->getAllKeyDetails($user->username) ;
+            $res = $usk->getAllKeyDetails($user['username']) ;
             foreach ($res as $user_key) {
 //                $strip_key = stripKey($user_key["fingerprint"]) ;
 //                $strip_key_hash = "" ;
@@ -98,9 +98,9 @@ function findUserKeys($username, $hash) {
                 file_put_contents('/tmp/keyfind', "\nvalue - ".$user_key["fingerprint"]."\n", FILE_APPEND) ;
                 file_put_contents('/tmp/keyfind', "\nvalue - ".$hash."\n\n\n\n", FILE_APPEND) ;
                 if ($user_key["fingerprint"] === $hash) {
-                    file_put_contents('/tmp/keyfind', "\nFound Match".$user->username."\n\n", FILE_APPEND) ;
+                    file_put_contents('/tmp/keyfind', "\nFound Match".$user['username']."\n\n", FILE_APPEND) ;
                     $new_key['key_data'] = $user_key['key_data'] ;
-                    $new_key["username"] = $user->username ;
+                    $new_key["username"] = $user['username'] ;
                     return $new_key ;
                 }
             }
