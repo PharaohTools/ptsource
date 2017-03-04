@@ -21,27 +21,13 @@ class UserProfileGetUserAllOS extends Base {
 
     public function getUser() {
         $username = $this->params["username"] ;
-        $allusers = $this->getAllUserDetails() ;
-        foreach ($allusers as $oneuser) {
-            if ($oneuser->username == $username) {
-
-                $userMod = new \StdClass() ;
-                $userMod->username = $oneuser->username ;
-                $userMod->email = $oneuser->email ;
-
-                return $userMod ; } }
-        return false ;
-    }
-
-    private function getAllUserDetails() {
-        $signupFactory = new \Model\Signup();
-        $signup = $signupFactory->getModel($this->params);
-        $me = $signup->getLoggedInUserData() ;
-        $rid = $signup->getUserRole($me->email);
-        if ($rid == 1) {
-            $au =$signup->getUsersData();
-            return $au; }
-        return array() ;
+        $uaf = new \Model\UserAccount() ;
+        $ua = $uaf->getModel($this->params) ;
+        $user = $ua->getUserDataByUsername($username);
+        $userMod = array() ;
+        $userMod['username'] = $user['username'] ;
+        $userMod['email'] = $user['email'] ;
+        return $userMod ;
     }
 
 }
