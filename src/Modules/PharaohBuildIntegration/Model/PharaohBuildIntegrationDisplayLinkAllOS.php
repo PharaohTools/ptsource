@@ -39,7 +39,9 @@ class PharaohBuildIntegrationDisplayLinkAllOS extends Base {
     }
 
     public function getLink() {
-        $ff = array("link" =>$this->repositoryFeatureValues["build_job_url"]);
+	    $bju = (isset($this->repositoryFeatureValues["build_job_url"])) ?
+            $this->repositoryFeatureValues["build_job_url"] : "" ;
+        $ff = array("link" => $bju);
         return $ff ;
     }
 
