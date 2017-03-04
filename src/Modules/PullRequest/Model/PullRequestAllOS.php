@@ -37,9 +37,9 @@ class PullRequestAllOS extends Base {
         $pull_request = $this->getPullRequest();
         $gsf = new \Model\GitServer();
         $gs = $gsf->getModel($this->params) ;
-        if ( ($pull_request['requestor'] == $user->username) ||
-             ($user->role == 1)  ||
-             ($gs->authUserToWrite($user->username, $this->params["item"]))) {
+        if ( ($pull_request['requestor'] == $user['username']) ||
+             ($user['role'] == 1)  ||
+             ($gs->authUserToWrite($user['username'], $this->params["item"]))) {
             // if user is the requestor they can close it
             // if user is an admin they can close it
             $can_update = true ;
@@ -51,10 +51,10 @@ class PullRequestAllOS extends Base {
                 $pull_request['status'] = $this->params["update_status"] ;
                 $pull_request['last_changed'] = time() ;
                 if ($this->params["update_status"] == 'rejected') {
-                    $pull_request['rejected_by'] = $user->username ;
+                    $pull_request['rejected_by'] = $user['username'] ;
                 }
                 if ($this->params["update_status"] == 'accepted') {
-                    $pull_request['accepted_by'] = $user->username ;
+                    $pull_request['accepted_by'] = $user['username'] ;
                 }
             }
             $clause = array(
@@ -90,7 +90,7 @@ class PullRequestAllOS extends Base {
             $user = $this->getLoggedInUser(); }
         if ($user === false) {
             return false ; }
-        return $user->role ;
+        return $user['role'] ;
     }
 
     protected function getLibraries() {
