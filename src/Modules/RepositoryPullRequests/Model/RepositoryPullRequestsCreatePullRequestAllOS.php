@@ -57,7 +57,7 @@ class RepositoryPullRequestsCreatePullRequestAllOS extends Base {
         $res = $datastore->insert('pull_requests', array(
             "title" => $this->params["new_pull_request_title"],
             'repo_pr_id' => $this->params["repository_slug"],
-            'requestor' => $au->username,
+            'requestor' => $au['username'],
             'created_on' => time(),
             'last_changed' => time(),
             'source_branch' => $this->params["source_branch"],
