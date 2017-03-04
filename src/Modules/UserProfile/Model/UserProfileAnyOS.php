@@ -21,41 +21,40 @@ class UserProfileAnyOS extends BasePHPApp {
     public function getData() {
         $ret['user'] = $this->getUserDetails();
         $ret['allusers'] = $this->getAllUserDetails();
-        $ret['email_users_enabled'] = $this->getEnabledStatus();
         $ret['extra_fieldsets'] = $this->getExtraFieldsets();
         return $ret ;
     }
 
     public function saveData() {
-        $user = new \stdClass() ;
+        $user = array() ;
         // @todo sanitize these request vars. Use Params?
-        $user->username = $this->params['update_username'];
-        $user->email = $this->params['update_email'];
+        $user['username'] = $this->params['update_username'];
+        $user['email'] = $this->params['update_email'];
         if (isset($this->params['update_password']) &&
             ($this->params['update_password'] === $this->params['update_password_match'])) {
-            $user->password = $this->params['update_password']; }
+            $user['password'] = $this->params['update_password']; }
         if (isset($this->params['update_user_bio']) ) {
-            $user->user_bio = $this->params['update_user_bio']; }
+            $user['user_bio'] = $this->params['update_user_bio']; }
         if (isset($this->params['update_location']) ) {
-            $user->location = $this->params['update_location']; }
+            $user['location'] = $this->params['update_location']; }
         if (isset($this->params['update_website']) ) {
-            $user->website = $this->params['update_website']; }
+            $user['website'] = $this->params['update_website']; }
         if (isset($this->params['update_full_name']) ) {
-            $user->full_name = $this->params['update_full_name']; }
+            $user['full_name'] = $this->params['update_full_name']; }
         if (isset($this->params['update_show_email']) ) {
-            $user->show_email = $this->params['update_show_email']; }
+            $user['show_email'] = $this->params['update_show_email']; }
         if (isset($this->params['update_show_location']) ) {
-            $user->show_location = $this->params['update_show_location']; }
+            $user['show_location'] = $this->params['update_show_location']; }
         if (isset($this->params['update_show_website']) ) {
-            $user->show_website = $this->params['update_show_website']; }
+            $user['show_website'] = $this->params['update_show_website']; }
         $this->saveUser($user);
     }
 
     public function getUserDetails() {
-        $signupFactory = new \Model\Signup();
-        $signup = $signupFactory->getModel($this->params);
-        $oldData=$signup->getLoggedInUserData();
-        return $oldData;
+        $uaf = new \Model\UserAccount() ;
+        $ua = $uaf->getModel($this->params) ;
+        $res = $ua->getLoggedInUserData();
+        return $res;
     }
 
     public function getExtraFieldsets() {
@@ -73,39 +72,21 @@ class UserProfileAnyOS extends BasePHPApp {
         return $fieldsets ;
     }
 
-    public function getEnabledStatus() {
-        $signupFactory = new \Model\Signup();
-        $signup = $signupFactory->getModel($this->params);
-        $me = $signup->getLoggedInUserData() ;
-        $rid = $signup->getUserRole($me->email);
-        if ($rid == 1) {
-            $au =$signup->getUsersData();
-            return $au;  }
-        return false ;
-    }
-
     public function getAllUserDetails() {
-        $signupFactory = new \Model\Signup();
-        $signup = $signupFactory->getModel($this->params);
-        $me = $signup->getLoggedInUserData() ;
-        $rid = $signup->getUserRole($me->email);
+        $userAccountFactory = new \Model\UserAccount();
+        $userAccount = $userAccountFactory->getModel($this->params);
+        $me = $userAccount->getLoggedInUserData() ;
+        $rid = $userAccount->getUserRole($me['email']);
         if ($rid == 1) {
-            $au =$signup->getUsersData();
+            $au =$userAccount->getUsersData();
             return $au;  }
         return false ;
     }
 
     private function saveUser($user) {
-        $signupFactory = new \Model\Signup();
-        $signup = $signupFactory->getModel($this->params);
-        $oldData=$signup->updateUser($user);
-        return $oldData;
-    }
-
-    private function createUser($user) {
-        $signupFactory = new \Model\Signup();
-        $signup = $signupFactory->getModel($this->params);
-        $oldData=$signup->updateUser($user);
+        $userAccountFactory = new \Model\UserAccount();
+        $userAccount = $userAccountFactory->getModel($this->params);
+        $oldData = $userAccount->updateUser($user);
         return $oldData;
     }
 
