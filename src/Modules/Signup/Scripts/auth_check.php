@@ -41,10 +41,6 @@ function oauthKeyValid($username, $password) {
     $uoakFactory = new \Model\UserOAuthKey() ;
     $uoak = $uoakFactory->getModel(array(), "AuthenticateKey") ;
     $res = $uoak->authenticateOauth($username, $password, false) ;
-//    ob_start() ;
-//    var_dump('oauth results', $res) ;
-//    $out = ob_get_clean() ;
-//    error_log('authcheck' . $out) ;
     if ($res["status"] === true) {
         // don't just return true here
         return true ; }
