@@ -24,89 +24,73 @@ class UserManagerAnyOS extends BasePHPApp {
     }
 
     public function getUserDetails() {
-        $signupFactory = new \Model\Signup();
-        $signup = $signupFactory->getModel($this->params);
-        $oldData=$signup->getUsersData();
+        $userAccountFactory = new \Model\UserAccount();
+        $userAccount = $userAccountFactory->getModel($this->params);
+        $oldData = $userAccount->getUsersData();
         return $oldData;
     }
 
-    public function changeRole(){
-        $oldData=$this->getUserDetails();
-        foreach($oldData as $key => $data){
-            // @todo security use post
-            if($data->username==$_REQUEST["username"] && $data->email==$_REQUEST["email"]){
-                $data->username=$_REQUEST["username"];
-                $data->email=$_REQUEST["email"];
-                $data->role=$_REQUEST["role"];
-                $oldData[$key] = $data; } }
-        $myfile = fopen(__DIR__."/../../Signup/Data/users.txt", "w") or die("Unable to open file!");
-        fwrite($myfile, json_encode($oldData));
-        fclose($myfile);
+    public function changeRole() {
+        $uaf = new \Model\UserAccount() ;
+        $ua = $uaf->getModel($this->params) ;
+        $user = $ua->getUserDataByUsername($this->params["username"]);
+        $data['role'] = $this->params["role"] ;
+        $data['email'] = $user['email'] ;
+        $result = $ua->updateUser($data);
+        return $result ;
     }
 
-    public function checkRole(){
-        $oldData=$this->getUserDetails();
-        foreach($oldData as $data){
-            // @todo make sure the guest username is handled correctly
-            $sess_un = (isset($_SESSION["username"])) ? $_SESSION["username"] : "guest" ;
-            if($data->username==$sess_un) {
-                if($data->role=1)
-                    return TRUE; } }
+    public function checkRole() {
+        $uaf = new \Model\UserAccount() ;
+        $ua = $uaf->getModel($this->params) ;
+        $res = $ua->getLoggedInUserData();
+        if ($res === false) {
+            return false ; }
+        else {
+            return ($res['role'] == 1) ; }
     }
 
     public function getMyUserRoleId() {
-        $oldData=$this->getUserDetails();
-        foreach($oldData as $data) {
-            // @todo make sure the guest username is handled correctly
-            $sess_un = (isset($_SESSION["username"])) ? $_SESSION["username"] : "guest" ;
-            if($data->username==$sess_un) {
-                return $data->role; } }
-        return false ;
+        $uaf = new \Model\UserAccount() ;
+        $ua = $uaf->getModel($this->params) ;
+        $res = $ua->getLoggedInUserData();
+        if ($res === false) {
+            return false ; }
+        else {
+            return $res['role'] ; }
     }
 
     public function getMyUserSlug() {
-        $oldData=$this->getUserDetails();
-        foreach($oldData as $data) {
-            // @todo make sure the guest username is handled correctly
-            $sess_un = (isset($_SESSION["username"])) ? $_SESSION["username"] : "guest" ;
-            if($data->username==$sess_un) {
-                return $sess_un; } }
-        return false ;
+        $uaf = new \Model\UserAccount() ;
+        $ua = $uaf->getModel($this->params) ;
+        $res = $ua->getLoggedInUserData();
+        if ($res === false) {
+            return false ; }
+        else {
+            return $res['username'] ; }
     }
 
     public function getRestrictionStatus($oneUser = null) {
         if (is_null($oneUser)) {
             $sess_un = (isset($_SESSION["username"])) ? $_SESSION["username"] : "guest" ;
             $oneUser = $sess_un ; }
-        $oldData = $this->getUserDetails();
-        foreach($oldData as $data) {
-            if ($data->username == $oneUser) {
-                if (isset($data->restrict) && $data->restrict == 1) {
-                    return true; } } }
+        $uaf = new \Model\UserAccount() ;
+        $ua = $uaf->getModel($this->params) ;
+        $user = $ua->getUserDataByUsername($oneUser);
+        if (isset($user['restrict']) && $user['restrict'] == 1) {
+            return true; }
         return false ;
     }
 
     public function restrictUser(){
-        $oldData=$this->getUserDetails();
-        foreach($oldData as $key => $data){
-            if ($data->username==$_REQUEST["username"] && $data->email==$_REQUEST["email"]){
-                $data->restrict=1;
-                $oldData[$key] = $data; } }
-        $myfile = fopen(__DIR__."/../../Signup/Data/users.txt", "w") or die("Unable to open file!");
-        fwrite($myfile, json_encode($oldData));
-        fclose($myfile);
+        // @TODO check that an admin is doing this
+        $uaf = new \Model\UserAccount() ;
+        $ua = $uaf->getModel($this->params) ;
+        $user = $ua->getUserDataByUsername($this->params["username"]);
+        $data['restrict'] = 1 ;
+        $data['email'] = $user['email'] ;
+        $result = $ua->updateUser($data);
+        return $result ;
     }
 
-    public function addUser(){
-        $oldData=$this->getUserDetails();
-        foreach($oldData as $key => $data){
-            if($data->username==$_REQUEST["username"] && $data->email==$_REQUEST["email"]){
-                $data->restrict=0;
-                $oldData[$key] = $data;
-            }
-        }
-        $myfile = fopen(__DIR__."/../../Signup/Data/users.txt", "w") or die("Unable to open file!");
-        fwrite($myfile, json_encode($oldData));
-        fclose($myfile);
-    }
 }
