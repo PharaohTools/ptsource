@@ -97,7 +97,7 @@ class PullRequestCommentsAllOS extends Base {
             "title" => 'title',
             'pr_id' => $this->params["pr_id"],
             'repo_id' => $this->params["repository_slug"],
-            'requestor' => $au->username,
+            'requestor' => $au['username'],
             'created_on' => time(),
             'last_changed' => time(),
             'data' => $this->params["new_pull_request_comment"],
