@@ -34,7 +34,7 @@ class RepositoryPullRequestsAllOS extends Base {
             $signupFactory = new \Model\Signup();
             $signup = $signupFactory->getModel($this->params);
             $me = $signup->getLoggedInUserData() ;
-            $uname = $me->username;
+            $uname = $me['username'];
         }
 
         $datastoreFactory = new \Model\Datastore() ;
