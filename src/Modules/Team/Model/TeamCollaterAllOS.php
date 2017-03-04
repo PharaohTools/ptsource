@@ -50,10 +50,10 @@ class TeamCollaterAllOS extends Base {
             $signupFactory = new \Model\Signup() ;
             $signup = $signupFactory->getModel($this->params);
             $user = $signup->getLoggedInUserData();
-            if ($user->role == 1) { return true ; }
-            if ($team["team_owner"] == $user->username) { return true ; }
-            if (strpos($team["team_members"], $user->username.',') !== false) { return true ; }
-            if (strpos($team["team_members"], ','.$user->username) !== false) { return true ; }
+            if ($user['role'] == 1) { return true ; }
+            if ($team["team_owner"] == $user['username']) { return true ; }
+            if (strpos($team["team_members"], $user['username'].',') !== false) { return true ; }
+            if (strpos($team["team_members"], ','.$user['username']) !== false) { return true ; }
             return false ; }
         return true ;
     }
