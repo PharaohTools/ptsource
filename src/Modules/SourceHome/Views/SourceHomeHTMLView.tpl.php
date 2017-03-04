@@ -104,7 +104,10 @@
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <div class="huge  hvr-grow-rotate">
-                                            <?php echo $pageVars['data']['my_owned_repositories']; ?>
+                                            <?php
+                                            $mor = (isset($pageVars['data']['my_owned_repositories'])) ?
+                                                $pageVars['data']['my_owned_repositories'] : "" ;
+                                            echo $pageVars['data']['my_owned_repositories']; ?>
                                         </div>
                                         <div>Your Repositories</div>
                                     </div>
@@ -127,7 +130,13 @@
                                         <i class="fa fa-times-circle fa-4x hvr-buzz-out"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge  hvr-grow-rotate"><?php echo $pageVars['data']['my_member_repositories']; ?></div>
+                                        <div class="huge  hvr-grow-rotate">
+                                            <?php
+                                            $mor = (isset($pageVars['data']['my_member_repositories'])) ?
+                                                $pageVars['data']['my_member_repositories'] : "" ;
+                                            echo $pageVars['data']['my_member_repositories'];
+                                            ?>
+                                        </div>
                                         <div>Broken</div>
                                     </div>
                                 </div>
@@ -202,12 +211,12 @@
                                     </div>
 
                                     <?php
-                                    if (isset($pageVars['data']['user']->username)) {
+                                    if (isset($pageVars['data']['user']['username'])) {
                                     ?>
 
                                     <div class="col-lg-4 col-md-6 hvr-pcreatoop">
                                         <div class="panel panel-green">
-                                            <a href="/index.php?control=RepositoryList&action=show&filters[]=user::<?php echo $pageVars['data']['user']->username ; ?>">
+                                            <a href="/index.php?control=RepositoryList&action=show&filters[]=user::<?php echo $pageVars['data']['user']['username'] ; ?>">
                                                 <div class="panel-heading">
                                                     <div class="row">
                                                         <div class="col-xs-12 huge hvr-grow-rotate text-center">
@@ -234,7 +243,12 @@
                                                 <div class="panel-heading">
                                                     <div class="row">
                                                         <div class="col-xs-12 huge hvr-grow-rotate text-center">
-                                                            Member - <?php echo $pageVars['data']['my_member_repositories']; ?>
+                                                            Member -
+                                                            <?php
+                                                            $mor = (isset($pageVars['data']['my_member_repositories'])) ?
+                                                                $pageVars['data']['my_member_repositories'] : "" ;
+                                                            echo $pageVars['data']['my_member_repositories'];
+                                                            ?>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -276,11 +290,11 @@
                                         </div>
                                     </div>
                                     <?php
-                                    if (isset($pageVars['data']['user']->username)) {
+                                    if (isset($pageVars['data']['user']['username'])) {
                                         ?>
                                         <div class="col-lg-4 col-md-6 hvr-pcreatoop">
                                             <div class="panel panel-green">
-                                                <a href="/index.php?control=TeamList&action=show&filters[]=team_creator::<?php echo $pageVars['data']['user']->username ; ?>">
+                                                <a href="/index.php?control=TeamList&action=show&filters[]=team_creator::<?php echo $pageVars['data']['user']['username'] ; ?>">
                                                     <div class="panel-heading">
                                                         <div class="row">
                                                             <div class="col-xs-12 text-center">
@@ -305,11 +319,11 @@
                                     }
                                     ?>
                                     <?php
-                                    if (isset($pageVars['data']['user']->username)) {
+                                    if (isset($pageVars['data']['user']['username'])) {
                                         ?>
                                         <div class="col-lg-4 col-md-6 hvr-pcreatoop">
                                             <div class="panel panel-yellow">
-                                                <a href="/index.php?control=TeamList&action=show&filters[]=team_members[~]::<?php echo $pageVars['data']['user']->username ; ?>">
+                                                <a href="/index.php?control=TeamList&action=show&filters[]=team_members[~]::<?php echo $pageVars['data']['user']['username'] ; ?>">
                                                     <div class="panel-heading">
                                                         <div class="row">
                                                             <div class="col-xs-12 text-center">
