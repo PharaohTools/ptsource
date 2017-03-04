@@ -2,6 +2,6 @@
 
 Namespace Model;
 
-class Signup extends BaseModelFactory {
+class UserAccount extends BaseModelFactory {
 
 }

@@ -1,6 +1,6 @@
 function subReg() {
     // alert("reg 1") ;
-    rurl = $('#base_url').val() + '/index.php?control=Signup&action=registration-submit&output-format=JSON' ;
+    rurl = $('#base_url').val() + '/index.php?control=UserAccount&action=registration-submit&output-format=JSON' ;
     console.log(rurl) ;
 
     $('#login_error_msg').html('');

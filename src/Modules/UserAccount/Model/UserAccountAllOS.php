@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class SignupAllOS extends Base {
+class UserAccountAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -14,18 +14,6 @@ class SignupAllOS extends Base {
     // Model Group
     public $modelGroup = array("Default") ;
 
-    public function getlogin() {
-        $ret["settings"] = $this->getSettings() ;
-
-        $eventRunnerFactory = new \Model\EventRunner() ;
-        $eventRunner = $eventRunnerFactory->getModel($this->params) ;
-        $ret["events"] = $eventRunner->eventRunner("getPublicLinks") ;
-        if ($ret["events"] == false) {
-         // should probably do sometihing here
-        }
-
-        return $ret ;
-    }
 
     private function getUserFileLocation() {
         return dirname(__DIR__).DS."Data".DS."users.txt" ;
@@ -84,7 +72,7 @@ class SignupAllOS extends Base {
             $url_spl = explode("&", $url_split[1]);
             if(isset($url_spl[0])){
                 $url_sp = explode("=", $url_spl[0]);
-                if(isset($url_sp[1]) && $url_sp[1] =="Signup"){
+                if(isset($url_sp[1]) && $url_sp[1] =="UserAccount"){
                     $url_s = explode("=", $url_spl[1]);
                     if(isset($url_s[1]) && ($url_s[1] =="login" || $url_s[1] =="logout" || $url_s[1] =="login-submit" || $url_s[1] =="registration" || $url_s[1] =="registration-submit")){
                         return array("status" => true); }
@@ -135,7 +123,7 @@ class SignupAllOS extends Base {
         else{
             fwrite($myfile, json_encode(array_merge($oldData, array($registrationData))));
             // @todo dont hardcode url?
-            $message = 'Hi <br /> <a href="/index.php?control=Signup&action=verify&verificationCode=verify">Click here to activate account</a>';
+            $message = 'Hi <br /> <a href="/index.php?control=UserAccount&action=verify&verificationCode=verify">Click here to activate account</a>';
             mail($_POST['email'], 'Verification mail from '.PHARAOH_APP, $message); }
         // print_r(array_merge($oldData, array($registrationData)));
         fclose($myfile);
@@ -145,7 +133,7 @@ class SignupAllOS extends Base {
 
     public function allLoginInfoDestroy() {
         session_destroy();
-        header("Location: /index.php?control=Signup&action=login");
+        header("Location: /index.php?control=UserAccount&action=login");
     }
 
     public function mailVerification() {
@@ -197,29 +185,53 @@ class SignupAllOS extends Base {
     }
 
     public function getUsersData() {
-        $myfile = fopen($this->getUserFileLocation(), "r") ;
-        if (!$myfile) {
-            echo json_encode(array(
-                "status" => false,
-                "id"=>"registration_error_msg",
-                "msg" => "Unable to read users Datastore. Contact Administrator.")); }
-        $oldData='';
-        while(!feof($myfile))
-            $oldData .= fgets($myfile);
-        fclose($myfile);
-        $oldData=json_decode($oldData);
-        return $oldData;
+
+        $signupFactory = new \Model\UserAccount();
+        $signup = $signupFactory->getModel($this->params);
+        $me = $signup->getLoggedInUserData() ;
+        $uname = $me->username;
+
+        $datastoreFactory = new \Model\Datastore() ;
+        $datastore = $datastoreFactory->getModel($this->params) ;
+
+        $loggingFactory = new \Model\Logging() ;
+        $logging = $loggingFactory->getModel($this->params) ;
+        $parsed_filters = array() ;
+//        $parsed_filters[] = array("where", "user_id", '=', $uname ) ;
+
+        if ($datastore->collectionExists('user_accounts')==false){
+            $column_defines = array(
+                'user_id' => 'INTEGER PRIMARY KEY ASC',
+                'username' => 'string',
+                'email' => 'string',
+                'password' => 'string',
+                'role' => 'string',
+                'status' => 'string',
+                'created_on' => 'string',
+                'user_bio' => 'string',
+                'location' => 'string',
+                'website' => 'string',
+                'full_name' => 'string',
+                'avatar' => 'string',
+                'show_email' => 'string',
+                'show_website' => 'string',
+                'show_location' => 'string',
+            );
+            $logging->log("Creating User Accounts Collection in Datastore", $this->getModuleName()) ;
+            $datastore->createCollection('user_accounts', $column_defines) ; }
+
+        $accounts = $datastore->findAll('user_accounts', $parsed_filters) ;
+        return $accounts ;
     }
 
     public function getLoggedInUserData() {
-        $users = $this->getUsersData() ;
         $retuser = false ;
-        foreach ($users as $user) {
-
-            if (isset($_SESSION["username"]) &&
-                $user->username === $_SESSION["username"]) {
-                $retuser = $user ;
-                break ; } }
+        if (isset($_SESSION["username"])) {
+            $datastoreFactory = new \Model\Datastore() ;
+            $datastore = $datastoreFactory->getModel($this->params) ;
+            $parsed_filters = array() ;
+            $parsed_filters[] = array("where", "user_id", '=', $_SESSION["username"] ) ;
+            $retuser = $datastore->findAll('user_accounts', $parsed_filters) ; }
         return $retuser ;
     }
 
@@ -365,6 +377,9 @@ class SignupAllOS extends Base {
                 $nray[] = $one ; } }
         //@todo change the format of saved data.
         fwrite($myfile, json_encode($nray));
+
+
+
         return true ;
     }
 
@@ -391,7 +406,7 @@ class SignupAllOS extends Base {
     public function getUserRole($email) {
         if ($this->userExist($email)) {
             $users = $this->getUsersData();
-            foreach ($users as $user) {
+            foreach (Array $users as $user) {
                 if ($user->email== $email)
                     return $user->role; } }
         return false;
@@ -404,28 +419,21 @@ class SignupAllOS extends Base {
 
     public function registrationEnabled() {
         $mod_config = \Model\AppConfig::getAppVariable("mod_config");
-        $is_enabled = (isset($mod_config["Signup"]["registration_enabled"]) &&
-            $mod_config["Signup"]["registration_enabled"]==true ) ? true : false ;
+        $is_enabled = (isset($mod_config["UserAccount"]["registration_enabled"]) &&
+            $mod_config["UserAccount"]["registration_enabled"]==true ) ? true : false ;
         return $is_enabled ;
     }
 
     public function settingEnabled($setting) {
         $mod_config = \Model\AppConfig::getAppVariable("mod_config");
-
         $providers = array("github", "fb", "li", "google") ;
-
         foreach ($providers as $provider) {
-
             if ($mod_config["OAuth"]["{$provider}_enabled"]) {
 
             }
-
         }
-
-        $github_client_id = "github_client_id";
-
-        $is_enabled = (isset($mod_config["Signup"]["registration_enabled"]) &&
-            $mod_config["Signup"]["registration_enabled"]==true ) ? true : false ;
+        $is_enabled = (isset($mod_config["UserAccount"]["registration_enabled"]) &&
+            $mod_config["UserAccount"]["registration_enabled"]==true ) ? true : false ;
         return $is_enabled ;
     }
 

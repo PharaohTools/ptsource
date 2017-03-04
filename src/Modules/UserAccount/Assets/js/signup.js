@@ -22,7 +22,7 @@ function submit_login(oauth) {
         return; }
 
     if (oauth === false) {
-        login_provide_url = $('#base_url').val() + '/index.php?control=Signup&action=login-submit' ;
+        login_provide_url = $('#base_url').val() + '/index.php?control=UserAccount&action=login-submit' ;
     }
     else {
         login_provide_url = $('#base_url').val() + '/index.php?control=OAuth&action=' + oauth +'login' ;
@@ -96,7 +96,7 @@ function submit_registration() {
 
     $.ajax({
         type: 'POST',
-        url: $('#base_url').val() + '/index.php?control=Signup&action=registration-submit',
+        url: $('#base_url').val() + '/index.php?control=UserAccount&action=registration-submit',
         data: {
             username:$('#login_username').val(),
             email:$('#login_email').val(),

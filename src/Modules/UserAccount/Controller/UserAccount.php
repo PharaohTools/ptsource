@@ -2,7 +2,7 @@
 
 Namespace Controller;
 
-class Signup extends Base {
+class UserAccount extends Base {
 
     public function execute($pageVars) {
 

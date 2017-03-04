@@ -2,31 +2,31 @@
 
 Namespace Info;
 
-class SignupInfo extends PTConfigureBase {
+class UserAccountInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "Signup and Login Functionality";
+    public $name = "UserAccount and Login Functionality";
 
     public function _construct() {
       parent::__construct();
     }
 
     public function routesAvailable() {
-        return array( "Signup" => array("login","logout","login-submit","login-status","registration","registration-submit") );
+        return array( "UserAccount" => array("login","logout","login-submit","login-status","registration","registration-submit") );
     }
 
     public function ignoredAuthenticationRoutes() {
-        return array( "Signup" => array("login","logout","login-submit","login-status","registration-submit") );
+        return array( "UserAccount" => array("login","logout","login-submit","login-status","registration-submit") );
     }
 
     public function routeAliases() {
-      return array("signup"=>"Signup");
+      return array("signup"=>"UserAccount");
     }
 
     public function configuration() {
         return array(
-            "signup_enabled"=> array("type" => "boolean", "default" => "off", "label" => "Signups Enabled?", ),
+            "signup_enabled"=> array("type" => "boolean", "default" => "off", "label" => "UserAccounts Enabled?", ),
             "registration_enabled"=> array("type" => "boolean", "default" => "off", "label" => "User Self Registration Enabled?", ),
         );
     }

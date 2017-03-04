@@ -14,7 +14,7 @@
 
                     <!--<div class="pull-right">
                     switch to
-                    <a href="http://www.pttrack.tld/index.php?control=Signup&action=registration"> OpenID log in</a>
+                    <a href="http://www.pttrack.tld/index.php?control=UserAccount&action=registration"> OpenID log in</a>
                     </div> -->
 					<hr>
 				</div>
@@ -71,9 +71,9 @@
 									<div>
 
                                         <?php
-                                            if (isset($pageVars["data"]["settings"]["Signup"]["registration_enabled"]) && $pageVars["data"]["settings"]["Signup"]["registration_enabled"]=="on") {
+                                            if (isset($pageVars["data"]["settings"]["UserAccount"]["registration_enabled"]) && $pageVars["data"]["settings"]["UserAccount"]["registration_enabled"]=="on") {
                                         ?>
-                                            <a href="/index.php?control=Signup&action=registration">  <b> Need an account ? Sign Up  </b> </a>
+                                            <a href="/index.php?control=UserAccount&action=registration">  <b> Need an account ? Sign Up  </b> </a>
                                         <?php
                                             }
                                         ?>
@@ -169,5 +169,5 @@
         </form>
     </div>
 </div>
-<link rel="stylesheet" type="text/css" href="/Assets/Modules/Signup/css/signup.css">
-<script type="text/javascript" src="/Assets/Modules/Signup/js/signup.js"></script>
+<link rel="stylesheet" type="text/css" href="/Assets/Modules/UserAccount/css/signup.css">
+<script type="text/javascript" src="/Assets/Modules/UserAccount/js/signup.js"></script>

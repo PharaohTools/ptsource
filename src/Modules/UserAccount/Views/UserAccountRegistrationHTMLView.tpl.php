@@ -1,4 +1,4 @@
-<script type="text/javascript" src="/Assets/Modules/Signup/js/registration.js"></script>
+<script type="text/javascript" src="/Assets/Modules/UserAccount/js/registration.js"></script>
 <div class="container" id="wapper">
 	<div class="row">
         <div class=" col-md-7 col-md-offset-2 ">
