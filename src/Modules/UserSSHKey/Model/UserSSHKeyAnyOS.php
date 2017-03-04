@@ -21,40 +21,17 @@ class UserSSHKeyAnyOS extends BasePHPApp {
     public function getData() {
         $ret['user'] = $this->getUserDetails();
         $ret['allusers'] = $this->getAllUserDetails();
-        $ret['email_users_enabled'] = $this->getEnabledStatus();
         $ret['public_ssh_keys'] = $this->getAllKeyDetails();
         return $ret ;
     }
 
-    public function saveData() {
-        $user = new \stdClass() ;
-        // @todo sanitize these request vars. Use Params?
-        $user->username = $this->params['update_username'];
-        $user->email = $this->params['update_email'];
-        if (isset($this->params['update_password']) &&
-            ($this->params['update_password'] == $this->params['update_password_match'])) {
-            $user->password = $this->params['update_password']; }
-        $this->saveUser($user);
-    }
-
-    public function getEnabledStatus() {
-        $signupFactory = new \Model\Signup();
-        $signup = $signupFactory->getModel($this->params);
-        $me = $signup->getLoggedInUserData() ;
-        $rid = $signup->getUserRole($me->email);
-        if ($rid == 1) {
-            $au =$signup->getUsersData();
-            return $au;  }
-        return false ;
-    }
-
     public function getAllUserDetails() {
-        $signupFactory = new \Model\Signup();
-        $signup = $signupFactory->getModel($this->params);
-        $me = $signup->getLoggedInUserData() ;
-        $rid = $signup->getUserRole($me->email);
+        $userAccountFactory = new \Model\UserAccount();
+        $userAccount = $userAccountFactory->getModel($this->params);
+        $me = $userAccount->getLoggedInUserData() ;
+        $rid = $userAccount->getUserRole($me['email']);
         if ($rid == 1) {
-            $au =$signup->getUsersData();
+            $au = $userAccount->getUsersData();
             return $au;  }
         return false ;
     }
@@ -63,10 +40,10 @@ class UserSSHKeyAnyOS extends BasePHPApp {
     public function getAllKeyDetails($uname = null) {
 
         if ($uname === null) {
-            $signupFactory = new \Model\Signup();
-            $signup = $signupFactory->getModel($this->params);
-            $me = $signup->getLoggedInUserData() ;
-            $uname = $me->username;
+            $userAccountFactory = new \Model\UserAccount();
+            $userAccount = $userAccountFactory->getModel($this->params);
+            $me = $userAccount->getLoggedInUserData() ;
+            $uname = $me['username'];
         }
 
         $datastoreFactory = new \Model\Datastore() ;
@@ -114,10 +91,10 @@ class UserSSHKeyAnyOS extends BasePHPApp {
     }
 
     public function getUserDetails() {
-        $signupFactory = new \Model\Signup();
-        $signup = $signupFactory->getModel($this->params);
-        $oldData=$signup->getLoggedInUserData();
-        return $oldData;
+        $userAccountFactory = new \Model\UserAccount();
+        $userAccount = $userAccountFactory->getModel($this->params);
+        $retuser = $userAccount->getLoggedInUserData();
+        return $retuser;
     }
 
     public function checkLoginSession() {
