@@ -108,7 +108,7 @@
                 ?>
                     
                     <?php
-                    if (isset($pageVars["data"]["user"]->username)) {
+                    if (isset($pageVars["data"]["user"]['username'])) {
 
                         $ownerOrPublic = (isset($pageVars["data"]["repository"]["project-owner"]) &&
                             strlen($pageVars["data"]["repository"]["project-owner"])>0) ?
@@ -134,7 +134,7 @@
 
                             <?php
 
-                            $git_http_url = "{$ht_string_lower}://{$pageVars["data"]["user"]->username}:{password}@{$_SERVER["SERVER_NAME"]}/git/{$ownerOrPublic}/{$pageVars["data"]["repository"]["project-slug"]} " ;
+                            $git_http_url = "{$ht_string_lower}://{$pageVars["data"]["user"]['username']}:{password}@{$_SERVER["SERVER_NAME"]}/git/{$ownerOrPublic}/{$pageVars["data"]["repository"]["project-slug"]} " ;
                             $git_ssh_url = "ssh://ptgit@{$_SERVER["SERVER_NAME"]}/git/{$ownerOrPublic}/{$pageVars["data"]["repository"]["project-slug"]} " ;
 
 
