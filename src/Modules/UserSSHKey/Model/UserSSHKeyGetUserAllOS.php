@@ -23,11 +23,11 @@ class UserSSHKeyGetUserAllOS extends Base {
         $username = $this->params["username"] ;
         $allusers = $this->getAllUserDetails() ;
         foreach ($allusers as $oneuser) {
-            if ($oneuser->username == $username) {
+            if ($oneuser['username'] == $username) {
 
                 $userMod = new \StdClass() ;
-                $userMod->username = $oneuser->username ;
-                $userMod->email = $oneuser->email ;
+                $userMod['username'] = $oneuser['username'] ;
+                $userMod['email'] = $oneuser['email'] ;
 
                 return $userMod ; } }
         return false ;
@@ -37,7 +37,7 @@ class UserSSHKeyGetUserAllOS extends Base {
         $signupFactory = new \Model\Signup();
         $signup = $signupFactory->getModel($this->params);
         $me = $signup->getLoggedInUserData() ;
-        $rid = $signup->getUserRole($me->email);
+        $rid = $signup->getUserRole($me['email']);
         if ($rid == 1) {
             $au =$signup->getUsersData();
             return $au; }

@@ -56,7 +56,7 @@ class UserSSHKeyUpdateUserAllOS extends Base {
     private function userAlreadyExists() {
         $allusers = $this->getAllUserDetails() ;
         foreach ($allusers as $oneuser) {
-            if ($oneuser->username == $this->params["create_username"]) {
+            if ($oneuser['username'] == $this->params["create_username"]) {
                 return true ; } }
         return false ;
     }
@@ -78,7 +78,7 @@ class UserSSHKeyUpdateUserAllOS extends Base {
         $signupFactory = new \Model\Signup();
         $signup = $signupFactory->getModel($this->params);
         $me = $signup->getLoggedInUserData() ;
-        $rid = $signup->getUserRole($me->email);
+        $rid = $signup->getUserRole($me['email']);
         if ($rid == 1) {
             $au =$signup->getUsersData();
             return $au; }
@@ -90,15 +90,14 @@ class UserSSHKeyUpdateUserAllOS extends Base {
         $signup = $signupFactory->getModel($this->params);
         $au =$signup->getUsersData();
         foreach ($au as $oneuser) {
-            if ($oneuser->username == $this->params["create_username"]) {
+            if ($oneuser['username'] == $this->params["create_username"]) {
                 return $oneuser ; } }
         return array() ;
     }
 
     private function updateTheUser() {
 
-        $userMod = new \StdClass() ;
-        $userMod->username = $this->params["create_username"] ;
+        $userMod['username'] = $this->params["create_username"] ;
         $userMod->password = $this->params["update_password"] ;
 
         $signupFactory = new \Model\Signup();
