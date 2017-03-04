@@ -56,7 +56,7 @@ class UserProfileCreateUserAllOS extends Base {
     private function userAlreadyExists() {
         $allusers = $this->getAllUserDetails() ;
         foreach ($allusers as $oneuser) {
-            if ($oneuser->username == $this->params["create_username"]) {
+            if ($oneuser['username'] == $this->params["create_username"]) {
                 return true ; } }
         return false ;
     }
@@ -75,27 +75,21 @@ class UserProfileCreateUserAllOS extends Base {
     }
 
     private function getAllUserDetails() {
-        $signupFactory = new \Model\Signup();
-        $signup = $signupFactory->getModel($this->params);
-        $me = $signup->getLoggedInUserData() ;
-        $rid = $signup->getUserRole($me->email);
+        $userAccountFactory = new \Model\UserAccount();
+        $userAccount = $userAccountFactory->getModel($this->params);
+        $me = $userAccount->getLoggedInUserData() ;
+        $rid = $userAccount->getUserRole($me['email']);
         if ($rid == 1) {
-            $au =$signup->getUsersData();
+            $au =$userAccount->getUsersData();
             return $au; }
         return array() ;
     }
 
     private function getOneUserDetails($username) {
-        $signupFactory = new \Model\Signup();
-        $signup = $signupFactory->getModel($this->params);
-        $au =$signup->getUsersData();
-        foreach ($au as $oneuser) {
-            if ($oneuser->username == $this->params["create_username"]) {
-                $return = new \StdClass();
-                $return->username = $oneuser->username ;
-                $return->email = $oneuser->email ;
-                return $return ; } }
-        return array() ;
+        $userAccountFactory = new \Model\UserAccount();
+        $userAccount = $userAccountFactory->getModel($this->params);
+        $au = $userAccount->getUserData($username);
+        return $au ;
     }
 
     private function makeTheUser() {
@@ -106,9 +100,9 @@ class UserProfileCreateUserAllOS extends Base {
         $newUser["status"] = 1 ;
         $newUser["role"] = 1 ;
 
-        $signupFactory = new \Model\Signup();
-        $signup = $signupFactory->getModel($this->params);
-        $cu = $signup->createNewUser($newUser);
+        $userAccountFactory = new \Model\UserAccount();
+        $userAccount = $userAccountFactory->getModel($this->params);
+        $cu = $userAccount->createNewUser($newUser);
 
         if ($cu == false) {
             $return = array(
