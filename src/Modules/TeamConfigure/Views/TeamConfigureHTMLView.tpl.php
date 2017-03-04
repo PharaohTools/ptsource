@@ -178,7 +178,7 @@
                             else {
                                 if ($pageVars["route"]["action"] == "new") {
                                     ?>
-                                    <h5 id="team_owner"><?php echo $pageVars["data"]["current_user_data"]->username ; ?></h5>
+                                    <h5 id="team_owner"><?php echo $pageVars["data"]["current_user_data"]['username'] ; ?></h5>
 
                                 <?php
 
