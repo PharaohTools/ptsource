@@ -104,7 +104,7 @@ class SourceHomeAllOS extends Base {
         $my_repos = 0 ;
         foreach ($all_repos as $one_repo) {
             if (isset ($one_repo["project-owner"]) &&
-                $one_repo["project-owner"] == $user->username) {
+                $one_repo["project-owner"] == $user['username']) {
                 $my_repos ++ ; } }
         return $my_repos ;
     }
@@ -114,7 +114,7 @@ class SourceHomeAllOS extends Base {
         foreach ($all_repos as $one_repo) {
             $pm = (isset($one_repo["project-members"])) ? $one_repo["project-members"] : "" ;
             $repo_members = explode(",", $pm) ;
-            if ( in_array($user->username, $repo_members)) {
+            if ( in_array($user['username'], $repo_members)) {
                 $member_repos ++ ; } }
         return $member_repos ;
     }
@@ -123,7 +123,7 @@ class SourceHomeAllOS extends Base {
         $my_teams = 0 ;
         foreach ($all_teams as $one_team) {
             $po = (isset($one_team["project-owner"])) ? $one_team["project-owner"] : "" ;
-            if ($po == $user->username) {
+            if ($po == $user['username']) {
                 $my_teams ++ ; } }
         return $my_teams ;
     }
@@ -133,7 +133,7 @@ class SourceHomeAllOS extends Base {
         foreach ($all_teams as $one_team) {
             $pm = (isset($one_team["project-members"])) ? $one_team["project-members"] : "" ;
             $team_members = explode(",", $pm) ;
-            if ( in_array($user->username, $team_members)) {
+            if ( in_array($user['username'], $team_members)) {
                 $member_teams ++ ; } }
         return $member_teams ;
     }
