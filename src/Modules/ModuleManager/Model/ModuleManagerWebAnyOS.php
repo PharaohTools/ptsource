@@ -27,9 +27,10 @@ class ModuleManagerWebAnyOS extends BasePHPApp {
         $allInfoObjects = \Core\AutoLoader::getInfoObjects() ;
         $moduleNames = array() ;
         foreach ($allInfoObjects as $infoObject) {
-            $array_keys = array_keys($infoObject->routesAvailable()) ;
             $miniRay = array() ;
-            $miniRay["command"] = $array_keys[0] ;
+            $class_name = get_class($infoObject) ;
+            $module_is = substr($class_name, 5, -4) ;
+            $miniRay["command"] = $module_is ;
             $miniRay["name"] = $infoObject->name ;
             $miniRay["hidden"] = $infoObject->hidden ;
             $moduleNames[] = $miniRay ; }

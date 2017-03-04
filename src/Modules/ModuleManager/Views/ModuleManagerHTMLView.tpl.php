@@ -115,6 +115,8 @@
                                     foreach ($pageVars["data"]["available_modules"] as $modSlug => $one_available_module) {
                                         //echo '<div class="form-group ui-state-default ui-sortable-handle moduleEntry" id="step'.$modSlug.'">' ;
 
+                                        $module = (isset($one_available_module['module'])) ? $one_available_module['module'] : "" ;
+                                        $steptype = (isset($one_available_module['steptype'])) ? $one_available_module['steptype'] : "" ;
                                         $oddeven = ($oddeven == "Odd") ? "Even" : "Odd" ;
 
                                         echo ' <div class="col-sm-12 moduleEntry moduleEntry'.$oddeven.'" id="step'.$modSlug.'">' ;
@@ -122,8 +124,8 @@
                                         echo '   <p><strong>'.$one_available_module["name"].' </strong></p>';
                                         echo '   <p>'.$one_available_module["description"].'</p>';
                                         echo '   <p><strong>Dependencies: </strong>'.implode(", ", $one_available_module["dependencies"]).'</p>';
-                                        echo '   <input type="hidden" id="steps['.$modSlug.'][module]" name="steps['.$modSlug.'][module]" value="'.$one_available_module["module"].'" />';
-                                        echo '   <input type="hidden" id="steps['.$modSlug.'][steptype]" name="steps['.$modSlug.'][steptype]" value="'.$one_available_module["steptype"].'" />';
+                                        echo '   <input type="hidden" id="steps['.$modSlug.'][module]" name="steps['.$modSlug.'][module]" value="'.$module.'" />';
+                                        echo '   <input type="hidden" id="steps['.$modSlug.'][steptype]" name="steps['.$modSlug.'][steptype]" value="'.$steptype.'" />';
                                         echo '  </div>';
                                         echo '  <div class="col-sm-4">'  ;
                                         echo '   <div class="col-sm-12 ">' ;
@@ -231,22 +233,6 @@
                         </div>
 
                     </div>
-
-                <!--
-                <form class="form-horizontal custom-form" action="<?= $act ; ?>" method="POST">
-
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <button type="submit" class="btn btn-success">Save Configuration</button>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <input type="hidden" name="item" id="item" value="<?php echo $pageVars["data"]["pipeline"]["project-slug"] ; ?>" />
-                    </div>
-
-                </form>
-                -->
             </div>
             <hr>
                 <p class="text-center">
