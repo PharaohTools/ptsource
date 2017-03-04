@@ -34,17 +34,17 @@ class RepositoryConfigureAllOS extends Base {
 
     public function getUserNamesData() {
         $usernames =array() ;
-        $signupFactory = new \Model\Signup() ;
-        $signup = $signupFactory->getModel($this->params);
-        $users = $signup->getUsersData() ;
-        foreach ($users as $user) { $usernames[] = $user->username ; }
+        $userAccountFactory = new \Model\UserAccount() ;
+        $userAccount = $userAccountFactory->getModel($this->params);
+        $users = $userAccount->getUsersData() ;
+        foreach ($users as $user) { $usernames[] = $user['username'] ; }
         return $usernames ;
     }
 
     public function getCurrentUserData() {
-        $signupFactory = new \Model\Signup() ;
-        $signup = $signupFactory->getModel($this->params);
-        $user = $signup->getLoggedInUserData();
+        $userAccountFactory = new \Model\UserAccount() ;
+        $userAccount = $userAccountFactory->getModel($this->params);
+        $user = $userAccount->getLoggedInUserData();
         if ($user == false) { return false ; }
         return $user ;
     }
@@ -52,7 +52,7 @@ class RepositoryConfigureAllOS extends Base {
     public function isAdmin() {
         $user = $this->getCurrentUserData() ;
         if ($user == false) { return false ; }
-        if ($user->role == 1) { return true ; }
+        if ($user['role'] == 1) { return true ; }
         return false ;
     }
 
