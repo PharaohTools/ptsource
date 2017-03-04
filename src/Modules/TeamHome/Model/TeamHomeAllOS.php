@@ -35,7 +35,7 @@ class TeamHomeAllOS extends Base {
     public function getCurrentUserRole($user = null) {
         if ($user == null) { $user = $this->getLoggedInUser(); }
         if ($user == false) { return false ; }
-        return $user->role ;
+        return $user['role'] ;
     }
 
     public function deleteData() {
