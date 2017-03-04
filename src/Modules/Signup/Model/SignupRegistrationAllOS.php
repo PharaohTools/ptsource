@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class SignupAllOS extends Base {
+class SignupRegistrationAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
