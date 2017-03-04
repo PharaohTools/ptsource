@@ -57,7 +57,7 @@ class UserOAuthKeyDisableKeyAllOS extends Base {
         $signupFactory = new \Model\Signup();
         $signup = $signupFactory->getModel($this->params);
         $me = $signup->getLoggedInUserData() ;
-        $uname = $me->username;
+        $uname = $me['username'];
 
         $datastoreFactory = new \Model\Datastore() ;
         $datastore = $datastoreFactory->getModel($this->params) ;
@@ -76,7 +76,7 @@ class UserOAuthKeyDisableKeyAllOS extends Base {
         $signupFactory = new \Model\Signup();
         $signup = $signupFactory->getModel($this->params);
         $me = $signup->getLoggedInUserData() ;
-        $uname = $me->username;
+        $uname = $me['username'];
 
         $key = $this->keyExists() ;
         $new_key = $key[0] ;
