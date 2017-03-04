@@ -56,11 +56,11 @@
                         <div id="avatar">
                             <?php
 
-                            if (isset($pageVars['data']['user']->avatar) &&
-                                is_string($pageVars['data']['user']->avatar) &&
-                            (strlen($pageVars['data']['user']->avatar) > 3 )) {
+                            if (isset($pageVars['data']['user']['avatar']) &&
+                                is_string($pageVars['data']['user']['avatar']) &&
+                            (strlen($pageVars['data']['user']['avatar']) > 3 )) {
                                 ?>
-                                <img src="<?php echo $pageVars['data']['user']->avatar ; ?>" alt="Your Avatar" />
+                                <img src="<?php echo $pageVars['data']['user']['avatar'] ; ?>" alt="Your Avatar" />
                             <?php } else { ?>
                                 <h4>
                                     No Avatar Stored
@@ -71,9 +71,9 @@
                     <div class="col-sm-8">
 
                         <?php
-                        if (isset($pageVars['data']['user']->full_name)) { ?>
+                        if (isset($pageVars['data']['user']['full_name'])) { ?>
                             <h3>
-                                <?php echo $pageVars['data']['user']->full_name ; ?>
+                                <?php echo $pageVars['data']['user']['full_name'] ; ?>
                             </h3>
                         <?php } else { ?>
                             <h5>
@@ -82,10 +82,10 @@
                         <?php } ?>
 
                         <?php
-                        if (isset($pageVars['data']['user']->username)) { ?>
+                        if (isset($pageVars['data']['user']['username'])) { ?>
                             <h4>
                                 <strong>Username: </strong>
-                                <?php echo $pageVars['data']['user']->username ; ?>
+                                <?php echo $pageVars['data']['user']['username'] ; ?>
                             </h4>
                         <?php } else { ?>
                             <h5>
@@ -94,10 +94,10 @@
                         <?php } ?>
 
                         <?php
-                        if (isset($pageVars['data']['user']->created_on)) { ?>
+                        if (isset($pageVars['data']['user']['created_on'])) { ?>
                             <h4>
                                 <strong>Joined On: </strong>
-                                <?php echo date('H:i d/m/Y', $pageVars['data']['user']->created_on) ; ?>
+                                <?php echo date('H:i d/m/Y', $pageVars['data']['user']['created_on']) ; ?>
                             </h4>
                         <?php } else { ?>
                             <h5>
@@ -106,10 +106,10 @@
                         <?php } ?>
 
                         <?php
-                        if (isset($pageVars['data']['user']->user_bio)) { ?>
+                        if (isset($pageVars['data']['user']['user_bio'])) { ?>
                             <h5>
                                 <strong>Bio: </strong>
-                                <?php echo $pageVars['data']['user']->user_bio ; ?>
+                                <?php echo $pageVars['data']['user']['user_bio'] ; ?>
                             </h5>
                         <?php } else { ?>
                             <h5>
@@ -118,12 +118,12 @@
                         <?php } ?>
 
                         <?php
-                        if (isset($pageVars['data']['user']->email)) {
-                            if (isset($pageVars['data']['user']->show_email) &&
-                                $pageVars['data']['user']->show_email === 'on') { ?>
+                        if (isset($pageVars['data']['user']['email'])) {
+                            if (isset($pageVars['data']['user']['show_email']) &&
+                                $pageVars['data']['user']['show_email'] === 'on') { ?>
                                 <h5>
                                     <strong>E-Mail: </strong>
-                                    <?php echo $pageVars['data']['user']->email ; ?>
+                                    <?php echo $pageVars['data']['user']['email'] ; ?>
                                 </h5>
                             <?php } else { ?>
                                 <h5>E-Mail Hidden</h5>
@@ -135,12 +135,12 @@
                         <?php } ?>
 
                         <?php
-                        if (isset($pageVars['data']['user']->website)) {
-                            if (isset($pageVars['data']['user']->show_website) &&
-                                $pageVars['data']['user']->show_website === 'on') { ?>
+                        if (isset($pageVars['data']['user']['website'])) {
+                            if (isset($pageVars['data']['user']['show_website']) &&
+                                $pageVars['data']['user']['show_website'] === 'on') { ?>
                                 <h5>
                                     <strong>Site: </strong>
-                                    <?php echo $pageVars['data']['user']->website ; ?>
+                                    <?php echo $pageVars['data']['user']['website'] ; ?>
                                 </h5>
                             <?php } else { ?>
                                 <h5>Website Hidden</h5>
@@ -152,12 +152,12 @@
                         <?php } ?>
 
                         <?php
-                        if (isset($pageVars['data']['user']->location)) {
-                            if (isset($pageVars['data']['user']->show_location) &&
-                                $pageVars['data']['user']->show_location === 'on') { ?>
+                        if (isset($pageVars['data']['user']['location'])) {
+                            if (isset($pageVars['data']['user']['show_location']) &&
+                                $pageVars['data']['user']['show_location'] === 'on') { ?>
                                 <h5>
                                     <strong>Location: </strong>
-                                    <?php echo $pageVars['data']['user']->location ; ?>
+                                    <?php echo $pageVars['data']['user']['location'] ; ?>
                                 </h5>
                             <?php } else { ?>
                                 <h5>Location Hidden</h5>
