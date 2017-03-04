@@ -122,7 +122,7 @@ class UserSSHKeyCreateKeyAllOS extends Base {
         $hash = md5($this->stripKey($this->params["new_ssh_key"])) ;
 
         $res = $datastore->insert('user_ssh_keys', array(
-            "user_id" => $au->username,
+            "user_id" => $au['username'],
             "key_data" => $this->params["new_ssh_key"],
             "key_hash" => $hash,
             "created_on" => time(),
