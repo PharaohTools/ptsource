@@ -29,10 +29,10 @@ class RepositoryRepositoryAllOS extends Base {
             if ($hidden == true) {
                 // @todo here
                 // if logged in user is owner
-                if ($user !== false && $user->role==1) {
+                if ($user !== false && $user['role']==1) {
                     $repositories[$name] = $repo ;
                     continue ; }
-                if ($user !== false && $user->username==$repo["project-owner"]) {
+                if ($user !== false && $user['username']==$repo["project-owner"]) {
 //                    var_dump("one") ;
 //                    die() ;
                     $repositories[$name] = $repo ;
@@ -44,7 +44,7 @@ class RepositoryRepositoryAllOS extends Base {
                     continue ; }
                 // if logged in user is member return true
                 $pm = explode(",", $repo["project-members"]) ;
-                if ($user !== false && in_array($user->username, $pm)) {
+                if ($user !== false && in_array($user['username'], $pm)) {
 //                    var_dump("three") ;
 //                    die() ;
                     $repositories[$name] = $repo ;
