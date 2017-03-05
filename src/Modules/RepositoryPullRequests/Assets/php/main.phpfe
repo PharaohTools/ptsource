@@ -26,18 +26,13 @@ class RepositoryPullRequests {
         });
 
         $jQuery('.source_branch_option')->on('click', function($jqthis) use ($jQuery, $console)  {
-            $console->log("t id:", $jqthis->target->id);
-//            $id = $jqthis->target->id ;
             $branch = $jQuery('#'.$jqthis->target->id)->attr('data-source_branch');
-//            $branch = \core::$php->substr($id, 21);
             $console->log("source branch:", $branch);
             $jQuery('#new_pull_request_source_branch')->val($branch);
             $jQuery('#new_pull_request_source_branch_display')->html($branch);
         });
 
         $jQuery('.target_branch_option')->on('click', function($jqthis) use ($jQuery, $console)  {
-            $console->log("t id:", $jqthis->target->id);
-//            $id = $jqthis->target->id ;
             $branch = $jQuery('#'.$jqthis->target->id)->attr('data-target_branch');
             $console->log("target branch:", $branch);
             $jQuery('#new_pull_request_target_branch')->val($branch);
@@ -101,7 +96,6 @@ class RepositoryPullRequests {
         foreach ($non_empty_fields as $non_empty_field) {
             if ($jQuery('#'.$non_empty_field[0])->val() == '') {
                 $jQuery('#'.$non_empty_field[0].'_alert')->html('Please enter a '.$non_empty_field[1]);
-//                $jQuery('#'.$non_empty_field[0])->focus();
                 return false ; }
             else {
                 $jQuery('#'.$non_empty_field[0].'_alert')->html('');
