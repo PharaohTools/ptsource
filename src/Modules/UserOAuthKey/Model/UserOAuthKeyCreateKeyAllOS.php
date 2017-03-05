@@ -24,7 +24,7 @@ class UserOAuthKeyCreateKeyAllOS extends Base {
         if ($valid !== true) {
             return $valid ; }
         $createdKey = $this->addTheKey() ;
-        if ($createdKey !== true) {
+        if ($createdKey === false) {
             return $createdKey ; }
 
         $keyBase = new \Model\UserOAuthKeyAnyOS($this->params) ;
@@ -33,7 +33,9 @@ class UserOAuthKeyCreateKeyAllOS extends Base {
         $return = array(
             "status" => true ,
             "message" => "Key Created",
-            "public_oauth_keys" => $all_keys );
+            "public_oauth_keys" => $all_keys,
+            "new_user" => $createdKey['new_user'],
+            "new_key" => $createdKey['new_key'] );
         return $return ;
 
     }
@@ -123,7 +125,12 @@ class UserOAuthKeyCreateKeyAllOS extends Base {
                 "message" => "Unable to add this OAuth Key to your account" );
             return $return ; }
 
-        return true ;
+        $return = array(
+            "status" => true ,
+            "new_user" => $oauth["user"],
+            "new_key" => $oauth["key"]) ;
+        return $return ;
+                
     }
 
     private function createOauth() {
