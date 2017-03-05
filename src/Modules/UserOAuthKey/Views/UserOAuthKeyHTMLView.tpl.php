@@ -165,15 +165,20 @@
                                                                     $enable_hidden = '' ;
                                                                 } ?>
                                                                 <div class="fullRow">
-                                                                    <btn class="btn btn-success <?php echo $enable_hidden ; ?> enable_oauth_key" id="enable_<?php echo $public_oauth_key['key_hash'] ; ?>">
+                                                                    <btn class="btn btn-success <?php echo $enable_hidden ; ?> enable_oauth_key"
+                                                                         data-source_hash="<?php echo $public_oauth_key['key_hash'] ; ?>"
+                                                                         id="enable_<?php echo $public_oauth_key['key_hash'] ; ?>">
                                                                         Enable
                                                                     </btn>
-                                                                    <div class="button_loader hidden" id="enable_<?php echo $public_oauth_key['key_hash'] ; ?>_loading">
+                                                                    <div class="button_loader hidden"
+                                                                         id="enable_<?php echo $public_oauth_key['key_hash'] ; ?>_loading">
                                                                         <img src="/Assets/Modules/UserOAuthKey/image/loading.gif" alt="Loading Keys">
                                                                     </div>
                                                                 </div>
                                                                 <div class="fullRow">
-                                                                    <btn class="btn btn-warning <?php echo $disable_hidden ; ?> disable_oauth_key" id="disable_<?php echo $public_oauth_key['key_hash'] ; ?>">
+                                                                    <btn class="btn btn-warning <?php echo $disable_hidden ; ?> disable_oauth_key"
+                                                                         data-source_hash="<?php echo $public_oauth_key['key_hash'] ; ?>"
+                                                                         id="disable_<?php echo $public_oauth_key['key_hash'] ; ?>">
                                                                         Disable
                                                                     </btn>
                                                                     <div class="button_loader hidden" id="disable_<?php echo $public_oauth_key['key_hash'] ; ?>_loading">
@@ -182,7 +187,9 @@
                                                                 </div>
                                                             </div>
                                                             <div class="fullRow">
-                                                                <btn class="btn btn-danger delete_oauth_key" id="delete_<?php echo $public_oauth_key['key_hash'] ; ?>">
+                                                                <btn class="btn btn-danger delete_oauth_key"
+                                                                     data-source_hash="<?php echo $public_oauth_key['key_hash'] ; ?>"
+                                                                     id="delete_<?php echo $public_oauth_key['key_hash'] ; ?>">
                                                                     Delete
                                                                 </btn>
                                                                 <div class="button_loader hidden" id="delete_<?php echo $public_oauth_key['key_hash'] ; ?>_loading">
