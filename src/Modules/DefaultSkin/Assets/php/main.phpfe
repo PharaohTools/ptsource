@@ -74,7 +74,7 @@ class WindowMessage {
         return $str;
     }
 
-    public static function areYouSure($message, $yesfunction) {
+    public static function areYouSure($message, $yesfunction = null) {
 
         $htmlvar  = '<div id="overlay_are_you_sure"> ';
         $htmlvar = $htmlvar . '    <div class="overlay_inner"> ';
@@ -109,7 +109,9 @@ class WindowMessage {
             $jQuery('#overlay_are_you_sure')->fadeOut('fast') ;
         } );
         $jQuery('#are_you_sure_yes')->on('click', function() use ($jQuery, $yesfunction) {
-            $yesfunction() ;
+            if ($yesfunction !== null) {
+                $yesfunction() ;
+            }
             $jQuery('#overlay_are_you_sure')->fadeOut('fast') ;
         } );
 
