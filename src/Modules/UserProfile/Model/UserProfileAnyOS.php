@@ -61,7 +61,7 @@ class UserProfileAnyOS extends BasePHPApp {
 
         $fieldsets = array(
             array ( 'title' => "Full Name", 'slug' => "full_name", 'type' => 'text' ),
-            array ( 'title' => "avatar", 'slug' => "avatar", 'type' => 'text' ),
+            array ( 'title' => "Avatar", 'slug' => "avatar", 'type' => 'text' ),
             array ( 'title' => "User Bio", 'slug' => "user_bio", 'type' => "textarea" ),
             array ( 'title' => "Website", 'slug' => "website", 'type' => 'text' ),
             array ( 'title' => "Location", 'slug' => "location", 'type' => 'text' ),
@@ -78,7 +78,7 @@ class UserProfileAnyOS extends BasePHPApp {
         $me = $userAccount->getLoggedInUserData() ;
         $rid = $userAccount->getUserRole($me['email']);
         if ($rid == 1) {
-            $au =$userAccount->getUsersData();
+            $au = $userAccount->getUsersData();
             return $au;  }
         return false ;
     }
