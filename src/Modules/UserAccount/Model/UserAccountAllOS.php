@@ -163,7 +163,7 @@ class UserAccountAllOS extends Base {
         $datastoreFactory = new \Model\Datastore() ;
         $datastore = $datastoreFactory->getModel($this->params) ;
         $parsed_filters = array() ;
-        $parsed_filters[] = array("where", "user_id", '=', $username ) ;
+        $parsed_filters[] = array("where", "username", '=', $username ) ;
         $retuser = $datastore->findOne('user_accounts', $parsed_filters) ;
         return $retuser ;
     }
