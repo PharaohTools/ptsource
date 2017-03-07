@@ -88,7 +88,7 @@ class UserProfileCreateUserAllOS extends Base {
     private function getOneUserDetails($username) {
         $userAccountFactory = new \Model\UserAccount();
         $userAccount = $userAccountFactory->getModel($this->params);
-        $au = $userAccount->getUserData($username);
+        $au = $userAccount->getUserDataByUsername($username);
         return $au ;
     }
 
