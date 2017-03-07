@@ -43,6 +43,13 @@ class SignupAllOS extends Base {
     }
 
     public function checkLoginSession() {
+        // @TODO if user is on CLI assume a logged in admin. Is that OK?
+        $auth = new \Model\Authentication();
+        $is_web = $auth->isWebSapi() ;
+        if ($is_web == false) {
+            $res = array("status" => true);
+            return $res ;
+        }
         if ( isset($_SESSION) && is_array($_SESSION) && (count($_SESSION)==0) ) {
             $res = array("status" => false); }
         else {
