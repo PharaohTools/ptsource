@@ -95,10 +95,12 @@ class DatastoreSQLLiteAllOS extends Base {
     public function insert($table, $rowData) {
         $loggingFactory = new \Model\Logging() ;
         $logging = $loggingFactory->getModel($this->params) ;
-        $logging->log("Attempting to insert into table {$table}.", $this->getModuleName()) ;
+        $logging->log("Attempting to insert into table {$table}", $this->getModuleName()) ;
         $res = $this->database->insert($table, $rowData) ;
-        if ($res == false) {
-            $logging->log("Unable to insert into table {$table}, Error: {$this->database->error()[2]}, {$this->database->last_query()}", $this->getModuleName()) ; }
+        if ($res === false) {
+            $implode_error = implode(' ', $this->database->error()) ;
+            $logging->log("Unable to insert into table {$table}, Error: {$implode_error}, {$this->database->last_query()}", $this->getModuleName()) ;
+        }
         return $res ;    }
 
     public function delete($table, $clause) {
