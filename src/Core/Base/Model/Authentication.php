@@ -79,7 +79,7 @@ class Authentication {
     }
 
 
-    private function isWebSapi() {
+    public function isWebSapi() {
         if (!in_array(PHP_SAPI, array("cli")))  { return true ; }
         return false ;
     }
