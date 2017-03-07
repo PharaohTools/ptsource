@@ -38,7 +38,7 @@ class UserAccountAllOS extends Base {
         $parsed_filters[] = array("where", "password", '=', $this->getSaltWord($pass) ) ;
         $parsed_filters[] = array("where", "status", '=', 1 ) ;
         $retuser = $datastore->findOne('user_accounts', $parsed_filters) ;
-        if (count($retuser) > 0) {
+        if (is_array($retuser) && count($retuser) > 0) {
             $verified = true;
         }
         if (($verified == true) && ($start_session == false)) {
@@ -141,6 +141,8 @@ class UserAccountAllOS extends Base {
 
     public function getLoggedInUserData() {
         $retuser = false ;
+//        var_dump($_SESSION) ;
+//        die() ;
         if (isset($_SESSION["username"])) {
             $datastoreFactory = new \Model\Datastore() ;
             $datastore = $datastoreFactory->getModel($this->params) ;
