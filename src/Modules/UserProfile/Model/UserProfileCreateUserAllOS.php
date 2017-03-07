@@ -89,6 +89,9 @@ class UserProfileCreateUserAllOS extends Base {
         $userAccountFactory = new \Model\UserAccount();
         $userAccount = $userAccountFactory->getModel($this->params);
         $au = $userAccount->getUserDataByUsername($username);
+        if (isset($au['user_id'])) {
+            unset($au['user_id']) ;
+        }
         return $au ;
     }
 
