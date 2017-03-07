@@ -294,7 +294,7 @@ class UserAccountAllOS extends Base {
         $parsed_filters = array() ;
         $parsed_filters[] = array("where", "email", '=', $email ) ;
         $user_found = $datastore->findOne('user_accounts', $parsed_filters) ;
-        return (count($user_found) === 1) ;
+        return ($user_found === false) ? false : true ;
     }
 
     public function userNameExist($name) {
