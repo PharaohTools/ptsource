@@ -64,25 +64,15 @@ class UserProfileCreateUserAllOS extends Base {
     }
 
     private function userAlreadyExists() {
-
         $userAccountFactory = new \Model\UserAccount();
         $userAccount = $userAccountFactory->getModel($this->params);
-        $me = $userAccount->userExist() ;
-
-
-        $allusers = $this->getAllUserDetails() ;
-        foreach ($allusers as $oneuser) {
-            if ($oneuser['username'] == $this->params["create_username"]) {
-                return true ; } }
-        return false ;
+        return $userAccount->userNameExist($this->params["create_username"]) ;
     }
 
     private function emailAlreadyExists() {
-
         $userAccountFactory = new \Model\UserAccount();
         $userAccount = $userAccountFactory->getModel($this->params);
-        return $userAccount->userExist() ;
-
+        return $userAccount->userExist($this->params["create_email"]) ;
     }
 
     private function passwordInvalid() {
