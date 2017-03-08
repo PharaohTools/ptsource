@@ -44,6 +44,16 @@ class UserProfileCreateUserAllOS extends Base {
                 "status" => false ,
                 "message" => "This username already exists" );
             return $return ; }
+        if ($this->emailAlreadyExists()) {
+            $return = array(
+                "status" => false ,
+                "message" => "This email address is already in use" );
+            return $return ; }
+        if ($this->emailInvalid()) {
+            $return = array(
+                "status" => false ,
+                "message" => "This email address is invalid" );
+            return $return ; }
         $presult = $this->passwordInvalid() ;
         if ($presult !== true) {
             $return = array(
@@ -54,11 +64,25 @@ class UserProfileCreateUserAllOS extends Base {
     }
 
     private function userAlreadyExists() {
+
+        $userAccountFactory = new \Model\UserAccount();
+        $userAccount = $userAccountFactory->getModel($this->params);
+        $me = $userAccount->userExist() ;
+
+
         $allusers = $this->getAllUserDetails() ;
         foreach ($allusers as $oneuser) {
             if ($oneuser['username'] == $this->params["create_username"]) {
                 return true ; } }
         return false ;
+    }
+
+    private function emailAlreadyExists() {
+
+        $userAccountFactory = new \Model\UserAccount();
+        $userAccount = $userAccountFactory->getModel($this->params);
+        return $userAccount->userExist() ;
+
     }
 
     private function passwordInvalid() {
@@ -74,13 +98,21 @@ class UserProfileCreateUserAllOS extends Base {
         return true ;
     }
 
+    private function emailInvalid() {
+        $is_valid = filter_var($this->params["create_email"], FILTER_VALIDATE_EMAIL) ;
+        if ($is_valid === false) {
+            return false ;
+        }
+        return true ;
+    }
+
     private function getAllUserDetails() {
         $userAccountFactory = new \Model\UserAccount();
         $userAccount = $userAccountFactory->getModel($this->params);
         $me = $userAccount->getLoggedInUserData() ;
         $rid = $userAccount->getUserRole($me['email']);
         if ($rid == 1) {
-            $au =$userAccount->getUsersData();
+            $au = $userAccount->getUsersData();
             return $au; }
         return array() ;
     }
