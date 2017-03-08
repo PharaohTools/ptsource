@@ -96,17 +96,6 @@ class UserProfileCreateUserAllOS extends Base {
         return true ;
     }
 
-    private function getAllUserDetails() {
-        $userAccountFactory = new \Model\UserAccount();
-        $userAccount = $userAccountFactory->getModel($this->params);
-        $me = $userAccount->getLoggedInUserData() ;
-        $rid = $userAccount->getUserRole($me['email']);
-        if ($rid == 1) {
-            $au = $userAccount->getUsersData();
-            return $au; }
-        return array() ;
-    }
-
     private function getOneUserDetails($username) {
         $userAccountFactory = new \Model\UserAccount();
         $userAccount = $userAccountFactory->getModel($this->params);
