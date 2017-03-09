@@ -89,8 +89,8 @@ class UserProfileCreateUserAllOS extends Base {
     }
 
     private function emailInvalid() {
-        $is_valid = filter_var($this->params["create_email"], FILTER_VALIDATE_EMAIL) ;
-        if ($is_valid === false) {
+        $is_invalid = !filter_var($this->params["create_email"], FILTER_VALIDATE_EMAIL) ;
+        if ($is_invalid === true) {
             return false ;
         }
         return true ;
