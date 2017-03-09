@@ -100,43 +100,44 @@ class UserAccountAllOS extends Base {
     }
 
     public function getUsersData() {
+        $datastoreFactory = new \Model\Datastore() ;
+        $datastore = $datastoreFactory->getModel($this->params) ;
+        $parsed_filters = array() ;
+//        $parsed_filters[] = array("where", "user_id", '=', $uname ) ;
+        if ($datastore->collectionExists('user_accounts')==false){
+            $this->ensureDataCollection();
+        }
+        $accounts = $datastore->findAll('user_accounts', $parsed_filters) ;
+        return $accounts ;
+    }
 
-        $signupFactory = new \Model\UserAccount();
-        $signup = $signupFactory->getModel($this->params);
-        $me = $signup->getLoggedInUserData() ;
-        $uname = $me['username'];
+    protected function ensureDataCollection() {
 
         $datastoreFactory = new \Model\Datastore() ;
         $datastore = $datastoreFactory->getModel($this->params) ;
 
         $loggingFactory = new \Model\Logging() ;
         $logging = $loggingFactory->getModel($this->params) ;
-        $parsed_filters = array() ;
-//        $parsed_filters[] = array("where", "user_id", '=', $uname ) ;
 
-        if ($datastore->collectionExists('user_accounts')==false){
-            $column_defines = array(
-                'user_id' => 'INTEGER PRIMARY KEY ASC',
-                'username' => 'string',
-                'email' => 'string',
-                'password' => 'string',
-                'role' => 'string',
-                'status' => 'string',
-                'created_on' => 'string',
-                'user_bio' => 'string',
-                'location' => 'string',
-                'website' => 'string',
-                'full_name' => 'string',
-                'avatar' => 'string',
-                'show_email' => 'string',
-                'show_website' => 'string',
-                'show_location' => 'string',
-            );
-            $logging->log("Creating User Accounts Collection in Datastore", $this->getModuleName()) ;
-            $datastore->createCollection('user_accounts', $column_defines) ; }
-
-        $accounts = $datastore->findAll('user_accounts', $parsed_filters) ;
-        return $accounts ;
+        $column_defines = array(
+            'user_id' => 'INTEGER PRIMARY KEY ASC',
+            'username' => 'string',
+            'email' => 'string',
+            'password' => 'string',
+            'role' => 'string',
+            'status' => 'string',
+            'created_on' => 'string',
+            'user_bio' => 'string',
+            'location' => 'string',
+            'website' => 'string',
+            'full_name' => 'string',
+            'avatar' => 'string',
+            'show_email' => 'string',
+            'show_website' => 'string',
+            'show_location' => 'string',
+        );
+        $logging->log("Creating User Accounts Collection in Datastore", $this->getModuleName()) ;
+        $datastore->createCollection('user_accounts', $column_defines) ;
     }
 
     public function getLoggedInUserData() {
@@ -171,6 +172,10 @@ class UserAccountAllOS extends Base {
     }
 
     public function createNewUser($newUser) {
+        $datastoreFactory = new \Model\Datastore() ;
+        $datastore = $datastoreFactory->getModel($this->params) ;
+        if ($datastore->collectionExists('user_accounts')==false){
+            $this->ensureDataCollection(); }
         $passEncrypted = $this->getSaltWord($newUser["password"]) ;
         $newUser["password"] = $passEncrypted ;
         $newUser["created_on"] = time() ;
@@ -179,8 +184,7 @@ class UserAccountAllOS extends Base {
             $datastore = $datastoreFactory->getModel($this->params) ;
             $retuser = $datastore->insert('user_accounts', $newUser) ;
             if ($retuser === false) {
-                return false ;
-            }
+                return false ; }
             return true ; }
         else {
             return false ;
