@@ -14,22 +14,22 @@ class DatastoreSQLLiteAllOS extends Base {
     // Model Group
     public $modelGroup = array("Default") ;
     protected $database ;
+    protected $data_dir ;
 
     public function __construct($params) {
         parent::__construct($params) ;
+        $this->data_dir = PFILESDIR.PHARAOH_APP.DS.'data'.DS ;
         try {
             require_once(dirname(__DIR__).DS."Libraries".DS."Medoo".DS."medoo.php" ) ;
-            $data_dir = PFILESDIR.PHARAOH_APP.DS.'data'.DS ;
 //            var_dump($data_dir) ;
 //            die() ;
             if (!file_exists($data_dir) || !is_dir($data_dir)) {
-                mkdir ($data_dir, 0777, true);
-                touch ($data_dir.'database.db'); }
+                mkdir ($this->data_dir, 0777, true);
+                touch ($this->data_dir.'database.db'); }
             $this->database = new \medoo([
                 'database_type' => 'sqlite',
-                'database_file' => $data_dir.'database.db',
-                'charset' => 'utf8',
-                'option' => array(\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION),
+                'database_file' => $this->data_dir.'database.db',
+                'charset' => 'utf8'
             ]);}
         catch (\Exception $e) {
             die("Unable to init datastore: {$e->getMessage()}") ; }
@@ -97,13 +97,27 @@ class DatastoreSQLLiteAllOS extends Base {
         $loggingFactory = new \Model\Logging() ;
         $logging = $loggingFactory->getModel($this->params) ;
         $logging->log("Attempting to insert into table {$table}", $this->getModuleName()) ;
+
+        $this->database = new \medoo([
+            'database_type' => 'sqlite',
+            'database_file' => $this->data_dir.'database.db',
+            'charset' => 'utf8',
+            'option' => array(\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION),
+        ]);
+
         try {
             $this->database->insert($table, $rowData) ;
-            return true ;
         } catch (\Exception $e) {
             $logging->log("Unable to insert into table {$table}, Error: {$e->getMessage()}, {$this->database->last_query()}", $this->getModuleName()) ;
             return false ;
         }
+
+        $this->database = new \medoo([
+            'database_type' => 'sqlite',
+            'database_file' => $this->data_dir.'database.db',
+            'charset' => 'utf8',
+        ]);
+        return true ;
     }
 
     public function delete($table, $clause) {
