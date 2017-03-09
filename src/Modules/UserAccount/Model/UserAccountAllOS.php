@@ -178,7 +178,10 @@ class UserAccountAllOS extends Base {
             $datastoreFactory = new \Model\Datastore() ;
             $datastore = $datastoreFactory->getModel($this->params) ;
             $retuser = $datastore->insert('user_accounts', $newUser) ;
-            return $retuser ; }
+            if ($retuser === false) {
+                return false ;
+            }
+            return true ; }
         else {
             return false ;
         }
