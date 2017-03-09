@@ -91,9 +91,9 @@ class UserProfileCreateUserAllOS extends Base {
     private function emailInvalid() {
         $is_invalid = !filter_var($this->params["create_email"], FILTER_VALIDATE_EMAIL) ;
         if ($is_invalid === true) {
-            return false ;
+            return true ;
         }
-        return true ;
+        return false ;
     }
 
     private function getOneUserDetails($username) {
