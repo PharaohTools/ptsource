@@ -276,10 +276,10 @@ class GitServerAllOS extends Base {
         $hidden = (isset($thisRepo["settings"]["HiddenScope"]["enabled"]) && $thisRepo["settings"]["HiddenScope"]["enabled"]=="on") ? true : false ;
         $hidden_from_members = (isset($thisRepo["settings"]["HiddenScope"]["hidden_from_members"]) && $thisRepo["settings"]["HiddenScope"]["hidden_from_members"]=="on") ? true : false ;
 
-        $signupFactory = new \Model\Signup();
-        $signup = $signupFactory->getModel($this->params) ;
+        $uaFactory = new \Model\UserAccount();
+        $ua = $uaFactory->getModel($this->params) ;
 
-        if ($signup->userNameExist($gitRequestUser["user"]) === false) {
+        if ($ua->userNameExist($gitRequestUser["user"]) === false) {
             return false ;
         }
 
