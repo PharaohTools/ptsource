@@ -28,7 +28,8 @@ class DatastoreSQLLiteAllOS extends Base {
             $this->database = new \medoo([
                 'database_type' => 'sqlite',
                 'database_file' => $data_dir.'database.db',
-                'charset' => 'utf8'
+                'charset' => 'utf8',
+                'option' => array(\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION),
             ]);}
         catch (\Exception $e) {
             die("Unable to init datastore: {$e->getMessage()}") ; }
@@ -96,12 +97,14 @@ class DatastoreSQLLiteAllOS extends Base {
         $loggingFactory = new \Model\Logging() ;
         $logging = $loggingFactory->getModel($this->params) ;
         $logging->log("Attempting to insert into table {$table}", $this->getModuleName()) ;
-        $res = $this->database->insert($table, $rowData) ;
-        if ($res === false) {
-            $implode_error = implode(' ', $this->database->error()) ;
-            $logging->log("Unable to insert into table {$table}, Error: {$implode_error}, {$this->database->last_query()}", $this->getModuleName()) ;
+        try {
+            $this->database->insert($table, $rowData) ;
+            return true ;
+        } catch (\Exception $e) {
+            $logging->log("Unable to insert into table {$table}, Error: {$e->getMessage()}, {$this->database->last_query()}", $this->getModuleName()) ;
+            return false ;
         }
-        return $res ;    }
+    }
 
     public function delete($table, $clause) {
         $loggingFactory = new \Model\Logging() ;
