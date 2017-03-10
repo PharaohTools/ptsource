@@ -281,6 +281,16 @@ class GitServerAllOS extends Base {
 
         if ($ua->userNameExist($gitRequestUser["user"]) === false) {
             return false ;
+
+            $uoFactory = new \Model\UserOAuthKey();
+            $uo = $uoFactory->getModel($this->params) ;
+
+            $is_key = $uo->findUsernameFromKey($gitRequestUser["user"]) ;
+            if ($is_key === false) {
+                return false ;
+            } else {
+                $gitRequestUser["user"] = $is_key ;
+            }
         }
 
         if ($hidden === true) {
