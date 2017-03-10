@@ -89,4 +89,21 @@ class UserOAuthKeyAnyOS extends BasePHPApp {
         return $signup->checkLoginSession();
     }
 
+    public function findUsernameFromKey($oauth_user) {
+        $datastoreFactory = new \Model\Datastore() ;
+        $datastore = $datastoreFactory->getModel($this->params) ;
+
+        $loggingFactory = new \Model\Logging() ;
+        $logging = $loggingFactory->getModel($this->params) ;
+        $parsed_filters = array() ;
+        $parsed_filters[] = array("where", "oauth_user", '=', $oauth_user ) ;
+
+        $user = $datastore->findOne('user_oauth_keys', $parsed_filters) ;
+        if ($user === false) {
+            return false ;
+        }
+        $username = $user['username'] ;
+        return $username ;
+    }
+
 }
