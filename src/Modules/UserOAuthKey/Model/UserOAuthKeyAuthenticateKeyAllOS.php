@@ -48,6 +48,7 @@ class UserOAuthKeyAuthenticateKeyAllOS extends Base {
         $parsed_filters[] = array("where", "oauth_user", '=', $username ) ;
         $parsed_filters[] = array("where", "oauth_key", '=', $key ) ;
         $keys = $datastore->findAll('user_oauth_keys', $parsed_filters) ;
+
         $key_exists = array() ;
         if (count($keys) === 1) {
             $key_exists['status'] = true ;

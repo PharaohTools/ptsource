@@ -338,7 +338,8 @@ class GitServerAllOS extends Base {
             if (in_array($gitRequestUser["user"], $pm)) { return true ; }
             return false ;
         } else {
-            return true ; }    }
+            return true ; }
+    }
 
     protected function isWriteAction() {
         // @TODO There are multiple better ways to do this. Maybe a method parameter
