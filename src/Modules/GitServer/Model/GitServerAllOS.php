@@ -276,11 +276,16 @@ class GitServerAllOS extends Base {
         $hidden = (isset($thisRepo["settings"]["HiddenScope"]["enabled"]) && $thisRepo["settings"]["HiddenScope"]["enabled"]=="on") ? true : false ;
         $hidden_from_members = (isset($thisRepo["settings"]["HiddenScope"]["hidden_from_members"]) && $thisRepo["settings"]["HiddenScope"]["hidden_from_members"]=="on") ? true : false ;
 
+//        $uaFactory = new \Model\Signup();
+//        $signup = $uaFactory->getModel($this->params) ;
+//        if ($ua->userNameExist($gitRequestUser["user"]) === false) {
+//            return false ;
+//        }
+
         $uaFactory = new \Model\UserAccount();
         $ua = $uaFactory->getModel($this->params) ;
 
         if ($ua->userNameExist($gitRequestUser["user"]) === false) {
-            return false ;
 
             $uoFactory = new \Model\UserOAuthKey();
             $uo = $uoFactory->getModel($this->params) ;
@@ -290,6 +295,7 @@ class GitServerAllOS extends Base {
                 return false ;
             } else {
                 $gitRequestUser["user"] = $is_key ;
+                return true ;
             }
         }
 
@@ -309,6 +315,8 @@ class GitServerAllOS extends Base {
                 return true ; }
             return false ;
         }
+
+        return true ;
 
     }
 
