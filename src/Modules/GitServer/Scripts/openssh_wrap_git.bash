@@ -17,15 +17,15 @@ if [[ $SSH_ORIGINAL_COMMAND == git-upload-pack* ]] || [[ $SSH_ORIGINAL_COMMAND =
 	new_command=`sed "s,',,g" <<<"$new_command"`
 	# echo "New command: $new_command " >> /tmp/sshlog ;
 
-	repo_only=`sed "s,git-upload-pack ',,g" <<<"$SSH_ORIGINAL_COMMAND"` ;
-	# echo "repo only: $repo_only " >> /tmp/sshlog ;
-	repo_only=`sed "s,',,g" <<<"$repo_only"` ;
-	# echo "repo only: $repo_only " >> /tmp/sshlog ;
+	path_only=`sed "s,git-upload-pack ',,g" <<<"$SSH_ORIGINAL_COMMAND"` ;
+	# echo "repo only: $path_only " >> /tmp/sshlog ;
+	path_only=`sed "s,',,g" <<<"$path_only"` ;
+	# echo "repo only: $path_only " >> /tmp/sshlog ;
 
 	# echo `printenv` >> /tmp/sshlog ;
 	auth_script='/home/ptgit/ptsource/openssh_auth.php';
 	# TODO the below input is risky for original command
-    auth_result="php $auth_script $PTGIT_USER $repo_only " ;
+    auth_result="php $auth_script $PTGIT_USER $path_only " ;
     # echo "AR command: $auth_result " >> /tmp/sshlog ;
     is_ok=`$auth_result` ;
     # echo "res is: $is_ok " >> /tmp/sshlog ;
@@ -33,8 +33,9 @@ if [[ $SSH_ORIGINAL_COMMAND == git-upload-pack* ]] || [[ $SSH_ORIGINAL_COMMAND =
         # echo "res is ok" >> /tmp/sshlog ;
         bash -c "$new_command" ;
         if [[ $SSH_ORIGINAL_COMMAND == git-receive-pack* ]] ; then
-            chmod -R 775 /opt/ptsource/repositories/$repo_only
-            chown -R ptsource:ptgit /opt/ptsource/repositories/$repo_only
+            repo_only=${path_only##*/} ;
+            chmod -R 775 /opt/ptsource/repositories/$repo_only ;
+            chown -R ptsource:ptgit /opt/ptsource/repositories/$repo_only ;
         fi
 	    exit 0 ;
 	fi
