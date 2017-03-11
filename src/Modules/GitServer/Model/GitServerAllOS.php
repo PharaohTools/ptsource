@@ -40,24 +40,32 @@ class GitServerAllOS extends Base {
     }
 
     public function fixPushPerms() {
-        $command  = "chmod -R 775 /opt/ptsource/repositories/{$this->params["item"]} ;";
-        $command .= "chown -R ptsource:ptgit /opt/ptsource/repositories/{$this->params["item"]} ;";
+        $repo_name = $this->findRepoName() ;
+        $command  = SUDOPREFIX." chmod -R 775 /opt/ptsource/repositories/{$repo_name}/objects && ";
+        $command .= SUDOPREFIX." chown -R ptgit:ptsource /opt/ptsource/repositories/{$repo_name}/objects ;";
+        ob_start() ;
         $rc = $this->executeAsShell($command) ;
+        $out = ob_get_clean() ;
+        file_put_contents('/tmp/pharaoh.log', $rc.$out, FILE_APPEND) ;
         return $rc ;
     }
 
-    public function backendData() {
-
+    protected function findRepoName(){
         $pos = strpos($this->params["item"], '/') ;
         $repo_name = $this->params["item"] ;
         if ($pos !== false) {
             $repo_name = substr($this->params["item"], 0, $pos) ; }
+        return $repo_name ;
+    }
+
+    public function backendData() {
+
 
         define("DEBUG_LOG",        true);
         define("HTTP_AUTH",        false);
         define("GZIP_SUPPORT",     false);
         define("GIT_ROOT",         REPODIR.DS );
-        define("GIT_HTTP_BACKEND", "sudo -u ptgit -c '/usr/lib/git-core/git-http-backend'");
+        define("GIT_HTTP_BACKEND", "/usr/lib/git-core/git-http-backend");
         define("GIT_BIN",          "/usr/bin/git");
         define("REMOTE_USER",      "smart-http");
         define("LOG_RESPONSE",     "/tmp/response.log");
