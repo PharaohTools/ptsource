@@ -11,7 +11,7 @@ class GitServer extends Base {
       if (is_array($thisModel)) {
           return $this->failDependencies($pageVars, $this->content, $thisModel) ; }
       if ($pageVars["route"]["action"] === 'serve') {
-          $this->content["data"] = $thisModel->backendData(); }
+          $this->content["data"] = $thisModel->runGitHTTP(); }
           $this->content["route"]["extraParams"] ;
           $this->content["output-format"] = "git" ;
       return array ("type"=>"view", "view"=>"gitServer", "pageVars"=>$this->content);
