@@ -57,7 +57,7 @@ class GitServerAllOS extends Base {
         define("HTTP_AUTH",        false);
         define("GZIP_SUPPORT",     false);
         define("GIT_ROOT",         REPODIR.DS );
-        define("GIT_HTTP_BACKEND", "/usr/lib/git-core/git-http-backend");
+        define("GIT_HTTP_BACKEND", "sudo -u ptgit -c '/usr/lib/git-core/git-http-backend'");
         define("GIT_BIN",          "/usr/bin/git");
         define("REMOTE_USER",      "smart-http");
         define("LOG_RESPONSE",     "/tmp/response.log");

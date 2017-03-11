@@ -1,0 +1,71 @@
+.listImage {
+    max-width:40px;
+    max-height:40px;
+}
+
+.listImageWide {
+    max-width:50%;
+}
+
+.runningBuild {
+    background-color: #dee;
+    margin: 0 0 10px 0;
+    overflow-x: hidden;
+}
+
+.runningBuildRow {
+    background-color: #dee;
+}
+
+.runningBuild p {
+    margin: 0 0 0 0;
+}
+
+div.teamRow {
+    width: 100%;
+    display: block ;
+    float:left ;
+}
+
+div.teamRow:hover {
+    background-color: white;
+}
+
+.blCell {
+    float: left ;                                                                                                    /
+    display: inline-block ;
+    text-align: center;
+}
+
+.cellRowIndex {
+    width: 5% ;
+}
+
+.cellRowName{
+    width: 20% ;
+    text-align: left;
+}
+
+.cellRowName a {
+    font-size: 125%;
+}
+
+.cellRowFeatures {
+    width: 55% ;
+}
+
+.cellRowFeatures .team-feature {
+    max-width: 20% ;
+    float: left ;
+    display: inline-block ;
+}
+
+.cellRowFeatures .team-feature img {
+    max-width: 60px ;
+    max-height: 48px ;
+    margin: auto 2px;
+}
+
+.cellRowMore {
+    width: 20% ;
+}

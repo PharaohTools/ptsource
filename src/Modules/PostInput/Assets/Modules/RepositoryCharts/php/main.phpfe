@@ -1,0 +1,48 @@
+<?php
+
+$jq = \js_core::$jQuery ;
+$jq("#select_clone")->on("click", function() {
+    \RepositoryChartsFE::activate_select_clone() ;
+}) ;
+
+$jq("#select_push")->on("click", function() {
+    \RepositoryChartsFE::activate_select_push() ;
+}) ;
+
+$jq("#select_pull")->on("click", function() {
+    \RepositoryChartsFE::activate_select_pull() ;
+}) ;
+
+class RepositoryChartsFE {
+
+    public static function activate_select_clone() {
+        $jq = \js_core::$jQuery ;
+        $jq(".select_git_command")->removeClass('btn-success') ;
+        $jq(".select_git_command")->addClass('btn-warning') ;
+        $jq("#select_clone")->removeClass('btn-warning') ;
+        $jq("#select_clone")->addClass('btn-success') ;
+        $jq("#git_command_string")->html('git clone') ;
+        return true;
+    }
+
+    public static function activate_select_push() {
+        $jq = \js_core::$jQuery ;
+        $jq(".select_git_command")->removeClass('btn-success') ;
+        $jq(".select_git_command")->addClass('btn-warning') ;
+        $jq("#select_push")->removeClass('btn-warning') ;
+        $jq("#select_push")->addClass('btn-success') ;
+        $jq("#git_command_string")->html('git push') ;
+        return ;
+    }
+
+    public static function activate_select_pull() {
+        $jq = \js_core::$jQuery ;
+        $jq(".select_git_command")->removeClass('btn-success') ;
+        $jq(".select_git_command")->addClass('btn-warning') ;
+        $jq("#select_pull")->removeClass('btn-warning') ;
+        $jq("#select_pull")->addClass('btn-success') ;
+        $jq("#git_command_string")->html('git pull') ;
+        return ;
+    }
+
+}

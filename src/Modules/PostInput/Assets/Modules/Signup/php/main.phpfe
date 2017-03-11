@@ -1,0 +1,26 @@
+<?php
+
+//    $jQuery('input#login_username')->blur(function () use ($jQuery, $window) {
+//        $window->alert("Blurred Username") ;
+//    } ) ;
+
+//    $login_username_blur_closure = function () use ($jQuery) {
+//        validate_username($jQuery) ;
+//    };
+//    $jQuery('input#login_username')->blur($login_username_blur_closure) ;
+
+//    $login_password_blur_closure = function () use ($jQuery) {
+//
+//    };
+
+//    $jQuery('input#login_password')->blur($login_password_blur_closure) ;
+
+//    function validate_username($jQuery) {
+//        $uname = $jQuery('input#login_username')->val() ;
+//        if ($uname == "") {
+//
+//        }
+//        if ($uname == "") {
+//
+//        }
+//    }

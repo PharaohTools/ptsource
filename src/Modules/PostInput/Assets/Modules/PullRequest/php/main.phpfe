@@ -1,0 +1,133 @@
+<?php
+
+$PullRequest = new \PullRequest() ;
+$PullRequest->setPageTriggers() ;
+
+class PullRequest {
+
+    public function setPageTriggers() {
+        $jQuery = \js_core::$jQuery ;
+        $console = \js_core::$console ;
+
+        $jQuery('#create_new_pull_request_comment')->on('click', function() use ($jQuery)  {
+            $jQuery('#create_new_pull_request_comment_fields')->fadeIn();
+            $jQuery('#create_new_pull_request_comment')->fadeOut();
+        });
+
+        $jQuery('#save_new_pull_request_comment')->on('click', function() use ($jQuery, $console)  {
+            $isValid = self::validatePullRequestComment() ;
+            if ($isValid === true) {
+                return self::createNewPullRequestComment() ;
+            } else {
+                return false ;
+            }
+        });
+
+        $jQuery('#merge_request_accept')->on('click', function() use ($jQuery, $console)  {
+            $repo_name = $jQuery('#repo_name')->val() ;
+            $pr_id = $jQuery('#pr_id')->val() ;
+            $new_href = '/index.php?control=PullRequest&action=close&item='.$repo_name.'&pr_id='.$pr_id.'&update_status=accepted' ;
+            $yesFunction = function () use ($new_href) {
+                \js_core::$window->location->href = $new_href ;
+            } ;
+            $msg = 'Are you sure you want to accept this request?' ;
+            WindowMessage::areYouSure($msg, $yesFunction) ;
+        });
+
+        $jQuery('#merge_request_reject')->on('click', function() use ($jQuery, $console)  {
+            $repo_name = $jQuery('#repo_name')->val() ;
+            $pr_id = $jQuery('#pr_id')->val() ;
+            $new_href = '/index.php?control=PullRequest&action=close&item='.$repo_name.'&pr_id='.$pr_id.'&update_status=rejected' ;
+            $yesFunction = function () use ($new_href) {
+                \js_core::$window->location->href = $new_href ;
+            } ;
+            $msg = 'Are you sure you want to reject this request?' ;
+            WindowMessage::areYouSure($msg, $yesFunction) ;
+        });
+
+    }
+
+    public function createNewPullRequestComment() {
+        $jQuery = \js_core::$jQuery ;
+        \js_core::$console->log('Creating PR Comment 1') ;
+
+        $jQuery('.new_pr_comment_field')->fadeOut('fast') ;
+        $jQuery('.loading_pull_request_comments')->fadeIn('fast') ;
+
+        $rurl = 'index.php?control=PullRequest&action=add-comment&output-format=JSON' ;
+        $comment = $jQuery('#new_pull_request_comment')->val() ;
+        $repo_name = $jQuery('#repo_name')->val() ;
+        $pr_id = $jQuery('#pr_id')->val() ;
+
+        \js_core::$console->log('Creating PR Comment 2') ;
+        $new_data_string = "new_pull_request_comment=".\js_core::$window->encodeURIComponent($comment).'&' ;
+        $new_data_string = $new_data_string."pr_id=".\js_core::$window->encodeURIComponent($pr_id).'&' ;
+        $new_data_string = $new_data_string."repository_slug=".\js_core::$window->encodeURIComponent($repo_name).'&' ;
+        $new_data_string = $new_data_string."item=".\js_core::$window->encodeURIComponent($repo_name) ;
+
+        \js_core::$console->log('Creating PR Comment 3') ;
+        $data = array(
+            'type' => 'POST',
+            'url' => $rurl,
+            'dataType'=> "json",
+            'data' => $new_data_string
+        ) ;
+
+        \js_core::$console->log('Creating PR Comment 4') ;
+        $ajax_object = $jQuery->ajax($data);
+        return $ajax_object->done(
+            function ($data) use ($jQuery) {
+                $jQuery('.loading_pull_request_comments')->fadeOut('fast') ;
+                $kt = new pullRequestCommentTable() ;
+                $kt->rewriteTable($data, $jQuery) ;
+                $jQuery('.new_pr_comment_field')->fadeIn();
+                $jQuery('#new_pull_request_comment_title')->val('') ;
+                $jQuery('#new_pull_request_comment')->val('') ;
+            }
+        );
+    }
+
+
+    public function validatePullRequestComment() {
+        $jQuery = \js_core::$jQuery ;
+        $non_empty_fields = array(
+            array("new_pull_request_comment", "Pull Request Comment"),
+        ) ;
+        foreach ($non_empty_fields as $non_empty_field) {
+            if ($jQuery('#'.$non_empty_field[0])->val() == '') {
+                \WindowMessage::showMessage('Please enter a '.$non_empty_field[1], 'bad') ;
+                return false ; }
+        }
+        return true ;
+    }
+
+}
+
+
+class pullRequestCommentTable {
+
+    public function rewriteTable($data, $jQuery) {
+        $ht = '' ;
+        $i = 1 ;
+        foreach ($data->pull_request_comments as $title => $commentRay) {
+            $comment = array();
+            foreach ($commentRay as $index => $cur_val) {
+                $comment[$index] = $cur_val ; }
+            $ht = $ht . '<div class="form-group col-sm-12 comment_row"> ';
+            $ht = $ht . '  <div class="fullWidth"> ';
+            $ht = $ht . '    <div class="col-sm-6"> ';
+            $ht = $ht . '      '.$comment['requestor'] ;
+            $ht = $ht . '    </div> ';
+            $ht = $ht . '    <div class="col-sm-6"> ';
+            $ht = $ht . '       '.$comment['created_on_format'] ;
+            $ht = $ht . '    </div> ';
+            $ht = $ht . '   </div> ';
+            $ht = $ht . '   <div class="fullWidth"> ';
+            $ht = $ht . '       <p>'.$comment['data'].' </p> ';
+            $ht = $ht . '   </div> ';
+            $ht = $ht . '</div>' ;
+            $i = $i + 1;
+        }
+        $jQuery('#comments_table')->html($ht) ;
+    }
+}

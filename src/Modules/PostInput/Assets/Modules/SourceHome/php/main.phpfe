@@ -1,0 +1,11 @@
+<?php
+
+    $jQuery('button#showMoreCommits')->on('click', function () use ($jQuery) {
+        $jQuery('div.hiddenCommitRow')->fadeIn() ;
+        $jQuery('button#showMoreCommits')->hide() ;
+    } ) ;
+
+    $jQuery('button#showMoreTrackers')->on('click', function () use ($jQuery) {
+        $jQuery('div.hiddenTrackerRow')->fadeIn() ;
+        $jQuery('button#showMoreTrackers')->hide() ;
+    } ) ;

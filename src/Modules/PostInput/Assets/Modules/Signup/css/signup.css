@@ -1,0 +1,15 @@
+#login_error_msg {
+    color: #ff6312;
+    /*margin-left: 46px;*/
+    text-align: center;
+}
+
+#login_success_msg {
+    color: darkgreen;
+    /*margin-left: 46px;*/
+    text-align: center;
+}
+
+.public_links {
+    text-align: center;
+}

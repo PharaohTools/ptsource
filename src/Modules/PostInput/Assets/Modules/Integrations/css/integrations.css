@@ -1,0 +1,21 @@
+p.integrationListText { margin: 0; }
+
+.integrationList {
+    display: block;
+    list-style-type: none;
+    position: relative;
+}
+
+.integrationEntry {
+    display: block;
+    border: 1px solid #d3d3d3;
+    /*position: absolute;*/
+    margin: 0px 1.25%;
+    width: 22.5%;
+    color: #000 ;
+    float: left;
+}
+
+.integrationEntryFirst {
+    /*margin: 0 0 2% 0 !important; */
+}

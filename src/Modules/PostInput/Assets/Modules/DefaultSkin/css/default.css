@@ -1,0 +1,149 @@
+body {
+    padding-top: 72px;
+}
+
+.sidebar {
+    position: relative;
+}
+
+#page-wrapper {
+    margin-left: 0;
+}
+
+div.well h2.text-uppercase {
+    text-align: center;
+}
+
+.pharaoh-message {
+    text-align: left;
+    width: 100%;
+}
+
+.pharaoh-message:hover {
+    cursor: default;
+}
+
+#overlay_are_you_sure {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);;
+    /*filter:alpha(opacity=50);*/
+    /*-moz-opacity:0.5;*/
+    /*-khtml-opacity: 0.5;*/
+    /*opacity: 0.5;*/
+    z-index: 10000;
+}
+
+#close_button_div {
+    position: relative;
+    float: right;
+    cursor: pointer;
+    top: -20px;
+    right: 16px;
+    width: 50px ;
+}
+
+#close_button_div img{
+    width: 75%;
+}
+
+.overlay_inner {
+    position: fixed;
+    margin: 10% 30%;
+    width: 40%;
+    height: 60%;
+    background-color: #fff;
+}
+
+.overlay_content {
+    position: relative;
+    margin: 5%;
+    width: 90%;
+    height: 90%;
+    background-color: #fff;
+    color: #000000;
+    overflow-y: scroll;
+}
+
+.navbar-header{
+    width: 100%;
+}
+.navbar-left{
+    float: left;
+}
+.navbar-right{
+    float: right;
+}
+
+.panel-primary {
+    background-color: #337ab7;
+    color: #fff;
+}
+
+.panel-primary span {
+    color: #337ab7;
+}
+
+.panel-primary a,
+.panel-primary a:hover,
+.panel-primary a:focus{
+    color: #fff;
+}
+
+.panel-primary span.allJobsCalendarLink {
+    color: #337ab7;
+}
+
+h3.title_username {
+    color: white ;
+}
+
+.fullRow {
+    display: block;
+    width: 100%;
+    float: left;
+}
+
+.leftCell,
+.rightCell{
+    display: block;
+    width: 50%;
+    float: left;
+}
+
+.leftWideCell {
+    display: block;
+    width: 80%;
+    float: left;
+}
+
+.rightNarrowCell {
+    display: block;
+    width: 20%;
+    float: left;
+}
+
+.load_hidden {
+    display: none;
+}
+
+#message_overlay {
+    min-width: 100px ;
+    z-index: 1000000;
+    display: block;
+    position: fixed;
+    top: 120px;
+    left: 10px;
+    /*background-color: rgba(0,0,0,0.5); !*dim the background*!*/
+}
+
+span.message_text {
+    height: 200%;
+    font-size: 250%;
+    border: 3px solid white;
+    padding: 15px;
+}

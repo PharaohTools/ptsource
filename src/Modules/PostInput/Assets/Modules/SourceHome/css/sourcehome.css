@@ -1,0 +1,39 @@
+.loading-ajax {
+    background-image: url("/Assets/Modules/SourceHome/images/loading.gif");
+    background-size: 45%;
+    background-position: center top ;
+    background-repeat: no-repeat;
+}
+.ajax-loaded {
+    background-image: none ;
+}
+
+#submit-parent-holder {
+
+}
+
+.trackerRow,
+.commitRow {
+    margin-bottom: 7.5px;
+    display: inline-block;
+    padding: 5px 0px;
+    border: 1px solid white ;
+}
+
+.trackerRow:hover,
+.commitRow:hover {
+    background-color: #F5F5F5;
+    border: 1px solid darkgrey;
+}
+
+.hiddenCommitRow {
+    display: none ;
+}
+
+.hiddenIssueRow {
+    display: none ;
+}
+
+.trackerRow img {
+    max-width: 12.5%;
+}

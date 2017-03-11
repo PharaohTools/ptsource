@@ -1,0 +1,70 @@
+$request_headers = Array
+(
+    [User-Agent] => git/1.9.1
+    [Host] => source.pharaoh.tld
+    [Accept] => */*
+    [Accept-Encoding] => gzip
+    [Pragma] => no-cache
+)
+$env = Array
+(
+    [GIT_PROJECT_ROOT] => /opt/ptsource/repositories
+    [GIT_HTTP_EXPORT_ALL] => 1
+    [GIT_HTTP_MAX_REQUEST_BUFFER] => 1000M
+    [REMOTE_USER] => ptsource
+    [REMOTE_ADDR] => 127.0.0.1
+    [REQUEST_METHOD] => GET
+    [PATH_INFO] => /
+    [QUERY_STRING] => control=GitServer&action=serve&item=phpengine&user=git/phpengine/ptbuild/info/refs&git_query=ptbuild/info?=
+    [CONTENT_TYPE] => 
+)
+$server = Array
+(
+    [USER] => ptsource
+    [HOME] => /home/ptsource
+    [FCGI_ROLE] => RESPONDER
+    [REDIRECT_STATUS] => 200
+    [proxy-nokeepalive] => 1
+    [HTTP_USER_AGENT] => git/1.9.1
+    [HTTP_HOST] => source.pharaoh.tld
+    [HTTP_ACCEPT] => */*
+    [HTTP_ACCEPT_ENCODING] => gzip
+    [HTTP_PRAGMA] => no-cache
+    [PATH] => /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    [SERVER_SIGNATURE] => <address>Apache/2.4.7 (Ubuntu) Server at source.pharaoh.tld Port 80</address>
+
+    [SERVER_SOFTWARE] => Apache/2.4.7 (Ubuntu)
+    [SERVER_NAME] => source.pharaoh.tld
+    [SERVER_ADDR] => 127.0.0.1
+    [SERVER_PORT] => 80
+    [REMOTE_ADDR] => 127.0.0.1
+    [DOCUMENT_ROOT] => /opt/ptsource/ptsource/src/Modules/PostInput/
+    [REQUEST_SCHEME] => http
+    [CONTEXT_PREFIX] => 
+    [CONTEXT_DOCUMENT_ROOT] => /opt/ptsource/ptsource/src/Modules/PostInput/
+    [SERVER_ADMIN] => webmaster@localhost
+    [SCRIPT_FILENAME] => /opt/ptsource/ptsource/src/Modules/PostInput/index.php
+    [REMOTE_PORT] => 43592
+    [REDIRECT_QUERY_STRING] => control=GitServer&action=serve&item=phpengine&user=git/phpengine/ptbuild/info/refs&git_query=ptbuild/info?=
+    [REDIRECT_URL] => /git/phpengine/ptbuild/info/refs
+    [GATEWAY_INTERFACE] => CGI/1.1
+    [SERVER_PROTOCOL] => HTTP/1.1
+    [REQUEST_METHOD] => GET
+    [QUERY_STRING] => control=GitServer&action=serve&item=phpengine&user=git/phpengine/ptbuild/info/refs&git_query=ptbuild/info?=
+    [REQUEST_URI] => /git/phpengine/ptbuild/info/refs?service=git-upload-pack
+    [SCRIPT_NAME] => /index.php
+    [PHP_SELF] => /index.php
+    [REQUEST_TIME_FLOAT] => 1470511078.2898
+    [REQUEST_TIME] => 1470511078
+)
+$php_input = 
+
+$response = Array
+(
+    [0] => Status: 404 Not Found
+Expires: Fri, 01 Jan 1980 00:00:00 GMT
+Pragma: no-cache
+Cache-Control: no-cache, max-age=0, must-revalidate
+)
+--------------------------------------------------------------------------------
+

@@ -1,0 +1,61 @@
+.pullRequestRow {
+    width: 100%;
+    display: block ;
+    float:left ;
+}
+
+.blCell {
+    float: left ;
+    display: inline-block ;
+    text-align: center;
+}
+
+.cellRowIndex {
+    width: 5% ;
+}
+
+.cellRowTitle {
+    width: 100%;
+    text-align: left;
+    float: left;
+    display: block;
+}
+
+.cellRowAuthor {
+    width: 100%;
+    text-align: left;
+    float: left;
+    display: block;
+}
+
+.cellRowDate {
+    width: 100%;
+    text-align: left;
+}
+
+.cellRowHash {
+    width: 12.5% ;
+    text-align: left;
+}
+
+#create_new_pull_request_fields {
+    display: none ;
+}
+
+/*.create_new_pull_request_field {*/
+    /*display: none ;*/
+/*}*/
+
+.loading_pull_requests {
+    display: none;
+}
+
+#allPullRequestRows h3,
+#allPullRequestRows h4 {
+    margin: 0 auto ;
+    padding: 0 auto ;
+}
+
+.findButton {
+    height: 90% ;
+}

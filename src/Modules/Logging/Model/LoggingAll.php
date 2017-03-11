@@ -39,16 +39,18 @@ class LoggingAll extends BaseLinuxApp {
     }
 
     public function log($message = null, $source = null, $options=array() ) {
+        $options["php-log"] = true ;
         if (isset($this->logMessage)) { $message = $this->logMessage ; }
         $stx = (strlen($source)>0) ? "[$source] " : "" ;
         $fullMessage = "[Pharaoh Logging] " . $stx . $message ;
         if (!isset($options["display-log"]) && !isset($this->params["display-log"])){
-        //    file_put_contents("php://stderr", $fullMessage );
+            //    file_put_contents("php://stderr", $fullMessage );
         }
-        else if (isset($options["display-log"]) && $options["display-log"] == false ||
-            isset($this->params["display-log"]) && $this->params["display-log"] == false ) {
+        else if ((isset($options["display-log"]) && $options["display-log"] == false) ||
+            (isset($this->params["display-log"]) && $this->params["display-log"] == false )) {
             file_put_contents("php://stderr", $fullMessage."\n" ); }
         if ((isset($options["php-log"]) && $options["php-log"] == true) || (isset($this->params["php-log"]) && $this->params["php-log"] == true) ) {
+            file_put_contents('/tmp/pharaoh.log', $fullMessage."\n", FILE_APPEND) ;
             error_log($fullMessage) ; }
         if ((isset($options["echo-log"]) && $options["echo-log"] == true) || (isset($this->params["echo-log"]) && $this->params["echo-log"] == true) ) {
             if ($this->isWebSapi()) {
@@ -56,13 +58,9 @@ class LoggingAll extends BaseLinuxApp {
                 $logs = $registry_values::getValue("logs") ;
                 $logs[] = $fullMessage ;
                 $registry_values::setValue("logs", $logs) ;
-
             } else {
                 echo $fullMessage."\n" ;
-
             }}
-
-
     }
 
 

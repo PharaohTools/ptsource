@@ -1,0 +1,35 @@
+<?php
+
+$jq = \js_core::$jQuery ;
+$jq("#select_http")->on("click", function() {
+    \RepositoryHomeFE::activate_select_http() ;
+}) ;
+$jq("#select_ssh")->on("click", function() {
+    \RepositoryHomeFE::activate_select_ssh() ;
+}) ;
+
+class RepositoryHomeFE {
+
+    public static function activate_select_http() {
+        $jq = \js_core::$jQuery ;
+        $jq(".select_git_command")->removeClass('btn-success') ;
+        $jq(".select_git_command")->addClass('btn-warning') ;
+        $jq("#select_http")->removeClass('btn-warning') ;
+        $jq("#select_http")->addClass('btn-success') ;
+        $http_string = $jq("#git_http_url")->val() ;
+        $jq("#git_url_string")->html($http_string) ;
+        return true;
+    }
+
+    public static function activate_select_ssh() {
+        $jq = \js_core::$jQuery ;
+        $jq(".select_git_command")->removeClass('btn-success') ;
+        $jq(".select_git_command")->addClass('btn-warning') ;
+        $jq("#select_ssh")->removeClass('btn-warning') ;
+        $jq("#select_ssh")->addClass('btn-success') ;
+        $ssh_string = $jq("#git_ssh_url")->val() ;
+        $jq("#git_url_string")->html($ssh_string) ;
+        return true;
+    }
+
+}
