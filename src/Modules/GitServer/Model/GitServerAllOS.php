@@ -33,10 +33,17 @@ class GitServerAllOS extends Base {
         return $gs->ensureSSHServerStatus() ;
     }
 
-    public function backendData2() {
-        $gsf = new \Model\GitServer();
-        $gs = $gsf->getModel($this->params, "ServerFunctions") ;
-        $gs->serveGit() ;
+    public function runGitHTTP() {
+        $out = $this->backendData() ;
+        $this->fixPushPerms() ;
+        return $out ;
+    }
+
+    public function fixPushPerms() {
+        $command  = "chmod -R 775 /opt/ptsource/repositories/{$this->params["item"]} ;";
+        $command .= "chown -R ptsource:ptgit /opt/ptsource/repositories/{$this->params["item"]} ;";
+        $rc = $this->executeAsShell($command) ;
+        return $rc ;
     }
 
     public function backendData() {
