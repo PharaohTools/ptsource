@@ -32,8 +32,10 @@ if [[ $SSH_ORIGINAL_COMMAND == git-upload-pack* ]] || [[ $SSH_ORIGINAL_COMMAND =
 	if [ "$is_ok" == "OK" ] ; then
         # echo "res is ok" >> /tmp/sshlog ;
         bash -c "$new_command" ;
-        chmod -R 775 /opt/ptsource/repositories/$repo_only
-        chown -R ptsource:ptgit /opt/ptsource/repositories/$repo_only
+        if [[ $SSH_ORIGINAL_COMMAND == git-receive-pack* ]] ; then
+            chmod -R 775 /opt/ptsource/repositories/$repo_only
+            chown -R ptsource:ptgit /opt/ptsource/repositories/$repo_only
+        fi
 	    exit 0 ;
 	fi
     exit 1 ;
