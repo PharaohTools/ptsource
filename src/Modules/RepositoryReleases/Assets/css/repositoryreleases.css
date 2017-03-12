@@ -1,0 +1,58 @@
+.historyImage {
+    max-width:40px;
+    max-height:40px;
+}
+
+.historyImageWide {
+    max-width:50%;
+}
+
+.runningBuild {
+    background-color: #dee;
+    margin: 0 0 10px 0;
+    overflow-x: hidden;
+}
+
+.runningBuildRow {
+    background-color: #dee;
+}
+
+.runningBuild p {
+    margin: 0 0 0 0;
+}
+
+.commitRow {
+    width: 100%;
+    display: block ;
+    float:left ;
+}
+
+.blCell {
+    float: left ;
+    display: inline-block ;
+    text-align: center;
+}
+
+.cellRowIndex {
+    width: 5% ;
+}
+
+.cellRowMessage{
+    width: 30% ;
+    text-align: left;
+}
+
+.cellRowAuthor{
+    width: 25% ;
+    text-align: left;
+}
+
+.cellRowDate{
+    width: 27.5% ;
+    text-align: left;
+}
+
+.cellRowHash{
+    width: 12.5% ;
+    text-align: left;
+}
