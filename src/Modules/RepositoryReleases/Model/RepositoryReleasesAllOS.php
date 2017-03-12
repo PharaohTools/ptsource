@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class RepositoryHistoryAllOS extends Base {
+class RepositoryReleasesAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -15,9 +15,9 @@ class RepositoryHistoryAllOS extends Base {
     public $modelGroup = array("Default") ;
 
     public function getData() {
-        $ret = $this->getCommitHistory();
+        $ret = $this->getReleaseHistory();
         $ret["repository"] = $this->getRepository();
-        $ret["branches"] = $this->getAvailableBranches();
+        $ret["tags"] = $this->getAvailableTags();
 //        var_dump($ret["commits"]) ;
         return $ret ;
     }
@@ -29,7 +29,7 @@ class RepositoryHistoryAllOS extends Base {
         return $r ;
     }
 
-    public function getCommitHistory() {
+    public function getReleaseHistory() {
         $repositoryFactory = new \Model\Repository() ;
         $repository = $repositoryFactory->getModel($this->params, "RepositoryCommits");
         return $repository->getCommits();
@@ -43,6 +43,16 @@ class RepositoryHistoryAllOS extends Base {
         $all_branches_string = str_replace(' ', "", $all_branches_string) ;
         $all_branches_ray = explode("\n", $all_branches_string) ;
         return $all_branches_ray ;
+    }
+
+    public function getAvailableTags() {
+        $filebrowserDir = $this->repoRootDir() ;
+        $command = "cd {$filebrowserDir} && git tag" ;
+        $all_tags_string = $this->executeAndLoad($command) ;
+        $all_tags_string = str_replace('* ', "", $all_tags_string) ;
+        $all_tags_string = str_replace(' ', "", $all_tags_string) ;
+        $all_tags_ray = explode("\n", $all_tags_string) ;
+        return $all_tags_ray ;
     }
 
     private function repoRootDir() {

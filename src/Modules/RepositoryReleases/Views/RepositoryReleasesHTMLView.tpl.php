@@ -63,8 +63,18 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/index.php?control=RepositoryHistory&action=show&item=<?php echo $pageVars['data']["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
-                        <i class="fa fa-history fa-fw hvr-bounce-in"></i> History <span class="badge"><?php echo $pageVars['data']["history_count"] ; ?></span>
+                    <a href="index.php?control=RepositoryHistory&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>"class="hvr-bounce-in">
+                        <i class="fa fa-history fa-fw hvr-bounce-in"></i> History <span class="badge"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="index.php?control=RepositoryPullRequests&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>"class="hvr-bounce-in">
+                        <i class="fa fa-code fa-fw hvr-bounce-in"></i> Pull Requests <span class="badge"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="index.php?control=RepositoryReleases&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>"class="hvr-bounce-in">
+                        <i class="fa fa-code fa-fw hvr-bounce-in"></i> Releases <span class="badge"></span>
                     </a>
                 </li>
                 <li>
@@ -81,7 +91,7 @@
 		<div class="well well-lg">
 			<div class="row clearfix no-margin">
 
-                <h3 class="text-uppercase text-light">Commit History: <strong><?php echo $pageVars['data']["repository"]["project-name"] ; ?></strong></h3>
+                <h3 class="text-uppercase text-light">Release History: <strong><?php echo $pageVars['data']["repository"]["project-name"] ; ?></strong></h3>
 
                 <div class="form-group col-sm-12">
                     <div class="form-group col-sm-3 thin_padding">
@@ -91,7 +101,7 @@
                         </button>
                         <ul class="dropdown-menu" id="assigneelist" role="menu" aria-labelledby="dropdownMenu1">
                             <?php
-                            foreach($pageVars["data"]["branches"] as $branch_name) {
+                            foreach($pageVars["data"]["tags"] as $branch_name) {
                                 ?>
                                 <li role="presentation">
                                     <a role="menuitem" tabindex="-1" href="<?php echo $_SERVER['REQUEST_URI'] ; ?>&identifier=<?php echo $branch_name ; ?>">
@@ -180,7 +190,7 @@
             </p>
         </div>
     </div><!-- /.container -->
-<link rel="stylesheet" type="text/css" href="/Assets/Modules/RepositoryHistory/css/repositoryhistory.css">
-<script type="text/javascript" src="/Assets/Modules/RepositoryHistory/js/repositoryhistory.js"></script>
+<link rel="stylesheet" type="text/css" href="/Assets/Modules/RepositoryReleases/css/repositoryreleases.css">
+<script type="text/javascript" src="/Assets/Modules/RepositoryReleases/js/repositoryreleases.js"></script>
 
 

@@ -2,7 +2,7 @@
 
 Namespace Controller ;
 
-class RepositoryHistory extends Base {
+class RepositoryReleases extends Base {
 
     public function execute($pageVars) {
       $thisModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars) ;
@@ -10,7 +10,7 @@ class RepositoryHistory extends Base {
       $this->content = $pageVars ;
       if (is_array($thisModel)) { return $this->failDependencies($pageVars, $this->content, $thisModel) ; }
       $this->content["data"] = $thisModel->getData();
-      return array ("type"=>"view", "view"=>"repositoryHistory", "pageVars"=>$this->content);
+      return array ("type"=>"view", "view"=>"repositoryReleases", "pageVars"=>$this->content);
     }
 
 }
