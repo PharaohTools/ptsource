@@ -124,55 +124,44 @@
                                                         <?php
 
                                                         $i = 0 ;
-                                                        $count = 0 ;
+                                                        $row_count = 0 ;
 
                                                         foreach ($pageVars['data']['release_packages']['default'][$one_tag] as $one_release_slug => $one_release_details) {
 
                                                         ?>
 
                                                             <div class="col-sm-4">
-                                                                <?php
 
-                                                                if (isset($one_release_details['image']) && strlen($one_release_details['image'])>3) {
-                                                                    $left_class = "col-sm-9" ;
-                                                                    $show_right = true ;
-                                                                }
-                                                                else {
-                                                                    $left_class = "col-sm-12" ;
-                                                                    $show_right = false ;
-                                                                }
-                                                                ?>
                                                                 <div class="repository_release_package col-sm-12">
-                                                                    <div class="<?php echo $left_class ; ?>">
-                                                                        <div class="repository_release_package_title">
-                                                                            <a href="/index.php?control=RepositoryHome&action=show&item=<?php echo $one_release_slug; ?>">
-                                                                                <h4>
-                                                                                    <?php echo $one_release_details['title']; ?>
-                                                                                </h4>
-                                                                            </a>
-                                                                        </div>
-                                                                        <div class="repository_release_package_description col-sm-12">
-                                                                            <a href="<?php echo $one_release_details['link']; ?>">
-                                                                                Download
-                                                                            </a>
-                                                                            <p>
-                                                                                <?php echo $one_release_details['description']; ?>
-                                                                            </p>
-                                                                        </div>
+                                                                    <div class="repository_release_package_title">
+                                                                        <a href="/index.php?control=RepositoryHome&action=show&item=<?php echo $one_release_slug; ?>">
+                                                                            <h4>
+                                                                                <?php echo $one_release_details['title']; ?>
+                                                                            </h4>
+                                                                        </a>
                                                                     </div>
 
                                                                     <?php
-                                                                    if ($show_right === true) {
-                                                                    ?>
+                                                                    if (isset($one_release_details['image']) && strlen($one_release_details['image'])>3) {
+                                                                        ?>
 
-                                                                    <div class="col-sm-3">
-                                                                        <img src="<?php echo $one_release_details['image']; ?>"
-                                                                             alt="Release Image"
-                                                                             class="release_package_image" />
-                                                                    </div>
-                                                                    <?php
+                                                                        <div class="col-sm-12">
+                                                                            <img src="<?php echo $one_release_details['image']; ?>"
+                                                                                 alt="Release Image"
+                                                                                 class="release_package_image" />
+                                                                        </div>
+                                                                        <?php
                                                                     }
                                                                     ?>
+
+                                                                    <div class="repository_release_package_description col-sm-12">
+                                                                        <a href="<?php echo $one_release_details['link']; ?>">
+                                                                            Download
+                                                                        </a>
+                                                                        <p>
+                                                                            <?php echo $one_release_details['description']; ?>
+                                                                        </p>
+                                                                    </div>
 
                                                                 </div>
 
@@ -198,41 +187,21 @@
                                                         ?>
 
                                                             <div class="col-sm-4">
-                                                                <?php
 
-                                                                if (isset($one_release_details['image']) && strlen($one_release_details['image'])>3) {
-                                                                    $left_class = "col-sm-9" ;
-                                                                    $show_right = true ;
-                                                                }
-                                                                else {
-                                                                    $left_class = "col-sm-12" ;
-                                                                    $show_right = false ;
-                                                                }
-                                                                ?>
                                                                 <div class="repository_release_package col-sm-12">
-                                                                    <div class="<?php echo $left_class ; ?>">
-                                                                        <div class="repository_release_package_title">
-                                                                            <a href="/index.php?control=RepositoryHome&action=show&item=<?php echo $one_release_slug; ?>">
-                                                                                <h4>
-                                                                                    <?php echo $one_release_details['title']; ?>
-                                                                                </h4>
-                                                                            </a>
-                                                                        </div>
-                                                                        <div class="repository_release_package_description col-sm-12">
-                                                                            <a href="<?php echo $one_release_details['link']; ?>">
-                                                                                Download
-                                                                            </a>
-                                                                            <p>
-                                                                                <?php echo $one_release_details['description']; ?>
-                                                                            </p>
-                                                                        </div>
+                                                                    <div class="repository_release_package_title">
+                                                                        <a href="/index.php?control=RepositoryHome&action=show&item=<?php echo $one_release_slug; ?>">
+                                                                            <h4>
+                                                                                <?php echo $one_release_details['title']; ?>
+                                                                            </h4>
+                                                                        </a>
                                                                     </div>
 
                                                                     <?php
-                                                                    if ($show_right === true) {
+                                                                    if (isset($one_release_details['image']) && strlen($one_release_details['image'])>3) {
                                                                         ?>
 
-                                                                        <div class="col-sm-3">
+                                                                        <div class="col-sm-12">
                                                                             <img src="<?php echo $one_release_details['image']; ?>"
                                                                                  alt="Release Image"
                                                                                  class="release_package_image" />
@@ -240,6 +209,15 @@
                                                                         <?php
                                                                     }
                                                                     ?>
+
+                                                                    <div class="repository_release_package_description col-sm-12">
+                                                                        <a href="<?php echo $one_release_details['link']; ?>">
+                                                                            Download
+                                                                        </a>
+                                                                        <p>
+                                                                            <?php echo $one_release_details['description']; ?>
+                                                                        </p>
+                                                                    </div>
 
                                                                 </div>
 
