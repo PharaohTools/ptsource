@@ -18,6 +18,7 @@ class RepositoryReleasesAllOS extends Base {
         $ret = $this->getReleaseHistory();
         $ret["repository"] = $this->getRepository();
         $ret["tags"] = $this->getAvailableTags();
+        $ret['release_packages'] = $this->getReleasePackages();
 //        var_dump($ret["commits"]) ;
         return $ret ;
     }
@@ -35,24 +36,26 @@ class RepositoryReleasesAllOS extends Base {
         return $repository->getCommits();
     }
 
-    private function getAvailableBranches() {
-        $filebrowserDir = $this->repoRootDir() ;
-        $command = "cd {$filebrowserDir} && git branch" ;
-        $all_branches_string = $this->executeAndLoad($command) ;
-        $all_branches_string = str_replace('* ', "", $all_branches_string) ;
-        $all_branches_string = str_replace(' ', "", $all_branches_string) ;
-        $all_branches_ray = explode("\n", $all_branches_string) ;
-        return $all_branches_ray ;
-    }
-
     public function getAvailableTags() {
         $filebrowserDir = $this->repoRootDir() ;
-        $command = "cd {$filebrowserDir} && git tag" ;
+        $command = "cd {$filebrowserDir}/refs/tags && ls -1" ;
         $all_tags_string = $this->executeAndLoad($command) ;
-        $all_tags_string = str_replace('* ', "", $all_tags_string) ;
-        $all_tags_string = str_replace(' ', "", $all_tags_string) ;
         $all_tags_ray = explode("\n", $all_tags_string) ;
+        $all_tags_ray = array_diff($all_tags_ray, array("")) ;
+//        var_dump('all tags: ', 's', $all_tags_string,  'r', $all_tags_ray, 'c', $command) ;
         return $all_tags_ray ;
+    }
+
+    public function getReleasePackages() {
+        $r = array(
+            '1.0.0' => array(
+                'git' => array('url' => 'http://google.com', 'title' => 'Git Clone'),
+                'zip' => array('url' => 'http://google.com', 'title' => 'Zip Archive'),
+                'tar' => array('url' => 'http://google.com', 'title' => 'Tar Archive'),
+                'windows' => array('url' => 'http://google.com', 'title' => 'Windows Installer'),
+            )
+        ) ;
+        return $r ;
     }
 
     private function repoRootDir() {
