@@ -11,9 +11,15 @@
 }
 
 .repository_release_package_title {
-
+    text-align: center;
 }
 
 .repository_release_package_description {
 
+}
+
+.release_package_image {
+    max-width: 30px;
+    top: 30px;
+    position: relative;
 }
