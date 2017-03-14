@@ -90,89 +90,69 @@
 	<div class="col-lg-9">
 		<div class="well well-lg">
 			<div class="row clearfix no-margin">
-
                 <h3 class="text-uppercase text-light">Release History: <strong><?php echo $pageVars['data']["repository"]["project-name"] ; ?></strong></h3>
-
-                <div class="form-group col-sm-12">
-                    <div class="form-group col-sm-3 thin_padding">
-                        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-                            Select Branch
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" id="assigneelist" role="menu" aria-labelledby="dropdownMenu1">
-                            <?php
-                            foreach($pageVars["data"]["tags"] as $branch_name) {
-                                ?>
-                                <li role="presentation">
-                                    <a role="menuitem" tabindex="-1" href="<?php echo $_SERVER['REQUEST_URI'] ; ?>&identifier=<?php echo $branch_name ; ?>">
-                                        <?= $branch_name ?>
-                                    </a>
-                                </li>
-                                <?php
-                            }
-                            ?>
-                        </ul>
-                    </div>
-                    <div class="form-group col-sm-9 thin_padding">
-                        <?php
-                        if (isset($pageVars["data"]["current_branch"]) && $pageVars["data"]["current_branch"] != null) {
-                            ?>
-                            <h4> Current Branch : <strong><?php echo $pageVars["data"]["current_branch"] ; ?></strong></h4>
-                            <?php
-                        }
-                        ?>
-                    </div>
-                </div>
                 <div class="form-group col-sm-12">
                     <div role="tabpanel grid">
-
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane active" id="all">
                                 <div class="table-responsive">
                                     <div class="table table-striped table-bordered table-condensed">
-                                        <div>
-                                            <div class="blCell cellRowIndex">#</div>
-                                            <div class="blCell cellRowMessage">Message</div>
-                                            <div class="blCell cellRowAuthor">Author</div>
-                                            <div class="blCell cellRowDate">Date</div>
-                                            <div class="blCell cellRowHash">Hash</div>
-                                        </div>
                                         <div class="allBuildRows table-hover">
-
                                             <?php
-
                                             $i = 1;
-
-                                            foreach ($pageVars['data']['commits'] as $commitDetails) {
-
+                                            foreach ($pageVars['data']['tags'] as $one_tag) {
                                                 ?>
+                                                <div class="tagRow" data-tag="<?php echo $one_tag; ?>" id="blRow_<?php echo $one_tag['tag']; ?>" >
+                                                    <div class="blCell col-sm-1" scope="row"><?php echo $i; ?> </div>
+                                                    <div class="blCell col-sm-11">
+                                                        Version:
+                                                        <a href="/index.php?control=CommitDetails&action=show&item=<?php echo $pageVars['data']["repository"]["project-slug"]; ?>&identifier=<?php echo $pageVars['data']['identifier'] ; ?>&tag=<?php echo $one_tag ; ?>" class="pipeName">
+                                                            <?php echo $one_tag; ?>
+                                                        </a>
+                                                        <p>
+                                                            Description Description Description Description Description Description
+                                                        </p>
 
-                                                <div class="commitRow" id="blRow_<?php echo $commitDetails['commit']; ?>" >
-                                                    <div class="blCell cellRowIndex" scope="row"><?php echo $i; ?> </div>
-                                                    <div class="blCell cellRowMessage">
-                                                        <a href="/index.php?control=CommitDetails&action=show&item=<?php echo $pageVars['data']["repository"]["project-slug"]; ?>&identifier=<?php echo $pageVars['data']['identifier'] ; ?>&commit=<?php echo $commitDetails['commit'] ; ?>" class="pipeName">
-                                                            <?php echo $commitDetails["message"]; ?>
-                                                        </a>
-                                                    </div>
-                                                    <div class="blCell cellRowAuthor">
-                                                        <a href="/index.php?control=CommitDetails&action=show&item=<?php echo $pageVars['data']["repository"]["project-slug"]; ?>&identifier=<?php echo $pageVars['data']['identifier'] ; ?>&commit=<?php echo $commitDetails['commit'] ; ?>" class="pipeName">
-                                                            <?php echo $commitDetails["author"]; ?>
-                                                        </a>
-                                                    </div>
-                                                    <div class="blCell cellRowDate">
-                                                        <a href="/index.php?control=CommitDetails&action=show&item=<?php echo $pageVars['data']["repository"]["project-slug"]; ?>&identifier=<?php echo $pageVars['data']['identifier'] ; ?>&commit=<?php echo $commitDetails['commit'] ; ?>" class="pipeName">
-                                                            <?php echo str_replace('+0000', '', $commitDetails["date"]) ; ?>
-                                                        </a>
-                                                    </div>
-                                                    <div class="blCell cellRowHash">
-                                                        <a href="/index.php?control=CommitDetails&action=show&item=<?php echo $pageVars['data']["repository"]["project-slug"]; ?>&identifier=<?php echo $pageVars['data']['identifier'] ; ?>&commit=<?php echo $commitDetails['commit'] ; ?>" class="pipeName">
-                                                            <?php echo substr($commitDetails['commit'], 0, 6); ?>
-                                                        </a>
-                                                    </div>
-                                                </div>
+                                                        <div class="repository_release_package_row fullRow">
 
+                                                        <?php
+
+                                                        var_dump($pageVars['data']['release_packages']) ;
+                                                        $i = 0 ;
+                                                        $count = 0 ;
+
+                                                        foreach ($pageVars['data']['release_packages'][$one_tag] as $one_release_slug => $one_release_details) {
+
+                                                        ?>
+
+                                                            <div class="col-sm-4">
+                                                                <div class="repository_release_package col-sm-12">
+                                                                    <div class="repository_release_package_title col-sm-12">
+                                                                        <a href="/index.php?control=RepositoryHome&action=show&item=<?php echo $one_release_slug; ?>">
+                                                                            <h4>
+                                                                                <?php echo $one_release_details['title']; ?>
+                                                                            </h4>
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="repository_release_package_description col-sm-12">
+                                                                        <a href="<?php echo $one_release_details['link']; ?>">
+                                                                            Download
+                                                                        </a>
+                                                                        <p>
+                                                                            <?php echo $one_release_details['description']; ?>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        <?php
+                                                        }
+                                                        ?>
+
+                                                        </div>
+
+                                                    </div>
                                                 <?php
-
                                                 $i++ ;
                                             }
                                             ?>
