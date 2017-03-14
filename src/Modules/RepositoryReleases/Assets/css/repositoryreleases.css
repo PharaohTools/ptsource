@@ -15,11 +15,12 @@
 }
 
 .repository_release_package_description {
-
+    text-align: center;
 }
 
 .release_package_image {
-    max-width: 30px;
-    top: 30px;
-    position: relative;
+    max-height: 40px;
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
 }
