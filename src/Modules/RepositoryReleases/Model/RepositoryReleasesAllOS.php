@@ -48,12 +48,30 @@ class RepositoryReleasesAllOS extends Base {
 
     public function getReleasePackages() {
         $r = array(
-            '1.0.0' => array(
-                'git' => array('url' => 'http://google.com', 'title' => 'Git Clone'),
-                'zip' => array('url' => 'http://google.com', 'title' => 'Zip Archive'),
-                'tar' => array('url' => 'http://google.com', 'title' => 'Tar Archive'),
-                'windows' => array('url' => 'http://google.com', 'title' => 'Windows Installer'),
-            )
+            'default' => array(
+                '1.0.0' => array(
+                    'git' => array('url' => 'http://google.com', 'title' => 'Git Clone', 'image' => 'http://source.pharaoh.tld/Assets/Modules/DefaultSkin/image/source-logo.png'),
+                    'zip' => array('url' => 'http://google.com', 'title' => 'Zip Archive', 'image' => 'http://source.pharaoh.tld/Assets/Modules/DefaultSkin/image/source-logo.png'),
+                    'tar' => array('url' => 'http://google.com', 'title' => 'Tar Archive', 'image' => 'http://source.pharaoh.tld/Assets/Modules/DefaultSkin/image/source-logo.png'),
+                ) ,
+                '1.0.1' => array(
+                    'git' => array('url' => 'http://google.com', 'title' => 'Git Clone', 'image' => 'http://source.pharaoh.tld/Assets/Modules/DefaultSkin/image/source-logo.png'),
+                    'zip' => array('url' => 'http://google.com', 'title' => 'Zip Archive', 'image' => 'http://source.pharaoh.tld/Assets/Modules/DefaultSkin/image/source-logo.png'),
+                    'tar' => array('url' => 'http://google.com', 'title' => 'Tar Archive', 'image' => 'http://source.pharaoh.tld/Assets/Modules/DefaultSkin/image/source-logo.png'),
+                ) ,
+            ),
+            'pharaoh_build_integration' => array(
+                '1.0.0' => array(
+                    'windows' => array('url' => 'http://google.com', 'title' => 'Windows Installer', 'image' => 'http://source.pharaoh.tld/Assets/Modules/RepositoryReleases/images/windows-logo.png'),
+                    'linux' => array('url' => 'http://google.com', 'title' => 'Linux Installer', 'image' => 'http://source.pharaoh.tld/Assets/Modules/RepositoryReleases/images/linux-logo.png'),
+                    'osx' => array('url' => 'http://google.com', 'title' => 'OSx Installer', 'image' => 'http://source.pharaoh.tld/Assets/Modules/RepositoryReleases/images/apple-logo.png'),
+                ) ,
+                '1.0.1' => array(
+                    'windows' => array('url' => 'http://google.com', 'title' => 'Windows Installer', 'image' => 'http://source.pharaoh.tld/Assets/Modules/RepositoryReleases/images/windows-logo.png'),
+                    'linux' => array('url' => 'http://google.com', 'title' => 'Linux Installer', 'image' => 'http://source.pharaoh.tld/Assets/Modules/RepositoryReleases/images/linux-logo.png'),
+                    'osx' => array('url' => 'http://google.com', 'title' => 'OSx Installer', 'image' => 'http://source.pharaoh.tld/Assets/Modules/RepositoryReleases/images/apple-logo.png'),
+                ) ,
+            ),
         ) ;
         return $r ;
     }
