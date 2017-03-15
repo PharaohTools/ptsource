@@ -35,7 +35,7 @@ if [[ $SSH_ORIGINAL_COMMAND == git-upload-pack* ]] || [[ $SSH_ORIGINAL_COMMAND =
         if [[ $SSH_ORIGINAL_COMMAND == git-receive-pack* ]] ; then
             repo_only=${path_only##*/} ;
             chmod -R 775 /opt/ptsource/repositories/$repo_only ;
-            chown -R ptgit:ptsource /opt/ptsource/repositories/$repo_only ;
+            # chown -R ptgit:ptsource /opt/ptsource/repositories/$repo_only ;
         fi
 	    exit 0 ;
 	fi
