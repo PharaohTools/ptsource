@@ -6,7 +6,7 @@ class AboutInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "About/Home Page";
+    public $name = "About Module";
 
     public function _construct() {
       parent::__construct();
