@@ -6,7 +6,7 @@ class TeamListInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "TeamList/Home Page";
+    public $name = "TeamList Module";
 
     public function _construct() {
       parent::__construct();

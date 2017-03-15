@@ -6,7 +6,7 @@ class TeamHomeInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "TeamHome/Home Page";
+    public $name = "TeamHome Module";
 
     public function _construct() {
       parent::__construct();
