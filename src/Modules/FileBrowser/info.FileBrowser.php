@@ -6,7 +6,7 @@ class FileBrowserInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "FileBrowser/Home Page";
+    public $name = "FileBrowser Module";
 
     public function _construct() {
       parent::__construct();

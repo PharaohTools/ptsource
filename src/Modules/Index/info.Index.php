@@ -6,7 +6,7 @@ class IndexInfo extends PTConfigureBase {
 
     public $hidden = true;
 
-    public $name = "Index/Home Page";
+    public $name = "Index Module";
 
     public function _construct() {
       parent::__construct();

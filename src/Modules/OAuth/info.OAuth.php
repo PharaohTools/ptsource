@@ -6,7 +6,7 @@ class OAuthInfo extends PTConfigureBase {
 
 	public $hidden = false;
 
-	public $name = "login using OAuth/Home Page";
+	public $name = "login using OAuth Module";
 
 	public function _construct() {
 		parent::__construct();

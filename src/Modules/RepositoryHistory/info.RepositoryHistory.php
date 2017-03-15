@@ -6,7 +6,7 @@ class RepositoryHistoryInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "RepositoryHistory/Home Page";
+    public $name = "RepositoryHistory Module";
 
     public function _construct() {
       parent::__construct();

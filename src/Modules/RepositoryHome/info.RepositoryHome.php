@@ -6,7 +6,7 @@ class RepositoryHomeInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "RepositoryHome/Home Page";
+    public $name = "RepositoryHome Module";
 
     public function _construct() {
       parent::__construct();

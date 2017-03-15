@@ -6,7 +6,7 @@ class RepositoryPullRequestsInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "RepositoryPullRequests/Home Page";
+    public $name = "RepositoryPullRequests Module";
 
     public function _construct() {
       parent::__construct();

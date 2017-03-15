@@ -6,7 +6,7 @@ class RepositoryListInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "RepositoryList/Home Page";
+    public $name = "RepositoryList Module";
 
     public function _construct() {
       parent::__construct();
