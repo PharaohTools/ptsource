@@ -102,7 +102,8 @@ class RepositoryAllOS extends Base {
             $comms = array(
                 'mkdir -p '.REPODIR.DS.$name,
                 'git init --bare '.REPODIR.DS.$name,
-                'cd '.REPODIR.DS.$name.'; git config http.receivepack true ;' ) ;
+                'cd '.REPODIR.DS.$name.'; git config http.receivepack true ;',
+                'chown -R ptgit:ptsource '.REPODIR.DS.$name.' ;' ) ;
             $results = array() ;
             foreach ($comms as $comm) {
                 $rc = self::executeAndGetReturnCode($comm);
