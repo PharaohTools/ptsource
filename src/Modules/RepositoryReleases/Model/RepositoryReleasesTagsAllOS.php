@@ -38,8 +38,12 @@ class RepositoryReleasesTagsAllOS extends Base {
         while (count($all_lines_ray)>0) {
             if (count($all_lines_ray)>0) {
                 $result_ray = $this->loadNextArray($all_lines_ray) ;
-                $all_lines_ray = $result_ray[0] ;
-                $all_tags[] = $result_ray[1] ;
+                if (is_array($result_ray[1])) {
+                    $all_lines_ray = $result_ray[0] ;
+                    $all_tags[] = $result_ray[1] ;
+                } else {
+                    break ;
+                }
             } else {
                 break ;
             }
@@ -50,6 +54,7 @@ class RepositoryReleasesTagsAllOS extends Base {
 
     protected function loadNextArray($remaining_lines) {
 
+        $tag_ray = array() ;
         if (strpos($remaining_lines[0], 'tag ')===0) {
             $tag_ray['tag'] = substr($remaining_lines[0], 4) ;
         }
@@ -64,19 +69,18 @@ class RepositoryReleasesTagsAllOS extends Base {
 
         if (strpos($remaining_lines[4], 'tag ')===0) {
             $remaining = array_slice($remaining_lines, 4 ) ;
-//            var_dump("This remains xx", $remaining) ;
-            return array($remaining, $tag_ray) ;
+            if (array_key_exists('tag', $tag_ray)) {
+                return array($remaining, $tag_ray) ;
+            }
+            else {
+                return false ;
+            }
         }
 
         if (isset($remaining_lines[4]) && $remaining_lines[4] !== '') {
             $tag_ray['message'] = $remaining_lines[4] ;
         }
 
-//        $tag_ray['message'] = $remaining_lines[4] ;
-
-//        var_dump("x1", $remaining_lines[5]) ;
-//        var_dump("x2", $remaining_lines[6]) ;
-//        var_dump("x3", $remaining_lines[7]) ;
         $cur_line = 5 ;
 //        for ($i=5; $i<250; $i++) {
 //            $cur_line = $i ;
@@ -92,22 +96,32 @@ class RepositoryReleasesTagsAllOS extends Base {
 
         if (strpos($remaining_lines[$cur_line], 'tag ')===0) {
             $remaining = array_slice($remaining_lines, $cur_line+1 ) ;
-//            var_dump("This remains 1", $remaining) ;
-            return array($remaining, $tag_ray) ;
+            if (array_key_exists('tag', $tag_ray)) {
+                return array($remaining, $tag_ray) ;
+            }
+            else {
+                return false ;
+            }
         }
 
 
         if (strpos($remaining_lines[$cur_line], 'commit ')===0) {
             $remaining = array_slice($remaining_lines, $cur_line+5 ) ;
-//            var_dump("This remains 2", $remaining) ;
             $tag_ray['commit'] = substr($remaining_lines[$cur_line], 8) ;
-            return array($remaining, $tag_ray) ;
+            if (array_key_exists('tag', $tag_ray)) {
+                return array($remaining, $tag_ray) ;
+            }
+            else {
+                return false ;
+            }
         }
 
-
-//        var_dump("This remains 3", $remaining_lines[$cur_line]) ;
-
-        return array(array(), $tag_ray) ;
+        if (array_key_exists('tag', $tag_ray)) {
+            return array(array(), $tag_ray) ;
+        }
+        else {
+            return false ;
+        }
 
     }
 
