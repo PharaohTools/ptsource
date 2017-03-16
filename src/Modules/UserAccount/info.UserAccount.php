@@ -24,13 +24,6 @@ class UserAccountInfo extends PTConfigureBase {
       return array("signup"=>"UserAccount");
     }
 
-    public function configuration() {
-        return array(
-            "signup_enabled"=> array("type" => "boolean", "default" => "off", "label" => "UserAccounts Enabled?", ),
-            "registration_enabled"=> array("type" => "boolean", "default" => "off", "label" => "User Self Registration Enabled?", ),
-        );
-    }
-
     public function helpDefinition() {
       $help = <<<"HELPDATA"
   This command is part of Core - its the default route and only used for help and as an Intro really...
