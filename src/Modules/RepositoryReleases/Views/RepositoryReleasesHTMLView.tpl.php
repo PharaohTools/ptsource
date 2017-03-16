@@ -103,7 +103,11 @@
                                             foreach ($pageVars['data']['tags'] as $one_tag) {
                                                 ?>
                                                 <div class="tagRow" data-tag="<?php echo $one_tag; ?>" id="blRow_<?php echo $one_tag['tag']; ?>" >
-                                                    <div class="blCell col-sm-1" scope="row"><?php echo $i; ?> </div>
+                                                    <div class="blCell col-sm-1" scope="row">
+                                                        <h2>
+                                                            <?php echo $i; ?>
+                                                        </h2>
+                                                    </div>
                                                     <div class="blCell col-sm-11">
                                                         <h4>
                                                             Version:
