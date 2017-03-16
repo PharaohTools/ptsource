@@ -19,8 +19,38 @@ class RepositoryReleasesAllOS extends Base {
         $ret["repository"] = $this->getRepository();
         $ret["tags"] = $this->getAvailableTags();
         $ret['release_packages'] = $this->getReleasePackages();
-//        var_dump($ret["commits"]) ;
+        $ret['enabled_default_release_packages'] =  $this->getEnabledDefaultReleasePackages($ret["repository"]);
+        $ret['standard_release_enabled'] =  $this->standardReleaseEnabled($ret["repository"]);
+        $ret['pharaoh_build_release_enabled'] =  $this->pharaohBuildReleaseEnabled($ret["repository"]);
         return $ret ;
+    }
+
+    public function getSettingTypes() {
+        return array_keys($this->getSettingFormFields());
+    }
+
+    public function getSettingFormFields() {
+        $ff = array(
+            "stdrel_enabled" =>
+                array(
+                    "type" => "boolean",
+                    "optional" => true,
+                    "name" => "Enable Publishing Standard Releases?"
+                ),
+            "stdrel_zip_enabled" =>
+                array(
+                    "type" => "boolean",
+                    "optional" => true,
+                    "name" => "Enable Publishing Zip Archive?"
+                ),
+            "stdrel_tar_enabled" =>
+                array(
+                    "type" => "boolean",
+                    "optional" => true,
+                    "name" => "Enable Publishing Tar Archive?"
+                ),
+        );
+        return $ff ;
     }
 
     public function getRepository() {
@@ -42,37 +72,68 @@ class RepositoryReleasesAllOS extends Base {
         $all_tags_string = $this->executeAndLoad($command) ;
         $all_tags_ray = explode("\n", $all_tags_string) ;
         $all_tags_ray = array_diff($all_tags_ray, array("")) ;
-//        var_dump('all tags: ', 's', $all_tags_string,  'r', $all_tags_ray, 'c', $command) ;
         return $all_tags_ray ;
     }
 
     public function getReleasePackages() {
+        $r = $this->getPharaohBuildIntegrationPackages() ;
+        $r = array_merge($r, $this->getDefaultReleasePackages()) ;
+        return $r ;
+    }
+
+    protected function getPharaohBuildIntegrationPackages() {
         $r = array(
-            'default' => array(
-                '1.0.0' => array(
-                    'git' => array('url' => 'http://google.com', 'title' => 'Git Clone', 'image' => 'http://source.pharaoh.tld/Assets/Modules/DefaultSkin/image/source-logo.png'),
-                    'zip' => array('url' => 'http://google.com', 'title' => 'Zip Archive', 'image' => 'http://source.pharaoh.tld/Assets/Modules/DefaultSkin/image/source-logo.png'),
-                    'tar' => array('url' => 'http://google.com', 'title' => 'Tar Archive', 'image' => 'http://source.pharaoh.tld/Assets/Modules/DefaultSkin/image/source-logo.png'),
-                ) ,
-                '1.0.1' => array(
-                    'git' => array('url' => 'http://google.com', 'title' => 'Git Clone', 'image' => 'http://source.pharaoh.tld/Assets/Modules/DefaultSkin/image/source-logo.png'),
-                    'zip' => array('url' => 'http://google.com', 'title' => 'Zip Archive', 'image' => 'http://source.pharaoh.tld/Assets/Modules/DefaultSkin/image/source-logo.png'),
-                    'tar' => array('url' => 'http://google.com', 'title' => 'Tar Archive', 'image' => 'http://source.pharaoh.tld/Assets/Modules/DefaultSkin/image/source-logo.png'),
-                ) ,
-            ),
             'pharaoh_build_integration' => array(
-                '1.0.0' => array(
-                    'windows' => array('url' => 'http://google.com', 'title' => 'Windows Installer', 'image' => 'http://source.pharaoh.tld/Assets/Modules/RepositoryReleases/images/windows-logo.png'),
-                    'linux' => array('url' => 'http://google.com', 'title' => 'Linux Installer', 'image' => 'http://source.pharaoh.tld/Assets/Modules/RepositoryReleases/images/linux-logo.png'),
-                    'osx' => array('url' => 'http://google.com', 'title' => 'OSx Installer', 'image' => 'http://source.pharaoh.tld/Assets/Modules/RepositoryReleases/images/apple-logo.png'),
-                ) ,
-                '1.0.1' => array(
-                    'windows' => array('url' => 'http://google.com', 'title' => 'Windows Installer', 'image' => 'http://source.pharaoh.tld/Assets/Modules/RepositoryReleases/images/windows-logo.png'),
-                    'linux' => array('url' => 'http://google.com', 'title' => 'Linux Installer', 'image' => 'http://source.pharaoh.tld/Assets/Modules/RepositoryReleases/images/linux-logo.png'),
-                    'osx' => array('url' => 'http://google.com', 'title' => 'OSx Installer', 'image' => 'http://source.pharaoh.tld/Assets/Modules/RepositoryReleases/images/apple-logo.png'),
-                ) ,
+                'windows' => array('url' => 'http://google.com', 'title' => 'Windows Installer', 'image' => 'http://source.pharaoh.tld/Assets/Modules/RepositoryReleases/images/windows-logo.png'),
+                'linux' => array('url' => 'http://google.com', 'title' => 'Linux Installer', 'image' => 'http://source.pharaoh.tld/Assets/Modules/RepositoryReleases/images/linux-logo.png'),
+                'osx' => array('url' => 'http://google.com', 'title' => 'OSx Installer', 'image' => 'http://source.pharaoh.tld/Assets/Modules/RepositoryReleases/images/apple-logo.png'),
             ),
         ) ;
+        return $r ;
+    }
+
+    protected function getDefaultReleasePackages() {
+        $r = array(
+            'default' => array(
+                'git' => array('url' => 'http://google.com', 'title' => 'Git Clone', 'image' => 'http://source.pharaoh.tld/Assets/Modules/DefaultSkin/image/source-logo.png'),
+                'zip' => array('url' => 'http://google.com', 'title' => 'Zip Archive', 'image' => 'http://source.pharaoh.tld/Assets/Modules/DefaultSkin/image/source-logo.png'),
+                'tar' => array('url' => 'http://google.com', 'title' => 'Tar Archive', 'image' => 'http://source.pharaoh.tld/Assets/Modules/DefaultSkin/image/source-logo.png'),
+            ),
+        ) ;
+        return $r ;
+    }
+
+    protected function standardReleaseEnabled($repo) {
+        $mn = $this->getModuleName() ;
+        if ($repo['settings'][$mn]['stdrel_enabled']) {
+            return true ;
+        }
+        return false ;
+    }
+
+    protected function pharaohBuildReleaseEnabled($repo) {
+        $mn = $this->getModuleName() ;
+        if ($repo['settings'][$mn]['pharaoh_build_rel_enabled']) {
+            return true ;
+        }
+        return false ;
+    }
+
+    public function getEnabledDefaultReleasePackages($repo) {
+        $mn = $this->getModuleName() ;
+        if (!isset($repo['settings'][$mn])) {
+            return array() ;
+        }
+        $r = array() ;
+        if ($repo['settings'][$mn]['stdrel_enabled']) {
+            $r[] = 'git' ;
+            if ($repo['settings'][$mn]['stdrel_zip_enabled']) {
+                $r[] = 'zip' ;
+            }
+            if ($repo['settings'][$mn]['stdrel_zip_enabled']) {
+                $r[] = 'tar' ;
+            }
+        }
         return $r ;
     }
 
