@@ -117,115 +117,140 @@
                                                         </p>
 
                                                         <div class="repository_release_package_row fullRow">
-                                                            <h4>
-                                                                Standard Release Packages
-                                                            </h4>
 
-                                                        <?php
+                                                            <?php
 
-                                                        $i = 0 ;
-                                                        $row_count = 0 ;
+                                                            if ($pageVars['data']['standard_release_enabled'] === true) {
 
-                                                        foreach ($pageVars['data']['release_packages']['default'][$one_tag] as $one_release_slug => $one_release_details) {
+                                                            ?>
 
-                                                        ?>
+                                                                <h4>
+                                                                    Standard Release Packages
+                                                                </h4>
 
-                                                            <div class="col-sm-4">
+                                                                <?php
 
-                                                                <div class="repository_release_package col-sm-12">
-                                                                    <div class="repository_release_package_title">
-                                                                        <a href="/index.php?control=RepositoryHome&action=show&item=<?php echo $one_release_slug; ?>">
-                                                                            <h4>
-                                                                                <?php echo $one_release_details['title']; ?>
-                                                                            </h4>
-                                                                        </a>
-                                                                    </div>
+                                                                foreach ($pageVars['data']['release_packages']['default'] as $one_release_slug => $one_release_details) {
 
-                                                                    <?php
-                                                                    if (isset($one_release_details['image']) && strlen($one_release_details['image'])>3) {
+                                                                    if (in_array($one_release_slug, $pageVars['data']['enabled_default_release_packages'])) {
+
                                                                         ?>
 
-                                                                        <div class="col-sm-12">
-                                                                            <img src="<?php echo $one_release_details['image']; ?>"
-                                                                                 alt="Release Image"
-                                                                                 class="release_package_image" />
+                                                                        <div class="col-sm-4">
+
+                                                                            <div class="repository_release_package col-sm-12">
+                                                                                <div class="repository_release_package_title">
+                                                                                    <a href="/index.php?control=RepositoryHome&action=show&item=<?php echo $one_release_slug; ?>">
+                                                                                        <h4>
+                                                                                            <?php echo $one_release_details['title']; ?>
+                                                                                        </h4>
+                                                                                    </a>
+                                                                                </div>
+
+                                                                                <?php
+                                                                                if (isset($one_release_details['image']) && strlen($one_release_details['image'])>3) {
+                                                                                    ?>
+
+                                                                                    <div class="col-sm-12">
+                                                                                        <img src="<?php echo $one_release_details['image']; ?>"
+                                                                                             alt="Release Image"
+                                                                                             class="release_package_image" />
+                                                                                    </div>
+
+                                                                                    <?php
+                                                                                }
+                                                                                ?>
+
+                                                                                <div class="repository_release_package_description col-sm-12">
+                                                                                    <a href="<?php echo $one_release_details['link']; ?>">
+                                                                                        Download
+                                                                                    </a>
+                                                                                    <p>
+                                                                                        <?php echo $one_release_details['description']; ?>
+                                                                                    </p>
+                                                                                </div>
+
+                                                                            </div>
+
                                                                         </div>
+
                                                                         <?php
                                                                     }
-                                                                    ?>
+                                                                }
+                                                                ?>
 
-                                                                    <div class="repository_release_package_description col-sm-12">
-                                                                        <a href="<?php echo $one_release_details['link']; ?>">
-                                                                            Download
-                                                                        </a>
-                                                                        <p>
-                                                                            <?php echo $one_release_details['description']; ?>
-                                                                        </p>
-                                                                    </div>
+                                                            <?php
 
-                                                                </div>
+                                                            }
 
-                                                            </div>
+                                                            ?>
 
-                                                        <?php
-                                                        }
-                                                        ?>
 
                                                         </div>
 
                                                         <div class="repository_release_package_row fullRow">
-                                                            <h4>
-                                                                Pharaoh Build Release Packages
-                                                            </h4>
-                                                        <?php
 
-                                                        $i = 0 ;
-                                                        $count = 0 ;
+                                                            <?php
 
-                                                        foreach ($pageVars['data']['release_packages']['pharaoh_build_integration'][$one_tag] as $one_release_slug => $one_release_details) {
+                                                            if ($pageVars['data']['standard_release_enabled'] === true) {
 
-                                                        ?>
+                                                            ?>
 
-                                                            <div class="col-sm-4">
+                                                                <h4>
+                                                                    Pharaoh Build Release Packages
+                                                                </h4>
 
-                                                                <div class="repository_release_package col-sm-12">
-                                                                    <div class="repository_release_package_title">
-                                                                        <a href="/index.php?control=RepositoryHome&action=show&item=<?php echo $one_release_slug; ?>">
-                                                                            <h4>
-                                                                                <?php echo $one_release_details['title']; ?>
-                                                                            </h4>
-                                                                        </a>
+                                                                <?php
+
+                                                                foreach ($pageVars['data']['release_packages']['pharaoh_build_integration'] as $one_release_slug => $one_release_details) {
+
+                                                                    ?>
+
+                                                                    <div class="col-sm-4">
+
+                                                                        <div class="repository_release_package col-sm-12">
+                                                                            <div class="repository_release_package_title">
+                                                                                <a href="/index.php?control=RepositoryHome&action=show&item=<?php echo $one_release_slug; ?>">
+                                                                                    <h4>
+                                                                                        <?php echo $one_release_details['title']; ?>
+                                                                                    </h4>
+                                                                                </a>
+                                                                            </div>
+
+                                                                            <?php
+                                                                            if (isset($one_release_details['image']) && strlen($one_release_details['image'])>3) {
+                                                                                ?>
+
+                                                                                <div class="col-sm-12">
+                                                                                    <img src="<?php echo $one_release_details['image']; ?>"
+                                                                                         alt="Release Image"
+                                                                                         class="release_package_image" />
+                                                                                </div>
+                                                                                <?php
+                                                                            }
+                                                                            ?>
+
+                                                                            <div class="repository_release_package_description col-sm-12">
+                                                                                <a href="<?php echo $one_release_details['link']; ?>">
+                                                                                    Download
+                                                                                </a>
+                                                                                <p>
+                                                                                    <?php echo $one_release_details['description']; ?>
+                                                                                </p>
+                                                                            </div>
+
+                                                                        </div>
+
                                                                     </div>
 
                                                                     <?php
-                                                                    if (isset($one_release_details['image']) && strlen($one_release_details['image'])>3) {
-                                                                        ?>
+                                                                }
+                                                                ?>
+                                                            <?php
 
-                                                                        <div class="col-sm-12">
-                                                                            <img src="<?php echo $one_release_details['image']; ?>"
-                                                                                 alt="Release Image"
-                                                                                 class="release_package_image" />
-                                                                        </div>
-                                                                        <?php
-                                                                    }
-                                                                    ?>
+                                                            }
 
-                                                                    <div class="repository_release_package_description col-sm-12">
-                                                                        <a href="<?php echo $one_release_details['link']; ?>">
-                                                                            Download
-                                                                        </a>
-                                                                        <p>
-                                                                            <?php echo $one_release_details['description']; ?>
-                                                                        </p>
-                                                                    </div>
-
-                                                                </div>
-
-                                                            </div>
-
-                                                        <?php
-                                                        }
-                                                        ?>
+                                                            ?>
 
                                                         </div>
 
