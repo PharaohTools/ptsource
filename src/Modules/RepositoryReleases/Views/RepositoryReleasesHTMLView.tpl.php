@@ -99,10 +99,10 @@
                                     <div class="table table-striped table-bordered table-condensed">
                                         <div class="allBuildRows table-hover">
                                             <?php
-                                            $i = 1;
+                                            $i = $pageVars['data']['tag_count'] ;
                                             foreach ($pageVars['data']['tags'] as $one_tag) {
                                                 ?>
-                                                <div class="tagRow" data-tag="<?php echo $one_tag; ?>" id="blRow_<?php echo $one_tag['tag']; ?>" >
+                                                <div class="tagRow" data-tag="<?php echo $one_tag['tag']; ?>" id="blRow_<?php echo $one_tag['tag']; ?>" >
                                                     <div class="blCell col-sm-1" scope="row">
                                                         <h2>
                                                             <?php echo $i; ?>
@@ -111,13 +111,18 @@
                                                     <div class="blCell col-sm-11">
                                                         <h4>
                                                             Version:
-                                                            <a href="/index.php?control=FileBrowser&action=show&item=<?php echo $pageVars['data']["repository"]["project-slug"]; ?>&identifier=<?php echo $one_tag; ?>&tag=<?php echo $one_tag ; ?>" class="pipeName">
-                                                                <?php echo $one_tag; ?>
+                                                            <a href="/index.php?control=FileBrowser&action=show&item=<?php echo $pageVars['data']["repository"]["project-slug"]; ?>&identifier=<?php echo $one_tag['tag']; ?>&tag=<?php echo $one_tag['tag'] ; ?>" class="pipeName">
+                                                                <?php echo $one_tag['tag']; ?>
                                                             </a>
                                                         </h4>
 
                                                         <p>
-                                                            Description Description Description Description Description Description
+                                                            <?php
+                                                            if (isset($one_tag['message']) && $one_tag['message'] != '') {
+                                                                echo $one_tag['message'];
+                                                            } else {
+                                                                echo 'No Message Associated with this Tag' ;
+                                                            }?>
                                                         </p>
 
                                                         <div class="repository_release_package_row fullRow">
@@ -256,11 +261,15 @@
 
                                                             ?>
 
+                                                            <hr />
+
                                                         </div>
 
                                                     </div>
+
+                                                </div>
                                                 <?php
-                                                $i++ ;
+                                                $i-- ;
                                             }
                                             ?>
                                         </div>
