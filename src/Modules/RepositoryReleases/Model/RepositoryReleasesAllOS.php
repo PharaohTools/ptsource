@@ -18,6 +18,7 @@ class RepositoryReleasesAllOS extends Base {
         $ret = $this->getReleaseHistory();
         $ret["repository"] = $this->getRepository();
         $ret["tags"] = $this->getAvailableTags();
+        $ret["tag_count"] = $this->getTagCount();
         $ret['release_packages'] = $this->getReleasePackages();
         $ret['enabled_default_release_packages'] =  $this->getEnabledDefaultReleasePackages($ret["repository"]);
         $ret['standard_release_enabled'] =  $this->standardReleaseEnabled($ret["repository"]);
@@ -67,12 +68,15 @@ class RepositoryReleasesAllOS extends Base {
     }
 
     public function getAvailableTags() {
-        $filebrowserDir = $this->repoRootDir() ;
-        $command = "cd {$filebrowserDir}/refs/tags && ls -1" ;
-        $all_tags_string = $this->executeAndLoad($command) ;
-        $all_tags_ray = explode("\n", $all_tags_string) ;
-        $all_tags_ray = array_diff($all_tags_ray, array("")) ;
-        return $all_tags_ray ;
+        $repositoryReleasesFactory = new \Model\RepositoryReleases() ;
+        $repositoryReleasesTags = $repositoryReleasesFactory->getModel($this->params, "Tags");
+        return $repositoryReleasesTags->getAvailableTags() ;
+    }
+
+    public function getTagCount() {
+        $repositoryReleasesFactory = new \Model\RepositoryReleases() ;
+        $repositoryReleasesTags = $repositoryReleasesFactory->getModel($this->params, "Tags");
+        return $repositoryReleasesTags->getTagCount() ;
     }
 
     public function getReleasePackages() {
@@ -137,7 +141,7 @@ class RepositoryReleasesAllOS extends Base {
         return $r ;
     }
 
-    private function repoRootDir() {
+    public function repoRootDir() {
         return REPODIR.DS.$this->params["item"].DS;
     }
 
