@@ -192,7 +192,7 @@
 
                                                             <?php
 
-                                                            if ($pageVars['data']['standard_release_enabled'] === true) {
+                                                            if ($pageVars['data']['pharaoh_build_release_enabled'] === true) {
 
                                                             ?>
 
