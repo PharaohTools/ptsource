@@ -54,6 +54,11 @@ class PullRequestAllOS extends Base {
                     $pull_request['rejected_by'] = $user['username'] ;
                 }
                 if ($this->params["update_status"] == 'accepted') {
+                    $accept_result = $this->acceptPullRequest() ;
+                    if ($accept_result['status'] === false) {
+                        $ret = $accept_result ;
+                        return $ret ;
+                    }
                     $pull_request['accepted_by'] = $user['username'] ;
                 }
             }
@@ -73,9 +78,35 @@ class PullRequestAllOS extends Base {
         }
         else {
             $ret["status"] = false ;
-            $ret["message"] = 'You do not have sufficient permission to close this pull request' ;
+            $ret["message"] = 'You do not have sufficient permission to change this pull request' ;
         }
         return $ret ;
+    }
+
+    protected function acceptPullRequest() {
+
+        $pull_request = $this->getPullRequest();
+
+        $rd = REPODIR.DS.$this->params["item"].DS ;
+
+        $orig = self::executeAndLoad("cd $rd && git rev-parse --abbrev-ref HEAD") ;
+
+        $commmand ="cd $rd && git symbolic-ref HEAD refs/heads/{$pull_request['source_branch']} && " .
+            "git branch -f {$pull_request['target_branch']} {$pull_request['source_branch']} && " .
+            "git symbolic-ref HEAD refs/heads/{$orig} " ;
+
+        $res = $this::executeAndGetReturnCode($commmand, false, true) ;
+//        var_dump('<pre>',$commmand,  $res, '</pre>') ;
+
+        if ($res['rc'] === 0) {
+            $ret["status"] = true ;
+            $ret["message"] = 'Pull Request Status updated to Closed' ;
+            return $ret ;
+        } else {
+            $ret["status"] = false ;
+            $ret["message"] = $res['output'][0] ;
+            return $ret ;
+        }
     }
 
     protected function getLoggedInUser() {
