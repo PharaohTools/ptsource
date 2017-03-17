@@ -48,12 +48,6 @@
                         <li>
                             <a href="/index.php?control=UserProfilePublic&action=show" class=" hvr-curl-bottom-right">Public Profile</a>
                         </li>
-                        <li>
-                            <a href="/index.php?control=UserSSHKey&action=show" class=" hvr-curl-bottom-right">SSH Keys</a>
-                        </li>
-                        <li>
-                            <a href="/index.php?control=UserOAuthKey&action=show" class=" hvr-curl-bottom-right">OAuth Keys</a>
-                        </li>
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>
