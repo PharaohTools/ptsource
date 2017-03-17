@@ -20,6 +20,16 @@ class RepositoryListInfo extends PTConfigureBase {
       return array("repositoryList"=>"RepositoryList");
     }
 
+    public function configuration() {
+        return array(
+            "index_override"=> array(
+                "type" => "boolean",
+                "default" => true,
+                "label" => "Override your default Index Module with Repository Listing as a Home Page?",
+            ),
+        );
+    }
+
     public function helpDefinition() {
       $help = <<<"HELPDATA"
   This command is part of Core - Display or find lists of repositories...
