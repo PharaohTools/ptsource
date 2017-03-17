@@ -18,27 +18,13 @@
                         <i class="fa fa-dashboard hvr-bounce-in"></i> Dashboard
                     </a>
                 </li>
-                <li>
-                    <a href="/index.php?control=ApplicationConfigure&action=show" class="hvr-bounce-in">
-                        <i class="fa fa-cogs fa-fw hvr-bounce-in"></i> Configure PTSource</a>
-                </li>
-                <li>
-                    <a href="/index.php?control=UserManager&action=show" class="hvr-bounce-in">
-                        <i class="fa fa-user hvr-bounce-in"></i> User Manager
-                    </a>
-                </li>
-                <li>
-                    <a href="/index.php?control=ModuleManager&action=show" class="hvr-bounce-in">
-                        <i class="fa fa-suitcase hvr-bounce-in"></i> Module Manager
-                    </a>
-                </li>
             </ul>
         </div>
     </div>
 
    <div class="col-lg-9">
      <div class="well well-lg">
-<!--        <h2 class="text-uppercase text-light"><a href="/"> PTSource - Pharaoh Tools</a></h2>-->
+<!--        <h2 class="text-uppercase text-light"><a href="/"> PT<?php echo ucfirst(PHARAOH_APP)  ; ?> - Pharaoh Tools</a></h2>-->
 		<div class="row clearfix no-margin">
 			<h4 class="alert alert-warning">You don't have permission to access this page</h4>
      	 <hr>

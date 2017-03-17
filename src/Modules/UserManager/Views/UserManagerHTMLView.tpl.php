@@ -20,7 +20,7 @@
                 </li>
                 <li>
                     <a href="/index.php?control=ApplicationConfigure&action=show" class=" hvr-bounce-in">
-                        <i class="fa fa-cogs fa-fw hvr-bounce-in"></i> Configure PTSource</a>
+                        <i class="fa fa-cogs fa-fw hvr-bounce-in"></i> Configure PT<?php echo ucfirst(PHARAOH_APP)  ; ?></a>
                 </li>
                 <li>
                     <a href="/index.php?control=UserManager&action=show" class=" hvr-bounce-in">
@@ -41,7 +41,7 @@
 
   <div class="col-lg-9">
                     <div class="well well-lg">
-<!--        <h2 class="text-uppercase text-light"><a href="/"> PTSource - Pharaoh Tools</a></h2>-->
+<!--        <h2 class="text-uppercase text-light"><a href="/"> PT<?php echo ucfirst(PHARAOH_APP)  ; ?> - Pharaoh Tools</a></h2>-->
 
                         <?php echo $this->renderLogs() ; ?>
 
@@ -49,8 +49,8 @@
            <h4 class="text-uppercase text-primary"><i class="fa fa-users hvr-grow-rotate"></i>  Users</h4>
             <!--
             <h3>
-                <a class="lg-anchor text-light" href="/index.php?control=BuildList&action=show">
-                    Build List <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a>
+                <a class="lg-anchor text-light" href="/index.php?control=<?php echo ucfirst(PHARAOH_APP)  ; ?>List&action=show">
+                    <?php echo ucfirst(PHARAOH_APP)  ; ?> List <i style="font-size: 18px;" class="fa fa-chevron-right"></i></a>
             </h3>
             -->
             <div role="tabpanel">
@@ -89,7 +89,7 @@
 							if($userdetails['role']==1){
 							echo '<b><p class="text-primary">Admin</p></b>'; }
 							if($userdetails['role']==2){
-							echo '<b><p class="text-success">Builder</p></b>'; }
+							echo '<b><p class="text-success"><?php echo ucfirst(PHARAOH_APP)  ; ?>er</p></b>'; }
 							if($userdetails['role']==3){
 							echo '<b><p class="text-warning">Viewer</p></b>'; } ?>
 						</td>
@@ -101,7 +101,7 @@
 							<button type="button" class="btn btn-default  btn-xs dropdown-toggle hvr-grow" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button>
 							<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
 							<li class="divider"></li><li><a class="bg-info">Change role</a></li><li class="divider"></li>
-							<li><a href="<?php echo'/index.php?control=UserManager&action=changerole&username='.$userdetails['username'].'&email='.$userdetails['email'].'&role=2' ?>" class="hvr-grow-shadow">Builder</a></li>
+							<li><a href="<?php echo'/index.php?control=UserManager&action=changerole&username='.$userdetails['username'].'&email='.$userdetails['email'].'&role=2' ?>" class="hvr-grow-shadow"><?php echo ucfirst(PHARAOH_APP)  ; ?>er</a></li>
 							<li><a href="<?php echo'/index.php?control=UserManager&action=changerole&username='.$userdetails['username'].'&email='.$userdetails['email'].'&role=3' ?>"class="hvr-grow-shadow">Viewer</a></li>
 							<li class="divider"></li><li><a class="bg-info">User option</a></li><li class="divider"></li>
 							<li><a href="<?php echo'/index.php?control=UserManager&action=removeuser&username='.$userdetails['username'].'&email='.$userdetails['email'].'' ?>" class="text-info hvr-grow-shadow">Restrict user</a></li>
@@ -128,7 +128,7 @@
 							<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
 							<li class="divider"></li><li><a class="bg-info">Change role</a></li><li class="divider"></li>
 							<li><a href="<?php echo'/index.php?control=UserManager&action=changerole&username='.$userdetails['username'].'&email='.$userdetails['email'].'&role=1' ?>" class="hvr-grow-shadow">Admin</a></li>
-							<li><a href="<?php echo'/index.php?control=UserManager&action=changerole&username='.$userdetails['username'].'&email='.$userdetails['email'].'&role=2' ?>" class="hvr-grow-shadow">Builder</a></li>
+							<li><a href="<?php echo'/index.php?control=UserManager&action=changerole&username='.$userdetails['username'].'&email='.$userdetails['email'].'&role=2' ?>" class="hvr-grow-shadow"><?php echo ucfirst(PHARAOH_APP)  ; ?>er</a></li>
 							<li class="divider"></li><li><a class="bg-info">User option</a></li><li class="divider"></li>
 							<li><a href="<?php echo'/index.php?control=UserManager&action=removeuser&username='.$userdetails['username'].'&email='.$userdetails['email'].'' ?>" class="text-info hvr-grow-shadow">Restrict user</a></li>
 							<li><a href="<?php echo'/index.php?control=UserManager&action=adduser&username='.$userdetails['username'].'&email='.$userdetails['email'].'' ?>" class="text-info hvr-grow-shadow">Allow user</a></li>
