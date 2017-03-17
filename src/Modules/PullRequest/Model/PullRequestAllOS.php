@@ -25,6 +25,7 @@ class PullRequestAllOS extends Base {
         $ret["user"] = $this->getLoggedInUser();
         $ret["current_user_role"] = $this->getCurrentUserRole($ret["user"]);
         $ret["pull_request"] = $this->getPullRequest();
+        $ret["commit_difference"] = $this->countCommitDifference();
         $ret["pull_request_comments"] = $this->getPullRequestComments($ret["pull_request"]);
         $ret["pharaoh_build_integration"] = $this->getPharaohBuildIntegration($ret["features"], $ret["repository"]);
         return $ret ;
@@ -119,6 +120,14 @@ class PullRequestAllOS extends Base {
             $ret["message"] = 'Server Error' ;
             return $ret ;
         }
+    }
+
+    protected function countCommitDifference() {
+        $pull_request = $this->getPullRequest();
+        $rd = REPODIR.DS.$this->params["item"].DS ;
+        $commmand="cd {$rd} && git log --oneline {$pull_request['source_branch']} ^{$pull_request['target_branch']} | wc -l" ;
+        $res = self::executeAndLoad($commmand) ;
+        return $res ;
     }
 
     protected function getLoggedInUser() {
