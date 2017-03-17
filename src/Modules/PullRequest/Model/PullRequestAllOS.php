@@ -89,22 +89,34 @@ class PullRequestAllOS extends Base {
 
         $rd = REPODIR.DS.$this->params["item"].DS ;
 
-        $orig = self::executeAndLoad("cd $rd && git rev-parse --abbrev-ref HEAD") ;
+        // @todo this might not be the best temp dir creator
+        $GIT_WORK_TREE = self::executeAndLoad("mktemp -d") ;
 
-        $commmand ="cd $rd && git symbolic-ref HEAD refs/heads/{$pull_request['source_branch']} && " .
-            "git branch -f {$pull_request['target_branch']} {$pull_request['source_branch']} && " .
-            "git symbolic-ref HEAD refs/heads/{$orig} " ;
+        $commmand ="cd $GIT_WORK_TREE \n " ;
+        $commmand.="git clone {$rd} . \n " ;
+//        $commmand.="git remote show \n " ;
+        $commmand.="GIT_DIR={$rd} GIT_WORK_TREE={$GIT_WORK_TREE} git reset --hard HEAD \n " ;
+        $commmand.="GIT_DIR={$rd} GIT_WORK_TREE={$GIT_WORK_TREE} git checkout {$pull_request['target_branch']} \n " ;
+//        $commmand.=" ( GIT_DIR={$rd} GIT_WORK_TREE={$GIT_WORK_TREE} git merge --ff-only -m \"Merging {$pull_request['source_branch']} into {$pull_request['target_branch']}\" origin/{$pull_request['source_branch']} || git reset --hard HEAD ) \n " ;
+        $commmand.=" ( GIT_DIR={$rd} GIT_WORK_TREE={$GIT_WORK_TREE} git merge --ff-only -m \"Merging {$pull_request['source_branch']} into {$pull_request['target_branch']}\" origin/{$pull_request['source_branch']} ) \n " ;
+        $commmand.="GIT_DIR={$rd} GIT_WORK_TREE={$GIT_WORK_TREE} git checkout master \n " ;
+//        $commmand.="GIT_DIR={$rd} GIT_WORK_TREE={$GIT_WORK_TREE} git remote add origin {$rd} \n " ;
+        $commmand.="GIT_DIR={$rd} GIT_WORK_TREE={$GIT_WORK_TREE} git push -u origin master \n " ;
+        $commmand.="cd {$rd} \n " ;
+        $commmand.="rm -rf $GIT_WORK_TREE " ;
 
-        $res = $this::executeAndGetReturnCode($commmand, false, true) ;
+        ob_start() ;
+        $res = self::executeAsShell($commmand) ;
+        $out = ob_get_clean() ;
 //        var_dump('<pre>',$commmand,  $res, '</pre>') ;
 
-        if ($res['rc'] === 0) {
+        if ($res === 0) {
             $ret["status"] = true ;
             $ret["message"] = 'Pull Request Status updated to Closed' ;
             return $ret ;
         } else {
             $ret["status"] = false ;
-            $ret["message"] = $res['output'][0] ;
+            $ret["message"] = 'Server Error' ;
             return $ret ;
         }
     }
