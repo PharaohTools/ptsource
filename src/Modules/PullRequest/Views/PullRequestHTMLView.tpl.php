@@ -116,9 +116,29 @@
 
                     ?>
                 </div>
+                <h4>
+
+                    <?php
+
+                    if (isset($pageVars["data"]['pull_request']['status'])) {
+                        if ($pageVars["data"]['pull_request']['status'] === 'open') {
+                            ?>
+                            <a href="index.php?control=UserProfilePublic&action=show&user=<?php echo $pageVars["data"]['pull_request']['requestor'] ; ?>"><?php echo $pageVars["data"]['pull_request']['requestor'] ; ?></a>
+                            wants to merge <?php echo $pageVars["data"]['commit_difference'] ; ?> commit into <?php echo $pageVars["data"]['pull_request']['target_branch'] ; ?> from <?php echo $pageVars["data"]['pull_request']['source_branch'] ; ?>
+                            <?php
+                        } else if ($pageVars["data"]['pull_request']['status'] === 'accepted') {
+                            ?>
+                            <a href="index.php?control=UserProfilePublic&action=show&user=<?php echo $pageVars["data"]['pull_request']['requestor'] ; ?>"><?php echo $pageVars["data"]['pull_request']['requestor'] ; ?></a>
+                            has merged into <?php echo $pageVars["data"]['pull_request']['target_branch'] ; ?> from <?php echo $pageVars["data"]['pull_request']['source_branch'] ; ?>
+                            <?php
+                        }
+                    }
+
+                    ?>
+
+                </h4>
                 <h5>
-                    <a href="index.php?control=UserProfilePublic&action=show&user=<?php echo $pageVars["data"]['pull_request']['requestor'] ; ?>"><?php echo $pageVars["data"]['pull_request']['requestor'] ; ?></a>
-                    wants to merge 1 commit into <?php echo $pageVars["data"]['pull_request']['target_branch'] ; ?> from <?php echo $pageVars["data"]['pull_request']['source_branch'] ; ?>
+                    <strong>Description: </strong><?php echo $pageVars["data"]['pull_request']['description'] ; ?>
                 </h5>
 
 
