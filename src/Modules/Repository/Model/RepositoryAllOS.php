@@ -103,6 +103,7 @@ class RepositoryAllOS extends Base {
                 'mkdir -p '.REPODIR.DS.$name,
                 'git init --bare '.REPODIR.DS.$name,
                 'cd '.REPODIR.DS.$name.'; git config http.receivepack true ;',
+                'chmod -R 775 '.REPODIR.DS.$name.' ;',
                 'chown -R ptgit:ptsource '.REPODIR.DS.$name.' ;' ) ;
             $results = array() ;
             foreach ($comms as $comm) {
