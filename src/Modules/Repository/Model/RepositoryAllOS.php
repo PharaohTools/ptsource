@@ -100,11 +100,10 @@ class RepositoryAllOS extends Base {
             $logging->log("Attempting to create directory ".REPODIR.DS."$name ", $this->getModuleName()) ;
             // @todo cross os
             $comms = array(
-                'mkdir -p '.REPODIR.DS.$name,
-                'git init --bare '.REPODIR.DS.$name,
+                'sudo -u ptgit "/bin/mkdir -m 0775 -p '.REPODIR.DS.$name . '"' ,
                 'cd '.REPODIR.DS.$name.'; git config http.receivepack true ;',
-                'chmod -R 775 '.REPODIR.DS.$name.' ;',
-                'chown -R ptgit:ptsource '.REPODIR.DS.$name.' ;' ) ;
+                'git init --bare '.REPODIR.DS.$name,
+                'sudo -u ptgit "chown -R ptgit:ptsource '.REPODIR.DS.$name . '"' ,) ;
             $results = array() ;
             foreach ($comms as $comm) {
                 $rc = self::executeAndGetReturnCode($comm);
