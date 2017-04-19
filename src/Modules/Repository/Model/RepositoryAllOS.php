@@ -115,4 +115,44 @@ class RepositoryAllOS extends Base {
             return (in_array(false, $results)) ? false : true ; }
     }
 
+    public function userIsAllowedAccess($public_resource = null) {
+        $user = $this->getLoggedInUser() ;
+        $repository = $this->getRepository($this->params['item']) ;
+        $settings = \Model\AppConfig::getAppVariable("mod_config");
+        if (!isset($settings["PublicScope"]["enable_public"]) ||
+            ( isset($settings["PublicScope"]["enable_public"]) && $settings["PublicScope"]["enable_public"] != "on" )) {
+            // if enable public is set to off
+            if ($user == false) {
+                // and the user is not logged in
+                return false ; }
+            // if they are logged in continue on
+            return true ; }
+        else {
+            if (is_null($public_resource)) {
+                $public_resource = "public_pages" ;
+            }
+            // if enable public is set to on
+            if ($user == false) {
+                // and the user is not logged in
+                if ($repository["settings"]["PublicScope"]["enabled"] == "on" &&
+                    $repository["settings"]["PublicScope"][$public_resource] == "on") {
+                    // if public pages are on
+                    return true ; }
+                else {
+                    // if no public pages are on
+                    return false ; } }
+            else {
+                // and the user is logged in
+                // @todo this is where repo specific perms go when ready
+                return true ; }
+        }
+    }
+
+
+    protected function getLoggedInUser() {
+        $signupFactory = new \Model\Signup() ;
+        $signup = $signupFactory->getModel($this->params);
+        return $signup->getLoggedInUserData() ;
+    }
+
 }
