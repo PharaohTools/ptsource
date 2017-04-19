@@ -78,14 +78,25 @@ class PharaohBuildIntegrationAllOS extends Base {
         return $result;
     }
 
+    public function findJobReleases($build_job) {
+        $apif = new \Model\PharaohAPI();
+        $params = $this->params ;
+        $params['api_module'] = 'PublishReleases' ;
+        $params['api_function'] = 'get_releases' ;
+        $params['slug'] = $build_job['job_slug'] ;
+        $params['api_instance_url'] = $build_job['instance_url'] ;
+        $params['api_key'] = $this->findInstanceKey($build_job['instance_url']) ;
+        $params['api_param_slug'] = $build_job['job_slug'] ;
+        $api_request = $apif->getModel($params, 'Request') ;
+        $result = $api_request->performAPIRequest() ;
+        return $result;
+    }
+
     public function findInstanceKey($instance_url) {
-
         $instance_url = $this->ensureTrailingSlash($instance_url) ;
-
         $settings = $this->getSettings() ;
         $instance_key = false ;
         if ($settings['PharaohBuildIntegration']['enabled'] === 'on') {
-
             for ($i=0; $i<5; $i++) {
                 if (isset($settings['PharaohBuildIntegration']['build_instance_url_'.$i])) {
                     $url = $settings['PharaohBuildIntegration']['build_instance_url_'.$i] ;
