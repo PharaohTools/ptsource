@@ -56,7 +56,8 @@
                     switch ($pageVars["route"]["action"]) {
                         case "show" :
                             $stat = "Browsing Files From " ;
-                            break ; }
+                            break ;
+                    }
                     ?>
                     <h3><?= $stat; ?> Repository <?php echo $pageVars["data"]["repository"]["project-name"] ; ?></h3>
                 </div>
@@ -184,9 +185,9 @@
 if ($pageVars["route"]["action"]=="show") {
     if ($pageVars["data"]["is_file"] == true) {
         ?>
-        <link rel="stylesheet" href="/Assets/Modules/FileBrowser/css/filebrowser.css">
+        <link rel="stylesheet" href="/Assets/Modules/FileBrowser/css/filebrowser.css" />
+        <link rel="stylesheet" href="/Assets/Modules/FileBrowser/js/CodeMirror/lib/codemirror.css" />
         <script src="/Assets/Modules/FileBrowser/js/CodeMirror/lib/codemirror.js"></script>
-        <link rel="stylesheet" href="/Assets/Modules/FileBrowser/js/CodeMirror/lib/codemirror.css">
         <script src="/Assets/Modules/FileBrowser/js/CodeMirror/mode/htmlmixed/htmlmixed.js"></script>
         <script src="/Assets/Modules/FileBrowser/js/CodeMirror/mode/htmlembedded/htmlembedded.js"></script>
         <script src="/Assets/Modules/FileBrowser/js/CodeMirror/mode/javascript/javascript.js"></script>
