@@ -80,8 +80,8 @@ class RepositoryReleasesAllOS extends Base {
     }
 
     public function getReleasePackages() {
-        $r = $this->getPharaohBuildIntegrationPackages() ;
-        $r = array_merge($r, $this->getDefaultReleasePackages()) ;
+        $r = $this->getDefaultReleasePackages() ;
+        $r = array_merge($r, $this->getPharaohBuildIntegrationPackages()) ;
         return $r ;
     }
 
@@ -116,8 +116,7 @@ class RepositoryReleasesAllOS extends Base {
     }
 
     protected function pharaohBuildReleaseEnabled($repo) {
-        $mn = $this->getModuleName() ;
-        if ($repo['settings'][$mn]['pharaoh_build_rel_enabled']) {
+        if ($repo['settings']['PharaohBuildIntegration']['enabled'] === 'on') {
             return true ;
         }
         return false ;
@@ -145,5 +144,36 @@ class RepositoryReleasesAllOS extends Base {
         return REPODIR.DS.$this->params["item"].DS;
     }
 
+
+    protected function getPharaohBuildIntegration($features, $repository) {
+        $pbi = false ;
+        foreach ($features as $feature) {
+            if ( ($feature["module"] === 'PharaohBuildIntegration') &&
+                ($feature['values']['enabled'] === 'on')) {
+                $res = $this->getBuildReleases($feature, $repository) ;
+                $pbi = $res ;
+            }
+        }
+        return $pbi ;
+    }
+
+    protected function getBuildReleases($feature, $repository) {
+        $results = array() ;
+        foreach ($feature['values']['build_jobs'] as $build_job) {
+            $results[] = $this->calculateBuildJob($build_job, $repository) ;
+        }
+        return $results ;
+    }
+
+    protected function calculateBuildJob($build_job, $repository) {
+        $pbif = new \Model\PharaohBuildIntegration() ;
+        $pbi = $pbif->getModel($this->params) ;
+        $job_releases = $pbi->findJobReleases($build_job, $repository) ;
+//        $bjr = array(
+//            'releases' => $job_releases,
+//        ) ;
+//        return $bjr ;
+        return $job_releases ;
+    }
 
 }
