@@ -9,6 +9,12 @@ class RepositoryReleases extends Base {
       // if we don't have an object, its an array of errors
       $this->content = $pageVars ;
       if (is_array($thisModel)) { return $this->failDependencies($pageVars, $this->content, $thisModel) ; }
+
+      $repoModel = $this->getModelAndCheckDependencies('Repository', $pageVars) ;
+      if ($repoModel->userIsAllowedAccess() !== true) {
+            $override = \Core\AutoLoader::getController("Signup")  ;
+            return $override->execute() ; }
+
       $this->content["data"] = $thisModel->getData();
       return array ("type"=>"view", "view"=>"repositoryReleases", "pageVars"=>$this->content);
     }
