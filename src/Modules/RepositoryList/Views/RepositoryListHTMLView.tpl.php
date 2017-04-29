@@ -1,53 +1,49 @@
 <div class="container" id="wrapper">
-	<div class="navbar-default col-sm-2 sidebar" role="navigation">
-		<div class="sidebar-nav ">
-			<ul class="nav in" id="side-menu">
-				<li class="sidebar-search">
-					<div class="input-group custom-search-form  hvr-bounce-in">
-						<input type="text" class="form-control" placeholder="Search...">
-						<span class="input-group-btn">
-							<button class="btn btn-default" type="button">
-								<i class="fa fa-search"></i>
-							</button> </span>
-					</div>
-					<!-- /input-group -->
-				</li>
-				<li>
-					<a href="/index.php?control=Index&action=show" class=" hvr-bounce-in"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-				</li>
-				<li>
-					<a href="/index.php?control=ApplicationConfigure&action=show" class=" hvr-bounce-in"> <i class="fa fa-cogs fa-fw"></i> Configure PTSource<span class="fa arrow"></span> </a>
-					<ul class="nav nav-second-level collapse">
-						<li>
-							<a href="/index.php?control=ApplicationConfigure&action=show" class=" hvr-curl-bottom-right">Application</a>
-						</li>
-						<li>
-							<a href="/index.php?control=UserManager&action=show" class=" hvr-curl-bottom-right">Users</a>
-						</li>
-						<li>
-							<a href="/index.php?control=ModuleManager&action=show" class=" hvr-curl-bottom-right">Modules</a>
-						</li>
-                        <li>
-                            <a href="/index.php?control=Integrations&action=show" class=" hvr-curl-bottom-right">Integrations</a>
-                        </li>
-					</ul>
-					<!-- /.nav-second-level -->
-				</li>
-				<li>
-					<a href="/index.php?control=RepositoryConfigure&action=new"class=" hvr-bounce-in"><i class="fa fa-edit fa-fw hvr-bounce-in"></i> New Repository</a>
-				</li>
-				<li>
-					<a href="/index.php?control=RepositoryConfigure&action=copy"class=" hvr-bounce-in"><i class="fa fa-edit fa-fw hvr-bounce-in"></i> Copy Repository</a>
-				</li>
-			</ul>
-		</div>
-		<br />
 
-
-	</div>
-
-	<div class="col-lg-9">
+	<div class="col-lg-12">
 		<div class="well well-lg">
+            <div  id="page_sidebar" class="navbar-default col-sm-2 sidebar" role="navigation">
+                <div class="sidebar-nav ">
+                    <div class="sidebar-search">
+                        <button class="btn btn-success" id="menu_visibility_label" type="button">
+                            Show Menu
+                        </button>
+                        <i class="fa fa-1x fa-toggle-off hvr-grow" id="menu_visibility_switch"></i>
+                    </div>
+                    <ul class="nav in" id="side-menu">
+                        <li>
+                            <a href="/index.php?control=Index&action=show" class=" hvr-bounce-in"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="/index.php?control=ApplicationConfigure&action=show" class=" hvr-bounce-in"> <i class="fa fa-cogs fa-fw"></i> Configure PTSource<span class="fa arrow"></span> </a>
+                            <ul class="nav nav-second-level collapse">
+                                <li>
+                                    <a href="/index.php?control=ApplicationConfigure&action=show" class=" hvr-curl-bottom-right">Application</a>
+                                </li>
+                                <li>
+                                    <a href="/index.php?control=UserManager&action=show" class=" hvr-curl-bottom-right">Users</a>
+                                </li>
+                                <li>
+                                    <a href="/index.php?control=ModuleManager&action=show" class=" hvr-curl-bottom-right">Modules</a>
+                                </li>
+                                <li>
+                                    <a href="/index.php?control=Integrations&action=show" class=" hvr-curl-bottom-right">Integrations</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="/index.php?control=RepositoryConfigure&action=new"class=" hvr-bounce-in"><i class="fa fa-edit fa-fw hvr-bounce-in"></i> New Repository</a>
+                        </li>
+                        <li>
+                            <a href="/index.php?control=RepositoryConfigure&action=copy"class=" hvr-bounce-in"><i class="fa fa-edit fa-fw hvr-bounce-in"></i> Copy Repository</a>
+                        </li>
+                    </ul>
+                </div>
+                <br />
+
+
+            </div>
 
 			<div class="row clearfix no-margin">
 				<h4 class="text-uppercase text-light">All Repositories</h4>
