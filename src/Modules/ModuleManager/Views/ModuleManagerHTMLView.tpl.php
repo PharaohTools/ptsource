@@ -1,46 +1,46 @@
 <div class="container" id="wrapper">
-    <div class="navbar-default col-sm-2 sidebar" role="navigation">
-        <div class="sidebar-nav ">
-            <ul class="nav in" id="side-menu">
-                <li class="sidebar-search">
-                    <div class="input-group custom-search-form hvr-bounce-in">
-                        <input type="text" class="form-control" placeholder="Search...">
-                        <span class="input-group-btn">
+
+    <div class="col-lg-12">
+        <div id="page_sidebar" class="navbar-default col-sm-2 sidebar" role="navigation">
+            <div class="sidebar-nav ">
+                <ul class="nav in" id="side-menu">
+                    <li class="sidebar-search">
+                        <div class="input-group custom-search-form hvr-bounce-in">
+                            <input type="text" class="form-control" placeholder="Search...">
+                            <span class="input-group-btn">
                             <button class="btn btn-default" type="button">
                                 <i class="fa fa-search"></i>
                             </button>
                         </span>
-                    </div>
-                    <!-- /input-group -->
-                </li>
-                <li>
-                    <a href="/index.php?control=Index&action=show" class=" hvr-bounce-in">
-                        <i class="fa fa-dashboard"></i> Dashboard
-                    </a>
-                </li>
-                <li>
-                    <a href="/index.php?control=ApplicationConfigure&action=show" class=" hvr-bounce-in">
-                        <i class="fa fa-cogs fa-fw hvr-bounce-in"></i> Configure PTSource
-                    </a>
-                </li>
-                <li>
-                    <a href="/index.php?control=UserManager&action=show" class=" hvr-bounce-in">
-                        <i class="fa fa-group hvr-bounce-in"></i> User Manager
-                    </a>
-                </li>
-				<li>
-                    <a href="/index.php?control=UserManager&action=show" class=" active hvr-bounce-in">
-                        <i class="fa fa-suitcase hvr-bounce-in"></i> Module Manager
-                    </a>
-                </li>
-                <li>
-                    <a href="/index.php?control=Integrations&action=show" class=" hvr-curl-bottom-right">Integrations</a>
-                </li>
-            </ul>
+                        </div>
+                        <!-- /input-group -->
+                    </li>
+                    <li>
+                        <a href="/index.php?control=Index&action=show" class=" hvr-bounce-in">
+                            <i class="fa fa-dashboard"></i> Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/index.php?control=ApplicationConfigure&action=show" class=" hvr-bounce-in">
+                            <i class="fa fa-cogs fa-fw hvr-bounce-in"></i> Configure PTSource
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/index.php?control=UserManager&action=show" class=" hvr-bounce-in">
+                            <i class="fa fa-group hvr-bounce-in"></i> User Manager
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/index.php?control=UserManager&action=show" class=" active hvr-bounce-in">
+                            <i class="fa fa-suitcase hvr-bounce-in"></i> Module Manager
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/index.php?control=Integrations&action=show" class=" hvr-curl-bottom-right">Integrations</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-
-    <div class="col-lg-9">
                     <div class="well well-lg">
 
 <!--            <h2 class="text-uppercase text-light"><a href="/">PTSource - Pharaoh Tools </a></h2>-->
