@@ -48,7 +48,7 @@
 			</ul>
 		</div>
 	</div>
-    <div class="col-lg-9">
+    <div class="col-lg-12">
 
     <?php echo $this->renderLogs() ; ?>
 
