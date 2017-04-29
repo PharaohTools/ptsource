@@ -2,8 +2,29 @@ body {
     padding-top: 72px;
 }
 
+
 .sidebar {
-    position: relative;
+    position: fixed;
+    z-index: 100;
+    border: 1px solid black;
+    margin-top: -20px;
+}
+
+@media (min-width: 768px) {
+    #page_sidebar.sidebar {
+        z-index: 1;
+        position: fixed;
+        width: 250px;
+    }
+}
+
+@media (max-width: 767px) {
+    #page_sidebar.sidebar {
+        z-index: revert;
+        position: relative;
+        width: 100%;
+        border: none;
+    }
 }
 
 #page-wrapper {
@@ -146,4 +167,14 @@ span.message_text {
     font-size: 250%;
     border: 3px solid white;
     padding: 15px;
+}
+
+
+#page_sidebar {
+    background-color: #f5f5f5;
+    right: 22.5%;
+}
+
+ul#side-menu {
+    display: none;
 }

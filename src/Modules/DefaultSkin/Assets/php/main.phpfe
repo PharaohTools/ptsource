@@ -120,6 +120,46 @@ class WindowMessage {
 
 }
 
+
+$jQuery('#menu_visibility_switch')->on('click', function() use ($jQuery)  {
+
+    toggleTheMenu() ;
+
+});
+
+$jQuery('#menu_visibility_label')->on('click', function() use ($jQuery)  {
+
+    toggleTheMenu() ;
+
+
+});
+
+function toggleTheMenu() {
+
+    $jQuery = \js_core::$jQuery ;
+    \js_core::$console->log('Using menu switch') ;
+    $switch = $jQuery('#menu_visibility_switch') ;
+    $start_status = $switch->hasClass('fa-toggle-off') ;
+    if ($start_status === true) {
+        $jQuery('#menu_visibility_label')->html('Hide Menu') ;
+        $jQuery('#menu_visibility_label')->removeClass('btn-success') ;
+        $jQuery('#menu_visibility_label')->addClass('btn-info') ;
+        $jQuery('#side-menu')->slideDown('slow');
+        $switch->removeClass('fa-toggle-off') ;
+        $switch->addClass('fa-toggle-on') ;
+    }
+
+    if ($start_status === false) {
+        $jQuery('#menu_visibility_label')->html('Show Menu') ;
+        $jQuery('#menu_visibility_label')->removeClass('btn-info') ;
+        $jQuery('#menu_visibility_label')->addClass('btn-success') ;
+        $jQuery('#side-menu')->slideUp('slow');
+        $switch->removeClass('fa-toggle-on') ;
+        $switch->addClass('fa-toggle-off') ;
+    }
+}
+
+
 $console->log("enabling load-locked elements") ;
 $jQuery('.load_hidden')->removeClass('load_hidden') ;
 $jQuery('.load_pending')->remove() ;

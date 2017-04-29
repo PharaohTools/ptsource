@@ -58,6 +58,7 @@
         <!-- Bootstrap Core CSS -->
         <link href="/Assets/Modules/DefaultSkin/css/default.css" rel="stylesheet">
         <script type="text/javascript" src="/Assets/Modules/DefaultSkin/js/pharaoh_default.js"></script>
+        <script type="text/javascript" src="/Assets/Modules/DefaultSkin/js/jquery-ui.js"></script>
 
     </head>
 
@@ -170,6 +171,12 @@
         </div> <!-- app wrapper -->
 	</body>
     <script type="text/javascript">
+
+        jQuery(function() {
+            jQuery( "#page_sidebar" ).draggable();
+            // $( "#sortableSteps" ).disableSelection();
+        });
+        
         function downloadJSAtOnload() {
 //                var element = document.createElement("script");
 //                element.src = "/Assets/Modules/DefaultSkin/js/bundle.js";
