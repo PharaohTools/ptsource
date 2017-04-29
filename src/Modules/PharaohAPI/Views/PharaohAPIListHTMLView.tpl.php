@@ -1,5 +1,5 @@
 <div class="container" id="wrapper">
-    <div class="col-lg-9">
+    <div class="dcol-lg-12">
         <?php
 
             $mn = $this->getModuleName() ;
