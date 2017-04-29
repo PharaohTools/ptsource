@@ -15,20 +15,7 @@ class AboutAllOS extends Base {
     public $modelGroup = array("Default") ;
 
     public function getData() {
-        $ret["pipeline"] = $this->getPipeline();
+        $ret = array() ;
         return $ret ;
     }
-
-    public function deleteData() {
-        $ret["pipeline"] = $this->deletePipeline();
-        return $ret ;
-    }
-
-    public function getPipeline() {
-        $pipelineFactory = new \Model\Pipeline() ;
-        $pipeline = $pipelineFactory->getModel($this->params);
-        $r = $pipeline->getPipeline($this->params["item"]);
-        return $r ;
-    }
-
 }
