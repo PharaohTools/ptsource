@@ -1,38 +1,32 @@
 <div class="container" id="wrapper">
-    <div class="navbar-default col-sm-2 sidebar" role="navigation">
-        <div class="sidebar-nav ">
-            <ul class="nav in" id="side-menu">
-                <li class="sidebar-search">
-                    <div class="thin_padding" id="show_menu_wrapper">
-                        <button class="btn btn-success" id="show_menu_button" type="button">
-                            Show Menu
-                        </button>
-                    </div>
-                    <div class="thin_padding" id="hide_menu_wrapper">
-                        <button class="btn btn-info" id="hide_menu_button" type="button">
-                            Hide Menu
-                        </button>
-                    </div>
-                </li>
-                <li>
-                    <a class=" hvr-bounce-in">
-                        <i class="fa fa-user fa-fw"></i> User Menu <span class="fa arrow"></span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/index.php?control=UserManager&action=show" class=" hvr-curl-bottom-right">User Manager</a>
-                </li>
-                <li>
-                    <a href="/index.php?control=UserProfile&action=show" class=" hvr-curl-bottom-right">Edit Profile</a>
-                </li>
-                <li>
-                    <a href="/index.php?control=UserProfilePublic&action=show" class=" hvr-curl-bottom-right active">Public Profile</a>
-                </li>
-            </ul>
-        </div>
-    </div>
 
-    <div class="col-lg-9">
+    <div class="col-lg-12">
+        <div id="page_sidebar" class="navbar-default col-sm-2 sidebar" role="navigation">
+            <div class="sidebar-nav ">
+                <div class="sidebar-search">
+                    <button class="btn btn-success" id="menu_visibility_label" type="button">
+                        Show Menu
+                    </button>
+                    <i class="fa fa-1x fa-toggle-off hvr-grow" id="menu_visibility_switch"></i>
+                </div>
+                <ul class="nav in" id="side-menu">
+                    <li>
+                        <a class=" hvr-bounce-in">
+                            <i class="fa fa-user fa-fw"></i> User Menu <span class="fa arrow"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/index.php?control=UserManager&action=show" class=" hvr-curl-bottom-right">User Manager</a>
+                    </li>
+                    <li>
+                        <a href="/index.php?control=UserProfile&action=show" class=" hvr-curl-bottom-right">Edit Profile</a>
+                    </li>
+                    <li>
+                        <a href="/index.php?control=UserProfilePublic&action=show" class=" hvr-curl-bottom-right active">Public Profile</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
         <div class="well well-lg">
 
             <?php echo $this->renderLogs() ; ?>
