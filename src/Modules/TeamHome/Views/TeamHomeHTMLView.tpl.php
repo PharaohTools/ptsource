@@ -1,54 +1,60 @@
 <div class="container" id="wrapper">
-        <div class="navbar-default col-sm-2 sidebar" role="navigation">
-            <div class="sidebar-nav ">
-                <ul class="nav in" id="side-menu">
-
-                    <?php
-
-                    if (in_array($pageVars["data"]["current_user_role"], array("1", "2"))) {
-
-                    ?>
-                        <li>
-                            <a href="/index.php?control=Index&amp;action=show" class="hvr-bounce-in">
-                                <i class="fa fa-dashboard fa-fw hvr-bounce-in"></i> Dashboard
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/index.php?control=TeamList&amp;action=show" class="hvr-bounce-in">
-                                <i class="fa fa-bars fa-fw hvr-bounce-in"></i> All Teams
-                            </a>
-                        </li>
-                        <li>
-                            <a href="index.php?control=TeamConfigure&action=show&item=<?php echo $pageVars["data"]["team"]["team_slug"] ; ?>" class="hvr-bounce-in">
-                                <i class="fa  fa-cog fa-fw hvr-bounce-in"></i> Configure
-                            </a>
-                        </li>
-
-                    <?php
-
-                    }
-
-                    ?>
+    
+        <div class="col-lg-12">
+            <div id="page_sidebar" class="navbar-default col-sm-2 sidebar" role="navigation">
+                <div class="sidebar-nav ">
+                    <div class="sidebar-search">
+                        <button class="btn btn-success" id="menu_visibility_label" type="button">
+                            Show Menu
+                        </button>
+                        <i class="fa fa-1x fa-toggle-off hvr-grow" id="menu_visibility_switch"></i>
+                    </div>
+                    <ul class="nav in" id="side-menu">
 
                         <?php
-                            if (in_array($pageVars["data"]["current_user_role"], array("1", "2"))) {
+
+                        if (in_array($pageVars["data"]["current_user_role"], array("1", "2"))) {
+
+                            ?>
+                            <li>
+                                <a href="/index.php?control=Index&amp;action=show" class="hvr-bounce-in">
+                                    <i class="fa fa-dashboard fa-fw hvr-bounce-in"></i> Dashboard
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/index.php?control=TeamList&amp;action=show" class="hvr-bounce-in">
+                                    <i class="fa fa-bars fa-fw hvr-bounce-in"></i> All Teams
+                                </a>
+                            </li>
+                            <li>
+                                <a href="index.php?control=TeamConfigure&action=show&item=<?php echo $pageVars["data"]["team"]["team_slug"] ; ?>" class="hvr-bounce-in">
+                                    <i class="fa  fa-cog fa-fw hvr-bounce-in"></i> Configure
+                                </a>
+                            </li>
+
+                            <?php
+
+                        }
+
                         ?>
 
-                        <li>
-                            <a href="index.php?control=TeamHome&action=delete&item=<?php echo $pageVars["data"]["team"]["team_slug"] ; ?>" class="hvr-bounce-in">
-                                <i class="fa fa-trash fa-fw hvr-bounce-in"></i> Delete
-                            </a>
-                        </li>
+                        <?php
+                        if (in_array($pageVars["data"]["current_user_role"], array("1", "2"))) {
+                            ?>
 
-                    <?php
+                            <li>
+                                <a href="index.php?control=TeamHome&action=delete&item=<?php echo $pageVars["data"]["team"]["team_slug"] ; ?>" class="hvr-bounce-in">
+                                    <i class="fa fa-trash fa-fw hvr-bounce-in"></i> Delete
+                                </a>
+                            </li>
+
+                            <?php
                         }
-                    ?>
+                        ?>
 
-                </ul>
+                    </ul>
+                </div>
             </div>
-        </div>
-    
-        <div class="col-lg-9">
 
             <div class="well well-lg ">
                 <?php

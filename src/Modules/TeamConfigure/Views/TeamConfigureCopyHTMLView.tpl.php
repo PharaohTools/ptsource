@@ -63,7 +63,7 @@
             </ul>
         </div>
     </div>
-<div class="col-lg-9">
+<div class="col-lg-12">
 
     <div class="well well-lg">
 
