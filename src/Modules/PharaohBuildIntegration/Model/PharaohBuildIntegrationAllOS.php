@@ -39,6 +39,11 @@ class PharaohBuildIntegrationAllOS extends Base {
                             "type" => "text",
                             "name" => "Build Job Slug",
                             "slug" => "job_slug"),
+                    "criteria" =>
+                        array(
+                            "type" => "textarea",
+                            "name" => "Build Run Search Criteria",
+                            "slug" => "criteria"),
 //                    "title" =>
 //                        array(
 //                            "type" => "text",
@@ -59,9 +64,12 @@ class PharaohBuildIntegrationAllOS extends Base {
         $params['api_instance_url'] = $build_job['instance_url'] ;
         $params['api_key'] = $this->findInstanceKey($build_job['instance_url']) ;
         $params['api_param_slug'] = $build_job['job_slug'] ;
+        $params['api_param_criteria'] = $build_job['criteria'] ;
         $api_request = $apif->getModel($params, 'Request') ;
         $result = $api_request->performAPIRequest() ;
+
         return $result;
+
     }
 
     public function findJobReports($build_job) {
