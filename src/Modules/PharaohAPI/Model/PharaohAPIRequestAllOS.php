@@ -66,11 +66,11 @@ class PharaohAPIRequestAllOS extends Base {
         $server_output = curl_exec ($ch);
 
 //        ob_start();
-//        var_dump('api returned: ' ,$server_output) ;
+//        var_dump('api returned: '.$server_output) ;
 //        $out = ob_get_clean() ;
-//        error_log($out) ;
+//        file_put_contents('/tmp/pharaohlog', "From Source: \n" .$out, FILE_APPEND) ;
 //        curl_close ($ch);
-        $callObject = json_decode($server_output, true);
+//        $callObject = json_decode($server_output, true);
 
         return $callObject;
     }
