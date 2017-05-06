@@ -1,0 +1,69 @@
+#message_overlay {
+    min-width: 100px ;
+    z-index: 1000000;
+    display: block;
+    position: fixed;
+    top: 120px;
+    left: 10px;
+    /*background-color: rgba(0,0,0,0.5); !*dim the background*!*/
+}
+
+span.message_text {
+    height: 200%;
+    font-size: 250%;
+    border: 3px solid white;
+    padding: 15px;
+}
+
+.overlay_fephp {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);;
+    /*filter:alpha(opacity=50);*/
+    /*-moz-opacity:0.5;*/
+    /*-khtml-opacity: 0.5;*/
+    /*opacity: 0.5;*/
+    z-index: 10000;
+}
+
+#close_button_div {
+    position: relative;
+    float: right;
+    cursor: pointer;
+    top: -20px;
+    right: 16px;
+    width: 50px ;
+}
+
+#close_button_div img{
+    width: 75%;
+}
+
+.overlay_inner {
+    position: fixed;
+    margin: 10% 30%;
+    width: 40%;
+    height: 60%;
+    background-color: #fff;
+}
+
+.overlay_content {
+    position: relative;
+    margin: 0% 5%;
+    width: 90%;
+    height: 80%;
+    background-color: #fff;
+    color: #000000;
+    overflow-y: scroll;
+}
+
+@media (max-width: 767px) {
+    .overlay_inner {
+        width: 90% !important;
+        margin: 10% 5% !important;
+    }
+}
