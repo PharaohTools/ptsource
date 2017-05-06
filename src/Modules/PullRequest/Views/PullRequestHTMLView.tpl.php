@@ -304,15 +304,15 @@
                                 } else {
 //                                var_dump($build_job) ;
 
-                                    if ($build_job['results']['status'] === 'success') {
+                                    if ($build_job['results']['status'] === 'SUCCESS') {
                                         $text_status = "Passing" ;
                                         $btn_class = "btn-success" ;
                                     }
-                                    else if ($build_job['results']['status'] === 'pending') {
+                                    else if ($build_job['results']['status'] === 'PENDING') {
                                         $text_status = "Pending" ;
                                         $btn_class = "btn-warning" ;
                                     }
-                                    else if ($build_job['results']['status'] === 'failure') {
+                                    else if ($build_job['results']['status'] === 'FAILURE') {
                                         $text_status = "Failed" ;
                                         $btn_class = "btn-danger" ;
                                     }
