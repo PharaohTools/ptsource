@@ -98,8 +98,6 @@
                         $sinplur = "files" ; }
                     echo "<p> There {$sinpluris} {$count} changed {$sinplur}</p>" ;
 
-//                var_dump('<pre>', $diffs, '</pre>') ;
-
                     foreach ($diffs as $diff) {
                         echo '<div class="commitDiff">' ;
                         $file = $diff->getFile() ;
