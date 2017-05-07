@@ -67,7 +67,6 @@ class PharaohBuildIntegrationAllOS extends Base {
         $params['api_param_criteria'] = $build_job['criteria'] ;
         $api_request = $apif->getModel($params, 'Request') ;
         $result = $api_request->performAPIRequest() ;
-
         return $result;
 
     }
