@@ -354,11 +354,11 @@
                                             <h5>Run Time: <?php echo date('H:i d/m/Y', $build_job['build_status']['data']['build_run_time']) ; ?></h5>
 
                                             <?php
-                                                if (isset($build_job['build_status']['criteria'])) {
+                                                if (isset($build_job['criteria_array'])) {
                                             ?>
                                                     <h5>Criteria: </h5>
                                                 <?php
-                                                    foreach ($build_job['build_status']['criteria'] as $criterion) {
+                                                    foreach ($build_job['criteria_array'] as $criterion) {
                                                 ?>
                                                     <h5>
                                                         &nbsp;&nbsp;&nbsp;&nbsp;
