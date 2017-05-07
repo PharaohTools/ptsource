@@ -64,13 +64,13 @@ class PharaohAPIRequestAllOS extends Base {
         // receive server response ...
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $server_output = curl_exec ($ch);
-
+//
 //        ob_start();
 //        var_dump('api returned: '.$server_output) ;
 //        $out = ob_get_clean() ;
 //        file_put_contents('/tmp/pharaohlog', "From Source: \n" .$out, FILE_APPEND) ;
-//        curl_close ($ch);
-//        $callObject = json_decode($server_output, true);
+        curl_close ($ch);
+        $callObject = json_decode($server_output, true);
 
         return $callObject;
     }
