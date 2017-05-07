@@ -204,7 +204,18 @@ class PullRequestAllOS extends Base {
     protected function getBuildReports($feature, $repository) {
         $results = array() ;
         foreach ($feature['values']['build_jobs'] as $build_job) {
-            $results[] = $this->calculateBuildJob($build_job, $repository) ;
+            $calc_bj = $this->calculateBuildJob($build_job, $repository) ;
+            $settings_bj = $build_job ;
+            $settings_bj['criteria_array'] = $this->calculateCriteria($settings_bj['criteria']) ;
+            $merged = array_merge($settings_bj, $calc_bj) ;
+
+//            ob_start();
+//            var_dump('rays: ', $calc_bj, $settings_bj, $merged) ;
+//            $out = ob_get_clean() ;
+//            file_put_contents('/tmp/pharaohlog', "From Source: \n" .$out, FILE_APPEND) ;
+
+//            var_dump('merged', $merged) ;
+            $results[] = $merged ;
         }
         return $results ;
     }
@@ -245,6 +256,20 @@ class PullRequestAllOS extends Base {
     protected function getSettings() {
         $settings = \Model\AppConfig::getAppVariable("mod_config");
         return $settings ;
+    }
+
+    public function calculateCriteria($criteria) {
+        $criteriaLines = explode("\n", $criteria) ;
+        $all_criteria = array() ;
+        foreach ($criteriaLines as $criteriaLine) {
+            $criteriaParts = explode(":::", $criteriaLine) ;
+            $one_criteria["type"] = $criteriaParts[0] ;
+            $one_criteria["key"] = $criteriaParts[1] ;
+            $criteriaParts[2] = rtrim($criteriaParts[2], "\n\r\t");
+            $one_criteria["value"] = $criteriaParts[2] ;
+            $all_criteria[] = $one_criteria ;
+        }
+        return $all_criteria ;
     }
 
 }
