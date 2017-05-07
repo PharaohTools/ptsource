@@ -122,6 +122,7 @@
 
                     ?>
                 </div>
+
                 <h4>
 
                     <?php
@@ -143,10 +144,10 @@
                     ?>
 
                 </h4>
+
                 <h5>
                     <strong>Description: </strong><?php echo $pageVars["data"]['pull_request']['description'] ; ?>
                 </h5>
-
 
                 <?php
 
@@ -335,9 +336,9 @@
                                             <hr class="no-margin-hr" />
                                         </div>
                                         <div class="col-sm-2">
-                                    <span class="btn <?php echo $btn_class ; ?>">
-                                        <h3><?php echo $text_status ; ?></h3>
-                                    </span>
+                                            <span class="btn <?php echo $btn_class ; ?>">
+                                                <h3><?php echo $text_status ; ?></h3>
+                                            </span>
                                         </div>
                                         <div class="col-sm-10">
                                             <h5>Build Link:
@@ -351,6 +352,31 @@
                                                 </a>
                                             </h5>
                                             <h5>Run Time: <?php echo date('H:i d/m/Y', $build_job['build_status']['data']['build_run_time']) ; ?></h5>
+
+                                            <?php
+                                                if (isset($build_job['build_status']['criteria'])) {
+                                            ?>
+                                                    <h5>Criteria: </h5>
+                                                <?php
+                                                    foreach ($build_job['build_status']['criteria'] as $criterion) {
+                                                ?>
+                                                    <h5>
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <strong>
+                                                            <?php echo $criterion['type'] ; ?>
+                                                        </strong>
+                                                        <?php echo $criterion['key'] ; ?>:
+                                                        &nbsp;<?php echo $criterion['value'] ; ?>
+                                                    </h5>
+                                            <?php
+                                                    }
+                                                }
+                                            ?>
+
+                                            <?php
+
+                                            ?>
+
                                         </div>
                                     </div>
 
