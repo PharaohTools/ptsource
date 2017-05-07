@@ -16,7 +16,7 @@ class PullRequestAllOS extends Base {
 
     public function __construct($params) {
         parent::__construct($params) ;
-        $this->getLibraries() ;
+        $this->loadLibraries() ;
     }
 
     public function getData() {
@@ -106,9 +106,9 @@ class PullRequestAllOS extends Base {
         $commmand.="cd {$rd} \n " ;
         $commmand.="rm -rf $GIT_WORK_TREE " ;
 
-        ob_start() ;
+//        ob_start() ;
         $res = self::executeAsShell($commmand) ;
-        $out = ob_get_clean() ;
+//        $out = ob_get_clean() ;
 //        var_dump('<pre>',$commmand,  $res, '</pre>') ;
 
         if ($res === 0) {
@@ -125,7 +125,9 @@ class PullRequestAllOS extends Base {
     protected function countCommitDifference() {
         $pull_request = $this->getPullRequest();
         $rd = REPODIR.DS.$this->params["item"].DS ;
-        $commmand="cd {$rd} && git log --oneline {$pull_request['source_branch']} ^{$pull_request['target_branch']} | wc -l" ;
+        $commmand =
+            "cd {$rd} && git log --oneline {$pull_request['source_branch']} " .
+            "^{$pull_request['target_branch']} | wc -l" ;
         $res = self::executeAndLoad($commmand) ;
         return $res ;
     }
@@ -145,7 +147,7 @@ class PullRequestAllOS extends Base {
         return $user['role'] ;
     }
 
-    protected function getLibraries() {
+    protected function loadLibraries() {
         $libDir = dirname(dirname(__DIR__)).DS."RepositoryCharts".DS."Libraries".DS ;
         require_once $libDir."gitter".DS."vendor".DS."autoload.php" ;
         foreach (glob("{$libDir}GitPrettyStats".DS."Charts".DS."*.php") as $filename) {
@@ -212,12 +214,10 @@ class PullRequestAllOS extends Base {
         $pbi = $pbif->getModel($this->params) ;
         $job_status = $pbi->findJobStatus($build_job, $repository) ;
 //        $job_reports = $pbi->findJobReports($build_job, $repository) ;
-
         $bjr = array(
             'build_status' => $job_status,
 //            'results' => $job_reports
         ) ;
-
         return $bjr ;
     }
 
