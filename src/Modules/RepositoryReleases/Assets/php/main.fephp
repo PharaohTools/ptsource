@@ -1,7 +1,51 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: pharaoh
- * Date: 07/05/17
- * Time: 18:02
- */
+
+
+$RepositoryReleases = new \RepositoryReleases() ;
+$RepositoryReleases->setRepoRepositoryReleasesPageTriggers() ;
+
+
+#set $archive_xxx_complete = false ;
+#send request to make the archive {
+#    on success ($response) : {
+        if (!isset($response["created_archive"] ) || $response["created_archive"] == false) {
+            archiveCreationFailed() ;
+        }
+        else {
+            archiveCreatedSuccessfully($download_link) ;
+		}
+  #  }
+#	on failure : {
+        archiveCreationFailed() ;
+ #   }
+} ;
+# set the overlay data to show waiting for archive creation ;
+
+
+class RepositoryReleases {
+
+    public function setRepoRepositoryReleasesPageTriggers()
+    {
+        $jQuery = \js_core::$jQuery;
+        $console = \js_core::$console;
+
+        $jQuery('.target_branch_option')->on('click', function ($jqthis) use ($jQuery, $console) {
+            $branch = $jQuery('#' . $jqthis->target->id)->attr('data-target_branch');
+            $console->log("target branch:", $branch);
+            $jQuery('#new_pull_request_target_branch')->val($branch);
+            $jQuery('#new_pull_request_target_branch_display')->html($branch);
+        });
+
+    }
+    
+}
+
+
+function archiveCreatedSuccessfully($download_link) {
+//    set the overlay data to show successful archive creation ;
+//	set the overlay data to show the download link ;
+}
+
+function archiveCreationFailed() {
+//    set the overlay data to show failed archive creation ;
+}
