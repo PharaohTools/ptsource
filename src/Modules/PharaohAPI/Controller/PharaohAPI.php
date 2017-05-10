@@ -11,7 +11,7 @@ class PharaohAPI extends Base {
              return $this->failDependencies($pageVars, $this->content, $thisModel) ; }
 
          $action = $pageVars["route"]["action"];
-         if ($pageVars["route"]["action"] === "respond") {
+         if ($pageVars["route"]["action"] === "call") {
              if ($thisModel->keyIsAllowedAccess() !== true) {
                  $override = $this->getIndexControllerForOverride() ;
                  return $override->execute() ; }
@@ -29,7 +29,7 @@ class PharaohAPI extends Base {
              $this->content["helpData"] = $helpModel->getHelpData($pageVars['route']['control']);
              return array ("type"=>"view", "view"=>"help", "pageVars"=>$this->content); }
 
-         $this->content["messages"][] = "Invalid HTML reports Action";
+         $this->content["messages"][] = "Invalid Pharaoh API Action";
          return array ("type"=>"control", "control"=>"index", "pageVars"=>$this->content);
 
      }
