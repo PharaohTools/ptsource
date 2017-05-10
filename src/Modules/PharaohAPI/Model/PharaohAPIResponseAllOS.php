@@ -36,9 +36,15 @@ class PharaohAPIResponseAllOS extends Base {
     public function executeAPI() {
         $apif = new \Model\PharaohAPI();
         $api_default = $apif->getModel($this->params) ;
+
         // Find API Model of requested module
         $api_module = $api_default->findAPIModule() ;
         $api_module_factory_string = '\Model\\'.$api_module ;
+
+//        ob_start();
+//        var_dump('api result 1: ' , class_exists($api_module_factory_string), $api_module, $api_default, $api_module_factory_string ) ;
+//        $out = ob_get_clean() ;
+//        file_put_contents('/tmp/pharaohlog', "$out: \n" . "\n\n\n", FILE_APPEND) ;
 
         if (!class_exists($api_module_factory_string)) {
             $api_result = array(
@@ -52,8 +58,13 @@ class PharaohAPIResponseAllOS extends Base {
 
         $api_module_factory = new $api_module_factory_string() ;
         $api_model = $api_module_factory->getModel($this->params, 'API') ;
-
         $api_function = $api_default->findAPIFunction() ;
+
+//        ob_start();
+//        var_dump('api result 2 ' , $this->apiModelProvidesFunction($api_model, $api_function),  $api_model, $api_function) ;
+//        $out = ob_get_clean() ;
+//        file_put_contents('/tmp/pharaohlog', "$out: \n" . "\n\n\n", FILE_APPEND) ;
+
         if ($this->apiModelProvidesFunction($api_model, $api_function) === true) {
             // if apimodel->availableFunctions includes our function
             //   run the function
@@ -75,6 +86,12 @@ class PharaohAPIResponseAllOS extends Base {
                 'data' => $module.' API Does not provide this function'
             );
         }
+
+//        ob_start();
+//        var_dump('api result 3 ' , $api_result ) ;
+//        $out = ob_get_clean() ;
+//        file_put_contents('/tmp/pharaohlog', "$out: \n" . "\n\n\n", FILE_APPEND) ;
+
         return $api_result ;
     }
 
