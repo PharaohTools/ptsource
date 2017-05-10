@@ -13,7 +13,7 @@ class PharaohAPIInfo extends PTConfigureBase {
     }
 
     public function routesAvailable() {
-        return array( "PharaohAPI" => array_merge(parent::routesAvailable(), array("help", "respond", "request") ) );
+        return array( "PharaohAPI" => array_merge(parent::routesAvailable(), array("help", "call", "request") ) );
     }
 
     public function routeAliases() {
