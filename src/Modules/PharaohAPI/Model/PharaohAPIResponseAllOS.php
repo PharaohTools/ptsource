@@ -68,11 +68,21 @@ class PharaohAPIResponseAllOS extends Base {
         if ($this->apiModelProvidesFunction($api_model, $api_function) === true) {
             // if apimodel->availableFunctions includes our function
             //   run the function
+
+            $run_result = $api_model->$api_function() ;
+
+//            ob_start();
+//            var_dump('in source api response', $run_result) ;
+//            $out = ob_get_clean() ;
+//            file_put_contents('/tmp/pharaohlog', "$out\n" . "\n\n\n", FILE_APPEND) ;
+
+            $success_or_failure = ($run_result === true) ? 'success' : 'failure' ;
+
             $api_result = array(
-                'result' => 'success' ,
+                'result' => $success_or_failure ,
                 'module' => $api_default->findAPIModule() ,
                 'function' => $api_default->findAPIFunction() ,
-                'data' => $api_model->$api_function() ,
+                'data' => $success_or_failure
             );
         }
         else {

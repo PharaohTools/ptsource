@@ -25,8 +25,10 @@ class PharaohAPIAllOS extends Base {
         $is_correct = false ;
         if ($settings['PharaohAPI']['enabled'] === 'on') {
             for ($i=0; $i<5; $i++) {
-                if ($settings['PharaohAPI']['api_key_'.$i] === $key) {
-                    $is_correct = true ;
+                if (isset($settings['PharaohAPI']['api_key_'.$i])) {
+                    if ($settings['PharaohAPI']['api_key_'.$i] === $key) {
+                        $is_correct = true ;
+                    }
                 }
             }
         }
