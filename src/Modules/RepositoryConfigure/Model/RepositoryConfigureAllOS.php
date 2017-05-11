@@ -158,9 +158,22 @@ class RepositoryConfigureAllOS extends Base {
         $repositorySaver = $repositoryFactory->getModel($this->params, "RepositorySaver");
         // @todo dunno why i have to force this param
         $repositorySaver->params["item"] = $this->params["item"];
-        $repositorySaver->saveRepository(array("type" => "Defaults", "data" => $data ));
+
+        $r1 = $repositorySaver->saveRepository(array("type" => "Defaults", "data" => $data ));
+        if ($r1['defaults'] === false) {
+            return false ;
+        }
+
         // $repositorySaver->saveRepository(array("type" => "Steps", "data" => $this->params["steps"] ));
-        $repositorySaver->saveRepository(array("type" => "Settings", "data" => $this->params["settings"] ));
+        $r2 = $repositorySaver->saveRepository(array("type" => "Settings", "data" => $this->params["settings"] ));
+        if ($r2['settings'] === false) {
+            return false ;
+        }
+
+//        ob_start();
+//        var_dump('in rpc saveRepository', $r1, $r2) ;
+//        $out = ob_get_clean() ;
+//        file_put_contents('/tmp/pharaohlog', "$out\n" . "\n\n\n", FILE_APPEND) ;
 
         $ev = $this->runBCEvent("afterRepositorySave") ;
         if ($ev == false) { return false ; }
@@ -188,7 +201,7 @@ class RepositoryConfigureAllOS extends Base {
             return false ; }
 
         $repositoryFactory = new \Model\Repository() ;
-        $repositoryDefault = $repositoryFactory->getModel($this->params);
+        $repositoryDefault = $repositoryFactory->getModel($this->params) ;
         $sourcePipe = $repositoryDefault->getRepository($this->params["source_repository"]) ;
 
         $pname = $this->guessPipeName($sourcePipe["project-slug"]);
@@ -209,7 +222,6 @@ class RepositoryConfigureAllOS extends Base {
             "project-name" => $pname,
             "project-slug" => $this->params["item"],
             "project-description" => $pdesc,
-
         ) ;
 
         $ev = $this->runBCEvent("beforeRepositorySave") ;

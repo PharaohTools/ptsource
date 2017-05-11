@@ -24,7 +24,6 @@ class RepositoryConfigureAPIAllOS extends Base {
 //        $out = ob_get_clean() ;
 //        file_put_contents('/tmp/pharaohlog', "$out\n" . "\n\n\n", FILE_APPEND) ;
         // load repo
-        $this->params['item'] = $this->params['slug'] ;
         $params["project-name"] = $this->params["repo_name"] ;
         $params["project-description"] = $this->params["repo_name"] ;
         $params["project-slug"] = $this->params["repo_name"] ;
@@ -36,6 +35,12 @@ class RepositoryConfigureAPIAllOS extends Base {
 //        var_dump('Midway repo configure: ' ,$rpc) ;
 //        $out = ob_get_clean() ;
 //        file_put_contents('/tmp/pharaohlog', "$out\n" . "\n\n\n", FILE_APPEND) ;
+
+
+//        $repositoryFactory = new \Model\Repository() ;
+//        $repositoryDefault = $repositoryFactory->getModel($this->params);
+//        $res = $repositoryDefault->createRepository($this->params["project-slug"]) ;
+
         $res = $rpc->saveRepository() ;
 //        ob_start();
 //        var_dump('Finish repo configure: ' ,$res) ;
