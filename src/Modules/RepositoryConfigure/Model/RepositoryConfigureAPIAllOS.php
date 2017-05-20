@@ -25,14 +25,14 @@ class RepositoryConfigureAPIAllOS extends Base {
 //        file_put_contents('/tmp/pharaohlog', "$out\n" . "\n\n\n", FILE_APPEND) ;
         // load repo
         $params["project-name"] = $this->params["repo_name"] ;
-        $params["project-description"] = $this->params["repo_name"] ;
-        $params["project-slug"] = $this->params["repo_name"] ;
-        $params["item"] = $this->params["repo_name"] ;
+        $params["project-description"] = $this->params["repo_description"] ;
+        $params["project-slug"] = $this->params["repo_slug"] ;
+        $params["item"] = $this->params["repo_slug"] ;
         $params["creation"] = "yes" ;
         $rpcf = new \Model\RepositoryConfigure() ;
         $rpc = $rpcf->getModel($params) ;
 //        ob_start();
-//        var_dump('Midway repo configure: ' ,$rpc) ;
+//        var_dump('Midway repo configure: ' ,$params) ;
 //        $out = ob_get_clean() ;
 //        file_put_contents('/tmp/pharaohlog', "$out\n" . "\n\n\n", FILE_APPEND) ;
 
