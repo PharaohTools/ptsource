@@ -178,3 +178,16 @@ span.message_text {
 ul#side-menu {
     display: none;
 }
+
+
+@media (min-width: 800px) {
+    #wrapper.container {
+        width: 90%;
+    }
+    #wrapper.container pre {
+        font-size: 100%;
+    }
+    #page_sidebar {
+        right: 10%;
+    }
+}
