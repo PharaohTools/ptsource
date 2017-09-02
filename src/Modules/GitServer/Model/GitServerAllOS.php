@@ -105,7 +105,7 @@ class GitServerAllOS extends Base {
 
 //        $env = array_merge($_SERVER, $env) ;
 
-
+        $repo_name = $this->findRepoName();
         $gitRequestUser = $this->getGitRequestUser() ;
 
         if ($this->userIsAllowed($gitRequestUser, $repo_name)==false) {
