@@ -128,6 +128,8 @@
                                             <?php
 
                                             $i = 1;
+                                            $ix = ($pageVars["data"]['commits_current_page'] - 1) * $pageVars["data"]['amount'] ;
+                                            $i = $i + $ix ;
 
                                             foreach ($pageVars['data']['commits'] as $commitDetails) {
 
@@ -161,7 +163,37 @@
 
                                                 $i++ ;
                                             }
+
                                             ?>
+                                            <p>Page <?php echo $pageVars["data"]['commits_current_page'] ; ?> of <?php echo $pageVars["data"]['commits_total_pages'] ; ?> </p>
+                                            <p>Go to Page:
+
+                                            <?php
+
+                                            $i = 1;
+
+                                            $ctp = (int) $pageVars["data"]['commits_total_pages'] ;
+                                            if (isset($pageVars['data']['identifier'])) {
+                                                $idstring = '&identifier='.$pageVars['data']['identifier'] ;
+                                            } else {
+                                                $idstring = '' ;
+                                            }
+
+                                            for ($i = 1 ; $i <= $ctp ; $i++) {
+
+                                                ?>
+
+                                                <a href="/index.php?control=RepositoryHistory&action=show&item=<?php echo $pageVars['data']["repository"]["project-slug"]; ?><?php echo $idstring ; ?>&page=<?php echo $i ; ?>">
+                                                    <?php echo $i ; ?>
+                                                </a>
+
+                                                <?php
+
+                                            }
+
+                                            ?>
+
+                                            </p>
                                         </div>
                                     </div>
                                 </div>

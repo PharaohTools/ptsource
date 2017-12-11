@@ -46,7 +46,7 @@ class RepositoryCommitsAllOS extends Base {
     }
 
     public function getPage() {
-        if (!isset($this->params["page"])) { $this->params["page"] = 0 ; }
+        if (!isset($this->params["page"])) { $this->params["page"] = 1 ; }
         $page = array("page" => $this->params["page"]);
         return $page ;
     }
@@ -59,7 +59,7 @@ class RepositoryCommitsAllOS extends Base {
     }
 
     private function getCommitsData() {
-        $skip_num = $this->params["page"] * $this->params["amount"] ;
+        $skip_num = ($this->params["page"] - 1) * $this->params["amount"] ;
         $command  = "cd '".REPODIR.DS.$this->params["item"].DS."' && git log {$this->params["identifier"]} " ;
         $command .= "-n {$this->params["amount"]} " ;
         $command .= "--skip={$skip_num} " ;
@@ -69,7 +69,17 @@ class RepositoryCommitsAllOS extends Base {
         $dirs_json = json_decode($commits, TRUE) ;
         if (isset($this->params["reverse"]) && $this->params["reverse"] == true) {
             $dirs_json = array_reverse($dirs_json) ; }
-        return array("commits" => $dirs_json) ;
+        $return_data = array();
+        $return_data['commits'] = $dirs_json ;
+        $return_data['commits_current_page'] = $this->params["page"] ;
+        $return_data['commits_total_pages'] = $this->params["page"] ;
+        $command  = "cd ".REPODIR.DS.$this->params["item"].DS." && git rev-list --count {$this->params["identifier"]} " ;
+        $total_commits = $this->executeAndLoad($command) ;
+        $total_commits = trim($total_commits) ;
+        $return_data["commits_total_commits"] = $total_commits ;
+        $float = $total_commits / $this->params["amount"] ;
+        $return_data["commits_total_pages"] = ceil($float) ;
+        return $return_data ;
     }
 
 }
