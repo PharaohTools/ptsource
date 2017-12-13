@@ -127,10 +127,10 @@
                         </div>
                         <div class="form-group col-sm-9 thin_padding">
                             <?php
-                            if (isset($pageVars["data"]["current_branch"]) && $pageVars["data"]["current_branch"] != null) {
+                            if (isset($pageVars["data"]["identifier"]) && $pageVars["data"]["identifier"] != null) {
                                 ?>
-                                <h4> Current Branch : <strong><?php echo $pageVars["data"]["current_branch"] ; ?></strong></h4>
-                            <?php
+                                <h4> Current Branch : <strong><?php echo $pageVars["data"]["identifier"] ; ?></strong></h4>
+                                <?php
                             }
                             ?>
                         </div>
@@ -151,17 +151,24 @@
                             echo $pageVars["data"]["file"] ;
                             echo '</textarea>' ; }
                         else {
+
+                            if (isset($pageVars['data']['identifier'])) {
+                                $idstring = '&identifier='.$pageVars['data']['identifier'] ;
+                            } else {
+                                $idstring = '' ;
+                            }
+
                             foreach ($pageVars["data"]["directory"] as $name => $isDir) {
 
                                 $dirString = ($isDir) ? " - (D)" : "" ;
                                 $trail = ($isDir) ? "/" : "" ;
-                                echo '<a href="/index.php?control=FileBrowser&action=show&item='.$pageVars["data"]["repository"]["project-slug"].'&relpath='.$pageVars["data"]["relpath"].'">'.$pageVars["data"]["relpath"].'</a>' ;
+                                echo '<a href="/index.php?control=FileBrowser&action=show&item='.$pageVars["data"]["repository"]["project-slug"].$idstring.'&relpath='.$pageVars["data"]["relpath"].'">'.$pageVars["data"]["relpath"].'</a>' ;
 
                                 $relativeString = str_replace($pageVars["data"]["wsdir"], "", $name) ;
                                 $nameparts = explode(DS, $relativeString) ;
 
                                 foreach ($nameparts as $namepart => $isSubDir) {
-                                    echo '<a href="/index.php?control=FileBrowser&action=show&item='.$pageVars["data"]["repository"]["project-slug"].'&relpath='.$pageVars["data"]["relpath"].$name.
+                                    echo '<a href="/index.php?control=FileBrowser&action=show&item='.$pageVars["data"]["repository"]["project-slug"].$idstring.'&relpath='.$pageVars["data"]["relpath"].$name.
                                         $trail.'">'.$name.'</a>' ; }
 
                                 echo $trail.$dirString.'<br />' ; } } }
