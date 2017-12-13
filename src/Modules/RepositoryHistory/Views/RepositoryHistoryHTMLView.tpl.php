@@ -101,9 +101,9 @@
                     </div>
                     <div class="form-group col-sm-9 thin_padding">
                         <?php
-                        if (isset($pageVars["data"]["current_branch"]) && $pageVars["data"]["current_branch"] != null) {
+                        if (isset($pageVars["data"]["identifier"]) && $pageVars["data"]["identifier"] != null) {
                             ?>
-                            <h4> Current Branch : <strong><?php echo $pageVars["data"]["current_branch"] ; ?></strong></h4>
+                            <h4> Current Branch : <strong><?php echo $pageVars["data"]["identifier"] ; ?></strong></h4>
                             <?php
                         }
                         ?>
