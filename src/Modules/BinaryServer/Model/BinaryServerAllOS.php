@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class GitServerAllOS extends Base {
+class BinaryServerAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -13,27 +13,27 @@ class GitServerAllOS extends Base {
 
     // Model Group
     public $modelGroup = array("Default") ;
+//
+//    public function getEventNames() {
+//        return array_keys($this->getEvents());
+//    }
+//
+//    public function getEvents() {
+//        $ff = array(
+//            "afterApplicationConfigurationSave" => array(
+//                "ensureSSHServerStatus",
+//            ),
+//        );
+//        return $ff ;
+//    }
+//
+//    public function ensureSSHServerStatus() {
+//        $gsf = new \Model\BinaryServer();
+//        $gs = $gsf->getModel($this->params, "ServerSSHFunctions") ;
+//        return $gs->ensureSSHServerStatus() ;
+//    }
 
-    public function getEventNames() {
-        return array_keys($this->getEvents());
-    }
-
-    public function getEvents() {
-        $ff = array(
-            "afterApplicationConfigurationSave" => array(
-                "ensureSSHServerStatus",
-            ),
-        );
-        return $ff ;
-    }
-
-    public function ensureSSHServerStatus() {
-        $gsf = new \Model\BinaryServer();
-        $gs = $gsf->getModel($this->params, "ServerSSHFunctions") ;
-        return $gs->ensureSSHServerStatus() ;
-    }
-
-    public function runGitHTTP() {
+    public function runBinaryHTTP() {
         $out = $this->backendData() ;
         $this->fixPushPerms() ;
         return $out ;
@@ -42,7 +42,7 @@ class GitServerAllOS extends Base {
     public function fixPushPerms() {
         $repo_name = $this->findRepoName() ;
         $command  = SUDOPREFIX." chmod -R 775 /opt/ptsource/repositories/{$repo_name}/objects && ";
-        $command .= SUDOPREFIX." chown -R ptgit:ptsource /opt/ptsource/repositories/{$repo_name}/objects ;";
+        $command .= SUDOPREFIX." chown -R ptsource: /opt/ptsource/repositories/{$repo_name}/objects ;";
         ob_start() ;
         $rc = $this->executeAsShell($command) ;
         $out = ob_get_clean() ;
@@ -60,161 +60,61 @@ class GitServerAllOS extends Base {
 
     public function backendData() {
 
-
-        define("DEBUG_LOG",        true);
-        define("HTTP_AUTH",        false);
-        define("GZIP_SUPPORT",     false);
-        define("GIT_ROOT",         REPODIR.DS );
-        define("GIT_HTTP_BACKEND", "/usr/lib/git-core/git-http-backend");
-        define("GIT_BIN",          "/usr/bin/git");
-        define("REMOTE_USER",      "smart-http");
-        define("LOG_RESPONSE",     "/tmp/response.log");
-        define("LOG_PROCESS",      "/tmp/process.log");
-//        error_log("three" ) ;
-
-        if(isset($_SERVER["PATH_INFO"])) {
-            list($git_project_path, $path_info) = $temp = preg_split("/\//", $_SERVER["PATH_INFO"], 2, PREG_SPLIT_NO_EMPTY);
-            $git_project_path = "/" . $git_project_path . "/";
-            $path_info = "/" . $path_info; }
-        else {
-            $git_project_path = "/";
-            $path_info = ""; }
-
         $path_info = "/".$this->params["item"] ;
         $request_headers = $this->getAllHeaders();
 
-        $php_input = file_get_contents("php://input");
-
-        $env = array (
-            "GIT_PROJECT_ROOT"    => REPODIR ,
-            "GIT_HTTP_EXPORT_ALL" => 1,
-            "GIT_HTTP_MAX_REQUEST_BUFFER" => "1000M",
-//            'PATH' => $_SERVER["PATH"],
-//            "REMOTE_USER"         => "ptsource",
-//            "REMOTE_USER"         => "smart-http",
-            "REMOTE_USER"         => isset($_SERVER["REMOTE_USER"])          ? $_SERVER["REMOTE_USER"]          : "ptsource",
-            "REMOTE_ADDR"         => isset($_SERVER["REMOTE_ADDR"])          ? $_SERVER["REMOTE_ADDR"]          : "",
-            "REQUEST_METHOD"      => isset($_SERVER["REQUEST_METHOD"])       ? $_SERVER["REQUEST_METHOD"]       : "",
-            "PATH_INFO"           => $path_info,
-            "QUERY_STRING"        => isset($_SERVER["QUERY_STRING"])         ? $_SERVER["QUERY_STRING"]         : "",
-            "CONTENT_TYPE"        => isset($request_headers["Accept"]) ? $request_headers["Accept"] : "",
-
-        );
-        // THIS IS IMPORTANT!! THIS IS WHAT STOPS PUSH WORKING. THE GIT CLIENT
-        $env["CONTENT_TYPE"]= str_replace("result", "request",$env["CONTENT_TYPE"] );
-
-//        $env = array_merge($_SERVER, $env) ;
-
         $repo_name = $this->findRepoName();
-        $gitRequestUser = $this->getGitRequestUser() ;
+        $binaryRequestUser = $this->getBinaryRequestUser() ;
 
-        if ($this->userIsAllowed($gitRequestUser, $repo_name)==false) {
+//        var_dump($repo_name, $binaryRequestUser) ;
+
+        if ($this->userIsAllowed($binaryRequestUser, $repo_name)==false) {
             header('HTTP/1.1 403 Forbidden');
             return false ;  }
 
-//        $pathStarts = array('/HEAD', '/info/', '/objects/') ;
-//        $scm_synonyms = array("git", "scm") ;
-//        $qs = $_SERVER["REQUEST_URI"] ;
-//      THIS IS IMPORTANT! THIS STOPS PUSH FROM WORKING. IF THE QUERY STRING ENV VAR IS NOT SPECIFICALLY
-//      SET TO HAVE A STRING WITH ONE PARAMETER IN THE CLIENT ASSUMES A DUMB SERVER PROTOCOL
-        $qs = $_SERVER["REQUEST_URI"] ;
-
-        $qsmpos = strpos($qs, "?") ;
-        if ($qsmpos==false) {
-            $service = basename($qs) ;
-            $qs ="service={$service}" ; }
-        else {
-            if ($qsmpos !== false) {
-                $qs = substr($qs, $qsmpos+1); }}
-
-        $env["QUERY_STRING"] = $qs ;
-
-        $env["PATH_INFO"] = $path_info ;
-
-        if (isset($service)) {
-            $path_info = str_replace($service, "", $path_info) ;
-//            if (substr($path_info, 0, 1) == '/') {
-//                $env["PATH_INFO"] = substr($path_info, 1, strlen($path_info)-1) ; }
-        }
-
-        $settings = array
-        (
-            0 => array("pipe", "r"),
-            1 => array("pipe", "w"),
-        );
-        if(defined(DEBUG_LOG))
-        {
-            $settings[2] = array("file", LOG_PROCESS, "a");
-        }
-        $process = proc_open(GIT_HTTP_BACKEND , $settings, $pipes, REPODIR.$path_info, $env);
 
 
+        $log = "<pre>";
+        $log .= "\$params = " . print_r($this->params, true);
+        $log .= "\$request_headers = " . print_r($request_headers, true);
+        $log .= "\$server = " . print_r($_SERVER, true);
+//        $log .= "\$php_input = " . PHP_EOL . $php_input . PHP_EOL;
+        //$log .= "\$return_output = " . PHP_EOL . $return_output . PHP_EOL;
+        $log .= str_repeat("-", 80) . PHP_EOL;
+        $log .= PHP_EOL;
+        $log .= '</pre>';
 
-//        ob_start();
-////        var_dump("this env", phpinfo()) ;
-//        var_dump("srv:", $_SERVER, "env:", $env) ;
-////        var_dump("grq:", $gitRequestUser) ;
-////        var_dump("this env", $_SERVER['HTTP_AUTHORIZATION'], "user", $this->params["user"], "remote user", $_SERVER["REMOTE_USER"], "AUTH user", $_SERVER["PHP_AUTH_USER"], $_SERVER["PHP_AUTH_PW"], $_SERVER["HTTP_AUTHORIZATION"]) ;
-//        $res = ob_get_clean();
-//        file_put_contents('/var/log/pharaoh.log', $res, FILE_APPEND) ;
-
-        if (is_resource($process)) {
-//            error_log("php in: $php_input" ) ;
-            fwrite($pipes[0], $php_input);
-            fclose($pipes[0]);
-            $return_output = stream_get_contents($pipes[1]);
-            fclose($pipes[1]);
-            $return_code = proc_close($process);
-//            error_log("\n\n\nNew Request" ) ;
-//            error_log("rc: $return_code, stduot: $return_output" ) ;
-        }
-        else {
-//            error_log("is r:", is_resource($process) ) ;
-        }
-        if(!empty($return_output))
-        {
-//            echo 'Pharaoh Source Git Server' ;
-            list($response_headers, $response_body)
-                = $response
-                = preg_split("/\R\R/", $return_output, 2, PREG_SPLIT_NO_EMPTY);
-
-            foreach(preg_split("/\R/", $response_headers) as $response_header)
-            {
-                error_log("RH: $response_header" ) ;
-                header($response_header);
+        if (isset($this->params['version'])) {
+            if ($this->versionStringIsValid($this->params['version'])) {
+                $this_version = $this->params['version'] ;
+            } else {
+                header('HTTP/1.1 400 Unable to handle request');
+                echo "Incompatible Version String Requested" ;
+                return false ;
             }
-            if(isset($request_headers["Accept-Encoding"]) && strpos($request_headers["Accept-Encoding"], "gzip") !== false && GZIP_SUPPORT)
-            {
-                error_log("using gzip" ) ;
-                $gzipoutput = gzencode($response_body, 6);
-                ini_set("zlib.output_compression", "Off");
-                header("Content-Encoding: gzip");
-                header("Content-Length: " . strlen($gzipoutput));
-                echo $gzipoutput;
-            }
-            else
-            {
-                error_log("using no gzip" ) ;
-                echo $response_body;
-            }
-        }
-//        echo 'Something went wrong' ;
-
-        if(DEBUG_LOG)
-        {
-//            file_put_contents(LOG_RESPONSE, "");
-            $log = "";
-            $log .= "\$request_headers = " . print_r($request_headers, true);
-            $log .= "\$env = " . print_r($env, true);
-            $log .= "\$server = " . print_r($_SERVER, true);
-            $log .= "\$php_input = " . PHP_EOL . $php_input . PHP_EOL;
-            //$log .= "\$return_output = " . PHP_EOL . $return_output . PHP_EOL;
-            $log .= "\$response = " . print_r($response, true);
-            $log .= str_repeat("-", 80) . PHP_EOL;
-            $log .= PHP_EOL;
-            file_put_contents(LOG_RESPONSE, $log, FILE_APPEND);
+        } else {
+            $this_version = '0.0.1' ;
         }
 
+        $dir_to_write = REPODIR.DS.$this->params["item"].DS.$this_version ;
+        if (!is_dir($dir_to_write)) {
+            mkdir($dir_to_write, 0777, true);
+        }
+//        var_dump($_FILES) ;
+        $contents = file_get_contents($_FILES['file']['tmp_name']) ;
+
+        $res = file_put_contents($dir_to_write.DS.$_FILES['file']['name'], $contents);
+        if ($res !== false) {
+            echo "File was uploaded successfully" ;
+        } else {
+            echo "File Upload failed" ;
+        }
+//        file_put_contents('/tmp/pharaoh-source.log', $log, FILE_APPEND);
+
+    }
+
+    protected function versionStringIsValid($version) {
+        return true;
     }
 
     protected function getAllHeaders() {
@@ -227,7 +127,7 @@ class GitServerAllOS extends Base {
     }
 
 
-    public function userIsAllowed($gitRequestUser, $repo_name) {
+    public function userIsAllowed($binaryRequestUser, $repo_name) {
         $isWriteAction = $this->isWriteAction() ;
         if ($isWriteAction == false) {
             //error_log("is not a write") ;
@@ -236,7 +136,7 @@ class GitServerAllOS extends Base {
             if ($publicReads == true) {
                 return true ; }
             else {
-                return $this->authUserToRead($gitRequestUser, $repo_name) ; } }
+                return $this->authUserToRead($binaryRequestUser, $repo_name) ; } }
         else {
             //error_log("is a write") ;
             $publicWrites = $this->repoPublicAllowed("write", $repo_name) ;
@@ -245,7 +145,7 @@ class GitServerAllOS extends Base {
                 return true ; }
             else {
                 //error_log("no public") ;
-                $res = $this->authUserToWrite($gitRequestUser, $repo_name) ;
+                $res = $this->authUserToWrite($binaryRequestUser, $repo_name) ;
                 //error_log("auth is: {$res}") ;
                 return $res ; } }
     }
@@ -268,7 +168,7 @@ class GitServerAllOS extends Base {
     }
 
 
-    protected function getGitRequestUser() {
+    protected function getBinaryRequestUser() {
         if (isset($_SERVER["REDIRECT_HTTP_AUTHORIZATION"])) {
             $base64 = str_replace("Basic ", "", $_SERVER["REDIRECT_HTTP_AUTHORIZATION"]) ;
             $string = base64_decode($base64) ;
@@ -282,8 +182,8 @@ class GitServerAllOS extends Base {
         return array("user"=> null, "pass"=> null) ;
     }
 
-    protected function authUserToRead($gitRequestUser, $repo_name) {
-        if ( $gitRequestUser["user"] == "anon" ) {
+    protected function authUserToRead($binaryRequestUser, $repo_name) {
+        if ( $binaryRequestUser["user"] == "anon" ) {
             return false ; }
         $repoFactory = new \Model\Repository() ;
         $repo = $repoFactory->getModel($this->params, "Default") ;
@@ -293,23 +193,23 @@ class GitServerAllOS extends Base {
 
 //        $uaFactory = new \Model\Signup();
 //        $signup = $uaFactory->getModel($this->params) ;
-//        if ($ua->userNameExist($gitRequestUser["user"]) === false) {
+//        if ($ua->userNameExist($binaryRequestUser["user"]) === false) {
 //            return false ;
 //        }
 
         $uaFactory = new \Model\UserAccount();
         $ua = $uaFactory->getModel($this->params) ;
 
-        if ($ua->userNameExist($gitRequestUser["user"]) === false) {
+        if ($ua->userNameExist($binaryRequestUser["user"]) === false) {
 
             $uoFactory = new \Model\UserOAuthKey();
             $uo = $uoFactory->getModel($this->params) ;
 
-            $is_key = $uo->findUsernameFromKey($gitRequestUser["user"]) ;
+            $is_key = $uo->findUsernameFromKey($binaryRequestUser["user"]) ;
             if ($is_key === false) {
                 return false ;
             } else {
-                $gitRequestUser["user"] = $is_key ;
+                $binaryRequestUser["user"] = $is_key ;
             }
         }
 
@@ -317,7 +217,7 @@ class GitServerAllOS extends Base {
 //            var_dump('its hidden');
             // @todo here
             // if logged in user is owner
-            if ($gitRequestUser["user"] === $thisRepo["project-owner"]) {
+            if ($binaryRequestUser["user"] === $thisRepo["project-owner"]) {
 //                var_dump('user match ting');
                 return true ; }
             // if settings say hide from members return false
@@ -325,7 +225,7 @@ class GitServerAllOS extends Base {
                 return false ; }
             // if logged in user is member return true
             $pm = explode(",", $thisRepo["project-members"]) ;
-            if (in_array($gitRequestUser["user"], $pm)) {
+            if (in_array($binaryRequestUser["user"], $pm)) {
                 return true ; }
             return false ;
         } else {
@@ -335,8 +235,8 @@ class GitServerAllOS extends Base {
 
     }
 
-    protected function authUserToWrite($gitRequestUser, $repo_name) {
-        if ( $gitRequestUser["user"] == "anon" ) { return false ; }
+    protected function authUserToWrite($binaryRequestUser, $repo_name) {
+        if ( $binaryRequestUser["user"] == "anon" ) { return false ; }
         $repoFactory = new \Model\Repository() ;
         $repo = $repoFactory->getModel($this->params, "Default") ;
         $thisRepo = $repo->getRepository($repo_name) ;
@@ -347,28 +247,28 @@ class GitServerAllOS extends Base {
 
         $uaFactory = new \Model\UserAccount();
         $ua = $uaFactory->getModel($this->params) ;
-        if ($ua->userNameExist($gitRequestUser["user"]) === false) {
+        if ($ua->userNameExist($binaryRequestUser["user"]) === false) {
 
             $uoFactory = new \Model\UserOAuthKey();
             $uo = $uoFactory->getModel($this->params) ;
 
-            $is_key = $uo->findUsernameFromKey($gitRequestUser["user"]) ;
+            $is_key = $uo->findUsernameFromKey($binaryRequestUser["user"]) ;
             if ($is_key === false) {
                 return false ;
             } else {
-                $gitRequestUser["user"] = $is_key ;
+                $binaryRequestUser["user"] = $is_key ;
             }
         }
 
         if ($hidden === true) {
             // @todo here
             // if logged in user is owner
-            if ($gitRequestUser["user"]==$thisRepo["project-owner"]) { return true ; }
+            if ($binaryRequestUser["user"]==$thisRepo["project-owner"]) { return true ; }
             // if settings say hide from members return false
             if ($hidden_from_members==true) { return false ; }
             // if logged in user is member return true
             $pm = explode(",", $thisRepo["project-members"]) ;
-            if (in_array($gitRequestUser["user"], $pm)) { return true ; }
+            if (in_array($binaryRequestUser["user"], $pm)) { return true ; }
             return false ;
         } else {
             return true ; }
@@ -379,12 +279,12 @@ class GitServerAllOS extends Base {
         // var_dump($_SERVER["REQUEST_URI"]) ;
         if (isset($_SERVER["REQUEST_URI"])) {
             // Its a http request
-            if ( strpos($_SERVER["REQUEST_URI"], "git-receive-pack") !== false) {
+            if ( strpos($_SERVER["REQUEST_URI"], "binary-receive-pack") !== false) {
                 return true ; }
             return false ; }
         else {
             // Its an SSH request
-             if (strpos($this->params["ssh_command"], 'git-recieve-pack') === 0) {
+             if (strpos($this->params["ssh_command"], 'binary-recieve-pack') === 0) {
                 return true ; }
             return false ; }
     }

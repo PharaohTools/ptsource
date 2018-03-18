@@ -26,7 +26,7 @@ exit (0);
 
 function userRepoPermissionsValid($username, $repo_name) {
     $ray = array("ssh_command" => $repo_name) ;
-    $gsf = new \Model\GitServer();
+    $gsf = new \Model\BinaryServer();
     $gs = $gsf->getModel($ray, 'ServerSSHFunctions') ;
     $res = $gs->sshUserIsAllowed($username, $repo_name) ;
     return $res ;

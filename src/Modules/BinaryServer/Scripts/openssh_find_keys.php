@@ -22,7 +22,7 @@ if ($hash === false || count($hash)===0) {
     echo "User does not have keys available\n" ;
     exit (1) ; }
 // PTGIT_USER='.$hash["username"].'
-$with_command = 'command="PTGIT_USER='.$hash["username"].' /home/ptgit/ptsource/openssh_wrap_git.bash",no-port-forwarding,no-X11-forwarding,no-pty ' ;
+$with_command = 'command="PTGIT_USER='.$hash["username"].' /home/ptbinary/ptsource/openssh_wrap_binary.bash",no-port-forwarding,no-X11-forwarding,no-pty ' ;
 $new_key = $with_command.$hash['key_data'] ;
 //file_put_contents('/tmp/keyfind', "new key: ".$new_key."\n", FILE_APPEND) ;
 
@@ -30,7 +30,7 @@ echo "$new_key\n" ;
 exit (0);
 
 function findUserKeys($username, $hash) {
-    if ($username === 'ptgit') {
+    if ($username === 'ptbinary') {
         $uskf = new \Model\UserSSHKey();
         $usk = $uskf->getModel(array()) ;
         $userAccountF = new \Model\UserAccount();

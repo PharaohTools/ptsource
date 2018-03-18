@@ -2,6 +2,6 @@
 
 Namespace Model;
 
-class GitServer extends BaseModelFactory {
+class BinaryServer extends BaseModelFactory {
 
 }

@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class GitServerSSHFunctionsAllOS extends Base {
+class BinaryServerSSHFunctionsAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -24,14 +24,14 @@ class GitServerSSHFunctionsAllOS extends Base {
         $is_enabled = ($mod_config["SSHServer"]['enable_ssh_server'] === 'on') ;
         if ($is_enabled === true) {
 //            $app_root  = PFILESDIR.PHARAOH_APP.DS.PHARAOH_APP.DS ;
-//            $bin_file = $app_root . 'src'.DS.'Modules'.DS.'GitServer'.DS.'Libraries' ;
+//            $bin_file = $app_root . 'src'.DS.'Modules'.DS.'BinaryServer'.DS.'Libraries' ;
 //            $bin_file .= DS.'vendor'.DS.'fpoirotte'.DS.'pssht'.DS.'bin'.DS.'pssht' ;
 //            $base_bin = basename($bin_file) ;
 //            error_log($bin_file) ;
 //            if (is_file($bin_file)) {
 //                $logging->log("Found Server Bin file {$base_bin}", $this->getModuleName()) ;
 //                $comm = "cd {$app_root} && bash -c 'php {$bin_file} >> {$app_root}ssh_log.txt 2>&1 ' & " ;
-//                # bash -c 'php /opt/ptsource/ptsource/src/Modules/GitServer/Libraries/vendor/fpoirotte/psshtin/pssht > /tmp/outy 2>&1 ' &
+//                # bash -c 'php /opt/ptsource/ptsource/src/Modules/BinaryServer/Libraries/vendor/fpoirotte/psshtin/pssht > /tmp/outy 2>&1 ' &
 //                $logging->log("Comm is {$comm}", $this->getModuleName()) ;
 ////                $status = $this->executeAndGetReturnCode($comm);
 ////                if ($status !== 0) {
@@ -40,14 +40,14 @@ class GitServerSSHFunctionsAllOS extends Base {
     }
         else {
             $app_root  = PFILESDIR.PHARAOH_APP.DS.PHARAOH_APP.DS ;
-//            $bin_file = $app_root . 'src'.DS.'Modules'.DS.'GitServer'.DS.'Libraries' ;
+//            $bin_file = $app_root . 'src'.DS.'Modules'.DS.'BinaryServer'.DS.'Libraries' ;
 //            $bin_file .= DS.'vendor'.DS.'fpoirotte'.DS.'pssht'.DS.'bin'.DS.'pssht' ;
 //            $base_bin = basename($bin_file) ;
 //            error_log($bin_file) ;
 //            if (is_file($bin_file)) {
 //                $logging->log("Found Server Bin file {$base_bin}", $this->getModuleName()) ;
 //                $comm = "cd {$app_root} && pkill pssht " ;
-//                # bash -c 'php /opt/ptsource/ptsource/src/Modules/GitServer/Libraries/vendor/fpoirotte/psshtin/pssht > /tmp/outy 2>&1 ' &
+//                # bash -c 'php /opt/ptsource/ptsource/src/Modules/BinaryServer/Libraries/vendor/fpoirotte/psshtin/pssht > /tmp/outy 2>&1 ' &
 //                $logging->log("Comm is {$comm}", $this->getModuleName()) ;
 ////                $status = $this->executeAndGetReturnCode($comm);
 ////                if ($status !== 0) {
@@ -58,9 +58,9 @@ class GitServerSSHFunctionsAllOS extends Base {
         return true ;
     }
 
-    public function sshUserIsAllowed($gitRequestUser, $repo_name) {
+    public function sshUserIsAllowed($binaryRequestUser, $repo_name) {
 //        $parsed = $this->parseSSHCommand($ssh_command) ;
-        $gr_ray = array('user' => $gitRequestUser) ;
+        $gr_ray = array('user' => $binaryRequestUser) ;
         $gsf = new \Model\BinaryServer();
         $pos = strrpos($repo_name, '/') ;
         $repo_name = substr($repo_name, $pos) ;
@@ -71,28 +71,28 @@ class GitServerSSHFunctionsAllOS extends Base {
     }
 
     protected function parseSSHCommand($ssh_command) {
-        if (strpos($ssh_command, 'git-upload-pack') === 0) {
+        if (strpos($ssh_command, 'binary-upload-pack') === 0) {
             // is a read
             $readwrite = 'read' ;
-            $without_gitcomm = substr($ssh_command, 15) ;
+            $without_binarycomm = substr($ssh_command, 15) ;
         }
-        elseif (strpos($ssh_command, 'git-recieve-pack') === 0) {
+        elseif (strpos($ssh_command, 'binary-recieve-pack') === 0) {
             // is a write
             $readwrite = 'write' ;
-            $without_gitcomm = substr($ssh_command, 15) ;
+            $without_binarycomm = substr($ssh_command, 15) ;
         }
         else {
             // not an allowed command
             return false ;
         }
-        $repo_path = $this->parseGitCommand($without_gitcomm) ;
+        $repo_path = $this->parseBinaryCommand($without_binarycomm) ;
         $path_sections = $this->parseRepoPath($repo_path) ;
         return $path_sections ;
     }
 
-    protected function parseGitCommand($without_gitcomm) {
-        $start = strpos($without_gitcomm, "/") ;
-        $no_first = substr($without_gitcomm, $start-1) ;
+    protected function parseBinaryCommand($without_binarycomm) {
+        $start = strpos($without_binarycomm, "/") ;
+        $no_first = substr($without_binarycomm, $start-1) ;
         $end = strrpos($no_first, "/") ;
         $parsed = substr($no_first, 0, $end+1) ;
         return $parsed ;
@@ -101,8 +101,8 @@ class GitServerSSHFunctionsAllOS extends Base {
     protected function parseRepoPath($repo_path) {
         $sections = explode('/', $repo_path) ;
         $return_sections = array() ;
-        if (in_array($sections[0], array('git', 'scm')) ) {
-            $return_sections['scm_type'] = 'git' ;
+        if (in_array($sections[0], array('binary', 'scm')) ) {
+            $return_sections['scm_type'] = 'binary' ;
         } else {
             // This is an incorrect command
             return false ;

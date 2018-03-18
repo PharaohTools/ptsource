@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class GitServerFunctionsAllOS extends Base {
+class BinaryServerFunctionsAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -14,7 +14,7 @@ class GitServerFunctionsAllOS extends Base {
     // Model Group
     public $modelGroup = array("ServerFunctions") ;
 
-    /* The following code has been ported from Git source <http://git-scm.com>
+    /* The following code has been ported from Binary source <http://binary-scm.com>
        by Jon Lund Steffensen, July 2011. Licenced under GPL2. */
 
     public function str_endswith($s, $test) {
@@ -50,24 +50,24 @@ class GitServerFunctionsAllOS extends Base {
         fclose($f);
     }
 
-    public function get_text_file($git_path, $name) {
+    public function get_text_file($binary_path, $name) {
         header_nocache();
-        send_local_file('text/plain', $git_path.$name);
+        send_local_file('text/plain', $binary_path.$name);
     }
 
-    public function get_loose_object($git_path, $name) {
+    public function get_loose_object($binary_path, $name) {
         header_cache_forever();
-        send_local_file('application/x-git-loose-object', $git_path.$name);
+        send_local_file('application/x-binary-loose-object', $binary_path.$name);
     }
 
-    public function get_pack_file($git_path, $name) {
+    public function get_pack_file($binary_path, $name) {
         header_cache_forever();
-        send_local_file('application/x-git-packed-objects', $git_path.$name);
+        send_local_file('application/x-binary-packed-objects', $binary_path.$name);
     }
 
-    public function get_idx_file($git_path, $name) {
+    public function get_idx_file($binary_path, $name) {
         header_cache_forever();
-        send_local_file('application/x-git-packed-objects-toc', $git_path.$name);
+        send_local_file('application/x-binary-packed-objects-toc', $binary_path.$name);
     }
 
 
@@ -88,8 +88,8 @@ class GitServerFunctionsAllOS extends Base {
         return $list;
     }
 
-    public function get_packed_refs($git_path) {
-        $packed_refs_path = $git_path.'/packed-refs';
+    public function get_packed_refs($binary_path) {
+        $packed_refs_path = $binary_path.'/packed-refs';
         $f = @fopen($packed_refs_path, 'r');
 
         $list = array();
@@ -102,7 +102,7 @@ class GitServerFunctionsAllOS extends Base {
         return $list;
     }
 
-    public function resolve_ref($git_path, $ref) {
+    public function resolve_ref($binary_path, $ref) {
         $depth = 5;
 
         while (TRUE) {
@@ -111,9 +111,9 @@ class GitServerFunctionsAllOS extends Base {
                 return array(NULL, '0000000000000000000000000000000000000000');
             }
 
-            $path = $git_path.'/'.$ref;
+            $path = $binary_path.'/'.$ref;
             if (!@lstat($path)) {
-                foreach (get_packed_refs($git_path) as $pref) {
+                foreach (get_packed_refs($binary_path) as $pref) {
                     if (!strcmp($pref[0], $ref)) {
                         return array($ref, $pref[1]);
                     }
@@ -146,8 +146,8 @@ class GitServerFunctionsAllOS extends Base {
         }
     }
 
-    public function get_ref_dir($git_path, $base, $list=array()) {
-        $path = $git_path.'/'.$base;
+    public function get_ref_dir($binary_path, $base, $list=array()) {
+        $path = $binary_path.'/'.$base;
         $dir = dir($path);
 
         while (($entry = $dir->read()) !== FALSE) {
@@ -158,9 +158,9 @@ class GitServerFunctionsAllOS extends Base {
             $entry_path = $path.'/'.$entry;
 
             if (is_dir($entry_path)) {
-                $list = get_ref_dir($git_path, $base.'/'.$entry, $list);
+                $list = get_ref_dir($binary_path, $base.'/'.$entry, $list);
             } else {
-                $r = resolve_ref($git_path, $base.'/'.$entry);
+                $r = resolve_ref($binary_path, $base.'/'.$entry);
                 $list[] = array($base.'/'.$entry, $r[1]);
             }
         }
@@ -169,33 +169,33 @@ class GitServerFunctionsAllOS extends Base {
         return $list;
     }
 
-    public function get_loose_refs($git_path) {
-        return get_ref_dir($git_path, 'refs');
+    public function get_loose_refs($binary_path) {
+        return get_ref_dir($binary_path, 'refs');
     }
 
-    public function get_refs($git_path) {
-        $list = array_merge(get_loose_refs($git_path), get_packed_refs($git_path));
+    public function get_refs($binary_path) {
+        $list = array_merge(get_loose_refs($binary_path), get_packed_refs($binary_path));
         usort($list, 'ref_entry_cmp');
         return $list;
     }
 
-    public function get_info_refs($git_path, $name) {
+    public function get_info_refs($binary_path, $name) {
         header_nocache();
         header('Content-Type: text/plain');
 
         /* TODO Are dereferenced tags needed in this
            list, or just a convenience? */
 
-        foreach (get_refs($git_path) as $ref) {
+        foreach (get_refs($binary_path) as $ref) {
             echo $ref[1]."\t".$ref[0]."\n";
         }
     }
 
-    public function get_info_packs($git_path, $name) {
+    public function get_info_packs($binary_path, $name) {
         header_nocache();
         header('Content-Type: text/plain; charset=utf-8');
 
-        $pack_dir = $git_path.'/objects/pack';
+        $pack_dir = $binary_path.'/objects/pack';
         $dir = dir($pack_dir);
 
         while (($entry = $dir->read()) !== FALSE) {
@@ -208,7 +208,7 @@ class GitServerFunctionsAllOS extends Base {
         }
     }
 
-    public function serveGit() {
+    public function serveBinary() {
 
 
         $services = array(
@@ -223,12 +223,12 @@ class GitServerFunctionsAllOS extends Base {
 
 
         /* Base url of this app */
-        $url_base = '/php-git-server';
+        $url_base = '/php-binary-server';
 
         /* Repositories */
         $repos = array(
-            array('/php-git-server.git', '.git'),
-            array('/wiki.git', '/home/jon/Wiki/.git'));
+            array('/php-binary-server.binary', '.binary'),
+            array('/wiki.binary', '/home/jon/Wiki/.binary'));
 
         $repos = array("ptbuild") ;
 

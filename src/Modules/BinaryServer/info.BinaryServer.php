@@ -2,26 +2,26 @@
 
 Namespace Info;
 
-class GitServerInfo extends PTConfigureBase {
+class BinaryServerInfo extends PTConfigureBase {
 
     public $hidden = false;
 
-    public $name = "Git Server Implementation";
+    public $name = "HTTP Binary Server Implementation";
 
     public function _construct() {
       parent::__construct();
     }
 
     public function routesAvailable() {
-      return array( "GitServer" => array("serve") );
+      return array( "BinaryServer" => array("serve") );
     }
 
     public function routeAliases() {
-        return array("gitServer"=>"GitServer");
+        return array("binaryServer"=>"BinaryServer");
     }
 
     public function ignoredAuthenticationRoutes() {
-        return array("GitServer"=>array("serve"));
+        return array("BinaryServer"=>array("serve"));
     }
 
     public function events() {
@@ -30,14 +30,14 @@ class GitServerInfo extends PTConfigureBase {
 
     public function configuration() {
         return array(
-            "enable_ssh_server"=> array("type" => "boolean", "label" => "Enable OpenSSH Server Integration?", ),
-//            "server_port"=> array("type" => "text", "default" => "22", "label" => "Git SSH Server Port?", ),
+//            "enable_ssh_server"=> array("type" => "boolean", "label" => "Enable OpenSSH Server Integration?", ),
+//            "server_port"=> array("type" => "text", "default" => "22", "label" => "Binary SSH Server Port?", ),
         );
     }
 
     public function helpDefinition() {
       $help = <<<"HELPDATA"
-  This is the Git Server Module
+  This is the Binary Server Module
 HELPDATA;
       return $help ;
     }
