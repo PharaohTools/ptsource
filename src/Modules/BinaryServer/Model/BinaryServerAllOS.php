@@ -60,29 +60,12 @@ class BinaryServerAllOS extends Base {
 
     public function backendData() {
 
-        $path_info = "/".$this->params["item"] ;
-        $request_headers = $this->getAllHeaders();
-
         $repo_name = $this->findRepoName();
         $binaryRequestUser = $this->getBinaryRequestUser() ;
-
-//        var_dump($repo_name, $binaryRequestUser) ;
 
         if ($this->userIsAllowed($binaryRequestUser, $repo_name)==false) {
             header('HTTP/1.1 403 Forbidden');
             return false ;  }
-
-
-
-        $log = "<pre>";
-        $log .= "\$params = " . print_r($this->params, true);
-        $log .= "\$request_headers = " . print_r($request_headers, true);
-        $log .= "\$server = " . print_r($_SERVER, true);
-//        $log .= "\$php_input = " . PHP_EOL . $php_input . PHP_EOL;
-        //$log .= "\$return_output = " . PHP_EOL . $return_output . PHP_EOL;
-        $log .= str_repeat("-", 80) . PHP_EOL;
-        $log .= PHP_EOL;
-        $log .= '</pre>';
 
         if (isset($this->params['version'])) {
             if ($this->versionStringIsValid($this->params['version'])) {
@@ -98,18 +81,18 @@ class BinaryServerAllOS extends Base {
 
         $dir_to_write = REPODIR.DS.$this->params["item"].DS.$this_version ;
         if (!is_dir($dir_to_write)) {
-            mkdir($dir_to_write, 0777, true);
+            mkdir($dir_to_write, 0755, true);
         }
-//        var_dump($_FILES) ;
         $contents = file_get_contents($_FILES['file']['tmp_name']) ;
 
         $res = file_put_contents($dir_to_write.DS.$_FILES['file']['name'], $contents);
         if ($res !== false) {
             echo "File was uploaded successfully" ;
+            return true ;
         } else {
             echo "File Upload failed" ;
+            return false ;
         }
-//        file_put_contents('/tmp/pharaoh-source.log', $log, FILE_APPEND);
 
     }
 
