@@ -1,10 +1,4 @@
 <?php
-
-$ht_string = ($pageVars["data"]["is_https"] == true) ? 'HTTPS' : 'HTTP' ;
-$ht_string_lower = strtolower($ht_string) ;
-?>
-
-<?php
 if (isset($pageVars["data"]["user"]['username'])) {
 
     $ownerOrPublic = (isset($pageVars["data"]["repository"]["project-owner"]) &&

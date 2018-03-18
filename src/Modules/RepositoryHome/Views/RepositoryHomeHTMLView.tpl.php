@@ -114,6 +114,11 @@
             </div>
 
                 <?php
+
+
+                $ht_string = ($pageVars["data"]["is_https"] == true) ? 'HTTPS' : 'HTTP' ;
+                $ht_string_lower = strtolower($ht_string) ;
+
                 $pt = (isset($pageVars["data"]["repository"]["project-type"])) ?
                     $pageVars["data"]["repository"]["project-type"] :
                     'git' ;
