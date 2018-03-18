@@ -12,10 +12,14 @@ if (isset($pageVars["data"]["user"]['username'])) {
     ?>
     <div class="row">
         <div class="col-sm-12">
+            <h4>Manually Upload to this repository here</h4>
+            <a href="index.php?control=ManualUpload&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="centered_button select_git_command btn btn-success">Manual Upload</a>
+        </div>
+        <div class="col-sm-12">
             <h4>To upload to this repository using curl, you can use the following command:</h4>
         </div>
         <div class="col-sm-12">
-            <span class="col-sm-3 centered_button btn btn-success">Write Enabled</span>
+            <span class="centered_button select_git_command btn btn-success">Write Enabled</span>
         </div>
         <div class="col-sm-12">
 
@@ -43,7 +47,7 @@ if (isset($pageVars["data"]["user"]['username'])) {
             <h4>To download from this repository using curl, you can use the following command:</h4>
         </div>
         <div class="col-sm-12">
-            <span id="select_pull" class="centered_button select_git_command btn btn-warning">Read</span>
+            <span class="centered_button select_git_command btn btn-warning">Read Enabled</span>
         </div>
 
         <?php
