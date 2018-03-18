@@ -1,0 +1,57 @@
+.repository-home-properties {
+
+}
+
+.repository-home-properties h4.propertyTitle {
+    text-align: center;
+}
+
+.repository-home-properties .pipe-block {
+    margin: 0 0 20px 0;
+}
+
+.repository-feature {
+    width : 18%;
+    margin: 5px 1% ;
+    border: 1px;
+    border-color: darkgray;
+    background-color: lightgrey;
+    float: left;
+    padding: 0 5px;
+    text-align: center;
+}
+
+.repository-feature img {
+    display: block;
+    margin: 0 auto;
+    width : 90%;
+    max-width : 90%;
+}
+
+.repository-feature:hover {
+    background-color: darkgray;
+}
+
+.current_status {
+    width: 100%;
+    padding: 10px 0px;
+    color: white;
+    display: block;
+    margin: 0 auto;
+}
+
+.current_status h3 {
+    text-align: center;
+}
+
+.current_status_good {
+    background-color: greenyellow;
+}
+
+.current_status_bad {
+    background-color: red;
+}
+
+.current_status_unknown {
+    background-color: darkgray;
+}
