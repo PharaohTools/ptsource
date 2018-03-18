@@ -1,0 +1,15 @@
+.dropzone{
+    min-height: 150px;
+    padding: 54px;
+}
+
+span.fileRow {
+    display: block;
+    margin: 0.25% 0;
+    padding: 0 !important;
+}
+
+span.fileRow .btn{
+    line-height: 80% ;
+    margin: 0 2px;
+}
