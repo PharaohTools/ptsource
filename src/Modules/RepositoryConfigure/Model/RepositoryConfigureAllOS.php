@@ -140,7 +140,8 @@ class RepositoryConfigureAllOS extends Base {
         $data = array(
             "project-name" => $this->params["project-name"],
             "project-slug" => $this->params["project-slug"],
-            "project-description" => $this->params["project-description"]
+            "project-description" => $this->params["project-description"],
+            "project-type" => $this->params["project-type"]
         ) ;
         if ($this->isAdmin()==true){
             $data["project-owner"] = $this->params["project-owner"] ;
@@ -149,12 +150,12 @@ class RepositoryConfigureAllOS extends Base {
         $ev = $this->runBCEvent("beforeRepositorySave") ;
         if ($ev == false) { return false ; }
 
-
         if ($this->params["creation"] == "yes") {
             $data["project-creator"] = $this->params["project-creator"] ;
             $data["project-owner"] = $this->params["project-creator"] ;
+            $data["project-type"] = $this->params["project-type"] ;
             $repositoryDefault = $repositoryFactory->getModel($this->params);
-            $repositoryDefault->createRepository($this->params["project-slug"]) ; }
+            $repositoryDefault->createRepository($this->params["project-slug"], $data["project-type"]) ; }
         $repositorySaver = $repositoryFactory->getModel($this->params, "RepositorySaver");
         // @todo dunno why i have to force this param
         $repositorySaver->params["item"] = $this->params["item"];

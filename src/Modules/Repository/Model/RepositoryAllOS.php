@@ -90,29 +90,53 @@ class RepositoryAllOS extends Base {
             return true ; }
     }
 
-    public function createRepository($name) {
+    public function createRepository($name, $repo_type = 'git') {
         $loggingFactory = new \Model\Logging();
         $logging = $loggingFactory->getModel($this->params);
         if (file_exists(REPODIR.DS.$name)) {
             $logging->log("Directory already exists at ".REPODIR.DS."{$name}. Exiting with failure.", $this->getModuleName()) ;
             return false ; }
         else  {
-            $logging->log("Attempting to create directory ".REPODIR.DS."$name ", $this->getModuleName()) ;
-            // @todo cross os
-            $comms = array(
-                'sudo -u ptgit "/bin/mkdir -m 0775 -p '.REPODIR.DS.$name . '"' ,
-                'cd '.REPODIR.DS.$name.'; git config http.receivepack true ;',
-                'git init --bare '.REPODIR.DS.$name,
-                'sudo -u ptgit "chown -R ptgit:ptsource '.REPODIR.DS.$name . '"' ,) ;
-            $results = array() ;
-            foreach ($comms as $comm) {
-                $rc = self::executeAndGetReturnCode($comm);
-                $results[] = ($rc["rc"] == 0) ? true : false ;
-                if ($rc["rc"] != 0) {
-                    $logging->log("Repository creation command failed ".REPODIR.DS."$name ", $this->getModuleName(), LOG_FAILURE_EXIT_CODE) ;
-                    $logging->log("Failed command was {$comm}", $this->getModuleName()) ;
-                    return false ; } }
-            return (in_array(false, $results)) ? false : true ; }
+            if ($repo_type === 'raw') {
+
+                $logging->log("Attempting to create Raw Repository at directory ".REPODIR.DS."$name ", $this->getModuleName()) ;
+                // @todo cross os
+                $comms = array (
+                    '/bin/mkdir -m 0775 -p '.REPODIR.DS.$name.' ; ' ,
+                    'cd '.REPODIR.DS.$name.' ; '
+                ) ;
+
+                $results = array() ;
+                foreach ($comms as $comm) {
+                    $rc = self::executeAndGetReturnCode($comm);
+                    $results[] = ($rc["rc"] == 0) ? true : false ;
+                    if ($rc["rc"] != 0) {
+                        $logging->log("Repository creation command failed ".REPODIR.DS."$name ", $this->getModuleName(), LOG_FAILURE_EXIT_CODE) ;
+                        $logging->log("Failed command was {$comm}", $this->getModuleName()) ;
+                        return false ; } }
+                return (in_array(false, $results)) ? false : true ;
+
+
+
+            } else if ($repo_type === 'git') {
+                $logging->log("Attempting to create Git Repository at directory ".REPODIR.DS."$name ", $this->getModuleName()) ;
+                // @todo cross os
+                $comms = array(
+                    'sudo -u ptgit "/bin/mkdir -m 0775 -p '.REPODIR.DS.$name . '" ;' ,
+                    'cd '.REPODIR.DS.$name.'; git config http.receivepack true ;',
+                    'git init --bare '.REPODIR.DS.$name,
+                    'sudo -u ptgit "chown -R ptgit:ptsource '.REPODIR.DS.$name . '"' ,) ;
+                $results = array() ;
+                foreach ($comms as $comm) {
+                    $rc = self::executeAndGetReturnCode($comm);
+                    $results[] = ($rc["rc"] == 0) ? true : false ;
+                    if ($rc["rc"] != 0) {
+                        $logging->log("Repository creation command failed ".REPODIR.DS."$name ", $this->getModuleName(), LOG_FAILURE_EXIT_CODE) ;
+                        $logging->log("Failed command was {$comm}", $this->getModuleName()) ;
+                        return false ; } }
+                return (in_array(false, $results)) ? false : true ;
+            }
+        }
     }
 
     public function userIsAllowedAccess($public_resource = null) {

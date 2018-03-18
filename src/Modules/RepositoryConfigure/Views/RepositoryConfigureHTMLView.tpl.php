@@ -110,6 +110,36 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="project-slug" class="col-sm-2 control-label text-left">Project Type</label>
+                        <div class="col-sm-10">
+                            <?php
+
+                            if (isset($pageVars["data"]["repository"]["project-type"]) && $pageVars["data"]["repository"]["project-type"] == 'git') {
+                            ?>
+                                <input type="text" class="form-control" name="project-type" id="project-type" disabled="disabled" value="git" />
+
+                                <?php
+                            }  else if (isset($pageVars["data"]["repository"]["project-type"]) && $pageVars["data"]["repository"]["project-type"] == 'raw') {
+                            ?>
+                                <input type="text" class="form-control" name="project-type" id="project-type" disabled="disabled" value="raw" />
+
+
+                            <?php
+                            } else {
+                            ?>
+                                <select type="text" class="form-control" name="project-type" id="project-type" >
+                                    <option value="git" selected="selected">Git SCM</option>
+                                    <option value="raw">Raw Binary</option>
+                                </select>
+
+                            <?php
+                            }
+
+                            ?>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <label for="project-slug" class="col-sm-2 control-label text-left">Project Owner</label>
 
                         <div class="col-sm-10">
