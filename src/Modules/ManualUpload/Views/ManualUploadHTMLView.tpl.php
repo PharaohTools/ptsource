@@ -59,17 +59,20 @@
                 
                
 
-         <div class="col-lg-9">
-                    <div class="well well-lg">
-<!--            <h2 class="text-uppercase text-light"><a href="/"> Track - Pharaoh Tools </a></h2>-->
+    <div class="col-lg-12">
+        <div class="well well-lg">
             <div class="row clearfix no-margin">
                 <?php
                     switch ($pageVars["route"]["action"]) {
                         case "show" :
                             $stat = "Manual Upload to " ;
-                            break ; }
+                            break ;
+                    }
                 ?>
-                <h3><?= $stat; ?> Repository <?php echo $pageVars["data"]["repository"]["project-name"] ; ?></h3>
+                <h3>
+                    <?= $stat; ?> Repository <?php echo $pageVars["data"]["repository"]["project-name"] ; ?>
+                </h3>
+
                 <?php
                     $rootPath = str_replace($pageVars["data"]["relpath"], "", $pageVars["data"]["wsdir"]) ;
                     echo '<h3><a href="/index.php?control=ManualUpload&action=show&item='.
@@ -77,14 +80,15 @@
 
                     $act = '/index.php?control=ManualUpload&item='.$pageVars["data"]["repository"]["project-slug"].'&action=show' ;
                 ?>
-                <div class="form-group col-sm-10" id="ajaxMessages">
-                </div
+
+                <div class="form-group col-sm-12" id="ajaxMessages">
+                </div>
 
                 <form class="form-horizontal custom-form" action="<?= $act ; ?>" method="POST">
 
                     <div class="form-group col-sm-12">
                         <label for="version">Customize Version Number:</label>
-                        <input type="text" value="<?php echo $pageVars["data"]["next_version"] ; ?>" name="version" id="version" />
+                        <input type="text" name="version" id="version" value="<?php echo $pageVars["data"]["next_version"] ; ?>" onchange="setDZOptions(this); return false;" />
                     </div>
 
                     <div class="form-group">
@@ -97,14 +101,12 @@
                 </form>
                 <div class="form-group">
                     <div class="col-sm-10">
-                        <form action="/index.php?control=ManualUpload&action=fileupload&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>& output-format=SERVICE" class="dropzone" id="manualUploadDrop"></form>
+                        <form action="/index.php?control=ManualUpload&action=fileupload&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>&output-format=SERVICE" class="dropzone" id="manualUpload-drop"></form>
                     </div>
                 </div>
             </div>
-            <p>
-                ---------------------------------------<br/>
-                Visit www.pharaohtools.com for more
-            </p>
+
+
 
         </div>
 
