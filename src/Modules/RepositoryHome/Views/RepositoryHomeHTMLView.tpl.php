@@ -28,7 +28,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="index.php?control=RepositoryConfigure&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
+                                <a href="/index.php?control=RepositoryConfigure&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
                                     <i class="fa  fa-cog fa-fw hvr-bounce-in"></i> Configure
                                 </a>
                             </li>
@@ -40,27 +40,27 @@
                         ?>
 
                         <li>
-                            <a href="index.php?control=FileBrowser&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
+                            <a href="/index.php?control=FileBrowser&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
                                 <i class="fa fa-folder-open-o hvr-bounce-in"></i> File Browser
                             </a>
                         </li>
                         <li>
-                            <a href="index.php?control=RepositoryCharts&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
+                            <a href="/index.php?control=RepositoryCharts&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
                                 <i class="fa fa-bar-chart-o hvr-bounce-in"></i> Charts
                             </a>
                         </li>
                         <li>
-                            <a href="index.php?control=RepositoryHistory&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>"class="hvr-bounce-in">
+                            <a href="/index.php?control=RepositoryHistory&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>"class="hvr-bounce-in">
                                 <i class="fa fa-history fa-fw hvr-bounce-in"></i> History <span class="badge"></span>
                             </a>
                         </li>
                         <li>
-                            <a href="index.php?control=RepositoryPullRequests&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>"class="hvr-bounce-in">
+                            <a href="/index.php?control=RepositoryPullRequests&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>"class="hvr-bounce-in">
                                 <i class="fa fa-code fa-fw hvr-bounce-in"></i> Pull Requests <span class="badge"></span>
                             </a>
                         </li>
                         <li>
-                            <a href="index.php?control=RepositoryReleases&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>"class="hvr-bounce-in">
+                            <a href="/index.php?control=RepositoryReleases&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>"class="hvr-bounce-in">
                                 <i class="fa fa-code fa-fw hvr-bounce-in"></i> Releases <span class="badge"></span>
                             </a>
                         </li>
@@ -70,7 +70,7 @@
                             ?>
 
                             <li>
-                                <a href="index.php?control=RepositoryHome&action=delete&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
+                                <a href="/index.php?control=RepositoryHome&action=delete&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
                                     <i class="fa fa-trash fa-fw hvr-bounce-in"></i> Delete
                                 </a>
                             </li>
