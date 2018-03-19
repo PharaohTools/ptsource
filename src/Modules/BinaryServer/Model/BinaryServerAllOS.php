@@ -63,8 +63,11 @@ class BinaryServerAllOS extends Base {
         $repo_name = $this->findRepoName();
         $binaryRequestUser = $this->getBinaryRequestUser() ;
 
+//        var_dump($binaryRequestUser, $repo_name) ;
+
         if ($this->userIsAllowed($binaryRequestUser, $repo_name)==false) {
             header('HTTP/1.1 403 Forbidden');
+            echo "Forbidden" ;
             return false ;  }
 
         $is_download = ($_FILES == array()) ? true : false ;
@@ -195,6 +198,7 @@ class BinaryServerAllOS extends Base {
     public function userIsAllowed($binaryRequestUser, $repo_name) {
         $isWriteAction = $this->isWriteAction() ;
         if ($isWriteAction == false) {
+//            var_dump('is not a write') ;
             //error_log("is not a write") ;
             $publicReads = $this->repoPublicAllowed("read", $repo_name) ;
 //            var_dump('public reads', $publicReads) ;
@@ -203,6 +207,7 @@ class BinaryServerAllOS extends Base {
             else {
                 return $this->authUserToRead($binaryRequestUser, $repo_name) ; } }
         else {
+//            var_dump('is a write') ;
             //error_log("is a write") ;
             $publicWrites = $this->repoPublicAllowed("write", $repo_name) ;
             if ($publicWrites == true) {
@@ -230,6 +235,17 @@ class BinaryServerAllOS extends Base {
 
 
     protected function getBinaryRequestUser() {
+
+        $userAccountFactory = new \Model\UserAccount();
+        $userAccount = $userAccountFactory->getModel($this->params);
+        $retuser = $userAccount->getLoggedInUserData();
+        if ($retuser !== false) {
+            $ret = array(
+                'user' => $retuser['username']
+            ) ;
+            return $ret ;
+        }
+
         if (isset($_SERVER["REDIRECT_HTTP_AUTHORIZATION"])) {
             $base64 = str_replace("Basic ", "", $_SERVER["REDIRECT_HTTP_AUTHORIZATION"]) ;
             $string = base64_decode($base64) ;
