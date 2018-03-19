@@ -35,19 +35,8 @@ class BinaryServerAllOS extends Base {
 
     public function runBinaryHTTP() {
         $out = $this->backendData() ;
-        $this->fixPushPerms() ;
+//        $this->fixPushPerms() ;
         return $out ;
-    }
-
-    public function fixPushPerms() {
-        $repo_name = $this->findRepoName() ;
-        $command  = SUDOPREFIX." chmod -R 775 /opt/ptsource/repositories/{$repo_name}/objects && ";
-        $command .= SUDOPREFIX." chown -R ptsource: /opt/ptsource/repositories/{$repo_name}/objects ;";
-        ob_start() ;
-        $rc = $this->executeAsShell($command) ;
-        $out = ob_get_clean() ;
-        file_put_contents('/tmp/pharaoh.log', $rc.$out, FILE_APPEND) ;
-        return $rc ;
     }
 
     protected function findRepoName(){
@@ -352,18 +341,8 @@ class BinaryServerAllOS extends Base {
     }
 
     protected function isWriteAction() {
-        // @TODO There are multiple better ways to do this. Maybe a method parameter
-        // var_dump($_SERVER["REQUEST_URI"]) ;
-        if (isset($_SERVER["REQUEST_URI"])) {
-            // Its a http request
-            if ( strpos($_SERVER["REQUEST_URI"], "binary-receive-pack") !== false) {
-                return true ; }
-            return false ; }
-        else {
-            // Its an SSH request
-             if (strpos($this->params["ssh_command"], 'binary-recieve-pack') === 0) {
-                return true ; }
-            return false ; }
+        $is_download = ($_FILES == array()) ? true : false ;
+        return !$is_download ;
     }
 
 
