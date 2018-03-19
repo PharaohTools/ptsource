@@ -51,7 +51,7 @@ div.repositoryRow:hover {
 }
 
 .cellRowFeatures {
-    width: 55% ;
+    width: 40% ;
 }
 
 .cellRowFeatures .repository-feature {
@@ -66,6 +66,6 @@ div.repositoryRow:hover {
     margin: auto 2px;
 }
 
-.cellRowMore {
-    width: 20% ;
+.cellRowAction {
+    width: 35% ;
 }
