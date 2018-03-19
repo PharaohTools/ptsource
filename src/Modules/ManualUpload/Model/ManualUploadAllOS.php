@@ -32,9 +32,6 @@ class ManualUploadAllOS extends Base {
 
     public function getArtefactVersion() {
 
-        file_put_contents('/tmp/pharaoh.log', 'afv'."\n", FILE_APPEND) ;
-        file_put_contents('/tmp/pharaoh.log', json_encode($this->params['version']), FILE_APPEND) ;
-
         if (isset($this->params['version'])) {
             $this_version = $this->params['version'] ;
         } else {
@@ -63,9 +60,6 @@ class ManualUploadAllOS extends Base {
                 $this_version = $cur_prefix.$new_build ;
             }
         }
-
-        file_put_contents('/tmp/pharaoh.log', 'version'."\n", FILE_APPEND) ;
-        file_put_contents('/tmp/pharaoh.log', $this_version."\n", FILE_APPEND) ;
 
         return $this_version;
     }
