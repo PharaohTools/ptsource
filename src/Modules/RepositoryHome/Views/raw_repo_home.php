@@ -12,58 +12,78 @@ if (isset($pageVars["data"]["user"]['username'])) {
     ?>
     <div class="row">
         <div class="col-sm-12">
-            <h4>Manually Upload to this repository here</h4>
-            <a href="index.php?control=ManualUpload&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="centered_button select_git_command btn btn-success">Manual Upload</a>
+            <div class="col-sm-6">
+                <span class="centered_button select_git_command btn btn-primary">
+                    <h2>Write Enabled</h2>
+                </span>
+            </div>
+            <div class="col-sm-6">
+                <?php
+                $manual_upload_link = "index.php?control=ManualUpload&action=show&item=".$pageVars["data"]["repository"]["project-slug"] ;
+                ?>
+                <a href="<?php echo $manual_upload_link ; ?>" class="centered_button select_git_command btn btn-success">
+                    <h2>Manual Upload</h2>
+                </a>
+            </div>
         </div>
         <div class="col-sm-12">
-            <h4>To upload to this repository using curl, you can use the following command:</h4>
+            <h4>To upload to this repository using curl, use the commands below:</h4>
         </div>
-        <div class="col-sm-12">
-            <span class="centered_button select_git_command btn btn-success">Write Enabled</span>
-        </div>
-        <div class="col-sm-12">
 
         <?php
         $curl_str_1 = "curl -F file=@/path/to/file -F control=BinaryServer -F action=serve -F item=".$pageVars["data"]["repository"]["project-slug"]." {$ht_string_lower}://{$pageVars['data']['user']['username']}:{password}@{$_SERVER['SERVER_NAME']}/index.php" ;
-        $curl_str_2 = "curl -F file=@/path/to/file -F control=BinaryServer -F action=serve -F item=".$pageVars["data"]["repository"]["project-slug"]." -F version=*.*.* http://source.pharaoh.tld/index.php" ;
+        $curl_str_2 = "curl -F file=@/path/to/file -F control=BinaryServer -F action=serve -F item=".$pageVars["data"]["repository"]["project-slug"]." -F version=*.*.* http://{$pageVars['data']['user']['username']}:{password}@{$_SERVER['SERVER_NAME']}/index.php" ;
         ?>
 
-            <div class="col-sm-12">
-                <h2 class="git_command_text">
-                    Specify version
-                    <strong><?php echo $curl_str_1  ; ?></strong>
-                </h2>
-                <h2 class="git_command_text">
-                    Create latest version
-                    <strong><?php echo $curl_str_2  ; ?></strong>
-                </h2>
-            </div>
+        <div class="col-sm-12">
+            <h4>
+                Guess latest version
+                <pre><?php echo $curl_str_2  ; ?></pre>
+            </h4>
+            <h4>
+                Specify version
+                <pre><?php echo $curl_str_1  ; ?></pre>
+            </h4>
         </div>
 
     </div>
 
+    <hr />
+
     <div class="row">
         <div class="col-sm-12">
-            <h4>To download from this repository using curl, you can use the following command:</h4>
+            <div class="col-sm-6">
+                <span class="centered_button select_git_command btn btn-warning">
+                    <h2>Read Enabled</h2>
+                </span>
+            </div>
+            <div class="col-sm-6">
+                <?php
+                $browser_link = "{$ht_string_lower}://{$_SERVER['SERVER_NAME']}/index.php?control=BinaryServer&action=serve&item=".$pageVars["data"]["repository"]["project-slug"] ;
+                ?>
+                <a href="<?php echo $browser_link ; ?>" class="centered_button select_git_command btn btn-success">
+                    <h2>Latest Download</h2>
+                </a>
+            </div>
         </div>
         <div class="col-sm-12">
-            <span class="centered_button select_git_command btn btn-warning">Read Enabled</span>
+            <h4>To download from this repository using curl, use the commands below:</h4>
         </div>
 
         <?php
-        $curl_str_1 = "curl -F file=@/path/to/file -F control=BinaryServer -F action=serve -F item=".$pageVars["data"]["repository"]["project-slug"]." -F version=*.*.* {$_SERVER['SERVER_NAME']}/index.php" ;
-        $curl_str_2 = "curl -F file=@/path/to/file -F control=BinaryServer -F action=serve -F item=".$pageVars["data"]["repository"]["project-slug"]." {$_SERVER['SERVER_NAME']}/index.php" ;
+        $curl_str_1 = "curl -X POST -O -J -d \"control=BinaryServer&action=serve&item=".$pageVars["data"]["repository"]["project-slug"]."&version=*.*.*\" {$ht_string_lower}://{$pageVars['data']['user']['username']}:{password}@{$_SERVER['SERVER_NAME']}/index.php" ;
+        $curl_str_2 = "curl -X POST -O -J -d \"control=BinaryServer&action=serve&item=".$pageVars["data"]["repository"]["project-slug"]."\" {$ht_string_lower}://{$pageVars['data']['user']['username']}:{password}@{$_SERVER['SERVER_NAME']}/index.php" ;
         ?>
 
         <div class="col-sm-12">
-            <h2 class="git_command_text">
+            <h4>
+                Latest version
+                <pre><?php echo $curl_str_2  ; ?></pre>
+            </h4>
+            <h4>
                 Specify version
-                <strong><?php echo $curl_str_1  ; ?></strong>
-            </h2>
-            <h2 class="git_command_text">
-                Download latest version
-                <strong><?php echo $curl_str_2  ; ?></strong>
-            </h2>
+                <pre><?php echo $curl_str_1  ; ?></pre>
+            </h4>
         </div>
     </div>
 
@@ -71,88 +91,107 @@ if (isset($pageVars["data"]["user"]['username'])) {
     <?php
 }
 else {
-    ?>
 
-    <div class="row">
-    <hr />
-    <?php
 
     if ($pageVars["data"]["repository"]["settings"]["PublicScope"]["enabled"] == "on") {
-        if ($pageVars["data"]["repository"]["settings"]["PublicScope"]["public_read"] == "on") { ?>
+        ?>
 
-            <?php
+<?php
 
-            if (in_array($pageVars["data"]["current_user_role"], array("1", "2")) ||
-                $pageVars["data"]["repository"]["settings"]["PublicScope"]["public_write"] == "on") { ?>
-
+        if ($pageVars["data"]["repository"]["settings"]["PublicScope"]["public_write"] == "on") {
+            ?>
+            <div class="row">
                 <div class="col-sm-12">
-                    <h4>To upload to this repository using curl, you can use the following command:</h4>
+                    <div class="col-sm-6">
+                <span class="centered_button select_git_command btn btn-primary">
+                    <h2>Write Enabled</h2>
+                </span>
+                    </div>
+                    <div class="col-sm-6">
+                        <?php
+                        $manual_upload_link = "index.php?control=ManualUpload&action=show&item=" . $pageVars["data"]["repository"]["project-slug"];
+                        ?>
+                        <a href="<?php echo $manual_upload_link; ?>"
+                           class="centered_button select_git_command btn btn-success">
+                            <h2>Manual Upload</h2>
+                        </a>
+                    </div>
                 </div>
-
                 <div class="col-sm-12">
-                    <span id="select_push" class="centered_button select_git_command btn btn-warning">Write</span>
+                    <h4>To upload to this repository using curl, use the commands below:</h4>
                 </div>
 
                 <?php
-
-                $curl_str_1 = "curl -F file=@/path/to/file -F control=BinaryServer -F action=serve -F item=".$pageVars["data"]["repository"]["project-slug"]." -F version=*.*.* {$_SERVER['SERVER_NAME']}/index.php" ;
-                $curl_str_2 = "curl -F file=@/path/to/file -F control=BinaryServer -F action=serve -F item=".$pageVars["data"]["repository"]["project-slug"]." {$_SERVER['SERVER_NAME']}/index.php" ;
-
+                $curl_str_1 = "curl -F file=@/path/to/file -F control=BinaryServer -F action=serve -F item=" . $pageVars["data"]["repository"]["project-slug"] . " {$ht_string_lower}://{$_SERVER['SERVER_NAME']}/index.php";
+                $curl_str_2 = "curl -F file=@/path/to/file -F control=BinaryServer -F action=serve -F item=" . $pageVars["data"]["repository"]["project-slug"] . " -F version=*.*.* {$ht_string_lower}://{$_SERVER['SERVER_NAME']}/index.php";
                 ?>
 
                 <div class="col-sm-12">
-                    <h2 class="git_command_text">
+                    <h4>
+                        Guess latest version
+                        <pre><?php echo $curl_str_2; ?></pre>
+                    </h4>
+                    <h4>
                         Specify version
-                        <strong><?php echo $curl_str_1  ; ?></strong>
-                    </h2>
-                    <h2 class="git_command_text">
-                        Create latest version
-                        <strong><?php echo $curl_str_2  ; ?></strong>
-                    </h2>
+                        <pre><?php echo $curl_str_1; ?></pre>
+                    </h4>
                 </div>
 
-            <?php } ?>
+            </div>
 
 
+        <?php
+        }
+        ?>
+
+        <hr/>
+
+        <?php
+        if ($pageVars["data"]["repository"]["settings"]["PublicScope"]["public_read"] == "on")  {
+        ?>
+
+        <div class="row">
             <div class="col-sm-12">
-                <h4>To download from this repository using curl, you can use the following command:</h4>
+                <div class="col-sm-6">
+                <span class="centered_button select_git_command btn btn-warning">
+                    <h2>Read Enabled</h2>
+                </span>
+                </div>
+                <div class="col-sm-6">
+                    <?php
+                    $browser_link = "{$ht_string_lower}://{$_SERVER['SERVER_NAME']}/index.php?control=BinaryServer&action=serve&item=" . $pageVars["data"]["repository"]["project-slug"];
+                    ?>
+                    <a href="<?php echo $browser_link; ?>" class="centered_button select_git_command btn btn-success">
+                        <h2>Latest Download</h2>
+                    </a>
+                </div>
             </div>
             <div class="col-sm-12">
-                <span id="select_pull" class="centered_button select_git_command btn btn-warning">Read</span>
+                <h4>To download from this repository using curl, use the commands below:</h4>
             </div>
 
             <?php
-
-            $curl_str_1 = "curl -F file=@/path/to/file -F control=BinaryServer -F action=serve -F item=".$pageVars["data"]["repository"]["project-slug"]." -F version=*.*.* {$_SERVER['SERVER_NAME']}/index.php" ;
-            $curl_str_2 = "curl -F file=@/path/to/file -F control=BinaryServer -F action=serve -F item=".$pageVars["data"]["repository"]["project-slug"]." {$_SERVER['SERVER_NAME']}/index.php" ;
-
+            $curl_str_1 = "curl -X POST -O -J -d \"control=BinaryServer&action=serve&item=" . $pageVars["data"]["repository"]["project-slug"] . "&version=*.*.*\" {$ht_string_lower}://{$_SERVER['SERVER_NAME']}/index.php";
+            $curl_str_2 = "curl -X POST -O -J -d \"control=BinaryServer&action=serve&item=" . $pageVars["data"]["repository"]["project-slug"] . "\" {$ht_string_lower}://{$_SERVER['SERVER_NAME']}/index.php";
             ?>
 
             <div class="col-sm-12">
-                <h2 class="git_command_text">
+                <h4>
+                    Latest version
+                    <pre><?php echo $curl_str_2; ?></pre>
+                </h4>
+                <h4>
                     Specify version
-                    <strong><?php echo $curl_str_1  ; ?></strong>
-                </h2>
-                <h2 class="git_command_text">
-                    Download latest version
-                    <strong><?php echo $curl_str_2  ; ?></strong>
-                </h2>
+                    <pre><?php echo $curl_str_1; ?></pre>
+                </h4>
             </div>
-
-        <?php } ?>
-        <div class="col-sm-12">
-
-            <?php
-
-            if (in_array($pageVars["data"]["current_user_role"], array("1", "2")) ||
-                $pageVars["data"]["repository"]["settings"]["PublicScope"]["public_write"] == "on") {?>
-                <span class="col-sm-3 centered_button btn btn-success">Write Enabled</span>
-            <?php } else { ?>
-                <span class="col-sm-3 centered_button btn btn-danger">Write Disabled</span>
-            <?php } ?>
-
         </div>
-    </div>
+
+
+        <?php
+        }
+        ?>
+
         <?php
     }
 
