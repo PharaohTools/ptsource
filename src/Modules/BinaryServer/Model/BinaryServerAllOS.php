@@ -67,17 +67,17 @@ class BinaryServerAllOS extends Base {
             header('HTTP/1.1 403 Forbidden');
             return false ;  }
 
-        $version = $this->getArtefactVersion() ;
-        if ($this->versionStringIsValid($version)) {
-            $this_version = $version ;
-        } else {
-            header('HTTP/1.1 400 Unable to handle request');
-            echo "Incompatible Version String Requested" ;
-            return false ;
-        }
-
         $is_download = ($_FILES == array()) ? true : false ;
         if ($is_download) {
+
+            $version = $this->getArtefactVersion(true) ;
+            if ($this->versionStringIsValid($version)) {
+                $this_version = $version ;
+            } else {
+                header('HTTP/1.1 400 Unable to handle request');
+                echo "Incompatible Version String Requested" ;
+                return false ;
+            }
 
             $dir_to_read = REPODIR.DS.$this->params["item"].DS.$this_version ;
             $in_dir = scandir($dir_to_read);
@@ -96,11 +96,32 @@ class BinaryServerAllOS extends Base {
                 return false ;
             }
 
-            $contents = file_get_contents($dir_to_read.DS.$this_one) ;
-            echo $contents ;
+            $file_path = $dir_to_read.DS.$this_one ;
+//            $mime = mime_content_type($file_path) ;
+//            header("Content-Type: {$mime}");
+            header("Content-Disposition: attachment; filename=\"$this_one\"");
+
+            set_time_limit(0);
+            $file = @fopen($file_path,"rb");
+            while(!feof($file)) {
+                print(@fread($file, 1024*8));
+                ob_flush();
+                flush();
+            }
+
             return true ;
 
         } else {
+
+
+            $version = $this->getArtefactVersion() ;
+            if ($this->versionStringIsValid($version)) {
+                $this_version = $version ;
+            } else {
+                header('HTTP/1.1 400 Unable to handle request');
+                echo "Incompatible Version String Requested" ;
+                return false ;
+            }
 
             $dir_to_write = REPODIR.DS.$this->params["item"].DS.$this_version ;
             if (!is_dir($dir_to_write)) {
@@ -120,7 +141,7 @@ class BinaryServerAllOS extends Base {
 
     }
 
-    public function getArtefactVersion() {
+    public function getArtefactVersion($get_current_max = false) {
 
         if (isset($this->params['version'])) {
             $this_version = $this->params['version'] ;
@@ -139,6 +160,9 @@ class BinaryServerAllOS extends Base {
                 } else {
                     $cur_max = $current_dir ;
                 }
+            }
+            if ($get_current_max == true) {
+                return $cur_max ;
             }
             if ($dir_count == 0) {
                 $this_version = '0.0.1' ;
