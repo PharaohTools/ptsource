@@ -227,6 +227,21 @@ class BinaryServerAllOS extends Base {
 
         $userAccountFactory = new \Model\UserAccount();
         $userAccount = $userAccountFactory->getModel($this->params);
+        $data = var_export($_SERVER, true) ;
+        $data2 = var_export($this->getAllHeaders(), true) ;
+//file_put_contents('/tmp/pharaoh.log', $data, FILE_APPEND) ;
+//file_put_contents('/tmp/pharaoh.log', $data2, FILE_APPEND) ;
+        if (isset($this->params['auth_user'])) {
+            $res = $userAccount->checkLoginInfo($this->params['auth_user'], $this->params['auth_pw'], false) ;
+//            echo(var_export($res, true).$this->params['auth_user'].$this->params['auth_pw']) ;
+            if ($res['status'] === true) {
+                $ret = array(
+                    'user' => $this->params['auth_user']
+                ) ;
+                return $ret ;
+            }
+        }
+
         $retuser = $userAccount->getLoggedInUserData();
         if ($retuser !== false) {
             $ret = array(
