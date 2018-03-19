@@ -75,20 +75,47 @@ class BinaryServerAllOS extends Base {
             echo "Incompatible Version String Requested" ;
             return false ;
         }
-        
-        $dir_to_write = REPODIR.DS.$this->params["item"].DS.$this_version ;
-        if (!is_dir($dir_to_write)) {
-            mkdir($dir_to_write, 0755, true);
-        }
-        $contents = file_get_contents($_FILES['file']['tmp_name']) ;
 
-        $res = file_put_contents($dir_to_write.DS.$_FILES['file']['name'], $contents);
-        if ($res !== false) {
-            echo "File was uploaded successfully" ;
+        $is_download = ($_FILES == array()) ? true : false ;
+        if ($is_download) {
+
+            $dir_to_read = REPODIR.DS.$this->params["item"].DS.$this_version ;
+            $in_dir = scandir($dir_to_read);
+            $this_one = null ;
+            foreach ($in_dir as $one) {
+                if (in_array($one, array('.', '..'))) {
+                    continue ;
+                } else {
+                    $this_one = $one ;
+                    break ;
+                }
+            }
+            if ($this_one === null) {
+                header('HTTP/1.1 404 Unable to find resource');
+                echo "Unable to find Requested Resource" ;
+                return false ;
+            }
+
+            $contents = file_get_contents($dir_to_read.DS.$this_one) ;
+            echo $contents ;
             return true ;
+
         } else {
-            echo "File Upload failed" ;
-            return false ;
+
+            $dir_to_write = REPODIR.DS.$this->params["item"].DS.$this_version ;
+            if (!is_dir($dir_to_write)) {
+                mkdir($dir_to_write, 0755, true);
+            }
+            $contents = file_get_contents($_FILES['file']['tmp_name']) ;
+
+            $res = file_put_contents($dir_to_write.DS.$_FILES['file']['name'], $contents);
+            if ($res !== false) {
+                echo "File was uploaded successfully" ;
+                return true ;
+            } else {
+                echo "File Upload failed" ;
+                return false ;
+            }
         }
 
     }
@@ -98,12 +125,12 @@ class BinaryServerAllOS extends Base {
         if (isset($this->params['version'])) {
             $this_version = $this->params['version'] ;
         } else {
-            $all_dirs = scandir($this->params["repository_dir"].DS.$this->params["item"]) ;
+            $all_dirs = scandir(REPODIR.DS.$this->params["item"]) ;
             $cur_max = 0 ;
             $dir_count = 0 ;
             foreach ($all_dirs as $current_dir) {
                 if (in_array($current_dir, array('.', '..'))) { continue ; }
-                $full_dir = $this->params["repository_dir"].DS.$this->params["item"].DS.$current_dir ;
+                $full_dir = REPODIR.DS.$this->params["item"].DS.$current_dir ;
                 if (!is_dir($full_dir)) { continue ; }
                 $dir_count ++ ;
                 $res = version_compare ( $cur_max , $current_dir );
