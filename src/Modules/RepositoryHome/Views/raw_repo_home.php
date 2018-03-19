@@ -31,8 +31,8 @@ if (isset($pageVars["data"]["user"]['username'])) {
         </div>
 
         <?php
-        $curl_str_1 = "curl -F file=@/path/to/file -F control=BinaryServer -F action=serve -F item=".$pageVars["data"]["repository"]["project-slug"]." {$ht_string_lower}://{$pageVars['data']['user']['username']}:{password}@{$_SERVER['SERVER_NAME']}/index.php" ;
-        $curl_str_2 = "curl -F file=@/path/to/file -F control=BinaryServer -F action=serve -F item=".$pageVars["data"]["repository"]["project-slug"]." -F version=*.*.* http://{$pageVars['data']['user']['username']}:{password}@{$_SERVER['SERVER_NAME']}/index.php" ;
+        $curl_str_1 = "curl -F file=@/path/to/file -F control=BinaryServer -F action=serve -F item=".$pageVars["data"]["repository"]["project-slug"]." -F auth_user={$pageVars['data']['user']['username']} -F auth_pass={password} {$ht_string_lower}://{$_SERVER['SERVER_NAME']}/index.php" ;
+        $curl_str_2 = "curl -F version=*.*.* -F file=@/path/to/file -F control=BinaryServer -F action=serve -F item=".$pageVars["data"]["repository"]["project-slug"]." -F auth_user={$pageVars['data']['user']['username']} -F auth_pass={password} {$ht_string_lower}://{$_SERVER['SERVER_NAME']}/index.php" ;
         ?>
 
         <div class="col-sm-12">
@@ -71,8 +71,8 @@ if (isset($pageVars["data"]["user"]['username'])) {
         </div>
 
         <?php
-        $curl_str_1 = "curl -X POST -O -J -d \"control=BinaryServer&action=serve&item=".$pageVars["data"]["repository"]["project-slug"]."&version=*.*.*\" {$ht_string_lower}://{$pageVars['data']['user']['username']}:{password}@{$_SERVER['SERVER_NAME']}/index.php" ;
-        $curl_str_2 = "curl -X POST -O -J -d \"control=BinaryServer&action=serve&item=".$pageVars["data"]["repository"]["project-slug"]."\" {$ht_string_lower}://{$pageVars['data']['user']['username']}:{password}@{$_SERVER['SERVER_NAME']}/index.php" ;
+        $curl_str_1 = "curl -X POST -O -J -d \"control=BinaryServer&action=serve&item=".$pageVars["data"]["repository"]["project-slug"]."&auth_user={$pageVars['data']['user']['username']}&auth_pw={password}&version=*.*.*\" {$ht_string_lower}://{$_SERVER['SERVER_NAME']}/index.php" ;
+        $curl_str_2 = "curl -X POST -O -J -d \"control=BinaryServer&action=serve&item=".$pageVars["data"]["repository"]["project-slug"]."&auth_user={$pageVars['data']['user']['username']}&auth_pw={password}\" {$ht_string_lower}://{$_SERVER['SERVER_NAME']}/index.php" ;
         ?>
 
         <div class="col-sm-12">
