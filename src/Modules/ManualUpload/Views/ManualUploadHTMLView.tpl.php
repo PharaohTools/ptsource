@@ -1,65 +1,86 @@
 <div class="container" id="wrapper">
-    <div class="navbar-default col-sm-2 sidebar" role="navigation">
-		<div class="sidebar-nav ">
-			<ul class="nav in" id="side-menu">
-				<li class="sidebar-search">
-					<div class="input-group custom-search-form hvr-bounce-in">
-						<input type="text" class="form-control" placeholder="Search...">
-						<span class="input-group-btn">
-							<button class="btn btn-default" type="button">
-								<i class="fa fa-search"></i>
-							</button>
-                        </span>
-					</div>
-					</li>
-                <li>
-                    <a href="/index.php?control=Index&amp;action=show"class="hvr-bounce-in">
-                        <i class="fa fa-dashboard hvr-bounce-in"></i> Dashboard
-                    </a>
-                </li>
-                <li>
-                    <a href="index.php?control=RepositoryList&action=show"class="hvr-bounce-in">
-                        <i class="fa fa-home hvr-bounce-in"></i>  Repository Home
-                    </a>
-                </li>
-                <li>
-                    <a href="/index.php?control=RepositoryList&amp;action=show" class="hvr-bounce-in">
-                        <i class="fa fa-bars fa-fw hvr-bounce-in"></i> All Repositorys
-                    </a>
-                </li>
-                <li>
-                    <a href="index.php?control=RepositoryConfigure&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
-                        <i class="fa  fa-cog fa-fw hvr-bounce-in"></i> Configure
-                    </a>
-                </li>
-                <li>
-                    <a href="index.php?control=Conversations&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
-                        <i class="fa fa-folder-open-o hvr-bounce-in"></i> Conversations
-                    </a>
-                </li>
-                <li>
-                    <a href="index.php?control=IssueList&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
-                        <i class="fa fa-bar-chart-o hvr-bounce-in"></i> Issues
-                    </a>
-                </li>
-
-                <li>
-                    <a href="index.php?control=ManualUpload&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
-                        <i class="fa fa-folder-open-o hvr-bounce-in"></i> ManualUpload
-                    </a>
-                </li>
-                <li>
-                    <a href="index.php?control=RepositoryProcesses&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>"class=" hvr-bounce-in">
-                        <i class="fa fa-bar-chart-o hvr-bounce-in"></i> Processes
-                    </a>
-                </li>
-            </ul>
-        </div>
-       </div>
-                
-               
 
     <div class="col-lg-12">
+        <div id="page_sidebar" class="navbar-default col-sm-2 sidebar" role="navigation">
+            <div class="sidebar-nav ">
+                <div class="sidebar-search">
+                    <button class="btn btn-success" id="menu_visibility_label" type="button">
+                        Show Menu
+                    </button>
+                    <i class="fa fa-1x fa-toggle-off hvr-grow" id="menu_visibility_switch"></i>
+                </div>
+                <ul class="nav in" id="side-menu">
+
+                    <li>
+                        <a href="/index.php?control=Index&amp;action=show" class="hvr-bounce-in">
+                            <i class="fa fa-dashboard fa-fw hvr-bounce-in"></i> Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="index.php?control=RepositoryHome&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
+                            <i class="fa fa-home hvr-bounce-in"></i>  Repository Home
+                        </a>
+                    </li>
+                    <?php
+
+                    if (in_array($pageVars["data"]["current_user_role"], array("1", "2"))) {
+
+                        ?>
+                        <li>
+                            <a href="index.php?control=RepositoryConfigure&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
+                                <i class="fa  fa-cog fa-fw hvr-bounce-in"></i> Configure
+                            </a>
+                        </li>
+
+                        <?php
+
+                    }
+
+                    ?>
+
+                    <li>
+                        <a href="index.php?control=FileBrowser&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
+                            <i class="fa fa-folder-open-o hvr-bounce-in"></i> File Browser
+                        </a>
+                    </li>
+                    <li>
+                        <a href="index.php?control=RepositoryCharts&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
+                            <i class="fa fa-bar-chart-o hvr-bounce-in"></i> Charts
+                        </a>
+                    </li>
+                    <li>
+                        <a href="index.php?control=RepositoryHistory&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>"class="hvr-bounce-in">
+                            <i class="fa fa-history fa-fw hvr-bounce-in"></i> History <span class="badge"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="index.php?control=RepositoryPullRequests&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>"class="hvr-bounce-in">
+                            <i class="fa fa-code fa-fw hvr-bounce-in"></i> Pull Requests <span class="badge"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="index.php?control=RepositoryReleases&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>"class="hvr-bounce-in">
+                            <i class="fa fa-code fa-fw hvr-bounce-in"></i> Releases <span class="badge"></span>
+                        </a>
+                    </li>
+
+                    <?php
+                    if (in_array($pageVars["data"]["current_user_role"], array("1", "2"))) {
+                        ?>
+
+                        <li>
+                            <a href="index.php?control=RepositoryHome&action=delete&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
+                                <i class="fa fa-trash fa-fw hvr-bounce-in"></i> Delete
+                            </a>
+                        </li>
+
+                        <?php
+                    }
+                    ?>
+
+                </ul>
+            </div>
+        </div>
         <div class="well well-lg">
             <div class="row clearfix no-margin">
                 <?php
