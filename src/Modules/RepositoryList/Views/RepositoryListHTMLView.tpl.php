@@ -57,8 +57,8 @@
 							<div class="table table-striped table-bordered table-condensed">
                                 <div class="blCell cellRowIndex">#</div>
                                 <div class="blCell cellRowName">Repository</div>
+                                <div class="blCell cellRowAction">Action</div>
                                 <div class="blCell cellRowFeatures">Features</div>
-                                <div class="blCell cellRowMore">More</div>
                             </div>
 							<div class="allBuildRows table-hover">
 
@@ -92,6 +92,38 @@
                                         <?php echo $slugOrName; ?>
                                     </a>
                                 </div>
+
+                                <div class="blCell cellRowAction">
+                                    <div class="col-sm-12">
+                                        <div class="col-sm-1">
+                                            &nbsp;
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <a href="/index.php?control=RepositoryConfigure&action=show&item=<?php echo $repositorySlug ; ?>">
+                                            <i class="fa fa-cog fa-2x hvr-grow-shadow"></i></a>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <a href="/index.php?control=FileBrowser&action=show&item=<?php echo $repositorySlug ; ?>">
+                                            <i class="fa fa-folder-open-o fa-2x hvr-grow-shadow"></i></a>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <a href="/index.php?control=RepositoryHistory&action=show&item=<?php echo $repositorySlug ; ?>">
+                                            <i class="fa fa-history fa-2x hvr-grow-shadow"></i></a>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <a href="/index.php?control=RepositoryCharts&action=contributors&item=<?php echo $repositorySlug ; ?>">
+                                            <i class="fa fa-users fa-2x hvr-grow-shadow"></i></a>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <a href="/index.php?control=RepositoryCharts&action=show&item=<?php echo $repositorySlug ; ?>">
+                                            <i class="fa fa-bar-chart-o fa-2x hvr-grow-shadow"></i></a>
+                                        </div>
+                                        <div class="col-sm-1">
+                                            &nbsp;
+                                        </div>
+                                    </div>
+
+                                </div>
                                 <div class="blCell cellRowFeatures">
                                     <?php
 
@@ -108,17 +140,6 @@
                                         echo '&nbsp;' ; }
 
                                     ?>
-                                </div>
-                                <div  class="blCell cellRowMore">
-                                    <span class="fullRow">
-                                        <a href="/index.php?control=RepositoryCharts&action=show&item=<?php echo $repositorySlug; ?>">Graphs</a>
-                                    </span>
-                                    <span class="fullRow">
-                                        <a href="/index.php?control=RepositoryCharts&action=contributors&item=<?php echo $repositorySlug; ?>">Contributors</a>
-                                    </span>
-                                    <span class="fullRow">
-                                        <a href="/index.php?control=RepositoryHistory&action=show&item=<?php echo $repositorySlug; ?>">History</a>
-                                    </span>
                                 </div>
 							</div>
 
