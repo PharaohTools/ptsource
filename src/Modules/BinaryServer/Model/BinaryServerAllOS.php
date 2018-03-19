@@ -67,18 +67,15 @@ class BinaryServerAllOS extends Base {
             header('HTTP/1.1 403 Forbidden');
             return false ;  }
 
-        if (isset($this->params['version'])) {
-            if ($this->versionStringIsValid($this->params['version'])) {
-                $this_version = $this->params['version'] ;
-            } else {
-                header('HTTP/1.1 400 Unable to handle request');
-                echo "Incompatible Version String Requested" ;
-                return false ;
-            }
+        $version = $this->getArtefactVersion() ;
+        if ($this->versionStringIsValid($version)) {
+            $this_version = $version ;
         } else {
-            $this_version = '0.0.1' ;
+            header('HTTP/1.1 400 Unable to handle request');
+            echo "Incompatible Version String Requested" ;
+            return false ;
         }
-
+        
         $dir_to_write = REPODIR.DS.$this->params["item"].DS.$this_version ;
         if (!is_dir($dir_to_write)) {
             mkdir($dir_to_write, 0755, true);
@@ -94,6 +91,40 @@ class BinaryServerAllOS extends Base {
             return false ;
         }
 
+    }
+
+    public function getArtefactVersion() {
+
+        if (isset($this->params['version'])) {
+            $this_version = $this->params['version'] ;
+        } else {
+            $all_dirs = scandir($this->params["repository_dir"].DS.$this->params["item"]) ;
+            $cur_max = 0 ;
+            $dir_count = 0 ;
+            foreach ($all_dirs as $current_dir) {
+                if (in_array($current_dir, array('.', '..'))) { continue ; }
+                $full_dir = $this->params["repository_dir"].DS.$this->params["item"].DS.$current_dir ;
+                if (!is_dir($full_dir)) { continue ; }
+                $dir_count ++ ;
+                $res = version_compare ( $cur_max , $current_dir );
+                if ($res == -1) {
+                    $cur_max = $current_dir ;
+                } else {
+                    $cur_max = $current_dir ;
+                }
+            }
+            if ($dir_count == 0) {
+                $this_version = '0.0.1' ;
+            } else {
+                $last_dot = strrpos($cur_max, '.') ;
+                $cur_build = substr($cur_max, $last_dot+1) ;
+                $new_build = $cur_build + 1;
+                $cur_prefix = substr($cur_max,0, $last_dot+1) ;
+                $this_version = $cur_prefix.$new_build ;
+            }
+        }
+
+        return $this_version;
     }
 
     protected function versionStringIsValid($version) {
@@ -138,10 +169,6 @@ class BinaryServerAllOS extends Base {
         $repoFactory = new \Model\Repository() ;
         $repo = $repoFactory->getModel($this->params, "Default") ;
         $thisRepo = $repo->getRepository($repo_name) ;
-//        ob_start();
-//        var_dump($repo_name, $thisRepo);
-//        $res = ob_get_clean();
-//        error_log($res) ;
         $public_enabled = (isset($thisRepo["settings"]["PublicScope"]["enabled"]) && $thisRepo["settings"]["PublicScope"]["enabled"]=="on") ? true : false ;
         if ($public_enabled == false) { return false ; }
         if ($type == "read" || $type == "write") {
