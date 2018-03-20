@@ -38,11 +38,11 @@ if (isset($pageVars["data"]["user"]['username'])) {
         <div class="col-sm-12">
             <h4>
                 Guess latest version
-                <pre><?php echo $curl_str_2  ; ?></pre>
+                <pre><?php echo $curl_str_1 ; ?></pre>
             </h4>
             <h4>
-                Specify version
-                <pre><?php echo $curl_str_1  ; ?></pre>
+                To specify version, just include the version number
+                <pre><?php echo $curl_str_2 ; ?></pre>
             </h4>
         </div>
 
