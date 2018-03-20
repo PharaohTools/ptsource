@@ -31,17 +31,17 @@ if (isset($pageVars["data"]["user"]['username'])) {
         </div>
 
         <?php
-        $curl_str_1 = "curl -F file=@/path/to/file -F control=BinaryServer -F action=serve -F item=".$pageVars["data"]["repository"]["project-slug"]." -F auth_user={$pageVars['data']['user']['username']} -F auth_pass={password} {$ht_string_lower}://{$_SERVER['SERVER_NAME']}/index.php" ;
-        $curl_str_2 = "curl -F version=*.*.* -F file=@/path/to/file -F control=BinaryServer -F action=serve -F item=".$pageVars["data"]["repository"]["project-slug"]." -F auth_user={$pageVars['data']['user']['username']} -F auth_pass={password} {$ht_string_lower}://{$_SERVER['SERVER_NAME']}/index.php" ;
+        $curl_str_1 = "curl -F file=@/path/to/file -F control=BinaryServer -F action=serve -F item=".$pageVars["data"]["repository"]["project-slug"]." -F auth_user={$pageVars['data']['user']['username']} -F auth_pw={password} {$ht_string_lower}://{$_SERVER['SERVER_NAME']}/index.php" ;
+        $curl_str_2 = "curl -F version=*.*.* -F file=@/path/to/file -F control=BinaryServer -F action=serve -F item=".$pageVars["data"]["repository"]["project-slug"]." -F auth_user={$pageVars['data']['user']['username']} -F auth_pw={password} {$ht_string_lower}://{$_SERVER['SERVER_NAME']}/index.php" ;
         ?>
 
         <div class="col-sm-12">
-            <h4>
+            <h4 class="raw_repo_subtitle">
                 Guess latest version
                 <pre><?php echo $curl_str_1 ; ?></pre>
             </h4>
-            <h4>
-                To specify version, just include the version number
+            <h4 class="raw_repo_subtitle">
+                To specify version, just swap the version number parameter for yours
                 <pre><?php echo $curl_str_2 ; ?></pre>
             </h4>
         </div>
