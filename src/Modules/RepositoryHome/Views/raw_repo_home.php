@@ -1,9 +1,5 @@
 <?php
 
-?>
-
-
-<?php
 if (isset($pageVars["data"]["user"]['username'])) {
 
     $ownerOrPublic = (isset($pageVars["data"]["repository"]["project-owner"]) &&
