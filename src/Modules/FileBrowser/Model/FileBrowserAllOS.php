@@ -40,10 +40,10 @@ class FileBrowserAllOS extends Base {
                 $ret["image_file"] = $fileBrowser->loadFileContents() ;
             }
             $ret["code_file_extension"] = $this->codeFileExtension() ;
-            $ret["file_mode"] = $this->findMode($ret["file_extension"]) ;
-            if ($ret["file_mode"] !== null) {
-                $ret["file"] = $fileBrowser->loadFileContents() ;
+            if (!is_null($ret["code_file_extension"])) {
+                $ret["code_file"] = $fileBrowser->loadFileContents() ;
             }
+            $ret["file_mode"] = $this->findMode($ret["code_file_extension"]) ;
         }
         $ret["relpath"] = $this->getRelPath();
         $ret["current_user_data"] = $this->getCurrentUserData();
@@ -99,14 +99,24 @@ class FileBrowserAllOS extends Base {
 
     private function codeFileExtension($identifier=null) {
         $filePath = $this->getRelPath() ;
-        $basename = basename($filePath) ;
+        $basename = strtolower(basename($filePath)) ;
+//        var_dump('bname', $basename) ;
+        if ($basename == 'virtufile') {
+            return 'php' ;
+        }
         if (substr($basename, strlen($basename)-7)=="dsl.php") {
             // @todo need a pharaoh dsl specific editor set
             $extension = pathinfo($basename, PATHINFO_EXTENSION); }
         else {
             $extension = pathinfo($basename, PATHINFO_EXTENSION); }
-        $allowed_extensions = array("php", "js", "html") ;
+//            var_dump($extension) ;
+
+        $allowed_extensions = array("php", "js", "html", 'fephp') ;
         if (in_array($extension, $allowed_extensions)) {
+            $php_extensions = array('fephp') ;
+            if (in_array($extension, $php_extensions)) {
+                return 'php' ;
+            }
             return $extension ;
         }
         return null ;
@@ -119,6 +129,8 @@ class FileBrowserAllOS extends Base {
             "xhtml" => "htmlmixed",
             "php" => "php",
             "rb" => "ruby",
+            "virtufile" => "php",
+            "fephp" => "php",
         ) ;
         if (isset($modes[$ext])) {
             return $modes[$ext] ;

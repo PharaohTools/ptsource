@@ -139,10 +139,13 @@
                      <?php
                     if ($pageVars["route"]["action"]=="show") {
                         if (isset($pageVars["data"]["code_file_extension"]) && $pageVars["data"]["code_file_extension"] != null) {
-                            echo '<div id="loader"><img alt="Loading" src="/Assets/Modules/FileBrowser/images/loading.gif" /></div>' ;
+                            echo '<div class="col-sm-12">' ;
+                            echo '    <h2>Displaying Code as <strong>'.$pageVars["data"]["code_file_extension"].'</strong>: </h2>' ;
+                            echo '    <div id="loader"><img alt="Loading" src="/Assets/Modules/FileBrowser/images/loading.gif" /></div>' ;
                             echo '<textarea id="editor">' ;
-                            echo $pageVars["data"]["file"] ;
-                            echo '</textarea>' ; }
+                            echo $pageVars["data"]["code_file"] ;
+                            echo '</textarea>' ;
+                            echo '</div>' ; }
                         else if (isset($pageVars["data"]["image_file_extension"]) && $pageVars["data"]["image_file_extension"] != null) {
                                 $base64 = base64_encode($pageVars["data"]['image_file']);
                                 $image_file_data =  'data:' . $pageVars["data"]["image_file_mime"] . ';base64,' . $base64 ;
@@ -227,7 +230,7 @@ if ($pageVars["route"]["action"]=="show") {
             <script src="/Assets/Modules/FileBrowser/js/CodeMirror/mode/css/css.js"></script>
             <script src="/Assets/Modules/FileBrowser/js/CodeMirror/mode/clike/clike.js"></script>
             <script src="/Assets/Modules/FileBrowser/js/CodeMirror/mode/php/php.js"></script>
-            <script src="/Assets/Modules/FileBrowser/js/CodeMirror/mode/<?php echo $pageVars["data"]["file_extension"] ; ?>/<?php echo $pageVars["data"]["file_extension"] ; ?>.js"></script>
+            <script src="/Assets/Modules/FileBrowser/js/CodeMirror/mode/<?php echo $pageVars["data"]["code_file_extension"] ; ?>/<?php echo $pageVars["data"]["code_file_extension"] ; ?>.js"></script>
             <?php
             }
 
