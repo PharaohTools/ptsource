@@ -35,6 +35,11 @@ class FileBrowserAllOS extends Base {
         $ret["relpath"] = $this->getRelPath();
         if ($ret["is_file"] == true) {
             $ret["file_extension"] = $this->findExtension() ;
+            $ret["image_file_extension"] = $this->imageFileExtension($ret["file_extension"]) ;
+            if (!is_null($ret["image_file_extension"])) {
+                $ret["image_file"] = $fileBrowser->loadFileContents() ;
+            }
+            $ret["code_file_extension"] = $this->codeFileExtension() ;
             $ret["file_mode"] = $this->findMode($ret["file_extension"]) ;
             if ($ret["file_mode"] !== null) {
                 $ret["file"] = $fileBrowser->loadFileContents() ;
@@ -84,6 +89,22 @@ class FileBrowserAllOS extends Base {
             $extension = pathinfo($basename, PATHINFO_EXTENSION); }
         else {
             $extension = pathinfo($basename, PATHINFO_EXTENSION); }
+            $extension = strtolower($extension) ;
+        $allowed_extensions = array("php", "js", "html", 'zip', 'txt', 'log' ,'xml', 'xhtml', 'png', 'gif', 'jpg', 'jpeg') ;
+        if (in_array($extension, $allowed_extensions)) {
+            return $extension ;
+        }
+        return null ;
+    }
+
+    private function codeFileExtension($identifier=null) {
+        $filePath = $this->getRelPath() ;
+        $basename = basename($filePath) ;
+        if (substr($basename, strlen($basename)-7)=="dsl.php") {
+            // @todo need a pharaoh dsl specific editor set
+            $extension = pathinfo($basename, PATHINFO_EXTENSION); }
+        else {
+            $extension = pathinfo($basename, PATHINFO_EXTENSION); }
         $allowed_extensions = array("php", "js", "html") ;
         if (in_array($extension, $allowed_extensions)) {
             return $extension ;
@@ -101,6 +122,20 @@ class FileBrowserAllOS extends Base {
         ) ;
         if (isset($modes[$ext])) {
             return $modes[$ext] ;
+        }
+
+        return null ;
+    }
+
+    private function imageFileExtension($ext) {
+        $fexts = array (
+            "png" => "image/png",
+            "jpg" => "image/jpg",
+            "jpeg" => "image/jpg",
+            "gif" => "image/gif"
+        ) ;
+        if (isset($fexts[$ext])) {
+            return array($ext, $fexts[$ext]) ;
         }
 
         return null ;

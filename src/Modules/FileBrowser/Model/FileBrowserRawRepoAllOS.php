@@ -37,7 +37,7 @@ class FileBrowserRawRepoAllOS extends Base {
             $this->params["repo-dir"] = REPODIR ; }
     }
 
-    public function getCurrentDirectory($identifier) {
+    public function getCurrentDirectory() {
         $filebrowserDir = $this->getFileBrowserDir() ;
         $relpath = $this->getRelPath() ;
         $filebrowserDir .= $relpath ;

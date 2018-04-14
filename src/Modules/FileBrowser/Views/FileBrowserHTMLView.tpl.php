@@ -25,8 +25,6 @@
                             <i class="fa fa-bars hvr-bounce-in"></i> All Repositories
                         </a>
                     </li>
-
-
                     <li>
                         <a href="index.php?control=FileBrowser&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>"class="hvr-bounce-in">
                             <i class="fa fa-folder-open-o hvr-bounce-in"></i> File Browser
@@ -64,11 +62,6 @@
                 </div>
 
                 <div class="form-group col-sm-12 thin_padding">
-                    <div class="form-group col-lg-3 thin_padding" id="show_menu_wrapper">
-                        <button class="btn btn-success" id="show_menu_button" type="button">
-                            Show Menu
-                        </button>
-                    </div>
                     <div class="form-group col-lg-12 thin_padding" id="path_header">
                         <?php
                         $rootPath = str_replace($pageVars["data"]["relpath"], "", $pageVars["data"]["wsdir"]) ;
@@ -82,60 +75,60 @@
 
             </div>
             <div class="form-group col-sm-12 thin_padding">
-
-
                 <?php
-                if ($pageVars["route"]["action"]=="show") {
-                    if ($pageVars["data"]["is_file"] == true) {
-                    ?>
-
-                    <div class="form-group col-sm-9">
-                        <h4>File: <strong><?php echo $pageVars["data"]["relpath"] ; ?></strong></h4>
-                    </div>
-                    <div class="form-group col-sm-3">
-                        <?php
-                        if (isset($pageVars["data"]["current_branch"]) && $pageVars["data"]["current_branch"] != null) {
+                if ($pageVars["data"]['repository']['project-type'] == 'git') {
+                    if ($pageVars["route"]["action"]=="show") {
+                        if ($pageVars["data"]["is_file"] == true) {
                             ?>
-                            <h4>Branch : <strong><?php echo $pageVars["data"]["current_branch"] ; ?></strong></h4>
-                        <?php
-                        }
-                        ?>
-                    </div>
 
-                    <?php
-                    } else {
-                        ?>
-
-                        <div class="form-group col-sm-3 thin_padding">
-                            <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-                                Select Branch
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" id="assigneelist" role="menu" aria-labelledby="dropdownMenu1">
+                            <div class="form-group col-sm-9">
+                                <h4>File: <strong><?php echo $pageVars["data"]["relpath"] ; ?></strong></h4>
+                            </div>
+                            <div class="form-group col-sm-3">
                                 <?php
-                                foreach($pageVars["data"]["branches"] as $branch_name) {
+                                if (isset($pageVars["data"]["current_branch"]) && $pageVars["data"]["current_branch"] != null) {
                                     ?>
-                                    <li role="presentation">
-                                        <a role="menuitem" tabindex="-1" href="<?php echo $act ; ?>&identifier=<?php echo $branch_name ; ?>">
-                                            <?= $branch_name ?>
-                                        </a>
-                                    </li>
-                                <?php
+                                    <h4>Branch : <strong><?php echo $pageVars["data"]["current_branch"] ; ?></strong></h4>
+                                    <?php
                                 }
                                 ?>
-                            </ul>
-                        </div>
-                        <div class="form-group col-sm-9 thin_padding">
-                            <?php
-                            if (isset($pageVars["data"]["identifier"]) && $pageVars["data"]["identifier"] != null) {
-                                ?>
-                                <h4> Current Branch : <strong><?php echo $pageVars["data"]["identifier"] ; ?></strong></h4>
-                                <?php
-                            }
-                            ?>
-                        </div>
+                            </div>
 
-                    <?php
+                            <?php
+                        } else {
+                            ?>
+
+                            <div class="form-group col-sm-3 thin_padding">
+                                <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                                    Select Branch
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" id="assigneelist" role="menu" aria-labelledby="dropdownMenu1">
+                                    <?php
+                                    foreach($pageVars["data"]["branches"] as $branch_name) {
+                                        ?>
+                                        <li role="presentation">
+                                            <a role="menuitem" tabindex="-1" href="<?php echo $act ; ?>&identifier=<?php echo $branch_name ; ?>">
+                                                <?= $branch_name ?>
+                                            </a>
+                                        </li>
+                                        <?php
+                                    }
+                                    ?>
+                                </ul>
+                            </div>
+                            <div class="form-group col-sm-9 thin_padding">
+                                <?php
+                                if (isset($pageVars["data"]["identifier"]) && $pageVars["data"]["identifier"] != null) {
+                                    ?>
+                                    <h4> Current Branch : <strong><?php echo $pageVars["data"]["identifier"] ; ?></strong></h4>
+                                    <?php
+                                }
+                                ?>
+                            </div>
+
+                            <?php
+                        }
                     }
                 }
                 ?>
@@ -145,11 +138,19 @@
                 <div id="editor_wrapper">
                      <?php
                     if ($pageVars["route"]["action"]=="show") {
-                        if ($pageVars["data"]["is_file"] === true) {
+                        if (isset($pageVars["data"]["code_file_extension"]) && $pageVars["data"]["code_file_extension"] != null) {
                             echo '<div id="loader"><img alt="Loading" src="/Assets/Modules/FileBrowser/images/loading.gif" /></div>' ;
                             echo '<textarea id="editor">' ;
                             echo $pageVars["data"]["file"] ;
                             echo '</textarea>' ; }
+                        else if (isset($pageVars["data"]["image_file_extension"]) && $pageVars["data"]["image_file_extension"] != null) {
+                                $base64 = base64_encode($pageVars["data"]['image_file']);
+                                $image_file_data =  'data:' . $pageVars["data"]["image_file_mime"] . ';base64,' . $base64 ;
+                                ?>
+                                <div class="col-sm-12">
+                                    <h2>Displaying File as Image: </h2><img src="<?php echo $image_file_data; ?>" alt="Image File" />
+                                </div>
+                            <?php }
                         else {
 
                             if (isset($pageVars['data']['identifier'])) {
@@ -213,18 +214,20 @@
 if ($pageVars["route"]["action"]=="show") {
     if ($pageVars["data"]["is_file"] == true) {
         ?>
-        <link rel="stylesheet" href="/Assets/Modules/FileBrowser/css/filebrowser.css" />
-        <link rel="stylesheet" href="/Assets/Modules/FileBrowser/js/CodeMirror/lib/codemirror.css" />
-        <script src="/Assets/Modules/FileBrowser/js/CodeMirror/lib/codemirror.js"></script>
-        <script src="/Assets/Modules/FileBrowser/js/CodeMirror/mode/htmlmixed/htmlmixed.js"></script>
-        <script src="/Assets/Modules/FileBrowser/js/CodeMirror/mode/htmlembedded/htmlembedded.js"></script>
-        <script src="/Assets/Modules/FileBrowser/js/CodeMirror/mode/javascript/javascript.js"></script>
-        <script src="/Assets/Modules/FileBrowser/js/CodeMirror/mode/xml/xml.js"></script>
-        <script src="/Assets/Modules/FileBrowser/js/CodeMirror/mode/css/css.js"></script>
-        <script src="/Assets/Modules/FileBrowser/js/CodeMirror/mode/clike/clike.js"></script>
-        <script src="/Assets/Modules/FileBrowser/js/CodeMirror/mode/php/php.js"></script>
-        <?php if (isset($pageVars["data"]["file_extension"]) && $pageVars["data"]["file_extension"] != null) { ?>
-                <script src="/Assets/Modules/FileBrowser/js/CodeMirror/mode/<?php echo $pageVars["data"]["file_extension"] ; ?>/<?php echo $pageVars["data"]["file_extension"] ; ?>.js"></script>
+
+
+        <?php if (isset($pageVars["data"]["code_file_extension"]) && $pageVars["data"]["code_file_extension"] != null) { ?>
+            <link rel="stylesheet" href="/Assets/Modules/FileBrowser/css/filebrowser.css" />
+            <link rel="stylesheet" href="/Assets/Modules/FileBrowser/js/CodeMirror/lib/codemirror.css" />
+            <script src="/Assets/Modules/FileBrowser/js/CodeMirror/lib/codemirror.js"></script>
+            <script src="/Assets/Modules/FileBrowser/js/CodeMirror/mode/htmlmixed/htmlmixed.js"></script>
+            <script src="/Assets/Modules/FileBrowser/js/CodeMirror/mode/htmlembedded/htmlembedded.js"></script>
+            <script src="/Assets/Modules/FileBrowser/js/CodeMirror/mode/javascript/javascript.js"></script>
+            <script src="/Assets/Modules/FileBrowser/js/CodeMirror/mode/xml/xml.js"></script>
+            <script src="/Assets/Modules/FileBrowser/js/CodeMirror/mode/css/css.js"></script>
+            <script src="/Assets/Modules/FileBrowser/js/CodeMirror/mode/clike/clike.js"></script>
+            <script src="/Assets/Modules/FileBrowser/js/CodeMirror/mode/php/php.js"></script>
+            <script src="/Assets/Modules/FileBrowser/js/CodeMirror/mode/<?php echo $pageVars["data"]["file_extension"] ; ?>/<?php echo $pageVars["data"]["file_extension"] ; ?>.js"></script>
             <?php
             }
 
