@@ -158,29 +158,49 @@
                                 $idstring = '' ;
                             }
 
-                            foreach ($pageVars["data"]["directory"] as $name => $isDir) {
+                            if ($pageVars["data"]['repository']['project-type'] == 'raw') {
 
-                                $dirString = ($isDir) ? " - (D)" : "" ;
-                                $trail = ($isDir) ? "/" : "" ;
-                                echo '<a href="/index.php?control=FileBrowser&action=show&item='.$pageVars["data"]["repository"]["project-slug"].$idstring.'&relpath='.$pageVars["data"]["relpath"].'">'.$pageVars["data"]["relpath"].'</a>' ;
+                                foreach ($pageVars["data"]["directory"] as $name => $isDir) {
 
-                                $relativeString = str_replace($pageVars["data"]["wsdir"], "", $name) ;
-                                $nameparts = explode(DS, $relativeString) ;
+                                    $dirString = ($isDir) ? " - (D)" : "" ;
+                                    $trail = ($isDir) ? "/" : "" ;
+                                    echo '<a href="/index.php?control=FileBrowser&action=show&item='.$pageVars["data"]["repository"]["project-slug"].$idstring.'&relpath='.$pageVars["data"]["relpath"].'">'.$pageVars["data"]["relpath"].'</a>' ;
 
-                                foreach ($nameparts as $namepart => $isSubDir) {
-                                    echo '<a href="/index.php?control=FileBrowser&action=show&item='.$pageVars["data"]["repository"]["project-slug"].$idstring.'&relpath='.$pageVars["data"]["relpath"].$name.
-                                        $trail.'">'.$name.'</a>' ; }
+                                    $relativeString = str_replace($pageVars["data"]["wsdir"], "", $name) ;
+                                    $nameparts = explode(DS, $relativeString) ;
 
-                                echo $trail.$dirString.'<br />' ; } } }
+                                    echo '<a href="/index.php?control=FileBrowser&action=show&item='.$pageVars["data"]["repository"]["project-slug"].$idstring.'&relpath='.$pageVars["data"]["relpath"].$relativeString.
+                                        $trail.'">'.$relativeString.'</a>' ;
+
+                                    echo $trail.$dirString.'<br />' ; }
+
+                            } else {
+
+                                foreach ($pageVars["data"]["directory"] as $name => $isDir) {
+
+                                    $dirString = ($isDir) ? " - (D)" : "" ;
+                                    $trail = ($isDir) ? "/" : "" ;
+                                    echo '<a href="/index.php?control=FileBrowser&action=show&item='.$pageVars["data"]["repository"]["project-slug"].$idstring.'&relpath='.$pageVars["data"]["relpath"].'">'.$pageVars["data"]["relpath"].'</a>' ;
+
+                                    $relativeString = str_replace($pageVars["data"]["wsdir"], "", $name) ;
+                                    $nameparts = explode(DS, $relativeString) ;
+
+                                    foreach ($nameparts as $namepart => $isSubDir) {
+                                        echo '<a href="/index.php?control=FileBrowser&action=show&item='.$pageVars["data"]["repository"]["project-slug"].$idstring.'&relpath='.$pageVars["data"]["relpath"].$name.
+                                            $trail.'">'.$name.'</a>' ; }
+
+                                    echo $trail.$dirString.'<br />' ; }
+
+                            }
+
+                        }
+
+                    }
+
                     ?>
-                </div>
-            </div>
 
-            <div class="form-group col-sm-12">
-                <hr />
-                <p class="text-center">
-                    Visit <a href="http://www.pharaohtools.com">www.pharaohtools.com</a> for more
-                </p>
+                </div>
+
             </div>
 
         </form>

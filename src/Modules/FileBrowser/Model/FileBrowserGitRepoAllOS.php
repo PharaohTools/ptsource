@@ -2,7 +2,7 @@
 
 Namespace Model;
 
-class FileBrowserAllOS extends Base {
+class FileBrowserGitRepoAllOS extends Base {
 
     // Compatibility
     public $os = array("any") ;
@@ -12,61 +12,9 @@ class FileBrowserAllOS extends Base {
     public $architectures = array("any") ;
 
     // Model Group
-    public $modelGroup = array("Default") ;
+    public $modelGroup = array("GitRepo") ;
 
-    public function getData() {
-        $this->setRepoDir();
-        $ret["branches"] = $this->getAvailableBranches() ;
-        $ret["identifier"] = $this->getCurrentIdentifier($ret["branches"]);
-        $ret["directory"] = $this->getCurrentDirectory($ret["identifier"]);
-        $ret["current_branch"] = (isset($this->params["branch"])) ? $this->params["branch"] : null;
-        $ret["repository"] = $this->getRepository();
-        $ret["item"] = $this->params["item"];
-        $ret["wsdir"] = $this->getFileBrowserDir();
-        $ret["relpath"] = $this->getRelPath();
-        $ret["is_file"] = $this->isFileNotDirectory();
-        if ($ret["is_file"] == true) {
-            $ret["file"] = $this->loadFileContents() ;
-            $ret["file_extension"] = $this->findExtension() ;
-            $ret["file_mode"] = $this->findMode($ret["file_extension"]) ;
-        }
-        $ret["relpath"] = $this->getRelPath();
-        $ret["current_user_data"] = $this->getCurrentUserData();
-        return $ret ;
-    }
-
-    public function getCurrentUserData() {
-        $signupFactory = new \Model\Signup() ;
-        $signup = $signupFactory->getModel($this->params);
-        $user = $signup->getLoggedInUserData();
-        if ($user == false) { return false ; }
-        return $user ;
-    }
-
-    public function getRepository() {
-        $repositoryFactory = new \Model\Repository() ;
-        $repository = $repositoryFactory->getModel($this->params);
-        return $repository->getRepository($this->params["item"]);
-    }
-
-    public function getRelPath() {
-        $relPath = isset($this->params["relpath"]) ? $this->params["relpath"] : "" ;
-        return $relPath ;
-    }
-
-    public function getFileBrowserDir() {
-        return $this->params["repo-dir"].DS.$this->params["item"].DS;
-    }
-
-    public function setRepoDir() {
-        if (isset($this->params["guess"]) && $this->params["guess"]==true) {
-            $this->params["repo-dir"] = REPODIR ; }
-        else {
-            // @todo should probably ask a question here
-            $this->params["repo-dir"] = REPODIR ; }
-    }
-
-    private function getCurrentIdentifier($branches) {
+    public function getCurrentIdentifier($branches) {
         if (isset($this->params["identifier"])) {
             if (in_array($this->params["identifier"], $branches)) {
                 $this->params["branch"] = $this->params["identifier"] ; }
@@ -85,7 +33,7 @@ class FileBrowserAllOS extends Base {
         return $this->params["identifier"] ;
     }
 
-    private function getAvailableBranches() {
+    public function getAvailableBranches() {
         $filebrowserDir = $this->getFileBrowserDir() ;
         $command = "cd {$filebrowserDir} && git branch" ;
         $all_branches_string = $this->executeAndLoad($command) ;
@@ -95,7 +43,7 @@ class FileBrowserAllOS extends Base {
         return $all_branches_ray ;
     }
 
-    private function getCurrentDirectory($identifier) {
+    public function getCurrentDirectory($identifier) {
         $filebrowserDir = $this->getFileBrowserDir() ;
         $scanned_files = $this->gitScanDir($filebrowserDir, $identifier) ;
         $all_files = $scanned_files[0] ;
@@ -109,7 +57,7 @@ class FileBrowserAllOS extends Base {
         return $filesRay ;
     }
 
-    private function gitScanDir($fileBrowserRootDir, $identifier=null) {
+    public function gitScanDir($fileBrowserRootDir, $identifier=null) {
 
         $fileBrowserRelativePath = $this->getRelPath() ;
         $lastChar = substr($fileBrowserRelativePath, strlen($fileBrowserRelativePath)-1) ;
@@ -153,7 +101,7 @@ class FileBrowserAllOS extends Base {
         return array ($new_ray, $dirs_ray) ;
     }
 
-    private function isFileNotDirectory($identifier=null) {
+    public function isFileNotDirectory($identifier=null) {
         $fileBrowserRootDir = $this->getFileBrowserDir() ;
         $filePath = $this->getRelPath() ;
         if (is_null($identifier)) { $identifier = "master" ; }
@@ -166,7 +114,7 @@ class FileBrowserAllOS extends Base {
         return false;
     }
 
-    private function loadFileContents($identifier=null) {
+    public function loadFileContents($identifier=null) {
         $fileBrowserRootDir = $this->getFileBrowserDir() ;
         $filePath = $this->getRelPath() ;
         if (is_null($identifier)) { $identifier = "master" ; }
@@ -175,37 +123,15 @@ class FileBrowserAllOS extends Base {
         return $fc ;
     }
 
-    private function findExtension($identifier=null) {
-        $filePath = $this->getRelPath() ;
-        $basename = basename($filePath) ;
-        if (substr($basename, strlen($basename)-7)=="dsl.php") {
-            // @todo need a pharaoh dsl specific editor set
-            $extension = pathinfo($basename, PATHINFO_EXTENSION); }
-        else {
-            $extension = pathinfo($basename, PATHINFO_EXTENSION); }
-
-        $allowed_extensions = array("php", "js", "html") ;
-        if (in_array($extension, $allowed_extensions)) {
-            return $extension ;
-        }
-
-
-        return null ;
+    public function getRelPath() {
+        $relPath = isset($this->params["relpath"]) ? $this->params["relpath"] : "" ;
+        return $relPath ;
     }
 
-    private function findMode($ext) {
-        $modes = array (
-            "js" => "javascript",
-            "html" => "htmlmixed",
-            "xhtml" => "htmlmixed",
-            "php" => "php",
-            "rb" => "ruby",
-        ) ;
-        if (isset($modes[$ext])) {
-            return $modes[$ext] ;
-        }
-
-        return null ;
+    public function getFileBrowserDir() {
+        return $this->params["repo-dir"].DS.$this->params["item"].DS;
     }
+
+
 
 }
