@@ -50,8 +50,13 @@ div.repositoryRow:hover {
     font-size: 125%;
 }
 
+.cellRowType{
+    width: 5% ;
+    text-align: left;
+}
+
 .cellRowFeatures {
-    width: 40% ;
+    width: 35% ;
 }
 
 .cellRowFeatures .repository-feature {

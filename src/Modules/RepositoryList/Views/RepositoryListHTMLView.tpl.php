@@ -57,6 +57,7 @@
 							<div class="table table-striped table-bordered table-condensed">
                                 <div class="blCell cellRowIndex">#</div>
                                 <div class="blCell cellRowName">Repository</div>
+                                <div class="blCell cellRowType">Type</div>
                                 <div class="blCell cellRowAction">Action</div>
                                 <div class="blCell cellRowFeatures">Features</div>
                             </div>
@@ -91,6 +92,20 @@
                                     <a href="/index.php?control=RepositoryHome&action=show&item=<?php echo $repositorySlug; ?>" class="pipeName">
                                         <?php echo $slugOrName; ?>
                                     </a>
+                                </div>
+                                <div class="blCell cellRowType">
+                                    <?php
+
+                                    if (isset($repositoryDetails["project-type"])) {
+
+                                        if ($repositoryDetails["project-type"] == 'raw') {
+                                            echo 'Raw' ; }
+                                        else {
+                                            echo "Git" ; }
+                                        
+                                    }
+
+                                    ?>
                                 </div>
 
                                 <div class="blCell cellRowAction">
