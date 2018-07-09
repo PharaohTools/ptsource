@@ -45,6 +45,7 @@
 
         </div>
 
+        <?php if (!isset($act)) $act = null ; ?>
         <form class="form-horizontal custom-form" action="<?= $act ; ?>" method="POST">
 
             <?php echo $this->renderLogs() ; ?>
