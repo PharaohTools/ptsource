@@ -15,15 +15,15 @@ class Virtufile extends VirtufileBase {
         require (__DIR__.DIRECTORY_SEPARATOR.'vars'.DIRECTORY_SEPARATOR.'vm.php') ;
 
         $this->setDefaultConfig();
-        $this->config["vm"]["name"] = 'pharaoh_build' ;
+        $this->config["vm"]["name"] = 'pharaoh_'.$variables['friendly_app_slug'] ;
         $this->config["vm"]["gui_mode"] = "gui" ;
 
         $bu = 'https://repositories.internal.pharaohtools.com/index.php?control=BinaryServer&action=serve&item=iso_php_virtualize_boxes_-_ubuntu_16.04_server' ;
         $this->config["vm"]["box_url"] = $bu ;
         $this->config["vm"]["box"] = "vanillaubuntu16042bitserver" ;
 
-        $random_port_suffix = '57' ;
-        $this->config["vm"]["memory"] = "4096" ;
+        $random_port_suffix = $variables['random_port_suffix'] ;
+        $this->config["vm"]["memory"] = "2048" ;
         $this->config["vm"]["graceful_halt_timeout"] = 15 ;
         $this->config["vm"]["ssh_halt_timeout"] = 2 ;
         $this->config["network"]["natpf1"][] = "{$this->config["vm"]["name"]}_guestssh,tcp,,22{$random_port_suffix},,22";
@@ -36,11 +36,11 @@ class Virtufile extends VirtufileBase {
         $this->config["ssh"]["port"] = "22{$random_port_suffix}" ;
         $this->config["ssh"]["retries"] = "1000" ;
 
-        $guest_path = DS.'opt'.DS.'ptbuild'.DS.'ptbuild'.DS ;
+        $guest_path = DS.'opt'.DS.$variables['full_slug'].DS.$variables['full_slug'].DS ;
         # Shared folder - This should map to the workstation environment vhost path parent...
         $this->config["vm"]["shared_folders"][] =
             array(
-                "name" => "host_tool",
+                "name" => "host_".$variables['full_slug'],
                 "host_path" => getcwd().DS,
                 "guest_path" => $guest_path,
             ) ;
@@ -73,9 +73,9 @@ class Virtufile extends VirtufileBase {
                 "params" => array("vars" => $i_path.'vars'.DS.'vm.php') ] ;
 
         $dsl_params = array('start-dir' => "{$guest_path}",
-                            'vars' => "{$guest_path}vars/vm.php",
-                            'step-times' => 'true',
-                            'step-numbers' => 'true') ;
+            'vars' => "{$guest_path}vars/vm.php",
+            'step-times' => 'true',
+            'step-numbers' => 'true') ;
 
         $this->config["vm"]["provision"][] =
             [   "provisioner" => "PharaohTools",
@@ -84,9 +84,10 @@ class Virtufile extends VirtufileBase {
                 "script" => "{$guest_path}/build/ptc/development.dsl.php",
                 "params" => $dsl_params ] ;
 
-        $description = (isset($variables['description'])) ? "\n\n{$variables['description']}\n\n" : '' ;
-        $this->config["vm"]["post_up_message"] = "Your ISOPHP Virtualize Box has been brought up. $description
+        $description = (isset($variables['description'])) ? "\n\nPharaoh Tools: {$variables['description']}\n\n" : '' ;
+        $this->config["vm"]["post_up_message"] = "Your Virtual Machine is running. $description
   You now have the following urls:\n\n
+    http://repositories.{$variables['domain']}:80{$random_port_suffix}/ - Repositories Server\n\n
     http://build.{$variables['domain']}:80{$random_port_suffix}/ - Build Server\n\n
         You can SSH into the VM with this:\n\n
             ssh {$this->config['ssh']['user']}@127.0.0.1 -p22{$random_port_suffix} - SSH Connection\n
