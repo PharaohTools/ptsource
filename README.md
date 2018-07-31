@@ -1,10 +1,11 @@
-![alt text](http://www.pharaohtools.com/images/logo-pharaoh.png "Pharaoh Tools Source Server")
+# Pharaoh Repositories
+![alt text](http://www.pharaohtools.com/images/logo-pharaoh.png "Pharaoh Tools Logo")
 
-# PTSource, Pharaoh Tools
 
 ## About:
 
-Source Control Management in PHP.
+Binary File and Source Code Repository Management Server. Fully featured Web Server for Git Repositories and Binary File
+Repositories. 
 
 A Web Interface for your your automated source processes, flexible to be distributed from Development through
 Enterprise Production.
@@ -13,49 +14,75 @@ Smooth Integration with all other Pharaoh Tools; seamlessly and simply being abl
 Environments, Configuration, Deployments, Tests, Tracked Processes and Managed Orchestration.
 
     
-## Installation
 
-First you'll need to install Git and PHP5. If you don't have either, google them - they're easy to install. To install
-ptsource cli on your On your Mac, Linux or  Unix Machine silently do the following:
+## Looky, looky...
 
-git clone https://github.com/PharaohTools/ptsource.git && sudo php ptsource/install-silent
+Here's some pictures of Pharaoh Source in action
 
-or on Windows, open a terminal with the "Run as Administrator" option...
 
-git clone https://github.com/PharaohTools/ptsource.git && php ptsource\install-silent
+## Installing
 
-... that's it, now the ptsource command should be available at the command line for you.
+If you just want to see how Pharaoh Track works, have a look a the demo...
+http://source.demo.pharaohtools.com
+
+#### Local or Cloud
+If you want to install a local version on your workstation, or you want to install on a cloud/internet server, first
+install Pharaoh Configure using instructions here...
+
+*http://www.pharaohtools.com/install*
+
+
+#### Local
+Then for a workstation install run this (N.B. This is probably only useful for testing unless you want an issue sourceer to use by yourself)... 
+
+``
+ptconfigure ptsource install -yg # This will guess a local install with the url www.pharaoh.tld
+``
+
+  
+#### Cloud
+Or install to a cloud server with one of these ...
+
+``
+ptconfigure ptsource install -yg --vhe-url=source.mydomain.com --vhe-ip-port=1.2.3.4:80 # Specific IP
+``
+
+``
+ptconfigure ptsource install -yg --vhe-url=source.mydomain.com --vhe-ip-port=0.0.0.0:80 # All IP's
+``
+
+``
+ptconfigure ptsource install -yg --vhe-url=source.mydomain.com --vhe-ip-port=0.0.0.0:80 --enable-ssl # Also install and configure HTTPS using a Lets Encrypt certificate
+``
+
+  
+#### Developer
+If you're a developer, who wants to contribute, you'll want to run inside the Virtual Machine, so that you can easily
+rebuild your front end changes, and work without affecting your host machine...
+- First install Pharaoh Configure, Deploy and Virtualize, using the instruction here:
+  - *http://www.pharaohtools.com/install*
+- Git clone this repo
+- Run the Development Virtual Machine using:
+  - Virtualize GUI or 
+  - the following command from the root of this repository
+  ``
+  ptvirtualize up now --mod --pro --step-times --step-numbers
+  ``
+- The Virtual machine will take a few minutes to set itself up
+- The URL http://source.pharaohtools.vm:8059 will now show your development version of Pharaoh Track 
+- The URL http://build.pharaohtools.vm:8059 will now show your build jobs, with automated tasks for the Virtual Machine
+Development Environment
+
+
 
 
 ## Usage:
-
-So, there are a few simple commands...
-
-First, you can just use
-
-ptsource
-
-...This will give you a list of the available modules...
-
-Then you can use
-
-ptsource *ModuleName* help
-
-...This will display the help for that module, and tell you a list of available alias for the module command, and the
-available actions too.
-
-You'll be able to automate any action from any available module into an autopilot file, or run it from the CLI. I'm
-working on a web front end, but you can also use JSON output and the PostInput module to use any module from an API.
-
-
-## Or some examples
 
 The following URL contains a bunch of tutorials
 
 http://www.pharaohtools.com/tutorials
 
-Go to http://www.pharaohtools.com for more
 
----------------------------------------
-Visit www.pharaohtools.com for more
-******************************
+
+## Kudos
+
