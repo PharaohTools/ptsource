@@ -1,0 +1,96 @@
+<?php
+
+Namespace Model ;
+
+class Virtufile extends VirtufileBase {
+
+    public $config ;
+
+    public function __construct() {
+        $this->setConfig();
+    }
+
+    private function setConfig() {
+        $variables = array() ;
+        require (__DIR__.DIRECTORY_SEPARATOR.'vars'.DIRECTORY_SEPARATOR.'vm.php') ;
+
+        $this->setDefaultConfig();
+        $this->config["vm"]["name"] = 'pharaoh_build' ;
+        $this->config["vm"]["gui_mode"] = "gui" ;
+
+        $bu = 'https://repositories.internal.pharaohtools.com/index.php?control=BinaryServer&action=serve&item=iso_php_virtualize_boxes_-_ubuntu_16.04_server' ;
+        $this->config["vm"]["box_url"] = $bu ;
+        $this->config["vm"]["box"] = "vanillaubuntu16042bitserver" ;
+
+        $random_port_suffix = '57' ;
+        $this->config["vm"]["memory"] = "4096" ;
+        $this->config["vm"]["graceful_halt_timeout"] = 15 ;
+        $this->config["vm"]["ssh_halt_timeout"] = 2 ;
+        $this->config["network"]["natpf1"][] = "{$this->config["vm"]["name"]}_guestssh,tcp,,22{$random_port_suffix},,22";
+        $this->config["network"]["natpf1"][] = "{$this->config["vm"]["name"]}_guestweb,tcp,,80{$random_port_suffix},,80";
+
+        $this->config["ssh"]["driver"] = "native" ;
+        $this->config["ssh"]["user"] = "ptv" ;
+        $this->config["ssh"]["password"] = "ptv" ;
+        $this->config["ssh"]["target"] = "127.0.0.1" ;
+        $this->config["ssh"]["port"] = "22{$random_port_suffix}" ;
+        $this->config["ssh"]["retries"] = "1000" ;
+
+        $guest_path = DS.'opt'.DS.'ptbuild'.DS.'ptbuild'.DS ;
+        # Shared folder - This should map to the workstation environment vhost path parent...
+        $this->config["vm"]["shared_folders"][] =
+            array(
+                "name" => "host_tool",
+                "host_path" => getcwd().DS,
+                "guest_path" => $guest_path,
+            ) ;
+        # Provisioning
+        $this->config["vm"]["provision"][] =
+            [   "provisioner" => "Shell",
+                "tool" => "shell",
+                "target" => "guest",
+                "default" => "MountShares" ];
+
+        $this->config["vm"]["provision"][] =
+            [   "provisioner" => "Shell",
+                "tool" => "shell",
+                "target" => "guest",
+                "default" => "PTConfigureInit",
+                "force" => true ];
+
+        $i_path = dirname(__FILE__).DS ;
+
+        $this->config["vm"]["provision"][] = $this->config["vm"]["provision_up_light"][] =
+            [   "provisioner" => "PharaohTools",
+                "tool" => "ptdeploy",
+                "target" => "host",
+                "script" => $i_path.'build'.DS.'ptd'.DS.'add-hostfile-entry.dsl.php',
+                "params" => array("vars" => $i_path.'vars'.DS.'vm.php'), ] ;
+
+        $this->config["vm"]["provision_destroy_post"][] =
+            [   "provisioner" => "PharaohTools", "tool" => "ptdeploy", "target" => "host",
+                "script" => $i_path.'build'.DS.'ptd'.DS.'remove-hostfile-entry.dsl.php',
+                "params" => array("vars" => $i_path.'vars'.DS.'vm.php') ] ;
+
+        $dsl_params = array('start-dir' => "{$guest_path}",
+                            'vars' => "{$guest_path}vars/vm.php",
+                            'step-times' => 'true',
+                            'step-numbers' => 'true') ;
+
+        $this->config["vm"]["provision"][] =
+            [   "provisioner" => "PharaohTools",
+                "tool" => "ptconfigure",
+                "target" => "guest",
+                "script" => "{$guest_path}/build/ptc/development.dsl.php",
+                "params" => $dsl_params ] ;
+
+        $description = (isset($variables['description'])) ? "\n\n{$variables['description']}\n\n" : '' ;
+        $this->config["vm"]["post_up_message"] = "Your ISOPHP Virtualize Box has been brought up. $description
+  You now have the following urls:\n\n
+    http://build.{$variables['domain']}:80{$random_port_suffix}/ - Build Server\n\n
+        You can SSH into the VM with this:\n\n
+            ssh {$this->config['ssh']['user']}@127.0.0.1 -p22{$random_port_suffix} - SSH Connection\n
+            The password is {$this->config['ssh']['password']} \n";
+    }
+
+}
