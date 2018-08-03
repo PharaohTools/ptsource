@@ -18,12 +18,13 @@ class Virtufile extends VirtufileBase {
         $this->config["vm"]["name"] = 'pharaoh_'.$variables['friendly_app_slug'] ;
         $this->config["vm"]["gui_mode"] = "gui" ;
 
+        $this->config["vm"]["cpus"] = "2" ;
         $bu = 'https://repositories.internal.pharaohtools.com/index.php?control=BinaryServer&action=serve&item=iso_php_virtualize_boxes_-_ubuntu_16.04_server' ;
         $this->config["vm"]["box_url"] = $bu ;
         $this->config["vm"]["box"] = "vanillaubuntu16042bitserver" ;
 
         $random_port_suffix = $variables['random_port_suffix'] ;
-        $this->config["vm"]["memory"] = "2048" ;
+        $this->config["vm"]["memory"] = "4096" ;
         $this->config["vm"]["graceful_halt_timeout"] = 15 ;
         $this->config["vm"]["ssh_halt_timeout"] = 2 ;
         $this->config["network"]["natpf1"][] = "{$this->config["vm"]["name"]}_guestssh,tcp,,22{$random_port_suffix},,22";
@@ -87,7 +88,7 @@ class Virtufile extends VirtufileBase {
         $description = (isset($variables['description'])) ? "\n\nPharaoh Tools: {$variables['description']}\n\n" : '' ;
         $this->config["vm"]["post_up_message"] = "Your Virtual Machine is running. $description
   You now have the following urls:\n\n
-    http://repositories.{$variables['domain']}:80{$random_port_suffix}/ - Repositories Server\n\n
+    http://source.{$variables['domain']}:80{$random_port_suffix}/ - Source Server\n\n
     http://build.{$variables['domain']}:80{$random_port_suffix}/ - Build Server\n\n
         You can SSH into the VM with this:\n\n
             ssh {$this->config['ssh']['user']}@127.0.0.1 -p22{$random_port_suffix} - SSH Connection\n
