@@ -6,8 +6,8 @@ Composer ensure
 
 NodeJS install
 
-PTBuild install
-  label "Lets configure Pharaoh Build without installing, as we are using files from the host"
+PTSource install
+  label "Lets configure Pharaoh Source without installing, as we are using files from the host"
   vhe-url "$$subdomain.{{{ var::domain }}}"
   vhe-ip-port "0.0.0.0:80"
   version latest
@@ -15,9 +15,12 @@ PTBuild install
   no-permissions
   guess
 
-SudoNoPass install
-  label "Sudo ability for Pharaoh Build user"
-  install-user-name ptbuild
+PTBuild install
+  label "Lets install Pharaoh Build"
+  vhe-url "$$buildsubdomain.{{{ var::domain }}}"
+  vhe-ip-port "0.0.0.0:80"
+  version latest
+  guess
 
 Logging log
   log-message "Lets copy in our build pipes"
@@ -25,7 +28,7 @@ Logging log
 
 RunCommand execute
   label "Get the names of the Build pipes"
-  command 'cd /opt/ptbuild/ptbuild/build/ptbuild/pipes/ && ls -1 | paste -sd "," -'
+  command 'cd /opt/pt{{{ var::application_slug }}}/pt{{{ var::application_slug }}}/build/ptbuild/pipes/ && ls -1 | paste -sd "," -'
   guess
   register "build_pipe_names"
 
