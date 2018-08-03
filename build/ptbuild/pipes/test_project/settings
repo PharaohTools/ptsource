@@ -1,0 +1,109 @@
+{
+    "BuildCleanup": {
+        "no_to_keep": ""
+    },
+    "BuildQueue": {
+        "enabled": "on",
+        "build_queue_max": "10",
+        "build_queue_delay": ""
+    },
+    "ClearWorkspace": {
+        "enable_clear_workspace_before_build": "on"
+    },
+    "CopyOnSave": {
+        "target_directory": ""
+    },
+    "GoogleCalendar": {
+        "clientid": "",
+        "emailaddress": "",
+        "keyfilelocation": "",
+        "youremailid": ""
+    },
+    "Hipchat": {
+        "Token": "",
+        "Room Id or Name": "",
+        "From": ""
+    },
+    "Ironmq": {
+        "token": "",
+        "projectid": "",
+        "queuename": ""
+    },
+    "Logstash": {
+        "ipaddress": "",
+        "port": ""
+    },
+    "Mongodb": {
+        "host": "",
+        "dbname": "",
+        "collection": "",
+        "path": "",
+        "title": ""
+    },
+    "PollSCM": {
+        "git_repository_url": "",
+        "git_branch": "",
+        "git_privkey_path": "",
+        "cron_string": ""
+    },
+    "PublishHTMLreports": {
+        "enabled": "on",
+        "reports": {
+            "6677854622280565": {
+                "Report_Directory": "some-dir",
+                "Index_Page": "index.html",
+                "Report_Title": "Example Report"
+            },
+            "38811935707171087": {
+                "Report_Directory": "some-other-dir",
+                "Index_Page": "index.html",
+                "Report_Title": "Second Report"
+            }
+        }
+    },
+    "PublishReleases": {
+        "enabled": "on",
+        "allow_public": "on",
+        "custom_release": {
+            "1418444706595038": {
+                "release_title": "Test Release One",
+                "release_file": "release-one.file",
+                "new_file_name": "release-one.file",
+                "remote_file_url": "http:\/\/www.google.com\/$$run-id.$$run_id.$$item.a-test-file.php",
+                "image": "",
+                "allow_public": "on",
+                "publish_as_remote_url": "on"
+            },
+            "2714673780803806": {
+                "release_title": "Test Release Two",
+                "release_file": "release-two.file",
+                "new_file_name": "release-two.file",
+                "remote_file_url": "http:\/\/www.google.com\/another-test-file.php",
+                "image": "",
+                "allow_public": "on"
+            }
+        }
+    },
+    "SCMPublishOnSave": {
+        "target_repository": ""
+    },
+    "SSH": {
+        "username": "",
+        "password": "",
+        "ipaddress": "",
+        "sourcefilepath": "",
+        "destinationfilepath": ""
+    },
+    "SVN": {
+        "Repository": "",
+        "TargetPath": "",
+        "Username": "",
+        "Password": ""
+    },
+    "ScheduledBuild": {
+        "cron_string": ""
+    },
+    "SendEmail": {
+        "send_postbuild_email_address": ""
+    }
+}

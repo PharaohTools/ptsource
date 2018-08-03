@@ -1,0 +1,12 @@
+{
+    "project-name": "test project",
+    "project-slug": "test_project",
+    "project-description": "A Testing Project",
+    "default-scm-url": null,
+    "email-id": null,
+    "parameter-status": null,
+    "parameter-name": null,
+    "parameter-dvalue": null,
+    "parameter-input": "",
+    "parameter-description": null
+}

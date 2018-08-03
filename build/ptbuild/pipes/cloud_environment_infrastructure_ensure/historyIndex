@@ -1,0 +1,1838 @@
+{
+    "1": {
+        "start": 1531707034,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531707036,
+        "status": "FAIL"
+    },
+    "2": {
+        "start": 1531707637,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531707638,
+        "status": "FAIL"
+    },
+    "3": {
+        "start": 1531708070,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531708071,
+        "status": "FAIL"
+    },
+    "4": {
+        "start": 1531708195,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531708199,
+        "status": "FAIL"
+    },
+    "5": {
+        "start": 1531708301,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531708305,
+        "status": "FAIL"
+    },
+    "6": {
+        "start": 1531708352,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531708356,
+        "status": "FAIL"
+    },
+    "7": {
+        "start": 1531709459,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531709464,
+        "status": "FAIL"
+    },
+    "8": {
+        "start": 1531709549,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531709554,
+        "status": "FAIL"
+    },
+    "9": {
+        "start": 1531709654,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531709659,
+        "status": "FAIL"
+    },
+    "10": {
+        "start": 1531709776,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531709781,
+        "status": "FAIL"
+    },
+    "11": {
+        "start": 1531709869,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531709874,
+        "status": "FAIL"
+    },
+    "12": {
+        "start": 1531709898,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531709903,
+        "status": "FAIL"
+    },
+    "13": {
+        "start": 1531711956,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531711961,
+        "status": "FAIL"
+    },
+    "14": {
+        "start": 1531711986,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531711990,
+        "status": "FAIL"
+    },
+    "15": {
+        "start": 1531712046,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531712051,
+        "status": "FAIL"
+    },
+    "16": {
+        "start": 1531712080,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531712084,
+        "status": "FAIL"
+    },
+    "17": {
+        "start": 1531712108,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531712113,
+        "status": "FAIL"
+    },
+    "18": {
+        "start": 1531712158,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531712163,
+        "status": "FAIL"
+    },
+    "19": {
+        "start": 1531712227,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531712231,
+        "status": "FAIL"
+    },
+    "20": {
+        "start": 1531712286,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531712291,
+        "status": "FAIL"
+    },
+    "21": {
+        "start": 1531717145,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531717150,
+        "status": "FAIL"
+    },
+    "22": {
+        "start": 1531717176,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531717180,
+        "status": "FAIL"
+    },
+    "23": {
+        "start": 1531717206,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531717211,
+        "status": "FAIL"
+    },
+    "24": {
+        "start": 1531717231,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531717236,
+        "status": "FAIL"
+    },
+    "25": {
+        "start": 1531717267,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531717272,
+        "status": "FAIL"
+    },
+    "26": {
+        "start": 1531717326,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531717331,
+        "status": "FAIL"
+    },
+    "27": {
+        "start": 1531717652,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531717656,
+        "status": "FAIL"
+    },
+    "28": {
+        "start": 1531717686,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531717691,
+        "status": "FAIL"
+    },
+    "29": {
+        "start": 1531717843,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531717848,
+        "status": "FAIL"
+    },
+    "30": {
+        "start": 1531717866,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531717871,
+        "status": "FAIL"
+    },
+    "31": {
+        "start": 1531717927,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531717932,
+        "status": "FAIL"
+    },
+    "32": {
+        "start": 1531717956,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531717961,
+        "status": "FAIL"
+    },
+    "33": {
+        "start": 1531717986,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531717991,
+        "status": "FAIL"
+    },
+    "34": {
+        "start": 1531718046,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531718051,
+        "status": "FAIL"
+    },
+    "35": {
+        "start": 1531774033,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531774042,
+        "status": "FAIL"
+    },
+    "36": {
+        "start": 1531776607,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531776612,
+        "status": "FAIL"
+    },
+    "37": {
+        "start": 1531776646,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531776651,
+        "status": "FAIL"
+    },
+    "38": {
+        "start": 1531776666,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531776671,
+        "status": "FAIL"
+    },
+    "39": {
+        "start": 1531777574,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531777580,
+        "status": "FAIL"
+    },
+    "40": {
+        "start": 1531777626,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531777631,
+        "status": "FAIL"
+    },
+    "41": {
+        "start": 1531777687,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531777691,
+        "status": "FAIL"
+    },
+    "42": {
+        "start": 1531777826,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531777831,
+        "status": "FAIL"
+    },
+    "43": {
+        "start": 1531777866,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531777871,
+        "status": "FAIL"
+    },
+    "44": {
+        "start": 1531777926,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531777931,
+        "status": "FAIL"
+    },
+    "45": {
+        "start": 1531777977,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531777982,
+        "status": "FAIL"
+    },
+    "46": {
+        "start": 1531778046,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531778051,
+        "status": "FAIL"
+    },
+    "47": {
+        "start": 1531778106,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531778111,
+        "status": "FAIL"
+    },
+    "48": {
+        "start": 1531778166,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531778171,
+        "status": "FAIL"
+    },
+    "49": {
+        "start": 1531778226,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531778230,
+        "status": "FAIL"
+    },
+    "50": {
+        "start": 1531778258,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531778262,
+        "status": "FAIL"
+    },
+    "51": {
+        "start": 1531778288,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531778294,
+        "status": "FAIL"
+    },
+    "52": {
+        "start": 1531778346,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531778351,
+        "status": "FAIL"
+    },
+    "53": {
+        "start": 1531778358,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531778362,
+        "status": "FAIL"
+    },
+    "54": {
+        "start": 1531778406,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531778412,
+        "status": "FAIL"
+    },
+    "55": {
+        "start": 1531778466,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531778471,
+        "status": "FAIL"
+    },
+    "56": {
+        "start": 1531778777,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531778781,
+        "status": "FAIL"
+    },
+    "57": {
+        "start": 1531778826,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531778831,
+        "status": "FAIL"
+    },
+    "58": {
+        "start": 1531778948,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531778953,
+        "status": "FAIL"
+    },
+    "59": {
+        "start": 1531779006,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531779011,
+        "status": "FAIL"
+    },
+    "60": {
+        "start": 1531779066,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531779071,
+        "status": "FAIL"
+    },
+    "61": {
+        "start": 1531779406,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531779411,
+        "status": "FAIL"
+    },
+    "62": {
+        "start": 1531779426,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531779431,
+        "status": "FAIL"
+    },
+    "63": {
+        "start": 1531779505,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531779510,
+        "status": "FAIL"
+    },
+    "64": {
+        "start": 1531779546,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531779551,
+        "status": "FAIL"
+    },
+    "65": {
+        "start": 1531779708,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531779715,
+        "status": "FAIL"
+    },
+    "66": {
+        "start": 1531779727,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531779732,
+        "status": "FAIL"
+    },
+    "67": {
+        "start": 1531779786,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531779791,
+        "status": "FAIL"
+    },
+    "68": {
+        "start": 1531779846,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531779851,
+        "status": "FAIL"
+    },
+    "69": {
+        "start": 1531780298,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531780303,
+        "status": "FAIL"
+    },
+    "70": {
+        "start": 1531780318,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531780324,
+        "status": "FAIL"
+    },
+    "71": {
+        "start": 1531780386,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531780391,
+        "status": "FAIL"
+    },
+    "72": {
+        "start": 1531780446,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531780451,
+        "status": "FAIL"
+    },
+    "73": {
+        "start": 1531780498,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531780503,
+        "status": "FAIL"
+    },
+    "74": {
+        "start": 1531780566,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531780571,
+        "status": "FAIL"
+    },
+    "75": {
+        "start": 1531780626,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531780631,
+        "status": "FAIL"
+    },
+    "76": {
+        "start": 1531780729,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531780734,
+        "status": "FAIL"
+    },
+    "77": {
+        "start": 1531780746,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531780751,
+        "status": "FAIL"
+    },
+    "78": {
+        "start": 1531780806,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531780811,
+        "status": "FAIL"
+    },
+    "79": {
+        "start": 1531780948,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531780953,
+        "status": "FAIL"
+    },
+    "80": {
+        "start": 1531780987,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531780992,
+        "status": "FAIL"
+    },
+    "81": {
+        "start": 1531781046,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531781051,
+        "status": "FAIL"
+    },
+    "82": {
+        "start": 1531781280,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531781286,
+        "status": "FAIL"
+    },
+    "83": {
+        "start": 1531781346,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531781351,
+        "status": "FAIL"
+    },
+    "84": {
+        "start": 1531781406,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531781411,
+        "status": "FAIL"
+    },
+    "85": {
+        "start": 1531781998,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531782003,
+        "status": "FAIL"
+    },
+    "86": {
+        "start": 1531782067,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531782072,
+        "status": "FAIL"
+    },
+    "87": {
+        "start": 1531782871,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531782875,
+        "status": "FAIL"
+    },
+    "88": {
+        "start": 1531782905,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531782910,
+        "status": "FAIL"
+    },
+    "89": {
+        "start": 1531782967,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531782972,
+        "status": "FAIL"
+    },
+    "90": {
+        "start": 1531783206,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531783213,
+        "status": "FAIL"
+    },
+    "91": {
+        "start": 1531783267,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531783272,
+        "status": "FAIL"
+    },
+    "92": {
+        "start": 1531783326,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531783331,
+        "status": "FAIL"
+    },
+    "93": {
+        "start": 1531783426,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531783431,
+        "status": "FAIL"
+    },
+    "94": {
+        "start": 1531783446,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531783452,
+        "status": "FAIL"
+    },
+    "95": {
+        "start": 1531784082,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531784087,
+        "status": "FAIL"
+    },
+    "96": {
+        "start": 1531784106,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531784111,
+        "status": "FAIL"
+    },
+    "97": {
+        "start": 1531784166,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531784171,
+        "status": "FAIL"
+    },
+    "98": {
+        "start": 1531784246,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531784251,
+        "status": "FAIL"
+    },
+    "99": {
+        "start": 1531784286,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531784291,
+        "status": "FAIL"
+    },
+    "100": {
+        "start": 1531784346,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531784351,
+        "status": "FAIL"
+    },
+    "101": {
+        "start": 1531784439,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531784443,
+        "status": "FAIL"
+    },
+    "102": {
+        "start": 1531784466,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531784471,
+        "status": "FAIL"
+    },
+    "103": {
+        "start": 1531784853,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531784858,
+        "status": "FAIL"
+    },
+    "104": {
+        "start": 1531784887,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531784892,
+        "status": "FAIL"
+    },
+    "105": {
+        "start": 1531784946,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531784950,
+        "status": "FAIL"
+    },
+    "106": {
+        "start": 1531784960,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531784969,
+        "status": "FAIL"
+    },
+    "107": {
+        "start": 1531785007,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531785012,
+        "status": "FAIL"
+    },
+    "108": {
+        "start": 1531785066,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531785071,
+        "status": "FAIL"
+    },
+    "109": {
+        "start": 1531785126,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531785131,
+        "status": "FAIL"
+    },
+    "110": {
+        "start": 1531794789,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531794911,
+        "status": "FAIL"
+    },
+    "111": {
+        "start": 1531795132,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531795254,
+        "status": "FAIL"
+    },
+    "112": {
+        "start": 1531795262,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531795385,
+        "status": "FAIL"
+    },
+    "113": {
+        "start": 1531795625,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531795746,
+        "status": "FAIL"
+    },
+    "114": {
+        "start": 1531795802,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        }
+    },
+    "115": {
+        "start": 1531795920,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531796042,
+        "status": "FAIL"
+    },
+    "116": {
+        "start": 1531796739,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531796861,
+        "status": "FAIL"
+    },
+    "117": {
+        "start": 1531796877,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531796999,
+        "status": "FAIL"
+    },
+    "118": {
+        "start": 1531855542,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531855664,
+        "status": "FAIL"
+    },
+    "119": {
+        "start": 1531855675,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531855797,
+        "status": "FAIL"
+    },
+    "120": {
+        "start": 1531855806,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531855928,
+        "status": "FAIL"
+    },
+    "121": {
+        "start": 1531855939,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531856061,
+        "status": "FAIL"
+    },
+    "122": {
+        "start": 1531856106,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531856228,
+        "status": "FAIL"
+    },
+    "123": {
+        "start": 1531856239,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531856360,
+        "status": "FAIL"
+    },
+    "124": {
+        "start": 1531856527,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531856651,
+        "status": "FAIL"
+    },
+    "125": {
+        "start": 1531856662,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531856784,
+        "status": "FAIL"
+    },
+    "126": {
+        "start": 1531856826,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531856948,
+        "status": "FAIL"
+    },
+    "127": {
+        "start": 1531856964,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531857086,
+        "status": "FAIL"
+    },
+    "128": {
+        "start": 1531857126,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531857247,
+        "status": "FAIL"
+    },
+    "129": {
+        "start": 1531857258,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531857380,
+        "status": "FAIL"
+    },
+    "130": {
+        "start": 1531857426,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531857548,
+        "status": "FAIL"
+    },
+    "131": {
+        "start": 1531857564,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531857686,
+        "status": "FAIL"
+    },
+    "132": {
+        "start": 1531872502,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531872625,
+        "status": "FAIL"
+    },
+    "133": {
+        "start": 1531872641,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531872763,
+        "status": "FAIL"
+    },
+    "134": {
+        "start": 1531872786,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531872909,
+        "status": "FAIL"
+    },
+    "135": {
+        "start": 1531872925,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531873047,
+        "status": "FAIL"
+    },
+    "136": {
+        "start": 1531873087,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531873209,
+        "status": "FAIL"
+    },
+    "137": {
+        "start": 1531873220,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531873342,
+        "status": "FAIL"
+    },
+    "138": {
+        "start": 1531948994,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531949116,
+        "status": "FAIL"
+    },
+    "139": {
+        "start": 1531949131,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531949253,
+        "status": "FAIL"
+    },
+    "140": {
+        "start": 1531949286,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531949408,
+        "status": "FAIL"
+    },
+    "141": {
+        "start": 1531949419,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531949541,
+        "status": "FAIL"
+    },
+    "142": {
+        "start": 1531949586,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531949708,
+        "status": "FAIL"
+    },
+    "143": {
+        "start": 1531949724,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531949847,
+        "status": "FAIL"
+    },
+    "144": {
+        "start": 1531949886,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531950008,
+        "status": "FAIL"
+    },
+    "145": {
+        "start": 1531950019,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531950141,
+        "status": "FAIL"
+    },
+    "146": {
+        "start": 1531950186,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531950308,
+        "status": "FAIL"
+    },
+    "147": {
+        "start": 1531950319,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531950441,
+        "status": "FAIL"
+    },
+    "148": {
+        "start": 1531950486,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531950608,
+        "status": "FAIL"
+    },
+    "149": {
+        "start": 1531950624,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531950746,
+        "status": "FAIL"
+    },
+    "150": {
+        "start": 1531950786,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531950908,
+        "status": "FAIL"
+    },
+    "151": {
+        "start": 1531950919,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531951040,
+        "status": "FAIL"
+    },
+    "152": {
+        "start": 1531951086,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531951209,
+        "status": "FAIL"
+    },
+    "153": {
+        "start": 1531951224,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531951346,
+        "status": "FAIL"
+    },
+    "154": {
+        "start": 1531951386,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531951509,
+        "status": "FAIL"
+    },
+    "155": {
+        "start": 1531951524,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531951646,
+        "status": "FAIL"
+    },
+    "156": {
+        "start": 1531951687,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531951809,
+        "status": "FAIL"
+    },
+    "157": {
+        "start": 1531951820,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531951944,
+        "status": "FAIL"
+    },
+    "158": {
+        "start": 1531951988,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531952111,
+        "status": "FAIL"
+    },
+    "159": {
+        "start": 1531952126,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531952249,
+        "status": "FAIL"
+    },
+    "160": {
+        "start": 1531952286,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531952408,
+        "status": "FAIL"
+    },
+    "161": {
+        "start": 1531952419,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531952541,
+        "status": "FAIL"
+    },
+    "162": {
+        "start": 1531952586,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531952707,
+        "status": "FAIL"
+    },
+    "163": {
+        "start": 1531952719,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531952841,
+        "status": "FAIL"
+    },
+    "164": {
+        "start": 1531952886,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531953008,
+        "status": "FAIL"
+    },
+    "165": {
+        "start": 1531953020,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531953141,
+        "status": "FAIL"
+    },
+    "166": {
+        "start": 1531953186,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531953309,
+        "status": "FAIL"
+    },
+    "167": {
+        "start": 1531953325,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531953446,
+        "status": "FAIL"
+    },
+    "168": {
+        "start": 1531953487,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531953609,
+        "status": "FAIL"
+    },
+    "169": {
+        "start": 1531953621,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531953743,
+        "status": "FAIL"
+    },
+    "170": {
+        "start": 1531953786,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531953908,
+        "status": "FAIL"
+    },
+    "171": {
+        "start": 1531953919,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1531954040,
+        "status": "FAIL"
+    },
+    "172": {
+        "start": 1532945390,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1532945513,
+        "status": "FAIL"
+    },
+    "173": {
+        "start": 1532945529,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1532945651,
+        "status": "FAIL"
+    },
+    "174": {
+        "start": 1532945706,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1532945828,
+        "status": "FAIL"
+    },
+    "175": {
+        "start": 1532945839,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1532945961,
+        "status": "FAIL"
+    },
+    "176": {
+        "start": 1532946198,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1532946320,
+        "status": "FAIL"
+    },
+    "177": {
+        "start": 1532946336,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1532946458,
+        "status": "FAIL"
+    },
+    "178": {
+        "start": 1532947021,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        }
+    },
+    "179": {
+        "start": 1532947508,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1532947630,
+        "status": "FAIL"
+    },
+    "180": {
+        "start": 1532947641,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1532947763,
+        "status": "FAIL"
+    },
+    "181": {
+        "start": 1532947709,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1532947831,
+        "status": "FAIL"
+    },
+    "182": {
+        "start": 1532947843,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1532947964,
+        "status": "FAIL"
+    },
+    "183": {
+        "start": 1532948674,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1532948796,
+        "status": "FAIL"
+    },
+    "184": {
+        "start": 1532948807,
+        "params": {
+            "environment_to_ensure": "qa\r",
+            "site_directory": "\/opt\/pharaoh_infrastructure\r",
+            "instance_id": "01"
+        },
+        "end": 1532948929,
+        "status": "FAIL"
+    }
+}

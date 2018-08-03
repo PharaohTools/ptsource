@@ -1,0 +1,41 @@
+{
+    "7027378264688555": {
+        "module": "PHPScript",
+        "steptype": "phpscriptdata",
+        "step_label": "Loop some sleep time",
+        "data": "for ($i=0; $i<3; $i++) {\r\n    echo \"Slept for $i...\\n\" ;\r\n    sleep(1) ;\r\n}"
+    },
+    "5552489013935609": {
+        "module": "Shell",
+        "steptype": "shelldata",
+        "step_label": "Create Releases",
+        "data": "touch release-one.file\r\necho \"the first release in\" > release-one.file\r\ntouch release-two.file\r\necho \"the second release in\" > release-two.file\r\n"
+    },
+    "15565689056493647": {
+        "module": "TriggerRemote",
+        "steptype": "trigger_remote_data",
+        "step_label": "Run a Different Build Job",
+        "trigger_job": "cloud_environment_infrastructure_ensure",
+        "allow_unstable": "on",
+        "allow_failed": "on",
+        "parameter_raw": "environment_to_ensure = qa\r\nsite_directory = \/opt\/pharaoh_infrastructure\r\ninstance_id = 01",
+        "timeout": "",
+        "quiet_progress": "on"
+    },
+    "9906419293097214": {
+        "module": "PHPScript",
+        "steptype": "phpscriptdata",
+        "step_label": "Loop some sleep time again",
+        "data": "for ($i=0; $i<10; $i++) {\r\n    echo \"Slept for $i...\\n\" ;\r\n    sleep(1) ;\r\n}"
+    },
+    "3938447047847583": {
+        "module": "TriggerRemote",
+        "steptype": "trigger_remote_data",
+        "step_label": "Run another Different Build Job",
+        "trigger_job": "cloud_environment_infrastructure_ensure",
+        "allow_unstable": "on",
+        "allow_failed": "on",
+        "parameter_raw": "environment_to_ensure = qa\r\nsite_directory = \/opt\/pharaoh_infrastructure\r\ninstance_id = 01",
+        "timeout": ""
+    }
+}
