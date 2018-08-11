@@ -1,0 +1,8 @@
+{
+    "7027378262840154": {
+        "module": "Shell",
+        "steptype": "shelldata",
+        "step_label": "Rebuild the assets",
+        "data": "su - pttrack 'pttrack assetpublisher publish' \r\n"
+    }
+}
