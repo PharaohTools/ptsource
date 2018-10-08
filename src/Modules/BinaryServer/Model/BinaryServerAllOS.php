@@ -62,8 +62,8 @@ class BinaryServerAllOS extends Base {
         $is_download = ($_FILES == array()) ? true : false ;
         if ($is_download) {
 
-            file_put_contents('/tmp/ptlog', $version) ;
             $version = $this->getArtefactVersion(true) ;
+            file_put_contents('/tmp/ptlog', $version) ;
             if ($this->versionStringIsValid($version)) {
                 $this_version = $version ;
             } else {
@@ -107,7 +107,12 @@ class BinaryServerAllOS extends Base {
         } else {
 
 
+            file_put_contents('/tmp/pharaoh.log', 'upload start'."\n", FILE_APPEND) ;
             $version = $this->getArtefactVersion() ;
+
+            file_put_contents('/tmp/pharaoh.log', 'version is:'.$version."\n", FILE_APPEND) ;
+
+
             if ($this->versionStringIsValid($version)) {
                 $this_version = $version ;
             } else {
@@ -119,11 +124,13 @@ class BinaryServerAllOS extends Base {
             $dir_to_write = REPODIR.DS.$this->params["item"].DS.$this_version ;
             if (!is_dir($dir_to_write)) {
                 mkdir($dir_to_write, 0755, true);
+                file_put_contents('/tmp/pharaoh.log', 'mkdir worked'."\n", FILE_APPEND) ;
             }
 
-//            $res = $this->singlePostUpload($dir_to_write) ;
-            $res = $this->chunkedUpload($dir_to_write) ;
+            $res = $this->singlePostUpload($dir_to_write) ;
+//            $res = $this->chunkedUpload($dir_to_write) ;
 
+            file_put_contents('/tmp/pharaoh.log', 'chunkedUpload / singlePostUpload res is: '.var_export($res, true)."\n", FILE_APPEND) ;
             if ($res !== false) {
                 return true ;
             } else {
@@ -134,122 +141,24 @@ class BinaryServerAllOS extends Base {
     }
 
     public function singlePostUpload($dir_to_write) {
-
         $contents = file_get_contents($_FILES['file']['tmp_name']) ;
-
         $res = file_put_contents($dir_to_write.DS.$_FILES['file']['name'], $contents);
         if ($res !== false) {
-            echo "File was uploaded successfully" ;
+            echo "File was uploaded successfully\n" ;
             return true ;
         } else {
-            echo "File Upload failed" ;
+            echo "File Upload failed\n" ;
             return false ;
         }
-
     }
 
     public function chunkedUpload($dir_to_write) {
-
-//
-//        define('MAX_FILE_SIZE_UPLOAD', 10000000000); // 10Gb
-//        header('Content-Type: application/json');
-//
-//// Make sure file is not cached (as it happens for example on iOS devices)
-//        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-//        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
-//        header('Cache-Control: no-store, no-cache, must-revalidate');
-//        header('Cache-Control: post-check=0, pre-check=0', false);
-//        header('Pragma: no-cache');
-
-
-        $tmpName = $_FILES['file']['tmp_name'];
-        $tmpDirectory = ini_get('upload_tmp_dir') ? ini_get('upload_tmp_dir') : sys_get_temp_dir();
-
-        // Security verification
-        if (!is_uploaded_file($tmpName)) {
-//            validationFail('bad_request', 'An error occured.');
-        }
-
-
-        $data = "this is outta range".date('d/m/Y H:i:s') ;
-        file_put_contents('/tmp/pharaoh.log', $data, FILE_APPEND) ;
-
-        $data = var_export($_SERVER, true) ;
-        file_put_contents('/tmp/pharaoh.log', $data, FILE_APPEND) ;
-
-        $lib = dirname(__DIR__.DIRECTORY_SEPARATOR.'Libraries'.DIRECTORY_SEPARATOR.'vendor'.DIRECTORY_SEPARATOR.'autoload.php') ;
-
-//        $data = var_export($_SERVER, true) ;
-        file_put_contents('/tmp/pharaoh.log', $lib, FILE_APPEND) ;
-        require_once ($lib) ;
-
-        //Path to autoload.php from current location
-//        require_once './vendor/autoload.php';
-
-        $config = new \Flow\Config();
-        $config->setTempDir('/tmp/chunks_temp_folder');
-        $request = new \Flow\Request();
-        $uploadFolder = '/tmp/final_file_destination/' ; // Folder where the file will be stored
-        $uploadFileName = uniqid()."_".$request->getFileName(); // The name the file will have on the server
-        $uploadPath = $uploadFolder.$uploadFileName;
-        if (\Flow\Basic::save($uploadPath, $config, $request)) {
-            // file saved successfully and can be accessed at $uploadPath
-        } else {
-            // This is not a final chunk or request is invalid, continue to upload.
-        }
-
-        $data = var_export($uploadFileName, true) ;
-        $data .= var_export($uploadPath, true) ;
-        file_put_contents('/tmp/pharaoh.log', $data, FILE_APPEND) ;
-
-        require_once (dirname(__DIR__.DIRECTORY_SEPARATOR.'Libraries'.DIRECTORY_SEPARATOR.'vendor'.DIRECTORY_SEPARATOR.'autoload.php')) ;
-
-
-//        if (isset($_SERVER['HTTP_CONTENT_RANGE']) && !empty($_SERVER['HTTP_CONTENT_RANGE']) && isset($_SERVER['CONTENT_LENGTH']) && is_numeric($_SERVER['CONTENT_LENGTH'])) {
-//
-//            $data = "this is ina range".date('d/m/Y H:i:s') ;
-//
-//            file_put_contents('/tmp/pharaoh.log', $data, FILE_APPEND) ;
-//
-//            // We get the size of the file uploaded from the client (real, final size)
-//            $filesize = intval(substr($_SERVER['HTTP_CONTENT_RANGE'], strpos($_SERVER['HTTP_CONTENT_RANGE'], '/') + 1));
-//
-////            if ($filesize > MAX_FILE_SIZE_UPLOAD) {
-////                validationFail('bad_request', 'File size allowed must be lower than 10Mb.');
-////            }
-//
-//            if (isset($_SESSION['filename']) && is_file($tmpDirectory.'/'.$_SESSION['filename'])) {
-//                file_put_contents($tmpDirectory.'/'.$_SESSION['filename'], fopen($tmpName, 'r'), FILE_APPEND);
-//                unlink($tmpName); // We delete the file once we copied it, in order to not use unecessary storage
-//
-//                // We stop here if the file is not completely loaded
-//                $currentSize = filesize($tmpDirectory.'/'.$_SESSION['filename']);
-//                if ($currentSize < $filesize) {
-////                    echo ('{"size": '.$currentSize.'}');
-//                    $res = false ;
-//                } else {
-//                    $tmpName = $tmpDirectory.'/'.$_SESSION['filename'];
-//                }
-//            } else {
-//                $_SESSION['filename'] = uniqid().'.csv.part';
-//                move_uploaded_file($tmpName, $tmpDirectory.DIRECTORY_SEPARATOR.$_SESSION['filename']);
-//                echo('{"size": '.filesize($tmpDirectory.DIRECTORY_SEPARATOR.$_SESSION['filename']).'}');
-//                $res =  true ;
-//            }
-//        }
-
-
-
-//        rename($tmpName, $dir_to_write.DS.$_FILES['file']['name']);
-//var_dump($res) ;
-//        if ($res !== false) {
-            echo "File was uploaded successfully" ;
-            return true ;
-//        } else {
-//            echo "File Upload failed" ;
-//            return false ;
-//        }
-
+        $lib_dir = dirname(__DIR__).DS.'Libraries'.DS ;
+        require_once ($lib_dir.'chunked_raw.php') ;
+        require_once ($lib_dir.'chunked_flow.php') ;
+        require_once ($lib_dir.'chunked_native.php') ;
+        echo "File was uploaded successfully" ;
+        return true ;
     }
 
     public function getArtefactVersion($get_current_max = false) {
@@ -265,13 +174,14 @@ class BinaryServerAllOS extends Base {
                 $full_dir = REPODIR.DS.$this->params["item"].DS.$current_dir ;
                 if (!is_dir($full_dir)) { continue ; }
                 $dir_count ++ ;
+
+                file_put_contents('/tmp/pharaoh.log', "version_compare  $cur_max , $current_dir\n", FILE_APPEND) ;
                 $res = version_compare ( $cur_max , $current_dir );
                 if ($res == -1) {
                     $cur_max = $current_dir ;
-                } else {
-                    $cur_max = $current_dir ;
                 }
             }
+//            file_put_contents('/tmp/pharaoh.log', "vcompare is $res\n", FILE_APPEND) ;
             if ($get_current_max == true) {
                 return $cur_max ;
             }
