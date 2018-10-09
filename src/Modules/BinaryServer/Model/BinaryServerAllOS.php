@@ -56,7 +56,7 @@ class BinaryServerAllOS extends Base {
 
         if ($this->userIsAllowed($binaryRequestUser, $repo_name)==false) {
             header('HTTP/1.1 403 Forbidden');
-            echo "Forbidden" ;
+            echo "Forbidden\n" ;
             return false ;  }
 
         $is_download = ($_FILES == array()) ? true : false ;
@@ -68,7 +68,7 @@ class BinaryServerAllOS extends Base {
                 $this_version = $version ;
             } else {
                 header('HTTP/1.1 400 Unable to handle request');
-                echo "Incompatible Version String Requested" ;
+                echo "Incompatible Version String Requested\n" ;
                 return false ;
             }
 
@@ -85,7 +85,7 @@ class BinaryServerAllOS extends Base {
             }
             if ($this_one === null) {
                 header('HTTP/1.1 404 Unable to find resource');
-                echo "Unable to find Requested Resource" ;
+                echo "Unable to find Requested Resource\n" ;
                 return false ;
             }
 
@@ -106,18 +106,15 @@ class BinaryServerAllOS extends Base {
 
         } else {
 
-
-            file_put_contents('/tmp/pharaoh.log', 'upload start'."\n", FILE_APPEND) ;
+//            file_put_contents('/tmp/pharaoh.log', 'upload start'."\n", FILE_APPEND) ;
             $version = $this->getArtefactVersion() ;
 
-            file_put_contents('/tmp/pharaoh.log', 'version is:'.$version."\n", FILE_APPEND) ;
-
-
+//            file_put_contents('/tmp/pharaoh.log', 'version is:'.$version."\n", FILE_APPEND) ;
             if ($this->versionStringIsValid($version)) {
                 $this_version = $version ;
             } else {
                 header('HTTP/1.1 400 Unable to handle request');
-                echo "Incompatible Version String Requested" ;
+                echo "Incompatible Version String Requested\n" ;
                 return false ;
             }
 
@@ -216,25 +213,23 @@ class BinaryServerAllOS extends Base {
     public function userIsAllowed($binaryRequestUser, $repo_name) {
         $isWriteAction = $this->isWriteAction() ;
         if ($isWriteAction == false) {
-//            var_dump('is not a write') ;
-            //error_log("is not a write") ;
+            file_put_contents('/tmp/pharaoh.log', "uia: is not a write\n", FILE_APPEND) ;
             $publicReads = $this->repoPublicAllowed("read", $repo_name) ;
-//            var_dump('public reads', $publicReads) ;
+            file_put_contents('/tmp/pharaoh.log', "uia: public reads, $publicReads\n", FILE_APPEND) ;
             if ($publicReads == true) {
                 return true ; }
             else {
                 return $this->authUserToRead($binaryRequestUser, $repo_name) ; } }
         else {
-//            var_dump('is a write') ;
-            //error_log("is a write") ;
+            file_put_contents('/tmp/pharaoh.log', "uia: is a write\n", FILE_APPEND) ;
             $publicWrites = $this->repoPublicAllowed("write", $repo_name) ;
             if ($publicWrites == true) {
-                //error_log("public write allowed") ;
+                file_put_contents('/tmp/pharaoh.log', "uia: public write allowed\n", FILE_APPEND) ;
                 return true ; }
             else {
-                //error_log("no public") ;
+                file_put_contents('/tmp/pharaoh.log', "uia: no public\n", FILE_APPEND) ;
                 $res = $this->authUserToWrite($binaryRequestUser, $repo_name) ;
-                //error_log("auth is: {$res}") ;
+                file_put_contents('/tmp/pharaoh.log', "uia: auth is: ".var_export($res, true), FILE_APPEND) ;
                 return $res ; } }
     }
 
@@ -269,6 +264,20 @@ class BinaryServerAllOS extends Base {
                 ) ;
                 return $ret ;
             }
+
+            $userOAuthKeyFactory = new \Model\UserOAuthKey();
+            $userOAuthKey = $userOAuthKeyFactory->getModel($this->params, 'AuthenticateKey');
+            $user = $userOAuthKey->authenticateOauth($this->params['auth_user'], $this->params['auth_pw']) ;
+            if (is_array($user) && isset($user['user'])) {
+                $ret = array(
+                    'user' => $user['user']
+                ) ;
+                return $ret ;
+            }
+
+//            file_put_contents('/tmp/pharaoh.log', "auth oauth:\n", FILE_APPEND) ;
+//            file_put_contents('/tmp/pharaoh.log', var_export($user, true), FILE_APPEND) ;
+
         }
 
         $retuser = $userAccount->getLoggedInUserData();
@@ -369,6 +378,9 @@ class BinaryServerAllOS extends Base {
                 $binaryRequestUser["user"] = $is_key ;
             }
         }
+
+//        file_put_contents('/tmp/pharaoh.log', "authUserToWrite:\n", FILE_APPEND) ;
+//        file_put_contents('/tmp/pharaoh.log', var_export($binaryRequestUser, true), FILE_APPEND) ;
 
         if ($hidden === true) {
             // @todo here
