@@ -49,9 +49,13 @@ class UserOAuthKeyAuthenticateKeyAllOS extends Base {
         $parsed_filters[] = array("where", "oauth_key", '=', $key ) ;
         $keys = $datastore->findAll('user_oauth_keys', $parsed_filters) ;
 
+//        file_put_contents('/tmp/pharaoh.log', "keys:\n", FILE_APPEND) ;
+//        file_put_contents('/tmp/pharaoh.log', var_export($keys, true), FILE_APPEND) ;
+
         $key_exists = array() ;
         if (count($keys) === 1) {
             $key_exists['status'] = true ;
+            $key_exists['user'] = $keys[0]['user_id'] ;
         }
         else {
             $key_exists['status'] = false ;
