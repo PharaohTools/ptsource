@@ -47,7 +47,9 @@ class FileBrowserRawRepoAllOS extends Base {
             if (!in_array($scanned_file, array(".", "..", 'defaults', 'settings'))) {
                 $full_path = $filebrowserDir.DS.$scanned_file ;
                 $is_dir = false;
-                if (is_dir($full_path)) { $is_dir = true; }
+                if (is_dir($full_path)) {
+                    $is_dir = stat($full_path);
+                }
                 $filesRay[$scanned_file] = $is_dir ; } }
         ksort($filesRay, SORT_NATURAL | SORT_FLAG_CASE ) ;
         $filesRay = array_reverse($filesRay) ;

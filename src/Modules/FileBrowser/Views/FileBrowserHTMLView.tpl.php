@@ -167,7 +167,9 @@
 
                                 foreach ($pageVars["data"]["directory"] as $name => $isDir) {
 
-                                    $dirString = ($isDir) ? " - (D)" : "" ;
+                                    $mod_time = isset($isDir['mtime']) ? date('d/m/Y H:i:s', $isDir['mtime']) : "N/A" ;
+                                    $access_time = isset($isDir['atime']) ? date('d/m/Y H:i:s', $isDir['atime']) : "N/A" ;
+                                    $dirString = (is_array($isDir)) ? " - (D) Last Modified: {$mod_time}, Last Accessed: {$access_time}" : "" ;
                                     $trail = ($isDir) ? "/" : "" ;
                                     echo '<a href="/index.php?control=FileBrowser&action=show&item='.$pageVars["data"]["repository"]["project-slug"].$idstring.'&relpath='.$pageVars["data"]["relpath"].'">'.$pageVars["data"]["relpath"].'</a>' ;
 
