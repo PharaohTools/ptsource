@@ -24,16 +24,16 @@ class BinaryServerInfo extends PTConfigureBase {
         return array("BinaryServer"=>array("serve"));
     }
 
-    public function events() {
-        return array("afterApplicationConfigurationSave");
-    }
+//    public function events() {
+//        return array("afterApplicationConfigurationSave");
+//    }
 
-    public function configuration() {
-        return array(
+//    public function configuration() {
+//        return array(
 //            "enable_ssh_server"=> array("type" => "boolean", "label" => "Enable OpenSSH Server Integration?", ),
 //            "server_port"=> array("type" => "text", "default" => "22", "label" => "Binary SSH Server Port?", ),
-        );
-    }
+//        );
+//    }
 
     public function helpDefinition() {
       $help = <<<"HELPDATA"
