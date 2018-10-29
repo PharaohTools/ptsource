@@ -152,9 +152,9 @@ class BinaryServerAllOS extends Base {
         $groups_enabled = (isset($thisRepo["settings"]["BinaryGroups"]["enabled"]) && $thisRepo["settings"]["BinaryGroups"]["enabled"]=="on") ? true : false ;
         if ($groups_enabled == 'on') {
             $requested_group = $this->params['group'] ;
-            if ($thisRepo["settings"]["BinaryGroups"]["param_chosen_option"] == 'allow_all') {
+            if ($thisRepo["settings"]["BinaryGroups"]["allow_all_or_specific"] == 'allow_all') {
                 $dir_to_use = REPODIR.DS.$this->params["item"].DS.$this_version.DS.$requested_group ;
-            } else if ($thisRepo["settings"]["BinaryGroups"]["param_chosen_option"] == 'specific') {
+            } else if ($thisRepo["settings"]["BinaryGroups"]["allow_all_or_specific"] == 'specific') {
                 $allowed_groups_string = $thisRepo["settings"]["BinaryGroups"]["allowed_groups"] ;
                 $allowed_groups = explode("\r\n", $allowed_groups_string) ;
                 $default_group = $allowed_groups[0] ;

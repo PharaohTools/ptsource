@@ -398,8 +398,8 @@ function displaySingleField($one_config_slug, $one_conf_tails, $fieldSlug, $fiel
             break ;
         case "options" :
             if ($val==null) {
-                if (isset($settings[$one_config_slug]['param_chosen_option'])) {
-                    $val = $settings[$one_config_slug]['param_chosen_option'];  }
+                if (isset($settings[$one_config_slug][$fieldSlug])) {
+                    $val = $settings[$one_config_slug][$fieldSlug];  }
                 else if (!isset($val) && isset($one_conf_tails["default"]) ) {
                     $val = $one_conf_tails["default"] ; }
                 else {
@@ -440,14 +440,14 @@ function displaySingleField($one_config_slug, $one_conf_tails, $fieldSlug, $fiel
             } else {
                 $value_string = '' ;
             }
-            echo '  <input type="text" name="settings['.$one_config_slug.']'.$field_slug_hash_string.'[param_chosen_option]" ';
-            echo ' id="settings['.$one_config_slug.']'.$field_slug_hash_string.'[param_chosen_option]"  class="btn btn-success options_display" '.$value_string.' />' ;
+            echo '  <input type="text" name="settings['.$one_config_slug.']'.$field_slug_hash_string.'['.$fieldSlug.']" ';
+            echo ' id="settings['.$one_config_slug.']'.$field_slug_hash_string.'['.$fieldSlug.']"  class="btn btn-success options_display" '.$value_string.' />' ;
             $orig_opt_str = implode("," , $fieldInfo["options"]) ;
 
 //            echo '<input type="hidden" name="settings['.$one_config_slug.']'.$field_slug_hash_string.'[param_type]" ';
 //            echo ' id="settings['.$one_config_slug.']'.$field_slug_hash_string.'[param_type]" class="param_type" value="'.$val.'" />' ;
-            echo '<input type="hidden" name="settings['.$one_config_slug.']'.$field_slug_hash_string.'[param_original_options]" ';
-            echo ' id="settings['.$one_config_slug.']'.$field_slug_hash_string.'[param_original_options]" class="param_original_options" value="'.$orig_opt_str.'" />' ;
+            echo '<input type="hidden" name="settings['.$one_config_slug.']'.$field_slug_hash_string.'['.$fieldSlug.'_original_options]" ';
+            echo ' id="settings['.$one_config_slug.']'.$field_slug_hash_string.'['.$fieldSlug.'_original_options]" class="param_original_options" value="'.$orig_opt_str.'" />' ;
 
             // @todo this should be an event or something
             if ($one_config_slug == "PipeRunParameters") {
