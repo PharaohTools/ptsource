@@ -69,6 +69,8 @@ if (isset($pageVars["data"]["user"]['username'])) {
         <?php
         $curl_str_1 = "curl -X POST -O -J -d \"control=BinaryServer&action=serve&item=".$pageVars["data"]["repository"]["project-slug"]."&auth_user={$pageVars['data']['user']['username']}&auth_pw={password}&version=*.*.*\" {$ht_string_lower}://{$_SERVER['SERVER_NAME']}/index.php" ;
         $curl_str_2 = "curl -X POST -O -J -d \"control=BinaryServer&action=serve&item=".$pageVars["data"]["repository"]["project-slug"]."&auth_user={$pageVars['data']['user']['username']}&auth_pw={password}\" {$ht_string_lower}://{$_SERVER['SERVER_NAME']}/index.php" ;
+        $curl_str_3 = "curl -X POST -O -J -d \"control=BinaryServer&action=serve&item=".$pageVars["data"]["repository"]["project-slug"]."&auth_user={$pageVars['data']['user']['username']}&auth_pw={password}&group=development\" {$ht_string_lower}://{$_SERVER['SERVER_NAME']}/index.php" ;
+        $curl_str_4 = "curl -X POST -O -J -d \"control=BinaryServer&action=serve&item=".$pageVars["data"]["repository"]["project-slug"]."&auth_user={$pageVars['data']['user']['username']}&auth_pw={password}&version=*.*.*&group=development\" {$ht_string_lower}://{$_SERVER['SERVER_NAME']}/index.php" ;
         ?>
 
         <div class="col-sm-12">
@@ -77,21 +79,23 @@ if (isset($pageVars["data"]["user"]['username'])) {
 
             $default_group_string = '' ;
             if ($pageVars["data"]["repository"]["settings"]["BinaryGroups"]["enabled"] == "on") {
-                if ($pageVars["data"]["repository"]["settings"]["BinaryGroups"]["param_chosen_option"] == 'specific') {
+                $default_group_string = "" ;
+                if ($pageVars["data"]["repository"]["settings"]["BinaryGroups"]["allow_all_or_specific"] == 'specific') {
 
                     $allowed_groups_string = $pageVars["data"]["repository"]["settings"]["BinaryGroups"]["allowed_groups"] ;
                     $allowed_groups = explode("\r\n", $allowed_groups_string) ;
                     $default_group = $allowed_groups[0] ;
-                } else if ($pageVars["data"]["repository"]["settings"]["BinaryGroups"]["param_chosen_option"] == 'allow_all') {
+                    $default_group_string = "Your default group is <strong>$default_group</strong>" ;
+                } else if ($pageVars["data"]["repository"]["settings"]["BinaryGroups"]["allow_all_or_specific"] == 'allow_all') {
 
                     $default_group = $pageVars["data"]["repository"]["settings"]["BinaryGroups"]["allow_all_default"] ;
+                    $default_group_string = "Your default group is <strong>$default_group</strong>" ;
                 }
-                $default_group_string = "Your default group is <strong>$default_group</strong>" ;
             }
 
             ?>
             <h4>
-                Latest version
+                Latest version <?php echo $default_group_string ; ?>
                 <pre><?php echo $curl_str_2  ; ?></pre>
             </h4>
 
@@ -109,14 +113,22 @@ if (isset($pageVars["data"]["user"]['username'])) {
             <?php
 
             if ($pageVars["data"]["repository"]["settings"]["BinaryGroups"]["enabled"] == "on") {
+                ?>
+
+                <h4>
+                    Latest version and specified group
+                    <pre><?php echo $curl_str_3  ; ?></pre>
+                </h4>
+
+                <h4>
+                    Specified version and group
+                    <pre><?php echo $curl_str_4  ; ?></pre>
+                </h4>
+                <?php
 
             }
 
             ?>
-            <h4>
-                Specified version and group
-                <pre><?php echo $curl_str_1  ; ?></pre>
-            </h4>
         </div>
     </div>
 
