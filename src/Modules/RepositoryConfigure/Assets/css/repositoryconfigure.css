@@ -54,7 +54,7 @@
 
 @media(min-width:1200px) {
     html {
-        max-width: 1280px;
+        /*max-width: 1280px;*/
         overflow-x: hidden;
     }
     #wrapper {

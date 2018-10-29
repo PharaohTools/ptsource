@@ -398,8 +398,8 @@ function displaySingleField($one_config_slug, $one_conf_tails, $fieldSlug, $fiel
             break ;
         case "options" :
             if ($val==null) {
-                if (isset($settings[$one_config_slug][$fieldSlug])) {
-                    $val = $settings[$one_config_slug][$fieldSlug];  }
+                if (isset($settings[$one_config_slug]['param_chosen_option'])) {
+                    $val = $settings[$one_config_slug]['param_chosen_option'];  }
                 else if (!isset($val) && isset($one_conf_tails["default"]) ) {
                     $val = $one_conf_tails["default"] ; }
                 else {
@@ -422,13 +422,26 @@ function displaySingleField($one_config_slug, $one_conf_tails, $fieldSlug, $fiel
                 if (isset($fieldInfo["js_change_function"])) {
                     $changestring = ' onclick="'.$fieldInfo["js_change_function"]."('".$field_hash."', '".$option."');\"" ; }
                 echo '    <li role="presentation"> ';
-                echo '      <a class="'.$selected_string.'" '.$changestring.' tabindex="-1" role="menuitem">'.$option.'</a>' ;
+                echo '      <a id="dropdownValue_'.$fieldSlug.'_'.$field_hash.'"
+                               class="'.$selected_string.' " '.$changestring.'
+                               data-option="'.$option.'"
+                               tabindex="-1" role="menuitem">'.$option.'</a>' ;
                 echo '    </li> '; }
             echo '  </ul>'."\n" ;
+            if (isset($fieldInfo["js_change_function_code"])) {
+                echo '  <script type="text/javascript">'."\n" ;
+                echo '    '.$fieldInfo["js_change_function_code"] ;
+                echo '  </script>'."\n" ; }
+
             echo '</div>'."\n" ;
             echo '<div class="col-sm-3">'."\n" ;
-            echo '  <input type="text" name="settings['.$one_config_slug.']'.$field_slug_hash_string.'[param_type]" ';
-            echo ' id="settings['.$one_config_slug.']'.$field_slug_hash_string.'[param_type]"  class="btn btn-success options_display" value="'.$val.'" />' ;
+            if ($val != "") {
+                $value_string = 'value="'.$val.'"' ;
+            } else {
+                $value_string = '' ;
+            }
+            echo '  <input type="text" name="settings['.$one_config_slug.']'.$field_slug_hash_string.'[param_chosen_option]" ';
+            echo ' id="settings['.$one_config_slug.']'.$field_slug_hash_string.'[param_chosen_option]"  class="btn btn-success options_display" '.$value_string.' />' ;
             $orig_opt_str = implode("," , $fieldInfo["options"]) ;
 
 //            echo '<input type="hidden" name="settings['.$one_config_slug.']'.$field_slug_hash_string.'[param_type]" ';
