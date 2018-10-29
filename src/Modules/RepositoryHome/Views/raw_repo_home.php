@@ -29,17 +29,57 @@ if (isset($pageVars["data"]["user"]['username'])) {
         <?php
         $curl_str_1 = "curl -F file=@/path/to/file -F control=BinaryServer -F action=serve -F item=".$pageVars["data"]["repository"]["project-slug"]." -F auth_user={$pageVars['data']['user']['username']} -F auth_pw={password} {$ht_string_lower}://{$_SERVER['SERVER_NAME']}/index.php" ;
         $curl_str_2 = "curl -F version=*.*.* -F file=@/path/to/file -F control=BinaryServer -F action=serve -F item=".$pageVars["data"]["repository"]["project-slug"]." -F auth_user={$pageVars['data']['user']['username']} -F auth_pw={password} {$ht_string_lower}://{$_SERVER['SERVER_NAME']}/index.php" ;
+
+        $curl_str_3 = "curl -F group=development -F file=@/path/to/file -F control=BinaryServer -F action=serve -F item=".$pageVars["data"]["repository"]["project-slug"]." -F auth_user={$pageVars['data']['user']['username']} -F auth_pw={password} {$ht_string_lower}://{$_SERVER['SERVER_NAME']}/index.php" ;
+        $curl_str_4 = "curl -F group=development -F version=*.*.* -F file=@/path/to/file -F control=BinaryServer -F action=serve -F item=".$pageVars["data"]["repository"]["project-slug"]." -F auth_user={$pageVars['data']['user']['username']} -F auth_pw={password} {$ht_string_lower}://{$_SERVER['SERVER_NAME']}/index.php" ;
+
         ?>
 
         <div class="col-sm-12">
+            <?php
+            $default_group_string = '' ;
+            if ($pageVars["data"]["repository"]["settings"]["BinaryGroups"]["enabled"] == "on") {
+                $default_group_string = "" ;
+                if ($pageVars["data"]["repository"]["settings"]["BinaryGroups"]["allow_all_or_specific"] == 'specific') {
+                    $allowed_groups_string = $pageVars["data"]["repository"]["settings"]["BinaryGroups"]["allowed_groups"] ;
+                    $allowed_groups = explode("\r\n", $allowed_groups_string) ;
+                    $default_group = $allowed_groups[0] ;
+                    $default_group_string = ", your default group of <strong>$default_group</strong>" ;
+                } else if ($pageVars["data"]["repository"]["settings"]["BinaryGroups"]["allow_all_or_specific"] == 'allow_all') {
+                    $default_group = $pageVars["data"]["repository"]["settings"]["BinaryGroups"]["allow_all_default"] ;
+                    $default_group_string = ", your default group of <strong>$default_group</strong>" ;
+                }
+            }
+            ?>
             <h4 class="raw_repo_subtitle">
-                Guess latest version
+                Latest version<?php echo $default_group_string ; ?>
                 <pre><?php echo $curl_str_1 ; ?></pre>
             </h4>
             <h4 class="raw_repo_subtitle">
-                To specify version, just swap the version number parameter for yours
+                To specify version, just swap the version number parameter for yours<?php echo $default_group_string ; ?>
                 <pre><?php echo $curl_str_2 ; ?></pre>
             </h4>
+
+            <?php
+
+            if ($pageVars["data"]["repository"]["settings"]["BinaryGroups"]["enabled"] == "on") {
+                ?>
+
+                <h4>
+                    Latest version and specified group
+                    <pre><?php echo $curl_str_3  ; ?></pre>
+                </h4>
+
+                <h4>
+                    Specified version and group
+                    <pre><?php echo $curl_str_4  ; ?></pre>
+                </h4>
+                <?php
+
+            }
+
+            ?>
+
         </div>
 
     </div>
@@ -74,40 +114,27 @@ if (isset($pageVars["data"]["user"]['username'])) {
         ?>
 
         <div class="col-sm-12">
-
             <?php
-
-            $default_group_string = '' ;
-            if ($pageVars["data"]["repository"]["settings"]["BinaryGroups"]["enabled"] == "on") {
-                $default_group_string = "" ;
-                if ($pageVars["data"]["repository"]["settings"]["BinaryGroups"]["allow_all_or_specific"] == 'specific') {
-
-                    $allowed_groups_string = $pageVars["data"]["repository"]["settings"]["BinaryGroups"]["allowed_groups"] ;
-                    $allowed_groups = explode("\r\n", $allowed_groups_string) ;
-                    $default_group = $allowed_groups[0] ;
-                    $default_group_string = "Your default group is <strong>$default_group</strong>" ;
-                } else if ($pageVars["data"]["repository"]["settings"]["BinaryGroups"]["allow_all_or_specific"] == 'allow_all') {
-
-                    $default_group = $pageVars["data"]["repository"]["settings"]["BinaryGroups"]["allow_all_default"] ;
-                    $default_group_string = "Your default group is <strong>$default_group</strong>" ;
+                $default_group_string = '' ;
+                if ($pageVars["data"]["repository"]["settings"]["BinaryGroups"]["enabled"] == "on") {
+                    $default_group_string = "" ;
+                    if ($pageVars["data"]["repository"]["settings"]["BinaryGroups"]["allow_all_or_specific"] == 'specific') {
+                        $allowed_groups_string = $pageVars["data"]["repository"]["settings"]["BinaryGroups"]["allowed_groups"] ;
+                        $allowed_groups = explode("\r\n", $allowed_groups_string) ;
+                        $default_group = $allowed_groups[0] ;
+                        $default_group_string = ", your default group of <strong>$default_group</strong>" ;
+                    } else if ($pageVars["data"]["repository"]["settings"]["BinaryGroups"]["allow_all_or_specific"] == 'allow_all') {
+                        $default_group = $pageVars["data"]["repository"]["settings"]["BinaryGroups"]["allow_all_default"] ;
+                        $default_group_string = ", your default group of <strong>$default_group</strong>" ;
+                    }
                 }
-            }
-
             ?>
             <h4>
-                Latest version <?php echo $default_group_string ; ?>
+                Latest version<?php echo $default_group_string ; ?>
                 <pre><?php echo $curl_str_2  ; ?></pre>
             </h4>
-
-            <?php
-
-            if ($pageVars["data"]["repository"]["settings"]["BinaryGroups"]["enabled"] == "on") {
-
-            }
-
-            ?>
             <h4>
-                Specified version
+                Specified version<?php echo $default_group_string ; ?>
                 <pre><?php echo $curl_str_1  ; ?></pre>
             </h4>
             <?php
