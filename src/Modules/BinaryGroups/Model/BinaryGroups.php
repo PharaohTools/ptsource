@@ -2,6 +2,6 @@
 
 Namespace Model;
 
-class MirrorRepository extends BaseModelFactory {
+class BinaryGroups extends BaseModelFactory {
 
 }
