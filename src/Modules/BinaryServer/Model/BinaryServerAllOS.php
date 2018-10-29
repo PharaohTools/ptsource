@@ -59,7 +59,14 @@ class BinaryServerAllOS extends Base {
             echo "Forbidden\n" ;
             return false ;  }
 
-        $is_download = ($_FILES == array()) ? true : false ;
+        $is_download = (is_array($_FILES)) ? false : true ;
+        $files_out = var_export($_FILES, true) ;
+        $reqq_out = var_export($_REQUEST, true) ;
+        file_put_contents('/tmp/pharaoh.log', 'download'."\n", FILE_APPEND) ;
+        file_put_contents('/tmp/pharaoh.log', $files_out."\n", FILE_APPEND) ;
+        file_put_contents('/tmp/pharaoh.log', 'req out'."\n", FILE_APPEND) ;
+        file_put_contents('/tmp/pharaoh.log', $reqq_out."\n", FILE_APPEND) ;
+
         if ($is_download) {
 
             $version = $this->getArtefactVersion(true) ;
@@ -72,7 +79,7 @@ class BinaryServerAllOS extends Base {
                 return false ;
             }
 
-            $dir_to_read = REPODIR.DS.$this->params["item"].DS.$this_version ;
+            $dir_to_read = $this->findReadWriteDirectory($this_version) ;
             $in_dir = scandir($dir_to_read);
             $this_one = null ;
             foreach ($in_dir as $one) {
@@ -105,10 +112,10 @@ class BinaryServerAllOS extends Base {
             return true ;
 
         } else {
+            // is an upload
 
 //            file_put_contents('/tmp/pharaoh.log', 'upload start'."\n", FILE_APPEND) ;
             $version = $this->getArtefactVersion() ;
-
 //            file_put_contents('/tmp/pharaoh.log', 'version is:'.$version."\n", FILE_APPEND) ;
             if ($this->versionStringIsValid($version)) {
                 $this_version = $version ;
@@ -118,16 +125,17 @@ class BinaryServerAllOS extends Base {
                 return false ;
             }
 
-            $dir_to_write = REPODIR.DS.$this->params["item"].DS.$this_version ;
+            $dir_to_write = $this->findReadWriteDirectory($this_version) ;
+            file_put_contents('/tmp/pharaoh.log', '$dir_to_write: '.$dir_to_write."\n", FILE_APPEND) ;
+
             if (!is_dir($dir_to_write)) {
                 mkdir($dir_to_write, 0755, true);
-                file_put_contents('/tmp/pharaoh.log', 'mkdir worked'."\n", FILE_APPEND) ;
+//                file_put_contents('/tmp/pharaoh.log', 'mkdir worked'."\n", FILE_APPEND) ;
             }
 
             $res = $this->singlePostUpload($dir_to_write) ;
 //            $res = $this->chunkedUpload($dir_to_write) ;
-
-            file_put_contents('/tmp/pharaoh.log', 'chunkedUpload / singlePostUpload res is: '.var_export($res, true)."\n", FILE_APPEND) ;
+//            file_put_contents('/tmp/pharaoh.log', 'chunkedUpload / singlePostUpload res is: '.var_export($res, true)."\n", FILE_APPEND) ;
             if ($res !== false) {
                 return true ;
             } else {
@@ -135,6 +143,43 @@ class BinaryServerAllOS extends Base {
             }
         }
 
+    }
+
+    public function findReadWriteDirectory($this_version) {
+        $repoFactory = new \Model\Repository() ;
+        $repo = $repoFactory->getModel($this->params, "Default") ;
+        $thisRepo = $repo->getRepository($this->params["item"]) ;
+        $groups_enabled = (isset($thisRepo["settings"]["BinaryGroups"]["enabled"]) && $thisRepo["settings"]["BinaryGroups"]["enabled"]=="on") ? true : false ;
+        if ($groups_enabled == 'on') {
+            $requested_group = $this->params['group'] ;
+            if ($thisRepo["settings"]["BinaryGroups"]["param_chosen_option"] == 'allow_all') {
+                $dir_to_use = REPODIR.DS.$this->params["item"].DS.$this_version.DS.$requested_group ;
+            } else if ($thisRepo["settings"]["BinaryGroups"]["param_chosen_option"] == 'specific') {
+                $allowed_groups_string = $thisRepo["settings"]["BinaryGroups"]["allowed_groups"] ;
+                $allowed_groups = explode("\r\n", $allowed_groups_string) ;
+                $default_group = $allowed_groups[0] ;
+
+                $requested_is_set = (isset($this->params['group']) && $this->params['group'] !== '') ? true : false ;
+//                $is_requested = ($requested_is_set && in_array($requested_group, $allowed_groups)) ? true : false ;
+                $requested_allowed = in_array($requested_group, $allowed_groups) ;
+                if ($requested_is_set && !$requested_allowed) {
+                    header('HTTP/1.1 400 Unable to handle request');
+                    echo "Invalid Group String Requested\n" ;
+                    $dir_to_use = false ;
+                } else if ($requested_is_set && $requested_allowed) {
+                    $dir_to_use = REPODIR.DS.$this->params["item"].DS.$this_version.DS.$requested_group ;
+                } else if ($default_group  !== '') {
+                    $dir_to_use = REPODIR.DS.$this->params["item"].DS.$this_version.DS.$default_group ;
+                } else {
+                    header('HTTP/1.1 400 Unable to handle request');
+                    echo "Invalid Group String Requested\n" ;
+                    $dir_to_use = false ;
+                }
+            }
+        } else {
+            $dir_to_use = REPODIR.DS.$this->params["item"].DS.$this_version ;
+        }
+        return $dir_to_use ;
     }
 
     public function singlePostUpload($dir_to_write) {
@@ -171,8 +216,7 @@ class BinaryServerAllOS extends Base {
                 $full_dir = REPODIR.DS.$this->params["item"].DS.$current_dir ;
                 if (!is_dir($full_dir)) { continue ; }
                 $dir_count ++ ;
-
-                file_put_contents('/tmp/pharaoh.log', "version_compare  $cur_max , $current_dir\n", FILE_APPEND) ;
+//                file_put_contents('/tmp/pharaoh.log', "version_compare  $cur_max , $current_dir\n", FILE_APPEND) ;
                 $res = version_compare ( $cur_max , $current_dir );
                 if ($res == -1) {
                     $cur_max = $current_dir ;
@@ -213,23 +257,23 @@ class BinaryServerAllOS extends Base {
     public function userIsAllowed($binaryRequestUser, $repo_name) {
         $isWriteAction = $this->isWriteAction() ;
         if ($isWriteAction == false) {
-            file_put_contents('/tmp/pharaoh.log', "uia: is not a write\n", FILE_APPEND) ;
+            # file_put_contents('/tmp/pharaoh.log', "uia: is not a write\n", FILE_APPEND) ;
             $publicReads = $this->repoPublicAllowed("read", $repo_name) ;
-            file_put_contents('/tmp/pharaoh.log', "uia: public reads, $publicReads\n", FILE_APPEND) ;
+            # file_put_contents('/tmp/pharaoh.log', "uia: public reads, $publicReads\n", FILE_APPEND) ;
             if ($publicReads == true) {
                 return true ; }
             else {
                 return $this->authUserToRead($binaryRequestUser, $repo_name) ; } }
         else {
-            file_put_contents('/tmp/pharaoh.log', "uia: is a write\n", FILE_APPEND) ;
+            # file_put_contents('/tmp/pharaoh.log', "uia: is a write\n", FILE_APPEND) ;
             $publicWrites = $this->repoPublicAllowed("write", $repo_name) ;
             if ($publicWrites == true) {
-                file_put_contents('/tmp/pharaoh.log', "uia: public write allowed\n", FILE_APPEND) ;
+                # file_put_contents('/tmp/pharaoh.log', "uia: public write allowed\n", FILE_APPEND) ;
                 return true ; }
             else {
-                file_put_contents('/tmp/pharaoh.log', "uia: no public\n", FILE_APPEND) ;
+                # file_put_contents('/tmp/pharaoh.log', "uia: no public\n", FILE_APPEND) ;
                 $res = $this->authUserToWrite($binaryRequestUser, $repo_name) ;
-                file_put_contents('/tmp/pharaoh.log', "uia: auth is: ".var_export($res, true), FILE_APPEND) ;
+                # file_put_contents('/tmp/pharaoh.log', "uia: auth is: ".var_export($res, true), FILE_APPEND) ;
                 return $res ; } }
     }
 
