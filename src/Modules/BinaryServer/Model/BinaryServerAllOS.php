@@ -59,7 +59,7 @@ class BinaryServerAllOS extends Base {
             echo "Forbidden\n" ;
             return false ;  }
 
-        $is_download = (is_array($_FILES)) ? false : true ;
+        $is_download = (is_array($_FILES) && array_key_exists('file', $_FILES)) ? false : true ;
         $files_out = var_export($_FILES, true) ;
         $reqq_out = var_export($_REQUEST, true) ;
         file_put_contents('/tmp/pharaoh.log', 'download'."\n", FILE_APPEND) ;
