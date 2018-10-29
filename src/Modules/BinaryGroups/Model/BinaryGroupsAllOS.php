@@ -39,7 +39,7 @@ class BinaryGroupsAllOS extends Base {
                 'js_change_function_code' => '
                 
                     function switch_binary_allow (hash, option) {
-                        target_id = "settings[BinaryGroups]"+hash+"[param_chosen_option]" ;
+                        target_id = "settings[BinaryGroups]"+hash+"[allow_all_or_specific]" ;
                         target_element = document.getElementById(target_id) ;
                         target_element.value = option ;
                     }
@@ -51,6 +51,12 @@ class BinaryGroupsAllOS extends Base {
                 "type" => "textarea",
                 "optional" => true,
                 "name" => "Specify Group Names to allow. Default download group is first."
+            ),
+            "allow_all_default" =>
+            array(
+                "type" => "text",
+                "optional" => true,
+                "name" => "Specify default Group Name when any are allowed"
             ),
         );
         return $ff ;
