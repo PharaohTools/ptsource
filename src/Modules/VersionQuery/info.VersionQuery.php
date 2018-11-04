@@ -13,16 +13,16 @@ class VersionQueryInfo extends PTConfigureBase {
     }
 
     public function routesAvailable() {
-        return array( "VersionQuery" => array_merge(parent::routesAvailable(), array("help") ) );
+        return array( "VersionQuery" => array_merge(parent::routesAvailable(), array("help", 'current', 'next', 'show') ) );
     }
 
     public function routeAliases() {
         return array("versionquery"=>"VersionQuery");
     }
 
-    public function repositorySettings() {
-        return array("enabled", "git_repository_url", "git_branch");
-    }
+//    public function repositorySettings() {
+//        return array("enabled", "git_repository_url", "git_branch");
+//    }
 
 //    public function configuration() {
 //        return array(
