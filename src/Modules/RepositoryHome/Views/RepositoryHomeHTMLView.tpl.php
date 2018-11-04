@@ -40,6 +40,11 @@
                         ?>
 
                         <li>
+                            <a href="/index.php?control=VersionQuery&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
+                                <i class="fa fa-folder-open-o hvr-bounce-in"></i> Versions
+                            </a>
+                        </li>
+                        <li>
                             <a href="/index.php?control=FileBrowser&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
                                 <i class="fa fa-folder-open-o hvr-bounce-in"></i> File Browser
                             </a>
