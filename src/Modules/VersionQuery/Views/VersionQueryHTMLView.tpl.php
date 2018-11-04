@@ -9,49 +9,70 @@
             </div>
             <ul class="nav in" id="side-menu">
                 <li>
-                    <a href="/index.php?control=Index&action=show" class=" hvr-bounce-in">
+                    <a href="/index.php?control=Index&action=show" class="hvr-bounce-in">
                         <i class="fa fa-dashboard hvr-bounce-in"></i> Dashboard
                     </a>
                 </li>
                 <li>
-                    <a href="/index.php?control=ApplicationConfigure&action=show" class=" hvr-bounce-in">
-                        <i class="fa fa-cogs fa-fw"></i> Configure PTBuild<span class="fa arrow"></span>
+                    <a href="index.php?control=RepositoryHome&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
+                        <i class="fa fa-home hvr-bounce-in"></i>  Repository Home
                     </a>
-                    <ul class="nav nav-second-level collapse">
-                        <li>
-                            <a href="/index.php?control=ApplicationConfigure&action=show" class=" hvr-curl-bottom-right">Application</a>
-                        </li>
-                        <li>
-                            <a href="/index.php?control=UserManager&action=show" class=" hvr-curl-bottom-right">User Manager</a>
-                        </li>
-                        <li>
-                            <a href="/index.php?control=ModuleManager&action=show" class=" hvr-curl-bottom-right">Modules</a>
-                        </li>
-                        <li>
-                            <a href="/index.php?control=Integrations&action=show" class=" hvr-curl-bottom-right">Integrations</a>
-                        </li>
-                    </ul>
                 </li>
                 <li>
-                    <a href="/index.php?control=ApplicationConfigure&action=show" class=" hvr-bounce-in">
-                        <i class="fa fa-user fa-fw"></i> User Menu <span class="fa arrow"></span>
+                    <a href="/index.php?control=RepositoryList&action=show"class="hvr-bounce-in">
+                        <i class="fa fa-bars hvr-bounce-in"></i> All Repositories
                     </a>
-                    <ul class="nav nav-second-level collapse">
-                        <li>
-                            <a href="/index.php?control=UserProfile&action=show" class=" hvr-curl-bottom-right">Edit Profile</a>
-                        </li>
-                        <li>
-                            <a href="/index.php?control=UserProfilePublic&action=show" class=" hvr-curl-bottom-right">Public Profile</a>
-                        </li>
-                        <li>
-                            <a href="/index.php?control=UserSSHKey&action=show" class=" hvr-curl-bottom-right">SSH Keys</a>
-                        </li>
-                        <li>
-                            <a href="/index.php?control=UserOAuthKey&action=show" class=" hvr-curl-bottom-right">OAuth Keys</a>
-                        </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
                 </li>
+                <li>
+                    <a href="index.php?control=FileBrowser&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>"class="hvr-bounce-in">
+                        <i class="fa fa-folder-open-o hvr-bounce-in"></i> File Browser
+                    </a>
+                </li>
+
+                <?php
+                if (in_array($pageVars["data"]["repository"]["project-type"], 'raw')) {
+                    ?>
+
+                    <li>
+                        <a href="/index.php?control=VersionQuery&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
+                            <i class="fa fa-folder-open-o hvr-bounce-in"></i> Versions
+                        </a>
+                    </li>
+
+                    <?php
+                }
+                ?>
+
+                <?php
+                if (in_array($pageVars["data"]["repository"]["project-type"], 'git')) {
+                    ?>
+
+
+                    <li>
+                        <a href="/index.php?control=RepositoryCharts&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>" class="hvr-bounce-in">
+                            <i class="fa fa-bar-chart-o hvr-bounce-in"></i> Charts
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/index.php?control=RepositoryHistory&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>"class="hvr-bounce-in">
+                            <i class="fa fa-history fa-fw hvr-bounce-in"></i> History <span class="badge"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/index.php?control=RepositoryPullRequests&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>"class="hvr-bounce-in">
+                            <i class="fa fa-code fa-fw hvr-bounce-in"></i> Pull Requests <span class="badge"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/index.php?control=RepositoryReleases&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>"class="hvr-bounce-in">
+                            <i class="fa fa-code fa-fw hvr-bounce-in"></i> Releases <span class="badge"></span>
+                        </a>
+                    </li>
+
+                    <?php
+                }
+                ?>
+
             </ul>
         </div>
     </div>
