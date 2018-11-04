@@ -19,6 +19,15 @@ class VersionQuery extends Base {
             return array ("type"=>"view", "view"=>"VersionQueryAPHAX", "pageVars"=>$this->content);
         }
 
+        if (in_array($action, array('current-quiet', 'next'))) {
+            // @todo output format change not being implemented
+            $thisModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars, "Default") ;
+            $this->content["params"]["output-format"] = "JSON";
+            $this->content['route']["extraParams"]["output-format"] = "JSON";
+            $this->content["data"] = $thisModel->findRepositoryVersion($action);
+            return array ("type"=>"view", "view"=>"VersionQueryAPHAX", "pageVars"=>$this->content);
+        }
+
         if (in_array($action, array('show'))) {
             // @todo output format change not being implemented
             $thisModel = $this->getModelAndCheckDependencies(substr(get_class($this), 11), $pageVars, "Default") ;

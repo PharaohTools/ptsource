@@ -97,10 +97,18 @@ class VersionQueryAllOS extends Base {
             $data['version']['groups_disabled']['current'] = $this->findDirectoryWithoutGroup($repository, 'current') ;
             $data['version']['groups_disabled']['next'] = $this->findDirectoryWithoutGroup($repository, 'next') ;
         }
-        $ray = array();
-        return $ray['data'] = $data ;
+        $ray = $data ;
+        $ray['repository'] = $repository ;
+        $ray["user"] = $this->getLoggedInUser();
+        return $ray ;
     }
 
+    protected function getLoggedInUser() {
+        $signupFactory = new \Model\Signup() ;
+        $signup = $signupFactory->getModel($this->params);
+        $this->params["user"] = $signup->getLoggedInUserData() ;
+        return $this->params["user"] ;
+    }
 
     public function findDirectoryWithoutGroup($repository, $current_or_next = 'current') {
 

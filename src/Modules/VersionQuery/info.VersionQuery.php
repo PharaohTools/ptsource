@@ -20,6 +20,11 @@ class VersionQueryInfo extends PTConfigureBase {
         return array("versionquery"=>"VersionQuery");
     }
 
+
+    public function ignoredAuthenticationRoutes() {
+        return array("VersionQuery"=>array('current', 'next'));
+    }
+
 //    public function repositorySettings() {
 //        return array("enabled", "git_repository_url", "git_branch");
 //    }

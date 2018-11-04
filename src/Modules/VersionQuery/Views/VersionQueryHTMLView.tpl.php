@@ -85,7 +85,8 @@
                 <h4 class="text-uppercase text-light">Versions:</h4>
 
                 <div class="row clearfix no-margin">
-                <h5 class="text-uppercase text-light" style="margin-top: 15px;margin-left: 51px;">  </h5>
+
+                    <hr />
                 <div class="col-sm-12">
 
                     <div role="tabpanel grid">
@@ -135,13 +136,101 @@
                         </div>
                     </div>
                 </div>
+
+                    <hr />
+
+                    <div class="col-sm-12">
+                        <h2>To Query Versions of this repository using curl, use the commands below:</h2>
+                    </div>
+
+                    <hr />
+
+                    <?php
+
+                    $ht_string = ($pageVars["data"]["is_https"] == true) ? 'HTTPS' : 'HTTP' ;
+                    $ht_string_lower = strtolower($ht_string) ;
+
+                    $default_group_string = '' ;
+                    if ($pageVars["data"]["repository"]["settings"]["BinaryGroups"]["enabled"] == "on") {
+                        $default_group_string = "" ;
+                        if ($pageVars["data"]["repository"]["settings"]["BinaryGroups"]["allow_all_or_specific"] == 'specific') {
+                            $allowed_groups_string = $pageVars["data"]["repository"]["settings"]["BinaryGroups"]["allowed_groups"] ;
+                            $allowed_groups = explode("\r\n", $allowed_groups_string) ;
+                            $default_group = $allowed_groups[0] ;
+                            $default_group_string = ", for your default group of <strong>$default_group</strong>" ;
+                        } else {
+                            $default_group = $pageVars["data"]["repository"]["settings"]["BinaryGroups"]["allow_all_default"] ;
+                            $default_group_string = ", for your default group of <strong>$default_group</strong>" ;
+                        }
+                        $curl_strings['curl_current_text_group'] = "curl -F control=VersionQuery -F action=current -F group=$default_group -F output-format=TEXT item=".$pageVars["data"]["repository"]["project-slug"]." -F auth_user={$pageVars['data']['user']['username']} -F auth_pw={password} {$ht_string_lower}://{$_SERVER['SERVER_NAME']}/index.php" ;
+                        $curl_strings['curl_next_text_group'] = "curl -F control=VersionQuery -F action=next -F group=$default_group -F output-format=TEXT item=".$pageVars["data"]["repository"]["project-slug"]." -F auth_user={$pageVars['data']['user']['username']} -F auth_pw={password} {$ht_string_lower}://{$_SERVER['SERVER_NAME']}/index.php" ;
+                    }
+
+                    $curl_strings['curl_current_text'] = "curl -F control=VersionQuery -F action=current -F output-format=TEXT item=".$pageVars["data"]["repository"]["project-slug"]." -F auth_user={$pageVars['data']['user']['username']} -F auth_pw={password} {$ht_string_lower}://{$_SERVER['SERVER_NAME']}/index.php" ;
+                    $curl_strings['curl_current_json'] = "curl -F control=VersionQuery -F action=current -F output-format=JSON item=".$pageVars["data"]["repository"]["project-slug"]." -F auth_user={$pageVars['data']['user']['username']} -F auth_pw={password} {$ht_string_lower}://{$_SERVER['SERVER_NAME']}/index.php" ;
+                    $curl_strings['curl_next_text'] = "curl -F control=VersionQuery -F action=next -F output-format=TEXT item=".$pageVars["data"]["repository"]["project-slug"]." -F auth_user={$pageVars['data']['user']['username']} -F auth_pw={password} {$ht_string_lower}://{$_SERVER['SERVER_NAME']}/index.php" ;
+                    $curl_strings['curl_next_json'] = "curl -F control=VersionQuery -F action=next -F output-format=JSON item=".$pageVars["data"]["repository"]["project-slug"]." -F auth_user={$pageVars['data']['user']['username']} -F auth_pw={password} {$ht_string_lower}://{$_SERVER['SERVER_NAME']}/index.php" ;
+                    
+                    ?>
+
+                    <div class="col-sm-12">
+
+                        <h4 class="raw_repo_subtitle">
+                            Current Version, Plain Text Format<?php echo $default_group_string ; ?>
+                            <pre><?php echo $curl_strings['curl_current_text'] ; ?></pre>
+                        </h4>
+                        <h4 class="raw_repo_subtitle">
+                            Current Version, JSON Format<?php echo $default_group_string ; ?>
+                            <pre><?php echo $curl_strings['curl_current_json'] ; ?></pre>
+                        </h4>
+
+                        <?php
+
+                        if ($pageVars["data"]["repository"]["settings"]["BinaryGroups"]["enabled"] == "on") {
+                            ?>
+
+                            <h4 class="raw_repo_subtitle">
+                                Current version, Specified group, Plain Text Format
+                                <pre><?php echo $curl_strings['curl_current_text_group']  ; ?></pre>
+                            </h4>
+
+                            <?php
+
+                        }
+
+                        ?>
+                        <h4 class="raw_repo_subtitle">
+                            Next Available Version, Plain Text Format<?php echo $default_group_string ; ?>
+                            <pre><?php echo $curl_strings['curl_current_text'] ; ?></pre>
+                        </h4>
+                        <h4 class="raw_repo_subtitle">
+                            Next Available Version, JSON Format<?php echo $default_group_string ; ?>
+                            <pre><?php echo $curl_strings['curl_current_json'] ; ?></pre>
+                        </h4>
+
+                        <?php
+
+                        if ($pageVars["data"]["repository"]["settings"]["BinaryGroups"]["enabled"] == "on") {
+                            ?>
+
+                            <h4 class="raw_repo_subtitle">
+                                Next version, Specified group, Plain Text Format
+                                <pre><?php echo $curl_strings['curl_next_text_group']  ; ?></pre>
+                            </h4>
+
+                            <?php
+
+                        }
+
+                        ?>
+
+                    </div>
+
+                </div>
             </div>
      
             <hr />
 
-            <p class="text-center">
-                Visit www.pharaohtools.com for more
-            </p>
         </div>
 </div><!-- container -->
 <link rel="stylesheet" href="/Assets/Modules/UserOAuthKey/css/useroauthkey.css">
