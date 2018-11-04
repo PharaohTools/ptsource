@@ -291,7 +291,7 @@ class BinaryServerAllOS extends Base {
     }
 
 
-    protected function getBinaryRequestUser() {
+    public function getBinaryRequestUser() {
 
         $userAccountFactory = new \Model\UserAccount();
         $userAccount = $userAccountFactory->getModel($this->params);
