@@ -102,7 +102,7 @@ class UserOAuthKeyAnyOS extends BasePHPApp {
         if ($user === false) {
             return false ;
         }
-        $username = $user['username'] ;
+        $username = $user['user_id'] ;
         return $username ;
     }
 
