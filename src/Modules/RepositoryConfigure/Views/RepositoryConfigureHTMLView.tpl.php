@@ -145,7 +145,7 @@
                         <div class="col-sm-10">
                             <?php
 
-                            if ($pageVars["data"]["current_user_data"] !== false && ($pageVars["data"]["current_user_data"]->role == 1)) {
+                            if ($pageVars["data"]["current_user_data"] !== false && ($pageVars["data"]["current_user_data"]['role'] == 1)) {
                                 ?>
 
 

@@ -143,6 +143,14 @@ class RepositoryConfigureAllOS extends Base {
             "project-description" => $this->params["project-description"],
             "project-type" => $this->params["project-type"]
         ) ;
+
+        $current_repo = $this->getRepository() ;
+        if ($current_repo != false) {
+            if ($current_repo["project-type"] == 'raw') {
+                $data['project-type'] = 'raw' ;
+            }
+        }
+
         if ($this->isAdmin()==true){
             $data["project-owner"] = $this->params["project-owner"] ;
         }
