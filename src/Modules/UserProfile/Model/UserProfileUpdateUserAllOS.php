@@ -112,9 +112,9 @@ class UserProfileUpdateUserAllOS extends Base {
         $userMod['username'] = $this->params["create_username"] ;
         $userMod['password'] = $this->params["update_password"] ;
 
-        $signupFactory = new \Model\Signup();
-        $signup = $signupFactory->getModel($this->params);
-        $cu = $signup->updateUser($userMod);
+        $uaf = new \Model\UserAccount() ;
+        $ua = $uaf->getModel($this->params) ;
+        $cu = $ua->updateUser($userMod);
 
         if ($cu !== true) {
             $return = array(
