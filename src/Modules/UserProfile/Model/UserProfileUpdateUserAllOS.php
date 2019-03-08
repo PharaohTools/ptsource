@@ -108,9 +108,9 @@ class UserProfileUpdateUserAllOS extends Base {
 
     private function updateTheUserPassword() {
 
-        $userMod = new \StdClass() ;
+        $userMod = array() ;
         $userMod['username'] = $this->params["create_username"] ;
-        $userMod->password = $this->params["update_password"] ;
+        $userMod['password'] = $this->params["update_password"] ;
 
         $signupFactory = new \Model\Signup();
         $signup = $signupFactory->getModel($this->params);
