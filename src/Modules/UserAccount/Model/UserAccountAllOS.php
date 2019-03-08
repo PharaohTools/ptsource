@@ -193,7 +193,7 @@ class UserAccountAllOS extends Base {
 
     public function updateUser($user) {
 
-        $one = $this->getUserData($user['email']) ;
+        $one = $this->getUserDataByUsername($user['username']) ;
 
         $two = array();
         $two['username'] = $one['username'] ;
