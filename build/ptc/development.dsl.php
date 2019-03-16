@@ -6,14 +6,63 @@ Composer ensure
 
 NodeJS install
 
-PTSource install
-  label "Lets configure Pharaoh Source without installing, as we are using files from the host"
+RunCommand execute
+  label "Add the Ondrej PPA"
+  command "add-apt-repository ppa:ondrej/php -y"
+  guess
+
+RunCommand execute
+  label "Update Apt with the Ondrej PPA"
+  command "apt-get update"
+  guess
+
+PackageManager pkg-ensure
+  package-name "{{ loop }}"
+  packager Apt
+  loop "php7.1,php7.1-cli,php7.1-curl,php7.1-fpm,php7.1-gd,php7.1-json,php7.1-mysql,php7.1-readline,php7.1-xml,php7.1-pdo-sqlite,php7.1-sqlite3,php7.1-xdebug,libapache2-mod-php7.1"
+
+RunCommand execute
+  label "Install prequisite packages"
+  command "apt-get install -y apache2 libapache2-mod-php7.1 sqlite3 php-sqlite zip unzip"
+  guess
+
+RunCommand execute
+  label "Enable PHP 7 for FPM"
+  command "a2enmod proxy_fcgi setenvif && a2enconf php7.1-fpm"
+  guess
+
+RunCommand execute
+  label "Set the Apache php module to 7"
+  command "a2dismod php5 || true && a2enmod php7.1 || true && service apache2 restart || true && a2enmod proxy_fcgi setenvif"
+  guess
+
+PTTrack install
+  label "Lets configure Pharaoh Track without installing, as we are using files from the host"
   vhe-url "$$subdomain.{{{ var::domain }}}"
   vhe-ip-port "0.0.0.0:80"
   version latest
   no-clone
   no-permissions
   guess
+
+Copy put
+  label "Copy Track Data in"
+  source "/opt/pttrack/pttrack/build/data/*"
+  target "/opt/pttrack/data/"
+  guess
+
+Chown path
+  label "Track Data file ownership"
+  user "pttrack"
+  group "pttrack"
+  path "/opt/pttrack/data/"
+  recursive
+
+Chown path
+  label "Track Data file mode"
+  path "/opt/pttrack/data/"
+  mode 0777
+  recursive
 
 PTBuild install
   label "Lets install Pharaoh Build"
@@ -22,13 +71,23 @@ PTBuild install
   version latest
   guess
 
+SudoNoPass install
+  label "Sudo ability for Pharaoh Build user"
+  install-user-name ptbuild
+  guess
+
+SudoNoPass install
+  label "Sudo ability for PTV user"
+  install-user-name ptv
+  guess
+
 Logging log
   log-message "Lets copy in our build pipes"
   source Autopilot
 
 RunCommand execute
   label "Get the names of the Build pipes"
-  command 'cd /opt/pt{{{ var::application_slug }}}/pt{{{ var::application_slug }}}/build/ptbuild/pipes/ && ls -1 | paste -sd "," -'
+  command 'cd /opt/ptbuild/ptbuild/build/ptbuild/pipes/ && ls -1 | paste -sd "," -'
   guess
   register "build_pipe_names"
 
