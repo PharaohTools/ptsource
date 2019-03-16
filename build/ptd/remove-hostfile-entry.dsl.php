@@ -16,5 +16,10 @@ HostEditor rm
   guess
   host-name "build.{{{ var::domain }}}"
 
+HostEditor rm
+  label "Remove our host file entry for VM Webgrind"
+  guess
+  host-name "webgrind.track.{{{ var::domain }}}"
+
 Logging log
   log-message "Pharaoh Deploy Configuration of Virtual Machine Host Complete"

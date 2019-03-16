@@ -14,6 +14,12 @@ HostEditor add
   host-ip "127.0.0.1"
 
 HostEditor add
+  label "Create our host file entry for our VM Webgrind URL"
+  guess
+  host-name "webgrind.track.{{{ var::domain }}}"
+  host-ip "127.0.0.1"
+
+HostEditor add
   label "Create our host file entry for our Build Server URL"
   guess
   host-name "build.{{{ var::domain }}}"
