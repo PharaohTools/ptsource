@@ -4,6 +4,8 @@ Namespace Core;
 
 class AutoLoader{
 
+    private static $enabled_modules ;
+
     public function launch() {
         spl_autoload_register('Core\autoLoader::autoLoad');
     }
@@ -22,14 +24,24 @@ class AutoLoader{
             $enabledModuleDirectories = self::enabledModuleDirectories($currentModulesParentDir) ;
             foreach ($enabledModuleDirectories as $singleModuleDir) {
                 if (!in_array($singleModuleDir, array(".", ".."))) { // if not dot or double dot
-                  if ( is_dir($currentModulesParentDir.DIRECTORY_SEPARATOR.$singleModuleDir)) { // if is a dir
+
+
+//                  if ( is_dir($currentModulesParentDir.DIRECTORY_SEPARATOR.$singleModuleDir)) { // if is a dir
+
+
                     $classNameForLoad = str_replace('\\' , DIRECTORY_SEPARATOR, $className);
                     $filename =
                       $currentModulesParentDir . DIRECTORY_SEPARATOR . $singleModuleDir .
                       DIRECTORY_SEPARATOR . $classNameForLoad.'.php';
-                    if (is_readable($filename)) {
+                    if (file_exists($filename)) {
                       require_once $filename;
-                      return; } } } } }
+                      return;
+
+                    }
+
+//                  }
+
+                } } }
     }
 
     public static function getInfoObjects() {
@@ -113,7 +125,7 @@ class AutoLoader{
             $enabledModuleDirectories = self::enabledModuleDirectories($currentModulesParentDir) ;
             foreach ($enabledModuleDirectories as $singleModuleDir) {
                 if (!in_array($singleModuleDir, array(".", ".."))) { // if not dot or double dot
-                    if ( is_dir($currentModulesParentDir.DIRECTORY_SEPARATOR.$singleModuleDir) && $singleModuleDir == $module ) { // if dirname is module were looking for
+                    if ( $singleModuleDir == $module ) { // if dirname is module were looking for
                         $filesInModelDirectory = scandir($currentModulesParentDir.DIRECTORY_SEPARATOR.$singleModuleDir
                             .DIRECTORY_SEPARATOR.'Model');
                         foreach ($filesInModelDirectory as $fileInModelDirectory) {
@@ -150,14 +162,18 @@ class AutoLoader{
     }
 
     public static function enabledModuleDirectories($oneModuleParentDirectory) {
+        if (isset(self::$enabled_modules[$oneModuleParentDirectory])) {
+            return self::$enabled_modules[$oneModuleParentDirectory] ;
+        }
         $modulesIndividualDirectories = scandir($oneModuleParentDirectory);
         require_once('Modules/PTConfigureRequired/Model/AppConfig.php') ;
         $appConfig = new \Model\AppConfig() ;
         $disabled_modules = $appConfig->getAppVariable("disabled_modules") ;
         if (!isset($disabled_modules) || $disabled_modules==null ) {
-//            error_log("disabled defaults") ;
             $disabled_modules = array() ; }
-        return array_diff($modulesIndividualDirectories, $disabled_modules) ;
+        $enabled_modules = array_diff($modulesIndividualDirectories, $disabled_modules) ;
+        self::$enabled_modules[$oneModuleParentDirectory] = $enabled_modules ;
+        return $enabled_modules ;
     }
 
 }

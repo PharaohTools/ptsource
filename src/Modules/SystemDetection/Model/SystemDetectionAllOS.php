@@ -11,6 +11,10 @@ class SystemDetectionAllOS extends Base {
     public $architecture ; // = array("any", "32", "64" ;
     public $hostName ; // = array("any", "32", "64" ;
     public $ipAddresses = array();
+    private static $preset_version ;
+    private static $preset_ips ;
+    private static $preset_arch ;
+    private static $preset_hostname ;
 
     public function __construct() {
         $this->setOperatingSystem();
@@ -97,10 +101,27 @@ class SystemDetectionAllOS extends Base {
     }
 
     private function setVersion() {
+        if (isset(self::$preset_version)) {
+            $this->version = self::$preset_version ;
+            return ;
+        }
         if ($this->os == "Linux") {
             if (in_array($this->distro, array("Ubuntu")) ) {
-                exec("lsb_release -a 2> /dev/null", $output_array);
-                $this->version = substr($output_array[2], 9) ; }
+                $vars = [] ;
+                $data = file_get_contents('/etc/lsb-release') ;
+                $lines = explode("\n", $data) ;
+                foreach ($lines as $line) {
+                    $parts = explode('=', $line) ;
+                    if (isset($parts[0]) && isset($parts[1])) {
+                        $vars[$parts[0]] = $parts[1] ;
+                    }
+                }
+                if (isset($vars['DISTRIB_RELEASE'])) {
+                    $this->version = $vars['DISTRIB_RELEASE'] ;
+                } else {
+                    exec("lsb_release -a 2> /dev/null", $output_array);
+                    $this->version = substr($output_array[2], 9) ;
+                } }
             if (in_array($this->distro, array("CentOS")) ) {
                 exec("cat /etc/*-release", $output_array);
                 $this->version = substr($output_array[0], 15, 3) ; } }
@@ -116,9 +137,14 @@ class SystemDetectionAllOS extends Base {
             ) ;
             $versionObject = new \Model\SoftwareVersion($verString) ;
             $this->version =  $versionObject->fullVersionNumber; }
+        self::$preset_version = $this->version ;
     }
 
     private function setArchitecture() {
+        if (isset(self::$preset_arch)) {
+            $this->architecture = self::$preset_arch ;
+            return ;
+        }
         if(($this->os == "Linux" && in_array($this->distro, array("Ubuntu", "CentOS")) ||
             $this->os == "Darwin")) {
             $output = exec("arch");
@@ -134,22 +160,32 @@ class SystemDetectionAllOS extends Base {
                 $this->architecture = "64" ; }
             else {
                 $this->architecture = "32" ; } }
+        self::$preset_arch = $this->architecture ;
     }
 
     private function setHostname() {
+        if (isset(self::$preset_hostname)) {
+            $this->hostName = self::$preset_hostname ;
+            return ;
+        }
         if (in_array($this->os, array("Windows", "WINNT", "Darwin", "Linux"))) {
             exec("hostname", $output_array);
             $this->hostName = $output_array[0] ; }
+        self::$preset_hostname = $this->hostName ;
     }
 
     private function setIPAddresses() {
+        if (isset(self::$preset_ips)) {
+            $this->ipAddresses = self::$preset_ips ;
+            return ;
+        }
         if ($this->os == "Linux") {
             if ($this->distro == "CentOS") {
                 // Centos has no network tools at all for some crazy reason, install them now
                 // @todo surely captain, there must be a better way
                 exec('yum install net-tools -y', $outputArray);
             }
-            $ifComm = ' ip addr list | awk \'/inet /{sub(/\/[0-9]+/,"",$2); print $2}\' ';
+            $ifComm = SUDOPREFIX.' ip addr list | awk \'/inet /{sub(/\/[0-9]+/,"",$2); print $2}\' ';
             // $ifComm = "sudo ifconfig  | grep 'inet addr:'| grep -v '127.0.0.1' | cut -d: -f2 | awk '{ print $1}'" ;
             exec($ifComm, $outputArray);
             foreach($outputArray as $outputLine ) {
@@ -169,6 +205,7 @@ class SystemDetectionAllOS extends Base {
                 exec($ifComm, $outputArray);
                 foreach($outputArray as $outputLine ) {
                     $this->ipAddresses[] = $outputLine ; } }
+        self::$preset_ips = $this->ipAddresses ;
     }
 
 }
