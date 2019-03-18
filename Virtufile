@@ -16,7 +16,7 @@ class Virtufile extends VirtufileBase {
 
         $this->setDefaultConfig();
         $this->config["vm"]["name"] = 'pharaoh_'.$variables['friendly_app_slug'] ;
-        $this->config["vm"]["gui_mode"] = "gui" ;
+        $this->config["vm"]["gui_mode"] = "headless" ;
 
         $this->config["vm"]["cpus"] = "2" ;
         $bu = 'https://repositories.internal.pharaohtools.com/index.php?control=BinaryServer&action=serve&item=iso_php_virtualize_boxes_-_ubuntu_16.04_server' ;
