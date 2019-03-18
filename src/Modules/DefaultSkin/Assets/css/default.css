@@ -191,3 +191,10 @@ ul#side-menu {
         right: 10%;
     }
 }
+
+div.app-wrapper h1,
+div.app-wrapper h2,
+div.app-wrapper h3,
+div.app-wrapper h4 {
+    text-align: center;
+}
