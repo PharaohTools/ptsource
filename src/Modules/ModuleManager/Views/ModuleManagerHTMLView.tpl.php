@@ -74,10 +74,11 @@
 
                 </div>
 
-                <h3>Module and Extension Manager</h3>
+                <h2>Module Manager</h2>
 
                 <div class="form-group">
 
+                    <h3>Download Module</h3>
                     <form class="form-horizontal custom-form" action="<?php echo '/index.php?control=ModuleManager&action=webaction' ; ?>" method="POST">
 
                         <div class="col-sm-3">

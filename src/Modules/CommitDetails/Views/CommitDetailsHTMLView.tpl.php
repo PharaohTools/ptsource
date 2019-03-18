@@ -79,7 +79,7 @@
             <div class="well well-lg ">
            
             <div class="row clearfix no-margin">
-            	<h3 class="text-uppercase text-light ">Commit</h3>
+            	<h2>Commit</h2>
 
                 <p><strong>Commit Message: </strong><?php echo $pageVars["data"]["commit"]->getMessage() ; ?></p>
                 <p><strong>Committer: </strong><?php echo $pageVars["data"]["commit"]->getAuthor()->getName() ; ?></p>

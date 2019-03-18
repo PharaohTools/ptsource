@@ -80,7 +80,7 @@
                 ?>
            
             <div class="row clearfix no-margin">
-            	<h3 class="text-uppercase text-light ">Team: <strong><?php echo $slugOrName ; ?></strong> </h3>
+            	<h2>Team: <strong><?php echo $slugOrName ; ?></strong> </h2>
                 <p> Slug: <?php echo $pageVars["data"]["team"]["team_slug"] ; ?></p>
                 <p> Description: <?php echo $slugOrDescription ; ?></p>
                 <p> Owner: <?php echo $ownerOrDescription ; ?></p>
@@ -161,13 +161,6 @@
                         <?php } ?>
 
                     </div>
-                </div>
-
-                <div class="fullRow">
-                    <hr />
-                    <p class="text-center">
-                        Visit <a href="http://www.pharaohtools.com">www.pharaohtools.com</a> for more
-                    </p>
                 </div>
 
             </div>

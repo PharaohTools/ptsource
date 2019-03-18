@@ -43,9 +43,7 @@
 
                 <form class="form-horizontal custom-form" action="/index.php?control=ApplicationConfigure&action=save" method="POST">
 
-                    <h3 class="text-uppercase text-light" style="margin-top: 15px;">
-                        Module Configuration <i style="font-size: 18px;" class="fa fa-chevron-right"></i>
-                    </h3>
+                    <h2>Application Settings</h2>
 
                     <?php
 
@@ -54,7 +52,7 @@
                                 $slug = strtolower($module_name) ;
                                 $slug = str_replace(" ", "_", $slug) ;
                                 echo '  <a name="'.$slug.'"></a>' ;
-                                echo '  <div class="col-sm-10" name="'.$slug.'">' ;
+                                echo '  <div class="col-sm-12" name="'.$slug.'">' ;
                                 echo '      <h4>Module: '.$module_name.'</h4>';
                                 echo '  </div>';
                                 foreach ($one_mod_confs as $one_config_slug => $one_conf_tails) {

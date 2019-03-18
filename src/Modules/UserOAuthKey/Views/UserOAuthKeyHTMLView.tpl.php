@@ -60,9 +60,7 @@
         <div class="well well-lg">
             <?php echo $this->renderLogs() ; ?>
             <div class="row clearfix no-margin">
-           <h4 class="text-uppercase text-primary">
-               <i class="fa fa-users hvr-grow-rotate"></i>User Profile
-           </h4>
+           <h2>OAuth Keys</h2>
 
                 <div class="row clearfix no-margin">
                 <h5 class="text-uppercase text-light" style="margin-top: 15px;margin-left: 51px;">  </h5>
@@ -216,12 +214,6 @@
                     </div>
                 </div>
             </div>
-     
-            <hr />
-
-            <p class="text-center">
-                Visit www.pharaohtools.com for more
-            </p>
         </div>
 </div><!-- container -->
 <link rel="stylesheet" href="/Assets/Modules/UserOAuthKey/css/useroauthkey.css">

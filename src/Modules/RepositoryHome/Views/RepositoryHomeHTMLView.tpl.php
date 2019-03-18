@@ -1,6 +1,4 @@
 <div class="container" id="wrapper">
-
-    
         <div class="col-lg-12">
             <div id="page_sidebar" class="navbar-default col-sm-2 sidebar" role="navigation">
                 <div class="sidebar-nav ">
@@ -131,10 +129,10 @@
                 ?>
            
             <div class="row clearfix no-margin">
-            	<h3 class="text-uppercase text-light ">Repository: <strong><?php echo $slugOrName ; ?></strong> </h3>
-                <p> Slug: <?php echo $pageVars["data"]["repository"]["project-slug"] ; ?></p>
-                <p> Description: <?php echo $slugOrDescription ; ?></p>
-                <p> Owner: <?php echo $ownerOrDescription ; ?></p>
+            	<h2>Repository: <strong><?php echo $slugOrName ; ?></strong> </h2>
+                <p><strong>Slug:</strong> <?php echo $pageVars["data"]["repository"]["project-slug"] ; ?></p>
+                <p><strong>Description:</strong> <?php echo $slugOrDescription ; ?></p>
+                <p><strong>Owner:</strong> <?php echo $ownerOrDescription ; ?></p>
             </div>
 
                 <?php
@@ -235,18 +233,8 @@
 
                     </div>
                 </div>
-
-                <div class="fullRow">
-                    <hr />
-                    <p class="text-center">
-                        Visit <a href="http://www.pharaohtools.com">www.pharaohtools.com</a> for more
-                    </p>
-                </div>
-
             </div>
-
         </div>
-
     </div>
 </div>
 <link rel="stylesheet" type="text/css" href="/Assets/Modules/RepositoryHome/css/repositoryhome.css">

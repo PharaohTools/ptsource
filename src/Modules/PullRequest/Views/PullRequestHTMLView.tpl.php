@@ -77,12 +77,12 @@
         </div>
         <div class="well well-lg ">
             <div class="row clearfix no-margin">
-                <h3 class="text-uppercase text-light">
+                <h2>
                     <strong>
                         <?php echo $pageVars["data"]["repository"]["project-name"] ; ?>:
                     </strong>
                     Pull Request
-                </h3>
+                </h2>
             </div>
 
             <div class="row clearfix no-margin">

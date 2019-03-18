@@ -77,7 +77,7 @@
 		<div class="well well-lg">
 			<div class="row clearfix no-margin">
 
-                <h3 class="text-uppercase text-light">Commit History: <strong><?php echo $pageVars['data']["repository"]["project-name"] ; ?></strong></h3>
+                <h2>Commit History: <strong><?php echo $pageVars['data']["repository"]["project-name"] ; ?></strong></h2>
 
                 <div class="form-group col-sm-12">
                     <div class="form-group col-sm-3 thin_padding">
@@ -201,11 +201,6 @@
                         </div>
                     </div>
                 </div>
-
-            <hr />
-            <p class="text-center">
-                Visit <a href="http://www.pharaohtools.com">www.pharaohtools.com</a> for more
-            </p>
         </div>
     </div><!-- /.container -->
 <link rel="stylesheet" type="text/css" href="/Assets/Modules/RepositoryHistory/css/repositoryhistory.css">

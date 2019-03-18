@@ -82,7 +82,7 @@
             <?php echo $this->renderLogs() ; ?>
             <div class="row clearfix no-margin">
 
-                <h4 class="text-uppercase text-light">Versions:</h4>
+                <h2>Versions:</h2>
 
                 <div class="row clearfix no-margin">
 
@@ -228,8 +228,6 @@
 
                 </div>
             </div>
-     
-            <hr />
 
         </div>
 </div><!-- container -->

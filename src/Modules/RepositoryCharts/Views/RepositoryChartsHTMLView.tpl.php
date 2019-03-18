@@ -102,7 +102,7 @@
                 ?>
            
             <div class="row clearfix no-margin">
-            	<h3 class="text-uppercase text-light ">Repository: <strong><?php echo $slugOrName ; ?></strong> </h3>
+            	<h2>Repository: <strong><?php echo $slugOrName ; ?></strong> </h2>
                 <p> Slug: <?php echo $pageVars['data']["repository"]["project-slug"] ; ?></p>
                 <p> Description: <?php echo $slugOrDescription ; ?></p>
             </div>

@@ -78,7 +78,7 @@
 
 		<div class="well well-lg">
 			<div class="row clearfix no-margin">
-				<h3 class="text-uppercase text-light">Pull Requests for <strong><?php echo $pageVars['data']["repository"]["project-name"] ; ?></strong></h3>
+				<h2>Pull Requests for <strong><?php echo $pageVars['data']["repository"]["project-name"] ; ?></strong></h2>
 
 				<div role="tabpanel grid">
 
@@ -310,10 +310,6 @@
                     </div>
                 </div>
             </div>
-            <hr />
-            <p class="text-center">
-                Visit <a href="http://www.pharaohtools.com">www.pharaohtools.com</a> for more
-            </p>
         </div>
     </div>
     </div>

@@ -90,9 +90,9 @@
                             break ;
                     }
                 ?>
-                <h3>
+                <h2>
                     <?= $stat; ?> Repository <?php echo $pageVars["data"]["repository"]["project-name"] ; ?>
-                </h3>
+                </h2>
 
                 <?php
                     $rootPath = str_replace($pageVars["data"]["relpath"], "", $pageVars["data"]["wsdir"]) ;
@@ -126,8 +126,6 @@
                     </div>
                 </div>
             </div>
-
-
 
         </div>
 

@@ -33,10 +33,6 @@
 <!--        <h2 class="text-uppercase text-light"><a href="/"> PT<?php echo ucfirst(PHARAOH_APP)  ; ?> - Pharaoh Tools</a></h2>-->
 		<div class="row clearfix no-margin">
 			<h4 class="alert alert-warning">You don't have permission to access this page</h4>
-     	 <hr>
-                <p class="text-center">
-                Visit <a href="http://www.pharaohtools.com">www.pharaohtools.com</a> for more
-            </p>
 		</div>
 	  </div>
 	</div>

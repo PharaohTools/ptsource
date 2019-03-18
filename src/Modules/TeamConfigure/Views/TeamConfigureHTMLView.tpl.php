@@ -79,8 +79,8 @@
                 <form class="form-horizontal custom-form" action="<?= $act ; ?>" method="POST">
 
                     <div class="form-group">
-                        <div class="col-sm-10">
-                            <h3>Team Settings</h3>
+                        <div class="col-sm-12">
+                            <h2>Team Settings</h2>
                         </div>
                     </div>
 
@@ -282,10 +282,6 @@
 
                 </form>
             </div>
-             <hr>
-                <p class="text-center">
-                Visit <a href="http://www.pharaohtools.com">www.pharaohtools.com</a> for more
-            </p>
 
         </div>
 

@@ -41,7 +41,7 @@
                         <?php echo $this->renderLogs() ; ?>
 
                         <div class="row clearfix no-margin">
-           <h4 class="text-uppercase text-primary"><i class="fa fa-users hvr-grow-rotate"></i>  Users</h4>
+           <h2>User Permission Management</h2>
             <!--
             <h3>
                 <a class="lg-anchor text-light" href="/index.php?control=<?php echo ucfirst(PHARAOH_APP)  ; ?>List&action=show">
@@ -146,12 +146,7 @@
                   </div>
                </div>
 			</div> 
-		  </div> 
-     
-        <hr>
-                <p class="text-center">
-                Visit <a href="http://www.pharaohtools.com">www.pharaohtools.com</a> for more
-            </p>
+		  </div>
     </div>
 </div><!-- container -->
 <link rel="stylesheet" href="/Assets/Modules/UserManager/css/usermanager.css">

@@ -94,7 +94,7 @@
                             break ;
                     }
                     ?>
-                    <h3><?= $stat; ?> Repository <?php echo $pageVars["data"]["repository"]["project-name"] ; ?></h3>
+                    <h2><?= $stat; ?> Repository <?php echo $pageVars["data"]["repository"]["project-name"] ; ?></h2>
                 </div>
 
                 <div class="form-group col-sm-12 thin_padding">

@@ -46,7 +46,7 @@
 		<div class="well well-lg">
 
 			<div class="row clearfix no-margin">
-				<h4 class="text-uppercase text-light">All Teams</h4>
+				<h2>All Teams</h2>
 
 				<div role="tabpanel grid">
 
@@ -133,10 +133,6 @@
 				</div>
 			</div>
 		</div>
-		 <hr>
-                <p class="text-center">
-                Visit <a href="http://www.pharaohtools.com">www.pharaohtools.com</a> for more
-            </p>
 	</div>
 </div><!-- /.container -->
 <link rel="stylesheet" type="text/css" href="/Assets/Modules/TeamList/css/teamlist.css">

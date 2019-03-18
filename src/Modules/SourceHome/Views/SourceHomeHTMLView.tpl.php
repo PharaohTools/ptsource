@@ -455,10 +455,6 @@
 
         </div>
 
-        <hr>
-        <div class="col-lg-13">
-
-        </div>
 
 </div>
 

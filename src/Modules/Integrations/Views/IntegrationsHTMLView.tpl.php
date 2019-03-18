@@ -80,7 +80,7 @@
 
                 </div>
 
-                <h3>Application Integration Manager</h3>
+                <h2>Application Integration Manager</h2>
 
                 <div class="form-group">
                     <div class="col-sm-12">
@@ -270,11 +270,6 @@
                 </div>
 
             </div>
-            <hr />
-            <p class="text-center">
-                Visit <a href="http://www.pharaohtools.com">www.pharaohtools.com</a> for more
-            </p>
-
         </div>
 
 </div><!-- container -->
