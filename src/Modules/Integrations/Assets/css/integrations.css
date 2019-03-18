@@ -14,6 +14,8 @@ p.integrationListText { margin: 0; }
     width: 22.5%;
     color: #000 ;
     float: left;
+    word-break: break-all;
+    white-space: normal;
 }
 
 .integrationEntryFirst {
