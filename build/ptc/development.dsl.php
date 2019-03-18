@@ -36,34 +36,21 @@ RunCommand execute
   command "a2dismod php5 || true && a2enmod php7.1 || true && service apache2 restart || true && a2enmod proxy_fcgi setenvif"
   guess
 
-PTTrack install
-  label "Lets configure Pharaoh Track without installing, as we are using files from the host"
+PTSource install
+  label "Lets configure Pharaoh Source without installing, as we are using files from the host"
   vhe-url "$$subdomain.{{{ var::domain }}}"
   vhe-ip-port "0.0.0.0:80"
   version latest
   no-clone
   no-permissions
+  enable-http
   guess
 
-Copy put
-  label "Copy Track Data in"
-  source "/opt/pttrack/pttrack/build/data/*"
-  target "/opt/pttrack/data/"
+RunCommand execute
+  label "Create a default admin user"
+  command "ptsource userprofile create -yg --create_username=admin --create_email=any@pharaohtools.com --update_password=admin --update_password_match=admin"
   guess
-
-Chown path
-  label "Track Data file ownership"
-  user "pttrack"
-  group "pttrack"
-  path "/opt/pttrack/data/"
-  recursive
-
-Chown path
-  label "Track Data file mode"
-  path "/opt/pttrack/data/"
-  mode 0777
-  recursive
-
+  
 PTBuild install
   label "Lets install Pharaoh Build"
   vhe-url "$$buildsubdomain.{{{ var::domain }}}"
