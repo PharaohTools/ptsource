@@ -152,25 +152,42 @@
                 }
                 ?>
 
-                <hr />
             <div class="row clearfix no-margin build-home-properties">
                 <div class="fullRow">
+                    <hr />
                     <div class="pipe-features-block pipe-block">
                         <h4 class="propertyTitle">Repository Features:</h4>
                         <div class="col-sm-12">
                             <?php
                             if (isset($pageVars["data"]['features']) &&
                                 count($pageVars["data"]['features'])>0 ) {
-                                foreach ($pageVars["data"]['features'] as $repository_feature) {
-                                    if ( (isset($repository_feature["hidden"]) && $repository_feature["hidden"] != true)
-                                        || !isset($repository_feature["hidden"]) ) {
-                                        echo '<div class="repository-feature">' ;
-                                        echo ' <a target="_blank" href="'.$repository_feature["model"]["link"].'">' ;
-                                        echo '  <h3>'.$repository_feature["model"]["title"].'</h3>' ;
-                                        echo '  <img src="'.$repository_feature["model"]["image"].'" />' ;
-                                        echo ' </a>' ;
-                                        echo '</div>' ; } } }
-                            else {
+
+                                echo '<table class="fullRow">' ;
+                                echo '<tbody class="fullRow">' ;
+                                $column_count = 10 ;
+                                $feature_count = count($pageVars["data"]['features']) ;
+                                $table_rows = ceil($feature_count / $column_count) ;
+                                for ($current_row=0; $current_row<$table_rows; $current_row++) {
+                                    $start_key = $current_row * $column_count ;
+                                    echo '<tr class="fullRow">' ;
+                                    for ($key=$start_key; $key<$feature_count; $key++) {
+                                        $repository_feature = $pageVars["data"]['features'][$key] ;
+
+                                        if ( (isset($repository_feature["hidden"]) && $repository_feature["hidden"] != true)
+                                            || !isset($repository_feature["hidden"]) ) {
+                                            echo '<td class="repository-feature tooltip_trigger" style=\'background-image: url("'.$repository_feature["model"]["image"].'")\'>' ;
+                                            echo ' <a target="_blank" href="'.$repository_feature["model"]["link"].'">' ;
+                                            echo '  <span class="tooltiptext">'.$repository_feature["model"]["title"].'</span>' ;
+                                            echo '  <img src="/Assets/Modules/DefaultSkin/image/clear.png" />' ;
+                                            echo ' </a>' ;
+                                            echo '</td>' ; }
+                                    }
+                                    echo '</tr>' ;
+
+                                }
+                                echo '</tbody>' ;
+                                echo '</table>' ;
+                            } else {
                                 ?>
                                 <h5>No Features configured for Repository</h5>
                             <?php
@@ -181,28 +198,33 @@
 
                 </div>
                 <div class="fullRow">
+                    <hr />
                     <div class="pipe-history-block pipe-block">
                         <h4 class="propertyTitle">Repository History:</h4>
                         <?php
-                        if (isset($pageVars["data"]["history"]) && count($pageVars["data"]["history"])>0 ) {
+//                        var_dump($pageVars["data"]["history"]) ;
+                        if (isset($pageVars["data"]["history"]['commits']) && count($pageVars["data"]["history"]['commits'])>0 ) {
                         $i = 1;
 
-                        foreach ($pageVars["data"]["history"]["commits"] as $commitDetails) {
-                        ?>
+                            foreach ($pageVars["data"]["history"]["commits"] as $commitDetails) {
+                            ?>
 
-                        <div class="commitRow" id="blRow_<?php echo $commitDetails["commit"]; ?>" >
-                            <div class="blCell cellRowIndex" scope="row"><?php echo $i; ?> </div>
-                            <div class="blCell cellRowMessage"><a href="/index.php?control=CommitDetails&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"]; ?>&identifier=<?php echo $pageVars["data"]["identifier"] ; ?>&commit=<?php echo $commitDetails["commit"] ; ?>" class="pipeName"><?php echo $commitDetails["message"]; ?>  </a> </div>
-                            <div class="blCell cellRowAuthor"><a href="/index.php?control=CommitDetails&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"]; ?>&identifier=<?php echo $pageVars["data"]["identifier"] ; ?>&commit=<?php echo $commitDetails["commit"] ; ?>" class="pipeName"><?php echo $commitDetails["author"]; ?>  </a> </div>
-                            <div class="blCell cellRowDate"><a href="/index.php?control=CommitDetails&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"]; ?>&identifier=<?php echo $pageVars["data"]["identifier"] ; ?>&commit=<?php echo $commitDetails["commit"] ; ?>" class="pipeName"><?php echo str_replace(" +0000", "", $commitDetails["date"]); ?>  </a> </div>
-                            <div class="blCell cellRowHash"><a href="/index.php?control=CommitDetails&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"]; ?>&identifier=<?php echo $pageVars["data"]["identifier"] ; ?>&commit=<?php echo $commitDetails["commit"] ; ?>" class="pipeName"><?php echo substr($commitDetails["commit"], 0, 6); ?>  </a> </div>
-                        </div>
+                            <div class="commitRow" id="blRow_<?php echo $commitDetails["commit"]; ?>" >
+                                <div class="blCell cellRowIndex" scope="row"><?php echo $i; ?> </div>
+                                <div class="blCell cellRowMessage"><a href="/index.php?control=CommitDetails&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"]; ?>&identifier=<?php echo $pageVars["data"]["identifier"] ; ?>&commit=<?php echo $commitDetails["commit"] ; ?>" class="pipeName"><?php echo $commitDetails["message"]; ?>  </a> </div>
+                                <div class="blCell cellRowAuthor"><a href="/index.php?control=CommitDetails&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"]; ?>&identifier=<?php echo $pageVars["data"]["identifier"] ; ?>&commit=<?php echo $commitDetails["commit"] ; ?>" class="pipeName"><?php echo $commitDetails["author"]; ?>  </a> </div>
+                                <div class="blCell cellRowDate"><a href="/index.php?control=CommitDetails&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"]; ?>&identifier=<?php echo $pageVars["data"]["identifier"] ; ?>&commit=<?php echo $commitDetails["commit"] ; ?>" class="pipeName"><?php echo str_replace(" +0000", "", $commitDetails["date"]); ?>  </a> </div>
+                                <div class="blCell cellRowHash"><a href="/index.php?control=CommitDetails&action=show&item=<?php echo $pageVars["data"]["repository"]["project-slug"]; ?>&identifier=<?php echo $pageVars["data"]["identifier"] ; ?>&commit=<?php echo $commitDetails["commit"] ; ?>" class="pipeName"><?php echo substr($commitDetails["commit"], 0, 6); ?>  </a> </div>
+                            </div>
+
                             <?php
 
                             $i++ ;
                             }
-                        }
-                            ?>
+                        } else { ?>
+                            <p class="text-center">No History available in Repository. Looks like its new, feel free to add code by <strong>cloning</strong> above</p>
+                        <?php } ?>
+
                     </div>
                 </div>
                 <div class="fullRow">
@@ -211,11 +233,14 @@
                         <?php
 
                         if ($pageVars["data"]["repository"]["project-type"] === 'git') {
+                            ?>
 
+                            <h4 class="propertyTitle">Readme:</h4>
+
+                            <?php
                             if (isset($pageVars["data"]["readme"]["exists"]) && $pageVars["data"]["readme"]["exists"] == true) {
                                 ?>
 
-                                <h4 class="propertyTitle">Readme:</h4>
                                 <div class="readme_display">
                                     <?php
                                     if (isset($pageVars["data"]["readme"]["md"])) { echo $pageVars["data"]["readme"]["md"] ; }
@@ -225,8 +250,7 @@
                                 </div>
 
                             <?php } else { ?>
-                                <h4 class="propertyTitle">Readme:</h4>
-                                <h5>No Readme file available in Repository</h5>
+                                <p class="text-center">No Readme file available in Repository</p>
                             <?php }
 
                         } ?>
