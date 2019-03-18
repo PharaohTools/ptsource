@@ -46,133 +46,129 @@
             </div>
 
 			<div class="row clearfix no-margin">
-				<h4 class="text-uppercase text-light">All Repositories</h4>
+				<h2>All Repositories</h2>
 
 				<div role="tabpanel grid">
+                    <table class="table table-striped table-bordered table-condensed">
+                                <thead>
+                                    <tr style="background-color: #fff">
+                                        <th class="blCell cellRowIndex">#</th>
+                                        <th class="blCell cellRowName">Repository</th>
+                                        <th class="blCell cellRowType">Type</th>
+                                        <th class="blCell cellRowAction">Action</th>
+                                        <th class="blCell cellRowFeatures">Features</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="allBuildRows table-hover">
 
-					<div class="tab-content">
-						<div role="tabpanel" class="tab-pane active" id="all">
-							<div class="table-responsive">
+                                <?php
 
-							<div class="table table-striped table-bordered table-condensed">
-                                <div class="blCell cellRowIndex">#</div>
-                                <div class="blCell cellRowName">Repository</div>
-                                <div class="blCell cellRowType">Type</div>
-                                <div class="blCell cellRowAction">Action</div>
-                                <div class="blCell cellRowFeatures">Features</div>
-                            </div>
-							<div class="allBuildRows table-hover">
+                                $i = 1;
+                                foreach ($pageVars["data"]["repositories"] as $repositorySlug => $repositoryDetails) {
 
-							<?php
+                                    if ($repositoryDetails["last_status"] === true) {
+                                        $successFailureClass = "successRow"  ; }
+                                    else if ($repositoryDetails["last_status"] === false) {
+                                        $successFailureClass = "failureRow" ; }
+                                    else {
+                                        $successFailureClass = "unstableRow" ; }
 
-							$i = 1;
-							foreach ($pageVars["data"]["repositories"] as $repositorySlug => $repositoryDetails) {
+                                    if (isset($repositoryDetails["project-name"])) {
+                                        $slugOrName = $repositoryDetails["project-name"] ; }
+                                    else if (isset($repositorySlug)) {
+                                        $slugOrName = $repositorySlug ; }
+                                    else {
+                                        $slugOrName = "Unnamed Project" ; }
 
-                                if ($repositoryDetails["last_status"] === true) {
-                                    $successFailureClass = "successRow"  ; }
-                                else if ($repositoryDetails["last_status"] === false) {
-                                    $successFailureClass = "failureRow" ; }
-                                else {
-                                    $successFailureClass = "unstableRow" ; }
+                                    ?>
 
-                                if (isset($repositoryDetails["project-name"])) {
-                                    $slugOrName = $repositoryDetails["project-name"] ; }
-                                else if (isset($repositorySlug)) {
-                                    $slugOrName = $repositorySlug ; }
-                                else {
-                                    $slugOrName = "Unnamed Project" ; }
+                                <tr class="repositoryRow <?php echo $successFailureClass ?>" id="blRow_<?php echo $repositorySlug; ?>" >
+                                    <td class="blCell cellRowIndex" scope="row">
+                                        <?php echo $i; ?>
+                                    </td>
+                                    <td class="blCell cellRowName">
+                                        <a href="/index.php?control=RepositoryHome&action=show&item=<?php echo $repositorySlug; ?>" class="pipeName">
+                                            <?php echo $slugOrName; ?>
+                                        </a>
+                                    </td>
+                                    <td class="blCell cellRowType">
+                                        <?php
 
+                                        if (isset($repositoryDetails["project-type"])) {
+
+                                            if ($repositoryDetails["project-type"] == 'raw') {
+                                                echo 'Raw' ; }
+                                            else {
+                                                echo "Git" ; }
+
+                                        }
+
+                                        ?>
+                                    </td>
+
+                                    <td class="blCell cellRowAction">
+                                        <div class="col-sm-12">
+                                            <div class="col-sm-2">
+                                                <a class="tooltip_trigger" href="/index.php?control=RepositoryConfigure&action=show&item=<?php echo $repositorySlug ; ?>">
+                                                    <i class="fa fa-cog fa-2x hvr-grow-shadow"></i>
+                                                    <span class="tooltiptext">Settings</span>
+                                                </a>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <a class="tooltip_trigger" href="/index.php?control=FileBrowser&action=show&item=<?php echo $repositorySlug ; ?>">
+                                                    <i class="tooltip_trigger fa fa-folder-open-o fa-2x hvr-grow-shadow"></i>
+                                                    <span class="tooltiptext">File Browser</span>
+                                                </a>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <a class="tooltip_trigger" href="/index.php?control=RepositoryHistory&action=show&item=<?php echo $repositorySlug ; ?>">
+                                                    <i class="tooltip_trigger fa fa-history fa-2x hvr-grow-shadow"></i>
+                                                    <span class="tooltiptext">History</span>
+                                                </a>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <a class="tooltip_trigger" href="/index.php?control=RepositoryCharts&action=contributors&item=<?php echo $repositorySlug ; ?>">
+                                                    <i class="tooltip_trigger fa fa-users fa-2x hvr-grow-shadow"></i>
+                                                    <span class="tooltiptext">Contributors</span>
+                                                </a>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <a class="tooltip_trigger" href="/index.php?control=RepositoryCharts&action=show&item=<?php echo $repositorySlug ; ?>">
+                                                    <i class="fa fa-bar-chart-o fa-2x hvr-grow-shadow"></i>
+                                                    <span class="tooltiptext">Charts</span>
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                    </td>
+                                    <td class="blCell cellRowFeatures">
+                                        <?php
+
+                                        if (isset($repositoryDetails["features"]) &&
+                                            count($repositoryDetails["features"])>0 ) {
+                                            foreach ($repositoryDetails["features"] as $repository_feature) {
+                                                echo '<div class="repository-feature">' ;
+                                                echo ' <a target="_blank" href="'.$repository_feature["model"]["link"].'">' ;
+    //                                                echo  '<h3>'.$repository_feature["model"]["title"].'</h3>' ;
+                                                echo '  <img src="'.$repository_feature["model"]["image"].'" />' ;
+                                                echo " </a>" ;
+                                                echo '</div>' ; } }
+                                        else {
+                                            echo '&nbsp;' ; }
+
+                                        ?>
+                                    </td>
+                                </tr>
+
+                                <?php
+                                $i++;
+                                }
                                 ?>
 
-							<div class="repositoryRow <?php echo $successFailureClass ?>" id="blRow_<?php echo $repositorySlug; ?>" >
-                                <div class="blCell cellRowIndex" scope="row">
-                                    <?php echo $i; ?>
-                                </div>
-                                <div class="blCell cellRowName">
-                                    <a href="/index.php?control=RepositoryHome&action=show&item=<?php echo $repositorySlug; ?>" class="pipeName">
-                                        <?php echo $slugOrName; ?>
-                                    </a>
-                                </div>
-                                <div class="blCell cellRowType">
-                                    <?php
+                                </tbody>
+                            </table>
+                </div>
 
-                                    if (isset($repositoryDetails["project-type"])) {
-
-                                        if ($repositoryDetails["project-type"] == 'raw') {
-                                            echo 'Raw' ; }
-                                        else {
-                                            echo "Git" ; }
-                                        
-                                    }
-
-                                    ?>
-                                </div>
-
-                                <div class="blCell cellRowAction">
-                                    <div class="col-sm-12">
-                                        <div class="col-sm-1">
-                                            &nbsp;
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <a href="/index.php?control=RepositoryConfigure&action=show&item=<?php echo $repositorySlug ; ?>">
-                                            <i class="fa fa-cog fa-2x hvr-grow-shadow"></i></a>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <a href="/index.php?control=FileBrowser&action=show&item=<?php echo $repositorySlug ; ?>">
-                                            <i class="fa fa-folder-open-o fa-2x hvr-grow-shadow"></i></a>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <a href="/index.php?control=RepositoryHistory&action=show&item=<?php echo $repositorySlug ; ?>">
-                                            <i class="fa fa-history fa-2x hvr-grow-shadow"></i></a>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <a href="/index.php?control=RepositoryCharts&action=contributors&item=<?php echo $repositorySlug ; ?>">
-                                            <i class="fa fa-users fa-2x hvr-grow-shadow"></i></a>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <a href="/index.php?control=RepositoryCharts&action=show&item=<?php echo $repositorySlug ; ?>">
-                                            <i class="fa fa-bar-chart-o fa-2x hvr-grow-shadow"></i></a>
-                                        </div>
-                                        <div class="col-sm-1">
-                                            &nbsp;
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="blCell cellRowFeatures">
-                                    <?php
-
-                                    if (isset($repositoryDetails["features"]) &&
-                                        count($repositoryDetails["features"])>0 ) {
-                                        foreach ($repositoryDetails["features"] as $repository_feature) {
-                                            echo '<div class="repository-feature">' ;
-                                            echo ' <a target="_blank" href="'.$repository_feature["model"]["link"].'">' ;
-//                                                echo  '<h3>'.$repository_feature["model"]["title"].'</h3>' ;
-                                            echo '  <img src="'.$repository_feature["model"]["image"].'" />' ;
-                                            echo " </a>" ;
-                                            echo '</div>' ; } }
-                                    else {
-                                        echo '&nbsp;' ; }
-
-                                    ?>
-                                </div>
-							</div>
-
-							<?php
-							$i++;
-							}
-							?>
-
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		 <hr>
-                <p class="text-center">
-                Visit <a href="http://www.pharaohtools.com">www.pharaohtools.com</a> for more
-            </p>
-	</div>
+	        </div>
 </div><!-- /.container -->
 <link rel="stylesheet" type="text/css" href="/Assets/Modules/RepositoryList/css/repositorylist.css">
