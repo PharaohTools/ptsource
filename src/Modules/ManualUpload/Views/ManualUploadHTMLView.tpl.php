@@ -108,12 +108,16 @@
                 <form class="form-horizontal custom-form" action="<?= $act ; ?>" method="POST">
 
                     <div class="form-group col-sm-12">
-                        <label for="version">Customize Version Number:</label>
-                        <input type="text" name="version" id="version" value="<?php echo $pageVars["data"]["next_version"] ; ?>" onchange="setDZOptions(this); return false;" />
+                        <div class="form-group col-sm-6">
+                            <label class="version_label" for="version">Customize Version Number:</label>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <input class="version_input" type="text" name="version" id="version" value="<?php echo $pageVars["data"]["next_version"] ; ?>" onchange="setDZOptions(this); return false;" />
+                        </div>
                     </div>
 
                     <div class="form-group">
-                        <div class="col-sm-10" id="updatable">
+                        <div class="col-sm-12" id="updatable">
 
                         </div>
                     </div>
@@ -121,7 +125,7 @@
 
                 </form>
                 <div class="form-group">
-                    <div class="col-sm-10">
+                    <div class="col-sm-12">
                         <form action="/index.php?control=ManualUpload&action=fileupload&item=<?php echo $pageVars["data"]["repository"]["project-slug"] ; ?>&output-format=SERVICE" class="dropzone" id="manualUpload-drop"></form>
                     </div>
                 </div>
