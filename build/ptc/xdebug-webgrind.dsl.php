@@ -11,14 +11,14 @@ Mkdir path
 
 Templating install
   label "XDebug FPM Configuration"
-  source "{{{ Facts::Runtime::factGetConstant::PFILESDIR }}}pttrack/pttrack/build/ptc/Templates/xdebug.ini"
+  source "{{{ Facts::Runtime::factGetConstant::PFILESDIR }}}ptsource/ptsource/build/ptc/Templates/xdebug.ini"
   target "/etc/php/7.0/fpm/conf.d/20-xdebug.ini"
   template_output_dir '/tmp/xdebug_out'
   guess
 
 Templating install
   label "XDebug Apache Configuration"
-  source "{{{ Facts::Runtime::factGetConstant::PFILESDIR }}}pttrack/pttrack/build/ptc/Templates/xdebug.ini"
+  source "{{{ Facts::Runtime::factGetConstant::PFILESDIR }}}ptsource/ptsource/build/ptc/Templates/xdebug.ini"
   target "/etc/php/7.0/apache2/conf.d/20-xdebug.ini"
   template_output_dir '/var/www/xdebug_out'
   guess
@@ -36,43 +36,43 @@ RunCommand execute
 Download file
   label 'Download'
   source "https://github.com/jokkedk/webgrind/archive/v1.5.0.zip"
-  target "/opt/pttrack/v1.5.0.zip"
+  target "/opt/ptsource/v1.5.0.zip"
   yes
   guess
 
 RunCommand execute
   label 'Unzip Webgrind'
-  command "cd /opt/pttrack/ && unzip -qo v1.5.0.zip"
+  command "cd /opt/ptsource/ && unzip -qo v1.5.0.zip"
   guess
 
 RunCommand execute
   label "Rename Webgrind Dir
-  command "cd /opt/pttrack/ && rm -rf webgrind && mv webgrind-1.5.0 webgrind"
+  command "cd /opt/ptsource/ && rm -rf webgrind && mv webgrind-1.5.0 webgrind"
   guess
 
 Copy put
   label "PHP Info for Webgrind"
-  source "{{{ Facts::Runtime::factGetConstant::PFILESDIR }}}pttrack/pttrack/build/ptc/Templates/phpinfo.php"
-  target "/opt/pttrack/webgrind/phpinfo.php"
+  source "{{{ Facts::Runtime::factGetConstant::PFILESDIR }}}ptsource/ptsource/build/ptc/Templates/phpinfo.php"
+  target "/opt/ptsource/webgrind/phpinfo.php"
   guess
 
 Chown path
   label "Change webgrind ownership"
-  path "/opt/pttrack/webgrind"
-  user "pttrack:pttrack"
+  path "/opt/ptsource/webgrind"
+  user "ptsource:ptsource"
   recursive true
   guess
 
 Copy put
   label "PHP Info for Track"
-  source "{{{ Facts::Runtime::factGetConstant::PFILESDIR }}}pttrack/pttrack/build/ptc/Templates/phpinfo.php"
-  target "{{{ Facts::Runtime::factGetConstant::PFILESDIR }}}pttrack/pttrack/src/Modules/PostInput/phpinfo.php"
+  source "{{{ Facts::Runtime::factGetConstant::PFILESDIR }}}ptsource/ptsource/build/ptc/Templates/phpinfo.php"
+  target "{{{ Facts::Runtime::factGetConstant::PFILESDIR }}}ptsource/ptsource/src/Modules/PostInput/phpinfo.php"
   guess
 
 Chown path
   label "Change phpinfo ownership"
-  path "{{{ Facts::Runtime::factGetConstant::PFILESDIR }}}pttrack/pttrack/src/Modules/PostInput/phpinfo.php"
-  user "pttrack:pttrack"
+  path "{{{ Facts::Runtime::factGetConstant::PFILESDIR }}}ptsource/ptsource/src/Modules/PostInput/phpinfo.php"
+  user "ptsource:ptsource"
   guess
 
 RunCommand execute
@@ -82,7 +82,7 @@ RunCommand execute
 
 Copy put
   label "Webgrind Apache VHost"
-  source "{{{ Facts::Runtime::factGetConstant::PFILESDIR }}}pttrack/pttrack/build/ptc/Templates/webgrind.track.pharaohtools.vm.conf"
+  source "{{{ Facts::Runtime::factGetConstant::PFILESDIR }}}ptsource/ptsource/build/ptc/Templates/webgrind.track.pharaohtools.vm.conf"
   target "/etc/apache2/sites-available/webgrind.track.pharaohtools.vm.conf"
   guess
 
