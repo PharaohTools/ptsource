@@ -13,3 +13,13 @@ span.fileRow .btn{
     line-height: 80% ;
     margin: 0 2px;
 }
+
+.version_input {
+    display: block;
+    float: left;
+}
+
+.version_label {
+    display: block;
+    float: right;
+}
