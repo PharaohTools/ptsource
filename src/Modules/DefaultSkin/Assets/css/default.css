@@ -198,3 +198,36 @@ div.app-wrapper h3,
 div.app-wrapper h4 {
     text-align: center;
 }
+
+
+/* Tooltip text */
+.tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 100;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip_trigger:hover .tooltiptext {
+    visibility: visible;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.fullWidth {
+    width: 100%;
+}
+
+.large_button {
+    font-size: 2.5em;
+}
