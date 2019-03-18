@@ -303,8 +303,17 @@
                                <hr />
 
                     <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" id="bt" class=" btn btn-success hvr-float-shadow" data-toggle="tooltip" data-placement="top" title="Save configure" data-original-title="Tooltip on right">Save Configuration</button>
+                        <div class="col-sm-4">
+                            &nbsp;
+                        </div>
+                        <div class="col-sm-4">
+                            <button type="submit" id="bt"
+                                    class="large_button fullWidth btn btn-success hvr-float-shadow"
+                                    data-toggle="tooltip" data-placement="top" title="Save Settings"
+                                    data-original-title="Tooltip on right">Save Settings</button>
+                        </div>
+                        <div class="col-sm-4">
+                            &nbsp;
                         </div>
                     </div>
 
