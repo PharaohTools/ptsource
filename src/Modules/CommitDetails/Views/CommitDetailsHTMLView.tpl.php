@@ -123,7 +123,7 @@
                     }
 
                 ?>
-                <p><strong>File Browser: </strong><a href="http://source.pharaoh.tld/"></a></p>
+
             </div>
 
         </div>
