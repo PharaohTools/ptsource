@@ -21,6 +21,7 @@ class FileBrowserAllOS extends Base {
         if ($ret['repository']['project-type'] == 'raw') {
             $fileBrowser = $fileBrowserFactory->getModel($this->params, 'RawRepo');
             $ret["directory"] = $fileBrowser->getCurrentDirectory();
+            $ret["stat"] = $fileBrowser->loadFileInformation() ;
         } else  {
             //  ($ret['repository']['type'] == 'git')
             $fileBrowser = $fileBrowserFactory->getModel($this->params, 'GitRepo');
@@ -36,12 +37,16 @@ class FileBrowserAllOS extends Base {
         if ($ret["is_file"] == true) {
             $ret["file_extension"] = $this->findExtension() ;
             $ret["image_file_extension"] = $this->imageFileExtension($ret["file_extension"]) ;
+            $ret["code_file_extension"] = $this->codeFileExtension() ;
             if (!is_null($ret["image_file_extension"])) {
                 $ret["image_file"] = $fileBrowser->loadFileContents() ;
-            }
-            $ret["code_file_extension"] = $this->codeFileExtension() ;
-            if (!is_null($ret["code_file_extension"])) {
+            } else if (!is_null($ret["code_file_extension"])) {
                 $ret["code_file"] = $fileBrowser->loadFileContents() ;
+            } else {
+                if ($ret["stat"]['size'] < 512000) {
+                    $ret["raw_file"] = $fileBrowser->loadFileContents() ;
+                }
+                $ret["code_file_extension"] = 'txt';
             }
             $ret["file_mode"] = $this->findMode($ret["code_file_extension"]) ;
         }
@@ -131,6 +136,7 @@ class FileBrowserAllOS extends Base {
             "rb" => "ruby",
             "virtufile" => "php",
             "fephp" => "php",
+            "txt" => "text/plain",
         ) ;
         if (isset($modes[$ext])) {
             return $modes[$ext] ;

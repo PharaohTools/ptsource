@@ -10,7 +10,7 @@
 }
 
 .CodeMirror{
-    height: auto
+    height: 102.5% !important;
 }
 
 .CodeMirror-lines {
@@ -50,4 +50,15 @@
 
 .thin_padding {
     padding-bottom: 0;
+}
+
+ul#assigneelist {
+    margin-left: -80px;
+    left: 50% !important;
+}
+
+.file_browser_image {
+    margin: 0 auto ;
+    display: block;
+    max-height: 600px;
 }

@@ -85,8 +85,8 @@
 
             <?php echo $this->renderLogs() ; ?>
 
-            <div class="form-group col-sm-12 thin_padding">
-                <div class="form-group col-lg-12 thin_padding">
+            <div class="col-sm-12 thin_padding">
+                <div class="col-lg-12 thin_padding">
                     <?php
                     switch ($pageVars["route"]["action"]) {
                         case "show" :
@@ -97,45 +97,41 @@
                     <h2><?= $stat; ?> Repository <?php echo $pageVars["data"]["repository"]["project-name"] ; ?></h2>
                 </div>
 
-                <div class="form-group col-sm-12 thin_padding">
-                    <div class="form-group col-lg-12 thin_padding" id="path_header">
-                        <?php
-                        $rootPath = str_replace($pageVars["data"]["relpath"], "", $pageVars["data"]["wsdir"]) ;
-                        echo '<h3><a href="/index.php?control=FileBrowser&action=show&item='.
-                            $pageVars["data"]["repository"]["project-slug"].'">'.$rootPath.'</a></h3>' ;
-
-                        $act = '/index.php?control=FileBrowser&item='.$pageVars["data"]["repository"]["project-slug"].'&action=show' ;
-                        ?>
-                    </div>
-                </div>
-
             </div>
-            <div class="form-group col-sm-12 thin_padding">
+            <div class="col-sm-12 thin_padding">
                 <?php
+
                 if ($pageVars["data"]['repository']['project-type'] == 'git') {
                     if ($pageVars["route"]["action"]=="show") {
                         if ($pageVars["data"]["is_file"] == true) {
                             ?>
 
-                            <div class="form-group col-sm-9">
-                                <h4>File: <strong><?php echo $pageVars["data"]["relpath"] ; ?></strong></h4>
-                            </div>
-                            <div class="form-group col-sm-3">
-                                <?php
+                            <?php
+
                                 if (isset($pageVars["data"]["current_branch"]) && $pageVars["data"]["current_branch"] != null) {
                                     ?>
-                                    <h4>Branch : <strong><?php echo $pageVars["data"]["current_branch"] ; ?></strong></h4>
+                                    <div class="col-sm-12">
+                                        <h4>File: <strong><?php echo $pageVars["data"]["relpath"] ; ?></strong></h4>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <h4>Branch : <strong><?php echo $pageVars["data"]["current_branch"] ; ?></strong></h4>
+                                    </div>
+                                    <?php
+                                } else {
+                                    ?>
+                                    <div class="col-sm-12">
+                                        <h4>File: <strong><?php echo $pageVars["data"]["relpath"] ; ?></strong></h4>
+                                    </div>
                                     <?php
                                 }
                                 ?>
-                            </div>
 
                             <?php
                         } else {
                             ?>
 
-                            <div class="form-group col-sm-3 thin_padding">
-                                <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                            <div class="col-sm-12">
+                                <button class="button_std btn btn-info dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
                                     Select Branch
                                     <span class="caret"></span>
                                 </button>
@@ -153,7 +149,7 @@
                                     ?>
                                 </ul>
                             </div>
-                            <div class="form-group col-sm-9 thin_padding">
+                            <div class="col-sm-12">
                                 <?php
                                 if (isset($pageVars["data"]["identifier"]) && $pageVars["data"]["identifier"] != null) {
                                     ?>
@@ -170,73 +166,38 @@
                 ?>
             </div>
 
-            <div class="form-group col-sm-12">
+            <div class="col-sm-12">
                 <div id="editor_wrapper">
                      <?php
+
+
                     if ($pageVars["route"]["action"]=="show") {
-                        if (isset($pageVars["data"]["code_file_extension"]) && $pageVars["data"]["code_file_extension"] != null) {
+                        if (isset($pageVars["data"]["code_file_extension"]) && $pageVars["data"]["code_file_extension"] != 'txt') {
                             echo '<div class="col-sm-12">' ;
-                            echo '    <h2>Displaying Code as <strong>'.$pageVars["data"]["code_file_extension"].'</strong>: </h2>' ;
+                            echo '    <h3>Displaying Code as <strong>'.$pageVars["data"]["code_file_extension"].'</strong>: </h3>' ;
                             echo '    <div id="loader"><img alt="Loading" src="/Assets/Modules/FileBrowser/images/loading.gif" /></div>' ;
                             echo '<textarea id="editor">' ;
                             echo $pageVars["data"]["code_file"] ;
                             echo '</textarea>' ;
-                            echo '</div>' ; }
-                        else if (isset($pageVars["data"]["image_file_extension"]) && $pageVars["data"]["image_file_extension"] != null) {
+                            echo '</div>' ;
+                        } else if (isset($pageVars["data"]["image_file_extension"]) && $pageVars["data"]["image_file_extension"] != null) {
                                 $base64 = base64_encode($pageVars["data"]['image_file']);
                                 $image_file_data =  'data:' . $pageVars["data"]["image_file_mime"] . ';base64,' . $base64 ;
                                 ?>
                                 <div class="col-sm-12">
-                                    <h2>Displaying File as Image: </h2><img src="<?php echo $image_file_data; ?>" alt="Image File" />
+                                    <h3>Displaying File as Image: </h3><img class="file_browser_image" src="<?php echo $image_file_data; ?>" alt="Image File" />
                                 </div>
-                            <?php }
-                        else {
-
-                            if (isset($pageVars['data']['identifier'])) {
-                                $idstring = '&identifier='.$pageVars['data']['identifier'] ;
-                            } else {
-                                $idstring = '' ;
-                            }
-
-                            if ($pageVars["data"]['repository']['project-type'] == 'raw') {
-
-                                foreach ($pageVars["data"]["directory"] as $name => $isDir) {
-
-                                    $mod_time = isset($isDir['mtime']) ? date('d/m/Y H:i:s', $isDir['mtime']) : "N/A" ;
-                                    $access_time = isset($isDir['atime']) ? date('d/m/Y H:i:s', $isDir['atime']) : "N/A" ;
-                                    $dirString = (is_array($isDir)) ? " - (D) Last Modified: {$mod_time}, Last Accessed: {$access_time}" : "" ;
-                                    $trail = ($isDir) ? "/" : "" ;
-                                    echo '<a href="/index.php?control=FileBrowser&action=show&item='.$pageVars["data"]["repository"]["project-slug"].$idstring.'&relpath='.$pageVars["data"]["relpath"].'">'.$pageVars["data"]["relpath"].'</a>' ;
-
-                                    $relativeString = str_replace($pageVars["data"]["wsdir"], "", $name) ;
-                                    $nameparts = explode(DS, $relativeString) ;
-
-                                    echo '<a href="/index.php?control=FileBrowser&action=show&item='.$pageVars["data"]["repository"]["project-slug"].$idstring.'&relpath='.$pageVars["data"]["relpath"].$relativeString.
-                                        $trail.'">'.$relativeString.'</a>' ;
-
-                                    echo $trail.$dirString.'<br />' ; }
-
-                            } else {
-
-                                foreach ($pageVars["data"]["directory"] as $name => $isDir) {
-
-                                    $dirString = ($isDir) ? " - (D)" : "" ;
-                                    $trail = ($isDir) ? "/" : "" ;
-                                    echo '<a href="/index.php?control=FileBrowser&action=show&item='.$pageVars["data"]["repository"]["project-slug"].$idstring.'&relpath='.$pageVars["data"]["relpath"].'">'.$pageVars["data"]["relpath"].'</a>' ;
-
-                                    $relativeString = str_replace($pageVars["data"]["wsdir"], "", $name) ;
-                                    $nameparts = explode(DS, $relativeString) ;
-
-                                    foreach ($nameparts as $namepart => $isSubDir) {
-                                        echo '<a href="/index.php?control=FileBrowser&action=show&item='.$pageVars["data"]["repository"]["project-slug"].$idstring.'&relpath='.$pageVars["data"]["relpath"].$name.
-                                            $trail.'">'.$name.'</a>' ; }
-
-                                    echo $trail.$dirString.'<br />' ; }
-
-                            }
-
+                            <?php
+                        } else if (strlen($pageVars["data"]["raw_file"]) > 0) {
+                            echo '<div class="col-sm-12">' ;
+                            echo '    <h3>Displaying File as <strong>Plain Text</strong>: </h3>' ;
+                            echo '    <div id="loader"><img alt="Loading" src="/Assets/Modules/FileBrowser/images/loading.gif" /></div>' ;
+                            echo '<textarea id="editor">' ;
+                            echo $pageVars["data"]["raw_file"] ;
+                            echo '</textarea>' ;
+                            echo '</div>' ;
                         }
-
+                        showTheFileBrowserDialogue($pageVars) ;
                     }
 
                     ?>
@@ -251,6 +212,9 @@
 
 </div>
 
+<link rel="stylesheet" href="/Assets/Modules/FileBrowser/css/filebrowser.css" />
+
+
 <?php
 if ($pageVars["route"]["action"]=="show") {
     if ($pageVars["data"]["is_file"] == true) {
@@ -258,7 +222,6 @@ if ($pageVars["route"]["action"]=="show") {
 
 
         <?php if (isset($pageVars["data"]["code_file_extension"]) && $pageVars["data"]["code_file_extension"] != null) { ?>
-            <link rel="stylesheet" href="/Assets/Modules/FileBrowser/css/filebrowser.css" />
             <link rel="stylesheet" href="/Assets/Modules/FileBrowser/js/CodeMirror/lib/codemirror.css" />
             <script src="/Assets/Modules/FileBrowser/js/CodeMirror/lib/codemirror.js"></script>
             <script src="/Assets/Modules/FileBrowser/js/CodeMirror/mode/htmlmixed/htmlmixed.js"></script>
@@ -267,6 +230,11 @@ if ($pageVars["route"]["action"]=="show") {
             <script src="/Assets/Modules/FileBrowser/js/CodeMirror/mode/xml/xml.js"></script>
             <script src="/Assets/Modules/FileBrowser/js/CodeMirror/mode/css/css.js"></script>
             <script src="/Assets/Modules/FileBrowser/js/CodeMirror/mode/clike/clike.js"></script>
+            <script src="/Assets/Modules/FileBrowser/js/CodeMirror/mode/php/php.js"></script>
+            <script src="/Assets/Modules/FileBrowser/js/CodeMirror/addon/display/autorefresh.js"></script>
+            <script src="/Assets/Modules/FileBrowser/js/CodeMirror/addon/display/fullscreen.js"></script>
+            <link rel="stylesheet" href="/Assets/Modules/FileBrowser/js/CodeMirror/addon/display/fullscreen.css" />
+            <script src="/Assets/Modules/FileBrowser/js/CodeMirror/mode/php/php.js"></script>
             <script src="/Assets/Modules/FileBrowser/js/CodeMirror/mode/php/php.js"></script>
             <script src="/Assets/Modules/FileBrowser/js/CodeMirror/mode/<?php echo $pageVars["data"]["code_file_extension"] ; ?>/<?php echo $pageVars["data"]["code_file_extension"] ; ?>.js"></script>
             <?php
@@ -288,7 +256,16 @@ if ($pageVars["route"]["action"]=="show") {
                 var editor = CodeMirror.fromTextArea(eob, {
                     <?php echo $readonlystring."\n" ; ?>
                     <?php echo $jsmode."\n" ; ?>
-                    lineNumbers: true
+                    lineNumbers: true,
+                    autoRefresh:true,
+                    extraKeys: {
+                    "F11": function(cm) {
+                        cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+                    },
+                    "Esc": function(cm) {
+                        if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+                    }
+                }
                 });
                 cm = document.getElementsByClassName("CodeMirror-code");
                 cms = $('.CodeMirror') ;
@@ -314,4 +291,97 @@ if ($pageVars["route"]["action"]=="show") {
 <?php
     }
 }
+
+function showTheFileBrowserDialogue($pageVars) {
+
+    if (isset($pageVars['data']['identifier'])) {
+        $idstring = '&identifier='.$pageVars['data']['identifier'] ;
+    } else {
+        $idstring = '' ;
+    }
+
+    $rootPath = str_replace($pageVars["data"]["relpath"], "", $pageVars["data"]["wsdir"]) ;
+    $html = '
+                                        <div id="config_panels" class="fullRow">
+                                            <div class="fullRow">
+                                                <h3>Browse</h3>
+                                            </div>
+                                            <div class="fullRow">
+                                                <div id="common_panel" class="directory_choice_panel common_panel">
+                                                ' ;
+    echo $html ;
+
+    $rootPath = str_replace($pageVars["data"]["relpath"], "", $pageVars["data"]["wsdir"]) ;
+    $rootBase = basename($rootPath) ;
+    $rootRel = dirname($pageVars["data"]["relpath"]) ;
+    $rootRelParts = explode('/', $pageVars["data"]["relpath"]) ;
+    $rootFull = $rootBase.DS.$rootRel ;
+    $href_parent = '/index.php?control=FileBrowser&action=show&item='.$pageVars["data"]["repository"]["project-slug"].$idstring ;
+    $href = $href_parent . '&relpath='.$rootRel ;
+    echo '<a href="'.$href_parent.'">'.$rootBase.'</a> / ' ;
+    $total_parts = count($rootRelParts) ;
+    $rels = '';
+    for ($i = 0; $i < $total_parts ; $i++) {
+        $rels = $rels . $rootRelParts[$i].'/' ;
+        $href = $href_parent . '&relpath='.$rels ;
+        echo '<a href="'.$href.'">'.$rootRelParts[$i].'</a>' ;
+        if ($i < ($total_parts-1)) {
+            echo ' / ' ;
+        }
+    }
+
+    $html = '   </div>
+          <div id="directory_panel" class="directory_choice_panel directory_panel">' ;
+
+    echo $html ;
+
+    if ($pageVars["data"]['repository']['project-type'] == 'raw') {
+//var_dump($pageVars["data"]["directory"]) ;
+        foreach ($pageVars["data"]["directory"] as $name => $isDir) {
+
+            $mod_time = isset($isDir['mtime']) ? date('d/m/Y H:i:s', $isDir['mtime']) : "N/A" ;
+            $access_time = isset($isDir['atime']) ? date('d/m/Y H:i:s', $isDir['atime']) : "N/A" ;
+            $dirString = (is_array($isDir)) ? "&nbsp;&nbsp; - &nbsp;&nbsp;<i class='fa fa-folder-open-o hvr-grow-shadow'></i> Modified: {$mod_time}, Accessed: {$access_time}" : "&nbsp;&nbsp; - &nbsp;&nbsp;<i class=\"fa fa-file hvr-grow-shadow\"></i> Modified: {$mod_time}, Accessed: {$access_time}" ;
+            $trail = ($isDir) ? "/" : "" ;
+//            echo '<a href="/index.php?control=FileBrowser&action=show&item='.$pageVars["data"]["repository"]["project-slug"].$idstring.'&relpath='.$pageVars["data"]["relpath"].'">'.$pageVars["data"]["relpath"].'</a>' ;
+
+            $relativeString = str_replace($pageVars["data"]["wsdir"], "", $name) ;
+            $nameparts = explode(DS, $relativeString) ;
+
+            echo '<a href="/index.php?control=FileBrowser&action=show&item='.$pageVars["data"]["repository"]["project-slug"].$idstring.'&relpath='.$pageVars["data"]["relpath"].$relativeString.
+                $trail.'">'.$relativeString.'</a>' ;
+
+            echo $trail.$dirString.'<br />' ; }
+
+    } else {
+
+        foreach ($pageVars["data"]["directory"] as $name => $isDir) {
+
+            $dirString = ($isDir) ? '&nbsp;&nbsp; - &nbsp;&nbsp;<i class="fa fa-folder-open-o hvr-grow-shadow"></i>' : '&nbsp;&nbsp; - &nbsp;&nbsp;<i class="fa fa-file hvr-grow-shadow"></i>' ;
+            $trail = ($isDir) ? "/" : "" ;
+//            echo '<a href="/index.php?control=FileBrowser&action=show&item='.$pageVars["data"]["repository"]["project-slug"].$idstring.'&relpath='.$pageVars["data"]["relpath"].'">'.$pageVars["data"]["relpath"].'</a>' ;
+
+            $relativeString = str_replace($pageVars["data"]["wsdir"], "", $name) ;
+            $nameparts = explode(DS, $relativeString) ;
+
+            foreach ($nameparts as $namepart => $isSubDir) {
+                echo '<a href="/index.php?control=FileBrowser&action=show&item='.$pageVars["data"]["repository"]["project-slug"].$idstring.'&relpath='.$pageVars["data"]["relpath"].$name.
+                    $trail.'">'.$name.'</a>' ; }
+
+            echo $trail.$dirString.'<br />' ; }
+
+
+    }
+
+
+    $html = '    
+   
+                </div>
+            </div>
+        </div> ' ;
+
+    echo $html ;
+
+}
+
 ?>

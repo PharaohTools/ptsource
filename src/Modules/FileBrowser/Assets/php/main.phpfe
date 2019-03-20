@@ -21,3 +21,203 @@ $jQuery('#show_menu_button')->on('click', function() use ($jQuery)  {
     $path_header->removeClass('col-lg-12');
     $path_header->addClass('col-lg-12');
 });
+
+class FileBrowserDirectories {
+
+    public $current_directory ;
+
+    public function fileBrowserLaunch() {
+        $this->populateCommonPanel() ;
+        $this->bindDirectoriesInPanel() ;
+    }
+
+    public function populateCommonPanel(){
+        \js_core::$console->log('populate common panel');
+        $is_windows = in_array(PHP_OS, ['Windows', 'Windows_NT', 'WINNT']) ;
+        if ($is_windows === true) {
+            $common_places = [getenv('SystemDrive'), ] ;
+        } else {
+            $common_places = ['/', '/opt', '/home'] ;
+        }
+        foreach ($common_places as $common_place) {
+            \js_core::$console->log('foreach common panel loop');
+            $this->displayPanelItem($common_place, 'common') ;
+        }
+    }
+
+    public function displayPanelItem($path, $panel_type){
+
+
+        \js_core::$console->log('display panel item');
+        $jQuery = \js_core::$jQuery ;
+        $panel = $jQuery('#'.$panel_type.'_panel') ;
+        \js_core::$console->log('panel object');
+        \js_core::$console->log($panel);
+        $path_slug = \Model\GitClone\OSFunctions::findSlug($path) ;
+        $html  = '<span id="panel_item_'.$panel_type.'_'.$path_slug.'"' ;
+        $html .= ' class="'.$panel_type.'_panel_item panel_item"' ;
+        $html .= ' data-path="'.$path.'" >' ;
+        $html .= '<i class="fa fa-folder-open-o fa-2x hvr-grow-shadow"></i>' ;
+        $html .= $path ;
+        $html .= '</span>' ;
+        \js_core::$console->log('panel html');
+        $panel->append($html);
+    }
+
+    public function populateDirectoryPanel($path){
+        $after = $this->updateDirectoryPanel($path) ;
+        $new_data = array() ;
+        $new_data['path'] = $path ;
+        \Model\Settings\OSFunctions::os_function('find_directories', $after, $new_data) ;
+    }
+
+    public function updateDirectoryPanel($path){
+        return function ($data) use ($path) {
+            $jQuery = \js_core::$jQuery ;
+            $panel = $jQuery('#directory_panel') ;
+            $panel->empty() ;
+            foreach ($data['directories'] as $data_path) {
+                $this->displayPanelItem($data_path, 'directory') ;
+            }
+            $this->bindDirectoriesInPanel() ;
+        } ;
+    }
+
+    public function updateDirectoryValue($value = null){
+        $jQuery = \js_core::$jQuery ;
+        if ($value == null) {
+            $value .= $this->current_directory ;
+        }
+        $is_valid = $this->validateDirectory($value) ;
+        if ($is_valid !== true) {
+            $data = $is_valid ;
+            $type = 'bad' ;
+            \WindowMessage::showMessage($data, $type) ;
+            return false ;
+        }
+        $slug = \Model\GitClone\OSFunctions::findSlug($value) ;
+        $html  = '<span class="fullRow" id="project_directory_entry_'.$slug.'_wrap">' ;
+        $html .= ' <span class="single_directory">' ;
+        $html .= '  <span class="project_directory_entry"' ;
+        $html .=        ' id="project_directory_entry_'.$slug.'">' ;
+        $html .=     $value ;
+        $html .= '  </span>' ;
+        $html .= '  <i id="remove_directory_'.$slug.'_logo_img"';
+        $html .= ' class="remove_directory fa fa-minus-circle fa-fw"';
+        $html .= ' data-dir="'.$value.'"></i>';
+        $html .= ' </span>' ;
+        $html .= '</span>' ;
+        $pdl = $jQuery('#project_directory_list') ;
+        $pdl->append($html);
+        $this->bindDirectoryDeletion() ;
+    }
+
+    public function validateDirectory($value) {
+        \js_core::$console->log('validating directory') ;
+        $project_dirs = \Model\Settings\OSFunctions::getProjectDirectories() ;
+        $already_exists = in_array($value, $project_dirs) ;
+        \js_core::$console->log('$project_dirs') ;
+        \js_core::$console->log($project_dirs) ;
+        \js_core::$console->log('$value') ;
+        \js_core::$console->log($value) ;
+        if ($already_exists) {
+            $fail_message = 'Directory '.$value.' already selected' ;
+            return $fail_message ;
+        }
+        return true ;
+    }
+
+    public function bindDirectoryDeletion(){
+        $jQuery = \js_core::$jQuery ;
+        $delete_buttons = $jQuery('.remove_directory') ;
+        $delete_buttons->on('click', function ($jsThis) use ($jQuery) {
+            $jsThis->preventDefault();
+            \js_core::$console->log('remove directory is clicked') ;
+            $id = $jsThis->target->id ;
+            $jq_el = $jQuery('#'.$id) ;
+            $data_dir = $jq_el->attr('data-dir');
+            $slug = \Model\GitClone\OSFunctions::findSlug($data_dir) ;
+            $wrap_id = 'project_directory_entry_'.$slug.'_wrap' ;
+            \js_core::$console->log('wrap id is: ') ;
+            \js_core::$console->log($wrap_id) ;
+            $wrap_el = $jQuery('#'.$wrap_id) ;
+            $wrap_el->remove() ;
+        }) ;
+    }
+
+    public function displayDirectoryOverlay($update_method = null) {
+        $tpl_vars = [] ;
+        if ($update_method == null) {
+            $update_directory_value = function () {
+                $this->updateDirectoryValue() ;
+            } ;
+        } else {
+            $update_directory_value = $update_method ;
+        }
+        \Core\View::loadTemplate('Settings', 'ChooseDirectory.php', $tpl_vars) ;
+        $html = \Core\View::parse_view_template() ;
+        \js_core::$console->log('displayDirectoryOverlay');
+        \js_core::$console->log($html);
+        \WindowMessage::areYouSure('Choose Directory', $update_directory_value, $html) ;
+        $this->fileBrowserLaunch() ;
+    }
+
+    public function bindDirectoriesInPanel(){
+        $jQuery = \js_core::$jQuery ;
+        $panel_item = $jQuery('.panel_item') ;
+        $panel_item->on('click', function ($jqThis) {
+            $jqThis->preventDefault() ;
+            $jQuery = \js_core::$jQuery ;
+            $this_panel_item = $jQuery('#'.$jqThis->target->id) ;
+            $path = $this_panel_item->attr('data-path');
+            $all_panel_items = $jQuery('.panel_item') ;
+            $all_panel_items->removeClass('selected-panel-item') ;
+            $this_panel_item->addClass('selected-panel-item') ;
+            $this->current_directory = $path ;
+            $jQuery('#directory_chosen')->text($path) ;
+            $jQuery('#directory_chosen')->removeClass('btn-default') ;
+            $jQuery('#directory_chosen')->addClass('btn-success') ;
+        }) ;
+        $panel_item->on('dblclick', function ($jqThis) {
+            $jqThis->preventDefault() ;
+            $current_id = $jqThis->target->id ;
+            \js_core::$console->log( $current_id );
+            $jQuery = \js_core::$jQuery ;
+            $path = $jQuery('#'.$jqThis->target->id)->attr('data-path');
+            $this->populateDirectoryPanel($path) ;
+        }) ;
+    }
+
+    public function createNewSSHKey() {
+        $jQuery = \js_core::$jQuery ;
+
+        $rurl = 'index.php?control=UserSSHKey&action=create&output-format=JSON' ;
+        $key = $jQuery('#new_ssh_key')->val() ;
+        $title = $jQuery('#new_ssh_key_title')->val() ;
+
+        $new_data_string = "new_ssh_key=".\js_core::$window->encodeURIComponent($key).'&' ;
+        $new_data_string = $new_data_string."new_ssh_key_title=".\js_core::$window->encodeURIComponent($title) ;
+
+        $data = array(
+            'type' => 'POST',
+            'url' => $rurl,
+            'dataType'=> "json",
+            'data' => $new_data_string
+        ) ;
+
+        $ajax_object = $jQuery->ajax($data);
+        return $ajax_object->done(
+            function ($data) use ($jQuery) {
+                $jQuery('.create_new_key_field')->fadeIn('fast') ;
+                $jQuery('.loading_keys')->fadeOut('fast') ;
+                $kt = new keyTable() ;
+                $kt->rewriteTable($data, $jQuery) ;
+                $jQuery('#create_new_key_fields')->fadeOut();
+                $jQuery('#create_new_key')->fadeIn();
+                $jQuery('#new_ssh_key_title')->val('') ;
+                $jQuery('#new_ssh_key')->val('') ;
+            }
+        );
+    }
+
+}

@@ -73,4 +73,12 @@ class FileBrowserRawRepoAllOS extends Base {
         return $fc ;
     }
 
+    public function loadFileInformation($identifier=null) {
+        $fileBrowserRootDir = $this->getFileBrowserDir() ;
+        $filePath = $this->getRelPath() ;
+        $full_path = $fileBrowserRootDir.DS.$filePath ;
+        $stat = stat($full_path) ;
+        return $stat ;
+    }
+
 }
