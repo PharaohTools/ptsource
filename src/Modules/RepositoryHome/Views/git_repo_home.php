@@ -25,9 +25,9 @@ if (isset($pageVars["data"]["user"]['username'])) {
 
             <?php
 
-            $git_http_url = "{$ht_string_lower}://{$pageVars["data"]["user"]['username']}:{password}@{$_SERVER["SERVER_NAME"]}/git/{$ownerOrPublic}/{$pageVars["data"]["repository"]["project-slug"]} " ;
+            $port_string = ($_SERVER['SERVER_PORT'] !== '80') ? ':'.$_SERVER['SERVER_PORT'] : '' ;
+            $git_http_url = "{$ht_string_lower}://{$pageVars["data"]["user"]['username']}:{password}@{$_SERVER["SERVER_NAME"]}{$port_string}/git/{$ownerOrPublic}/{$pageVars["data"]["repository"]["project-slug"]} " ;
             $git_ssh_url = "ssh://ptgit@{$_SERVER["SERVER_NAME"]}/git/{$ownerOrPublic}/{$pageVars["data"]["repository"]["project-slug"]} " ;
-
 
             ?>
             <input type="hidden" id="git_http_url" value="<?= $git_http_url ;?>" />
