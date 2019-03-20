@@ -174,7 +174,7 @@ class GitServerAllOS extends Base {
         if(!empty($return_output))
         {
 //            echo 'Pharaoh Source Git Server' ;
-            list($response_headers, $response_body)
+            @list($response_headers, $response_body)
                 = $response
                 = preg_split("/\R\R/", $return_output, 2, PREG_SPLIT_NO_EMPTY);
 
