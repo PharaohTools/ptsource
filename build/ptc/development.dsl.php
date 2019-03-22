@@ -142,3 +142,12 @@ RunCommand execute
   label "FS Fixes for web writing to share in a Virtual Machine"
   command "usermod -a -G vboxsf ptv"
   guess
+
+RunCommand execute
+  label "Stop PHP 5 FPM"
+  command "service php5-fpm stop"
+
+RunCommand execute
+  label "Start PHP 7 FPM"
+  command "service php7.0-fpm start"
+  guess
