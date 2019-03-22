@@ -101,16 +101,15 @@
 
                 ?>
            
-            <div class="row clearfix no-margin">
-            	<h2>Repository: <strong><?php echo $slugOrName ; ?></strong> </h2>
-                <p> Slug: <?php echo $pageVars['data']["repository"]["project-slug"] ; ?></p>
-                <p> Description: <?php echo $slugOrDescription ; ?></p>
-            </div>
+                <div class="row clearfix no-margin">
+                    <h2>Repository: <strong><?php echo $slugOrName ; ?></strong> </h2>
+                </div>
 
 
             <?php
 
-            if (count($pageVars['data']['repository_charts']['statistics']) == 0) {
+            if (!isset($pageVars['data']['repository_charts']['statistics']) ||
+                count($pageVars['data']['repository_charts']['statistics']) == 0) {
 
                 ?>
 
@@ -123,180 +122,174 @@
             else {
                 ?>
 
-            <div class="row">
+                <div class="row">
 
-                <div class="col-lg-3 col-md-4 hvr-pop">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-database fa-4x hvr-buzz-out"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="chart_feature_text huge hvr-grow-rotate" >
-                                        <?php echo $pageVars['data']['repository_charts']['statistics']["Total contributors"]; ?>
+                    <div class="col-lg-4 hvr-pop">
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-check-circle fa-4x hvr-buzz-out"></i>
                                     </div>
-                                    <div>Contributors</div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="chart_feature_text huge hvr-grow-rotate">
+                                            <?php echo $pageVars['data']['repository_charts']['statistics']["Total commits"]; ?>
+                                        </div>
+                                        <div>Commits</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 hvr-pop">
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-database fa-4x hvr-buzz-out"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="chart_feature_text huge hvr-grow-rotate" >
+                                            <?php echo $pageVars['data']['repository_charts']['statistics']["Average commits per day"]; ?>
+                                        </div>
+                                        <div>Daily</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 hvr-pop">
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-12 text-center">
+                                        <div class="huge hvr-grow-rotate">
+                                            <?php echo $pageVars['data']['repository_charts']['statistics']["Active for"] ; ?>
+                                        </div>
+                                        <div>Days Active</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel">
+                            <div id="chart-commits-by-date" class="chart" style="width:100%"></div>
+                        </div>
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-6 text-center">
+                                        <div class="huge hvr-grow-rotate">
+                                            <?php echo $pageVars['data']['repository_charts']['statistics']["First commit date"]; ?>
+                                        </div>
+                                        <div>First commit date</div>
+                                    </div>
+                                    <div class="col-xs-6 text-center">
+                                        <div class="huge hvr-grow-rotate">
+                                            <?php echo $pageVars['data']['repository_charts']['statistics']["Latest commit date"] ; ?>
+                                        </div>
+                                        <div>Latest commit date</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-md-6 hvr-pop">
-                    <div class="panel panel-green">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-check-circle fa-4x hvr-buzz-out"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="chart_feature_text huge hvr-grow-rotate">
-                                        <?php echo $pageVars['data']['repository_charts']['statistics']["Total commits"]; ?>
-                                    </div>
-                                    <div>Commits</div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                <div class="huge hvr-grow-rotate">
+                                    Activity by Hour
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 hvr-pop">
-                    <div class="panel panel-green">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-check-circle fa-4x hvr-buzz-out"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="chart_feature_text huge hvr-grow-rotate">
-                                        <?php echo $pageVars['data']['repository_charts']['statistics']["Average commits per day"]; ?>
-                                    </div>
-                                    <div>Daily</div>
-                                </div>
-                            </div>
+                        <div class="panel">
+                            <div id="chart-commits-by-hour" class="chart hour" style="width:100%"></div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 hvr-pop">
-                    <div class="panel panel-green">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-check-circle fa-4x hvr-buzz-out"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="chart_feature_text huge hvr-grow-rotate">
-                                        <?php echo str_replace(" days", "", $pageVars['data']['repository_charts']['statistics']["Active for"]) ; ?>
-                                    </div>
-                                    <div>Days Active</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-lg-6 col-md-6 hvr-pop">
-                    <div class="panel panel-green">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-check-circle fa-4x hvr-buzz-out"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge hvr-grow-rotate">
-                                        <?php echo $pageVars['data']['repository_charts']['statistics']["First commit date"]; ?>
-                                    </div>
-                                    <div>First commit date</div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                <div class="huge hvr-grow-rotate">
+                                    Activity by Weekday
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 hvr-pop">
-                    <div class="panel panel-green">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-check-circle fa-4x hvr-buzz-out"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge hvr-grow-rotate">
-                                        <?php echo $pageVars['data']['repository_charts']['statistics']["Latest commit date"] ; ?>
-                                    </div>
-                                    <div>Latest commit date</div>
-                                </div>
-                            </div>
+                        <div class="panel">
+                            <div id="chart-commits-by-day" class="chart" style="width:100%"></div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="col-sm-12">
-                    <hr />
-                    <div class="col-sm-4">
-                        <h5>Total Contributors:</h5>
-                        <strong>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                <div class="huge hvr-grow-rotate">
+                                    Contributors
+                                </div>
+                            </div>
+                        </div>
+
+                        <?php
+                        foreach ($pageVars['data']['repository_charts']['charts']['contributor'] as $contributor) {
+                            ?>
+
+                            <div class="col-md-6">
+                                <div class="thumbnail">
+                                    <h4><?php echo $contributor['name'] ; ?><br />
+                                        <small>
+                                            <?php echo $contributor['email'] ; ?>
+                                        </small>
+                                    </h4>
+                                    <h5>
+                                        <?php echo $contributor['commits'] ; ?>
+                                    </h5>
+                                    <div class="chart" style="height: 200px; width: 100%">
+
+                                    </div>
+                                </div>
+                            </div>
+
                             <?php
-//                            var_dump($pageVars['data']['repository_charts']) ;
+                        }
+                        ?>
 
-                            echo $pageVars['data']['repository_charts']['statistics']["Total contributors"] ; ?>
-                        </strong>
                     </div>
-                    <div class="col-sm-4">
-                        <h5>Total commits:</h5>
-                        <strong>
-                            <?php echo $pageVars['data']['repository_charts']['statistics']["Total commits"] ; ?>
-                        </strong>
-                    </div>
-                    <div class="col-sm-4">
-                        <h5>Average commits per day:</h5>
-                        <strong>
-                            <?php echo $pageVars['data']['repository_charts']['statistics']["Average commits per day"] ; ?>
-                        </strong>
-                    </div>
-                    <hr />
-                    <div class="col-sm-4">
-                        <h5>Active for:</h5>
-                        <strong>
-                            <?php echo $pageVars['data']['repository_charts']['statistics']["Active for"] ; ?>
-                        </strong>
-                    </div>
-                    <div class="col-sm-4">
-                        <h5>First commit date:</h5>
-                        <strong>
-                            <?php echo $pageVars['data']['repository_charts']['statistics']["First commit date"] ; ?>
-                        </strong>
-                    </div>
-                    <div class="col-sm-4">
-                        <h5>Latest commit date:</h5>
-                        <strong>
-                            <?php echo $pageVars['data']['repository_charts']['statistics']["Latest commit date"] ; ?>
-                        </strong>
-                    </div>
-
                 </div>
+
 
             </div>
 
             <?php
             }
+
+                // var_dump('<pre>', $pageVars['data']['repository_charts']['charts'], '</pre>') ;
             ?>
 
-            <div class="row clearfix no-margin build-home-properties">
-                <div class="fullRow">
-                    <hr />
-                    <p class="text-center">
-                        Visit <a href="http://www.pharaohtools.com">www.pharaohtools.com</a> for more
-                    </p>
-                </div>
-            </div>
-
         </div>
-
     </div>
 </div>
+
+<script src="/Assets/Modules/RepositoryCharts/js/Highcharts-7.0.3/code/highcharts.js"></script>
 <link rel="stylesheet" type="text/css" href="/Assets/Modules/RepositoryCharts/css/repositorycharts.css">
 <link rel="stylesheet" type="text/css" href="/Assets/Modules/RepositoryHistory/css/repositoryhistory.css">
+
+<script type="text/javascript">
+    var chart_data = <?php echo json_encode($pageVars['data']['repository_charts']['charts']) ; ?> ;
+    console.log('chart data', chart_data) ;
+</script>
+
+<script src="/Assets/Modules/RepositoryCharts/js/repositorycharts.js"></script>
