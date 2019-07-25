@@ -16,6 +16,7 @@ class RepositoryListAllOS extends Base {
 
     public function getData() {
         $ret["repositories"] = $this->getRepositories();
+        $ret["user"] = $this->getLoggedInUser();
         return $ret ;
     }
 
@@ -24,6 +25,13 @@ class RepositoryListAllOS extends Base {
         $repository = $repositoryFactory->getModel($this->params);
         $repos = $repository->getRepositories();
         return $repos ;
+    }
+
+    protected function getLoggedInUser() {
+        $signupFactory = new \Model\Signup() ;
+        $signup = $signupFactory->getModel($this->params);
+        $this->params["user"] = $signup->getLoggedInUserData() ;
+        return $this->params["user"] ;
     }
 
 }
