@@ -25,7 +25,17 @@ class RepositoryListAllOS extends Base {
         $repositoryFactory = new \Model\Repository() ;
         $repository = $repositoryFactory->getModel($this->params);
         $repos = $repository->getRepositories();
-        return $repos ;
+        $new_repos = [] ;
+        foreach ($repos as $repo) {
+            $single_repo = [] ;
+            $single_repo['project-name'] = $repo['project-name'] ;
+            $single_repo['project-slug'] = $repo['project-slug'] ;
+            $single_repo['project-description'] = $repo['project-description'] ;
+            $single_repo['project-type'] = $repo['project-type'] ;
+            $single_repo['project-owner'] = $repo['project-owner'] ;
+            $new_repos[] = $single_repo ;
+        }
+        return $new_repos ;
     }
 
     protected function getLoggedInUser() {
