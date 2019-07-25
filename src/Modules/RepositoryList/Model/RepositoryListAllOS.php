@@ -17,6 +17,7 @@ class RepositoryListAllOS extends Base {
     public function getData() {
         $ret["repositories"] = $this->getRepositories();
         $ret["user"] = $this->getLoggedInUser();
+        $ret["is_https"] = $this->isSecure();
         return $ret ;
     }
 
@@ -32,6 +33,12 @@ class RepositoryListAllOS extends Base {
         $signup = $signupFactory->getModel($this->params);
         $this->params["user"] = $signup->getLoggedInUserData() ;
         return $this->params["user"] ;
+    }
+
+    protected function isSecure() {
+        return
+            (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+            || $_SERVER['SERVER_PORT'] == 443;
     }
 
 }
