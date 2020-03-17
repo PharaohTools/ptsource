@@ -23,7 +23,7 @@ PackageManager pkg-ensure
 
 RunCommand execute
   label "Install prequisite packages"
-  command "apt-get install -y apache2 libapache2-mod-php7.1 sqlite3 php-sqlite zip unzip"
+  command "apt-get install -y apache2 libapache2-mod-php7.1 sqlite3 zip unzip"
   guess
 
 RunCommand execute
@@ -34,6 +34,9 @@ RunCommand execute
 RunCommand execute
   label "Set the Apache php module to 7"
   command "a2dismod php5 || true && a2enmod php7.1 || true && service apache2 restart || true && a2enmod proxy_fcgi setenvif"
+  guess
+
+VariableGroups dump
   guess
 
 PTSource install
@@ -50,7 +53,10 @@ RunCommand execute
   label "Create a default admin user"
   command "ptsource userprofile create -yg --create_username=admin --create_email=any@pharaohtools.com --update_password=admin --update_password_match=admin"
   guess
-  
+
+VariableGroups dump
+  guess
+
 PTBuild install
   label "Lets install Pharaoh Build"
   vhe-url "$$buildsubdomain.{{{ var::domain }}}"
@@ -95,8 +101,8 @@ RunCommand execute
 
 Copy put
   label "Import the Pharaoh Build Config"
-  source "/opt/ptbuild/ptbuild/build/ptbuild/ptbuildvars"
-  target /opt/ptbuild/ptbuild/
+  source "/opt/ptsource/ptsource/build/ptbuild/ptbuildvars"
+  target /opt/ptbuild/ptbuild/ptbuildvars
   recursive
 
 Chown path
@@ -143,11 +149,12 @@ RunCommand execute
   command "usermod -a -G vboxsf ptv"
   guess
 
-RunCommand execute
+Service stop
   label "Stop PHP 5 FPM"
-  command "service php5-fpm stop"
+  service-name "php5-fpm"
+  guess
 
-RunCommand execute
+Service start
   label "Start PHP 7 FPM"
-  command "service php7.0-fpm start"
+  service-name "php7.4-fpm"
   guess
