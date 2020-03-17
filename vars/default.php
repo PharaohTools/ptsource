@@ -2,7 +2,7 @@
 
 $variables = array() ;
 $variables['application_slug'] = 'source' ;
-$variables['random_port_suffix'] = '59' ;
+$variables['random_port_suffix'] = '67' ;
 $variables['domain'] = 'pharaohtools.vm' ;
 $variables['full_slug'] = 'pt'.$variables['application_slug'] ;
 $variables['description'] = 'Pharaoh '.ucfirst($variables['application_slug']).' Development VM' ;
