@@ -234,8 +234,6 @@ if ($pageVars["route"]["action"]=="show") {
             <script src="/Assets/Modules/FileBrowser/js/CodeMirror/addon/display/autorefresh.js"></script>
             <script src="/Assets/Modules/FileBrowser/js/CodeMirror/addon/display/fullscreen.js"></script>
             <link rel="stylesheet" href="/Assets/Modules/FileBrowser/js/CodeMirror/addon/display/fullscreen.css" />
-            <script src="/Assets/Modules/FileBrowser/js/CodeMirror/mode/php/php.js"></script>
-            <script src="/Assets/Modules/FileBrowser/js/CodeMirror/mode/php/php.js"></script>
             <script src="/Assets/Modules/FileBrowser/js/CodeMirror/mode/<?php echo $pageVars["data"]["code_file_extension"] ; ?>/<?php echo $pageVars["data"]["code_file_extension"] ; ?>.js"></script>
             <?php
             }
@@ -243,9 +241,7 @@ if ($pageVars["route"]["action"]=="show") {
             if (isset($pageVars["data"]["file_mode"]) && $pageVars["data"]["file_mode"] != null) {
                 $jsmode = "mode: '{$pageVars["data"]["file_mode"]}'," ;
             }
-//            if (isset($pageVars["data"]["file_mode"]) && $pageVars["data"]["file_mode"] != null) {
-                $readonlystring = "readOnly: true," ;
-//            }
+            $readonlystring = "readOnly: true," ; # always read only
         ?>
 
         <script type="text/javascript">
