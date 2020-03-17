@@ -21,7 +21,7 @@ class Virtufile extends VirtufileBase {
         $this->config["vm"]["cpus"] = "2" ;
         $bu = 'https://repositories.internal.pharaohtools.com/index.php?control=BinaryServer&action=serve&item=iso_php_virtualize_boxes_-_ubuntu_16.04_server' ;
         $this->config["vm"]["box_url"] = $bu ;
-        $this->config["vm"]["box"] = "isophpexampleapp" ;
+        $this->config["vm"]["box"] = "ubuntu-18.04.4-server-amd64" ;
 
         $random_port_suffix = $variables['random_port_suffix'] ;
         $this->config["vm"]["memory"] = "512" ;
@@ -37,44 +37,33 @@ class Virtufile extends VirtufileBase {
         $this->config["ssh"]["port"] = "22{$random_port_suffix}" ;
         $this->config["ssh"]["retries"] = "1000" ;
 
-        $guest_path = DS.'opt'.DS.$variables['full_slug'].DS.$variables['full_slug'].DS ;
+        $guest_path = DS.'opt'.DS.$variables['full_slug'].DS.$variables['full_slug'] ;
         # Shared folder - This should map to the workstation environment vhost path parent...
         $this->config["vm"]["shared_folders"][] =
             array(
                 "name" => "host_".$variables['full_slug'],
                 "host_path" => getcwd().DS,
                 "guest_path" => $guest_path,
+                "symlinks" => "enable"
             ) ;
         # Provisioning
-        $this->config["vm"]["provision"][] =
-            [   "provisioner" => "Shell",
-                "tool" => "shell",
-                "target" => "guest",
-                "default" => "MountShares" ];
-
-        $this->config["vm"]["provision"][] =
-            [   "provisioner" => "Shell",
-                "tool" => "shell",
-                "target" => "guest",
-                "default" => "PTConfigureInit",
-                "force" => true ];
-
+        $this->config["vm"]["defaults"] = ['mountshares', 'ptc'] ;
         $i_path = dirname(__FILE__).DS ;
 
         $this->config["vm"]["provision"][] = $this->config["vm"]["provision_up_light"][] =
             [   "provisioner" => "PharaohTools",
-                "tool" => "ptdeploy",
+                "tool" => "ptconfigure",
                 "target" => "host",
-                "script" => $i_path.'build'.DS.'ptd'.DS.'add-hostfile-entry.dsl.php',
+                "script" => $i_path.'build'.DS.'ptc'.DS.'add-hostfile-entry.dsl.php',
                 "params" => array("vars" => $i_path.'vars'.DS.'vm.php'), ] ;
 
         $this->config["vm"]["provision_destroy_post"][] =
-            [   "provisioner" => "PharaohTools", "tool" => "ptdeploy", "target" => "host",
-                "script" => $i_path.'build'.DS.'ptd'.DS.'remove-hostfile-entry.dsl.php',
+            [   "provisioner" => "PharaohTools", "tool" => "ptconfigure", "target" => "host",
+                "script" => $i_path.'build'.DS.'ptc'.DS.'remove-hostfile-entry.dsl.php',
                 "params" => array("vars" => $i_path.'vars'.DS.'vm.php') ] ;
 
         $dsl_params = array('start-dir' => "{$guest_path}",
-            'vars' => "{$guest_path}vars/vm.php",
+            'vars' => "{$guest_path}vars/default.php,{$guest_path}vars/vm.php",
             'step-times' => 'true',
             'step-numbers' => 'true') ;
 
@@ -85,22 +74,37 @@ class Virtufile extends VirtufileBase {
                 "script" => "{$guest_path}/build/ptc/development.dsl.php",
                 "params" => $dsl_params ] ;
 
-        $this->config["vm"]["provision"][] =
-            [   "provisioner" => "PharaohTools",
-                "tool" => "ptconfigure",
-                "target" => "guest",
-                "script" => "{$guest_path}/build/ptc/xdebug-webgrind.dsl.php",
-                "params" => $dsl_params ] ;
+//        $this->config["vm"]["provision"][] =
+//            [   "provisioner" => "PharaohTools",
+//                "tool" => "ptconfigure",
+//                "target" => "guest",
+//                "script" => "{$guest_path}/build/ptc/xdebug-webgrind.dsl.php",
+//                "params" => $dsl_params ] ;
 
-        $description = (isset($variables['description'])) ? "\n\nPharaoh Tools: {$variables['description']}\n\n" : '' ;
-        $this->config["vm"]["post_up_message"] = "Your Virtual Machine is running. $description
-  You now have the following urls:\n\n
-    http://source.{$variables['domain']}:80{$random_port_suffix}/ - Source Server\n\n 
-    http://build.{$variables['domain']}:80{$random_port_suffix}/ - Build Server\n\n
-    http://webgrind.{$variables['domain']}:80{$random_port_suffix}/ - Build Server\n\n
-        You can SSH into the VM with this:\n\n
-            ssh {$this->config['ssh']['user']}@127.0.0.1 -p22{$random_port_suffix} - SSH Connection\n
-            The password is {$this->config['ssh']['password']} \n";
+        $this->config["ptv"]['endpoints'] = [
+            ['type' => 'ssh', 'connection_string' => "ssh ptv@127.0.0.1 -o PreferredAuthentications=password -p 22{$random_port_suffix}", 'description' => "SSH Connection"],
+            ['type' => 'http', 'url' => "http://build.{$variables['domain']}:80{$random_port_suffix}/", 'description' => "Build Server"],
+            ['type' => 'http', 'url' => "http://source.{$variables['domain']}:80{$random_port_suffix}/", 'description' => "Web Client Application"],
+            ['type' => 'http', 'url' => "http://webgrind.{$variables['domain']}:80{$random_port_suffix}/", 'description' => "Webgrind"]
+        ] ;
+
+        $description = (isset($variables['description'])) ? "\n\n{$variables['description']}\n\n" : '' ;
+        $this->config["vm"]["post_up_message"] = "Your Virtualize Box has been brought up. $description.\n" ;
+        $i=1 ;
+        $text = '' ;
+        foreach ($this->config["ptv"]['endpoints'] as $endpoint) {
+            $text .= "Endpoint {$i}: \n" ;
+            $text .= "    Type: {$endpoint['type']} \n" ;
+            $text .= "    Description: {$endpoint['description']} \n" ;
+            if ($endpoint['type'] == 'http') {
+                $text .= "    URL: {$endpoint['url']} \n" ;
+            } else if ($endpoint['type'] == 'ssh') {
+                $text .= "    Connection String: {$endpoint['connection_string']}: \n" ;
+            }
+            $text .= "\n" ;
+            $i++ ;
+        }
+        $this->config["vm"]["post_up_message"] .= $text ;
     }
 
 }
