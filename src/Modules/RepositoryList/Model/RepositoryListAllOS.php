@@ -36,6 +36,9 @@ class RepositoryListAllOS extends Base {
     }
 
     protected function isSecure() {
+        if (!isset($_SERVER['SERVER_PORT'])){
+            return true ;
+        }
         return
             (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
             || $_SERVER['SERVER_PORT'] == 443;
