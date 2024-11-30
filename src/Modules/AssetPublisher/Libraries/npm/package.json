@@ -16,7 +16,7 @@
   "author": "asmblah",
   "license": "MIT",
   "dependencies": {
-    "jquery": "^2.1.4",
+    "jquery": "^3.5.0",
     "json-loader": "^0.5.1",
     "uglifyify": "^3.0.1",
     "uniter": "^1.0",
